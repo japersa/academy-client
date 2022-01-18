@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
+// Layouts
 import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
 
 const routes: Routes = [
   {
@@ -22,49 +23,9 @@ const routes: Routes = [
           .then(m => m.DashboardModule)
       },
       {
-        path: '',
-        loadChildren:
-          './pages/examples/dashboard/dashboard.module#DashboardModule'
-      },
-      {
-        path: 'components',
-        loadChildren:
-          './pages/examples/components/components.module#ComponentsPageModule'
-      },
-      {
-        path: 'forms',
-        loadChildren: './pages/examples/forms/forms.module#Forms'
-      },
-      {
-        path: 'tables',
-        loadChildren: './pages/examples/tables/tables.module#TablesModule'
-      },
-      {
-        path: 'maps',
-        loadChildren: './pages/examples/maps/maps.module#MapsModule'
-      },
-      {
-        path: 'widgets',
-        loadChildren: './pages/examples/widgets/widgets.module#WidgetsModule'
-      },
-      {
-        path: 'charts',
-        loadChildren: './pages/examples/charts/charts.module#ChartsModule'
-      },
-      {
-        path: 'calendar',
-        loadChildren:
-          './pages/examples/calendar/calendar.module#CalendarModulee'
-      },
-      {
-        path: '',
-        loadChildren:
-          './pages/examples/pages/user/user-profile.module#UserModule'
-      },
-      {
-        path: '',
-        loadChildren:
-          './pages/examples/pages/timeline/timeline.module#TimelineModule'
+        path: 'profile',
+        loadChildren: () => import('./features/admin/pages/user/user-profile.module')
+          .then(m => m.UserModule)
       }
     ]
   },
@@ -73,9 +34,11 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: 'pages',
-        loadChildren: './pages/examples/pages/pages.module#PagesModule'
-      }
+        path: 'sign-in', loadChildren: () => import('./features/auth/pages/login/login.module')
+          .then(m => m.LoginModule)
+      },
+      { path: 'sign-up', loadChildren: () => import('./features/auth/pages/register/register.module')
+      .then(m => m.RegisterModule) },
     ]
   },
   {
@@ -97,4 +60,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
