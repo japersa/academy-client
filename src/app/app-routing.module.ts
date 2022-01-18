@@ -10,7 +10,7 @@ import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-la
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'sign-up',
     pathMatch: 'full'
   },
   {
