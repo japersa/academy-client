@@ -6,7 +6,7 @@ import { UserDataService } from '../services/user-data.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthInterceptor {
 
 
   constructor(

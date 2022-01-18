@@ -1,0 +1,36 @@
+import { ErrorHandler, NgModule, Optional, SkipSelf } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+// Core
+import { StorageService } from './services/storage.service';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RollbarService, rollbarFactory, RollbarErrorHandler } from './utils/rollbar';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule
+  ],
+  providers: [
+    StorageService,
+    // Core interceptors
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    // Rollbar
+    { provide: ErrorHandler, useClass: RollbarErrorHandler },
+    { provide: RollbarService, useFactory: rollbarFactory }
+  ],
+})
+export class CoreModule { 
+
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    if (parentModule) {
+      throw new Error(
+        'CoreModule is already loaded'
+      );
+    }
+  }
+
+}
