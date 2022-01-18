@@ -1,92 +1,86 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { BrowserModule } from "@angular/platform-browser";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
-import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
-import { RtlLayoutComponent } from "./layouts/rtl-layout/rtl-layout.component";
+import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "dashboard",
-    pathMatch: "full"
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
   {
-    path: "",
+    path: '',
     component: AdminLayoutComponent,
     children: [
       {
-        path: "",
+        path: '',
+        loadChildren: () => import('./features/admin/pages/dashboard/dashboard.module')
+          .then(m => m.DashboardModule)
+      },
+      {
+        path: '',
         loadChildren:
-          "./pages/examples/dashboard/dashboard.module#DashboardModule"
+          './pages/examples/dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: "components",
+        path: 'components',
         loadChildren:
-          "./pages/examples/components/components.module#ComponentsPageModule"
+          './pages/examples/components/components.module#ComponentsPageModule'
       },
       {
-        path: "forms",
-        loadChildren: "./pages/examples/forms/forms.module#Forms"
+        path: 'forms',
+        loadChildren: './pages/examples/forms/forms.module#Forms'
       },
       {
-        path: "tables",
-        loadChildren: "./pages/examples/tables/tables.module#TablesModule"
+        path: 'tables',
+        loadChildren: './pages/examples/tables/tables.module#TablesModule'
       },
       {
-        path: "maps",
-        loadChildren: "./pages/examples/maps/maps.module#MapsModule"
+        path: 'maps',
+        loadChildren: './pages/examples/maps/maps.module#MapsModule'
       },
       {
-        path: "widgets",
-        loadChildren: "./pages/examples/widgets/widgets.module#WidgetsModule"
+        path: 'widgets',
+        loadChildren: './pages/examples/widgets/widgets.module#WidgetsModule'
       },
       {
-        path: "charts",
-        loadChildren: "./pages/examples/charts/charts.module#ChartsModule"
+        path: 'charts',
+        loadChildren: './pages/examples/charts/charts.module#ChartsModule'
       },
       {
-        path: "calendar",
+        path: 'calendar',
         loadChildren:
-          "./pages/examples/calendar/calendar.module#CalendarModulee"
+          './pages/examples/calendar/calendar.module#CalendarModulee'
       },
       {
-        path: "",
+        path: '',
         loadChildren:
-          "./pages/examples/pages/user/user-profile.module#UserModule"
+          './pages/examples/pages/user/user-profile.module#UserModule'
       },
       {
-        path: "",
+        path: '',
         loadChildren:
-          "./pages/examples/pages/timeline/timeline.module#TimelineModule"
+          './pages/examples/pages/timeline/timeline.module#TimelineModule'
       }
     ]
   },
   {
-    path: "",
+    path: '',
     component: AuthLayoutComponent,
     children: [
       {
-        path: "pages",
-        loadChildren: "./pages/examples/pages/pages.module#PagesModule"
+        path: 'pages',
+        loadChildren: './pages/examples/pages/pages.module#PagesModule'
       }
     ]
   },
   {
-    path: "",
-    component: RtlLayoutComponent,
-    children: [
-      {
-        path: "pages",
-        loadChildren: "./pages/examples/pages/rtl/rtl.module#RtlModule"
-      }
-    ]
-  },
-  {
-    path: "**",
-    redirectTo: "dashboard"
+    path: '**',
+    redirectTo: 'dashboard'
   }
 ];
 
@@ -95,9 +89,9 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
-      useHash: true,
-      scrollPositionRestoration: "enabled",
-      anchorScrolling: "enabled",
+      preloadingStrategy: PreloadAllModules,
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
       scrollOffset: [0, 64]
     })
   ],

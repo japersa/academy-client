@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ROUTES } from "../sidebar/sidebar.component";
+import { ROUTES } from "../../features/admin/components/sidebar/sidebar.component";
 import { Location } from "@angular/common";
 import { ToastrService } from "ngx-toastr";
 
