@@ -12,8 +12,11 @@ import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-la
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './shared/components/components.module';
 
+// Core Modules
+
 // Features Module
 import { FeaturesModule } from './features/features.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { FeaturesModule } from './features/features.module';
     AppRoutingModule,
     ToastrModule.forRoot(),
     ComponentsModule,
+    CoreModule,
     FeaturesModule
   ],
   providers: [],
