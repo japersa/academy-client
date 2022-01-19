@@ -37,10 +37,10 @@ const routes: Routes = [
         path: 'sign-in', loadChildren: () => import('./features/auth/pages/login/login.module')
           .then(m => m.LoginModule)
       },
-      {
-        path: 'sign-up', loadChildren: () => import('./features/auth/pages/register/register.module')
-          .then(m => m.RegisterModule)
-      },
+      { path: 'sign-up', loadChildren: () => import('./features/auth/pages/register/register.module')
+      .then(m => m.RegisterModule) },
+      { path: 'forget-password', loadChildren: () => import('./features/auth/pages/forget-password/forget-password.module')
+      .then(m => m.ForgetPasswordModule) },
     ]
   },
   {
