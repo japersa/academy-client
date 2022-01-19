@@ -10,7 +10,7 @@ import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-la
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'sign-up',
+    redirectTo: 'sign-in',
     pathMatch: 'full'
   },
   {
@@ -37,8 +37,10 @@ const routes: Routes = [
         path: 'sign-in', loadChildren: () => import('./features/auth/pages/login/login.module')
           .then(m => m.LoginModule)
       },
-      { path: 'sign-up', loadChildren: () => import('./features/auth/pages/register/register.module')
-      .then(m => m.RegisterModule) },
+      {
+        path: 'sign-up', loadChildren: () => import('./features/auth/pages/register/register.module')
+          .then(m => m.RegisterModule)
+      },
     ]
   },
   {
