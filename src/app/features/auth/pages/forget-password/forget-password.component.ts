@@ -18,9 +18,6 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
   subscription$: Subscription;
 
   focus;
-  focus1;
-  focus2;
-  focus4;
 
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
@@ -39,14 +36,14 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
   recoverUser(dataFrom: any) {
 
+
     const data = {
       username: dataFrom.email
-  }
+    }
 
     this.subscription$ = this.forgetPasswordService.register(data).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.registerForm.reset();
-
     },
       error => {
         this.errorMessage = error.error;
@@ -57,11 +54,11 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    var body = document.getElementsByTagName('body')[0];
-    body.classList.add('register-page');
+    var body = document.getElementsByTagName("body")[0];
+    body.classList.add("lock-page");
   }
   ngOnDestroy() {
-    var body = document.getElementsByTagName('body')[0];
-    body.classList.remove('register-page');
+    var body = document.getElementsByTagName("body")[0];
+    body.classList.remove("lock-page");
   }
 }
