@@ -7,108 +7,108 @@ export class UtilsService {
 
   private validationMessages = {
     first_name: [
-      { type: 'required', message: 'The first name is required' },
-      { type: 'minlength', message: 'The first name must be more than 2 characters' }
+      { type: 'required', message: 'El nombre es obligatorio' },
+      { type: 'minlength', message: 'El nombre debe de tener más de dos caracteres' }
     ],
 
     last_name: [
-      { type: 'required', message: 'The last name is required' },
-      { type: 'minlength', message: 'The last name must be more than 2 characters' }
+      { type: 'required', message: 'El apellido es obligatorio' },
+      { type: 'minlength', message: 'El apellido debe de tener más de dos caracteres' }
     ],
 
     name: [
-      { type: 'required', message: 'The full name is required' },
-      { type: 'minlength', message: 'The full name must be more than 2 characters' }
+      { type: 'required', message: 'El nombre completo es obligatorio' },
+      { type: 'minlength', message: 'El nombre completo debe de tener más de dos caracteres' }
     ],
 
     username: [
-      { type: 'required', message: 'The username is required' },
-      { type: 'minlength', message: 'The username be 3 or more characters' }
+      { type: 'required', message: 'El nombre de usuario es obligatorio' },
+      { type: 'minlength', message: 'El nombre de usuario debe de ser de 3 o más caracteres' }
     ],
 
     email: [
-      { type: 'required', message: 'The email is required' },
-      { type: 'pattern', message: 'The email format is invalid' }
+      { type: 'required', message: 'El email es obligatorio' },
+      { type: 'pattern', message: 'El formato del email es inválido' }
     ],
 
     phone: [
-      { type: 'required', message: 'The phone is required' },
-      { type: 'minlength', message: 'The phone number must be 5 or more characters' }
+      { type: 'required', message: 'El número de teléfono es obligatorio' },
+      { type: 'minlength', message: 'El número de teléfono debe contener 5 o más caracteres' }
     ],
 
     identification: [
-      { type: 'required', message: 'The identification is required' },
-      { type: 'minlength', message: 'The identification number must be 7 or more characters' }
+      { type: 'required', message: 'El número de identificación es obligatorio' },
+      { type: 'minlength', message: 'El número de identificación debe de ser de 7 o más caracteres' }
     ],
 
     state: [
-      { type: 'required', message: 'The state is required' },
-      { type: 'minlength', message: 'The state must be 3 or more characters' }
+      { type: 'required', message: 'El estado es obligatorio' },
+      { type: 'minlength', message: 'El estado debe de ser de 3 o más caracteres' }
     ],
 
     city: [
-      { type: 'required', message: 'The city is required' },
-      { type: 'minlength', message: 'The city name must be 3 or more characters' }
+      { type: 'required', message: 'La ciudad es obligatoria' },
+      { type: 'minlength', message: 'El nombre de la ciudad debe de ser de 3 o más caracteres' }
     ],
 
     address: [
-      { type: 'required', message: 'The adress is required' },
-      { type: 'minlength', message: 'The adress number must be 5 or more characters' }
+      { type: 'required', message: 'La dirección es obligatoria' },
+      { type: 'minlength', message: 'La dirección debe de contener al menos 5 caracteres' }
     ],
 
     country: [
-      { type: 'required', message: 'The country is required' },
-      { type: 'minlength', message: 'The country must be 3 or more characters' }
+      { type: 'required', message: 'El país es obligatorio' },
+      { type: 'minlength', message: 'El nombre del país debe de contener 3 o más caracteres' }
     ],
 
     zip: [
-      { type: 'required', message: 'The zip code is required' },
-      { type: 'minlength', message: 'The zip code must be 3 or more characters' }
+      { type: 'required', message: 'El código postal es obligatorio' },
+      { type: 'minlength', message: 'El código postal debe de contener 3 o más caracteres' }
     ],
 
     licence_number: [
-      { type: 'required', message: 'The licence number is required' },
-      { type: 'minlength', message: 'The licence number must be 6 or more characters' }
+      { type: 'required', message: 'El número de licencia es obligatorio' }, //No se a que tipo de licencia hace referencia
+      { type: 'minlength', message: 'El número de licencia debe contener 6 o más caracteres' }
     ],
 
     routing_number: [
-      { type: 'required', message: 'The routing number is required' },
-      { type: 'minlength', message: 'The routing number must be 9 or more characters' }
+      { type: 'required', message: 'El número de ruta es requerido' }, //The routing number is required
+      { type: 'minlength', message: 'El número de ruta debe contener 9 o más caracteres' } //The routing number must be 9 or more characters
     ],
 
     account_number: [
-      { type: 'required', message: 'The account number is required' },
-      { type: 'minlength', message: 'The account number must be 5 or more characters' }
+      { type: 'required', message: 'El número de cuenta es obligatorio' },
+      { type: 'minlength', message: 'El número de cuenta debe de contener 5 o más caracteres' }
     ],
 
     current_password: [
-      { type: 'required', message: 'The current password password is required' },
-      { type: 'minlength', message: 'The current password password must be 8 or more characters' }
+      { type: 'required', message: 'Se debe ingresar la contraseña actual' },
+      { type: 'minlength', message: 'La contraseña actual debe de contener 8 o más caracteres' }
     ],
 
     password: [
-      { type: 'required', message: 'The password is required' },
-      { type: 'minlength', message: 'The password must be 8 or more characters' }
+      { type: 'required', message: 'Se debe de ingresar la contraseña' },
+      { type: 'minlength', message: 'La contraseña debe de contener 8 o más caracteres' }
     ],
 
     password_confirmation: [
-      { type: 'required', message: 'The confirm password is required' },
-      { type: 'minlength', message: 'The confirm password must be 8 or more characters' }
+      { type: 'required', message: 'La contraseña de confirmación es necesaria' },
+      { type: 'minlength', message: 'La contraseña de confirmación debe de contener 8 o más caracteres' }
     ],
 
     opinion: [
-      { type: 'required', message: 'The opinion is required' },
-      { type: 'minlength', message: 'The review must be at least 3 characters' },
-      { type: 'maxlength', message: 'The opinion must be 3 or 20 characters' }
+      { type: 'required', message: 'La opinión es obligatoria' },
+      { type: 'minlength', message: 'La opinión debe de contener al menos 3 caracteres' },
+      { type: 'maxlength', message: 'La opinión debe de tener entre 3 o 20 caracteres' }
     ],
 
     experience: [
-      { type: 'required', message: 'The opinion is required' },
-      { type: 'minlength', message: 'The review must be at least 20 characters' },
-      { type: 'maxlength', message: 'The opinion must be 20 or 300 characters' }
+      { type: 'required', message: 'La reseña es obligatoria' },
+      { type: 'minlength', message: 'La reseña debe de contener al menos 20 caracteres' },
+      { type: 'maxlength', message: 'La reseña debe de tener entre 20 y 300 caracteres' }
     ],
     role: [
-      { type: 'required', message: 'The role is required' },
+      { type: 'required', message: 'Se debe de seleccionar un rol' },
     ],
 
   };
