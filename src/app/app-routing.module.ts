@@ -10,7 +10,7 @@ import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-la
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'sign-up',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'dashboard',
         loadChildren: () => import('./features/admin/pages/dashboard/dashboard.module')
           .then(m => m.DashboardModule)
       },
@@ -34,13 +34,20 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: 'sign-in', loadChildren: () => import('./features/auth/pages/login/login.module')
+        path: 'sign-in',
+        loadChildren: () => import('./features/auth/pages/login/login.module')
           .then(m => m.LoginModule)
       },
-      { path: 'sign-up', loadChildren: () => import('./features/auth/pages/register/register.module')
-      .then(m => m.RegisterModule) },
-      { path: 'forget-password', loadChildren: () => import('./features/auth/pages/forget-password/forget-password.module')
-      .then(m => m.ForgetPasswordModule) },
+      {
+        path: 'sign-up',
+        loadChildren: () => import('./features/auth/pages/register/register.module')
+          .then(m => m.RegisterModule)
+      },
+      {
+        path: 'forget-password',
+        loadChildren: () => import('./features/auth/pages/forget-password/forget-password.module')
+          .then(m => m.ForgetPasswordModule)
+      },
     ]
   },
   {

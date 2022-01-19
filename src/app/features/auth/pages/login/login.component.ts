@@ -1,14 +1,84 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { UtilsService } from '../../../../core/services/utils.service';
+import { AuthService } from '../../services/auth.service';
+import { StorageService } from '../../../../core/services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-login",
   templateUrl: "login.component.html"
 })
 export class LoginComponent implements OnInit, OnDestroy {
+
+  loginForm: FormGroup;
+  validationMessages: any;
+
   focus;
   focus1;
 
-  constructor() {}
+  errorMessage: string | null;
+
+  subscription$: Subscription;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private utilsService: UtilsService,
+    private authenticationService: AuthService,
+    private storageService: StorageService,
+    private router: Router) {
+
+    this.validationMessages = utilsService.getValidationMessages();
+
+    this.loginForm = this.formBuilder.group({
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      password: new FormControl('', Validators.compose([
+        Validators.required, Validators.minLength(8)
+      ])
+      )
+    });
+
+
+  }
+
+  loginUser(data: any) {
+    console.log(data);
+    
+    const CREDENTIALS = {
+      username: data.email,
+      password: data.password
+    }
+
+    this.subscription$ = this.authenticationService.doLogin(CREDENTIALS).pipe(take(1)).subscribe(res => {
+
+      console.log(res);
+
+      this.errorMessage = '';
+
+      this.storageService.set('isUserLoggedIn', true);
+      this.storageService.set('accessToken', res.token);
+
+      this.storageService.set('userData', {
+        id: res.id,
+        username: res.username,
+        firstName: res.first_name,
+        lastName: res.last_name,
+        email: res.email
+      });
+
+      this.loginForm.reset();
+
+      this.router.navigate(['/dashboard']);
+    },
+      error => {
+        this.errorMessage = error.error;
+      });
+
+  }
 
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];

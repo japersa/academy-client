@@ -2,64 +2,66 @@
   <div class=" content">
     <div class=" container">
       <div class=" col-lg-4 col-md-6 ml-auto mr-auto">
-        <form class=" form">
+        <form class=" form" [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)" role="form">
           <div class=" card card-login card-white">
             <div class=" card-header">
               <img alt="" src="assets/img/card-primary.png" />
-
-              <h1 class=" card-title">Log in</h1>
+              <h1 class=" card-title">Ingresar</h1>
             </div>
             <div class=" card-body">
-              <div
-                class=" input-group"
-                [ngClass]="{ 'input-group-focus': focus === true }"
-              >
+              <div class=" input-group" [ngClass]="{ 'input-group-focus': focus === true }">
                 <div class=" input-group-prepend">
                   <div class=" input-group-text">
                     <i class=" tim-icons icon-email-85"> </i>
                   </div>
                 </div>
-                <input
-                  class=" form-control"
-                  placeholder="Email"
-                  type="text"
-                  (blur)="focus = false"
-                  (focus)="focus = true"
-                />
+                <input class=" form-control" formControlName="email" placeholder="Email" type="text"
+                  (blur)="focus = false" (focus)="focus = true" />
               </div>
-              <div
-                class=" input-group"
-                [ngClass]="{ 'input-group-focus': focus1 === true }"
-              >
+
+              <ng-container *ngFor="let validation of validationMessages.email">
+                <small class="text-danger" *ngIf="loginForm.get('email').hasError(validation.type) &&
+                        (loginForm.get('email').dirty || loginForm.get('email').touched) ">
+                  {{validation.message}}
+                </small>
+              </ng-container>
+
+              <div class=" input-group" [ngClass]="{ 'input-group-focus': focus1 === true }">
                 <div class=" input-group-prepend">
                   <div class=" input-group-text">
                     <i class=" tim-icons icon-lock-circle"> </i>
                   </div>
                 </div>
-                <input
-                  class=" form-control"
-                  placeholder="Password"
-                  type="text"
-                  (blur)="focus1 = false"
-                  (focus)="focus1 = true"
-                />
+                <input class=" form-control" formControlName="password" placeholder="Contraseña" type="password"
+                  (blur)="focus1 = false" (focus)="focus1 = true" />
               </div>
+              <ng-container *ngFor="let validation of validationMessages.password">
+                <small class="text-danger" *ngIf=" loginForm.get('password').hasError(validation.type) &&
+                    (loginForm.get('password').dirty ||
+                      loginForm.get('password').touched) ">
+                  {{validation.message}}
+                </small>
+              </ng-container>
+
+              <ng-container *ngIf="errorMessage">
+                <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+              </ng-container>
             </div>
             <div class=" card-footer">
-              <a class=" btn btn-primary btn-lg btn-block mb-3" href="#pablo">
-                Get Started
-              </a>
+              <button class=" btn btn-primary btn-lg btn-block mb-3" [disabled]="loginForm.invalid" type="submit">
+                Iniciar sesión
+              </button>
               <div class=" pull-left">
                 <h6>
-                  <a class=" link footer-link" href="javascript:void(0)">
-                    Create Account
+                  <a class=" link footer-link" routerLink="/sign-up">
+                    Crear cuenta
                   </a>
                 </h6>
               </div>
               <div class=" pull-right">
                 <h6>
                   <a class=" link footer-link" href="javascript:void(0)">
-                    Need Help?
+                    Olvidó su cuenta?
                   </a>
                 </h6>
               </div>
