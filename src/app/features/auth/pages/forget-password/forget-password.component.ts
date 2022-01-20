@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { ForgetPasswordService } from '../../services/forget-password.service';
+import { NotificationsService } from 'src/app/core/services/notifications.service';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,7 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
+    public notificationService: NotificationsService,
     private forgetPasswordService: ForgetPasswordService) {
 
     this.validationMessages = utilsService.getValidationMessages();
@@ -34,6 +36,8 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
   }
 
+  
+
   recoverUser(dataFrom: any) {
 
 
@@ -43,10 +47,13 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
     this.subscription$ = this.forgetPasswordService.register(data).pipe(take(1)).subscribe(res => {
       console.log(res);
+      this.notificationService.showNotification('bottom','center','Se ha enviado la solicitud de cambio de clave correctamente',2);
       this.registerForm.reset();
+
     },
       error => {
         this.errorMessage = error.error;
+        this.notificationService.showNotification('bottom','center','Ha surgido un error',4);
         console.log(error.error);
       });
 
@@ -61,4 +68,6 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("lock-page");
   }
+
+
 }
