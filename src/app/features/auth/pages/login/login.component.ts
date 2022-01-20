@@ -48,8 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loginUser(data: any) {
-    console.log(data);
-    
+
     const CREDENTIALS = {
       username: data.email,
       password: data.password
@@ -58,19 +57,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription$ = this.authenticationService.doLogin(CREDENTIALS).pipe(take(1)).subscribe(res => {
 
       console.log(res);
-      this.notificationService.showNotification('bottom','center','Has iniciado sesión correctamente',2);
+      this.notificationService.showNotification('bottom', 'center', 'Has iniciado sesión correctamente', 2);
       this.errorMessage = '';
 
       this.storageService.set('isUserLoggedIn', true);
       this.storageService.set('accessToken', res.token);
 
-      this.storageService.set('userData', {
-        id: res.id,
-        username: res.username,
-        firstName: res.first_name,
-        lastName: res.last_name,
-        email: res.email
-      });
+      this.storageService.set('userData', res.user);
 
       this.loginForm.reset();
 
@@ -78,7 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     },
       error => {
         this.errorMessage = error.error;
-        this.notificationService.showNotification('bottom','center','Error al iniciar sesión',4);
+        this.notificationService.showNotification('bottom', 'center', 'Error al iniciar sesión', 4);
       });
 
   }
