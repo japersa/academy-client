@@ -1,3 +1,4 @@
+import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private utilsService: UtilsService,
     private authenticationService: AuthService,
     private storageService: StorageService,
+    public notificationService: NotificationsService,
     private router: Router) {
 
     this.validationMessages = utilsService.getValidationMessages();
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription$ = this.authenticationService.doLogin(CREDENTIALS).pipe(take(1)).subscribe(res => {
 
       console.log(res);
-
+      this.notificationService.showNotification('bottom','center','Has iniciado sesión correctamente',2);
       this.errorMessage = '';
 
       this.storageService.set('isUserLoggedIn', true);
@@ -76,6 +78,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     },
       error => {
         this.errorMessage = error.error;
+        this.notificationService.showNotification('bottom','center','Error al iniciar sesión',4);
       });
 
   }

@@ -1,3 +1,4 @@
+import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
+    public notificationService: NotificationsService,
     private registerService: RegisterService) {
 
     this.validationMessages = utilsService.getValidationMessages();
@@ -57,12 +59,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     this.subscription$ = this.registerService.register(data).pipe(take(1)).subscribe(res => {
       console.log(res);
+      this.notificationService.showNotification('bottom','center','Te has registrado correctamente',2);
       this.registerForm.reset();
 
     },
       error => {
         this.errorMessage = error.error;
         console.log(error.error);
+        this.notificationService.showNotification('bottom','center','Error al registrarse',4);
       });
 
   }
