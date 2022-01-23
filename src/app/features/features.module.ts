@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminLayoutModule } from './admin/layouts/admin-layout/admin-layout.module';
+import { AdminModule } from './admin/admin.module';
 
 
 @NgModule({
@@ -8,9 +9,11 @@ import { AdminLayoutModule } from './admin/layouts/admin-layout/admin-layout.mod
   ],
   imports: [
     CommonModule,
-    AdminLayoutModule
+    AdminLayoutModule,
+    AdminModule
   ], exports: [
-    AdminLayoutModule
+    AdminLayoutModule,
+    AdminModule
   ]
 })
 export class FeaturesModule { }

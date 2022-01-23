@@ -332,9 +332,11 @@ export class DashboardComponent implements OnInit {
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke.addColorStop(1, "rgba(233,32,16,0.2)");
-    gradientStroke.addColorStop(0.4, "rgba(233,32,16,0.0)");
-    gradientStroke.addColorStop(0, "rgba(233,32,16,0)"); //red colors
+    gradientStroke.addColorStop(1, "rgba(66,134,121,0.15)");
+    gradientStroke.addColorStop(0.4, "rgba(66,134,121,0.0)"); //green colors
+    gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
+
+
 
     var data = {
       labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
@@ -429,9 +431,9 @@ export class DashboardComponent implements OnInit {
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke.addColorStop(1, "rgba(233,32,16,0.2)");
-    gradientStroke.addColorStop(0.4, "rgba(233,32,16,0.0)");
-    gradientStroke.addColorStop(0, "rgba(233,32,16,0)"); //red colors
+    gradientStroke.addColorStop(1, "rgba(66,134,121,0.15)");
+    gradientStroke.addColorStop(0.4, "rgba(66,134,121,0.0)"); //green colors
+    gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
 
     var config = {
       type: "line",
@@ -442,13 +444,13 @@ export class DashboardComponent implements OnInit {
             label: "My First dataset",
             fill: true,
             backgroundColor: gradientStroke,
-            borderColor: "#ec250d",
+            borderColor: "#00d6b4",
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            pointBackgroundColor: "#ec250d",
+            pointBackgroundColor: "#00d6b4",
             pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#ec250d",
+            pointHoverBackgroundColor: "#00d6b4",
             pointBorderWidth: 20,
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,

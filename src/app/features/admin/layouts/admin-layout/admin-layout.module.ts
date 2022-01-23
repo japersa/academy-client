@@ -20,6 +20,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { TagInputModule } from 'ngx-chips';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
     FormsModule,
     HttpClientModule,
     JwBootstrapSwitchNg2Module,
+    RouterModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
