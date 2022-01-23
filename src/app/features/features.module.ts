@@ -11,7 +11,8 @@ import { AdminModule } from './admin/admin.module';
     CommonModule,
     AdminLayoutModule,
     AdminModule
-  ], exports: [
+  ],
+  exports: [
     AdminLayoutModule,
     AdminModule
   ]

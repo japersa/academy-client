@@ -75,10 +75,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   }
 
-  nav() {
-    this.router.navigate(['/dashboard']);
-  }
-
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("login-page");
