@@ -5,10 +5,11 @@
         <form class=" form" [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)" role="form">
           <div class=" card card-login card-white">
             <div class=" card-header">
-              <img alt="" src="assets/img/card-primary.png" />
+              <img alt="" src="assets/img/card-success.png" />
               <h1 class=" card-title">Ingresar</h1>
             </div>
             <div class=" card-body">
+              
               <div class=" input-group" [ngClass]="{ 'input-group-focus': focus === true }">
                 <div class=" input-group-prepend">
                   <div class=" input-group-text">
@@ -25,6 +26,7 @@
                   {{validation.message}}
                 </small>
               </ng-container>
+
 
               <div class=" input-group" [ngClass]="{ 'input-group-focus': focus1 === true }">
                 <div class=" input-group-prepend">
@@ -60,7 +62,7 @@
               </div>
               <div class=" pull-right">
                 <h6>
-                  <a class=" link footer-link" href="javascript:void(0)">
+                  <a class=" link footer-link" routerLink="/forget-password">
                     Olvidó su cuenta?
                   </a>
                 </h6>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ROUTES } from '../../../features/admin/components/sidebar/sidebar.component';
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 var misc: any = {
   sidebar_mini_active: true
@@ -16,7 +17,9 @@ export class AuthNavbarComponent implements OnInit {
   private listTitles: any[];
   location: Location;
 
-  constructor(location: Location, public toastr: ToastrService) {
+  constructor(location: Location,
+    public toastr: ToastrService,
+    private router: Router) {
     this.location = location;
   }
   minimizeSidebar() {
@@ -61,21 +64,5 @@ export class AuthNavbarComponent implements OnInit {
   }
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-  }
-  getTitle() {
-    var titlee = this.location.prepareExternalUrl(this.location.path());
-    titlee = titlee.split('/')[2];
-
-    for (let i = 0; i < this.listTitles.length; i++) {
-      if (this.listTitles[i].type === 'sub') {
-        for (let j = 0; j < this.listTitles[i].children.length; j++) {
-          if (this.listTitles[i].children[j].path === titlee) {
-            return this.listTitles[i].children[j].title;
-          }
-        }
-      }
-    }
-
-    return 'MISTRADES ACADEMY';
   }
 }

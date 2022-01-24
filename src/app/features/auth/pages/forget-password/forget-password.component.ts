@@ -36,24 +36,22 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
   }
 
-  
+
 
   recoverUser(dataFrom: any) {
-
 
     const data = {
       username: dataFrom.email
     }
 
     this.subscription$ = this.forgetPasswordService.register(data).pipe(take(1)).subscribe(res => {
-      console.log(res);
-      this.notificationService.showNotification('bottom','center','Se ha enviado la solicitud de cambio de clave correctamente',2);
+      this.notificationService.showNotification('bottom', 'center', 'Se ha enviado la solicitud de cambio de clave correctamente', 2);
       this.registerForm.reset();
 
     },
       error => {
         this.errorMessage = error.error;
-        this.notificationService.showNotification('bottom','center','Ha surgido un error',4);
+        this.notificationService.showNotification('bottom', 'center', 'Ha surgido un error', 4);
         console.log(error.error);
       });
 

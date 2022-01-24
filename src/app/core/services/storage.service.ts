@@ -12,9 +12,13 @@ export class StorageService {
     this._localStorage = storageRefService.localStorage
   }
 
-  public set(key: string, value: any) {
-    const jsonData = JSON.stringify(value)
-    this._localStorage.setItem(key, jsonData);
+  public async set(key: string, value: any) {
+    try {
+      const jsonData = JSON.stringify(value)
+      this._localStorage.setItem(key, jsonData);
+    } catch (error) {
+      console.log('Error saving to localstorage', error);
+    }
   }
 
   public get(key: string): any {

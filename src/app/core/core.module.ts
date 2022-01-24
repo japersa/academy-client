@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RollbarService, rollbarFactory, RollbarErrorHandler } from './utils/rollbar';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { UserDataService } from './services/user-data.service';
 
 @NgModule({
   declarations: [],
@@ -15,6 +16,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
   ],
   providers: [
     StorageService,
+    UserDataService,
     // Core interceptors
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
@@ -23,7 +25,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     { provide: RollbarService, useFactory: rollbarFactory }
   ],
 })
-export class CoreModule { 
+export class CoreModule {
 
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {

@@ -6,16 +6,18 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 // Layouts
 import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'roles',
     pathMatch: 'full'
   },
   {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -24,9 +26,14 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        loadChildren: () => import('./features/admin/pages/user/user-profile.module')
+        loadChildren: () => import('./shared/pages/user/user-profile.module')
           .then(m => m.UserModule)
-      }
+      },
+      {
+        path: 'roles',
+        loadChildren: () => import('./features/admin/pages/admins/admins.module')
+          .then(m => m.AdminsModule)
+      },
     ]
   },
   {
