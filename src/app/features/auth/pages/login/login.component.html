@@ -11,11 +11,11 @@
             <div class=" card-body">
               
               <div class=" input-group" [ngClass]="{ 'input-group-focus': focus === true }">
-                <div class=" input-group-prepend">
+                <!--<div class=" input-group-prepend">
                   <div class=" input-group-text">
                     <i class=" tim-icons icon-email-85"> </i>
                   </div>
-                </div>
+                </div>-->
                 <input class=" form-control" formControlName="email" placeholder="Email" type="text"
                   (blur)="focus = false" (focus)="focus = true" />
               </div>
@@ -29,11 +29,11 @@
 
 
               <div class=" input-group" [ngClass]="{ 'input-group-focus': focus1 === true }">
-                <div class=" input-group-prepend">
+                <!--<div class=" input-group-prepend">
                   <div class=" input-group-text">
                     <i class=" tim-icons icon-lock-circle"> </i>
                   </div>
-                </div>
+                </div>-->
                 <input class=" form-control" formControlName="password" placeholder="Contraseña" type="password"
                   (blur)="focus1 = false" (focus)="focus1 = true" />
               </div>
