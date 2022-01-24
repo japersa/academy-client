@@ -1,12 +1,148 @@
-<div class=" content">
-  <div class=" row">
-    <div class=" col-md-8">
-      <div class=" card">
-        <div class=" card-header"><h5 class=" title">Edit Profile</h5></div>
-        <div class=" card-body">
+<div class="content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header"><h5 class="title">Editar perfil</h5></div>
+        <div class="card-body">
           <form>
+            <div class="row">
+              <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                  <label> Nombre </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Nombre" [formControl] ="nombre"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 pl-md-1">
+                <div class="form-group">
+                  <label> Apellido </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Apellido" [formControl] ="apellido"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!--<div class=" col-md-6 pr-md-1">
+                <div class=" form-group">
+                  <label> Company (disabled) </label>
+                  <input
+                    class=" form-control"
+                    disabled=""
+                    type="text"
+                    value="Creative Code Inc."
+                  />
+                </div>
+              </div>-->
+              <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                  <label> Dirección de Email </label>
+                  <input
+                    class="form-control"
+                    placeholder="Email" [formControl] ="email"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 pl-md-1">
+                <div class="form-group">
+                  <label> Teléfono </label>
+                  <input
+                    class="form-control"
+                    placeholder="Teléfono" [formControl] ="telefono"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!--<div class=" row">
+              <div class=" col-md-12">
+                <div class=" form-group">
+                  <label> Address </label>
+                  <input
+                    class=" form-control"
+                    placeholder="Home Address"
+                    type="text"
+                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                  />
+                </div>
+              </div>
+            </div>
             <div class=" row">
-              <div class=" col-md-5 pr-md-1">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label> City </label>
+                  <input class=" form-control" type="text" value="Mike" />
+                </div>
+              </div>
+              <div class=" col-md-4 px-md-1">
+                <div class=" form-group">
+                  <label> Country </label>
+                  <input class=" form-control" type="text" value="Andrew" />
+                </div>
+              </div>
+              <div class=" col-md-4 pl-md-1">
+                <div class=" form-group">
+                  <label> Postal Code </label>
+                  <input
+                    class=" form-control"
+                    placeholder="ZIP Code"
+                    type="number"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-8">
+                <div class=" form-group">
+                  <label> About Me </label>
+                  <textarea class=" form-control" cols="80" rows="4">
+Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
+</textarea
+                  >
+                </div>
+              </div>
+            </div>-->
+          </form>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-danger" type="submit">Guardar</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Actualizar contraseña</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                  <label> Nueva contraseña </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Contraseña"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 pl-md-1">
+                <div class="form-group">
+                  <label> Confirmar contraseña </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Contraseña"
+                  />
+                </div>
+              </div>
+            </div>
+            <!--<div class=" row">
+              <div class=" col-md-6 pr-md-1">
                 <div class=" form-group">
                   <label> Company (disabled) </label>
                   <input
@@ -17,37 +153,28 @@
                   />
                 </div>
               </div>
-              <div class=" col-md-3 px-md-1">
+              <div class=" col-md-6 pr-md-1">
                 <div class=" form-group">
-                  <label> Username </label>
-                  <input class=" form-control" type="text" value="michael23" />
-                </div>
-              </div>
-              <div class=" col-md-4 pl-md-1">
-                <div class=" form-group">
-                  <label> Email address </label>
+                  <label> Dirección de Email </label>
                   <input
                     class=" form-control"
-                    placeholder="mike@email.com"
+                    placeholder="Email"
+                    type="email"
+                  />
+                </div>
+              </div>
+              <div class=" col-md-6 pl-md-1">
+                <div class=" form-group">
+                  <label> Teléfono </label>
+                  <input
+                    class=" form-control"
+                    placeholder="Teléfono"
                     type="email"
                   />
                 </div>
               </div>
             </div>
-            <div class=" row">
-              <div class=" col-md-6 pr-md-1">
-                <div class=" form-group">
-                  <label> First Name </label>
-                  <input class=" form-control" type="text" value="Mike" />
-                </div>
-              </div>
-              <div class=" col-md-6 pl-md-1">
-                <div class=" form-group">
-                  <label> Last Name </label>
-                  <input class=" form-control" type="text" value="Andrew" />
-                </div>
-              </div>
-            </div>
+            
             <div class=" row">
               <div class=" col-md-12">
                 <div class=" form-group">
@@ -95,41 +222,183 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
                   >
                 </div>
               </div>
-            </div>
+            </div>-->
           </form>
         </div>
-        <div class=" card-footer">
-          <button class=" btn btn-fill btn-danger" type="submit">Save</button>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-success" type="submit">
+            Actualizar
+          </button>
         </div>
       </div>
-    </div>
-    <div class=" col-md-4">
-      <div class=" card card-user">
-        <div class=" card-body">
-          <p class=" card-text"></p>
-          <div class=" author">
-            <div class=" block block-one"></div>
-            <div class=" block block-two"></div>
-            <div class=" block block-three"></div>
-            <div class=" block block-four"></div>
-            <a href="javascript:void(0)">
-              <img
-                alt="..."
-                class=" avatar"
-                src="assets/img/emilyz.jpg"
-              />
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Cursos</h5>
+        </div>
+        <div class="card-body">
+          <div class=" row"><div class="col-lg-4 col-md-5">
+            <div class="card card-stats">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="info-icon text-center icon-warning">
+                      <i class="tim-icons icon-chat-33"> </i>
+                    </div>
+                  </div>
+                  <div class="col-7">
+                    <div class="numbers">
+                      <p class="card-category">Curso</p>
+                      <h6 class="card-title">Fundamentos del trading</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <hr />
 
-              <h5 class=" title">Mike Andrew</h5>
-            </a>
-            <p class=" description">Ceo/Co-Founder</p>
+                <div class="stats">
+                  <i class="tim-icons icon-double-right"> </i> Ingresar
+                </div>
+              </div>
+            </div>
           </div>
-          <div class=" card-description">
-            Do not be scared of the truth because we need to restart the human
-            foundation in truth And I love you like Kanye loves Kanye I love
-            Rick Owensâ bed design but the back is...
+          <div class="col-lg-4 col-md-5">
+            <div class="card card-stats">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="info-icon text-center icon-primary">
+                      <i class="tim-icons icon-shape-star"> </i>
+                    </div>
+                  </div>
+                  <div class="col-7">
+                    <div class="numbers">
+                      <p class="card-category">Curso</p>
+                      <h6 class="card-title">+45k</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <hr />
+
+                <div class="stats">
+                  <i class="tim-icons icon-double-right"> </i> ingresar
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5">
+            <div class="card card-stats">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="info-icon text-center icon-success">
+                      <i class="tim-icons icon-single-02"> </i>
+                    </div>
+                  </div>
+                  <div class="col-7">
+                    <div class="numbers">
+                      <p class="card-category">Curso</p>
+                      <h6 class="card-title">150,000</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <hr />
+
+                <div class="stats">
+                  <i class="tim-icons icon-double-right"> </i> Ingresar
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5">
+            <div class="card card-stats">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="info-icon text-center icon-danger">
+                      <i class="tim-icons icon-molecule-40"> </i>
+                    </div>
+                  </div>
+                  <div class="col-7">
+                    <div class="numbers">
+                      <p class="card-category">Curso</p>
+                      <h6 class="card-title">¿Cómo invertir mi capital?</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <hr />
+
+                <div class="stats">
+                  <i class="tim-icons icon-double-right"> </i> Ingresar
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5">
+            <div class="card card-stats">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="info-icon text-center icon-danger">
+                      <i class="tim-icons icon-molecule-40"> </i>
+                    </div>
+                  </div>
+                  <div class="col-7">
+                    <div class="numbers">
+                      <p class="card-category">Curso</p>
+                      <h6 class="card-title">¿Cómo invertir mi capital?</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <hr />
+
+                <div class="stats">
+                  <i class="tim-icons icon-double-right"> </i> Ingresar
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class=" card-footer">
+          
+        </div>
+        <div class="card-footer">
+          <!--<button class="btn btn-fill btn-success" type="submit">
+            Actualizar
+          </button>-->
+        </div>
+      </div>
+      
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="card-body">
+          <p class="card-text"></p>
+          <div class="author">
+            <div class="block block-one"></div>
+            <div class="block block-two"></div>
+            <div class="block block-three"></div>
+            <div class="block block-four"></div>
+            <a href="javascript:void(0)">
+              <img alt="..." class="avatar" src="assets/img/emilyz.jpg" />
+
+              <h5 class="title"> {{nombre.value}} {{apellido.value}} </h5>
+            </a>
+            <p class="description">Estudiante</p>
+          </div>
+          <div class="card-description" style="text-align: center">
+            {{email.value}} <br> 
+            {{telefono.value}}
+          </div>
+        </div>
+        <!--<div class=" card-footer">
           <div class=" button-container">
             <button
               class=" btn btn-icon btn-round btn-facebook mr-1"
@@ -150,7 +419,7 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
               <i class=" fab fa-google-plus"> </i>
             </button>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
