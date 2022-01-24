@@ -57,9 +57,9 @@
             </li>
             <li class=" dropdown-divider"></li>
             <li class=" nav-link">
-              <button class=" nav-item dropdown-item" (click)="doLogout()">
+              <a class=" nav-item dropdown-item" [routerLink]="['/login']" (click)="doLogout()">
                 Cerrar sesión
-              </button>
+              </a>
             </li>
           </ul>
         </li>

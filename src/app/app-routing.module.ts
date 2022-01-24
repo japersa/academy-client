@@ -26,9 +26,14 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        loadChildren: () => import('./features/admin/pages/user/user-profile.module')
+        loadChildren: () => import('./shared/pages/user/user-profile.module')
           .then(m => m.UserModule)
-      }
+      },
+      {
+        path: 'admins',
+        loadChildren: () => import('./features/admin/pages/admins/admins.module')
+          .then(m => m.AdminsModule)
+      },
     ]
   },
   {
