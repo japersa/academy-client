@@ -1,69 +1,79 @@
 <div class=" content">
     <div class=" row">
         <ol class=" breadcrumb bg-transparent ml-3">
-            <li class=" breadcrumb-item"><a href="#"> Home </a></li>
-            <li class=" breadcrumb-item"><a href="#"> Library </a></li>
-            <li class=" breadcrumb-item active">Data</li>
+            <li class=" breadcrumb-item"><a href="#"> Dashboard </a></li>
+            <li class=" breadcrumb-item active">Roles</li>
         </ol>
-        <div class=" col-md-12">
-            <div class=" card">
-                <div class=" card-header">
-                    <div class=" tools float-right">
-                        <button class=" btn btn-primary btn-sm mr-1 d-inline" type="button">
-                            CREAR
-                        </button>
-                        <div class=" dropdown d-inline" dropdown>
-                            <button class=" btn btn-default dropdown-toggle btn-link btn-icon dropdown-toggle"
-                                data-toggle="dropdown" dropdownToggle type="button">
-                                <i class=" tim-icons icon-settings-gear-63"> </i>
+        <ng-container *ngIf="!showFormCreateUser">
+            <div class=" col-md-12">
+                <div class=" card">
+                    <div class=" card-header">
+                        <div class=" tools float-right">
+                            <button class=" btn btn-primary btn-sm mr-1 d-inline" (click)="createUser()" type="button">
+                                CREAR
                             </button>
-                            <div class=" dropdown-menu dropdown-menu-right" *dropdownMenu>
-                                <a class=" dropdown-item" (click)="getAdmins()"> Administradores </a>
-                                <a class=" dropdown-item" (click)="getTeachers()"> Profesores </a>
-                                <a class=" dropdown-item" (click)="getStudents()"> Alumnos </a>
+                            <div class=" dropdown d-inline" dropdown>
+                                <button class=" btn btn-default dropdown-toggle btn-link btn-icon dropdown-toggle"
+                                    data-toggle="dropdown" dropdownToggle type="button">
+                                    <i class=" tim-icons icon-settings-gear-63"> </i>
+                                </button>
+                                <div class=" dropdown-menu dropdown-menu-right" *dropdownMenu>
+                                    <a class=" dropdown-item" (click)="getAdmins()"> Administradores </a>
+                                    <a class=" dropdown-item" (click)="getTeachers()"> Profesores </a>
+                                    <a class=" dropdown-item" (click)="getStudents()"> Alumnos </a>
+                                </div>
                             </div>
                         </div>
+                        <h4 class=" card-title">{{ role | uppercase }}</h4>
                     </div>
-                    <h4 class=" card-title">{{ role | uppercase }}</h4>
-                </div>
-                <div class=" card-body">
-                    <div class=" table-responsive">
-                        <table class=" table">
-                            <thead class=" text-primary">
-                                <tr>
-                                    <th class=" text-center">#</th>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th class=" text-center">email</th>
-                                    <th class=" text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let u of users">
-                                    <td class=" text-center">
-                                        <div class=" photo">
-                                            <img alt="Table image"
-                                                [src]=" u.img ? u.img : 'assets/img/default-avatar.png'" />
-                                        </div>
-                                    </td>
-                                    <td>{{ u?.first_name }}</td>
-                                    <td>{{ u?.last_name }}</td>
-                                    <td class=" text-center">{{u?.username}}</td>
-                                    <td class=" text-right">
-                                        <button class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh"
-                                            type="button">
-                                            <i class=" tim-icons icon-pencil"> </i>
-                                        </button>
-                                        <button class=" btn btn-danger btn-link btn-sm" tooltip="Delete" type="button">
-                                            <i class=" tim-icons icon-simple-remove"> </i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class=" card-body">
+                        <div class=" table-responsive">
+                            <table class=" table">
+                                <thead class=" text-primary">
+                                    <tr>
+                                        <th class=" text-center">#</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th class=" text-center">email</th>
+                                        <th class=" text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let u of users">
+                                        <td class=" text-center">
+                                            <div class=" photo">
+                                                <img alt="Table image"
+                                                    [src]=" u.img ? u.img : 'assets/img/default-avatar.png'" />
+                                            </div>
+                                        </td>
+                                        <td>{{ u?.first_name }}</td>
+                                        <td>{{ u?.last_name }}</td>
+                                        <td class=" text-center">{{u?.username}}</td>
+                                        <td class=" text-right">
+                                            <button class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh"
+                                                type="button">
+                                                <i class=" tim-icons icon-pencil"> </i>
+                                            </button>
+                                            <button class=" btn btn-danger btn-link btn-sm" (click)="deleteUser(u?.id)"
+                                                tooltip="Delete" type="button">
+                                                <i class=" tim-icons icon-simple-remove"> </i>
+                                            </button>
+                                        </td>
+    
+    
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
+        <ng-container *ngIf="showFormCreateUser">
+            <div class=" col-md-12">
+                <app-create-user></app-create-user>
+            </div>
+        </ng-container>
+        
     </div>
 </div>

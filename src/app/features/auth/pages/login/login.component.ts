@@ -7,6 +7,7 @@ import { UtilsService } from '../../../../core/services/utils.service';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../../../core/services/storage.service';
 import { Router } from '@angular/router';
+import { UserDataService } from '../../../../core/services/user-data.service';
 
 @Component({
   selector: "app-login",
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private utilsService: UtilsService,
     private authenticationService: AuthService,
     private storageService: StorageService,
+    private userDataService: UserDataService,
     public notificationService: NotificationsService,
     private router: Router) {
 
@@ -64,9 +66,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.storageService.set('accessToken', res.token);
       this.storageService.set('userData', res.user);
 
+      this.userDataService.loadStorageUserData();
+
       this.loginForm.reset();
 
       this.router.navigate(['/dashboard']);
+
     },
       error => {
         this.errorMessage = error.error;
