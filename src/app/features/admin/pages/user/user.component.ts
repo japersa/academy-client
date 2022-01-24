@@ -1,3 +1,4 @@
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -5,7 +6,22 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "user.component.html"
 })
 export class UserComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit() {}
+  nombre= new FormControl('');
+  apellido=new FormControl('');
+  email = new FormControl('');
+  telefono = new FormControl('');
+  //registrationForm: any;
+  constructor() {
+    //this.nombre = new FormControl('');
+  }
+
+  ngOnInit() {
+    /*this.registrationForm= new FormGroup({
+      nombre : new FormControl(''),
+      apellido : new FormControl(''),
+      email : new FormControl(''),
+      phone : new FormControl('')
+    })*/
+  }
 }
