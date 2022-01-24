@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import Chart from "chart.js";
+import { Subscription } from 'rxjs';
+import { DashboardService } from '../../services/dashboard.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: "app-dashboard",
@@ -14,9 +17,26 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
   public clicked2: boolean = false;
-  constructor() { }
+
+  subscription$: Subscription;
+
+  constructor(private dashboardService: DashboardService) { }
+
+  getAdmins() {
+
+    this.subscription$ = this.dashboardService.getAdmins().pipe(take(1)).subscribe(res => {
+      console.log(res);
+
+    },
+      error => {
+        console.log(error);
+      });
+
+  }
+
 
   ngOnInit() {
+    this.getAdmins()
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
       legend: {
@@ -496,6 +516,7 @@ export class DashboardComponent implements OnInit {
       options: gradientBarChartConfiguration
     });
   }
+
   public updateOptions() {
     this.myChartData.data.datasets[0].data = this.data;
     this.myChartData.update();

@@ -35,7 +35,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'tim-icons icon-chart-pie-36',
   },
   {
-    path: '/admins',
+    path: '/roles',
     title: 'roles',
     type: 'link',
     icontype: 'tim-icons icon-single-02',

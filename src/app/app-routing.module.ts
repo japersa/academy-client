@@ -11,7 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'roles',
     pathMatch: 'full'
   },
   {
@@ -30,7 +30,7 @@ const routes: Routes = [
           .then(m => m.UserModule)
       },
       {
-        path: 'admins',
+        path: 'roles',
         loadChildren: () => import('./features/admin/pages/admins/admins.module')
           .then(m => m.AdminsModule)
       },

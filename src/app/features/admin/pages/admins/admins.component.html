@@ -18,13 +18,13 @@
                                 <i class=" tim-icons icon-settings-gear-63"> </i>
                             </button>
                             <div class=" dropdown-menu dropdown-menu-right" *dropdownMenu>
-                                <a class=" dropdown-item" href="#"> Administradores </a>
-                                <a class=" dropdown-item" href="#"> Profesores </a>
-                                <a class=" dropdown-item" href="#"> Alumnos </a>
+                                <a class=" dropdown-item" (click)="getAdmins()"> Administradores </a>
+                                <a class=" dropdown-item" (click)="getTeachers()"> Profesores </a>
+                                <a class=" dropdown-item" (click)="getStudents()"> Alumnos </a>
                             </div>
                         </div>
                     </div>
-                    <h4 class=" card-title">ADMINISTRADORES</h4>
+                    <h4 class=" card-title">{{ role | uppercase }}</h4>
                 </div>
                 <div class=" card-body">
                     <div class=" table-responsive">
@@ -34,131 +34,27 @@
                                     <th class=" text-center">#</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
-                                    <th class=" text-center">ROL</th>
-                                    <th class=" text-center">ID</th>
+                                    <th class=" text-center">email</th>
                                     <th class=" text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngFor="let u of users">
                                     <td class=" text-center">
                                         <div class=" photo">
-                                            <img alt="Table image" src="assets/img/tania.jpg" />
+                                            <img alt="Table image"
+                                                [src]=" u.img ? u.img : 'assets/img/default-avatar.png'" />
                                         </div>
                                     </td>
-                                    <td>Andrew Mike</td>
-                                    <td>Develop</td>
-                                    <td class=" text-center">ADMIN</td>
-                                    <td class=" text-center">2013</td>
+                                    <td>{{ u?.first_name }}</td>
+                                    <td>{{ u?.last_name }}</td>
+                                    <td class=" text-center">{{u?.username}}</td>
                                     <td class=" text-right">
                                         <button class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh"
                                             type="button">
                                             <i class=" tim-icons icon-pencil"> </i>
                                         </button>
                                         <button class=" btn btn-danger btn-link btn-sm" tooltip="Delete" type="button">
-                                            <i class=" tim-icons icon-simple-remove"> </i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class=" text-center">
-                                        <div class=" photo">
-                                            <img alt="Table image" src="assets/img/robi.jpg" />
-                                        </div>
-                                    </td>
-                                    <td>John Doe</td>
-                                    <td>Design</td>
-                                    <td class=" text-center">ADMIN</td>
-                                    <td class=" text-center">2012</td>
-                                    <td class=" text-right">
-                                        <button class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh"
-                                            type="button">
-                                            <i class=" tim-icons icon-pencil"> </i>
-                                        </button>
-                                        <button class=" btn btn-danger btn-link btn-sm" tooltip="Delete" type="button">
-                                            <i class=" tim-icons icon-simple-remove"> </i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class=" text-center">
-                                        <div class=" photo">
-                                            <img alt="Table image" src="assets/img/lora.jpg" />
-                                        </div>
-                                    </td>
-                                    <td>Alex Mike</td>
-                                    <td>Design</td>
-                                    <td class=" text-center">ADMIN</td>
-                                    <td class=" text-center">2010</td>
-                                    <td class=" text-right">
-                                        <button class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh"
-                                            type="button">
-                                            <i class=" tim-icons icon-pencil"> </i>
-                                        </button>
-                                        <button class=" btn btn-danger btn-link btn-sm" tooltip="Delete" type="button">
-                                            <i class=" tim-icons icon-simple-remove"> </i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class=" text-center">
-                                        <div class=" photo">
-                                            <img alt="Table image" src="assets/img/jana.jpg" />
-                                        </div>
-                                    </td>
-                                    <td>Mike Monday</td>
-                                    <td>Marketing</td>
-                                    <td class=" text-center">STUDENT</td>
-                                    <td class=" text-center">2013</td>
-                                    <td class=" text-right">
-                                        <button class=" btn btn-success btn-link btn-sm btn-icon btn-simple"
-                                            tooltip="Refresh" type="button">
-                                            <i class=" tim-icons icon-pencil"> </i>
-                                        </button>
-                                        <button class=" btn btn-danger btn-link btn-sm btn-simple" tooltip="Delete"
-                                            type="button">
-                                            <i class=" tim-icons icon-simple-remove"> </i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class=" text-center">
-                                        <div class=" photo">
-                                            <img alt="Table image" src="assets/img/robi.jpg" />
-                                        </div>
-                                    </td>
-                                    <td>Paul Dickens</td>
-                                    <td>Communication</td>
-                                    <td class=" text-center">TEACHER</td>
-                                    <td class=" text-center">2015</td>
-                                    <td class=" text-right">
-                                        <button class=" btn btn-success btn-link btn-sm btn-icon btn-simple"
-                                            tooltip="Refresh" type="button">
-                                            <i class=" tim-icons icon-pencil"> </i>
-                                        </button>
-                                        <button class=" btn btn-danger btn-link btn-sm btn-simple" tooltip="Delete"
-                                            type="button">
-                                            <i class=" tim-icons icon-simple-remove"> </i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class=" text-center">
-                                        <div class=" photo">
-                                            <img alt="Table image" src="assets/img/emilyz.jpg" />
-                                        </div>
-                                    </td>
-                                    <td>Manuel Rico</td>
-                                    <td>Manager</td>
-                                    <td class=" text-center">STUDENT</td>
-                                    <td class=" text-center">2012</td>
-                                    <td class=" text-right">
-                                        <button class=" btn btn-success btn-link btn-sm btn-icon btn-simple"
-                                            tooltip="Refresh" type="button">
-                                            <i class=" tim-icons icon-pencil"> </i>
-                                        </button>
-                                        <button class=" btn btn-danger btn-link btn-sm btn-simple" tooltip="Delete"
-                                            type="button">
                                             <i class=" tim-icons icon-simple-remove"> </i>
                                         </button>
                                     </td>
