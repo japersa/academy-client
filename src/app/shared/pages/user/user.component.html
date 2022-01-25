@@ -12,7 +12,9 @@
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="Nombre" [formControl] ="nombre"
+                    placeholder="Nombre"
+                    [value] = "userDataService?.userData$?.value?.first_name"
+                    [formControl] ="first_name"
                   />
                 </div>
               </div>
@@ -22,29 +24,20 @@
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="Apellido" [formControl] ="apellido"
+                    placeholder="Apellido" [formControl] ="last_name"
+                    value = "this.registerForm.value.last_name"
                   />
                 </div>
               </div>
             </div>
             <div class="row">
-              <!--<div class=" col-md-6 pr-md-1">
-                <div class=" form-group">
-                  <label> Company (disabled) </label>
-                  <input
-                    class=" form-control"
-                    disabled=""
-                    type="text"
-                    value="Creative Code Inc."
-                  />
-                </div>
-              </div>-->
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Dirección de Email </label>
                   <input
                     class="form-control"
-                    placeholder="Email" [formControl] ="email"
+                    placeholder="Email" [formControl] ="username"
+                    value="a@a.com"
                   />
                 </div>
               </div>
@@ -53,60 +46,11 @@
                   <label> Teléfono </label>
                   <input
                     class="form-control"
-                    placeholder="Teléfono" [formControl] ="telefono"
+                    placeholder="Teléfono" [formControl] ="phone"
                   />
                 </div>
               </div>
             </div>
-
-            <!--<div class=" row">
-              <div class=" col-md-12">
-                <div class=" form-group">
-                  <label> Address </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Home Address"
-                    type="text"
-                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class=" row">
-              <div class=" col-md-4 pr-md-1">
-                <div class=" form-group">
-                  <label> City </label>
-                  <input class=" form-control" type="text" value="Mike" />
-                </div>
-              </div>
-              <div class=" col-md-4 px-md-1">
-                <div class=" form-group">
-                  <label> Country </label>
-                  <input class=" form-control" type="text" value="Andrew" />
-                </div>
-              </div>
-              <div class=" col-md-4 pl-md-1">
-                <div class=" form-group">
-                  <label> Postal Code </label>
-                  <input
-                    class=" form-control"
-                    placeholder="ZIP Code"
-                    type="number"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class=" row">
-              <div class=" col-md-8">
-                <div class=" form-group">
-                  <label> About Me </label>
-                  <textarea class=" form-control" cols="80" rows="4">
-Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
-</textarea
-                  >
-                </div>
-              </div>
-            </div>-->
           </form>
         </div>
         <div class="card-footer">
@@ -122,107 +66,25 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
             <div class="row">
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
-                  <label> Nueva contraseña </label>
+                  <label> Contraseña actual </label>
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="Contraseña"
+                    placeholder="Contraseña actual"
                   />
                 </div>
               </div>
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
-                  <label> Confirmar contraseña </label>
+                  <label> Nueva contraseña </label>
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="Contraseña"
+                    placeholder="Nueva contraseña"
                   />
                 </div>
               </div>
             </div>
-            <!--<div class=" row">
-              <div class=" col-md-6 pr-md-1">
-                <div class=" form-group">
-                  <label> Company (disabled) </label>
-                  <input
-                    class=" form-control"
-                    disabled=""
-                    type="text"
-                    value="Creative Code Inc."
-                  />
-                </div>
-              </div>
-              <div class=" col-md-6 pr-md-1">
-                <div class=" form-group">
-                  <label> Dirección de Email </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Email"
-                    type="email"
-                  />
-                </div>
-              </div>
-              <div class=" col-md-6 pl-md-1">
-                <div class=" form-group">
-                  <label> Teléfono </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Teléfono"
-                    type="email"
-                  />
-                </div>
-              </div>
-            </div>
-            
-            <div class=" row">
-              <div class=" col-md-12">
-                <div class=" form-group">
-                  <label> Address </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Home Address"
-                    type="text"
-                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class=" row">
-              <div class=" col-md-4 pr-md-1">
-                <div class=" form-group">
-                  <label> City </label>
-                  <input class=" form-control" type="text" value="Mike" />
-                </div>
-              </div>
-              <div class=" col-md-4 px-md-1">
-                <div class=" form-group">
-                  <label> Country </label>
-                  <input class=" form-control" type="text" value="Andrew" />
-                </div>
-              </div>
-              <div class=" col-md-4 pl-md-1">
-                <div class=" form-group">
-                  <label> Postal Code </label>
-                  <input
-                    class=" form-control"
-                    placeholder="ZIP Code"
-                    type="number"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class=" row">
-              <div class=" col-md-8">
-                <div class=" form-group">
-                  <label> About Me </label>
-                  <textarea class=" form-control" cols="80" rows="4">
-Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
-</textarea
-                  >
-                </div>
-              </div>
-            </div>-->
           </form>
         </div>
         <div class="card-footer">
@@ -257,7 +119,8 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
                 <hr />
 
                 <div class="stats">
-                  <i class="tim-icons icon-double-right"> </i> Ingresar
+                  <button class="btn btn-simple btn-info btn-sm" type="submit">
+                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
                 </div>
               </div>
             </div>
@@ -283,7 +146,8 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
                 <hr />
 
                 <div class="stats">
-                  <i class="tim-icons icon-double-right"> </i> ingresar
+                  <button class="btn btn-simple btn-info btn-sm" type="submit">
+                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
                 </div>
               </div>
             </div>
@@ -309,7 +173,8 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
                 <hr />
 
                 <div class="stats">
-                  <i class="tim-icons icon-double-right"> </i> Ingresar
+                  <button class="btn btn-simple btn-info btn-sm" type="submit">
+                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
                 </div>
               </div>
             </div>
@@ -335,7 +200,8 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
                 <hr />
 
                 <div class="stats">
-                  <i class="tim-icons icon-double-right"> </i> Ingresar
+                  <button class="btn btn-simple btn-info btn-sm" type="submit">
+                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
                 </div>
               </div>
             </div>
@@ -361,7 +227,9 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
                 <hr />
 
                 <div class="stats">
-                  <i class="tim-icons icon-double-right"> </i> Ingresar
+                  
+                  <button class="btn btn-simple btn-info btn-sm" type="submit">
+                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
                 </div>
               </div>
             </div>
@@ -389,37 +257,15 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
             <a href="javascript:void(0)">
               <img alt="..." class="avatar" src="assets/img/emilyz.jpg" />
 
-              <h5 class="title"> {{nombre.value}} {{apellido.value}} </h5>
+              <h5 class="title"> {{first_name.value}} {{last_name.value}} </h5>
             </a>
-            <p class="description">Estudiante</p>
+            <p class="description">{{rol}}</p>
           </div>
           <div class="card-description" style="text-align: center">
-            {{email.value}} <br> 
-            {{telefono.value}}
+            {{username.value}} <br> 
+            {{phone.value}}
           </div>
         </div>
-        <!--<div class=" card-footer">
-          <div class=" button-container">
-            <button
-              class=" btn btn-icon btn-round btn-facebook mr-1"
-              href="javascript:void(0)"
-            >
-              <i class=" fab fa-facebook"> </i>
-            </button>
-            <button
-              class=" btn btn-icon btn-round btn-twitter mr-1"
-              href="javascript:void(0)"
-            >
-              <i class=" fab fa-twitter"> </i>
-            </button>
-            <button
-              class=" btn btn-icon btn-round btn-google"
-              href="javascript:void(0)"
-            >
-              <i class=" fab fa-google-plus"> </i>
-            </button>
-          </div>
-        </div>-->
       </div>
     </div>
   </div>
