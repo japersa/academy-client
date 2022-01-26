@@ -18,13 +18,15 @@ export class UserComponent implements OnInit {
   first_name= new FormControl('');
   last_name=new FormControl('');
   username = new FormControl('');
-  phone = new FormControl('');
+  phone_number = new FormControl('');
 
   public rol;
+  showPasswordField:boolean=false;
+  showButtonPassword:boolean=true;
 
 
-
-  registerForm: FormGroup;
+  updateForm: FormGroup;
+  updatePasswordForm: FormGroup;
   validationMessages: any;
   errorMessage: string | null;
 
@@ -42,7 +44,7 @@ export class UserComponent implements OnInit {
     public userDataService: UserDataService) {
     this.validationMessages = utilsService.getValidationMessages();
 
-    this.registerForm = this.formBuilder.group({
+    this.updateForm = this.formBuilder.group({
       first_name: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3)])),
@@ -57,6 +59,17 @@ export class UserComponent implements OnInit {
         Validators.minLength(8)])),
     }
     );
+  }
+
+  showUpdatePassword(){
+    if(this.showPasswordField==true){
+      this.showPasswordField=false;
+      this.showButtonPassword=true;
+      this.updatePasswordForm.reset();
+    } else if(this.showPasswordField==false){
+      this.showPasswordField=true;
+      this.showButtonPassword=false;
+    }
   }
 
   setRol(rolLocal){
@@ -75,15 +88,12 @@ export class UserComponent implements OnInit {
       first_name: dataFrom.first_name,
       last_name: dataFrom.last_name,
       username: dataFrom.email,
-      identity_card: dataFrom.password,
-      phone_number: dataFrom.phone,
+      phone_number: dataFrom.phone_number,
     }
-
-    this.subscription$ = this.editUserService.register(data).pipe(take(1)).subscribe(res => {
+    this.subscription$ = this.editUserService.updateUser(data).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.notificationService.showNotification('bottom','center','Has actualizado los datos correctamente',2);
-      this.registerForm.reset();
-
+      this.updateForm.reset();
     },
       error => {
         this.errorMessage = error.error;
@@ -98,11 +108,11 @@ export class UserComponent implements OnInit {
     const data = {
       password: dataFrom.password
     }
-    this.subscription$ = this.editUserService.register(data).pipe(take(1)).subscribe(res => {
+    this.subscription$ = this.editUserService.updateUser(data).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.notificationService.showNotification('bottom','center','Has actualizado los datos correctamente',2);
-      this.registerForm.reset();
-
+      this.updatePasswordForm.reset();
+      this.showUpdatePassword();
     },
       error => {
         this.errorMessage = error.error;
@@ -112,14 +122,11 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.registerForm)
     this.setRol(localStorage.userData.split(',')[4].split(':')[1].split('}')[0]);
     console.log(this.rol)
     console.log(localStorage.userData.split(',')[4].split(':')[1].split('}')[0])
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('register-page');
-    this.registerForm.patchValue(this.userDataService.userData$.value);
-    console.log(this.registerForm.value.last_name);
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];
