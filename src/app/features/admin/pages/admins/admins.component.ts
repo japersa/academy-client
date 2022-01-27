@@ -12,7 +12,8 @@ import swal from 'sweetalert2';
 })
 export class AdminsComponent implements OnInit, OnDestroy {
 
-  showFormCreateUser = true;
+  userEdit = {};
+  showFormCreateUser = false;
   role = 'administradores'
   users = [];
 
@@ -26,7 +27,17 @@ export class AdminsComponent implements OnInit, OnDestroy {
   }
 
   createUser() {
+    this.userEdit = null;
     this.showFormCreateUser = !this.showFormCreateUser;
+  }
+
+  editUser(user: object) {
+    this.userEdit = user;
+    this.showFormCreateUser = !this.showFormCreateUser;
+  }
+
+  changeStateShow(value: boolean) {
+    this.showFormCreateUser = value;
   }
 
   getAdmins() {

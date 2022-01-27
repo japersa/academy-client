@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -6,6 +6,8 @@ import { UtilsService } from '../../../../core/services/utils.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { RegisterService } from '../../../auth/services/register.service';
 import { take } from 'rxjs/operators';
+
+const ROLES = ROLES_ENUM;
 
 @Component({
   selector: 'app-create-user',
@@ -17,21 +19,25 @@ export class CreateUserComponent implements OnInit {
   roles = [
     {
       name: 'administrador',
-      role: ROLES_ENUM.ADMIN
+      role: ROLES.ADMIN
     },
     {
       name: 'PROFESOR',
-      role: ROLES_ENUM.TEACHER
+      role: ROLES.TEACHER
     },
     {
       name: 'estudiante',
-      role: ROLES_ENUM.STUDENT
+      role: ROLES.STUDENT
     }
   ];
+
+  @Input() user = null;
 
   createUserForm: FormGroup;
   validationMessages: any;
   errorMessage: string | null;
+
+  @Output() showEvent = new EventEmitter<boolean>();
 
   subscription$: Subscription;
 
@@ -59,30 +65,80 @@ export class CreateUserComponent implements OnInit {
 
   }
 
-
   createUser(dataFrom: any) {
 
     const data = {
+      username: dataFrom.email,
       first_name: dataFrom.first_name,
       last_name: dataFrom.last_name,
-      role: dataFrom.role,
-  }
+      rol: dataFrom.role,
+    }
 
-    this.subscription$ = this.registerService.register(data).pipe(take(1)).subscribe(res => {
-      console.log(res);
-      this.notificationService.showNotification('bottom','center','Usuario registrado correctamente',2);
+    console.log(data);
+
+
+    this.subscription$ = this.registerService.registerByRole(data).pipe(take(1)).subscribe(res => {
+      this.showEvent.emit(false);
+      this.notificationService.showNotification('bottom', 'center', 'Usuario registrado correctamente', 2);
       this.createUserForm.reset();
-
     },
       error => {
         this.errorMessage = error.error;
         console.log(error.error);
-        this.notificationService.showNotification('bottom','center','Error al registrarse',4);
+        this.notificationService.showNotification('bottom', 'center', 'Error al registrarse', 4);
       });
 
   }
 
+  doAction(dataFrom: any) {
+    if (this.user) {
+      console.log('edit', dataFrom);
+      this.editUser(dataFrom);
+    } else {
+      console.log('create', dataFrom);
+      this.createUser(dataFrom);
+    }
+  }
+
+  editUser(dataFrom: any) {
+
+    console.log(this.user);
+
+    let data: any = {
+      username: dataFrom.email,
+      first_name: dataFrom.first_name,
+      last_name: dataFrom.last_name,
+      rol: dataFrom.role,
+    }
+
+    if (this.user.username === dataFrom.email) {
+      data = {
+        first_name: dataFrom.first_name,
+        last_name: dataFrom.last_name,
+        rol: dataFrom.role,
+      }
+    }
+
+    this.subscription$ = this.registerService.editUser(data, this.user.id).pipe(take(1)).subscribe(res => {
+      this.showEvent.emit(false);
+      this.notificationService.showNotification('bottom', 'center', 'Usuario editado correctamente', 2);
+      this.createUserForm.reset();
+    },
+      error => {
+        this.errorMessage = error.error;
+        console.log(error.error);
+        this.notificationService.showNotification('bottom', 'center', 'Error al editar', 4);
+      });
+
+  }
+
+  cancelCreate() {
+    this.showEvent.emit(false);
+  }
+
+
   ngOnInit(): void {
   }
+
 
 }
