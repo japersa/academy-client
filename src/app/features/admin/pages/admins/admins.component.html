@@ -6,8 +6,11 @@
             <ng-container *ngIf="showFormCreateUser">
                 <li class=" breadcrumb-item active">Crear</li>
             </ng-container>
+            <ng-container *ngIf="showFormEditUser">
+                <li class=" breadcrumb-item active">Editar</li>
+            </ng-container>
         </ol>
-        <ng-container *ngIf="!showFormCreateUser">
+        <ng-container *ngIf="!showFormCreateUser  && !showFormEditUser ">
             <div class=" col-md-12">
                 <div class=" card">
                     <div class=" card-header">
@@ -72,7 +75,12 @@
         </ng-container>
         <ng-container *ngIf="showFormCreateUser">
             <div class=" col-md-12">
-                <app-create-user (showEvent)="changeStateShow($event)" [user]="userEdit"></app-create-user>
+                <app-create-user (showEvent)="changeStateShow($event)"></app-create-user>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="showFormEditUser">
+            <div class=" col-md-12">
+                <app-edit-user (showEvent)="changeStateShow($event)" [user]="userEdit"></app-edit-user>
             </div>
         </ng-container>
 

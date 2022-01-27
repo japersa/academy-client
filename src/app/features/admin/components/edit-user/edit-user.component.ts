@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -10,11 +10,12 @@ import { take } from 'rxjs/operators';
 const ROLES = ROLES_ENUM;
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.scss']
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.scss']
 })
-export class CreateUserComponent implements OnInit {
+export class EditUserComponent implements OnInit {
+
 
   roles = [
     {
@@ -31,6 +32,7 @@ export class CreateUserComponent implements OnInit {
     }
   ];
 
+  @Input() user = null;
 
   createUserForm: FormGroup;
   validationMessages: any;
@@ -64,24 +66,35 @@ export class CreateUserComponent implements OnInit {
 
   }
 
-  createUser(dataFrom: any) {
 
-    const data = {
+  editUser(dataFrom: any) {
+    console.log('edddd');
+
+
+    let data: any = {
       username: dataFrom.email,
       first_name: dataFrom.first_name,
       last_name: dataFrom.last_name,
       rol: dataFrom.role,
     }
 
-    this.subscription$ = this.registerService.registerByRole(data).pipe(take(1)).subscribe(res => {
+    if (this.user.username === dataFrom.email) {
+      data = {
+        first_name: dataFrom.first_name,
+        last_name: dataFrom.last_name,
+        rol: dataFrom.role,
+      }
+    }
+
+    this.subscription$ = this.registerService.editUser(data, this.user.id).pipe(take(1)).subscribe(res => {
       this.showEvent.emit(false);
-      this.notificationService.showNotification('bottom', 'center', 'Usuario registrado correctamente', 2);
+      this.notificationService.showNotification('bottom', 'center', 'Usuario editado correctamente', 2);
       this.createUserForm.reset();
     },
       error => {
         this.errorMessage = error.error;
         console.log(error.error);
-        this.notificationService.showNotification('bottom', 'center', 'Error al registrarse', 4);
+        this.notificationService.showNotification('bottom', 'center', 'Error al editar', 4);
       });
 
   }
@@ -90,9 +103,7 @@ export class CreateUserComponent implements OnInit {
     this.showEvent.emit(false);
   }
 
-
   ngOnInit(): void {
   }
-
 
 }

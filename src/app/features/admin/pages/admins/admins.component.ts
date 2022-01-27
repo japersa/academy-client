@@ -14,6 +14,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
 
   userEdit = {};
   showFormCreateUser = false;
+  showFormEditUser = false;
   role = 'administradores'
   users = [];
 
@@ -27,18 +28,19 @@ export class AdminsComponent implements OnInit, OnDestroy {
   }
 
   createUser() {
-    this.userEdit = null;
     this.showFormCreateUser = !this.showFormCreateUser;
   }
 
   editUser(user: object) {
     this.userEdit = user;
-    this.showFormCreateUser = !this.showFormCreateUser;
+    this.showFormEditUser = !this.showFormCreateUser;
   }
 
   changeStateShow(value: boolean) {
     this.showFormCreateUser = value;
+    this.showFormEditUser = value;
   }
+
 
   getAdmins() {
     this.users.length = 0;
