@@ -1,3 +1,4 @@
+import { UpdatePasswordService } from './../../services/update-password.service';
 import { UserDataService } from './../../../core/services/user-data.service';
 import { take } from 'rxjs/operators';
 import { NotificationsService } from './../../../core/services/notifications.service';
@@ -18,7 +19,7 @@ export class UserComponent implements OnInit {
   first_name= new FormControl('');
   last_name=new FormControl('');
   username = new FormControl('');
-  phone_number = new FormControl('');
+  phone = new FormControl('');
 
   public rol;
   showPasswordField:boolean=false;
@@ -41,7 +42,8 @@ export class UserComponent implements OnInit {
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
     private editUserService: EditUserService, 
-    public userDataService: UserDataService) {
+    public userDataService: UserDataService,
+    public updatePasswordService: UpdatePasswordService) {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.updateForm = this.formBuilder.group({
@@ -88,7 +90,7 @@ export class UserComponent implements OnInit {
       first_name: dataFrom.first_name,
       last_name: dataFrom.last_name,
       username: dataFrom.email,
-      phone_number: dataFrom.phone_number,
+      phone_number: dataFrom.phone,
     }
     this.subscription$ = this.editUserService.updateUser(data).pipe(take(1)).subscribe(res => {
       console.log(res);
@@ -108,23 +110,22 @@ export class UserComponent implements OnInit {
     const data = {
       password: dataFrom.password
     }
-    this.subscription$ = this.editUserService.updateUser(data).pipe(take(1)).subscribe(res => {
+    this.subscription$ = this.updatePasswordService.updatePassword(data).pipe(take(1)).subscribe(res => {
       console.log(res);
-      this.notificationService.showNotification('bottom','center','Has actualizado los datos correctamente',2);
+      this.notificationService.showNotification('bottom','center','Has actualizado la contraseña correctamente',2);
       this.updatePasswordForm.reset();
       this.showUpdatePassword();
     },
       error => {
         this.errorMessage = error.error;
         console.log(error.error);
-        this.notificationService.showNotification('bottom','center','Error al actualizar usuario',4);
+        this.notificationService.showNotification('bottom','center','Error al actualizar la contraseña',4);
       });
   }
 
   ngOnInit() {
     this.setRol(localStorage.userData.split(',')[4].split(':')[1].split('}')[0]);
     console.log(this.rol)
-    console.log(localStorage.userData.split(',')[4].split(':')[1].split('}')[0])
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('register-page');
   }

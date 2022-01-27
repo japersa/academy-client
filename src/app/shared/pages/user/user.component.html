@@ -59,10 +59,8 @@
                 <div class="form-group">
                   <label> Teléfono </label>
                   <input
-                    class="form-control"
-                    placeholder="Teléfono"
-                    formControlName="phone_number"
-                    type="text"
+                    class="form-control" placeholder="Teléfono" formControlName="phone"
+                    type="tel"
                     (blur)="focus = false" (focus)="focus = true"
                   />
                 </div>
@@ -112,8 +110,15 @@
                     class="form-control"
                     type="password"
                     placeholder="Nueva contraseña"
+                    formControlName="password"
                   />
                 </div>
+                <ng-container *ngFor="let validation of validationMessages.password">
+                    <small class="text-danger d-block" *ngIf="updateForm.get('password').hasError(validation.type) &&
+                    (updateForm.get('password').dirty || updateForm.get('password').touched) ">
+                      {{validation.message}}
+                    </small>
+                  </ng-container>
               </div>
             </div>
             <div class="card-footer">
@@ -301,7 +306,7 @@
           </div>
           <div class="card-description" style="text-align: center">
             {{username.value}} <br> 
-            {{phone_number.value}}
+            {{phone.value}}
           </div>
         </div>
       </div>
