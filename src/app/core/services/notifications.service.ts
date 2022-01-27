@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class NotificationsService {
-  constructor(public toastr: ToastrService) {}
-  
-  showNotification(from:string, align:string, text:string, color:number) {
+  constructor(public toastr: ToastrService) { }
+
+  showNotification(from: string, align: string, text: string, color: number) {
 
     switch (color) {
       case 1:
@@ -25,7 +25,7 @@ export class NotificationsService {
         break;
       case 2:
         this.toastr.success(
-          `<span class=" tim-icons icon-bell-55"></span>  ${text}`,          
+          `<span class=" tim-icons icon-bell-55"></span>  ${text}`,
           "",
           {
             timeOut: 8000,
