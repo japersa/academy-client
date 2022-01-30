@@ -1,5 +1,5 @@
 import { NotificationsService } from 'src/app/core/services/notifications.service';
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -7,10 +7,11 @@ import { UtilsService } from '../../../../core/services/utils.service';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../../../core/services/storage.service';
 import { Router } from '@angular/router';
+import { UserDataService } from '../../../../core/services/user-data.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "login.component.html"
+  selector: 'app-login',
+  templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private utilsService: UtilsService,
     private authenticationService: AuthService,
     private storageService: StorageService,
+    private userDataService: UserDataService,
     public notificationService: NotificationsService,
     private router: Router) {
 
@@ -64,9 +66,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.storageService.set('accessToken', res.token);
       this.storageService.set('userData', res.user);
 
+      this.userDataService.loadStorageUserData();
+      this.userDataService.isUserLoggedIn$.next(true);
+
       this.loginForm.reset();
 
-      this.router.navigate(['/dashboard']);
+      this.router.navigateByUrl('/dashboard')
+
     },
       error => {
         this.errorMessage = error.error;
@@ -76,11 +82,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.add("login-page");
+    var body = document.getElementsByTagName('body')[0];
+    body.classList.add('login-page');
   }
   ngOnDestroy() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.remove("login-page");
+    var body = document.getElementsByTagName('body')[0];
+    body.classList.remove('login-page');
   }
 }

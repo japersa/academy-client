@@ -15,6 +15,9 @@ import { PictureUploadComponent } from './picture-upload/picture-upload.componen
 import { AuthNavbarComponent } from './auth-navbar/auth-navbar.component';
 import { FixedPluginComponent } from './fixed-plugin/fixed-plugin.component';
 
+import { ProgressbarModule } from "ngx-bootstrap/progressbar";
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { FixedPluginComponent } from './fixed-plugin/fixed-plugin.component';
     FormsModule,
     JwBootstrapSwitchNg2Module,
     DxVectorMapModule,
+    ProgressbarModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot()
@@ -38,6 +42,7 @@ import { FixedPluginComponent } from './fixed-plugin/fixed-plugin.component';
     FooterComponent,
     VectorMapComponent1,
     PictureUploadComponent,
+    ProgressbarModule,
     AuthNavbarComponent,
     FixedPluginComponent
   ]

@@ -33,15 +33,16 @@
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" dropdownToggle href="#"
             (click)="$event.preventDefault()">
             <div class=" photo">
-              <img alt="Profile Photo" src="assets/img/mike.jpg" />
+              <img alt="Profile Photo"
+                [src]=" userDataService.userData$.value ? userDataService.userData$.value.image_profile : 'assets/img/placeholder.jpg'" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
             <p (click)="doLogout()" class=" d-lg-none">Cerrar sesión</p>
           </a>
           <ul class=" dropdown-menu dropdown-navbar dropdown-menu-right" *dropdownMenu>
             <li class=" nav-link">
-              <p class=" nav-item dropdown-item" >
-                {{ userDataService.userData$.value.first_name }} 
+              <p class=" nav-item dropdown-item">
+                {{ userDataService?.userData$?.value?.first_name }}
               </p>
             </li>
             <li class=" dropdown-divider"></li>
