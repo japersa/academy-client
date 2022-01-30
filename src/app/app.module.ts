@@ -10,32 +10,47 @@ import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admi
 import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { ComponentsModule } from './shared/components/components.module';
+
+// Firebase
+import { AngularFireModule,AngularFireStorageModule } from '@angular/';
+
 
 // Core Modules
+import { CoreModule } from './core/core.module';
 
 // Features Module
 import { FeaturesModule } from './features/features.module';
-import { CoreModule } from './core/core.module';
+
+// Shared Modulse
+import { SharedModule } from './shared/shared.module';
+import { ComponentsModule } from './shared/components/components.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent
-    ],
+  ],
   imports: [
     CommonModule,
     FormsModule,
     BrowserAnimationsModule,
+    ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp({
+      apiKey: "<your-api-key>",
+      authDomain: "<your-auth-domain>",
+      storageBucket: "<project-id>.appspot.com",
+      projectId: "<your-project-id>",
+    }),
+    AngularFireStorageModule
     ToastrModule.forRoot(),
-    ComponentsModule,
     CoreModule,
+    SharedModule,
     FeaturesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

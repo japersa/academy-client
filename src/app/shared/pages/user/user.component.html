@@ -2,43 +2,35 @@
   <div class="row">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header"><h5 class="title">Editar perfil</h5></div>
+        <div class="card-header">
+          <h5 class="title">Editar perfil</h5>
+        </div>
         <div class="card-body">
           <form class="form" [formGroup]="updateForm" (ngSubmit)="updateUser(updateForm.value)" role="form">
             <div class="row">
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Nombre </label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    placeholder="Nombre"
-                    formControlName="first_name"
-                  />
+                  <input class="form-control" type="text" placeholder="Nombre" formControlName="first_name" />
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.first_name">
-                    <small class="text-danger d-block" *ngIf="updateForm.get('first_name').hasError(validation.type) &&
+                  <small class="text-danger d-block" *ngIf="updateForm.get('first_name').hasError(validation.type) &&
                         (updateForm.get('first_name').dirty || updateForm.get('first_name').touched) ">
-                      {{validation.message}}
-                    </small>
-                  </ng-container>
+                    {{validation.message}}
+                  </small>
+                </ng-container>
               </div>
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Apellido </label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    placeholder="Apellido"
-                    formControlName="last_name"
-                  />
+                  <input class="form-control" type="text" placeholder="Apellido" formControlName="last_name" />
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.last_name">
-                    <small class="text-danger d-block" *ngIf="updateForm.get('last_name').hasError(validation.type) &&
+                  <small class="text-danger d-block" *ngIf="updateForm.get('last_name').hasError(validation.type) &&
                     (updateForm.get('last_name').dirty || updateForm.get('last_name').touched) ">
-                      {{validation.message}}
-                    </small>
-                  </ng-container>
+                    {{validation.message}}
+                  </small>
+                </ng-container>
               </div>
             </div>
             <div class="row">
@@ -46,7 +38,7 @@
                 <div class="form-group">
                   <label> Dirección de Email </label>
                   <input class=" form-control" formControlName="email" placeholder="Email" type="email"
-                    (blur)="focus = false" (focus)="focus = true"/>
+                    (blur)="focus = false" (focus)="focus = true" />
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.email">
                   <small class="text-danger" *ngIf="updateForm.get('email').hasError(validation.type) &&
@@ -58,13 +50,8 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Teléfono </label>
-                  <input
-                    class="form-control"
-                    placeholder="Teléfono"
-                    formControlName="phone_number"
-                    type="text"
-                    (blur)="focus = false" (focus)="focus = true"
-                  />
+                  <input class="form-control" placeholder="Teléfono" formControlName="phone_number" type="text"
+                    (blur)="focus = false" (focus)="focus = true" />
                 </div>
                 <!--<ng-container *ngFor="let validation of validationMessages.phone_number">
                   <small class="text-danger" *ngIf="updateForm.get('phone_number').hasError(validation.type) &&
@@ -75,44 +62,37 @@
               </div>
             </div>
             <ng-container *ngIf="errorMessage">
-                  <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
-                </ng-container>
+              <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+            </ng-container>
             <div class="card-footer">
-              <button class="btn btn-fill btn-success" type="submit" >Guardar</button>
+              <button class="btn btn-fill btn-success" type="submit">Guardar</button>
             </div>
           </form>
         </div>
-        
+
       </div>
       <div *ngIf="showButtonPassword">
         <button class="btn btn-fill btn-info btn-sm" (click)="showUpdatePassword()"> Actualizar contraseña</button>
         <br>
       </div>
-      <div  class="card" *ngIf="showPasswordField">
+      <div class="card" *ngIf="showPasswordField">
         <div class="card-header">
           <h5 class="title">Actualizar contraseña</h5>
         </div>
         <div class="card-body">
-          <form class="form" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword(updatePasswordForm.value)" role="form">
+          <form class="form" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword(updatePasswordForm.value)"
+            role="form">
             <div class="row">
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Contraseña actual </label>
-                  <input
-                    class="form-control"
-                    type="password"
-                    placeholder="Contraseña actual"
-                  />
+                  <input class="form-control" type="password" placeholder="Contraseña actual" />
                 </div>
               </div>
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Nueva contraseña </label>
-                  <input
-                    class="form-control"
-                    type="password"
-                    placeholder="Nueva contraseña"
-                  />
+                  <input class="form-control" type="password" placeholder="Nueva contraseña" />
                 </div>
               </div>
             </div>
@@ -120,8 +100,8 @@
               <div class="row">
                 <div class="col-md-6 pr-md-1">
                   <button class="btn btn-fill btn-success" type="submit">
-            Actualizar
-                </button>
+                    Actualizar
+                  </button>
                 </div>
                 <div class="col-md-6 pl-md-1">
                   <button class="btn btn-fill btn-danger" (click)="showUpdatePassword()"> Cancelar</button>
@@ -129,151 +109,152 @@
               </div>
             </div>
           </form>
-        </div>    
+        </div>
       </div>
       <div class="card">
         <div class="card-header">
           <h5 class="title">Cursos</h5>
         </div>
         <div class="card-body">
-          <div class=" row"><div class="col-lg-4 col-md-5">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-5">
-                    <div class="info-icon text-center icon-warning">
-                      <i class="tim-icons icon-chat-33"> </i>
+          <div class=" row">
+            <div class="col-lg-4 col-md-5">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="info-icon text-center icon-warning">
+                        <i class="tim-icons icon-chat-33"> </i>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-7">
-                    <div class="numbers">
-                      <p class="card-category">Curso</p>
-                      <h6 class="card-title">Fundamentos del trading</h6>
+                    <div class="col-7">
+                      <div class="numbers">
+                        <p class="card-category">Curso</p>
+                        <h6 class="card-title">Fundamentos del trading</h6>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer">
-                <hr />
+                <div class="card-footer">
+                  <hr />
 
-                <div class="stats">
-                  <button class="btn btn-simple btn-info btn-sm" type="submit">
-                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
+                  <div class="stats">
+                    <button class="btn btn-simple btn-info btn-sm" type="submit">
+                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="info-icon text-center icon-primary">
+                        <i class="tim-icons icon-shape-star"> </i>
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="numbers">
+                        <p class="card-category">Curso</p>
+                        <h6 class="card-title">+45k</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <hr />
+
+                  <div class="stats">
+                    <button class="btn btn-simple btn-info btn-sm" type="submit">
+                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="info-icon text-center icon-success">
+                        <i class="tim-icons icon-single-02"> </i>
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="numbers">
+                        <p class="card-category">Curso</p>
+                        <h6 class="card-title">150,000</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <hr />
+
+                  <div class="stats">
+                    <button class="btn btn-simple btn-info btn-sm" type="submit">
+                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="info-icon text-center icon-danger">
+                        <i class="tim-icons icon-molecule-40"> </i>
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="numbers">
+                        <p class="card-category">Curso</p>
+                        <h6 class="card-title">¿Cómo invertir mi capital?</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <hr />
+
+                  <div class="stats">
+                    <button class="btn btn-simple btn-info btn-sm" type="submit">
+                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="info-icon text-center icon-danger">
+                        <i class="tim-icons icon-molecule-40"> </i>
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="numbers">
+                        <p class="card-category">Curso</p>
+                        <h6 class="card-title">¿Cómo invertir mi capital?</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <hr />
+
+                  <div class="stats">
+
+                    <button class="btn btn-simple btn-info btn-sm" type="submit">
+                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-5">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-5">
-                    <div class="info-icon text-center icon-primary">
-                      <i class="tim-icons icon-shape-star"> </i>
-                    </div>
-                  </div>
-                  <div class="col-7">
-                    <div class="numbers">
-                      <p class="card-category">Curso</p>
-                      <h6 class="card-title">+45k</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <hr />
 
-                <div class="stats">
-                  <button class="btn btn-simple btn-info btn-sm" type="submit">
-                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-5">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-5">
-                    <div class="info-icon text-center icon-success">
-                      <i class="tim-icons icon-single-02"> </i>
-                    </div>
-                  </div>
-                  <div class="col-7">
-                    <div class="numbers">
-                      <p class="card-category">Curso</p>
-                      <h6 class="card-title">150,000</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <hr />
-
-                <div class="stats">
-                  <button class="btn btn-simple btn-info btn-sm" type="submit">
-                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-5">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-5">
-                    <div class="info-icon text-center icon-danger">
-                      <i class="tim-icons icon-molecule-40"> </i>
-                    </div>
-                  </div>
-                  <div class="col-7">
-                    <div class="numbers">
-                      <p class="card-category">Curso</p>
-                      <h6 class="card-title">¿Cómo invertir mi capital?</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <hr />
-
-                <div class="stats">
-                  <button class="btn btn-simple btn-info btn-sm" type="submit">
-                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-5">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-5">
-                    <div class="info-icon text-center icon-danger">
-                      <i class="tim-icons icon-molecule-40"> </i>
-                    </div>
-                  </div>
-                  <div class="col-7">
-                    <div class="numbers">
-                      <p class="card-category">Curso</p>
-                      <h6 class="card-title">¿Cómo invertir mi capital?</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <hr />
-
-                <div class="stats">
-                  
-                  <button class="btn btn-simple btn-info btn-sm" type="submit">
-                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-          
         </div>
         <div class="card-footer">
           <!--<button class="btn btn-fill btn-success" type="submit">
@@ -281,7 +262,7 @@
           </button>-->
         </div>
       </div>
-      
+
     </div>
     <div class="col-md-4">
       <div class="card card-user">
@@ -293,14 +274,15 @@
             <div class="block block-three"></div>
             <div class="block block-four"></div>
             <a href="javascript:void(0)">
-              <img alt="..." class="avatar" src="assets/img/emilyz.jpg" />
+              <!-- <img alt="..." class="avatar" src="assets/img/emilyz.jpg" /> -->
+              <app-picture-upload></app-picture-upload>
 
               <h5 class="title"> {{first_name.value}} {{last_name.value}} </h5>
             </a>
             <p class="description">{{rol}}</p>
           </div>
           <div class="card-description" style="text-align: center">
-            {{username.value}} <br> 
+            {{username.value}} <br>
             {{phone_number.value}}
           </div>
         </div>
