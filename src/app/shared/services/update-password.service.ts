@@ -4,7 +4,7 @@ import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 
 const apiURL = environment.apiURL;
-const route = '/update/password/';
+const route = '/change/password/';
 
 @Injectable({
   providedIn: 'root'

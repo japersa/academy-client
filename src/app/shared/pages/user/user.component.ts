@@ -59,6 +59,19 @@ export class UserComponent implements OnInit {
       password: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8)])),
+      phone: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(5)])),
+        
+    }
+    );
+    this.updatePasswordForm = this.formBuilder.group({
+      old_password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(8)])),
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(8)])),
     }
     );
   }
@@ -104,12 +117,12 @@ export class UserComponent implements OnInit {
       });
   }
 
-
-
   updatePassword(dataFrom: any){
     const data = {
-      password: dataFrom.password
+      old_password: dataFrom.old_password,
+      password: dataFrom.password,
     }
+    console.log(data)
     this.subscription$ = this.updatePasswordService.updatePassword(data).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.notificationService.showNotification('bottom','center','Has actualizado la contraseña correctamente',2);
