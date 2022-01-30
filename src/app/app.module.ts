@@ -12,8 +12,8 @@ import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-la
 import { AppRoutingModule } from './app-routing.module';
 
 // Firebase
-import { AngularFireModule,AngularFireStorageModule } from '@angular/';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // Core Modules
 import { CoreModule } from './core/core.module';
@@ -24,6 +24,8 @@ import { FeaturesModule } from './features/features.module';
 // Shared Modulse
 import { SharedModule } from './shared/shared.module';
 import { ComponentsModule } from './shared/components/components.module';
+
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -38,13 +40,8 @@ import { ComponentsModule } from './shared/components/components.module';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp({
-      apiKey: "<your-api-key>",
-      authDomain: "<your-auth-domain>",
-      storageBucket: "<project-id>.appspot.com",
-      projectId: "<your-project-id>",
-    }),
-    AngularFireStorageModule
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
     ToastrModule.forRoot(),
     CoreModule,
     SharedModule,

@@ -7,6 +7,7 @@ import { UserComponent } from "./user.component";
 import { UserRoutes } from "./user-profile.routing";
 import { ComponentsModule } from '../../components/components.module';
 
+
 @NgModule({
   imports: [
     CommonModule,

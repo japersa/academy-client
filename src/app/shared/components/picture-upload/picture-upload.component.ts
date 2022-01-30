@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { UserDataService } from '../../../core/services/user-data.service';
+import { FirebaseStorageService } from '../../services/firebase-storage.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-picture-upload',
@@ -9,17 +12,21 @@ import { UserDataService } from '../../../core/services/user-data.service';
 export class PictureUploadComponent implements OnInit {
 
   avatar = '';
+  imgEvent = null;
 
   file: any = {};
   imagePreviewUrl: any = {};
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(public userDataService: UserDataService) {
+  constructor(public userDataService: UserDataService,
+    public firebaseStorageService: FirebaseStorageService
+  ) {
     this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   ngOnInit() {
+
     this.avatar = this.userDataService.userData$?.value?.image_profile
     this.file = null;
 
@@ -31,8 +38,9 @@ export class PictureUploadComponent implements OnInit {
 
   handleImageChange($event) {
     $event.preventDefault();
-    let reader = new FileReader();
-    let file = $event.target.files[0];
+    const reader = new FileReader();
+    const file = $event.target.files[0];
+    this.imgEvent = $event;
     reader.onloadend = () => {
       this.file = file;
       this.imagePreviewUrl = reader.result;
@@ -42,7 +50,7 @@ export class PictureUploadComponent implements OnInit {
   }
 
   handleClick() {
-    console.log(this.fileInput.nativeElement);
+    // const uuid = self.crypto.randomUUID();
     this.fileInput.nativeElement.click();
   }
 
@@ -54,10 +62,10 @@ export class PictureUploadComponent implements OnInit {
         : 'assets/img/placeholder.jpg';
     this.fileInput.nativeElement.value = null;
   }
+
   handleSubmit($event) {
     $event.preventDefault();
-    // this.state.file is the file/image uploaded
-    // in this function you can save the image (this.state.file) on form submit
-    // you have to call it yourself
+    this.firebaseStorageService.uploadAvatar(this.imgEvent);
   }
+
 }

@@ -8,7 +8,7 @@
       Agregar
     </button>
     <span *ngIf="file !== null">
-      <button class="btn-round btn btn-primary" (click)="handleClick()">
+      <button class="btn-round btn btn-primary" (click)="handleSubmit($event)">
         Subir
       </button>
       <br *ngIf="avatar !== ''" />
@@ -16,5 +16,15 @@
         <i class="fa fa-times"></i> Eliminar
       </button>
     </span>
+    <ng-container *ngIf="firebaseStorageService.uploadPercent">
+      <div class=" progress-container">
+        <span class=" progress-badge"> Subiendo </span>
+        <div class=" progress">
+          <progressbar [value]="firebaseStorageService.uploadPercent | async">
+            <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}} </span>
+          </progressbar>
+        </div>
+      </div>
+    </ng-container>
+
   </div>
-</div>
