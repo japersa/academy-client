@@ -1,33 +1,46 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { UserDataService } from '../../../core/services/user-data.service';
+import { FirebaseStorageService } from '../../services/firebase-storage.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
-  selector: "app-picture-upload",
-  templateUrl: "./picture-upload.component.html",
-  styleUrls: ["./picture-upload.component.css"]
+  selector: 'app-picture-upload',
+  templateUrl: './picture-upload.component.html',
+  styleUrls: ['./picture-upload.component.css']
 })
 export class PictureUploadComponent implements OnInit {
-  @Input() avatar: boolean = false;
-  @Input() image: string;
+
+  avatar = '';
+  imgEvent = null;
+
   file: any = {};
   imagePreviewUrl: any = {};
-  @ViewChild("fileInput") fileInput: ElementRef;
-  constructor() {
+
+  @ViewChild('fileInput') fileInput: ElementRef;
+
+  constructor(public userDataService: UserDataService,
+    public firebaseStorageService: FirebaseStorageService
+  ) {
     this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   ngOnInit() {
+
+    this.avatar = this.userDataService.userData$?.value?.image_profile
     this.file = null;
+
     this.imagePreviewUrl =
-      this.image !== undefined
-        ? this.image
-        : this.avatar
-        ? "assets/img/placeholder.jpg"
-        : "assets/img/image_placeholder.jpg";
+      this.avatar !== ''
+        ? this.userDataService.userData$?.value?.image_profile
+        : 'assets/img/placeholder.jpg';
   }
+
   handleImageChange($event) {
     $event.preventDefault();
-    let reader = new FileReader();
-    let file = $event.target.files[0];
+    const reader = new FileReader();
+    const file = $event.target.files[0];
+    this.imgEvent = $event;
     reader.onloadend = () => {
       this.file = file;
       this.imagePreviewUrl = reader.result;
@@ -35,24 +48,24 @@ export class PictureUploadComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+
   handleClick() {
-    console.log(this.fileInput.nativeElement);
+    // const uuid = self.crypto.randomUUID();
     this.fileInput.nativeElement.click();
   }
+
   handleRemove() {
     this.file = null;
     this.imagePreviewUrl =
-      this.image !== undefined
-        ? this.image
-        : this.avatar
-        ? "assets/img/placeholder.jpg"
-        : "assets/img/image_placeholder.jpg";
+      this.avatar
+        ? 'assets/img/placeholder.jpg'
+        : 'assets/img/placeholder.jpg';
     this.fileInput.nativeElement.value = null;
   }
+
   handleSubmit($event) {
     $event.preventDefault();
-    // this.state.file is the file/image uploaded
-    // in this function you can save the image (this.state.file) on form submit
-    // you have to call it yourself
+    this.firebaseStorageService.uploadAvatar(this.imgEvent);
   }
+
 }

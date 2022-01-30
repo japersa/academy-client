@@ -24,13 +24,13 @@ export class DashboardComponent implements OnInit {
 
   getAdmins() {
 
-    this.subscription$ = this.dashboardService.getAdmins().pipe(take(1)).subscribe(res => {
-      console.log(res);
+    // this.subscription$ = this.dashboardService.getAdmins().pipe(take(1)).subscribe(res => {
+    //   console.log(res);
 
-    },
-      error => {
-        console.log(error);
-      });
+    // },
+    //   error => {
+    //     console.log(error);
+    //   });
 
   }
 
