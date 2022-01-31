@@ -71,7 +71,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.loginForm.reset();
 
-      this.router.navigateByUrl('/dashboard')
+      setTimeout(() => {
+        this.router.navigateByUrl('/dashboard')
+      }, 300);
 
     },
       error => {

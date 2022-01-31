@@ -34,7 +34,7 @@
             (click)="$event.preventDefault()">
             <div class=" photo">
               <img alt="Profile Photo"
-                [src]=" userDataService.userData$.value ? userDataService.userData$.value.image_profile : 'assets/img/placeholder.jpg'" />
+                [src]=" userDataService.userData$.value.image_profile !== '' ? userDataService.userData$.value.image_profile : 'assets/img/placeholder.jpg'" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
             <p (click)="doLogout()" class=" d-lg-none">Cerrar sesión</p>

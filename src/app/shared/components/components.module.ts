@@ -36,7 +36,7 @@ import { ProgressbarModule } from "ngx-bootstrap/progressbar";
     VectorMapComponent1,
     PictureUploadComponent,
     AuthNavbarComponent,
-    FixedPluginComponent
+    FixedPluginComponent,
   ],
   exports: [
     FooterComponent,
