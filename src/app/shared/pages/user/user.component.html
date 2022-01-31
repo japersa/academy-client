@@ -2,13 +2,7 @@
   <div class="row">
     <div class="col-md-8">
       <div class="card">
-<<<<<<< HEAD
         <div class="card-header"><h4 class="title">Editar perfil</h4></div>
-=======
-        <div class="card-header">
-          <h5 class="title">Editar perfil</h5>
-        </div>
->>>>>>> dev
         <div class="card-body">
           <form class="form" [formGroup]="updateForm" (ngSubmit)="updateUser(updateForm.value)" role="form">
             <div class="row">
@@ -54,33 +48,27 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Teléfono </label>
-<<<<<<< HEAD
                   <input
                     class="form-control" placeholder="Teléfono" formControlName="phone"
                     type="tel"
                     (blur)="focus = false" (focus)="focus = true"
                   />
-=======
-                  <input class="form-control" placeholder="Teléfono" formControlName="phone_number" type="text"
-                    (blur)="focus = false" (focus)="focus = true" />
->>>>>>> dev
                 </div>
-                <!--<ng-container *ngFor="let validation of validationMessages.phone_number">
+                <ng-container *ngFor="let validation of validationMessages.phone">
                   <small class="text-danger" *ngIf="updateForm.get('phone_number').hasError(validation.type) &&
                   (updateForm.get('phone_number').dirty || updateForm.get('phone_number').touched) ">
                     {{validation.message}}
                   </small>
-                </ng-container>-->
+                </ng-container>
               </div>
             </div>
             <ng-container *ngIf="errorMessage">
               <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
             </ng-container>
             <div class="card-footer">
-<<<<<<< HEAD
               <div class="row">
                 <div class="col-md-6 pr-md-1">
-                  <button class="btn btn-fill btn-primary btn-round" type="submit" >Guardar</button>
+                  <button class="btn btn-fill btn-primary" type="submit" >Guardar</button>
                 </div>
                 <div class=" pull-right col-md-6 pl-md-1" *ngIf="showButtonPassword">
                   <h6>
@@ -89,85 +77,44 @@
                     </a>
                   </h6>
                 </div>
-              </div>
-              
-=======
-              <button class="btn btn-fill btn-success" type="submit">Guardar</button>
->>>>>>> dev
+              </div>             
             </div>
           </form>
         </div>
-
       </div>
-      <!--<div *ngIf="showButtonPassword">
-        <button class="btn btn-fill btn-primary btn-sm btn-round" (click)="showUpdatePassword()"> Actualizar contraseña</button>
-        <br>
-<<<<<<< HEAD
-      </div>-->
       <div  class="card" *ngIf="showPasswordField">
-=======
-      </div>
-      <div class="card" *ngIf="showPasswordField">
->>>>>>> dev
         <div class="card-header">
           <h4 class="title">Actualizar contraseña</h4>
         </div>
         <div class="card-body">
-          <form class="form" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword(updatePasswordForm.value)"
-            role="form">
+          <form class="form" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword(updatePasswordForm.value)" role="form">
             <div class="row">
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Contraseña actual </label>
-<<<<<<< HEAD
-                  <input
-                    class="form-control"
-                    type="password"
-                    placeholder="Contraseña actual"
-                    formControlName="old_password"
-                  />
-=======
-                  <input class="form-control" type="password" placeholder="Contraseña actual" />
->>>>>>> dev
+                  <input class="form-control" type="password" placeholder="Contraseña actual" formControlName="old_password" />
                 </div>
-              </div>
-              <div class="col-md-6 pl-md-1">
-                <div class="form-group">
-                  <label> Nueva contraseña </label>
-<<<<<<< HEAD
-                  <input
-                    class="form-control"
-                    type="password"
-                    placeholder="Nueva contraseña"
-                    formControlName="password"
-                  />
-=======
-                  <input class="form-control" type="password" placeholder="Nueva contraseña" />
->>>>>>> dev
-                </div>
-                <ng-container *ngFor="let validation of validationMessages.password">
+                <!--<ng-container *ngFor="let validation of validationMessages.old_password">
                     <small class="text-danger d-block" *ngIf="updateForm.get('password').hasError(validation.type) &&
                     (updateForm.get('password').dirty || updateForm.get('password').touched) ">
                       {{validation.message}}
                     </small>
-                  </ng-container>
+                  </ng-container>--> 
+              </div>
+              <div class="col-md-6 pl-md-1">
+                <div class="form-group">
+                  <label> Nueva contraseña </label>
+                  <input class="form-control" type="password" placeholder="Nueva contraseña" formControlName="password" />
+                </div>
               </div>
             </div>
             <div class="card-footer">
               <div class="row">
                 <div class="col-md-6 pr-md-1">
-<<<<<<< HEAD
-                  <button class="btn btn-fill btn-primary btn-round" type="submit">
-            Actualizar
-                </button>
-=======
-                  <button class="btn btn-fill btn-success" type="submit">
-                    Actualizar
-                  </button>
->>>>>>> dev
+                  <button class="btn btn-fill btn-primary" type="submit">Actualizar</button>
                 </div>
                 <div class="col-md-6 pl-md-1">
-                  <button class="btn btn-fill btn-danger btn-round" (click)="showUpdatePassword()"> Cancelar</button>
+                  <button class="btn btn-fill btn-danger" (click)="showUpdatePassword()"> Cancelar</button>
                 </div>
               </div>
             </div>
@@ -199,17 +146,10 @@
                 </div>
                 <div class="card-footer">
                   <hr />
-
-<<<<<<< HEAD
-                <div class="stats">
-                  <button class="btn btn-simple btn-info btn-sm btn-round pull-left" type="submit">
-                    <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-=======
                   <div class="stats">
-                    <button class="btn btn-simple btn-info btn-sm" type="submit">
+                    <button class="btn btn-simple btn-info btn-sm pull-left" type="submit">
                       <i class="tim-icons icon-double-right"> </i> Ingresar</button>
                   </div>
->>>>>>> dev
                 </div>
               </div>
             </div>
@@ -346,18 +286,13 @@
               <!-- <img alt="..." class="avatar" src="assets/img/emilyz.jpg" /> -->
               <app-picture-upload></app-picture-upload>
 
-              <h5 class="title"> {{first_name.value}} {{last_name.value}} </h5>
+              <h5 class="title"> {{first_name}} {{last_name}} </h5>
             </a>
             <p class="description">{{rol}}</p>
           </div>
           <div class="card-description" style="text-align: center">
-<<<<<<< HEAD
-            {{username.value}} <br> 
+            {{username}} <br> 
             {{phone.value}}
-=======
-            {{username.value}} <br>
-            {{phone_number.value}}
->>>>>>> dev
           </div>
         </div>
       </div>

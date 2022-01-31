@@ -16,15 +16,18 @@ import { EditUserService } from '../../services/edit-user.service';
 export class UserComponent implements OnInit {
 
   //two way data binding
-  first_name = new FormControl('');
+  /*first_name = new FormControl('');
   last_name = new FormControl('');
-  username = new FormControl('');
+  username = new FormControl('');*/
   phone = new FormControl('');
 
   public rol = '';
+  public first_name = this.userDataService.userData$.value.first_name;
+  public last_name = this.userDataService.userData$.value.last_name;
+  public username = this.userDataService.userData$.value.username;
+  //public phone = '';
   showPasswordField: boolean = false;
   showButtonPassword: boolean = true;
-
 
   updateForm: FormGroup;
   updatePasswordForm: FormGroup;
@@ -43,7 +46,8 @@ export class UserComponent implements OnInit {
     public notificationService: NotificationsService,
     private editUserService: EditUserService, 
     public userDataService: UserDataService,
-    public updatePasswordService: UpdatePasswordService) {
+    public updatePasswordService: UpdatePasswordService,
+    ) {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.updateForm = this.formBuilder.group({
@@ -56,15 +60,10 @@ export class UserComponent implements OnInit {
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
-      password: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(8)])),
       phone: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(5)])),
-        
-    }
-    );
+        Validators.minLength(5)])), 
+    });
     this.updatePasswordForm = this.formBuilder.group({
       old_password: new FormControl('', Validators.compose([
         Validators.required,
@@ -72,8 +71,7 @@ export class UserComponent implements OnInit {
       password: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8)])),
-    }
-    );
+    });
   }
 
   showUpdatePassword() {
@@ -87,17 +85,19 @@ export class UserComponent implements OnInit {
     }
   }
 
-  setRol(rolLocal: string) {
-    if (rolLocal == '"student"') {
+  //Asignar valor al rol del usuario
+  setRol(rolLocal: string = this.userDataService.userData$.value.rol) {
+    if (rolLocal == 'student') {
       this.rol = 'Estudiante';
-    } else if (rolLocal == '"teacher"') {
+    } else if (rolLocal == 'teacher') {
       this.rol = 'Profesor';
-    } else if (rolLocal == '"admin"') {
+    } else if (rolLocal == 'admin') {
       this.rol = 'Administrador'
-    }
+    } else {this.rol = 'Que putas pasa con el rol'}
     return this.rol;
   }
 
+  //Actualizar info del usuario
   updateUser(dataFrom: any) {
     const data = {
       first_name: dataFrom.first_name,
@@ -117,28 +117,29 @@ export class UserComponent implements OnInit {
       });
   }
 
-  updatePassword(dataFrom: any){
+  //Actualizar contraseña del usuario
+  updatePassword(dataFrom: any) {
     const data = {
       old_password: dataFrom.old_password,
       password: dataFrom.password,
     }
-    console.log(data)
     this.subscription$ = this.updatePasswordService.updatePassword(data).pipe(take(1)).subscribe(res => {
       console.log(res);
-      this.notificationService.showNotification('bottom','center','Has actualizado la contraseña correctamente',2);
+      this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);
       this.updatePasswordForm.reset();
       this.showUpdatePassword();
     },
       error => {
         this.errorMessage = error.error;
         console.log(error.error);
-        this.notificationService.showNotification('bottom','center','Error al actualizar la contraseña',4);
+        this.notificationService.showNotification('bottom', 'center', 'Error al actualizar contraseña', 4);
       });
   }
 
   ngOnInit() {
-    this.setRol(localStorage.userData.split(',')[4].split(':')[1].split('}')[0]);
-    console.log(localStorage.userData.split(',')[4].split(':')[1].split('}')[0])
+    this.setRol();
+    /*console.log(this.userDataService.userData$.value.rol);
+    console.log(this.userDataService.userData$);*/
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('register-page');
   }
