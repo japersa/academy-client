@@ -41,7 +41,7 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'tim-icons icon-single-02',
   },
   {
-    path: '/pages',
+    path: '',
     title: 'Profesores',
     type: 'sub',
     icontype: 'tim-icons icon-single-copy-04',
@@ -49,8 +49,8 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'rtl',
-        title: 'crear curso',
+        path: 'admin-courses',
+        title: 'Admin cursos',
         type: 'link',
         smallTitle: 'RS'
       },

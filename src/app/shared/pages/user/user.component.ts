@@ -41,14 +41,9 @@ export class UserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
-<<<<<<< HEAD
     private editUserService: EditUserService, 
     public userDataService: UserDataService,
     public updatePasswordService: UpdatePasswordService) {
-=======
-    private editUserService: EditUserService,
-    public userDataService: UserDataService) {
->>>>>>> dev
     this.validationMessages = utilsService.getValidationMessages();
 
     this.updateForm = this.formBuilder.group({
@@ -122,13 +117,7 @@ export class UserComponent implements OnInit {
       });
   }
 
-<<<<<<< HEAD
   updatePassword(dataFrom: any){
-=======
-
-
-  updatePassword(dataFrom: any) {
->>>>>>> dev
     const data = {
       old_password: dataFrom.old_password,
       password: dataFrom.password,
@@ -136,32 +125,20 @@ export class UserComponent implements OnInit {
     console.log(data)
     this.subscription$ = this.updatePasswordService.updatePassword(data).pipe(take(1)).subscribe(res => {
       console.log(res);
-<<<<<<< HEAD
       this.notificationService.showNotification('bottom','center','Has actualizado la contraseña correctamente',2);
-=======
-      this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);
->>>>>>> dev
       this.updatePasswordForm.reset();
       this.showUpdatePassword();
     },
       error => {
         this.errorMessage = error.error;
         console.log(error.error);
-<<<<<<< HEAD
         this.notificationService.showNotification('bottom','center','Error al actualizar la contraseña',4);
-=======
-        this.notificationService.showNotification('bottom', 'center', 'Error al actualizar usuario', 4);
->>>>>>> dev
       });
   }
 
   ngOnInit() {
     this.setRol(localStorage.userData.split(',')[4].split(':')[1].split('}')[0]);
-<<<<<<< HEAD
-    console.log(this.rol)
-=======
     console.log(localStorage.userData.split(',')[4].split(':')[1].split('}')[0])
->>>>>>> dev
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('register-page');
   }
