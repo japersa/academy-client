@@ -5,15 +5,15 @@
         <form class=" form" [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)" role="form">
           <div class=" card card-login card-white">
             <div class=" card-header">
-              <img alt="" src="assets/img/card-success.png" />
-              <h1 class=" card-title">Ingresar</h1>
+              <img alt="" src="https://res.cloudinary.com/mistrades-com/image/upload/v1643665649/assets/Login/banner-login_gcuogr.png" />
+              <h1 class=" card-title" style="color: hsl(0, 0%, 50%);"> INICIAR SESIÓN</h1>
             </div>
             <div class=" card-body">
               
               <div class=" input-group" [ngClass]="{ 'input-group-focus': focus === true }">
-                <!--<div class=" input-group-prepend">
-                  <div class=" input-group-text">
-                    <i class=" tim-icons icon-email-85"> </i>
+                <!--<div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="tim-icons icon-email-85"></i>
                   </div>
                 </div>-->
                 <input class=" form-control" formControlName="email" placeholder="Email" type="text"
