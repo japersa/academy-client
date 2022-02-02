@@ -11,7 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'sign-in',
+    redirectTo: 'admin-courses',
     pathMatch: 'full'
   },
   {

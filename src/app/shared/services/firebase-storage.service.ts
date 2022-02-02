@@ -54,4 +54,37 @@ export class FirebaseStorageService {
       .subscribe(res => console.log(res))
 
   }
+
+  uploadCourseCover(event, dataForm) {
+    const randomId = Math.random().toString(36).substring(2);
+
+    const file = event.target.files[0];
+    console.log(file);
+
+    const filePath = `/mistrades/uploads/courses/covers/${randomId}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().pipe(take(1)).subscribe(imgUrl => {
+          this.editUserService.updateUser({ image_profile: imgUrl }).pipe(take(1))
+            .subscribe(res => {
+
+              this.notificationService.showNotification('bottom', 'center', 'Curso creado con éxito', 2);
+
+            },
+              error => {
+                console.log('Error: ', error.error);
+                this.notificationService.showNotification('bottom', 'center', 'Error al crear curso', 4);
+              })
+        })
+      }))
+      .subscribe(res => console.log(res))
+
+  }
 }

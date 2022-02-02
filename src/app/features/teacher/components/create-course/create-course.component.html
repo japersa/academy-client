@@ -39,7 +39,19 @@
             </ng-container>
 
             <label for="formFileSm" class="form-label ">Imágen de portada</label>
-            <input class=" form-control" formControlName="price" id="formFileSm" type="file" accept="image/png, image/jpeg" required />
+            <input class=" form-control" formControlName="price" (change)="handleImageChange($event)" id="formFileSm"
+                type="file" accept="image/png, image/jpeg" required />
+            <ng-container *ngIf="firebaseStorageService.uploadPercent">
+                <div class=" progress-container">
+                    <span class=" progress-badge"> Subiendo </span>
+                    <div class=" progress">
+                        <progressbar [value]="firebaseStorageService.uploadPercent | async">
+                            <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}} </span>
+                        </progressbar>
+                    </div>
+                </div>
+            </ng-container>
+
 
             <ng-container *ngIf="errorMessage">
                 <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
