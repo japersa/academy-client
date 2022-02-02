@@ -42,7 +42,7 @@
           <ul class=" dropdown-menu dropdown-navbar dropdown-menu-right" *dropdownMenu>
             <li class=" nav-link">
               <p class=" nav-item dropdown-item">
-                {{ userDataService?.userData$?.value?.first_name }}
+                {{ userDataService?.userData$?.value?.first_name | titlecase}}
               </p>
             </li>
             <li class=" dropdown-divider"></li>

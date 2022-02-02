@@ -11,13 +11,13 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'admin-courses',
+    redirectTo: 'sign-in',
     pathMatch: 'full'
   },
   {
     path: '',
     component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -64,7 +64,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'sign-in'
   }
 ];
 

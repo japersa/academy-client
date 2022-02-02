@@ -4,46 +4,37 @@
       <div class=" col-lg-4 col-md-6 ml-auto mr-auto">
         <form class=" form" [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)" role="form">
           <div class=" card card-login card-white">
-            <div class=" card-header">
-              <img alt="" src="https://res.cloudinary.com/mistrades-com/image/upload/v1643665649/assets/Login/banner-login_gcuogr.png" />
-              <h1 class=" card-title" style="color: hsl(0, 0%, 50%);"> INICIAR SESIÓN</h1>
+            <div class=" card-header" >
+              <img alt=""
+                src="https://res.cloudinary.com/mistrades-com/image/upload/v1643665649/assets/Login/banner-login_gcuogr.png" />
+              <h1 class=" card-title" style="color: hsl(0, 0%, 50%);"> Ingresar</h1>
             </div>
             <div class=" card-body">
-              
-              <div class=" input-group" [ngClass]="{ 'input-group-focus': focus === true }">
-                <!--<div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <i class="tim-icons icon-email-85"></i>
-                  </div>
-                </div>-->
-                <input class=" form-control" formControlName="email" placeholder="Email" type="text"
-                  (blur)="focus = false" (focus)="focus = true" />
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp"
+                  placeholder="Escriba su email">
+                <ng-container *ngFor="let validation of validationMessages.email">
+                  <small class="form-text text-danger" *ngIf="loginForm.get('email').hasError(validation.type) &&
+                          (loginForm.get('email').dirty || loginForm.get('email').touched) ">
+                    {{validation.message}}
+                  </small>
+                </ng-container>
               </div>
 
-              <ng-container *ngFor="let validation of validationMessages.email">
-                <small class="text-danger" *ngIf="loginForm.get('email').hasError(validation.type) &&
-                        (loginForm.get('email').dirty || loginForm.get('email').touched) ">
-                  {{validation.message}}
-                </small>
-              </ng-container>
-
-
-              <div class=" input-group" [ngClass]="{ 'input-group-focus': focus1 === true }">
-                <!--<div class=" input-group-prepend">
-                  <div class=" input-group-text">
-                    <i class=" tim-icons icon-lock-circle"> </i>
-                  </div>
-                </div>-->
-                <input class=" form-control" formControlName="password" placeholder="Contraseña" type="password"
-                  (blur)="focus1 = false" (focus)="focus1 = true" />
+              <div class="form-group">
+                <label for="exampleInputEmail1">Contraseña</label>
+                <input type="email" class="form-control" formControlName="password" placeholder="Contraseña"
+                  type="password" aria-describedby="password">
+                <ng-container *ngFor="let validation of validationMessages.password">
+                  <small class="form-text text-danger" *ngIf=" loginForm.get('password').hasError(validation.type) &&
+                      (loginForm.get('password').dirty ||
+                        loginForm.get('password').touched) ">
+                    {{validation.message}}
+                  </small>
+                </ng-container>
               </div>
-              <ng-container *ngFor="let validation of validationMessages.password">
-                <small class="text-danger" *ngIf=" loginForm.get('password').hasError(validation.type) &&
-                    (loginForm.get('password').dirty ||
-                      loginForm.get('password').touched) ">
-                  {{validation.message}}
-                </small>
-              </ng-container>
 
               <ng-container *ngIf="errorMessage">
                 <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
