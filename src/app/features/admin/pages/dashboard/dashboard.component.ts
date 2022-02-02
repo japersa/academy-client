@@ -17,6 +17,11 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
   public clicked2: boolean = false;
+  public total_students: number = 0;
+  public total_admins: number = 0;
+  public total_teachers: number = 0;
+  public date;
+  public users;
 
   subscription$: Subscription;
 
@@ -34,9 +39,22 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  showGeneralStatistics(){
+    this.subscription$ = this.dashboardService.getUsersByCount().pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.total_students = res.total_students
+      this.total_admins = res.total_admins
+      this.total_teachers = res.total_teachers
+    },
+    error => {
+      console.log(error);
+    });
+  }
+
 
   ngOnInit() {
     this.getAdmins()
+    this.showGeneralStatistics()
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
       legend: {
