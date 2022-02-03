@@ -373,9 +373,9 @@
     }
   }
   &[data="white"] {
-    @include linear-gradient($gray-900, $gray-900);
+    @include linear-gradient($gray-600, $gray-600);
     &:before {
-      border-bottom-color: $gray-900;
+      border-bottom-color: $gray-600;
     }
   }
   &[data="red"] {

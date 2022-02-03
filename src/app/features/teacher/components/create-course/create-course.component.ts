@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
+import { CoursesService } from '../../../../shared/services/courses.service';
+import { take } from 'rxjs/operators';
+import { NotificationsService } from '../../../../core/services/notifications.service';
 
 @Component({
   selector: 'app-create-course',
@@ -14,18 +16,17 @@ export class CreateCourseComponent implements OnInit {
   courseForm: FormGroup;
   validationMessages: any;
 
-  focus;
-  focus1;
+  event;
 
   errorMessage: string | null;
 
-  subscription$: Subscription;
 
   constructor(
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
-    public firebaseStorageService: FirebaseStorageService
-
+    public firebaseStorageService: FirebaseStorageService,
+    private coursesService: CoursesService,
+    private notificationsService: NotificationsService
   ) {
 
     this.validationMessages = utilsService.getValidationMessages();
@@ -41,17 +42,23 @@ export class CreateCourseComponent implements OnInit {
         Validators.required, Validators.min(1)
       ])),
       path_preview_image: new FormControl('', Validators.compose([
-        Validators.required
       ])
       )
     });
 
   }
 
+  createCourse(dataForm: any) {
+    this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
+  }
+
+  handleImageChange(event) {
+    this.event = event;
+  }
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
 
-  createCourse(s) { console.log(s) }
 
 }
