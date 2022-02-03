@@ -6,6 +6,7 @@ import { EditUserService } from './edit-user.service';
 import { UserDataService } from '../../core/services/user-data.service';
 import { StorageService } from '../../core/services/storage.service';
 import { NotificationsService } from '../../core/services/notifications.service';
+import { CoursesService } from './courses.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class FirebaseStorageService {
     private editUserService: EditUserService,
     private storageService: StorageService,
     private userDataService: UserDataService,
+    private coursesService: CoursesService,
     public notificationService: NotificationsService) { }
 
   uploadAvatar(event) {
@@ -72,8 +74,17 @@ export class FirebaseStorageService {
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().pipe(take(1)).subscribe(imgUrl => {
-          this.editUserService.updateUser({ image_profile: imgUrl }).pipe(take(1))
+
+          const data = {
+            title: dataForm.title,
+            description: dataForm.description,
+            price: dataForm.price,
+            path_preview_image: imgUrl
+          }
+
+          this.coursesService.createCourse(data).pipe(take(1))
             .subscribe(res => {
+              console.log(res);
 
               this.notificationService.showNotification('bottom', 'center', 'Curso creado con éxito', 2);
 

@@ -4,7 +4,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const apiURL = environment.apiURL;
-const route = '/change/password/';
+
 
 
 @Injectable({
@@ -17,6 +17,9 @@ export class CoursesService {
   constructor(private http: HttpClient) { }
 
   createCourse(data: any): Observable<any> {
+    console.log(data);
+    
+    const route = '/create/course/';
     return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 }
