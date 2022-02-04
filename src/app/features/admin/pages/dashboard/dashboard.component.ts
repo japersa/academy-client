@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   public dataChart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   public dataChart2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   public dataChart3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  public dataLabel = [
+  public dataLabel = [/*
     "ENE",
     "FEB",
     "MAR",
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     "SEP",
     "OCT",
     "NOV",
-    "DEC",
+    "DEC",*/
   ];
 
   subscription$: Subscription;
@@ -77,8 +77,8 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (res) => {
           var currentMonth = new Date().getMonth();
-          var data = res.avg_users_months[0];
-          console.log(data);
+          //var data = res.avg_users_months[0];
+          //console.log(data);
           console.log(currentMonth);
           var normalYear = [
             "ENE",
@@ -94,7 +94,26 @@ export class DashboardComponent implements OnInit {
             "NOV",
             "DEC",
           ];
-          this.dataLabel = normalYear;
+          var moddedYear = []
+          var variableMonth = currentMonth
+          for (var i = normalYear.length - 1; i >= 0; i--) {
+            console.log("Valor i:");
+            console.log(i);
+            /*var fullDate = data[i].date.split("-");
+            var year = parseInt(fullDate[0], 10);
+            var month = parseInt(fullDate[1], 10) - 1;*/
+            moddedYear[i] = normalYear[variableMonth];
+            /*this.dataChart[variableMonth] = data[i].users;*/
+            variableMonth = variableMonth - 1;
+            if (variableMonth < 0) {
+              variableMonth = 11;
+            }
+            if (variableMonth == currentMonth) {
+              break;
+            }
+            console.log(variableMonth);
+          }
+          this.dataLabel = moddedYear;
           /*
           for (var i = 11; i >= 0; i--) {
             console.log("Valor i:");
