@@ -4,35 +4,42 @@
             <li class=" breadcrumb-item text-primary">Dashboard</li>
             <li class=" breadcrumb-item active">Administración de Cursos</li>
         </ol>
-            <div class="offset-1 col-md-10">
-                <div class=" card card-subcategories card-plain">
-                    <div class=" card-header">
-                        <h4 class=" card-title text-center mt-5">Administración de Cursos</h4>
-                        <br />
-                    </div>
-                    <div class=" card-body">
-                        <tabset class="nav-pills-danger nav-pills-icons justify-content-center" type="pills">
-                            <tab>
-                                <ng-template tabHeading>
-                                    <i class="tim-icons icon-spaceship"> </i> Curso
-                                </ng-template>
-                                <app-create-course></app-create-course>
-                            </tab>
-                            <tab>
-                                <ng-template tabHeading>
-                                    <i class="tim-icons icon-settings-gear-63"> </i> Temario
-                                </ng-template>
-                                <app-create-topics></app-create-topics>
-                            </tab>
-                            <tab>
-                                <ng-template tabHeading>
-                                    <i class="tim-icons icon-bag-16"> </i> Exámen
-                                </ng-template>
-                                <app-create-quiz></app-create-quiz>
-                            </tab>
-                        </tabset>
-                    </div>
+        <div class="offset-1 col-md-10">
+            <div class=" card card-subcategories card-plain">
+                <div class=" card-header">
+                    <h4 class=" card-title text-center mt-5">Administración de Cursos</h4>
+                    <br />
+                </div>
+                <div class=" card-body">
+                    <tabset class="nav-pills-primary nav-pills-icons justify-content-center" type="pills">
+                        <tab>
+                            <ng-template tabHeading>
+                                <i class="tim-icons icon-paper"> </i> Temario
+                            </ng-template>
+                            <app-create-topics></app-create-topics>
+                        </tab>
+                        <tab>
+                            <ng-template tabHeading>
+                                <i class="tim-icons icon-components"> </i> Módulos
+                            </ng-template>
+                            <app-create-module></app-create-module>
+                        </tab>
+                        <tab>
+                            <ng-template tabHeading>
+                                <i class="tim-icons icon-trophy"> </i> Exámen
+                            </ng-template>
+                            <app-create-quiz></app-create-quiz>
+                        </tab>
+
+                        <tab>
+                            <ng-template tabHeading>
+                                <i class="tim-icons icon-book-bookmark"> </i> Curso
+                            </ng-template>
+                            <app-create-course></app-create-course>
+                        </tab>
+                    </tabset>
                 </div>
             </div>
+        </div>
     </div>
 </div>

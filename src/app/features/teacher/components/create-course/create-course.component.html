@@ -6,7 +6,7 @@
         <div class=" card-body col-md-6">
             <label> Título </label>
             <div class=" form-group">
-                <input class=" form-control" formControlName="title" placeholder="title" type="title" required />
+                <input class=" form-control" formControlName="title" placeholder="Ingresa el título" type="text" required />
             </div>
             <ng-container *ngFor="let validation of validationMessages.title">
                 <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&

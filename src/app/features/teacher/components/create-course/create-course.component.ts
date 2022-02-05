@@ -33,10 +33,10 @@ export class CreateCourseComponent implements OnInit {
 
     this.courseForm = this.formBuilder.group({
       title: new FormControl('', Validators.compose([
-        Validators.required,
+        Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
       description: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(8), Validators.maxLength(100)
+        Validators.required, Validators.minLength(8), Validators.maxLength(500)
       ])),
       price: new FormControl('', Validators.compose([
         Validators.required, Validators.min(1)
@@ -57,7 +57,6 @@ export class CreateCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
 
