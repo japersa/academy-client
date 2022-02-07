@@ -3,6 +3,7 @@ import Chart from "chart.js";
 import { Subscription } from 'rxjs';
 import { DashboardService } from '../../services/dashboard.service';
 import { take } from 'rxjs/operators';
+import { $ } from "protractor";
 
 @Component({
   selector: "app-dashboard",
@@ -23,7 +24,8 @@ export class DashboardComponent implements OnInit {
   public dataChart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   public dataChart2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   public dataChart3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  public dataLabel = [/*
+  public dataLabel = /*[]*/
+  [
     "ENE",
     "FEB",
     "MAR",
@@ -35,7 +37,7 @@ export class DashboardComponent implements OnInit {
     "SEP",
     "OCT",
     "NOV",
-    "DEC",*/
+    "DEC",
   ];
 
   subscription$: Subscription;
@@ -57,19 +59,33 @@ export class DashboardComponent implements OnInit {
       .pipe(take(1))
       .subscribe(
         (res) => {
-          //console.log(res);
           this.total_students = res.total_students;
           this.total_admins = res.total_admins;
           this.total_teachers = res.total_teachers;
-          /*console.log(res.avg_users_months[0]);
-          console.log(res.users);*/
         },
         (error) => {
           console.log(error);
         }
       );
   }
-
+  setDataLabel(){
+    var currentMonth = new Date().getMonth();
+    var normalYear = this.dataLabel;
+    var moddedYear = [];
+    var variableMonth = currentMonth;
+    for (var i = normalYear.length - 1; i >= 0; i--) {
+      moddedYear[i] = normalYear[variableMonth];
+      variableMonth = variableMonth - 1;
+      if (variableMonth < 0) {
+        variableMonth = 11;
+      }
+      if (variableMonth == currentMonth) {
+        break;
+      }
+    }
+    this.dataLabel = moddedYear;
+    return this.dataLabel;
+  }
   fillChart() {
     this.subscription$ = this.dashboardService
       .getUsersByCount()
@@ -77,33 +93,25 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (res) => {
           var currentMonth = new Date().getMonth();
-          //var data = res.avg_users_months[0];
-          //console.log(data);
-          console.log(currentMonth);
-          var normalYear = [
-            "ENE",
-            "FEB",
-            "MAR",
-            "ABR",
-            "MAY",
-            "JUN",
-            "JUL",
-            "AGO",
-            "SEP",
-            "OCT",
-            "NOV",
-            "DEC",
-          ];
-          var moddedYear = []
-          var variableMonth = currentMonth
-          for (var i = normalYear.length - 1; i >= 0; i--) {
-            console.log("Valor i:");
-            console.log(i);
-            /*var fullDate = data[i].date.split("-");
-            var year = parseInt(fullDate[0], 10);
-            var month = parseInt(fullDate[1], 10) - 1;*/
-            moddedYear[i] = normalYear[variableMonth];
-            /*this.dataChart[variableMonth] = data[i].users;*/
+          console.log(currentMonth)
+          var data = res.avg_users_months[0];
+          var moddedData = []
+          var variableMonth = currentMonth;
+          var count = 11;
+          for (var i = 11; i >= 0; i--) {
+            //console.log(data.length)
+            for (var j = data.length; j >= 0;j--){
+              var fullDate = data[j].date.split("-");
+              console.log(fullDate)
+              var year = parseInt(fullDate[0], 10);
+              var month = parseInt(fullDate[1], 10) - 1;
+              moddedData[count] = count
+              count = count-1
+              /*console.log("ModdedData:")
+              console.log(moddedData)
+              console.log(count)*/
+            }
+            //console.log(fullDate)
             variableMonth = variableMonth - 1;
             if (variableMonth < 0) {
               variableMonth = 11;
@@ -111,9 +119,9 @@ export class DashboardComponent implements OnInit {
             if (variableMonth == currentMonth) {
               break;
             }
-            console.log(variableMonth);
+            /*console.log(moddedData)
+            console.log(variableMonth);*/
           }
-          this.dataLabel = moddedYear;
           /*
           for (var i = 11; i >= 0; i--) {
             console.log("Valor i:");
@@ -137,8 +145,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getAdmins();
+    console.log(this.dataLabel)
+    this.setDataLabel();
+    console.log(this.dataLabel)
     this.showGeneralStatistics();
     this.fillChart();
+    
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
       legend: {
@@ -548,7 +560,7 @@ export class DashboardComponent implements OnInit {
     var config = {
       type: "line",
       data: {
-        labels: chart_labels,
+        labels: this.dataLabel,
         datasets: [
           {
             label: "Nuevos usuarios",
@@ -565,7 +577,7 @@ export class DashboardComponent implements OnInit {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.data,
+            data: this.datasets[0],
           },
         ],
       },
