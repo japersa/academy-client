@@ -17,9 +17,23 @@ export class CoursesService {
   constructor(private http: HttpClient) { }
 
   createCourse(data: any): Observable<any> {
-    console.log(data);
-    
     const route = '/create/course/';
     return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
+
+  getCourses(): Observable<any> {
+    const route = '/my/courses/';
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  createModule(data: any): Observable<any> {
+    const route = '/create/module/';
+    return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
+  }
+
+  getModules(): Observable<any> {
+    const route = '/my/courses/';
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
 }

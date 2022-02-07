@@ -9,6 +9,7 @@ import { CreateTopicsComponent } from '../../components/create-topics/create-top
 import { CreateQuizComponent } from '../../components/create-quiz/create-quiz.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { CreateModuleComponent } from '../../components/create-module/create-module.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     AdminCoursesComponent,
     CreateCourseComponent,
     CreateTopicsComponent,
-    CreateQuizComponent
+    CreateQuizComponent,
+    CreateModuleComponent
   ],
   imports: [
     CommonModule,
