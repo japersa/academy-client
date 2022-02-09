@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(8)
@@ -61,18 +62,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.notificationService.showNotification('bottom', 'center', 'Has iniciado sesión correctamente', 2);
       this.errorMessage = '';
 
-      // save data in local storage
-      this.storageService.set('isUserLoggedIn', true);
-      this.storageService.set('accessToken', res.token);
-      this.storageService.set('userData', res.user);
-
-      this.userDataService.loadStorageUserData();
-      this.userDataService.isUserLoggedIn$.next(true);
-
       this.loginForm.reset();
 
       setTimeout(() => {
-        this.router.navigateByUrl('/dashboard')
+        this.router.navigate(['/dashboard'])
       }, 300);
 
     },

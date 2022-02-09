@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-create-quiz',
-  templateUrl: './create-quiz.component.html',
-  styleUrls: ['./create-quiz.component.scss']
+  selector: 'app-create-module',
+  templateUrl: './create-module.component.html',
+  styleUrls: ['./create-module.component.scss']
 })
-export class CreateQuizComponent implements OnInit {
+export class CreateModuleComponent implements OnInit {
 
   courses = []
 
-  quizForm: FormGroup;
+  moduleForm: FormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
@@ -32,11 +32,8 @@ export class CreateQuizComponent implements OnInit {
 
     this.validationMessages = utilsService.getValidationMessages();
 
-    this.quizForm = this.formBuilder.group({
-      question: new FormControl('', Validators.compose([
-        Validators.required,
-      ])),
-      answer: new FormControl('', Validators.compose([
+    this.moduleForm = this.formBuilder.group({
+      name: new FormControl('', Validators.compose([
         Validators.required,
       ])),
       course: new FormControl('', Validators.compose([
@@ -46,14 +43,26 @@ export class CreateQuizComponent implements OnInit {
 
   }
 
-  createQuiz(dataForm: any) {
-    console.log('sadasdas');
+  createModule(dataForm: any) {
+    this.subscription2$ = this.coursesService.createModule(dataForm).subscribe(res => {
+      this.notificationsService.showNotification('bottom', 'center', 'Módulo creado con éxito', 2);
+      this.errorMessage = '';
+      this.moduleForm.reset();
+    },
+      error => {
+        console.log(error.error);
+        this.errorMessage = error.error;
+        this.notificationsService.showNotification('bottom', 'center', 'Error al crear módulo', 4);
+      }
+    );
   }
+
+
 
   loadCourses() {
 
     this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
-
+      Object.assign(this.courses, res);
     },
       error => {
         console.log(error.error);
@@ -65,7 +74,6 @@ export class CreateQuizComponent implements OnInit {
   ngOnInit(): void {
     this.loadCourses()
   }
-
 
 
 }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserDataService } from '../../../core/services/user-data.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 const apiURL = environment.apiURL;
 const route = '/login/';
@@ -21,7 +22,18 @@ export class AuthService {
 
   doLogin(credentials: any): Observable<any> {
     this.headers = this.headers.set('skip-auth', 'true');
-    return this.http.post<any>(`${apiURL}${route}`, credentials, { headers: this.headers });
+    return this.http.post<any>(`${apiURL}${route}`, credentials, { headers: this.headers }).pipe(tap(res => {
+      // save data in local storage
+      this.storageService.set('isUserLoggedIn', true);
+      this.storageService.set('accessToken', res.token);
+      this.storageService.set('userData', res.user);
+
+      // load data at memory
+      this.userDataService.loadStorageUserData();
+      this.userDataService.isUserLoggedIn$.next(true);
+    })
+
+    )
   }
 
   doLogout() {

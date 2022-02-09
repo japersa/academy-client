@@ -39,6 +39,11 @@ const routes: Routes = [
         loadChildren: () => import('./features/teacher/pages/admin-courses/admin-courses.module')
           .then(m => m.AdminCoursesModule)
       },
+      {
+        path: 'courses',
+        loadChildren: () => import('./features/student/pages/courses/courses.module')
+          .then(m => m.CoursesModule)
+      },
     ]
   },
   {
@@ -64,7 +69,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'sign-in'
   }
 ];
 

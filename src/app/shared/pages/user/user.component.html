@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Editar perfil</h5>
+          <h4 class="title">Editar perfil</h4>
         </div>
         <div class="card-body">
           <form class="form" [formGroup]="updateForm" (ngSubmit)="updateUser(updateForm.value)" role="form">
@@ -50,30 +50,36 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Teléfono </label>
-                  <input class="form-control" placeholder="Teléfono" formControlName="phone_number" type="text"
+                  <input class="form-control" placeholder="Teléfono" formControlName="phone" type="tel"
                     (blur)="focus = false" (focus)="focus = true" />
                 </div>
-                <!--<ng-container *ngFor="let validation of validationMessages.phone_number">
-                  <small class="text-danger" *ngIf="updateForm.get('phone_number').hasError(validation.type) &&
-                  (updateForm.get('phone_number').dirty || updateForm.get('phone_number').touched) ">
+                <ng-container *ngFor="let validation of validationMessages.phone">
+                  <small class="text-danger" *ngIf="updateForm.get('phone').hasError(validation.type) &&
+                  (updateForm.get('phone').dirty || updateForm.get('phone').touched) ">
                     {{validation.message}}
                   </small>
-                </ng-container>-->
+                </ng-container>
               </div>
             </div>
             <ng-container *ngIf="errorMessage">
               <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
             </ng-container>
             <div class="card-footer">
-              <button class="btn btn-fill btn-success" type="submit">Guardar</button>
+              <div class="row">
+                <div class="col-md-6 pr-md-1">
+                  <button class="btn btn-fill btn-primary" type="submit">Guardar</button>
+                </div>
+                <div class=" pull-right col-md-6 pl-md-1" *ngIf="showButtonPassword">
+                  <h6>
+                    <a class=" link footer-link " (click)="showUpdatePassword()" href="javascript:showUpdatePassword()">
+                      Actualizar contraseña
+                    </a>
+                  </h6>
+                </div>
+              </div>
             </div>
           </form>
         </div>
-
-      </div>
-      <!--<div *ngIf="showButtonPassword">
-        <button class="btn btn-fill btn-primary btn-sm btn-round" (click)="showUpdatePassword()"> Actualizar contraseña</button>
-        <br>
       </div>
       <div class="card" *ngIf="showPasswordField">
         <div class="card-header">
@@ -86,37 +92,38 @@
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Contraseña actual </label>
-                  <input class="form-control" type="password" placeholder="Contraseña actual" />
+                  <input class="form-control" type="password" placeholder="Contraseña actual"
+                    formControlName="old_password" />
                 </div>
-              </div>
-              <div class="col-md-6 pl-md-1">
-                <div class="form-group">
-                  <label> Nueva contraseña </label>
-                  <input class="form-control" type="password" placeholder="Nueva contraseña" />
-                </div>
-                <ng-container *ngFor="let validation of validationMessages.password">
+                <!--<ng-container *ngFor="let validation of validationMessages.old_password">
                     <small class="text-danger d-block" *ngIf="updateForm.get('password').hasError(validation.type) &&
                     (updateForm.get('password').dirty || updateForm.get('password').touched) ">
                       {{validation.message}}
                     </small>
-                  </ng-container>
+                  </ng-container>-->
+              </div>
+              <div class="col-md-6 pl-md-1">
+                <div class="form-group">
+                  <label> Nueva contraseña </label>
+                  <input class="form-control" type="password" placeholder="Nueva contraseña"
+                    formControlName="password" />
+                </div>
               </div>
             </div>
             <div class="card-footer">
               <div class="row">
                 <div class="col-md-6 pr-md-1">
-                  <button class="btn btn-fill btn-success" type="submit">
-                    Actualizar
-                  </button>
+                  <button class="btn btn-fill btn-primary" type="submit">Actualizar</button>
                 </div>
                 <div class="col-md-6 pl-md-1">
-                  <button class="btn btn-fill btn-danger btn-round" (click)="showUpdatePassword()"> Cancelar</button>
+                  <button class="btn btn-fill btn-danger" (click)="showUpdatePassword()"> Cancelar</button>
                 </div>
               </div>
             </div>
           </form>
         </div>
       </div>
+
       <div class="card">
         <div class="card-header">
           <h4 class="title">Cursos</h4>
@@ -142,9 +149,8 @@
                 </div>
                 <div class="card-footer">
                   <hr />
-
                   <div class="stats">
-                    <button class="btn btn-simple btn-info btn-sm" type="submit">
+                    <button class="btn btn-simple btn-info btn-sm pull-left" type="submit">
                       <i class="tim-icons icon-double-right"> </i> Ingresar</button>
                   </div>
                 </div>
@@ -283,13 +289,13 @@
               <!-- <img alt="..." class="avatar" src="assets/img/emilyz.jpg" /> -->
               <app-picture-upload></app-picture-upload>
 
-              <h5 class="title"> {{first_name.value}} {{last_name.value}} </h5>
+              <h5 class="title"> {{first_name | titlecase}} {{last_name | titlecase}} </h5>
             </a>
             <p class="description">{{rol}}</p>
           </div>
           <div class="card-description" style="text-align: center">
-            {{username.value}} <br>
-            {{phone_number.value}}
+            {{username}} <br>
+            {{phone.value}}
           </div>
         </div>
       </div>

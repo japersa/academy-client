@@ -18,11 +18,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   subscription$: Subscription;
 
-  focus;
-  focus1;
-  focus2;
-  focus4;
-
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
@@ -39,10 +34,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
         Validators.minLength(3)])),
       email: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
       password: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(8)])),
+        Validators.required, Validators.minLength(8)
+      ]))
     }
     );
 
@@ -55,22 +51,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
       last_name: dataFrom.last_name,
       username: dataFrom.email,
       password: dataFrom.password
-  }
+    }
 
     this.subscription$ = this.registerService.register(data).pipe(take(1)).subscribe(res => {
       console.log(res);
-      this.notificationService.showNotification('bottom','center','Te has registrado correctamente',2);
+      this.notificationService.showNotification('bottom', 'center', 'Te has registrado correctamente', 2);
       this.registerForm.reset();
 
     },
       error => {
         this.errorMessage = error.error;
         console.log(error.error);
-        this.notificationService.showNotification('bottom','center','Error al registrarse',4);
+        this.notificationService.showNotification('bottom', 'center', 'Error al registrarse', 4);
       });
 
   }
-
 
   ngOnInit() {
     var body = document.getElementsByTagName('body')[0];

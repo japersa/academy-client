@@ -8,6 +8,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CreateTopicsComponent } from '../../components/create-topics/create-topics.component';
 import { CreateQuizComponent } from '../../components/create-quiz/create-quiz.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { CreateModuleComponent } from '../../components/create-module/create-module.component';
 
 
 @NgModule({
@@ -15,12 +17,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminCoursesComponent,
     CreateCourseComponent,
     CreateTopicsComponent,
-    CreateQuizComponent
+    CreateQuizComponent,
+    CreateModuleComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ProgressbarModule,
     TabsModule.forRoot(),
     AdminCoursesRoutingModule
   ], exports: [
