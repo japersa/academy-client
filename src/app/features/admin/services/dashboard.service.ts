@@ -25,4 +25,9 @@ export class DashboardService {
     return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
+  getUsersByCount():Observable<any> {
+    const route = `/list/admin/statistics/`;
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
 }
