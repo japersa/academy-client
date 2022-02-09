@@ -16,6 +16,8 @@ export class CoursesService {
 
   constructor(private http: HttpClient) { }
 
+  // Courses
+
   createCourse(data: any): Observable<any> {
     const route = '/create/course/';
     return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
@@ -26,14 +28,25 @@ export class CoursesService {
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
-  createModule(data: any): Observable<any> {
-    const route = '/create/module/';
-    return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
+  updateCourse(data: any, id: any): Observable<any> {
+    const route = `/update/course/${id}/`;
+    return this.http.patch<any>(`${apiURL}${route}`, data,{ headers: this.headers });
   }
 
+  deleteCourse(id: string) {
+    const route = `/delete/course/${id}/`;
+    return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  // Modules
   getModules(): Observable<any> {
     const route = '/my/courses/';
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  createModule(data: any): Observable<any> {
+    const route = '/create/module/';
+    return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 
 }

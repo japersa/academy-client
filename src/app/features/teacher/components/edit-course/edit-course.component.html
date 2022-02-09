@@ -1,12 +1,13 @@
 <div class=" card text-left">
     <form [formGroup]="courseForm" (ngSubmit)="createCourse(courseForm.value)" role="form">
         <div class=" card-header">
-            <h4 class=" card-title">Crear curso</h4>
+            <h4 class=" card-title">Editar curso</h4>
         </div>
         <div class=" card-body col-md-6">
             <label> Título </label>
             <div class=" form-group">
-                <input class=" form-control" formControlName="title" placeholder="Ingresa el título" type="text" required />
+                <input class=" form-control" formControlName="title" placeholder="Ingresa el título" type="text"
+                    [(ngModel)]="course.title" required />
             </div>
             <ng-container *ngFor="let validation of validationMessages.title">
                 <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
@@ -18,7 +19,7 @@
             <div class=" form-group">
 
                 <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
-                    required></textarea>
+                    [(ngModel)]="course.description" required></textarea>
 
             </div>
             <ng-container *ngFor="let validation of validationMessages.description">
@@ -29,7 +30,8 @@
             </ng-container>
             <label> Precio </label>
             <div class=" form-group">
-                <input class=" form-control" formControlName="price" placeholder="Precio" type="number" required />
+                <input class=" form-control" formControlName="price" placeholder="Precio" type="number"
+                    [(ngModel)]="course.price" required />
             </div>
             <ng-container *ngFor="let validation of validationMessages.price">
                 <small class="text-danger d-block" *ngIf="createUserForm.get('price').hasError(validation.type) &&
@@ -39,8 +41,8 @@
             </ng-container>
 
             <label for="formFileSm" class="form-label ">Imágen de portada</label>
-            <input  class=" form-control" formControlName="path_preview_image" (change)="handleImageChange($event)" id="formFileSm"
-                type="file" accept="image/png, image/jpeg" required />
+            <input class=" form-control" formControlName="path_preview_image" (change)="handleImageChange($event)"
+                id="formFileSm" type="file" accept="image/png, image/jpeg" required />
             <ng-container *ngIf="firebaseStorageService.uploadPercent">
                 <div class=" progress-container">
                     <span class=" progress-badge"> Subiendo </span>

@@ -4,7 +4,7 @@
             <li class=" breadcrumb-item text-primary">Dashboard</li>
             <li class=" breadcrumb-item active">Administración de Cursos</li>
         </ol>
-        <div class="offset-1 col-md-10">
+        <div class="col-md-12">
             <div class=" card card-subcategories card-plain">
                 <div class=" card-header">
                     <h4 class=" card-title text-center mt-5">Administración de Cursos</h4>
@@ -12,6 +12,73 @@
                 </div>
                 <div class=" card-body">
                     <tabset class="nav-pills-primary nav-pills-icons justify-content-center" type="pills">
+                        <tab>
+                            <ng-template tabHeading>
+                                <i class="tim-icons icon-book-bookmark"> </i> Curso
+                            </ng-template>
+                            <ng-container *ngIf="!showFormCreateCourse  && !showFormEditCourse ">
+                                <div class=" col-md-12">
+                                    <div class=" card">
+                                        <div class=" card-header">
+                                            <div class=" tools float-right">
+                                                <button class=" btn btn-primary btn-sm mr-1 d-inline"
+                                                    (click)="createCourse()" type="button">
+                                                    CREAR
+                                                </button>
+                                            </div>
+                                            <h4 class=" card-title">Mis cursos</h4>
+                                        </div>
+                                        <div class=" card-body">
+                                            <div class=" table-responsive">
+                                                <table class=" table">
+                                                    <thead class=" text-primary">
+                                                        <tr>
+                                                            <th class=" text-center">id</th>
+                                                            <th>Nombre</th>
+                                                            <th class=" text-center">Estado</th>
+                                                            <th class=" text-center">Fecha de creación</th>
+                                                            <th class=" text-right">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let c of courses">
+                                                            <td class=" text-center">{{ c?.id }}</td>
+                                                            <td>{{ c?.title | titlecase}}</td>
+                                                            <td class=" text-center">{{ c?.is_active.toString() | uppercase }}</td>
+                                                            <td class=" text-center">{{c?.created_at | date}}</td>
+                                                            <td class=" text-right">
+                                                                <button
+                                                                    class=" btn btn-success btn-link btn-sm btn-icon"
+                                                                    (click)="editCourse(c)" tooltip="Editar"
+                                                                    type="button">
+                                                                    <i class=" tim-icons icon-pencil"> </i>
+                                                                </button>
+                                                                <button class=" btn btn-danger btn-link btn-sm"
+                                                                    (click)="deleteCourse(c?.id)" tooltip="Eliminar"
+                                                                    type="button">
+                                                                    <i class=" tim-icons icon-simple-remove"> </i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showFormCreateCourse">
+                                <div class=" col-md-12">
+                                    <app-create-course (showEvent)="changeStateShow($event)"></app-create-course>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showFormEditCourse">
+                                <div class=" col-md-12">
+                                    <app-edit-course (showEvent)="changeStateShow($event)" [course]="courseEdit"></app-edit-course>
+                                </div>
+                            </ng-container>
+
+                        </tab>
                         <tab>
                             <ng-template tabHeading>
                                 <i class="tim-icons icon-paper"> </i> Temario
@@ -31,12 +98,6 @@
                             <app-create-quiz></app-create-quiz>
                         </tab>
 
-                        <tab>
-                            <ng-template tabHeading>
-                                <i class="tim-icons icon-book-bookmark"> </i> Curso
-                            </ng-template>
-                            <app-create-course></app-create-course>
-                        </tab>
                     </tabset>
                 </div>
             </div>

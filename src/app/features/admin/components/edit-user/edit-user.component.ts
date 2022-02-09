@@ -68,8 +68,6 @@ export class EditUserComponent implements OnInit {
 
 
   editUser(dataFrom: any) {
-    console.log('edddd');
-
 
     let data: any = {
       username: dataFrom.email,

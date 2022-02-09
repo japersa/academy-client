@@ -4,8 +4,7 @@ import { AdminLayoutModule } from './admin/layouts/admin-layout/admin-layout.mod
 import { AdminCoursesModule } from './teacher/pages/admin-courses/admin-courses.module';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     AdminLayoutModule,
