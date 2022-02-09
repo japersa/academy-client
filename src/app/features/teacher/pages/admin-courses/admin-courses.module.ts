@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { CreateModuleComponent } from '../../components/create-module/create-module.component';
 import { EditCourseComponent } from '../../components/edit-course/edit-course.component';
+import { EditModuleComponent } from '../../components/edit-module/edit-module.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { EditCourseComponent } from '../../components/edit-course/edit-course.co
     CreateTopicsComponent,
     CreateQuizComponent,
     CreateModuleComponent,
-    EditCourseComponent
+    EditCourseComponent,
+    EditModuleComponent
   ],
   imports: [
     CommonModule,

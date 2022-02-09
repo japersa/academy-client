@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-module',
   templateUrl: './create-module.component.html',
   styleUrls: ['./create-module.component.scss']
 })
-export class CreateModuleComponent implements OnInit {
+export class CreateModuleComponent implements OnInit, OnDestroy {
 
   courses = []
 
@@ -18,6 +19,8 @@ export class CreateModuleComponent implements OnInit {
   validationMessages: any;
 
   errorMessage: string | null;
+
+  @Output() showEvent = new EventEmitter<boolean>();
 
   subscription1$: Subscription;
   subscription2$: Subscription;
@@ -48,6 +51,7 @@ export class CreateModuleComponent implements OnInit {
       this.notificationsService.showNotification('bottom', 'center', 'Módulo creado con éxito', 2);
       this.errorMessage = '';
       this.moduleForm.reset();
+      this.showEvent.emit(false);
     },
       error => {
         console.log(error.error);
@@ -57,6 +61,9 @@ export class CreateModuleComponent implements OnInit {
     );
   }
 
+  cancelCreate() {
+    this.showEvent.emit(false);
+  }
 
 
   loadCourses() {
@@ -73,7 +80,16 @@ export class CreateModuleComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCourses()
+    this.subscriptions.push(this.subscription1$);
+    this.subscriptions.push(this.subscription2$);
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      if (subscription !== undefined) {
+        subscription.unsubscribe();
+      }
+    })
+  }
 
 }

@@ -6,7 +6,7 @@
         <div class=" card-body col-md-6">
             <label> Título </label>
             <div class=" form-group">
-                <input class=" form-control" formControlName="name" placeholder="Título del modulo" type="text"
+                <input class=" form-control" formControlName="name" placeholder="Título del módulo" type="text"
                     required />
             </div>
             <ng-container *ngFor="let validation of validationMessages.title">
@@ -38,6 +38,9 @@
         <div class=" card-footer">
             <button class=" btn btn-fill btn-primary" [disabled]="moduleForm.invalid" type="submit">
                 Enviar
+            </button>
+            <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
+                Cancelar
             </button>
         </div>
     </form>
