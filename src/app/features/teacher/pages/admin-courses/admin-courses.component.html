@@ -76,8 +76,7 @@
                             </ng-container>
                             <ng-container *ngIf="showFormEditModule">
                                 <div class=" col-md-12">
-                                    <app-edit-course (showEvent)="changeStateShow($event)" [module]="moduleEdit">
-                                    </app-edit-course>
+                                    <app-edit-module (showEvent)="changeStateShow($event)" [module]="moduleEdit"></app-edit-module>
                                 </div>
                             </ng-container>
 

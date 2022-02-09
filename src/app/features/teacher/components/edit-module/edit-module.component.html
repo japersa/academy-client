@@ -1,1 +1,47 @@
-<p>edit-module works!</p>
+<div class=" card text-left">
+    <form [formGroup]="moduleForm" (ngSubmit)="editarModule(moduleForm.value)" role="form">
+        <div class=" card-header">
+            <h4 class=" card-title">Editar módulo</h4>
+        </div>
+        <div class=" card-body col-md-6">
+            <label> Título </label>
+            <div class=" form-group">
+                <input class=" form-control" formControlName="name" placeholder="Título del módulo" type="text"
+                    [(ngModel)]="module.name" required />
+            </div>
+            <ng-container *ngFor="let validation of validationMessages.title">
+                <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
+                            (createUserForm.get('title').dirty || createUserForm.get('title').touched) ">
+                    {{validation.message}}
+                </small>
+            </ng-container>
+            <label> Curso </label>
+            <select class="form-select form-group d-block" formControlName="course" size="4">
+                <option *ngFor="let c of courses" [value]="c?.id">{{ c?.title | titlecase}}</option>
+
+            </select>
+
+            <ng-container *ngFor="let validation of validationMessages.title">
+                <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
+                            (createUserForm.get('title').dirty || createUserForm.get('title').touched) ">
+                    {{validation.message}}
+                </small>
+            </ng-container>
+
+
+
+            <ng-container *ngIf="errorMessage">
+                <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+            </ng-container>
+
+        </div>
+        <div class=" card-footer">
+            <button class=" btn btn-fill btn-primary" [disabled]="moduleForm.invalid" type="submit">
+                Enviar
+            </button>
+            <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>
