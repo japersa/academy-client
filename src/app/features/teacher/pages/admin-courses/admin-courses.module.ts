@@ -12,6 +12,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { CreateModuleComponent } from '../../components/create-module/create-module.component';
 import { EditCourseComponent } from '../../components/edit-course/edit-course.component';
 import { EditModuleComponent } from '../../components/edit-module/edit-module.component';
+import { EditTopicsComponent } from '../../components/edit-topics/edit-topics.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { EditModuleComponent } from '../../components/edit-module/edit-module.co
     CreateQuizComponent,
     CreateModuleComponent,
     EditCourseComponent,
-    EditModuleComponent
+    EditModuleComponent,
+    EditTopicsComponent
   ],
   imports: [
     CommonModule,

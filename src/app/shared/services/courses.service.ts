@@ -71,12 +71,12 @@ export class CoursesService {
   }
 
   updateTopic(data: any, id: any): Observable<any> {
-    const route = `/update/module/${id}/`;
+    const route = `/update/topic/${id}/`;
     return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 
   deleteTopic(id: string) {
-    const route = `/delete/module/${id}/`;
+    const route = `/delete/topic/${id}/`;
     return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 

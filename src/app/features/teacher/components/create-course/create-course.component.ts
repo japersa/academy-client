@@ -16,7 +16,7 @@ export class CreateCourseComponent implements OnInit {
   courseForm: FormGroup;
   validationMessages: any;
 
-  event;
+  event = null;
 
   @Output() showEvent = new EventEmitter<boolean>();
 

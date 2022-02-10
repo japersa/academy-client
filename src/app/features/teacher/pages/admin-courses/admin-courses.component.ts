@@ -26,7 +26,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   showFormCreateModule = false;
   showFormEditModule = false;
 
-  // MODULES
+  // TOPICS
   topics = [];
   topicEdit = {};
 
@@ -45,12 +45,16 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   constructor(private coursesService: CoursesService) { }
 
   changeStateShow(value: boolean) {
+    this.ngOnInit()
     // Courses
     this.showFormCreateCourse = value;
     this.showFormEditCourse = value;
     // Modules
     this.showFormCreateModule = value;
     this.showFormEditModule = value;
+    // Topics
+    this.showFormCreateTopic = value;
+    this.showFormEditTopic = value;
   }
 
   // COURSES
@@ -178,10 +182,74 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   }
 
+  // Modules
+
+  createTopic() {
+    this.showFormCreateTopic = !this.showFormCreateTopic;
+  }
+
+  editTopic(topic: object) {
+    this.topicEdit = topic;
+    this.showFormEditTopic = !this.showFormEditTopic;
+  }
+
+  deleteTopic(topicId: string) {
+
+    swal
+      .fire({
+        title: 'Estas seguro?',
+        text: '¡No podrás revertir esto!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '¡Sí, bórralo!',
+        cancelButtonText: 'Cancelar',
+        customClass: {
+          confirmButton: 'btn btn-success mr-1',
+          cancelButton: 'btn btn-danger',
+        },
+        buttonsStyling: false
+      })
+      .then(result => {
+        if (result.value) {
+
+          this.subscription1$ = this.coursesService.deleteTopic(topicId).pipe(take(1)).subscribe(res => {
+
+            swal.fire({
+              title: 'Eliminado!',
+              text: 'La orden ha sido ejecutada',
+              icon: 'success',
+              customClass: {
+                confirmButton: 'btn btn-success',
+              },
+              buttonsStyling: false
+            })
+          },
+            error => {
+              console.log('error ' + error.error);
+            });
+
+        } else {
+          swal.fire({
+            title: 'Cancelado',
+            text: 'No hemos eliminado nada :)',
+            icon: 'error',
+            customClass: {
+              confirmButton: 'btn btn-info',
+            },
+            buttonsStyling: false
+          });
+          return false
+        }
+      });
+
+  }
+
   ngOnInit(): void {
     // Subs
     this.subscriptions.push(this.subscription1$);
     this.subscriptions.push(this.subscription2$);
+    this.subscriptions.push(this.subscription3$);
+    this.subscriptions.push(this.subscription4$);
 
     // GET COURSES
     this.subscription$ = this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
@@ -199,7 +267,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
         console.log('Error: ', error);
       }
     )
-    // GET MODULES
+    // GET TOPICS
     this.subscription3$ = this.coursesService.getTopics().pipe(take(1)).subscribe(res => {
       Object.assign(this.topics, res);
     },

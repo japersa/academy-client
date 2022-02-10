@@ -15,15 +15,15 @@
                         <!-- TOPICS -->
                         <tab>
                             <ng-template tabHeading>
-                                <i class="tim-icons icon-paper"> </i> Temario
+                                <i class="tim-icons icon-paper"> </i> Temarios
                             </ng-template>
-                            <ng-container *ngIf="!showFormCreateCourse  && !showFormEditCourse ">
+                            <ng-container *ngIf="!showFormCreateTopic  && !showFormEditTopic ">
                                 <div class=" col-md-12">
                                     <div class=" card">
                                         <div class=" card-header">
                                             <div class=" tools float-right">
                                                 <button class=" btn btn-primary btn-sm mr-1 d-inline"
-                                                    (click)="createCourse()" type="button">
+                                                    (click)="createTopic()" type="button">
                                                     CREAR
                                                 </button>
                                             </div>
@@ -35,28 +35,25 @@
                                                     <thead class=" text-primary">
                                                         <tr>
                                                             <th class=" text-center">id</th>
-                                                            <th>Nombre</th>
-                                                            <th class=" text-center">Estado</th>
+                                                            <th>Título</th>
                                                             <th class=" text-center">Fecha de creación</th>
                                                             <th class=" text-right">Acciones</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let c of courses">
-                                                            <td class=" text-center">{{ c?.id }}</td>
-                                                            <td>{{ c?.title | titlecase}}</td>
-                                                            <td class=" text-center">
-                                                                {{ c?.is_active.toString() | uppercase }}</td>
-                                                            <td class=" text-center">{{c?.created_at | date}}</td>
+                                                        <tr *ngFor="let t of topics">
+                                                            <td class=" text-center">{{ t?.id }}</td>
+                                                            <td>{{ t?.title | titlecase}}</td>
+                                                            <td class=" text-center">{{t?.created_at | date}}</td>
                                                             <td class=" text-right">
                                                                 <button
                                                                     class=" btn btn-success btn-link btn-sm btn-icon"
-                                                                    (click)="editCourse(c)" tooltip="Editar"
+                                                                    (click)="editTopic(t)" tooltip="Editar"
                                                                     type="button">
                                                                     <i class=" tim-icons icon-pencil"> </i>
                                                                 </button>
                                                                 <button class=" btn btn-danger btn-link btn-sm"
-                                                                    (click)="deleteCourse(c?.id)" tooltip="Eliminar"
+                                                                    (click)="deleteTopic(t?.id)" tooltip="Eliminar"
                                                                     type="button">
                                                                     <i class=" tim-icons icon-simple-remove"> </i>
                                                                 </button>
@@ -69,22 +66,22 @@
                                     </div>
                                 </div>
                             </ng-container>
-                            <ng-container *ngIf="showFormCreateCourse">
+                            <ng-container *ngIf="showFormCreateTopic">
                                 <div class=" col-md-12">
                                     <app-create-topics (showEvent)="changeStateShow($event)"></app-create-topics>
                                 </div>
                             </ng-container>
-                            <ng-container *ngIf="showFormEditCourse">
+                            <ng-container *ngIf="showFormEditTopic">
                                 <div class=" col-md-12">
-                                    <app-edit-course (showEvent)="changeStateShow($event)" [course]="courseEdit">
-                                    </app-edit-course>
+                                    <app-edit-topics (showEvent)="changeStateShow($event)" [topic]="topicEdit">
+                                    </app-edit-topics>
                                 </div>
                             </ng-container>
                         </tab>
                         <!-- COURSES -->
                         <tab>
                             <ng-template tabHeading>
-                                <i class="tim-icons icon-book-bookmark"> </i> Curso
+                                <i class="tim-icons icon-book-bookmark"> </i> Cursos
                             </ng-template>
                             <ng-container *ngIf="!showFormCreateCourse  && !showFormEditCourse ">
                                 <div class=" col-md-12">
@@ -223,7 +220,7 @@
                         <!-- QUIZZES -->
                         <tab>
                             <ng-template tabHeading>
-                                <i class="tim-icons icon-trophy"> </i> Exámen
+                                <i class="tim-icons icon-trophy"> </i> Exámenes
                             </ng-template>
                             <app-create-quiz></app-create-quiz>
                         </tab>

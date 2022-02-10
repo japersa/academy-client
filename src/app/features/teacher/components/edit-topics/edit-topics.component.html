@@ -1,12 +1,13 @@
 <div class=" card text-left">
     <form [formGroup]="topicForm" (ngSubmit)="createTopic(topicForm.value)" role="form">
         <div class=" card-header">
-            <h4 class=" card-title">Crear Temario</h4>
+            <h4 class=" card-title">Editar Temario</h4>
         </div>
         <div class=" card-body col-md-6">
             <label> Título </label>
             <div class=" form-group">
-                <input class=" form-control" formControlName="title" placeholder="Título" type="text" required />
+                <input class=" form-control" formControlName="title" placeholder="Título" type="text" 
+                [(ngModel)]="topic.title" required />
             </div>
             <ng-container *ngFor="let validation of validationMessages.title">
                 <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
@@ -18,7 +19,7 @@
             <div class=" form-group">
 
                 <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
-                    required></textarea>
+                [(ngModel)]="topic.description" required></textarea>
 
             </div>
             <ng-container *ngFor="let validation of validationMessages.description">
