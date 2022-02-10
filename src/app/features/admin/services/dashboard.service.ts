@@ -30,4 +30,9 @@ export class DashboardService {
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
+  getAdminCourses(): Observable<any>{
+    const route = `/list/admin/courses/`;
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
 }

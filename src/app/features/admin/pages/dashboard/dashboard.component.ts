@@ -172,11 +172,62 @@ export class DashboardComponent implements OnInit {
       );
   }
 
+  fillCourses(){
+    this.subscription$ = this.dashboardService.getAdminCourses().pipe(take(1)).subscribe(res => {
+      console.log(res);
+      for(var j = 0; j < res.length; j++){
+        console.log(res[j])
+        console.log(res[j].path_preview_image)
+        var firstName = res[j].teacher.first_name
+        var lastName = res[j].teacher.last_name
+        var imgProfile = res[j].path_preview_image
+        var img = `<img src="`+imgProfile+`" alt="Curso de ????">`
+        if (imgProfile=="Sin imagen"){
+          img=``
+        }
+        console.log(imgProfile)
+        var description = res[j].description
+        const div = document.createElement('div');
+        div.className = 'col-lg-3';
+        div.innerHTML = `
+          <div class=" card card-chart">
+            <div class=" card-header">
+              <h5 class=" card-category">`+firstName+` `+lastName+`</h5>
+              `+img+`
+              
+            </div>
+          <div class=" card-body">
+            <h4 class=" card-title">
+                <i class=" tim-icons icon-paper text-primary"> </i> `+description+`
+              </h4>
+            <!--<div class=" chart-area"><canvas id="chartLineGreen"> </canvas></div>-->
+          </div>
+          <div class="card-footer">
+            <hr />
+            <div class="stats">
+              <button class="btn btn-simple btn-primary btn-sm" type="submit">
+                <i class="tim-icons icon-pencil text-primary"> </i> Editar Curso
+              </button>
+            </div>
+          </div>
+        </div>`
+      document.getElementById('dashboard').appendChild(div)
+      }
+      
+
+    
+    },
+      error => {
+        console.log(error);
+      });
+  }
+
   ngOnInit() {
     this.getAdmins();
     this.setDataLabel();
     this.showGeneralStatistics();
     this.fillChart2();
+    this.fillCourses();
     console.log(this.dataChart)
 
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
