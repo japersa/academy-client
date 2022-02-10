@@ -137,4 +137,46 @@ export class FirebaseStorageService {
       .subscribe(res => console.log(res))
 
   }
+
+  uploadTopic(event, dataForm) {
+    const randomId = Math.random().toString(36).substring(2);
+
+    const file = event.target.files[0];
+
+    const filePath = `/mistrades/uploads/courses/videos/${randomId}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().pipe(take(1)).subscribe(imgUrl => {
+
+          const data = {
+            title: dataForm.title,
+            description: dataForm.description,
+            price: dataForm.price,
+            path_preview_image: imgUrl
+          }
+
+          this.coursesService.createTopic(data).pipe(take(1)).subscribe(res => {
+            console.log(res);
+
+            this.notificationService.showNotification('bottom', 'center', 'Curso creado con éxito', 2);
+
+          },
+            error => {
+              console.log('Error: ', error.error);
+              this.notificationService.showNotification('bottom', 'center', 'Error al crear curso', 4);
+            })
+        })
+      }))
+      .subscribe(res => console.log(res))
+
+  }
+
+
 }

@@ -64,8 +64,6 @@ export class EditCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.course);
-
   }
 
 }

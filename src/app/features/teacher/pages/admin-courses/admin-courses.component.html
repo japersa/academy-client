@@ -12,22 +12,22 @@
                 </div>
                 <div class=" card-body">
                     <tabset class="nav-pills-primary nav-pills-icons justify-content-center" type="pills">
-                        <!-- MODULES -->
+                        <!-- TOPICS -->
                         <tab>
                             <ng-template tabHeading>
-                                <i class="tim-icons icon-components"> </i> Módulos
+                                <i class="tim-icons icon-paper"> </i> Temario
                             </ng-template>
-                            <ng-container *ngIf="!showFormCreateModule  && !showFormEditModule ">
+                            <ng-container *ngIf="!showFormCreateCourse  && !showFormEditCourse ">
                                 <div class=" col-md-12">
                                     <div class=" card">
                                         <div class=" card-header">
                                             <div class=" tools float-right">
                                                 <button class=" btn btn-primary btn-sm mr-1 d-inline"
-                                                    (click)="createModule()" type="button">
+                                                    (click)="createCourse()" type="button">
                                                     CREAR
                                                 </button>
                                             </div>
-                                            <h4 class=" card-title">Mis módulos</h4>
+                                            <h4 class=" card-title">Mis temarios</h4>
                                         </div>
                                         <div class=" card-body">
                                             <div class=" table-responsive">
@@ -36,27 +36,27 @@
                                                         <tr>
                                                             <th class=" text-center">id</th>
                                                             <th>Nombre</th>
-                                                            <th class=" text-center">ID CURSO</th>
+                                                            <th class=" text-center">Estado</th>
                                                             <th class=" text-center">Fecha de creación</th>
                                                             <th class=" text-right">Acciones</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let m of modules">
-                                                            <td class=" text-center">{{ m?.id }}</td>
-                                                            <td>{{ m?.name | titlecase}}</td>
+                                                        <tr *ngFor="let c of courses">
+                                                            <td class=" text-center">{{ c?.id }}</td>
+                                                            <td>{{ c?.title | titlecase}}</td>
                                                             <td class=" text-center">
-                                                                {{ m?.course }}</td>
-                                                            <td class=" text-center">{{m?.created_at | date}}</td>
+                                                                {{ c?.is_active.toString() | uppercase }}</td>
+                                                            <td class=" text-center">{{c?.created_at | date}}</td>
                                                             <td class=" text-right">
                                                                 <button
                                                                     class=" btn btn-success btn-link btn-sm btn-icon"
-                                                                    (click)="editModule(m)" tooltip="Editar"
+                                                                    (click)="editCourse(c)" tooltip="Editar"
                                                                     type="button">
                                                                     <i class=" tim-icons icon-pencil"> </i>
                                                                 </button>
                                                                 <button class=" btn btn-danger btn-link btn-sm"
-                                                                    (click)="deleteModule(m?.id)" tooltip="Eliminar"
+                                                                    (click)="deleteCourse(c?.id)" tooltip="Eliminar"
                                                                     type="button">
                                                                     <i class=" tim-icons icon-simple-remove"> </i>
                                                                 </button>
@@ -69,17 +69,17 @@
                                     </div>
                                 </div>
                             </ng-container>
-                            <ng-container *ngIf="showFormCreateModule">
+                            <ng-container *ngIf="showFormCreateCourse">
                                 <div class=" col-md-12">
-                                    <app-create-module (showEvent)="changeStateShow($event)"></app-create-module>
+                                    <app-create-topics (showEvent)="changeStateShow($event)"></app-create-topics>
                                 </div>
                             </ng-container>
-                            <ng-container *ngIf="showFormEditModule">
+                            <ng-container *ngIf="showFormEditCourse">
                                 <div class=" col-md-12">
-                                    <app-edit-module (showEvent)="changeStateShow($event)" [module]="moduleEdit"></app-edit-module>
+                                    <app-edit-course (showEvent)="changeStateShow($event)" [course]="courseEdit">
+                                    </app-edit-course>
                                 </div>
                             </ng-container>
-
                         </tab>
                         <!-- COURSES -->
                         <tab>
@@ -150,12 +150,75 @@
                                 </div>
                             </ng-container>
                         </tab>
-                        <!-- TOPICS -->
+                        <!-- MODULES -->
                         <tab>
                             <ng-template tabHeading>
-                                <i class="tim-icons icon-paper"> </i> Temario
+                                <i class="tim-icons icon-components"> </i> Módulos
                             </ng-template>
-                            <app-create-topics></app-create-topics>
+                            <ng-container *ngIf="!showFormCreateModule  && !showFormEditModule ">
+                                <div class=" col-md-12">
+                                    <div class=" card">
+                                        <div class=" card-header">
+                                            <div class=" tools float-right">
+                                                <button class=" btn btn-primary btn-sm mr-1 d-inline"
+                                                    (click)="createModule()" type="button">
+                                                    CREAR
+                                                </button>
+                                            </div>
+                                            <h4 class=" card-title">Mis módulos</h4>
+                                        </div>
+                                        <div class=" card-body">
+                                            <div class=" table-responsive">
+                                                <table class=" table">
+                                                    <thead class=" text-primary">
+                                                        <tr>
+                                                            <th class=" text-center">id</th>
+                                                            <th>Nombre</th>
+                                                            <th class=" text-center">ID CURSO</th>
+                                                            <th class=" text-center">Fecha de creación</th>
+                                                            <th class=" text-right">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let m of modules">
+                                                            <td class=" text-center">{{ m?.id }}</td>
+                                                            <td>{{ m?.name | titlecase}}</td>
+                                                            <td class=" text-center">
+                                                                {{ m?.course }}</td>
+                                                            <td class=" text-center">{{m?.created_at | date}}</td>
+                                                            <td class=" text-right">
+                                                                <button
+                                                                    class=" btn btn-success btn-link btn-sm btn-icon"
+                                                                    (click)="editModule(m)" tooltip="Editar"
+                                                                    type="button">
+                                                                    <i class=" tim-icons icon-pencil"> </i>
+                                                                </button>
+                                                                <button class=" btn btn-danger btn-link btn-sm"
+                                                                    (click)="deleteModule(m?.id)" tooltip="Eliminar"
+                                                                    type="button">
+                                                                    <i class=" tim-icons icon-simple-remove"> </i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showFormCreateModule">
+                                <div class=" col-md-12">
+                                    <app-create-module (showEvent)="changeStateShow($event)"></app-create-module>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showFormEditModule">
+                                <div class=" col-md-12">
+                                    <app-edit-module (showEvent)="changeStateShow($event)" [module]="moduleEdit">
+                                    </app-edit-module>
+                                </div>
+                            </ng-container>
+
                         </tab>
                         <!-- QUIZZES -->
                         <tab>
@@ -164,7 +227,6 @@
                             </ng-template>
                             <app-create-quiz></app-create-quiz>
                         </tab>
-
                     </tabset>
                 </div>
             </div>

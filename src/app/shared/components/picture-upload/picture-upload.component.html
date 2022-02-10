@@ -4,8 +4,8 @@
     <img src="{{ imagePreviewUrl }}" alt="..." />
   </div>
   <div>
-    <button *ngIf="file === null && avatar === ''" class="btn-round btn btn-primary" (click)="handleClick()">
-      Agregar
+    <button *ngIf="file === null " class="btn-round btn btn-primary" (click)="handleClick()">
+      Modificar
     </button>
     <span *ngIf="file !== null">
       <button class="btn-round btn btn-primary" (click)="handleSubmit($event)">
