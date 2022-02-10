@@ -26,10 +26,19 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   showFormCreateModule = false;
   showFormEditModule = false;
 
+  // MODULES
+  topics = [];
+  topicEdit = {};
+
+  showFormCreateTopic = false;
+  showFormEditTopic = false;
+
   // OTHERS
   subscription$: Subscription;
   subscription1$: Subscription;
   subscription2$: Subscription;
+  subscription3$: Subscription;
+  subscription4$: Subscription;
 
   subscriptions: Subscription[] = [];
 
@@ -185,6 +194,14 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     // GET MODULES
     this.subscription2$ = this.coursesService.getModules().pipe(take(1)).subscribe(res => {
       Object.assign(this.modules, res);
+    },
+      error => {
+        console.log('Error: ', error);
+      }
+    )
+    // GET MODULES
+    this.subscription3$ = this.coursesService.getTopics().pipe(take(1)).subscribe(res => {
+      Object.assign(this.topics, res);
     },
       error => {
         console.log('Error: ', error);

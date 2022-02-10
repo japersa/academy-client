@@ -30,7 +30,7 @@ export class CoursesService {
 
   updateCourse(data: any, id: any): Observable<any> {
     const route = `/update/course/${id}/`;
-    return this.http.patch<any>(`${apiURL}${route}`, data,{ headers: this.headers });
+    return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 
   deleteCourse(id: string) {
@@ -49,7 +49,33 @@ export class CoursesService {
     return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 
+  updateModule(data: any, id: any): Observable<any> {
+    const route = `/update/module/${id}/`;
+    return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
+  }
+
   deleteModule(id: string) {
+    const route = `/delete/module/${id}/`;
+    return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  // Topics
+  getTopics(): Observable<any> {
+    const route = '/my/topics/';
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  createTopic(data: any): Observable<any> {
+    const route = '/create/topic/';
+    return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
+  }
+
+  updateTopic(data: any, id: any): Observable<any> {
+    const route = `/update/module/${id}/`;
+    return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
+  }
+
+  deleteTopic(id: string) {
     const route = `/delete/module/${id}/`;
     return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
   }
