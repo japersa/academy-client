@@ -21,11 +21,10 @@ export class DashboardComponent implements OnInit {
   public total_students: number = 0;
   public total_admins: number = 0;
   public total_teachers: number = 0;
-  public dataChart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  public dataChart = [];
   public dataChart2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   public dataChart3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  public dataLabel = /*[]*/
-  [
+  public dataLabel /*[]*/ = [
     "ENE",
     "FEB",
     "MAR",
@@ -68,7 +67,7 @@ export class DashboardComponent implements OnInit {
         }
       );
   }
-  setDataLabel(){
+  setDataLabel() {
     var currentMonth = new Date().getMonth();
     var normalYear = this.dataLabel;
     var moddedYear = [];
@@ -86,42 +85,42 @@ export class DashboardComponent implements OnInit {
     this.dataLabel = moddedYear;
     return this.dataLabel;
   }
-  fillChart() {
+  /*fillChart() {
     this.subscription$ = this.dashboardService
       .getUsersByCount()
       .pipe(take(1))
       .subscribe(
         (res) => {
           var currentMonth = new Date().getMonth();
-          console.log(currentMonth)
+          console.log(currentMonth);
           var data = res.avg_users_months[0];
-          var moddedData = []
+          var moddedData = [];
           var variableMonth = currentMonth;
           var count = 11;
-          for (var i = 11; i >= 0; i--) {
+          for (var i = 11; i >= 0; i--) {*/
             //console.log(data.length)
-            for (var j = data.length; j >= 0;j--){
+           /* for (var j = data.length; j >= 0; j--) {
               var fullDate = data[j].date.split("-");
-              console.log(fullDate)
+              console.log(fullDate);
               var year = parseInt(fullDate[0], 10);
               var month = parseInt(fullDate[1], 10) - 1;
-              moddedData[count] = count
-              count = count-1
+              moddedData[count] = count;
+              count = count - 1;*/
               /*console.log("ModdedData:")
               console.log(moddedData)
               console.log(count)*/
-            }
+            /*}*/
             //console.log(fullDate)
-            variableMonth = variableMonth - 1;
+            /*variableMonth = variableMonth - 1;
             if (variableMonth < 0) {
               variableMonth = 11;
-            }
-            if (variableMonth == currentMonth) {
+            }*/
+            /*if (variableMonth == currentMonth) {
               break;
-            }
+            }*/
             /*console.log(moddedData)
             console.log(variableMonth);*/
-          }
+         /* }*/
           /*
           for (var i = 11; i >= 0; i--) {
             console.log("Valor i:");
@@ -136,6 +135,36 @@ export class DashboardComponent implements OnInit {
             this.dataChart[month] = data[i].users;
             console.log(this.dataChart);
           }*/
+        /*},
+        (error) => {
+          console.log(error);
+
+        }
+      );
+  }*/
+
+  fillChart2() {
+    this.subscription$ = this.dashboardService.getUsersByCount().pipe(take(1)).subscribe(
+        (res) => {
+          var data = res.avg_users_months[0];
+          var currentMonth = new Date().getMonth();
+          var count = 0;
+          //var tempArray = []
+          for(var i = 11; i >= 0 ; i--){
+            if(data[i]!=undefined){
+              //console.log(data[i].users)
+              //tempArray.push(data[i].users)
+              this.dataChart.push(data[i].users)
+            } else {
+              //tempArray.push(0)
+              this.dataChart.push(0)
+            }
+            count++
+          }
+          //console.log(tempArray)
+          //this.dataChart.push(tempArray)
+          console.log(this.dataChart)
+          return this.dataChart
         },
         (error) => {
           console.log(error);
@@ -145,12 +174,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getAdmins();
-    console.log(this.dataLabel)
     this.setDataLabel();
-    console.log(this.dataLabel)
     this.showGeneralStatistics();
-    this.fillChart();
-    
+    this.fillChart2();
+    console.log(this.dataChart)
+
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
       legend: {
