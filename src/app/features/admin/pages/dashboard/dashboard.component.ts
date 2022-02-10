@@ -569,8 +569,8 @@ export class DashboardComponent implements OnInit {
     /*["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC",];*/
     this.datasets = [
       this.dataChart,
-      this.dataChart2,
-      this.dataChart3 /*
+      /*this.dataChart2,
+      this.dataChart3 
       [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
       [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130],*/,
     ];
