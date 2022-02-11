@@ -181,26 +181,34 @@ export class DashboardComponent implements OnInit {
         var firstName = res[j].teacher.first_name
         var lastName = res[j].teacher.last_name
         var imgProfile = res[j].path_preview_image
-        var img = `<img src="`+imgProfile+`" alt="Curso de ????">`
+        var img = `<img src="`+imgProfile+`" alt="Curso de ????" style="max-height:100px;">`
         if (imgProfile=="Sin imagen"){
           img=``
         }
         console.log(imgProfile)
         var description = res[j].description
+        if(description.length > 10){
+          description = description.substring(0,50) + "..."
+        }
         const div = document.createElement('div');
         div.className = 'col-lg-3';
-        div.innerHTML = `
+        div.innerHTML =
+          `
           <div class=" card card-chart">
             <div class=" card-header">
-              <h5 class=" card-category">`+firstName+` `+lastName+`</h5>
-              `+img+`
-              
+              <h5 class=" card-category">
+                <i class=" tim-icons icon-single-02 text-primary"> </i> ` +
+                firstName + ` ` + lastName +
+              `</h5>
+              ` +
+              img +
+              `
             </div>
           <div class=" card-body">
             <h4 class=" card-title">
-                <i class=" tim-icons icon-paper text-primary"> </i> `+description+`
-              </h4>
-            <!--<div class=" chart-area"><canvas id="chartLineGreen"> </canvas></div>-->
+                <i class=" tim-icons icon-paper text-primary"> </i> ` +
+                description +
+                `</h4>
           </div>
           <div class="card-footer">
             <hr />
@@ -210,7 +218,7 @@ export class DashboardComponent implements OnInit {
               </button>
             </div>
           </div>
-        </div>`
+        </div>`;
       document.getElementById('dashboard').appendChild(div)
       }
       
@@ -627,7 +635,7 @@ export class DashboardComponent implements OnInit {
     ];
     this.data = this.datasets[0];
 
-    this.canvas = document.getElementById("chartBig1");
+    this.canvas = document.getElementById("bigChart");
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
