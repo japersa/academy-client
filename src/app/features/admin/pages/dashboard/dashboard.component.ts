@@ -189,7 +189,7 @@ export class DashboardComponent implements OnInit {
     this.fillChart();
     this.fillCourses();
 
-    var gradientChartOptionsConfigurationWithTooltipBlue: any = {
+    /*var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
       legend: {
         display: false
@@ -239,9 +239,9 @@ export class DashboardComponent implements OnInit {
           }
         ]
       }
-    };
+    };*/
 
-    var gradientChartOptionsConfigurationWithTooltipPurple: any = {
+    /*var gradientChartOptionsConfigurationWithTooltipPurple: any = {
       maintainAspectRatio: false,
       legend: {
         display: false
@@ -291,7 +291,7 @@ export class DashboardComponent implements OnInit {
           }
         ]
       }
-    };
+    };*/
 
     var gradientChartOptionsConfigurationWithTooltipRed: any = {
       maintainAspectRatio: false,
@@ -345,7 +345,7 @@ export class DashboardComponent implements OnInit {
       }
     };
 
-    var gradientChartOptionsConfigurationWithTooltipOrange: any = {
+    /*var gradientChartOptionsConfigurationWithTooltipOrange: any = {
       maintainAspectRatio: false,
       legend: {
         display: false
@@ -395,9 +395,9 @@ export class DashboardComponent implements OnInit {
           }
         ]
       }
-    };
+    };*/
 
-    var gradientChartOptionsConfigurationWithTooltipGreen: any = {
+    /*var gradientChartOptionsConfigurationWithTooltipGreen: any = {
       maintainAspectRatio: false,
       legend: {
         display: false
@@ -447,9 +447,9 @@ export class DashboardComponent implements OnInit {
           }
         ]
       }
-    };
+    };*/
 
-    var gradientBarChartConfiguration: any = {
+    /*var gradientBarChartConfiguration: any = {
       maintainAspectRatio: false,
       legend: {
         display: false
@@ -497,20 +497,20 @@ export class DashboardComponent implements OnInit {
           }
         ]
       }
-    };
+    };*/
 
-    this.canvas = document.getElementById("chartLineRed");
+    /*this.canvas = document.getElementById("chartLineRed");
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
     gradientStroke.addColorStop(1, "rgba(66,134,121,0.15)");
     gradientStroke.addColorStop(0.4, "rgba(66,134,121,0.0)"); //green colors
-    gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
+    gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors*/
 
 
 
-    var data = {
+    /*var data = {
       labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
       datasets: [
         {
@@ -531,24 +531,24 @@ export class DashboardComponent implements OnInit {
           data: [80, 100, 70, 80, 120, 80]
         }
       ]
-    };
+    };*/
 
-    var myChart = new Chart(this.ctx, {
+    /*var myChart = new Chart(this.ctx, {
       type: "line",
       data: data,
       options: gradientChartOptionsConfigurationWithTooltipRed
-    });
+    });*/
 
-    this.canvas = document.getElementById("chartLineGreen");
+    /*this.canvas = document.getElementById("chartLineGreen");
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
     gradientStroke.addColorStop(1, "rgba(66,134,121,0.15)");
     gradientStroke.addColorStop(0.4, "rgba(66,134,121,0.0)"); //green colors
-    gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
+    gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors*/
 
-    var data = {
+    /*var data = {
       labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
       datasets: [
         {
@@ -569,13 +569,13 @@ export class DashboardComponent implements OnInit {
           data: [90, 27, 60, 12, 80]
         }
       ]
-    };
+    };*/
 
-    var myChart = new Chart(this.ctx, {
+    /*var myChart = new Chart(this.ctx, {
       type: "line",
       data: data,
       options: gradientChartOptionsConfigurationWithTooltipGreen
-    });
+    });*/
 
     var chart_labels = this.dataLabel;
     this.datasets = [
@@ -583,7 +583,7 @@ export class DashboardComponent implements OnInit {
     ];
     this.data = this.datasets[0];
 
-    this.canvas = document.getElementById("bigChart");
+    this.canvas = document.getElementById("chartBig1");
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
@@ -601,13 +601,13 @@ export class DashboardComponent implements OnInit {
             label: "My First dataset",
             fill: true,
             backgroundColor: gradientStroke,
-            borderColor: "#00d6b4",
+            borderColor: "#0AC116",
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            pointBackgroundColor: "#00d6b4",
+            pointBackgroundColor: "#0AC116",
             pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#00d6b4",
+            pointHoverBackgroundColor: "#0AC116",
             pointBorderWidth: 20,
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
@@ -620,15 +620,15 @@ export class DashboardComponent implements OnInit {
     };
     this.myChartData = new Chart(this.ctx, config);
 
-    this.canvas = document.getElementById("CountryChart");
-    this.ctx = this.canvas.getContext("2d");
-    var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
+    //this.canvas = document.getElementById("CountryChart");
+    //this.ctx = this.canvas.getContext("2d");
+    //var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+    //gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+    //gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+    //gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
 
-    var myChart = new Chart(this.ctx, {
+    /*var myChart = new Chart(this.ctx, {
       type: "bar",
       responsive: true,
       legend: {
@@ -651,7 +651,7 @@ export class DashboardComponent implements OnInit {
         ]
       },
       options: gradientBarChartConfiguration
-    });
+    });*/
   }
 
   public updateOptions() {
