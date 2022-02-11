@@ -44,6 +44,11 @@ const routes: Routes = [
         loadChildren: () => import('./features/student/pages/courses/courses.module')
           .then(m => m.CoursesModule)
       },
+      {
+        path: 'subscription',
+        loadChildren: () => import('./shared/pages/subscription/subscription.module')
+          .then(m => m.SubscriptionModule)
+      },
     ]
   },
   {
