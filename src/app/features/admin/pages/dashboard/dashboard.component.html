@@ -1,68 +1,19 @@
 <div class=" content">
-  <div class=" row">
+  <div class=" row" id="dashboard">
     <div class=" col-12">
       <div class=" card card-chart">
         <div class=" card-header">
           <div class=" row">
             <div class=" col-sm-6 text-left">
-              <h5 class=" card-category">Total Shipments</h5>
-              <h2 class=" card-title">Performance</h2>
+              <h5 class=" card-category">NUEVOS</h5>
+              <h2 class=" card-title">Usuarios</h2>
             </div>
             <div class=" col-sm-6">
-              <div class=" btn-group btn-group-toggle float-right" data-toggle="buttons">
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="
-                    data = datasets[0];
-                    updateOptions();
-                    clicked = true;
-                    clicked1 = false;
-                    clicked2 = false
-                  " [ngClass]="{ active: clicked === true }">
-                  <input checked="checked" name="options" type="radio" />
-
-                  <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                    Accounts
-                  </span>
-                  <span class=" d-block d-sm-none">
-                    <i class=" tim-icons icon-single-02"> </i>
-                  </span>
-                </label>
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="
-                    data = datasets[1];
-                    updateOptions();
-                    clicked = false;
-                    clicked1 = true;
-                    clicked2 = false
-                  " [ngClass]="{ active: clicked1 === true }">
-                  <input class=" d-none d-sm-none" name="options" type="radio" />
-
-                  <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                    Purchases
-                  </span>
-                  <span class=" d-block d-sm-none">
-                    <i class=" tim-icons icon-gift-2"> </i>
-                  </span>
-                </label>
-                <label class=" btn btn-sm btn-danger btn-simple" (click)="
-                    data = datasets[2];
-                    updateOptions();
-                    clicked = false;
-                    clicked1 = false;
-                    clicked2 = true
-                  " [ngClass]="{ active: clicked2 === true }">
-                  <input class=" d-none" name="options" type="radio" />
-
-                  <span class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                    Sessions
-                  </span>
-                  <span class=" d-block d-sm-none">
-                    <i class=" tim-icons icon-tap-02"> </i>
-                  </span>
-                </label>
-              </div>
             </div>
           </div>
         </div>
         <div class=" card-body">
+          <!--GRAFICA DE NUEVOS ESTUDIANTES (bug)-->
           <div class=" chart-area"><canvas id="chartBig1"> </canvas></div>
         </div>
       </div>
@@ -72,14 +23,14 @@
         <div class=" card-body">
           <div class=" row">
             <div class=" col-5">
-              <div class=" info-icon text-center icon-warning">
-                <i class=" tim-icons icon-chat-33"> </i>
+              <div class=" info-icon text-center icon-primary">
+                <span><img src="https://res.cloudinary.com/mistrades-com/image/upload/v1643906005/assets/Super%20Admin/icono-estudiantes-totales_vedx69.png" alt=""></span>
               </div>
             </div>
             <div class=" col-7">
               <div class=" numbers">
-                <p class=" card-category">Total alumnos</p>
-                <h3 class=" card-title">150</h3>
+                <p class=" card-category">Estudiantes totales</p>
+                <h3 class=" card-title">{{total_students}}</h3>
               </div>
             </div>
           </div>
@@ -95,13 +46,13 @@
           <div class=" row">
             <div class=" col-5">
               <div class=" info-icon text-center icon-primary">
-                <i class=" tim-icons icon-shape-star"> </i>
+                <span><img src="https://res.cloudinary.com/mistrades-com/image/upload/v1643906005/assets/Super%20Admin/icono-estudiantes-activos_qkeici.png" alt=""></span>
               </div>
             </div>
             <div class=" col-7">
               <div class=" numbers">
-                <p class=" card-category">Alumnos subscritos</p>
-                <h3 class=" card-title">27</h3>
+                <p class=" card-category">Estudiantes activos</p>
+                <h3 class=" card-title">{{total_students}}</h3>
               </div>
             </div>
           </div>
@@ -116,13 +67,13 @@
         <div class=" card-body">
           <div class=" row">
             <div class=" col-5">
-              <div class=" info-icon text-center icon-success">
-                <i class=" tim-icons icon-single-02"> </i>
+              <div class=" info-icon text-center icon-primary">
+                <span><img src="https://res.cloudinary.com/mistrades-com/image/upload/v1643906005/assets/Super%20Admin/icono-tutores-registrados_a5e5tj.png" alt=""></span> 
               </div>
             </div>
             <div class=" col-7">
               <div class=" numbers">
-                <p class=" card-category">Profesores</p>
+                <p class=" card-category">Tutores registrados</p>
                 <h3 class=" card-title">3</h3>
               </div>
             </div>
@@ -138,14 +89,14 @@
         <div class=" card-body">
           <div class=" row">
             <div class=" col-5">
-              <div class=" info-icon text-center icon-danger">
-                <i class=" tim-icons icon-molecule-40"> </i>
+              <div class=" info-icon text-center icon-primary">
+                <span><img src="https://res.cloudinary.com/mistrades-com/image/upload/v1643906005/assets/Super%20Admin/icono-tutores-registrados_a5e5tj.png" alt=""></span>
               </div>
             </div>
             <div class=" col-7">
               <div class=" numbers">
-                <p class=" card-category">Administradores</p>
-                <h3 class=" card-title">2</h3>
+                <p class=" card-category">Administradores Activos</p>
+                <h3 class=" card-title">{{total_admins}}</h3>
               </div>
             </div>
           </div>
@@ -154,45 +105,10 @@
           <hr />
         </div>
       </div>
-    </div>
-    <div class=" col-lg-4">
-      <div class=" card card-chart">
-        <div class=" card-header">
-          <h5 class=" card-category">Total Shipments</h5>
-          <h3 class=" card-title">
-            <i class=" tim-icons icon-bell-55 text-primary"> </i> 763,215
-          </h3>
-        </div>
-        <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartLineRed"> </canvas></div>
-        </div>
-      </div>
-    </div>
-    <div class=" col-lg-4">
-      <div class=" card card-chart">
-        <div class=" card-header">
-          <h5 class=" card-category">Daily Sales</h5>
-          <h3 class=" card-title">
-            <i class=" tim-icons icon-delivery-fast text-info"> </i> 3,500€
-          </h3>
-        </div>
-        <div class=" card-body">
-          <div class=" chart-area"><canvas id="CountryChart"> </canvas></div>
-        </div>
-      </div>
-    </div>
-    <div class=" col-lg-4">
-      <div class=" card card-chart">
-        <div class=" card-header">
-          <h5 class=" card-category">Completed Tasks</h5>
-          <h3 class=" card-title">
-            <i class=" tim-icons icon-send text-success"> </i> 12,100K
-          </h3>
-        </div>
-        <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartLineGreen"> </canvas></div>
-        </div>
-      </div>
+    </div>`
+    <div  class=" col-lg-12">
+      <h2>Cursos</h2>
+      <hr style="width: 100%;" color="green">
     </div>
   </div>
 </div>
