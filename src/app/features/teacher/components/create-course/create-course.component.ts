@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
-import { take } from 'rxjs/operators';
+import { take, finalize } from 'rxjs/operators';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 
 @Component({
@@ -51,8 +51,9 @@ export class CreateCourseComponent implements OnInit {
 
   createCourse(dataForm: any) {
     this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
-    this.showEvent.emit(false);
-  }
+    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
+      this.showEvent.emit(false);
+    })).subscribe();  }
 
   cancelCreate() {
     this.showEvent.emit(false);

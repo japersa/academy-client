@@ -13,6 +13,7 @@ import { CreateModuleComponent } from '../../components/create-module/create-mod
 import { EditCourseComponent } from '../../components/edit-course/edit-course.component';
 import { EditModuleComponent } from '../../components/edit-module/edit-module.component';
 import { EditTopicsComponent } from '../../components/edit-topics/edit-topics.component';
+import { EditQuizComponent } from '../../components/edit-quiz/edit-quiz.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { EditTopicsComponent } from '../../components/edit-topics/edit-topics.co
     CreateModuleComponent,
     EditCourseComponent,
     EditModuleComponent,
-    EditTopicsComponent
+    EditTopicsComponent,
+    EditQuizComponent
   ],
   imports: [
     CommonModule,

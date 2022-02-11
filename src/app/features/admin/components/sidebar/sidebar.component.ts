@@ -55,13 +55,7 @@ export const ROUTES: RouteInfo[] = [
         smallTitle: 'RS'
       },
       {
-        path: 'timeline',
-        title: 'cursos',
-        type: 'link',
-        smallTitle: 'T'
-      },
-      {
-        path: 'timeline',
+        path: 'ama',
         title: 'dudas',
         type: 'link',
         smallTitle: 'T'

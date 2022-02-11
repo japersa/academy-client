@@ -12,72 +12,6 @@
                 </div>
                 <div class=" card-body">
                     <tabset class="nav-pills-primary nav-pills-icons justify-content-center" type="pills">
-                        <!-- TOPICS -->
-                        <tab>
-                            <ng-template tabHeading>
-                                <i class="tim-icons icon-paper"> </i> Temarios
-                            </ng-template>
-                            <ng-container *ngIf="!showFormCreateTopic  && !showFormEditTopic ">
-                                <div class=" col-md-12">
-                                    <div class=" card">
-                                        <div class=" card-header">
-                                            <div class=" tools float-right">
-                                                <button class=" btn btn-primary btn-sm mr-1 d-inline"
-                                                    (click)="createTopic()" type="button">
-                                                    CREAR
-                                                </button>
-                                            </div>
-                                            <h4 class=" card-title">Mis temarios</h4>
-                                        </div>
-                                        <div class=" card-body">
-                                            <div class=" table-responsive">
-                                                <table class=" table">
-                                                    <thead class=" text-primary">
-                                                        <tr>
-                                                            <th class=" text-center">id</th>
-                                                            <th>Título</th>
-                                                            <th class=" text-center">Fecha de creación</th>
-                                                            <th class=" text-right">Acciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr *ngFor="let t of topics">
-                                                            <td class=" text-center">{{ t?.id }}</td>
-                                                            <td>{{ t?.title | titlecase}}</td>
-                                                            <td class=" text-center">{{t?.created_at | date}}</td>
-                                                            <td class=" text-right">
-                                                                <button
-                                                                    class=" btn btn-success btn-link btn-sm btn-icon"
-                                                                    (click)="editTopic(t)" tooltip="Editar"
-                                                                    type="button">
-                                                                    <i class=" tim-icons icon-pencil"> </i>
-                                                                </button>
-                                                                <button class=" btn btn-danger btn-link btn-sm"
-                                                                    (click)="deleteTopic(t?.id)" tooltip="Eliminar"
-                                                                    type="button">
-                                                                    <i class=" tim-icons icon-simple-remove"> </i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="showFormCreateTopic">
-                                <div class=" col-md-12">
-                                    <app-create-topics (showEvent)="changeStateShow($event)"></app-create-topics>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="showFormEditTopic">
-                                <div class=" col-md-12">
-                                    <app-edit-topics (showEvent)="changeStateShow($event)" [topic]="topicEdit">
-                                    </app-edit-topics>
-                                </div>
-                            </ng-container>
-                        </tab>
                         <!-- COURSES -->
                         <tab>
                             <ng-template tabHeading>
@@ -108,7 +42,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let c of courses">
+                                                        <tr *ngFor="let c of courses; index as i; trackBy: trackCourse">
                                                             <td class=" text-center">{{ c?.id }}</td>
                                                             <td>{{ c?.title | titlecase}}</td>
                                                             <td class=" text-center">
@@ -177,7 +111,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let m of modules">
+                                                        <tr *ngFor="let m of modules; index as i; trackBy: trackModule">
                                                             <td class=" text-center">{{ m?.id }}</td>
                                                             <td>{{ m?.name | titlecase}}</td>
                                                             <td class=" text-center">
@@ -217,12 +151,139 @@
                             </ng-container>
 
                         </tab>
+                        <!-- TOPICS -->
+                        <tab>
+                            <ng-template tabHeading>
+                                <i class="tim-icons icon-paper"> </i> Temarios
+                            </ng-template>
+                            <ng-container *ngIf="!showFormCreateTopic  && !showFormEditTopic ">
+                                <div class=" col-md-12">
+                                    <div class=" card">
+                                        <div class=" card-header">
+                                            <div class=" tools float-right">
+                                                <button class=" btn btn-primary btn-sm mr-1 d-inline"
+                                                    (click)="createTopic()" type="button">
+                                                    CREAR
+                                                </button>
+                                            </div>
+                                            <h4 class=" card-title">Mis temarios</h4>
+                                        </div>
+                                        <div class=" card-body">
+                                            <div class=" table-responsive">
+                                                <table class=" table">
+                                                    <thead class=" text-primary">
+                                                        <tr>
+                                                            <th class=" text-center">id</th>
+                                                            <th>Título</th>
+                                                            <th class=" text-center">Fecha de creación</th>
+                                                            <th class=" text-right">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let t of topics; index as i; trackBy: trackTopics">
+                                                            <td class=" text-center">{{ t?.id }}</td>
+                                                            <td>{{ t?.title | titlecase}}</td>
+                                                            <td class=" text-center">{{t?.created_at | date}}</td>
+                                                            <td class=" text-right">
+                                                                <button
+                                                                    class=" btn btn-success btn-link btn-sm btn-icon"
+                                                                    (click)="editTopic(t)" tooltip="Editar"
+                                                                    type="button">
+                                                                    <i class=" tim-icons icon-pencil"> </i>
+                                                                </button>
+                                                                <button class=" btn btn-danger btn-link btn-sm"
+                                                                    (click)="deleteTopic(t?.id)" tooltip="Eliminar"
+                                                                    type="button">
+                                                                    <i class=" tim-icons icon-simple-remove"> </i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showFormCreateTopic">
+                                <div class=" col-md-12">
+                                    <app-create-topics (showEvent)="changeStateShow($event)"></app-create-topics>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showFormEditTopic">
+                                <div class=" col-md-12">
+                                    <app-edit-topics (showEvent)="changeStateShow($event)" [topic]="topicEdit">
+                                    </app-edit-topics>
+                                </div>
+                            </ng-container>
+                        </tab>
                         <!-- QUIZZES -->
                         <tab>
                             <ng-template tabHeading>
                                 <i class="tim-icons icon-trophy"> </i> Exámenes
                             </ng-template>
-                            <app-create-quiz></app-create-quiz>
+                            <ng-container *ngIf="!showFormCreateQuizzes  && !showFormEditQuizzes ">
+                                <div class=" col-md-12">
+                                    <div class=" card">
+                                        <div class=" card-header">
+                                            <div class=" tools float-right">
+                                                <button class=" btn btn-primary btn-sm mr-1 d-inline"
+                                                    (click)="createQuiz()" type="button">
+                                                    CREAR
+                                                </button>
+                                            </div>
+                                            <h4 class=" card-title">Mis exámenes</h4>
+                                        </div>
+                                        <div class=" card-body">
+                                            <div class=" table-responsive">
+                                                <table class=" table">
+                                                    <thead class=" text-primary">
+                                                        <tr>
+                                                            <th class=" text-center">id</th>
+                                                            <th>Pregunta</th>
+                                                            <th class=" text-center">id curso</th>
+                                                            <th class=" text-center">Fecha de creación</th>
+                                                            <th class=" text-right">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let q of quizzes; index as i; trackBy: trackQuiz">
+                                                            <td class=" text-center">{{ q?.id }}</td>
+                                                            <td>{{ q?.question | titlecase}}</td>
+                                                            <td class=" text-center">{{q?.course_id}}</td>
+                                                            <td class=" text-center">{{q?.created_at | date}}</td>
+                                                            <td class=" text-right">
+                                                                <button
+                                                                    class=" btn btn-success btn-link btn-sm btn-icon"
+                                                                    (click)="editQuiz(q)" tooltip="Editar"
+                                                                    type="button">
+                                                                    <i class=" tim-icons icon-pencil"> </i>
+                                                                </button>
+                                                                <button class=" btn btn-danger btn-link btn-sm"
+                                                                    (click)="deleteQuiz(q?.id)" tooltip="Eliminar"
+                                                                    type="button">
+                                                                    <i class=" tim-icons icon-simple-remove"> </i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showFormCreateQuizzes">
+                                <div class=" col-md-12">
+                                    <app-create-quiz (showEvent)="changeStateShow($event)"></app-create-quiz>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="showFormEditQuizzes">
+                                <div class=" col-md-12">
+                                    <app-edit-quiz (showEvent)="changeStateShow($event)" [quiz]="quizEdit">
+                                    </app-edit-quiz>
+                                </div>
+                            </ng-container>
                         </tab>
                     </tabset>
                 </div>

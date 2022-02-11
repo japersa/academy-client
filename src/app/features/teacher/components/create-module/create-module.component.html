@@ -18,7 +18,6 @@
             <label> Curso </label>
             <select class="form-select form-group d-block" formControlName="course" size="4">
                 <option *ngFor="let c of courses" [value]="c?.id">{{ c?.title | titlecase}}</option>
-
             </select>
 
             <ng-container *ngFor="let validation of validationMessages.title">

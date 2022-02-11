@@ -80,4 +80,98 @@ export class CoursesService {
     return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
+  // Topics
+  getQuizzes(): Observable<any> {
+    const route = '/my/quizzes/';
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  createQuiz(dataForm: any): Observable<any> {
+
+    const correctAnswer = dataForm.answer
+    const answersArr = []
+
+    const DATA = {
+      question: dataForm.question,
+      course: dataForm.course,
+      answers: answersArr
+    }
+
+    Object.entries(dataForm).forEach(([key, value]) => {
+
+      switch (key.toString()) {
+        case 'optionOne':
+          if (correctAnswer === '1') {
+            answersArr.push({
+              option: value,
+              isCorrect: true
+            })
+            break;
+          }
+          answersArr.push({
+            option: value,
+            isCorrect: false
+          })
+          break;
+        case 'optionTwo':
+          if (correctAnswer === '2') {
+            answersArr.push({
+              option: value,
+              isCorrect: true
+            })
+            break;
+          }
+          answersArr.push({
+            option: value,
+            isCorrect: false
+          })
+          break;
+        case 'optionThree':
+          if (correctAnswer === '3') {
+            answersArr.push({
+              option: value,
+              isCorrect: true
+            })
+            break;
+          }
+          answersArr.push({
+            option: value,
+            isCorrect: false
+          })
+          break;
+        case 'optionFour':
+          if (correctAnswer === '4') {
+            answersArr.push({
+              option: value,
+              isCorrect: true
+            })
+            break;
+          }
+          answersArr.push({
+            option: value,
+            isCorrect: false
+          })
+          break;
+
+        default:
+          break;
+      }
+
+
+    });
+
+    const route = '/create/quiz/';
+    return this.http.post<any>(`${apiURL}${route}`, DATA, { headers: this.headers });
+  }
+
+  updateQuiz(data: any, id: any): Observable<any> {
+    const route = `/update/quiz/${id}/`;
+    return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
+  }
+
+  deleteQuiz(id: string) {
+    const route = `/delete/quiz/${id}/`;
+    return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
@@ -6,11 +6,11 @@ import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 
 @Component({
-  selector: 'app-create-quiz',
-  templateUrl: './create-quiz.component.html',
-  styleUrls: ['./create-quiz.component.scss']
+  selector: 'app-edit-quiz',
+  templateUrl: './edit-quiz.component.html',
+  styleUrls: ['./edit-quiz.component.scss']
 })
-export class CreateQuizComponent implements OnInit, OnDestroy {
+export class EditQuizComponent implements OnInit, OnDestroy {
 
   courses = []
 
@@ -19,6 +19,7 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
 
   errorMessage: string | null;
 
+  @Input() quiz = null;
   @Output() showEvent = new EventEmitter<boolean>();
 
   subscription1$: Subscription;
@@ -56,9 +57,9 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
 
   }
 
-  createQuiz(dataForm: any) {
-    this.subscription2$ = this.coursesService.createQuiz(dataForm).subscribe(res => {
-      this.notificationsService.showNotification('bottom', 'center', 'Quiz creado con éxito', 2);
+  editQuiz(dataForm: any) {
+    this.subscription2$ = this.coursesService.updateQuiz(dataForm, this.quiz.id).subscribe(res => {
+      this.notificationsService.showNotification('bottom', 'center', 'Quiz actualizado con éxito', 2);
       this.errorMessage = '';
       this.quizForm.reset();
       this.showEvent.emit(false);
@@ -66,7 +67,7 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
       error => {
         console.log(error.error);
         this.errorMessage = error.error;
-        this.notificationsService.showNotification('bottom', 'center', 'Error al crear quiz', 4);
+        this.notificationsService.showNotification('bottom', 'center', 'Error al actualizar quiz', 4);
       }
     );
   }
@@ -88,6 +89,8 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(this.quiz.answers);
+    
     this.loadCourses()
     this.subscriptions.push(this.subscription1$);
     this.subscriptions.push(this.subscription2$);
@@ -100,5 +103,6 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
       }
     })
   }
+
 
 }

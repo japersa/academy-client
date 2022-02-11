@@ -1,5 +1,5 @@
 <div class=" card text-left">
-    <form [formGroup]="quizForm" (ngSubmit)="createQuiz(quizForm.value)" role="form">
+    <form [formGroup]="quizForm" (ngSubmit)="editQuiz(quizForm.value)" role="form">
         <div class=" card-header">
             <h4 class=" card-title">Crear exámen</h4>
         </div>
@@ -8,7 +8,7 @@
                 <label> Pregunta </label>
                 <div class=" form-group">
                     <textarea class="form-control" formControlName="question" placeholder="Ingrese las pregunta"
-                        rows="2" required></textarea>
+                        rows="2" [(ngModel)]="quiz.question" required></textarea>
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.title">
                     <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
@@ -21,26 +21,30 @@
 
                     <label>1. Opción </label>
                     <div class=" form-group">
-                        <textarea class="form-control" formControlName="optionOne" placeholder="Ingrese la primera opción de respuesta"
+                        <textarea class="form-control" formControlName="optionOne"
+                            placeholder="Ingrese la primera opción de respuesta" [(ngModel)]="quiz.answers[0].option"
                             rows="2"></textarea>
                     </div>
 
                     <label>2. Opción </label>
                     <div class=" form-group">
                         <textarea class="form-control" formControlName="optionTwo"
-                            placeholder="Ingrese la segunda opción de respuesta" rows="2"></textarea>
+                            placeholder="Ingrese la segunda opción de respuesta" [(ngModel)]="quiz.answers[1].option"
+                            rows="2"></textarea>
                     </div>
 
                     <label>3. Opción </label>
                     <div class=" form-group">
                         <textarea class="form-control" formControlName="optionThree"
-                            placeholder="Ingrese la tercera opción de respuesta" rows="2"></textarea>
+                            placeholder="Ingrese la tercera opción de respuesta" [(ngModel)]="quiz.answers[2].option"
+                            rows="2"></textarea>
                     </div>
 
                     <label>4. Opción</label>
                     <div class=" form-group">
                         <textarea class="form-control" formControlName="optionFour"
-                            placeholder="Ingrese la cuarta opción de respuesta" rows="2"></textarea>
+                            placeholder="Ingrese la cuarta opción de respuesta" [(ngModel)]="quiz.answers[3].option"
+                            rows="2"></textarea>
                     </div>
 
 
@@ -74,7 +78,9 @@
 
                 <div class="mt-2">
                     <h6>Instrucciones</h6>
-                    <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur dignissimos sunt molestiae reprehenderit ullam sapiente consequuntur, unde porro ratione recusandae eaque quia architecto pariatur quo totam distinctio repudiandae hic? Sunt.</small>
+                    <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur dignissimos sunt
+                        molestiae reprehenderit ullam sapiente consequuntur, unde porro ratione recusandae eaque quia
+                        architecto pariatur quo totam distinctio repudiandae hic? Sunt.</small>
                 </div>
 
             </div>
