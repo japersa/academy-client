@@ -14,16 +14,11 @@ export class DashboardComponent implements OnInit {
   public datasets: any;
   public data: any;
   public myChartData;
-  public clicked: boolean = true;
-  public clicked1: boolean = false;
-  public clicked2: boolean = false;
   public total_students: number = 0;
   public total_admins: number = 0;
   public total_teachers: number = 0;
   public dataChart = [];
-  public dataChart2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  public dataChart3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  public dataLabel /*[]*/ = [
+  public dataLabel = [
     "ENE",
     "FEB",
     "MAR",
@@ -52,6 +47,8 @@ export class DashboardComponent implements OnInit {
     //     console.log(error);
     //   });
   }
+
+  //Muestra el total de alumnos, docentes y administradores
   showGeneralStatistics() {
     this.subscription$ = this.dashboardService
       .getUsersByCount()
@@ -67,6 +64,7 @@ export class DashboardComponent implements OnInit {
         }
       );
   }
+  //Le dá los valores a los labels de la gráfica de nuevos usuarios
   setDataLabel() {
     var currentMonth = new Date().getMonth();
     var normalYear = this.dataLabel;
@@ -85,67 +83,11 @@ export class DashboardComponent implements OnInit {
     this.dataLabel = moddedYear;
     return this.dataLabel;
   }
-  /*fillChart() {
-    this.subscription$ = this.dashboardService
-      .getUsersByCount()
-      .pipe(take(1))
-      .subscribe(
-        (res) => {
-          var currentMonth = new Date().getMonth();
-          console.log(currentMonth);
-          var data = res.avg_users_months[0];
-          var moddedData = [];
-          var variableMonth = currentMonth;
-          var count = 11;
-          for (var i = 11; i >= 0; i--) {*/
-            //console.log(data.length)
-           /* for (var j = data.length; j >= 0; j--) {
-              var fullDate = data[j].date.split("-");
-              console.log(fullDate);
-              var year = parseInt(fullDate[0], 10);
-              var month = parseInt(fullDate[1], 10) - 1;
-              moddedData[count] = count;
-              count = count - 1;*/
-              /*console.log("ModdedData:")
-              console.log(moddedData)
-              console.log(count)*/
-            /*}*/
-            //console.log(fullDate)
-            /*variableMonth = variableMonth - 1;
-            if (variableMonth < 0) {
-              variableMonth = 11;
-            }*/
-            /*if (variableMonth == currentMonth) {
-              break;
-            }*/
-            /*console.log(moddedData)
-            console.log(variableMonth);*/
-         /* }*/
-          /*
-          for (var i = 11; i >= 0; i--) {
-            console.log("Valor i:");
-            console.log(i);
-            var fullDate = data[i].date.split("-");
-            var year = parseInt(fullDate[0], 10);
-            var month = parseInt(fullDate[1], 10) - 1;
-            console.log(fullDate);
-            console.log(year);
-            console.log(month);
-            console.log(data[i].users);
-            this.dataChart[month] = data[i].users;
-            console.log(this.dataChart);
-          }*/
-        /*},
-        (error) => {
-          console.log(error);
-
-        }
-      );
-  }*/
-
-  fillChart2() {
+  //Llena la gráfica con la información de nuevos usuarios por mes
+  fillChart() {
     this.subscription$ = this.dashboardService.getUsersByCount().pipe(take(1)).subscribe(
         (res) => {
+          //debugger
           var data = res.avg_users_months[0];
           var currentMonth = new Date().getMonth();
           var count = 0;
@@ -165,24 +107,34 @@ export class DashboardComponent implements OnInit {
         }
       );
   }
-
+  //Trae los cursos y los agrega al final del div del dashboard
   fillCourses(){
     this.subscription$ = this.dashboardService.getAdminCourses().pipe(take(1)).subscribe(res => {
       console.log(res);
       for(var j = 0; j < res.length; j++){
         console.log(res[j])
-        console.log(res[j].path_preview_image)
         var firstName = res[j].teacher.first_name
         var lastName = res[j].teacher.last_name
+        var profilePic = res[j].teacher.image_profile;
         var imgProfile = res[j].path_preview_image
         var img = `<img src="`+imgProfile+`" alt="Curso de ????" style="max-height:100px;">`
         if (imgProfile=="Sin imagen"){
           img=``
         }
-        console.log(imgProfile)
         var description = res[j].description
         if(description.length > 10){
-          description = description.substring(0,50) + "..."
+          description = description.substring(0,50) + `...`
+        }
+        var active=res[j].teacher.is_active
+        var isActive
+        var iconColor
+        if(active){
+          isActive = "Activo"
+          iconColor = `icon-minimal-right text-primary`;
+        } else {
+          isActive = "Inactivo"
+          //iconColor = `icon-alert-circle-exc text-danger`;
+          iconColor = `icon-minimal-right text-primary`;
         }
         const div = document.createElement('div');
         div.className = 'col-lg-3';
@@ -191,18 +143,23 @@ export class DashboardComponent implements OnInit {
           <div class=" card card-chart">
             <div class=" card-header">
               <h5 class=" card-category">
-                <i class=" tim-icons icon-single-02 text-primary"> </i> ` +
-                firstName + ` ` + lastName +
-              `</h5>
+                <span><img class="rounded-circle" src="` +
+          profilePic +
+          `" style="max-height:35px;"></img></span>     ` +
+          firstName +
+          ` ` +
+          lastName +
+          `</h5><hr/>
               ` +
-              img +
-              `
+          img +
+          `
             </div>
           <div class=" card-body">
+          
             <h4 class=" card-title">
-                <i class=" tim-icons icon-paper text-primary"> </i> ` +
-                description +
-                `</h4>
+                <i class=" tim-icons `+iconColor+`"> </i> ` +
+          description +
+          `</h4>
           </div>
           <div class="card-footer">
             <hr />
@@ -225,12 +182,12 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    //debugger
     this.getAdmins();
     this.setDataLabel();
     this.showGeneralStatistics();
-    this.fillChart2();
+    this.fillChart();
     this.fillCourses();
-    console.log(this.dataChart)
 
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
@@ -620,26 +577,9 @@ export class DashboardComponent implements OnInit {
       options: gradientChartOptionsConfigurationWithTooltipGreen
     });
 
-    var chart_labels = [
-      "JAN",
-      "FEB",
-      "MAR",
-      "APR",
-      "MAY",
-      "JUN",
-      "JUL",
-      "AUG",
-      "SEP",
-      "OCT",
-      "NOV",
-      "DEC"
-    ];
+    var chart_labels = this.dataLabel;
     this.datasets = [
       this.dataChart,
-      /*this.dataChart2,
-      this.dataChart3 
-      [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
-      [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]*/
     ];
     this.data = this.datasets[0];
 
