@@ -46,7 +46,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
     this.users.length = 0;
     this.role = 'administradores'
     this.subscription1$ = this.dashboardService.getUsersByRole(ROLES_ENUM.ADMIN).pipe(take(1)).subscribe(res => {
-      this.users.push(...res)
+      Object.assign(this.users, res)
     },
       error => {
         console.log('error ' + error.error);
@@ -57,7 +57,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
     this.users.length = 0;
     this.role = 'estudiantes'
     this.subscription2$ = this.dashboardService.getUsersByRole(ROLES_ENUM.STUDENT).pipe(take(1)).subscribe(res => {
-      this.users.push(...res)
+      Object.assign(this.users, res)
     },
       error => {
         console.log('error ' + error.error);
@@ -68,7 +68,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
     this.users.length = 0;
     this.role = 'profesores'
     this.subscription3$ = this.dashboardService.getUsersByRole(ROLES_ENUM.TEACHER).pipe(take(1)).subscribe(res => {
-      this.users.push(...res)
+      Object.assign(this.users, res)
     },
       error => {
         console.log('error ' + error.error);

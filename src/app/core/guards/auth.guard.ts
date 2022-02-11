@@ -8,22 +8,19 @@ import { UserDataService } from '../services/user-data.service';
 })
 export class AuthGuard implements CanActivate {
 
-  logged = false;
-
   constructor(private router: Router,
     private storageService: StorageService) {
-    this.logged = this.storageService.get('isUserLoggedIn');
-    console.log(this.logged);
-    ;
   }
 
   canActivate() {
-    if (this.logged) {
-      return true;
-    } else {
+    const token = this.storageService.get('isUserLoggedIn');
+    if (!token) {
       this.router.navigate(['/sign-in']);
       return false;
     }
+
+    return true;
+
   }
 
 }

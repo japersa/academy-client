@@ -62,18 +62,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.notificationService.showNotification('bottom', 'center', 'Has iniciado sesión correctamente', 2);
       this.errorMessage = '';
 
-      // save data in local storage
-      this.storageService.set('isUserLoggedIn', true);
-      this.storageService.set('accessToken', res.token);
-      this.storageService.set('userData', res.user);
-
-      this.userDataService.loadStorageUserData();
-      this.userDataService.isUserLoggedIn$.next(true);
-
       this.loginForm.reset();
 
       setTimeout(() => {
-        this.router.navigateByUrl('/dashboard')
+        this.router.navigate(['/dashboard'])
       }, 300);
 
     },

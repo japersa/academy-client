@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
@@ -10,7 +10,7 @@ import { NotificationsService } from '../../../../core/services/notifications.se
   templateUrl: './create-quiz.component.html',
   styleUrls: ['./create-quiz.component.scss']
 })
-export class CreateQuizComponent implements OnInit {
+export class CreateQuizComponent implements OnInit, OnDestroy {
 
   courses = []
 
@@ -18,6 +18,8 @@ export class CreateQuizComponent implements OnInit {
   validationMessages: any;
 
   errorMessage: string | null;
+
+  @Output() showEvent = new EventEmitter<boolean>();
 
   subscription1$: Subscription;
   subscription2$: Subscription;
@@ -34,26 +36,45 @@ export class CreateQuizComponent implements OnInit {
 
     this.quizForm = this.formBuilder.group({
       question: new FormControl('', Validators.compose([
-        Validators.required,
+        Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ])),
-      answer: new FormControl('', Validators.compose([
-        Validators.required,
+      optionOne: new FormControl('', Validators.compose([
+      ])),
+      optionTwo: new FormControl('', Validators.compose([
+      ])),
+      optionThree: new FormControl('', Validators.compose([
+      ])),
+      optionFour: new FormControl('', Validators.compose([
       ])),
       course: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1), Validators.maxLength(100)
+        Validators.required
+      ])),
+      answer: new FormControl('', Validators.compose([
+        Validators.required
       ])),
     });
 
   }
 
   createQuiz(dataForm: any) {
-    console.log('sadasdas');
+    this.subscription2$ = this.coursesService.createQuiz(dataForm).subscribe(res => {
+      this.notificationsService.showNotification('bottom', 'center', 'Quiz creado con éxito', 2);
+      this.errorMessage = '';
+      this.quizForm.reset();
+      this.showEvent.emit(false);
+    },
+      error => {
+        console.log(error.error);
+        this.errorMessage = error.error;
+        this.notificationsService.showNotification('bottom', 'center', 'Error al crear quiz', 4);
+      }
+    );
   }
 
   loadCourses() {
 
     this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
-
+      Object.assign(this.courses, res)
     },
       error => {
         console.log(error.error);
@@ -62,10 +83,22 @@ export class CreateQuizComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.loadCourses()
+  cancelCreate() {
+    this.showEvent.emit(false);
   }
 
+  ngOnInit(): void {
+    this.loadCourses()
+    this.subscriptions.push(this.subscription1$);
+    this.subscriptions.push(this.subscription2$);
+  }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      if (subscription !== undefined) {
+        subscription.unsubscribe();
+      }
+    })
+  }
 
 }

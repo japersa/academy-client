@@ -1,22 +1,23 @@
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
-import { take, finalize } from 'rxjs/operators';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 
 @Component({
-  selector: 'app-create-course',
-  templateUrl: './create-course.component.html',
-  styleUrls: ['./create-course.component.scss']
+  selector: 'app-edit-course',
+  templateUrl: './edit-course.component.html',
+  styleUrls: ['./edit-course.component.scss']
 })
-export class CreateCourseComponent implements OnInit {
+export class EditCourseComponent implements OnInit {
+
+  @Input() course = null;
 
   courseForm: FormGroup;
   validationMessages: any;
 
-  event = null;
+  event;
 
   @Output() showEvent = new EventEmitter<boolean>();
 
@@ -50,10 +51,9 @@ export class CreateCourseComponent implements OnInit {
   }
 
   createCourse(dataForm: any) {
-    this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
-    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
-      this.showEvent.emit(false);
-    })).subscribe();  }
+    this.firebaseStorageService.updateCourseCover(this.event, dataForm, this.course.id);
+    this.showEvent.emit(false);
+  }
 
   cancelCreate() {
     this.showEvent.emit(false);
@@ -65,6 +65,5 @@ export class CreateCourseComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 
 }

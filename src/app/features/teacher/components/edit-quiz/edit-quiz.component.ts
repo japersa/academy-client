@@ -1,25 +1,25 @@
-import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-create-module',
-  templateUrl: './create-module.component.html',
-  styleUrls: ['./create-module.component.scss']
+  selector: 'app-edit-quiz',
+  templateUrl: './edit-quiz.component.html',
+  styleUrls: ['./edit-quiz.component.scss']
 })
-export class CreateModuleComponent implements OnInit, OnDestroy {
+export class EditQuizComponent implements OnInit, OnDestroy {
 
   courses = []
 
-  moduleForm: FormGroup;
+  quizForm: FormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
 
+  @Input() quiz = null;
   @Output() showEvent = new EventEmitter<boolean>();
 
   subscription1$: Subscription;
@@ -35,50 +35,62 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
     this.validationMessages = utilsService.getValidationMessages();
 
-    this.moduleForm = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([
-        Validators.required,
+    this.quizForm = this.formBuilder.group({
+      question: new FormControl('', Validators.compose([
+        Validators.required, Validators.minLength(10), Validators.maxLength(100)
+      ])),
+      optionOne: new FormControl('', Validators.compose([
+      ])),
+      optionTwo: new FormControl('', Validators.compose([
+      ])),
+      optionThree: new FormControl('', Validators.compose([
+      ])),
+      optionFour: new FormControl('', Validators.compose([
       ])),
       course: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1), Validators.maxLength(100)
+        Validators.required
+      ])),
+      answer: new FormControl('', Validators.compose([
+        Validators.required
       ])),
     });
 
   }
 
-  createModule(dataForm: any) {
-    this.subscription2$ = this.coursesService.createModule(dataForm).subscribe(res => {
-      this.notificationsService.showNotification('bottom', 'center', 'Módulo creado con éxito', 2);
+  editQuiz(dataForm: any) {
+    this.subscription2$ = this.coursesService.updateQuiz(dataForm, this.quiz.id).subscribe(res => {
+      this.notificationsService.showNotification('bottom', 'center', 'Quiz actualizado con éxito', 2);
       this.errorMessage = '';
-      this.moduleForm.reset();
+      this.quizForm.reset();
       this.showEvent.emit(false);
     },
       error => {
         console.log(error.error);
         this.errorMessage = error.error;
-        this.notificationsService.showNotification('bottom', 'center', 'Error al crear módulo', 4);
+        this.notificationsService.showNotification('bottom', 'center', 'Error al actualizar quiz', 4);
       }
     );
+  }
+
+  loadCourses() {
+
+    this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
+      Object.assign(this.courses, res)
+    },
+      error => {
+        console.log(error.error);
+      }
+    );
+
   }
 
   cancelCreate() {
     this.showEvent.emit(false);
   }
 
-
-  loadCourses() {
-
-    this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
-      Object.assign(this.courses, res);
-    },
-      error => {
-        console.log(error.error);
-      }
-    );
-
-  }
-
   ngOnInit(): void {
+    console.log(this.quiz.answers);
+    
     this.loadCourses()
     this.subscriptions.push(this.subscription1$);
     this.subscriptions.push(this.subscription2$);
@@ -91,5 +103,6 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
       }
     })
   }
+
 
 }

@@ -1,18 +1,18 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { UtilsService } from '../../../../core/services/utils.service';
-import { NotificationsService } from '../../../../core/services/notifications.service';
 import { Subscription } from 'rxjs';
+import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
+import { NotificationsService } from '../../../../core/services/notifications.service';
 import { finalize } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-create-topics',
-  templateUrl: './create-topics.component.html',
-  styleUrls: ['./create-topics.component.scss']
+  selector: 'app-edit-topics',
+  templateUrl: './edit-topics.component.html',
+  styleUrls: ['./edit-topics.component.scss']
 })
-export class CreateTopicsComponent implements OnInit, OnDestroy {
+export class EditTopicsComponent implements OnInit, OnDestroy {
 
   modules = [];
 
@@ -23,6 +23,7 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
 
   errorMessage: string | null;
 
+  @Input() topic = null;
   @Output() showEvent = new EventEmitter<boolean>();
 
   subscription1$: Subscription;
@@ -58,7 +59,7 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
   }
 
   createTopic(dataForm: any) {
-    this.firebaseStorageService.uploadCourseVideo(this.event, dataForm);
+    this.firebaseStorageService.updateCourseVideo(this.event, dataForm, this.topic.id);
     this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
       this.showEvent.emit(false);
     })).subscribe();
@@ -75,6 +76,8 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
   loadModules() {
 
     this.subscription1$ = this.coursesService.getModules().subscribe(res => {
+      console.log(res);
+
       Object.assign(this.modules, res);
     },
       error => {

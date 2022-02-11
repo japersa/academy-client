@@ -30,28 +30,27 @@
 
 
             <label for="formFileSm" class="form-label ">Vídeo</label>
-            <input class=" form-control" formControlName="path_preview_image" id="formFileSm" type="file"
-                accept="image/png, image/jpeg" required />
-            <!-- <ng-container *ngIf="firebaseStorageService.uploadPercent">
+            <input class=" form-control" formControlName="video" id="formFileSm" type="file"
+                accept="video/mp4, video/ogg" (change)="handleVideoChange($event)" required />
+            <ng-container *ngIf="firebaseStorageService.uploadPercent">
                 <div class=" progress-container">
                     <span class=" progress-badge"> Subiendo </span>
                     <div class=" progress">
                         <progressbar [value]="firebaseStorageService.uploadPercent | async">
-                            <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}} </span>
+                            <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}}</span>
                         </progressbar>
                     </div>
                 </div>
-            </ng-container> -->
+            </ng-container>
 
             <label> Módulo </label>
-            <select class="form-select form-group d-block" formControlName="course" size="4">
-                <option *ngFor="let m of modules" [value]="c?.id">{{ m?.title | titlecase}}</option>
+            <select class="form-select form-group d-block" formControlName="module" size="8">
+                <option *ngFor="let m of modules" [value]="m?.id">{{ m?.name | titlecase}}</option>
 
             </select>
 
             <label for="formFileSm" class="form-label ">Archivos</label>
-            <input class=" form-control" formControlName="path_preview_image" id="formFileSm" type="file"
-                accept="image/png, image/jpeg" required />
+            <input class=" form-control" formControlName="files" id="formFileSm" type="file" />
 
 
             <ng-container *ngIf="errorMessage">
@@ -62,6 +61,9 @@
         <div class=" card-footer">
             <button class=" btn btn-fill btn-primary" [disabled]="topicForm.invalid" type="submit">
                 Enviar
+            </button>
+            <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
+                Cancelar
             </button>
         </div>
     </form>

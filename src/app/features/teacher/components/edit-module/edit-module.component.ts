@@ -1,17 +1,19 @@
-import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-create-module',
-  templateUrl: './create-module.component.html',
-  styleUrls: ['./create-module.component.scss']
+  selector: 'app-edit-module',
+  templateUrl: './edit-module.component.html',
+  styleUrls: ['./edit-module.component.scss']
 })
-export class CreateModuleComponent implements OnInit, OnDestroy {
+export class EditModuleComponent implements OnInit, OnDestroy {
+
+  @Input() module = null;
+  @Output() showEvent = new EventEmitter<boolean>();
 
   courses = []
 
@@ -19,8 +21,6 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
   validationMessages: any;
 
   errorMessage: string | null;
-
-  @Output() showEvent = new EventEmitter<boolean>();
 
   subscription1$: Subscription;
   subscription2$: Subscription;
@@ -46,9 +46,9 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
   }
 
-  createModule(dataForm: any) {
-    this.subscription2$ = this.coursesService.createModule(dataForm).subscribe(res => {
-      this.notificationsService.showNotification('bottom', 'center', 'Módulo creado con éxito', 2);
+  editarModule(dataForm: any) {
+    this.subscription2$ = this.coursesService.updateModule(dataForm, this.module.id).subscribe(res => {
+      this.notificationsService.showNotification('bottom', 'center', 'Módulo editado con éxito', 2);
       this.errorMessage = '';
       this.moduleForm.reset();
       this.showEvent.emit(false);
@@ -56,7 +56,7 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
       error => {
         console.log(error.error);
         this.errorMessage = error.error;
-        this.notificationsService.showNotification('bottom', 'center', 'Error al crear módulo', 4);
+        this.notificationsService.showNotification('bottom', 'center', 'Error al editar módulo', 4);
       }
     );
   }
@@ -91,5 +91,6 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
       }
     })
   }
+
 
 }
