@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit {
           img=``
         }
         var description = res[j].description
-        if(description.length > 10){
+        if(description.length > 50){
           description = description.substring(0,50) + `...`
         }
         var active=res[j].teacher.is_active
