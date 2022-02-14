@@ -103,19 +103,20 @@ export class DashboardComponent implements OnInit {
           console.log(this.dataChart)
           
           this.dataChartFix = [
-            this.dataChart[0],
-            this.dataChart[1],
-            this.dataChart[2],
-            this.dataChart[3],
-            this.dataChart[4],
-            this.dataChart[5],
-            this.dataChart[6],
-            this.dataChart[7],
-            this.dataChart[8],
-            this.dataChart[9],
-            this.dataChart[10],
-            this.dataChart[11],
+            ""+this.dataChart[0],
+            ""+this.dataChart[1],
+            ""+this.dataChart[2],
+            ""+this.dataChart[3],
+            ""+this.dataChart[4],
+            ""+this.dataChart[5],
+            ""+this.dataChart[6],
+            ""+this.dataChart[7],
+            ""+this.dataChart[8],
+            ""+this.dataChart[9],
+            ""+this.dataChart[10],
+            ""+this.dataChart[11],
           ];
+          console.log(this.dataChartFix)
           return this.dataChartFix
         },
         (error) => {
@@ -254,23 +255,26 @@ export class DashboardComponent implements OnInit {
       }
     };
     var chart_labels = this.dataLabel;
-    this.datasets = [
-      this.dataChart,
+    this.datasets = 
+      // this.dataChart,
       //this.dataChartFix,
-      /*[this.dataChart[0],
-      this.dataChart[1],
-      this.dataChart[2],
-      this.dataChart[3],
-      this.dataChart[4],
-      this.dataChart[5],
-      this.dataChart[6],
-      this.dataChart[7],
-      this.dataChart[8],
-      this.dataChart[9],
-      this.dataChart[10],
-      this.dataChart[11],]*/
-    ];
-    this.data = this.datasets[0];
+      [parseInt(this.dataChart[0],10),
+      parseInt(this.dataChart[1],10),
+      parseInt(this.dataChart[2],10),
+      parseInt(this.dataChart[3],10),
+      parseInt(this.dataChart[4],10),
+      parseInt(this.dataChart[5],10),
+      parseInt(this.dataChart[6],10),
+      parseInt(this.dataChart[7],10),
+      parseInt(this.dataChart[8],10),
+      parseInt(this.dataChart[9],10),
+      parseInt(this.dataChart[10],10),
+      parseInt(this.dataChart[11],10),]
+    ;
+    // this.data = this.datasets;
+    // this.data = ["1",2,3,4,4,5,6,7,8,9,"10","11"];
+    // this.data = this.dataChart;
+    this.data = this.dataChartFix;
 
     this.canvas = document.getElementById("chartBig1");
     this.ctx = this.canvas.getContext("2d");
@@ -301,11 +305,12 @@ export class DashboardComponent implements OnInit {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.data
-          }
-        ]
+            data: [0,0,0,0,0,0,0,0,0,0,0,6]
+            // this.dataChart
+          },
+        ],
       },
-      options: gradientChartOptionsConfigurationWithTooltipRed
+      options: gradientChartOptionsConfigurationWithTooltipRed,
     };
     this.myChartData = new Chart(this.ctx, config);
   }
