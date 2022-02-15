@@ -5,33 +5,32 @@ import { NotificationsService } from './../../../core/services/notifications.ser
 import { UtilsService } from './../../../core/services/utils.service';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EditUserService } from '../../services/edit-user.service';
+import { StorageService } from '../../../core/services/storage.service';
 
 
 @Component({
   selector: 'app-user',
   templateUrl: 'user.component.html'
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
 
-  //two way data binding
-  /*first_name = new FormControl('');
-  last_name = new FormControl('');
-  username = new FormControl('');*/
+
   phone = new FormControl('');
 
   public rol = '';
   public first_name = this.userDataService.userData$.value.first_name;
   public last_name = this.userDataService.userData$.value.last_name;
   public username = this.userDataService.userData$.value.username;
-  //public phone = '';
+
   showPasswordField: boolean = false;
   showButtonPassword: boolean = true;
 
   updateForm: FormGroup;
   updatePasswordForm: FormGroup;
   validationMessages: any;
+  errorPassMessage: any;
   errorMessage: string | null;
 
   subscription$: Subscription;
@@ -44,10 +43,11 @@ export class UserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
-    private editUserService: EditUserService, 
+    private storageService: StorageService,
+    private editUserService: EditUserService,
     public userDataService: UserDataService,
     public updatePasswordService: UpdatePasswordService,
-    ) {
+  ) {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.updateForm = this.formBuilder.group({
@@ -60,9 +60,9 @@ export class UserComponent implements OnInit {
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
-      phone: new FormControl('', Validators.compose([
+      phone_number: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(5)])), 
+        Validators.minLength(5)])),
     });
     this.updatePasswordForm = this.formBuilder.group({
       old_password: new FormControl('', Validators.compose([
@@ -75,7 +75,7 @@ export class UserComponent implements OnInit {
   }
 
   showUpdatePassword() {
-    if (this.showPasswordField == true) {
+    if (this.showPasswordField) {
       this.showPasswordField = false;
       this.showButtonPassword = true;
       this.updatePasswordForm.reset();
@@ -85,7 +85,7 @@ export class UserComponent implements OnInit {
     }
   }
 
-  //Asignar valor al rol del usuario
+  // Asignar valor al rol del usuario
   setRol(rolLocal: string = this.userDataService.userData$.value.rol) {
     if (rolLocal == 'student') {
       this.rol = 'Estudiante';
@@ -93,20 +93,19 @@ export class UserComponent implements OnInit {
       this.rol = 'Profesor';
     } else if (rolLocal == 'admin') {
       this.rol = 'Administrador'
-    } else {this.rol = 'Que putas pasa con el rol'}
+    } else { this.rol = 'Que putas pasa con el rol' }
     return this.rol;
   }
 
-  //Actualizar info del usuario
+  // Actualizar info del usuario
   updateUser(dataFrom: any) {
-    const data = {
-      first_name: dataFrom.first_name,
-      last_name: dataFrom.last_name,
-      username: dataFrom.email,
-      phone_number: dataFrom.phone,
-    }
-    this.subscription$ = this.editUserService.updateUser(data).pipe(take(1)).subscribe(res => {
+
+    this.subscription$ = this.editUserService.updateUser(dataFrom).pipe(take(1)).subscribe(res => {
+      this.userDataService.userData$.next(res);
       console.log(res);
+      
+      this.storageService.set('userData', res);
+
       this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);
       this.updateForm.reset();
     },
@@ -117,7 +116,7 @@ export class UserComponent implements OnInit {
       });
   }
 
-  //Actualizar contraseña del usuario
+  // Actualizar contraseña del usuario
   updatePassword(dataFrom: any) {
     const data = {
       old_password: dataFrom.old_password,
@@ -130,7 +129,7 @@ export class UserComponent implements OnInit {
       this.showUpdatePassword();
     },
       error => {
-        this.errorMessage = error.error;
+        this.errorPassMessage = error.error;
         console.log(error.error);
         this.notificationService.showNotification('bottom', 'center', 'Error al actualizar contraseña', 4);
       });
