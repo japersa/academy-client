@@ -17,7 +17,7 @@
 .input-group-focus:not(.has-danger):not(.has-success)
   .input-group-prepend
   .input-group-text {
-  border-color: $danger;
+  border-color: $primary;
 }
 textarea.form-control:active,
 textarea.form-control:focus {

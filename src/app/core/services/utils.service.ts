@@ -107,8 +107,26 @@ export class UtilsService {
       { type: 'minlength', message: 'La reseña debe de contener al menos 20 caracteres' },
       { type: 'maxlength', message: 'La reseña debe de tener entre 20 y 300 caracteres' }
     ],
+
     role: [
       { type: 'required', message: 'Se debe de seleccionar un rol' },
+    ],
+
+    title: [
+      { type: 'required', message: 'El título es obligatorio' },
+      { type: 'minlength', message: 'El título debe de contener al menos 8 caracteres' },
+      { type: 'maxlength', message: 'El título debe de tener entre 8 y 100 caracteres' }
+    ],
+
+    description: [
+      { type: 'required', message: 'La descripción es obligatoria' },
+      { type: 'minlength', message: 'La descripción debe de contener al menos 8 caracteres' },
+      { type: 'maxlength', message: 'La descripción debe de tener entre 8 y 500 caracteres' }
+    ],
+
+    price: [
+      { type: 'required', message: 'El precio es obligatorio' },
+      { type: 'minlength', message: 'El precio debe de contener al menos 2 caracteres' }
     ],
 
   };

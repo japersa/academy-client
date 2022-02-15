@@ -175,6 +175,7 @@
                                                         <tr>
                                                             <th class=" text-center">id</th>
                                                             <th>Título</th>
+                                                            <th class=" text-center">ID Módulo</th>
                                                             <th class=" text-center">Fecha de creación</th>
                                                             <th class=" text-right">Acciones</th>
                                                         </tr>
@@ -183,6 +184,7 @@
                                                         <tr *ngFor="let t of topics; index as i; trackBy: trackTopics">
                                                             <td class=" text-center">{{ t?.id }}</td>
                                                             <td>{{ t?.title | titlecase}}</td>
+                                                            <td class=" text-center">{{t?.module_id }}</td>
                                                             <td class=" text-center">{{t?.created_at | date}}</td>
                                                             <td class=" text-right">
                                                                 <button

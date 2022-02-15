@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { take, finalize } from 'rxjs/operators';
 import { NotificationsService } from '../../../../core/services/notifications.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
   styleUrls: ['./create-course.component.scss']
 })
-export class CreateCourseComponent implements OnInit {
+export class CreateCourseComponent implements OnInit, OnDestroy {
 
   courseForm: FormGroup;
   validationMessages: any;
@@ -21,6 +22,8 @@ export class CreateCourseComponent implements OnInit {
   @Output() showEvent = new EventEmitter<boolean>();
 
   errorMessage: string | null;
+
+  suscription$: Subscription;
 
   constructor(
     private utilsService: UtilsService,
@@ -34,13 +37,18 @@ export class CreateCourseComponent implements OnInit {
 
     this.courseForm = this.formBuilder.group({
       title: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(8), Validators.maxLength(100)
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(100)
       ])),
       description: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(8), Validators.maxLength(500)
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(500)
       ])),
       price: new FormControl('', Validators.compose([
-        Validators.required, Validators.min(1)
+        Validators.required,
+        Validators.min(2)
       ])),
       path_preview_image: new FormControl('', Validators.compose([
       ])
@@ -51,9 +59,10 @@ export class CreateCourseComponent implements OnInit {
 
   createCourse(dataForm: any) {
     this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
-    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
+    this.suscription$ = this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
       this.showEvent.emit(false);
-    })).subscribe();  }
+    })).subscribe();
+  }
 
   cancelCreate() {
     this.showEvent.emit(false);
@@ -66,5 +75,10 @@ export class CreateCourseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    if (this.suscription$ !== undefined) {
+      this.suscription$.unsubscribe();
+    }
+  }
 
 }
