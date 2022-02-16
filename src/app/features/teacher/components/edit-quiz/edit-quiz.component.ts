@@ -13,6 +13,7 @@ import { NotificationsService } from '../../../../core/services/notifications.se
 export class EditQuizComponent implements OnInit, OnDestroy {
 
   courses = []
+  currentCourse = '';
 
   quizForm: FormGroup;
   validationMessages: any;
@@ -24,6 +25,7 @@ export class EditQuizComponent implements OnInit, OnDestroy {
 
   subscription1$: Subscription;
   subscription2$: Subscription;
+  subscription3$: Subscription;
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -86,14 +88,28 @@ export class EditQuizComponent implements OnInit, OnDestroy {
 
   }
 
+  getCourseName() {
+    this.subscription3$ = this.coursesService.getCourseById(this.quiz.course_id).subscribe(res => {
+      console.log(res);
+
+      this.currentCourse = res.title
+    },
+      error => {
+        console.log(error.error);
+      }
+    );
+  }
+
   cancelCreate() {
     this.showEvent.emit(false);
   }
 
   ngOnInit(): void {
-    this.loadCourses()
+    this.loadCourses();
+    this.getCourseName();
     this.subscriptions.push(this.subscription1$);
     this.subscriptions.push(this.subscription2$);
+    this.subscriptions.push(this.subscription3$);
   }
 
   ngOnDestroy(): void {

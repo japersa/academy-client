@@ -37,7 +37,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   quizzes = [];
   quizEdit = {};
 
-  showFormCreateQuizzes = true;
+  showFormCreateQuizzes = false;
   showFormEditQuizzes = false;
 
   // OTHERS

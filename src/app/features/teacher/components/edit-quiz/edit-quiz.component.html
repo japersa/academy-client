@@ -82,6 +82,8 @@
                         {{validation.message}}
                     </small>
                 </ng-container>
+                <p class="mt-2 text-info"> Curso actual: {{currentCourse | titlecase}} </p>
+
 
                 <ng-container *ngIf="errorMessage">
                     <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
