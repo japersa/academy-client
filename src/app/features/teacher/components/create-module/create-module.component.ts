@@ -70,7 +70,6 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
     this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
       Object.assign(this.courses, res);
-      console.log('courses', this.courses);
     },
       error => {
         console.log(error.error);

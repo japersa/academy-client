@@ -48,8 +48,9 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
       ])),
       price: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(2)
-      ])),
+        Validators.minLength(1),
+        Validators.pattern('[0-9]+,?[0-9]{2}')]
+      )),
       path_preview_image: new FormControl('', Validators.compose([
       ])
       )

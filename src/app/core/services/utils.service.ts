@@ -126,7 +126,12 @@ export class UtilsService {
 
     price: [
       { type: 'required', message: 'El precio es obligatorio' },
-      { type: 'minlength', message: 'El precio debe de contener al menos 2 caracteres' }
+      { type: 'minlength', message: 'El precio debe de contener al menos 1 carácter' },
+      { type: 'pattern', message: 'Formato de precio incorrecto' }
+    ],
+
+    course: [
+      { type: 'required', message: 'El curso es obligatorio' }
     ],
 
   };
