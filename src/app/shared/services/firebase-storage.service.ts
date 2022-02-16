@@ -97,6 +97,12 @@ export class FirebaseStorageService {
   }
 
   updateCourseCover(event: any, dataForm: any, id: string) {
+
+    if (event === undefined) {
+      this.updateCourse(dataForm, id)
+      return
+    }
+
     const randomId = Math.random().toString(36).substring(2);
 
     const file = event.target.files[0];
@@ -135,6 +141,23 @@ export class FirebaseStorageService {
       .subscribe(res => console.log(res))
 
   }
+
+  updateCourse(dataForm, id: string) {
+    const data = {
+      title: dataForm.title,
+      description: dataForm.description,
+      price: dataForm.price,
+    }
+
+    this.coursesService.updateCourse(data, id).pipe(take(1)).subscribe(res => {
+      this.notificationService.showNotification('bottom', 'center', 'Curso editado con éxito', 2);
+    },
+      error => {
+        console.log('Error: ', error.error);
+        this.notificationService.showNotification('bottom', 'center', 'Error al editar curso', 4);
+      })
+  }
+
 
   uploadCourseVideo(event, dataForm) {
 

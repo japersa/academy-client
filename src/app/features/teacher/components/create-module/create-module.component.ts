@@ -37,10 +37,10 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
     this.moduleForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
-        Validators.required,
+        Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
       course: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1), Validators.maxLength(100)
+        Validators.required
       ])),
     });
 
@@ -70,6 +70,7 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
     this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
       Object.assign(this.courses, res);
+      console.log('courses', this.courses);
     },
       error => {
         console.log(error.error);

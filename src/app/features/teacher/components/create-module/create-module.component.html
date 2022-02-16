@@ -10,24 +10,24 @@
                     required />
             </div>
             <ng-container *ngFor="let validation of validationMessages.title">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
-                            (createUserForm.get('title').dirty || createUserForm.get('title').touched) ">
+                <small class="text-danger d-block" *ngIf="moduleForm.get('name').hasError(validation.type) &&
+                            (moduleForm.get('name').dirty || moduleForm.get('name').touched) ">
                     {{validation.message}}
                 </small>
             </ng-container>
+
+
             <label> Curso </label>
             <select class="form-select form-group d-block" formControlName="course" size="4">
                 <option *ngFor="let c of courses" [value]="c?.id">{{ c?.title | titlecase}}</option>
             </select>
 
             <ng-container *ngFor="let validation of validationMessages.title">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
-                            (createUserForm.get('title').dirty || createUserForm.get('title').touched) ">
+                <small class="text-danger d-block" *ngIf="moduleForm.get('course').hasError(validation.type) &&
+                            (moduleForm.get('course').dirty || moduleForm.get('course').touched) ">
                     {{validation.message}}
                 </small>
             </ng-container>
-
-
 
             <ng-container *ngIf="errorMessage">
                 <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
@@ -43,4 +43,5 @@
             </button>
         </div>
     </form>
+
 </div>

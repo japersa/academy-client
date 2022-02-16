@@ -321,13 +321,14 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   loadData() {
 
-    this.courses.length = 0;
-    this.modules.length = 0;
-    this.topics.length = 0;
-    this.quizzes.length = 0;
+    // this.courses.length = 0;
+    // this.modules.length = 0;
+    // this.topics.length = 0;
+    // this.quizzes.length = 0;
 
     // GET COURSES
-    this.subscription$ = this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
+    this.subscription$ = this.coursesService.getCourses().subscribe(res => {
+
       Object.assign(this.courses, res);
     },
       error => {
@@ -335,7 +336,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       }
     )
     // GET MODULES
-    this.subscription2$ = this.coursesService.getModules().pipe(take(1)).subscribe(res => {
+    this.subscription2$ = this.coursesService.getModules().subscribe(res => {
+
       Object.assign(this.modules, res);
     },
       error => {
@@ -343,7 +345,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       }
     )
     // GET TOPICS
-    this.subscription3$ = this.coursesService.getTopics().pipe(take(1)).subscribe(res => {
+    this.subscription3$ = this.coursesService.getTopics().subscribe(res => {
+
       Object.assign(this.topics, res);
     },
       error => {
@@ -351,7 +354,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       }
     )
     // GET QUIZZES
-    this.subscription5$ = this.coursesService.getQuizzes().pipe(take(1)).subscribe(res => {
+    this.subscription5$ = this.coursesService.getQuizzes().subscribe(res => {
+
       Object.assign(this.quizzes, res);
     },
       error => {
@@ -362,18 +366,18 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   }
 
   // Tracks
-  trackCourse(index, c) {
-    return c.id
-  }
-  trackModule(index, m) {
-    return m.id
-  }
-  trackTopics(index, t) {
-    return t.id
-  }
-  trackQuiz(index, q) {
-    return q.id
-  }
+  // trackCourse(index, c) {
+  //   return c.id
+  // }
+  // trackModule(index, m) {
+  //   return m.id
+  // }
+  // trackTopics(index, t) {
+  //   return t.id
+  // }
+  // trackQuiz(index, q) {
+  //   return q.id
+  // }
 
   ngOnInit(): void {
     this.loadData();

@@ -35,16 +35,20 @@ export class EditCourseComponent implements OnInit {
 
     this.courseForm = this.formBuilder.group({
       title: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(8), Validators.maxLength(100)
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(100)
       ])),
       description: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(8), Validators.maxLength(500)
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(500)
       ])),
       price: new FormControl('', Validators.compose([
-        Validators.required, Validators.min(1)
+        Validators.required,
+        Validators.minLength(2)
       ])),
-      path_preview_image: new FormControl('', Validators.compose([
-      ])
+      path_preview_image: new FormControl('', Validators.compose([])
       )
     });
 

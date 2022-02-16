@@ -3,62 +3,74 @@
         <div class=" card-header">
             <h4 class=" card-title">Editar curso</h4>
         </div>
-        <div class=" card-body col-md-6">
-            <label> Título </label>
-            <div class=" form-group">
-                <input class=" form-control" formControlName="title" placeholder="Ingresa el título" type="text"
-                    [(ngModel)]="course.title" required />
-            </div>
-            <ng-container *ngFor="let validation of validationMessages.title">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
-                            (createUserForm.get('title').dirty || createUserForm.get('title').touched) ">
-                    {{validation.message}}
-                </small>
-            </ng-container>
-            <label> Descripción </label>
-            <div class=" form-group">
-
-                <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
-                    [(ngModel)]="course.description" required></textarea>
-
-            </div>
-            <ng-container *ngFor="let validation of validationMessages.description">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('description').hasError(validation.type) &&
-                            (createUserForm.get('description').dirty || createUserForm.get('description').touched) ">
-                    {{validation.message}}
-                </small>
-            </ng-container>
-            <label> Precio </label>
-            <div class=" form-group">
-                <input class=" form-control" formControlName="price" placeholder="Precio" type="number"
-                    [(ngModel)]="course.price" required />
-            </div>
-            <ng-container *ngFor="let validation of validationMessages.price">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('price').hasError(validation.type) &&
-                            (createUserForm.get('price').dirty || createUserForm.get('price').touched) ">
-                    {{validation.message}}
-                </small>
-            </ng-container>
-
-            <label for="formFileSm" class="form-label ">Imágen de portada</label>
-            <input class=" form-control" formControlName="path_preview_image" (change)="handleImageChange($event)"
-                id="formFileSm" type="file" accept="image/png, image/jpeg" required />
-            <ng-container *ngIf="firebaseStorageService.uploadPercent">
-                <div class=" progress-container">
-                    <span class=" progress-badge"> Subiendo </span>
-                    <div class=" progress">
-                        <progressbar [value]="firebaseStorageService.uploadPercent | async">
-                            <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}} </span>
-                        </progressbar>
-                    </div>
+        <div class="card-body row">
+            <div class="  col-md-6">
+                <label> Título </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="title" placeholder="Ingresa el título" type="text"
+                        [(ngModel)]="course.title" required />
                 </div>
-            </ng-container>
+                <ng-container *ngFor="let validation of validationMessages.title">
+                    <small class="text-danger d-block" *ngIf="courseForm.get('title').hasError(validation.type) &&
+                            (courseForm.get('title').dirty || courseForm.get('title').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <label> Descripción </label>
+                <div class=" form-group">
+
+                    <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
+                        [(ngModel)]="course.description" required></textarea>
+
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.description">
+                    <small class="text-danger d-block" *ngIf="courseForm.get('description').hasError(validation.type) &&
+                            (courseForm.get('description').dirty || courseForm.get('description').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <label> Precio </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="price" placeholder="Precio" type="text"
+                        [(ngModel)]="course.price" required />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.price">
+                    <small class="text-danger d-block" *ngIf="courseForm.get('price').hasError(validation.type) &&
+                            (courseForm.get('price').dirty || courseForm.get('price').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+
+                <label for="formFileSm" class="form-label ">Imágen de portada</label>
+                <input class=" form-control" formControlName="path_preview_image" (change)="handleImageChange($event)"
+                    id="formFileSm" type="file" accept="image/png, image/jpeg" />
+                <ng-container *ngIf="firebaseStorageService.uploadPercent">
+                    <div class=" progress-container">
+                        <span class=" progress-badge"> Subiendo </span>
+                        <div class=" progress">
+                            <progressbar [value]="firebaseStorageService.uploadPercent | async">
+                                <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}} </span>
+                            </progressbar>
+                        </div>
+                    </div>
+                </ng-container>
 
 
-            <ng-container *ngIf="errorMessage">
-                <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
-            </ng-container>
+                <ng-container *ngIf="errorMessage">
+                    <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                </ng-container>
+            </div>
 
+            <div class="col-md-6">
+                <div class="mt-2">
+                    <h6>Instrucciones</h6>
+                    <small>Ups, tal parece que has cometido una equivocación, pero no es para preocuparse, corrige los inconvenientes sin problema, nos encargaremos de hacer nuestra magia y nadie se dará cuenta.</small>
+                </div>
+                <div class="mt-3">
+                    <h6>Restricciones</h6>
+                    <small>Si no vas a modificar la <strong>imágen de portada</strong> no es necesario subirla nuevamente, deja el campo en <strong>blanco</strong>.</small>
+                </div>
+            </div>
         </div>
         <div class=" card-footer">
             <button class=" btn btn-fill btn-primary" [disabled]="courseForm.invalid" type="submit">
