@@ -1,5 +1,5 @@
 <div class="fileinput text-center">
-  <input type="file" (change)="handleImageChange($event)" #fileInput />
+  <input type="file" accept="image/png, image/jpeg" (change)="handleImageChange($event)" #fileInput />
   <div class="thumbnail img-circle">
     <img src="{{ imagePreviewUrl }}" alt="..." />
   </div>

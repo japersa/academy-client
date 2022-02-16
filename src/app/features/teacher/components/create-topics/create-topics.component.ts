@@ -44,12 +44,15 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
         Validators.required,
       ])),
       title: new FormControl('', Validators.compose([
-        Validators.required,
+        Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
       description: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(8), Validators.maxLength(700)
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(500)
       ])),
       video: new FormControl('', Validators.compose([
+        Validators.required,
       ])),
       files: new FormControl('', Validators.compose([
       ]))

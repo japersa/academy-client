@@ -40,8 +40,10 @@ export class EditQuizComponent implements OnInit, OnDestroy {
         Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ])),
       optionOne: new FormControl('', Validators.compose([
+        Validators.required, Validators.required, Validators.minLength(2)
       ])),
       optionTwo: new FormControl('', Validators.compose([
+        Validators.required, Validators.minLength(2)
       ])),
       optionThree: new FormControl('', Validators.compose([
       ])),
@@ -89,8 +91,6 @@ export class EditQuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.quiz.answers);
-    
     this.loadCourses()
     this.subscriptions.push(this.subscription1$);
     this.subscriptions.push(this.subscription2$);

@@ -18,6 +18,8 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
 
   event = null;
 
+  currentModule = '';
+
   topicForm: FormGroup;
   validationMessages: any;
 
@@ -28,6 +30,7 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
 
   subscription1$: Subscription;
   subscription2$: Subscription;
+  subscription3$: Subscription;
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -45,10 +48,12 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
         Validators.required,
       ])),
       title: new FormControl('', Validators.compose([
-        Validators.required,
+        Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
       description: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(8), Validators.maxLength(700)
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(500)
       ])),
       video: new FormControl('', Validators.compose([
       ])),
@@ -73,11 +78,23 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
     this.showEvent.emit(false);
   }
 
+  setValues() {
+    this.topicForm.patchValue({ title: this.topic.title, description: this.topic.description})
+  }
+
+  getTopicName() {
+    this.subscription3$ = this.coursesService.getModuleById(this.topic.module_id).subscribe(res => {
+      this.currentModule = res.id
+    },
+      error => {
+        console.log(error.error);
+      }
+    );
+  }
+
   loadModules() {
 
     this.subscription1$ = this.coursesService.getModules().subscribe(res => {
-      console.log(res);
-
       Object.assign(this.modules, res);
     },
       error => {
@@ -88,9 +105,12 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadModules()
+    this.loadModules();
+    this.getTopicName();
+    this.setValues();
     this.subscriptions.push(this.subscription1$);
     this.subscriptions.push(this.subscription2$);
+    this.subscriptions.push(this.subscription3$);
   }
 
   ngOnDestroy(): void {

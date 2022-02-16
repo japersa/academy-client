@@ -17,6 +17,8 @@ export class EditModuleComponent implements OnInit, OnDestroy {
 
   courses = []
 
+  currentCourse = '';
+
   moduleForm: FormGroup;
   validationMessages: any;
 
@@ -24,6 +26,7 @@ export class EditModuleComponent implements OnInit, OnDestroy {
 
   subscription1$: Subscription;
   subscription2$: Subscription;
+  subscription3$: Subscription;
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -78,13 +81,27 @@ export class EditModuleComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnInit(): void {
+  setValues() {
+    this.moduleForm.patchValue({ name: this.module.name })
+  }
 
-    this.loadCourses()
+  getCourseName() {
+    this.subscription3$ = this.coursesService.getCourseById(this.module.course).subscribe(res => {
+      this.currentCourse = res.title
+    },
+      error => {
+        console.log(error.error);
+      }
+    );
+  }
+
+  ngOnInit(): void {
+    this.loadCourses();
+    this.setValues();
+    this.getCourseName();
     this.subscriptions.push(this.subscription1$);
     this.subscriptions.push(this.subscription2$);
-
-
+    this.subscriptions.push(this.subscription3$);
   }
 
   ngOnDestroy(): void {
@@ -94,6 +111,5 @@ export class EditModuleComponent implements OnInit, OnDestroy {
       }
     })
   }
-
 
 }

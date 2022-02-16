@@ -9,7 +9,7 @@
                 <label> Título </label>
                 <div class=" form-group">
                     <input class=" form-control" formControlName="name" placeholder="Título del módulo" type="text"
-                        [(ngModel)]="module.name" required />
+                         required />
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.title">
                     <small class="text-danger d-block" *ngIf="moduleForm.get('name').hasError(validation.type) &&
@@ -22,6 +22,7 @@
                     <option *ngFor="let c of courses" [value]="c?.id" [selected]="module.course  === c?.id">
                         {{ c?.title | titlecase}}</option>
                 </select>
+                <p class="mt-2 text-info"> Curso actual: {{currentCourse | titlecase}} </p>
 
                 <ng-container *ngFor="let validation of validationMessages.title">
                     <small class="text-danger d-block" *ngIf="moduleForm.get('course').hasError(validation.type) &&

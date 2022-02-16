@@ -10,9 +10,9 @@
                     <textarea class="form-control" formControlName="question" placeholder="Ingrese las pregunta"
                         rows="2" required></textarea>
                 </div>
-                <ng-container *ngFor="let validation of validationMessages.title">
-                    <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
-                                (createUserForm.get('title').dirty || createUserForm.get('title').touched) ">
+                <ng-container *ngFor="let validation of validationMessages.question">
+                    <small class="text-danger d-block" *ngIf="quizForm.get('question').hasError(validation.type) &&
+                                (quizForm.get('question').dirty || quizForm.get('question').touched) ">
                         {{validation.message}}
                     </small>
                 </ng-container>
@@ -21,15 +21,27 @@
 
                     <label>1. Opción </label>
                     <div class=" form-group">
-                        <textarea class="form-control" formControlName="optionOne" placeholder="Ingrese la primera opción de respuesta"
-                            rows="2"></textarea>
+                        <textarea class="form-control" formControlName="optionOne"
+                            placeholder="Ingrese la primera opción de respuesta" rows="2" required></textarea>
                     </div>
+                    <ng-container *ngFor="let validation of validationMessages.optionOne">
+                        <small class="text-danger d-block" *ngIf="quizForm.get('optionOne').hasError(validation.type) &&
+                                    (quizForm.get('optionOne').dirty || quizForm.get('optionOne').touched) ">
+                            {{validation.message}}
+                        </small>
+                    </ng-container>
 
                     <label>2. Opción </label>
                     <div class=" form-group">
                         <textarea class="form-control" formControlName="optionTwo"
                             placeholder="Ingrese la segunda opción de respuesta" rows="2"></textarea>
                     </div>
+                    <ng-container *ngFor="let validation of validationMessages.optionTwo">
+                        <small class="text-danger d-block" *ngIf="quizForm.get('optionTwo').hasError(validation.type) &&
+                                    (quizForm.get('optionTwo').dirty || quizForm.get('optionTwo').touched) ">
+                            {{validation.message}}
+                        </small>
+                    </ng-container>
 
                     <label>3. Opción </label>
                     <div class=" form-group">
@@ -60,10 +72,9 @@
                 <select class="form-select form-group d-block" formControlName="course" size="4">
                     <option *ngFor="let c of courses" [value]="c?.id">{{ c?.title | titlecase}}</option>
                 </select>
-                <ng-container *ngFor="let validation of validationMessages.description">
-                    <small class="text-danger d-block"
-                        *ngIf="createUserForm.get('description').hasError(validation.type) &&
-                                (createUserForm.get('description').dirty || createUserForm.get('description').touched) ">
+                <ng-container *ngFor="let validation of validationMessages.course">
+                    <small class="text-danger d-block" *ngIf="quizForm.get('course').hasError(validation.type) &&
+                                (quizForm.get('course').dirty || quizForm.get('course').touched) ">
                         {{validation.message}}
                     </small>
                 </ng-container>
@@ -72,9 +83,17 @@
                     <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
                 </ng-container>
 
-                <div class="mt-2">
+                <div class="mt-3">
                     <h6>Instrucciones</h6>
-                    <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur dignissimos sunt molestiae reprehenderit ullam sapiente consequuntur, unde porro ratione recusandae eaque quia architecto pariatur quo totam distinctio repudiandae hic? Sunt.</small>
+                    <small>Hemos llegado al último paso, agrega cuantas preguntas consideres necesarias al exámen, no
+                        olvides elegir cuál de las 4 opciones es la correcta.
+                    </small>
+                </div>
+                <div class="mt-3">
+                    <h6>Restricciones</h6>
+                    <small class="d-block">Las opciones uno y dos son obligatorias.</small>
+                    <small class="d-block">Es obligatorio elegir el <strong>curso</strong> al que asignaremos la
+                        pregunta.</small>
                 </div>
 
             </div>

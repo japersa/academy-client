@@ -27,6 +27,10 @@ export class CoursesService {
     const route = '/my/courses/';
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
+  getCourseById(id: string): Observable<any> {
+    const route = `/retrieve/course/${id}/`;
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
 
   updateCourse(data: any, id: any): Observable<any> {
     const route = `/update/course/${id}/`;
@@ -41,6 +45,10 @@ export class CoursesService {
   // Modules
   getModules(): Observable<any> {
     const route = '/my/modules/';
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+  getModuleById(id: string): Observable<any> {
+    const route = `/retrieve/modules/${id}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 

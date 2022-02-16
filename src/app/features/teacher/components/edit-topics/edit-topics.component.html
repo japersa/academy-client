@@ -3,60 +3,75 @@
         <div class=" card-header">
             <h4 class=" card-title">Editar Temario</h4>
         </div>
-        <div class=" card-body col-md-6">
-            <label> Título </label>
-            <div class=" form-group">
-                <input class=" form-control" formControlName="title" placeholder="Título" type="text" 
-                [(ngModel)]="topic.title" required />
-            </div>
-            <ng-container *ngFor="let validation of validationMessages.title">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('title').hasError(validation.type) &&
-                            (createUserForm.get('title').dirty || createUserForm.get('title').touched) ">
-                    {{validation.message}}
-                </small>
-            </ng-container>
-            <label> Descripción </label>
-            <div class=" form-group">
+        <div class=" card-body row">
+            <div class="col-md-6">
 
-                <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
-                [(ngModel)]="topic.description" required></textarea>
-
-            </div>
-            <ng-container *ngFor="let validation of validationMessages.description">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('description').hasError(validation.type) &&
-                            (createUserForm.get('description').dirty || createUserForm.get('description').touched) ">
-                    {{validation.message}}
-                </small>
-            </ng-container>
-
-
-            <label for="formFileSm" class="form-label ">Vídeo</label>
-            <input class=" form-control" formControlName="video" id="formFileSm" type="file"
-                accept="video/mp4, video/ogg" (change)="handleVideoChange($event)" required />
-            <ng-container *ngIf="firebaseStorageService.uploadPercent">
-                <div class=" progress-container">
-                    <span class=" progress-badge"> Subiendo </span>
-                    <div class=" progress">
-                        <progressbar [value]="firebaseStorageService.uploadPercent | async">
-                            <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}}</span>
-                        </progressbar>
-                    </div>
+                <label> Título </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="title" placeholder="Título" type="text" required />
                 </div>
-            </ng-container>
+                <ng-container *ngFor="let validation of validationMessages.title">
+                    <small class="text-danger d-block" *ngIf="topicForm.get('title').hasError(validation.type) &&
+                                (topicForm.get('title').dirty || topicForm.get('title').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <label> Descripción </label>
+                <div class=" form-group">
 
-            <label> Módulo </label>
-            <select class="form-select form-group d-block" formControlName="module" size="8">
-                <option *ngFor="let m of modules" [value]="m?.id">{{ m?.name | titlecase}}</option>
+                    <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
+                        required></textarea>
 
-            </select>
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.description">
+                    <small class="text-danger d-block" *ngIf="topicForm.get('description').hasError(validation.type) &&
+                                (topicForm.get('description').dirty || topicForm.get('description').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
 
-            <label for="formFileSm" class="form-label ">Archivos</label>
-            <input class=" form-control" formControlName="files" id="formFileSm" type="file" />
 
+                <label for="formFileSm" class="form-label ">Vídeo</label>
+                <input class=" form-control" formControlName="video" id="formFileSm" type="file"
+                    accept="video/mp4, video/ogg" (change)="handleVideoChange($event)"  />
+                <ng-container *ngIf="firebaseStorageService.uploadPercent">
+                    <div class=" progress-container">
+                        <span class=" progress-badge"> Subiendo </span>
+                        <div class=" progress">
+                            <progressbar [value]="firebaseStorageService.uploadPercent | async">
+                                <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}}</span>
+                            </progressbar>
+                        </div>
+                    </div>
+                </ng-container>
 
-            <ng-container *ngIf="errorMessage">
-                <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
-            </ng-container>
+                <label> Módulo </label>
+                <select class="form-select form-group d-block" formControlName="module" size="8">
+                    <option *ngFor="let m of modules" [value]="m?.id">{{ m?.name | titlecase}}</option>
+                </select>
+                <p class="mt-2 text-info"> Módulo actual: {{currentModule | titlecase}} </p>
+
+                <!-- <label for="formFileSm" class="form-label ">Archivos</label>
+                <input class=" form-control" formControlName="files" id="formFileSm" type="file" /> -->
+
+                <ng-container *ngIf="errorMessage">
+                    <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                </ng-container>
+            </div>
+            <div class="col-md-6">
+                <div class="mt-2">
+                    <h6>Instrucciones</h6>
+                    <small>Las equivocaciones son comunes, pero no hay problema, modifica los datos que queires cambiar
+                        y envialos una vez más.
+                    </small>
+                </div>
+                <div class="mt-3">
+                    <h6>Restricciones</h6>
+                    <small class="d-block">Si no vas a modificar el vídeo del temario debe dejarla en blanco, no es
+                        necesario volver a subirlo.</small>
+                    <small class="d-block">Es necesario volver a seleccionar el <strong>módulo</strong>.</small>
+                </div>
+            </div>
 
         </div>
         <div class=" card-footer">

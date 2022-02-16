@@ -39,8 +39,10 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
         Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ])),
       optionOne: new FormControl('', Validators.compose([
+        Validators.required, Validators.required, Validators.minLength(2)
       ])),
       optionTwo: new FormControl('', Validators.compose([
+        Validators.required, Validators.minLength(2)
       ])),
       optionThree: new FormControl('', Validators.compose([
       ])),

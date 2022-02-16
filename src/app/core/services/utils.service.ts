@@ -134,6 +134,22 @@ export class UtilsService {
       { type: 'required', message: 'El curso es obligatorio' }
     ],
 
+    question: [
+      { type: 'required', message: 'La pregunta es obligatoria' },
+      { type: 'minlength', message: 'La pregunta debe de contener al menos 10 carácter' },
+      { type: 'maxlength', message: 'La pregunta debe de tener entre 10 y 100 caracteres ' },
+    ],
+
+    optionOne: [
+      { type: 'required', message: 'La pregunta número uno es obligatoria' },
+      { type: 'minlength', message: 'La pregunta número uno debe de contener al menos 2 caracteres' },
+    ],
+
+    optionTwo: [
+      { type: 'required', message: 'La pregunta número dos es obligatoria' },
+      { type: 'minlength', message: 'La pregunta número dos debe de contener al menos 2 caracteres' },
+    ],
+
   };
 
   constructor() { }
