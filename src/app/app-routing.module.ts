@@ -11,7 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'courses/1',
     pathMatch: 'full'
   },
   {
@@ -40,7 +40,7 @@ const routes: Routes = [
           .then(m => m.AdminCoursesModule)
       },
       {
-        path: 'courses',
+        path: 'courses/:id',
         loadChildren: () => import('./features/student/pages/courses/courses.module')
           .then(m => m.CoursesModule)
       },
