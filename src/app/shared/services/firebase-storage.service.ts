@@ -13,6 +13,8 @@ import { CoursesService } from './courses.service';
 })
 export class FirebaseStorageService {
 
+  course: any = {};
+
   uploadPercent: Observable<number>;
 
   constructor(private storage: AngularFireStorage,
@@ -81,7 +83,7 @@ export class FirebaseStorageService {
           }
 
           this.coursesService.createCourse(data).pipe(take(1)).subscribe(res => {
-            console.log(res);
+            Object.assign(this.course, res)
 
             this.notificationService.showNotification('bottom', 'center', 'Curso creado con éxito', 2);
 
@@ -127,8 +129,6 @@ export class FirebaseStorageService {
           }
 
           this.coursesService.updateCourse(data, id).pipe(take(1)).subscribe(res => {
-            console.log(res);
-
             this.notificationService.showNotification('bottom', 'center', 'Curso editado con éxito', 2);
 
           },
@@ -158,7 +158,6 @@ export class FirebaseStorageService {
       })
   }
 
-
   uploadCourseVideo(event, dataForm) {
 
     const randomId = Math.random().toString(36).substring(2);
@@ -184,6 +183,9 @@ export class FirebaseStorageService {
             module: dataForm.module
           }
 
+          console.log('topic', data);
+
+
           this.coursesService.createTopic(data).pipe(take(1)).subscribe(res => {
             this.notificationService.showNotification('bottom', 'center', 'Temario creado con éxito', 2);
 
@@ -197,9 +199,10 @@ export class FirebaseStorageService {
       .subscribe(res => console.log(res))
 
   }
+
   updateCourseVideo(event, dataForm, id: string) {
     console.log(event);
-    
+
     if (event === (undefined || null)) {
       this.updateVideo(dataForm, id)
       return
@@ -258,6 +261,5 @@ export class FirebaseStorageService {
         this.notificationService.showNotification('bottom', 'center', 'Error al crear temario', 4);
       })
   }
-
 
 }

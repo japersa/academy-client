@@ -9,20 +9,26 @@
 
                 <h2>{{ course?.title | uppercase}}</h2>
 
-                <div *ngFor="let t of course.modules" class="row">
-                    <div class="col-12">
-                        <h3>{{t?.name | titlecase}}</h3>
-                    </div>
-                    <div *ngFor="let c of t?.topics" class="col-4">
-                        <div class="card" style="width: 18rem;">
-                            <video [src]="c?.video" controls controlsList="nodownload"></video>
-                            <div class="card-body">
-                                <h5 class="card-title">{{c?.title | titlecase}}</h5>
-                                <p class="card-text">{{c?.description}}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row" *ngFor="let t of course.modules">
+                            <div class="col-12">
+                                <h3>{{t?.name | titlecase}}</h3>
+                            </div>
+                            <div *ngFor="let c of t?.topics" class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-primary">{{c?.title | uppercase}}</h4>
+                                        <p class="card-text">{{c?.description}}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-6">
+                        <img [src]="course?.path_preview_image" class="img-fluid" alt="Responsive image">
+                        <p class="mt-2">{{ course?.description }}</p>
+                    </div>
                 </div>
 
                 <!-- <vg-player>
@@ -56,9 +62,6 @@
                         <source [src]="source" >
                     </video>
                 </vg-player> -->
-
-
-
 
             </div>
         </div>

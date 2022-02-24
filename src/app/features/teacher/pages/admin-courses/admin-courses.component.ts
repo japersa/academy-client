@@ -48,6 +48,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   subscription4$: Subscription;
   subscription5$: Subscription;
   subscription6$: Subscription;
+  subscription7$: Subscription;
 
   subscriptions: Subscription[] = [];
 
@@ -138,6 +139,17 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     this.showFormCreateModule = !this.showFormCreateModule;
   }
 
+  getModulesByCourseId(courseId: string) {
+
+    this.subscription7$ = this.coursesService.getModulesByCourseId(courseId).pipe(take(1)).subscribe(res => {
+      this.modules.length = 0;
+      Object.assign(this.modules, res)
+    },
+      error => {
+        console.log('error ' + error.error);
+      });
+  }
+
   editModule(module: object) {
     this.moduleEdit = module;
     this.showFormEditModule = !this.showFormEditModule;
@@ -194,10 +206,21 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   }
 
-  // Modules
+  // Topics
 
   createTopic() {
     this.showFormCreateTopic = !this.showFormCreateTopic;
+  }
+
+  getTopicByModuleId(courseId: string) {
+
+    this.subscription7$ = this.coursesService.getTopicsByModuleId(courseId).pipe(take(1)).subscribe(res => {
+      this.topics.length = 0;
+      Object.assign(this.topics, res)
+    },
+      error => {
+        console.log('error ' + error.error);
+      });
   }
 
   editTopic(topic: object) {
@@ -321,10 +344,10 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   loadData() {
 
-    // this.courses.length = 0;
-    // this.modules.length = 0;
-    // this.topics.length = 0;
-    // this.quizzes.length = 0;
+    this.courses.length = 0;
+    this.modules.length = 0;
+    this.topics.length = 0;
+    this.quizzes.length = 0;
 
     // GET COURSES
     this.subscription$ = this.coursesService.getCourses().subscribe(res => {
@@ -337,7 +360,6 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     )
     // GET MODULES
     this.subscription2$ = this.coursesService.getModules().subscribe(res => {
-
       Object.assign(this.modules, res);
     },
       error => {
@@ -346,7 +368,6 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     )
     // GET TOPICS
     this.subscription3$ = this.coursesService.getTopics().subscribe(res => {
-
       Object.assign(this.topics, res);
     },
       error => {
@@ -355,7 +376,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     )
     // GET QUIZZES
     this.subscription5$ = this.coursesService.getQuizzes().subscribe(res => {
-
+      console.log('quiz', res);
       Object.assign(this.quizzes, res);
     },
       error => {
@@ -389,6 +410,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.subscription4$);
     this.subscriptions.push(this.subscription5$);
     this.subscriptions.push(this.subscription6$);
+    this.subscriptions.push(this.subscription7$);
 
   }
 

@@ -49,16 +49,22 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
+        path: 'course-by-steps',
+        title: 'Crear curso',
+        type: 'link',
+        smallTitle: 'CP'
+      },
+      {
         path: 'admin-courses',
         title: 'Admin cursos',
         type: 'link',
-        smallTitle: 'RS'
+        smallTitle: 'AC'
       },
       {
         path: 'ama',
         title: 'dudas',
         type: 'link',
-        smallTitle: 'T'
+        smallTitle: 'D&C'
       },
     ]
   },

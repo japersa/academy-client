@@ -47,8 +47,14 @@ export class CoursesService {
     const route = '/my/modules/';
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
+
   getModuleById(id: string): Observable<any> {
     const route = `/retrieve/modules/${id}/`;
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  getModulesByCourseId(courseId: string): Observable<any> {
+    const route = `/list/modules/${courseId}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
@@ -73,6 +79,11 @@ export class CoursesService {
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
+  getTopicsByModuleId(courseId: string): Observable<any> {
+    const route = `/list/topics/${courseId}/`;
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
   createTopic(data: any): Observable<any> {
     const route = '/create/topic/';
     return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
@@ -88,9 +99,14 @@ export class CoursesService {
     return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
-  // Topics
+  // Quizzes
   getQuizzes(): Observable<any> {
     const route = '/my/quizzes/';
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  getQuizzesByCourseId(courseId: string): Observable<any> {
+    const route = `/list/quizzes/${courseId}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
@@ -171,6 +187,12 @@ export class CoursesService {
     const route = '/create/quiz/';
     return this.http.post<any>(`${apiURL}${route}`, DATA, { headers: this.headers });
   }
+
+  createQuizByStep(DATA: any): Observable<any> {
+    const route = '/create/quiz/';
+    return this.http.post<any>(`${apiURL}${route}`, DATA, { headers: this.headers });
+  }
+
 
   updateQuiz(data: any, id: any): Observable<any> {
     const route = `/update/quiz/${id}/`;

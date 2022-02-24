@@ -1,0 +1,14 @@
+
+.active .bs-stepper-circle {
+    background: var(--primary) !important;
+    color: aliceblue !important;
+}
+.bs-stepper-label {
+    color: aliceblue !important;
+}
+
+.bs-stepper-label:hover { 
+    color: aliceblue;
+    background: var(--primary) !important;
+} 
+

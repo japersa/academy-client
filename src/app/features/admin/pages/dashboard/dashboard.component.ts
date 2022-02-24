@@ -106,7 +106,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
           count++
         }
-        console.log(this.dataChart)
 
         this.dataChartFix = [
           '' + this.dataChart[0],
@@ -122,7 +121,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           '' + this.dataChart[10],
           '' + this.dataChart[11],
         ];
-        console.log(this.dataChartFix)
         return this.dataChartFix
       },
       (error) => {
@@ -136,7 +134,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
       Object.assign(this.courses, res);
 
-      console.log('courses',res);
       // for (var j = 0; j < res.length; j++) {
       //   //console.log(res[j])
       //   //Imagen del curso
@@ -179,7 +176,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       //     ` <hr/>
       //       </div>
       //     <div class=" card-body" style="height:30%">
-          
+
       //       <h4 class=" card-title"> ` +
       //     title +
       //     `</h4>
