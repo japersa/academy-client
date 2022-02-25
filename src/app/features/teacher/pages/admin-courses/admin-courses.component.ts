@@ -49,6 +49,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   subscription5$: Subscription;
   subscription6$: Subscription;
   subscription7$: Subscription;
+  subscription8$: Subscription;
+  subscription9$: Subscription;
 
   subscriptions: Subscription[] = [];
 
@@ -214,7 +216,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   getTopicByModuleId(courseId: string) {
 
-    this.subscription7$ = this.coursesService.getTopicsByModuleId(courseId).pipe(take(1)).subscribe(res => {
+    this.subscription8$ = this.coursesService.getTopicsByModuleId(courseId).pipe(take(1)).subscribe(res => {
       this.topics.length = 0;
       Object.assign(this.topics, res)
     },
@@ -285,6 +287,17 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     this.showFormCreateQuizzes = !this.showFormCreateQuizzes;
   }
 
+  getQuizzesByCourseId(courseId: string) {
+
+    this.subscription9$ = this.coursesService.getQuizzesByCourseId(courseId).pipe(take(1)).subscribe(res => {
+      this.quizzes.length = 0;
+      Object.assign(this.quizzes, res)
+    },
+      error => {
+        console.log('error ' + error.error);
+      });
+  }
+
   editQuiz(quiz: object) {
     this.quizEdit = quiz;
     this.showFormEditQuizzes = !this.showFormEditQuizzes;
@@ -351,7 +364,6 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
     // GET COURSES
     this.subscription$ = this.coursesService.getCourses().subscribe(res => {
-
       Object.assign(this.courses, res);
     },
       error => {
@@ -376,7 +388,6 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     )
     // GET QUIZZES
     this.subscription5$ = this.coursesService.getQuizzes().subscribe(res => {
-      console.log('quiz', res);
       Object.assign(this.quizzes, res);
     },
       error => {
@@ -411,6 +422,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.subscription5$);
     this.subscriptions.push(this.subscription6$);
     this.subscriptions.push(this.subscription7$);
+    this.subscriptions.push(this.subscription8$);
+    this.subscriptions.push(this.subscription9$);
 
   }
 

@@ -13,7 +13,7 @@
                 <div class=" card-body">
                     <tabset class="nav-pills-primary nav-pills-icons justify-content-center" type="pills">
                         <!-- COURSES -->
-                        <!-- <tab>
+                        <tab>
                             <ng-template tabHeading>
                                 <i class="tim-icons icon-book-bookmark"> </i> Cursos
                             </ng-template>
@@ -80,9 +80,9 @@
                                     </app-edit-course>
                                 </div>
                             </ng-container>
-                        </tab> -->
+                        </tab>
                         <!-- MODULES -->
-                        <!-- <tab>
+                        <tab>
                             <ng-template tabHeading>
                                 <i class="tim-icons icon-components"> </i> Módulos
                             </ng-template>
@@ -162,9 +162,9 @@
                                 </div>
                             </ng-container>
 
-                        </tab> -->
+                        </tab>
                         <!-- TOPICS -->
-                        <!-- <tab>
+                        <tab>
                             <ng-template tabHeading>
                                 <i class="tim-icons icon-paper"> </i> Temarios
                             </ng-template>
@@ -241,7 +241,7 @@
                                     </app-edit-topics>
                                 </div>
                             </ng-container>
-                        </tab> -->
+                        </tab>
                         <!-- QUIZZES -->
                         <tab>
                             <ng-template tabHeading>
@@ -264,7 +264,7 @@
                                                     </button>
                                                     <div class=" dropdown-menu dropdown-menu-right" *dropdownMenu>
                                                         <a class=" dropdown-item" *ngFor="let c of courses"
-                                                            (click)="getTopicByModuleId(c.id)">
+                                                            (click)="getQuizzesByCourseId(c.id)">
                                                             {{c.title | titlecase}} </a>
                                                     </div>
                                                 </div>
@@ -289,6 +289,7 @@
                                                             <td class=" text-center">{{ q?.id }}</td>
                                                             <td>{{ q?.question | titlecase | slice:0:40}}</td>
                                                             <td class=" text-center">{{q?.course_id}}</td>
+                                                            <td class=" text-center">{{q?.course_name | titlecase}}</td>
                                                             <td class=" text-center">{{q?.created_at | date}}</td>
                                                             <td class=" text-right">
                                                                 <button
