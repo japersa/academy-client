@@ -6,8 +6,12 @@ import { UtilsService } from '../../../../core/services/utils.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { RegisterService } from '../../../auth/services/register.service';
 import { take } from 'rxjs/operators';
+import { SUBS_ENUM } from '../../../../shared/enum/subcriptions.enum';
+import { CoursesService } from '../../../../shared/services/courses.service';
 
 const ROLES = ROLES_ENUM;
+const SUBS = SUBS_ENUM;
+
 
 @Component({
   selector: 'app-edit-user',
@@ -15,7 +19,6 @@ const ROLES = ROLES_ENUM;
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-
 
   roles = [
     {
@@ -32,6 +35,23 @@ export class EditUserComponent implements OnInit {
     }
   ];
 
+  subscriptions = [
+    {
+      name: 'Ninguna',
+      sub: SUBS.NONE
+    },
+    {
+      name: 'Básica',
+      sub: SUBS.BASIC
+    },
+    {
+      name: 'Full',
+      sub: SUBS.FULL
+    }
+  ]
+
+  courses = [];
+
   @Input() user = null;
 
   createUserForm: FormGroup;
@@ -41,9 +61,11 @@ export class EditUserComponent implements OnInit {
   @Output() showEvent = new EventEmitter<boolean>();
 
   subscription$: Subscription;
+  subscription1$: Subscription;
 
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
+    private coursesService: CoursesService,
     public notificationService: NotificationsService,
     private registerService: RegisterService) {
     this.validationMessages = utilsService.getValidationMessages();
@@ -61,6 +83,10 @@ export class EditUserComponent implements OnInit {
       role: new FormControl('', Validators.compose([
         Validators.required,
       ])),
+      courses_ids: new FormControl('', Validators.compose([
+      ])),
+      subscription: new FormControl('', Validators.compose([
+      ])),
     }
     );
 
@@ -69,18 +95,26 @@ export class EditUserComponent implements OnInit {
 
   editUser(dataFrom: any) {
 
-    let data: any = {
-      username: dataFrom.email,
-      first_name: dataFrom.first_name,
-      last_name: dataFrom.last_name,
-      rol: dataFrom.role,
-    }
+    let data = {}
 
-    if (this.user.username === dataFrom.email) {
+    if (dataFrom.subscription === 'basic') {
       data = {
+        username: dataFrom.email,
         first_name: dataFrom.first_name,
         last_name: dataFrom.last_name,
         rol: dataFrom.role,
+        subscription: dataFrom.subscription,
+        courses_ids: dataFrom.courses_ids,
+        email: dataFrom.email
+      }
+    } else {
+      data = {
+        username: dataFrom.email,
+        first_name: dataFrom.first_name,
+        last_name: dataFrom.last_name,
+        rol: dataFrom.role,
+        subscription: dataFrom.subscription,
+        email: dataFrom.email
       }
     }
 
@@ -102,6 +136,13 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.subscription1$ = this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
+      this.courses = res;
+    },
+      error => {
+        console.log(error.error);
+      });
   }
 
 }

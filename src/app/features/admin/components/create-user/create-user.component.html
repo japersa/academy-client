@@ -3,57 +3,81 @@
         <div class=" card-header">
             <h4 class=" card-title">Crear Usuario</h4>
         </div>
-        <div class=" card-body col-md-6">
-            <label> Email </label>
-            <div class=" form-group">
-                <input class=" form-control" formControlName="email" placeholder="Email" type="email"
-                    required />
-            </div>
-            <ng-container *ngFor="let validation of validationMessages.email">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('email').hasError(validation.type) &&
-                    (createUserForm.get('email').dirty || createUserForm.get('email').touched) ">
-                    {{validation.message}}
-                </small>
-            </ng-container>
-            <label> Nombres </label>
-            <div class=" form-group">
-                <input class=" form-control" formControlName="first_name" placeholder="Nombres" type="text"
-                    required />
-            </div>
-            <ng-container *ngFor="let validation of validationMessages.first_name">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('first_name').hasError(validation.type) &&
-                    (createUserForm.get('first_name').dirty || createUserForm.get('first_name').touched) ">
-                    {{validation.message}}
-                </small>
-            </ng-container>
-            <label> Apellidos </label>
-            <div class=" form-group">
-                <input class=" form-control" formControlName="last_name" placeholder="Apellidos" type="text"
-                    required />
-            </div>
-            <ng-container *ngFor="let validation of validationMessages.last_name">
-                <small class="text-danger d-block" *ngIf="createUserForm.get('last_name').hasError(validation.type) &&
-                    (createUserForm.get('last_name').dirty || createUserForm.get('last_name').touched) ">
-                    {{validation.message}}
-                </small>
-            </ng-container>
-            <div class=" row">
-                <label class=" col-sm-2 col-form-label">
-                    Rol
-                </label>
-                <div class=" col-sm-10 checkbox-radios">
-                    <div *ngFor="let r of roles" class=" form-check form-check-radio">
-                        <label class=" form-check-label">
-                            <input class=" form-check-input" formControlName="role" type="radio" [value]="r.role"
-                                required />
-                            <span class=" form-check-sign"> </span> {{r.name | titlecase}}
-                        </label>
+        <div class=" card-body row">
+            <div class=" col-md-6">
+                <label> Email </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="email" placeholder="Email" type="email" required />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.email">
+                    <small class="text-danger d-block" *ngIf="createUserForm.get('email').hasError(validation.type) &&
+                        (createUserForm.get('email').dirty || createUserForm.get('email').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <label> Nombres </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="first_name" placeholder="Nombres" type="text"
+                        required />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.first_name">
+                    <small class="text-danger d-block" *ngIf="createUserForm.get('first_name').hasError(validation.type) &&
+                        (createUserForm.get('first_name').dirty || createUserForm.get('first_name').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <label> Apellidos </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="last_name" placeholder="Apellidos" type="text"
+                        required />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.last_name">
+                    <small class="text-danger d-block" *ngIf="createUserForm.get('last_name').hasError(validation.type) &&
+                        (createUserForm.get('last_name').dirty || createUserForm.get('last_name').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <div class=" row">
+                    <label class=" col-sm-2 col-form-label">
+                        Rol
+                    </label>
+                    <div class=" col-sm-10 checkbox-radios">
+                        <div *ngFor="let r of roles" class=" form-check form-check-radio">
+                            <label class=" form-check-label">
+                                <input class=" form-check-input" formControlName="role" type="radio" [value]="r.role"
+                                    required />
+                                <span class=" form-check-sign"> </span> {{r.name | titlecase}}
+                            </label>
+                        </div>
                     </div>
                 </div>
+                <ng-container *ngIf="errorMessage">
+                    <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                </ng-container>
             </div>
-            <ng-container *ngIf="errorMessage">
-                <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
-            </ng-container>
+            <div class="  col-md-6">
+                <div class=" row">
+                    <label class=" col-sm-2 col-form-label">
+                        Suscripción
+                    </label>
+                    <div class=" col-sm-10 checkbox-radios">
+                        <div *ngFor="let s of subscriptions" class=" form-check form-check-radio">
+                            <label class=" form-check-label">
+                                <input class=" form-check-input" formControlName="subscription" type="radio"
+                                    [value]="s.sub" required />
+                                <span class=" form-check-sign"> </span> {{s.name | titlecase}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngIf="createUserForm.value.subscription === 'basic' && courses.length > 0">
+                    <label> Curso </label>
+                    <select class="form-select form-group d-block" formControlName="courses_ids" size="4" multiple>
+                        <option *ngFor="let c of courses" [value]="c?.id">{{ c?.title | titlecase}}</option>
+                    </select>
+                </ng-container>
+            </div>
+
         </div>
         <div class=" card-footer">
             <button class=" btn btn-fill btn-primary" [disabled]="createUserForm.invalid" type="submit">
