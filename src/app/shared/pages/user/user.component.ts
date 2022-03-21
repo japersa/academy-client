@@ -103,7 +103,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.subscription$ = this.editUserService.updateUser(dataFrom).pipe(take(1)).subscribe(res => {
       this.userDataService.userData$.next(res);
       console.log(res);
-      
+
       this.storageService.set('userData', res);
 
       this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);

@@ -297,9 +297,10 @@
             </a>
           </div>
           <div class="card-description" style="text-align: center">
+            <p class="description">{{ userDataService?.userData$?.value.subscription | titlecase}}</p>
             <p class="description">{{rol | titlecase}}</p>
             {{username}} <br>
-            {{phone.value}}
+            {{ userDataService?.userData$?.value.phone_number }}
           </div>
         </div>
       </div>

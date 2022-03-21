@@ -62,6 +62,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.notificationService.showNotification('bottom', 'center', 'Has iniciado sesión correctamente', 2);
       this.errorMessage = '';
 
+      console.log(res);
+      
+
       this.loginForm.reset();
 
       setTimeout(() => {
