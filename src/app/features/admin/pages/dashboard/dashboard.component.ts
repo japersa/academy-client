@@ -134,68 +134,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
       Object.assign(this.courses, res);
 
-      // for (var j = 0; j < res.length; j++) {
-      //   //console.log(res[j])
-      //   //Imagen del curso
-      //   var imgCourse = res[j].path_preview_image
-      //   var img = `<img src="` + imgCourse + `" alt="Curso de ????" style="max-height:100px; width: 100%; height:auto">`
-      //   if (imgCourse == 'Sin imagen') {
-      //     img = ``
-      //   }
-      //   //Titulo del curso
-      //   var title = res[j].title
-      //   if (title.length > 50) {
-      //     title = title.substring(0, 50) + `...`
-      //   }
-      //   //Descripción del curso
-      //   var description = res[j].description;
-      //   var maxTextLimit = 70
-      //   if (description.length > maxTextLimit) {
-      //     description = description.substring(0, maxTextLimit) + `...`;
-      //   }
-      //   //var active=res[j].teacher.is_active
-      //   //var isActive
-      //   //var iconColor
-      //   //if(active){
-      //   //  isActive = "Activo"
-      //   //  iconColor = `icon-minimal-right text-primary`;
-      //   //} else {
-      //   //  isActive = "Inactivo"
-      //   //iconColor = `icon-alert-circle-exc text-danger`;
-      //   //  iconColor = `icon-minimal-right text-primary`;
-      //   //}
-      //   const div = document.createElement('div');
-      //   div.className = 'col-lg-3';
-      //   div.id = 'course'
-      //   div.innerHTML =
-      //     `
-      //     <div class=" card card-chart" style="height: 350px">
-      //       <div class=" card-header" style="height:35%">
-      //         ` +
-      //     img +
-      //     ` <hr/>
-      //       </div>
-      //     <div class=" card-body" style="height:30%">
-
-      //       <h4 class=" card-title"> ` +
-      //     title +
-      //     `</h4>
-      //     <p>`+ description + `</p>
-      //     </div>
-      //     <div class="card-footer" style="height:30%">
-      //       <hr />
-      //       <div class="stats">
-      //         <button class="btn btn-fill btn-primary btn-sm" type="submit">
-      //           <!--<i class="tim-icons icon-pencil text-primary"> </i>--> Ver Curso
-      //         </button>
-      //       </div>
-      //     </div>
-      //   </div>`;
-      //   document.getElementById('dashboard').appendChild(div)
-      // }
-
-
-
     },
       error => {
         console.log(error);
@@ -215,6 +153,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.showGeneralStatistics();
     this.fillChart();
     this.fillCourses();
+
+    // Subs
+    this.subscriptions.push(this.subscription1$);
+    this.subscriptions.push(this.subscription2$);
+    this.subscriptions.push(this.subscription3$);
+
     var gradientChartOptionsConfigurationWithTooltipRed: any = {
       maintainAspectRatio: false,
       legend: {

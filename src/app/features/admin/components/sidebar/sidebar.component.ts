@@ -69,7 +69,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/courses',
+    path: '/home',
     title: 'cursos',
     type: 'link',
     icontype: 'tim-icons icon-trophy'
