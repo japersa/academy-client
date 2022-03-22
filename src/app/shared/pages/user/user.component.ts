@@ -1,0 +1,149 @@
+import { UpdatePasswordService } from './../../services/update-password.service';
+import { UserDataService } from './../../../core/services/user-data.service';
+import { take } from 'rxjs/operators';
+import { NotificationsService } from './../../../core/services/notifications.service';
+import { UtilsService } from './../../../core/services/utils.service';
+import { Subscription } from 'rxjs';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { EditUserService } from '../../services/edit-user.service';
+import { StorageService } from '../../../core/services/storage.service';
+
+
+@Component({
+  selector: 'app-user',
+  templateUrl: 'user.component.html'
+})
+export class UserComponent implements OnInit, OnDestroy {
+
+
+  phone = new FormControl('');
+
+  public rol = '';
+  public first_name = this.userDataService.userData$.value.first_name;
+  public last_name = this.userDataService.userData$.value.last_name;
+  public username = this.userDataService.userData$.value.username;
+
+  showPasswordField: boolean = false;
+  showButtonPassword: boolean = true;
+
+  updateForm: FormGroup;
+  updatePasswordForm: FormGroup;
+  validationMessages: any;
+  errorPassMessage: any;
+  errorMessage: string | null;
+
+  subscription$: Subscription;
+
+  focus;
+  focus1;
+  focus2;
+  focus4;
+
+  constructor(private formBuilder: FormBuilder,
+    private utilsService: UtilsService,
+    public notificationService: NotificationsService,
+    private storageService: StorageService,
+    private editUserService: EditUserService,
+    public userDataService: UserDataService,
+    public updatePasswordService: UpdatePasswordService,
+  ) {
+    this.validationMessages = utilsService.getValidationMessages();
+
+    this.updateForm = this.formBuilder.group({
+      first_name: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3)])),
+      last_name: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3)])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+      phone_number: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(5)])),
+    });
+    this.updatePasswordForm = this.formBuilder.group({
+      old_password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(8)])),
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(8)])),
+    });
+  }
+
+  showUpdatePassword() {
+    if (this.showPasswordField) {
+      this.showPasswordField = false;
+      this.showButtonPassword = true;
+      this.updatePasswordForm.reset();
+    } else if (this.showPasswordField == false) {
+      this.showPasswordField = true;
+      this.showButtonPassword = false;
+    }
+  }
+
+  // Asignar valor al rol del usuario
+  setRol(rolLocal: string = this.userDataService.userData$.value.rol) {
+    if (rolLocal == 'student') {
+      this.rol = 'Estudiante';
+    } else if (rolLocal == 'teacher') {
+      this.rol = 'Profesor';
+    } else if (rolLocal == 'admin') {
+      this.rol = 'Administrador'
+    } else { this.rol = 'Que putas pasa con el rol' }
+    return this.rol;
+  }
+
+  // Actualizar info del usuario
+  updateUser(dataFrom: any) {
+
+    this.subscription$ = this.editUserService.updateUser(dataFrom).pipe(take(1)).subscribe(res => {
+      this.userDataService.userData$.next(res);
+      console.log(res);
+
+      this.storageService.set('userData', res);
+
+      this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);
+      this.updateForm.reset();
+    },
+      error => {
+        this.errorMessage = error.error;
+        console.log(error.error);
+        this.notificationService.showNotification('bottom', 'center', 'Error al actualizar usuario', 4);
+      });
+  }
+
+  // Actualizar contraseña del usuario
+  updatePassword(dataFrom: any) {
+    const data = {
+      old_password: dataFrom.old_password,
+      password: dataFrom.password,
+    }
+    this.subscription$ = this.updatePasswordService.updatePassword(data).pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);
+      this.updatePasswordForm.reset();
+      this.showUpdatePassword();
+    },
+      error => {
+        this.errorPassMessage = error.error;
+        console.log(error.error);
+        this.notificationService.showNotification('bottom', 'center', 'Error al actualizar contraseña', 4);
+      });
+  }
+
+  ngOnInit() {
+    this.setRol();
+    /*console.log(this.userDataService.userData$.value.rol);
+    console.log(this.userDataService.userData$);*/
+    var body = document.getElementsByTagName('body')[0];
+    body.classList.add('register-page');
+  }
+  ngOnDestroy() {
+    var body = document.getElementsByTagName('body')[0];
+    body.classList.remove('register-page');
+  }
+}

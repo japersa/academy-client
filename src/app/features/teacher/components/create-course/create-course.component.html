@@ -1,0 +1,89 @@
+<div class=" card text-left">
+    <form class=" form" [formGroup]="courseForm" (ngSubmit)="createCourse(courseForm.value)" role="form">
+
+        <div class=" card-header">
+            <h4 class=" card-title">Crear curso</h4>
+        </div>
+        <div class=" card-body row">
+            <div class="  col-md-6">
+
+                <label> Título </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="title" placeholder="Ingresa el título" type="text"
+                        required />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.title">
+                    <small class="form-text text-danger d-block" *ngIf="courseForm.get('title').hasError(validation.type) &&
+                                (courseForm.get('title').dirty || courseForm.get('title').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <label> Descripción </label>
+                <div class=" form-group">
+
+                    <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
+                        required></textarea>
+
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.description">
+                    <small class="form-text text-danger d-block" *ngIf="courseForm.get('description').hasError(validation.type) &&
+                                (courseForm.get('description').dirty || courseForm.get('description').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <label> Precio </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="price" placeholder="Precio" type="text" required />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.price">
+                    <small class="form-text text-danger d-block" *ngIf="courseForm.get('price').hasError(validation.type) &&
+                    (courseForm.get('price').dirty || courseForm.get('price').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+
+                <label for="formFileSm" class="form-label ">Imágen de portada</label>
+                <input class=" form-control" formControlName="path_preview_image" (change)="handleImageChange($event)"
+                    id="formFileSm" type="file" accept="image/png, image/jpeg" required />
+                <ng-container *ngIf="firebaseStorageService.uploadPercent">
+                    <div class=" progress-container">
+                        <span class=" progress-badge"> Subiendo </span>
+                        <div class=" progress">
+                            <progressbar [value]="firebaseStorageService.uploadPercent | async">
+                                <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}} </span>
+                            </progressbar>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+                <ng-container *ngIf="errorMessage">
+                    <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                </ng-container>
+
+            </div>
+            <div class="  col-md-6">
+                <div class="mt-2">
+                    <h6>Instrucciones</h6>
+                    <small>Bienvenido, para continuar necesita llenar todos los campos correspondientes a los cursos,
+                        una vez estos campos sean diligenciados presiona el botón de enviar y puedes seguir en la
+                        sección de <strong>Módulos</strong>.</small>
+                </div>
+                <div class="mt-3">
+                    <h6>Restricciones</h6>
+                    <small class="d-block">El campo de imágen de portada solo permite imágenes en formato <strong>JPG y
+                            PNG</strong>.</small>
+                    <small class="d-block">El precio en decimal se delimitan por <strong>punto (.)</strong> además de <strong>dos</strong> decimales.</small>
+                </div>
+            </div>
+        </div>
+        <div class=" card-footer">
+            <button class=" btn btn-fill btn-primary" [disabled]="courseForm.invalid" type="submit">
+                Enviar
+            </button>
+            <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

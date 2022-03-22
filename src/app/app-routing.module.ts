@@ -3,18 +3,21 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
+// Layouts
 import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -22,50 +25,45 @@ const routes: Routes = [
           .then(m => m.DashboardModule)
       },
       {
-        path: '',
-        loadChildren:
-          './pages/examples/dashboard/dashboard.module#DashboardModule'
+        path: 'profile',
+        loadChildren: () => import('./shared/pages/user/user-profile.module')
+          .then(m => m.UserModule)
       },
       {
-        path: 'components',
-        loadChildren:
-          './pages/examples/components/components.module#ComponentsPageModule'
+        path: 'roles',
+        loadChildren: () => import('./features/admin/pages/admins/admins.module')
+          .then(m => m.AdminsModule)
       },
       {
-        path: 'forms',
-        loadChildren: './pages/examples/forms/forms.module#Forms'
+        path: 'course-by-steps',
+        loadChildren: () => import('./features/teacher/pages/create-course-by-steps/create-course-by-steps.module')
+          .then(m => m.CreateCourseByStepsModule)
       },
       {
-        path: 'tables',
-        loadChildren: './pages/examples/tables/tables.module#TablesModule'
+        path: 'admin-courses',
+        loadChildren: () => import('./features/teacher/pages/admin-courses/admin-courses.module')
+          .then(m => m.AdminCoursesModule)
       },
       {
-        path: 'maps',
-        loadChildren: './pages/examples/maps/maps.module#MapsModule'
+        path: 'ama',
+        loadChildren: () => import('./features/teacher/pages/ama/ama.module')
+          .then(m => m.AmaModule)
       },
       {
-        path: 'widgets',
-        loadChildren: './pages/examples/widgets/widgets.module#WidgetsModule'
+        path: 'courses/:id',
+        loadChildren: () => import('./features/student/pages/courses/courses.module')
+          .then(m => m.CoursesModule)
       },
       {
-        path: 'charts',
-        loadChildren: './pages/examples/charts/charts.module#ChartsModule'
+        path: 'subscription',
+        loadChildren: () => import('./shared/pages/subscription/subscription.module')
+          .then(m => m.SubscriptionModule)
       },
       {
-        path: 'calendar',
-        loadChildren:
-          './pages/examples/calendar/calendar.module#CalendarModulee'
+        path: 'home',
+        loadChildren: () => import('./shared/pages/home/home.module')
+          .then(m => m.HomeModule)
       },
-      {
-        path: '',
-        loadChildren:
-          './pages/examples/pages/user/user-profile.module#UserModule'
-      },
-      {
-        path: '',
-        loadChildren:
-          './pages/examples/pages/timeline/timeline.module#TimelineModule'
-      }
     ]
   },
   {
@@ -73,14 +71,25 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: 'pages',
-        loadChildren: './pages/examples/pages/pages.module#PagesModule'
-      }
+        path: 'sign-in',
+        loadChildren: () => import('./features/auth/pages/login/login.module')
+          .then(m => m.LoginModule)
+      },
+      {
+        path: 'sign-up',
+        loadChildren: () => import('./features/auth/pages/register/register.module')
+          .then(m => m.RegisterModule)
+      },
+      {
+        path: 'forget-password',
+        loadChildren: () => import('./features/auth/pages/forget-password/forget-password.module')
+          .then(m => m.ForgetPasswordModule)
+      },
     ]
   },
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'sign-in'
   }
 ];
 
@@ -97,4 +106,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

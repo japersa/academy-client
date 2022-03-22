@@ -1,0 +1,137 @@
+<div class="full-page register-page">
+  <div class=" content">
+    <div class=" container">
+      <div class=" row">
+        <div class=" col-md-5 ml-auto">
+          <div class=" info-area info-horizontal mt-5">
+            <div class=" icon icon-warning">
+              <i class=" tim-icons icon-chart-bar-32"> </i>
+            </div>
+            <div class=" description">
+              <h3 class=" info-title">Invierte en mercados financieros</h3>
+              <p class=" description">
+                Te ayudaremos a iniciar en el mundo del trading guiandote en tu proceso.
+              </p>
+            </div>
+          </div>
+          <div class=" info-area info-horizontal">
+            <div class=" icon icon-primary">
+              <i class=" tim-icons icon-vector"> </i>
+            </div>
+            <div class=" description">
+              <h3 class=" info-title">Educación profesional personalizada</h3>
+              <p class=" description">
+                Nuestros Traders estarán disponibles para ayudarte en todo momento.
+              </p>
+            </div>
+          </div>
+          <div class=" info-area info-horizontal">
+            <div class=" icon icon-info">
+              <i class=" tim-icons icon-money-coins"> </i>
+            </div>
+            <div class=" description">
+              <h3 class=" info-title">
+                Forex, Crypto, Índices sintéticos</h3>
+              <p class=" description">
+                Nuestros equipo analiza el mercado buscando las mejores oportunidades de inversión.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class=" col-md-7 mr-auto">
+          <div class=" card card-register card-white">
+            <div class=" card-header"
+              style=" background-image: url('https://res.cloudinary.com/mistrades-com/image/upload/v1643666032/assets/Sign%20up/banner-registro_vzgark.png')">
+              <!-- <img alt="Card image" class=" card-img"
+                src="https://res.cloudinary.com/mistrades-com/image/upload/v1643666032/assets/Sign%20up/banner-registro_vzgark.png" /> -->
+
+              <h1 class=" card-title" style="text-align: right; color: hsl(0, 0%, 50%);">Registro</h1>
+
+            </div>
+            <div class=" card-body">
+              <form class="form" [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)" role="form">
+
+                <div class="row">
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="names">Nombres</label>
+                      <input type="text" class="form-control" formControlName="first_name" id="names"
+                        placeholder="Ingrese sus nombres">
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="last_names">Apellidos</label>
+                      <input type="text" class="form-control" formControlName="last_name" id="last_names"
+                        placeholder="Ingrese sus apellidos">
+                    </div>
+                  </div>
+
+                </div>
+
+                <ng-container>
+                  <ng-container *ngFor="let validation of validationMessages.first_name">
+                    <small class="form-text text-danger d-block" *ngIf="registerForm.get('first_name').hasError(validation.type) &&
+                        (registerForm.get('first_name').dirty || registerForm.get('first_name').touched) ">
+                      {{validation.message}}
+                    </small>
+                  </ng-container>
+                  <ng-container *ngFor="let validation of validationMessages.last_name">
+                    <small class="form-text text-danger d-block" *ngIf="registerForm.get('last_name').hasError(validation.type) &&
+                    (registerForm.get('last_name').dirty || registerForm.get('last_name').touched) ">
+                      {{validation.message}}
+                    </small>
+                  </ng-container>
+                </ng-container>
+
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" formControlName="email" id="email" id="email"
+                    placeholder="Escriba su email">
+                  <ng-container *ngFor="let validation of validationMessages.email">
+                    <small class="form-text text-danger" *ngIf="registerForm.get('email').hasError(validation.type) &&
+                          (registerForm.get('email').dirty || registerForm.get('email').touched) ">
+                      {{validation.message}}
+                    </small>
+                  </ng-container>
+                </div>
+
+                <div class="form-group">
+                  <label for="pass">Contraseña</label>
+                  <input type="password" class="form-control" formControlName="password" id="pass"
+                    placeholder="Ingrese su contraseña">
+                  <ng-container *ngFor="let validation of validationMessages.password">
+                    <small class="form-text text-danger" *ngIf="registerForm.get('password').hasError(validation.type) &&
+                    (registerForm.get('password').dirty || registerForm.get('password').touched) ">
+                      {{validation.message}}
+                    </small>
+                  </ng-container>
+                </div>
+
+                <div class=" form-check text-left">
+                  <label class=" form-check-label">
+                    <input class=" form-check-input" type="checkbox" required />
+
+                    <span class=" form-check-sign"> </span> He leído y acepto los
+                    <a href="javascript:void(0)"> terminos y condiciones </a> .
+                  </label>
+                </div>
+                <ng-container *ngIf="errorMessage">
+                  <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                </ng-container>
+
+                <div class=" card-footer">
+                  <button class=" btn btn-primary btn-lg" [disabled]="registerForm.invalid" type="submit">
+                    Registrarse
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

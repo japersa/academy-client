@@ -1,0 +1,30 @@
+<div class="fileinput text-center">
+  <input type="file" accept="image/png, image/jpeg" (change)="handleImageChange($event)" #fileInput />
+  <div class="thumbnail img-circle">
+    <img src="{{ imagePreviewUrl }}" alt="..." />
+  </div>
+  <div>
+    <button *ngIf="file === null " class="btn-round btn btn-primary d-block" (click)="handleClick()">
+      Modificar
+    </button>
+    <span *ngIf="file !== null">
+      <button class="btn-round btn btn-primary" (click)="handleSubmit($event)">
+        Subir
+      </button>
+      <br *ngIf="avatar !== ''" />
+      <button class="btn-round btn btn-danger " (click)="handleRemove()">
+        <i class="fa fa-times"></i> Eliminar
+      </button>
+    </span>
+    <ng-container *ngIf="firebaseStorageService.uploadPercent">
+      <div class=" progress-container">
+        <span class=" progress-badge"> Subiendo </span>
+        <div class=" progress">
+          <progressbar [value]="firebaseStorageService.uploadPercent | async">
+            <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}}</span>
+          </progressbar>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>

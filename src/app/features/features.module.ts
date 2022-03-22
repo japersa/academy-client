@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminLayoutModule } from './admin/layouts/admin-layout/admin-layout.module';
-
+import { AdminCoursesModule } from './teacher/pages/admin-courses/admin-courses.module';
+import { CreateCourseByStepsModule } from './teacher/pages/create-course-by-steps/create-course-by-steps.module';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
-    AdminLayoutModule
-  ], exports: [
-    AdminLayoutModule
+    AdminLayoutModule,
+    AdminCoursesModule,
+    CreateCourseByStepsModule
+  ],
+  exports: [
+    AdminLayoutModule,
+    AdminCoursesModule,
+    CreateCourseByStepsModule
   ]
 })
 export class FeaturesModule { }

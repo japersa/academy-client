@@ -1,0 +1,71 @@
+<div class=" content">
+    <div class=" row">
+        <ol class=" breadcrumb bg-transparent ml-3">
+            <li class=" breadcrumb-item text-primary">Dashboard</li>
+            <li class=" breadcrumb-item active">Cursos</li>
+        </ol>
+        <div class="offset-1 col-md-10">
+            <div class="video-player-wrapper">
+
+                <h2>{{ course?.title | uppercase}}</h2>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12">
+                        <img [src]="course?.path_preview_image" class="img-fluid" alt="Responsive image">
+                        <p class="mt-2">{{ course?.description }}</p>
+                        <button type="button" class="btn btn-primary">Presentar exámen</button>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="row" *ngFor="let t of course.modules">
+                            <div class="col-12">
+                                <h3>{{t?.name | titlecase}}</h3>
+                            </div>
+                            <div *ngFor="let c of t?.topics" class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-primary">{{c?.title | uppercase}}</h4>
+                                        <!-- <p class="card-text">{{c?.description}}</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <!-- <vg-player>
+                    <vg-overlay-play></vg-overlay-play>
+                    <vg-buffering></vg-buffering>
+
+                    <vg-scrub-bar>
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                    </vg-scrub-bar>
+
+                    <vg-controls>
+                        <vg-play-pause></vg-play-pause>
+                        <vg-playback-button></vg-playback-button>
+
+                        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                        <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+                        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+                        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                        <vg-track-selector></vg-track-selector>
+                        <vg-mute></vg-mute>
+                        <vg-volume></vg-volume>
+
+                        <vg-fullscreen></vg-fullscreen>
+                    </vg-controls>
+
+                    <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
+                        <source [src]="source" >
+                    </video>
+                </vg-player> -->
+
+            </div>
+        </div>
+    </div>
+</div>

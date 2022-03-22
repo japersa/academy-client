@@ -1,0 +1,86 @@
+<div class=" card text-left">
+    <form [formGroup]="topicForm" (ngSubmit)="createTopic(topicForm.value)" role="form">
+        <div class=" card-header">
+            <h4 class=" card-title">Crear Temario</h4>
+        </div>
+        <div class=" card-body row">
+            <div class="col-md-6">
+
+                <label> Título </label>
+                <div class=" form-group">
+                    <input class=" form-control" formControlName="title" placeholder="Título" type="text" required />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.title">
+                    <small class="text-danger d-block" *ngIf="topicForm.get('title').hasError(validation.type) &&
+                                (topicForm.get('title').dirty || topicForm.get('title').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+                <label> Descripción </label>
+                <div class=" form-group">
+
+                    <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
+                        required></textarea>
+
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.description">
+                    <small class="text-danger d-block" *ngIf="topicForm.get('description').hasError(validation.type) &&
+                                (topicForm.get('description').dirty || topicForm.get('description').touched) ">
+                        {{validation.message}}
+                    </small>
+                </ng-container>
+
+
+                <label for="formFileSm" class="form-label ">Vídeo</label>
+                <input class=" form-control" formControlName="video" id="formFileSm" type="file"
+                    accept="video/mp4, video/ogg" (change)="handleVideoChange($event)" required />
+                <ng-container *ngIf="firebaseStorageService.uploadPercent">
+                    <div class=" progress-container">
+                        <span class=" progress-badge"> Subiendo </span>
+                        <div class=" progress">
+                            <progressbar [value]="firebaseStorageService.uploadPercent | async">
+                                <span class=" progress-value"> {{firebaseStorageService.uploadPercent | async}}</span>
+                            </progressbar>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <label> Módulo </label>
+                <select class="form-select form-group d-block" formControlName="module" size="8">
+                    <option *ngFor="let m of modules" [value]="m?.id">{{ m?.name | titlecase}}</option>
+
+                </select>
+
+                <label for="formFileSm" class="form-label ">Archivos</label>
+                <input class=" form-control" formControlName="files" id="formFileSm" type="file" />
+
+
+                <ng-container *ngIf="errorMessage">
+                    <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                </ng-container>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mt-2">
+                    <h6>Instrucciones</h6>
+                    <small>Hasta aquí has creado un curso, sus módulos, y ahora agregaremos cada uno de los temas a su
+                        respectivo módulo.</small>
+                </div>
+                <div class="mt-3">
+                    <h6>Restricciones</h6>
+                    <small class="d-block">Es obligatorio agregar un vídeo en formato <strong>mp4</strong> o
+                        <strong>ogg</strong>.</small>
+                </div>
+            </div>
+
+        </div>
+        <div class=" card-footer">
+            <button class=" btn btn-fill btn-primary" [disabled]="topicForm.invalid" type="submit">
+                Enviar
+            </button>
+            <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

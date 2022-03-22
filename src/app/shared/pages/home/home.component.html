@@ -1,0 +1,29 @@
+<div class=" content">
+  <div class=" row">
+    <!-- <ol class=" breadcrumb bg-transparent ml-3">
+            <li class=" breadcrumb-item text-primary">Dashboard</li>
+            <li class=" breadcrumb-item active">Dudas y consultas</li>
+        </ol> -->
+    <div class="col-12">
+      <h3 class="m-0">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
+      <p>Continúa aprendiendo mediante su subscripción
+        <strong>{{userDataService?.userData$?.value?.subscription | titlecase}}</strong> </p>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mt-4">Cursos</h2>
+        <hr style="width: 100%;" color="green">
+      </div>
+      <div *ngFor="let c of courses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
+        <div class="card">
+          <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{c.title | uppercase}}</h5>
+            <!-- <p class="card-text">{{ c.description | slice:1:100}}...</p> -->
+            <button class="btn btn-primary" type="button" (click)="goToCourseDetail(c.id)">Ver detalles</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
