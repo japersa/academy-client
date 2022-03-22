@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from "@angular/core";
 import { Router } from "@angular/router";
 import PerfectScrollbar from "perfect-scrollbar";
 import { ToastrService } from "ngx-toastr";
+import { UserDataService } from '../../../../core/services/user-data.service';
 
 var misc: any = {
   sidebar_mini_active: true
@@ -13,7 +14,9 @@ var misc: any = {
   styleUrls: ["./admin-layout.component.scss"]
 })
 export class AdminLayoutComponent implements OnInit {
-  constructor(public router: Router, public toastr: ToastrService) {}
+  constructor(public router: Router,
+    public userDataService: UserDataService,
+    public toastr: ToastrService) { }
   @HostListener("window:scroll", ["$event"])
   showNavbarButton = () => {
     var mainPanel: any = document.getElementsByClassName("main-panel")[0];
@@ -70,12 +73,12 @@ export class AdminLayoutComponent implements OnInit {
     }
 
     // we simulate the window Resize so the charts will get updated in realtime.
-    const simulateWindowResize = setInterval(function() {
+    const simulateWindowResize = setInterval(function () {
       window.dispatchEvent(new Event("resize"));
     }, 180);
 
     // we stop the simulation of Window Resize after the animations are completed
-    setTimeout(function() {
+    setTimeout(function () {
       clearInterval(simulateWindowResize);
     }, 1000);
   }

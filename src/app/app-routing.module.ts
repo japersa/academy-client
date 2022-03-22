@@ -59,6 +59,11 @@ const routes: Routes = [
         loadChildren: () => import('./shared/pages/subscription/subscription.module')
           .then(m => m.SubscriptionModule)
       },
+      {
+        path: 'home',
+        loadChildren: () => import('./shared/pages/home/home.module')
+          .then(m => m.HomeModule)
+      },
     ]
   },
   {

@@ -27,8 +27,10 @@ export class HttpErrorInterceptor {
             console.log(error.error);
 
             if (error.status === 401) {
-              //   this.notificationsService.presentToast('Your login token has expired');
-              this.goToLogin();
+              this.router.navigate(['/sign-in'])
+            }
+            if (error.status === 403) {
+              this.router.navigate(['/home'])
             }
           }
           console.log(errorMessage);
@@ -38,7 +40,4 @@ export class HttpErrorInterceptor {
       );
   }
 
-  goToLogin() {
-    this.router.navigate(['/sign-in']);
-  }
 }
