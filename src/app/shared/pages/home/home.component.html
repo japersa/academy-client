@@ -18,9 +18,9 @@
         <div class="card">
           <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{c.title | uppercase}}</h5>
+            <h5 class="card-title text-center">{{ c.title.length > 20 ? c.title + '...': c.title | uppercase | slice:0:20}} </h5>
             <!-- <p class="card-text">{{ c.description | slice:1:100}}...</p> -->
-            <button class="btn btn-primary" type="button" (click)="goToCourseDetail(c.id)">Ver detalles</button>
+            <button class="btn btn-simple btn-primary btn-block" type="button" (click)="goToCourseDetail(c.id)">IR AL CURSO</button>
           </div>
         </div>
       </div>

@@ -16,7 +16,8 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
 
   modules = [];
 
-  event = null;
+  eventFiles = null;
+  eventVideo = null;
 
   topicForm: FormGroup;
   validationMessages: any;
@@ -61,14 +62,24 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
   }
 
   createTopic(dataForm: any) {
-    this.firebaseStorageService.uploadCourseVideo(this.event, dataForm);
+    this.createTopicFile();
+    this.firebaseStorageService.uploadCourseVideo(this.eventVideo, dataForm);
     this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
       this.showEvent.emit(false);
     })).subscribe();
   }
 
+  createTopicFile() {
+    this.firebaseStorageService.uploadCourseFiles(this.eventFiles);
+    this.firebaseStorageService.uploadPercentFiles.subscribe();
+  }
+
   handleVideoChange(event) {
-    this.event = event;
+    this.eventVideo = event;
+  }
+
+  handleFilesChange(event) {
+    this.eventFiles = event;
   }
 
   cancelCreate() {
@@ -94,6 +105,7 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+
     this.subscriptions.forEach((subscription) => {
       if (subscription !== undefined) {
         subscription.unsubscribe();

@@ -24,8 +24,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService,
-    private sanitizer: DomSanitizer) {
-    // this.source = this.sanitizer.bypassSecurityTrustResourceUrl('https://firebasestorage.googleapis.com/v0/b/mistrades-b043d.appspot.com/o/y2mate.com%20-%20Linkin%20Park%20feat%20Travis%20Barker%20%20Bleed%20It%20Out_480p.mp4?alt=media&token=df12c13b-7e0a-4fa8-956a-d5ff9dacfee5');
+  ) {
 
     this.subscription1$ = this.route.paramMap.subscribe((params: ParamMap) => {
       this.courseId = params.get('id');

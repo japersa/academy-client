@@ -14,6 +14,9 @@ export const environment = {
     storageBucket: 'mistrades-b043d.appspot.com',
     messagingSenderId: '508708256791',
     appId: '1:508708256791:web:2f02493b480f80ec79f052'
+  },
+  recaptcha: {
+    siteKey: '6LdJGV4fAAAAAMXk2Faeso4ZvN8LbiXElUhwU2pB',
   }
 };
 

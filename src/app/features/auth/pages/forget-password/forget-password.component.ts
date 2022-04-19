@@ -8,7 +8,8 @@ import { NotificationsService } from 'src/app/core/services/notifications.servic
 
 @Component({
   selector: 'app-register',
-  templateUrl: 'forget-password.component.html'
+  templateUrl: 'forget-password.component.html',
+  styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit, OnDestroy {
 

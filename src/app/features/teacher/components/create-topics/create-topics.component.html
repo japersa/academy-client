@@ -45,14 +45,25 @@
                     </div>
                 </ng-container>
 
-                <label> Módulo </label>
+                <label class="form-label "> Módulo </label>
                 <select class="form-select form-group d-block" formControlName="module" size="8">
                     <option *ngFor="let m of modules" [value]="m?.id">{{ m?.name | titlecase}}</option>
 
                 </select>
 
-                <label for="formFileSm" class="form-label ">Archivos</label>
-                <input class=" form-control" formControlName="files" id="formFileSm" type="file" />
+                <label for="formFileSm" class="form-label mt-2 ">Archivos</label>
+                <input class=" form-control" formControlName="files" id="formFileSm" multiple (change)="handleFilesChange($event)" type="file" />
+                <ng-container *ngIf="firebaseStorageService.uploadPercentFiles">
+                    <div class=" progress-container">
+                        <span class=" progress-badge"> Subiendo </span>
+                        <div class=" progress">
+                            <progressbar [value]="firebaseStorageService.uploadPercentFiles | async">
+                                <span class=" progress-value"> {{firebaseStorageService.uploadPercentFiles | async}}</span>
+                            </progressbar>
+                        </div>
+                    </div>
+                </ng-container>
+                <button (click)="createTopicFile()" type="button">sunbor</button>
 
 
                 <ng-container *ngIf="errorMessage">

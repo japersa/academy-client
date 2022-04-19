@@ -1,0 +1,52 @@
+.card-title {
+    font-weight: 600 !important;
+    color: hsl(0, 0%, 50%) !important;
+    margin-top: 50px !important;
+    margin-left: 0px !important;
+    margin-right: 20px !important;
+    font-size: 50px !important;
+    text-transform: uppercase !important;
+}
+
+.card-header {
+    height: 180px !important;
+}
+
+.card-header {
+    background-image: url('https://res.cloudinary.com/mistrades-com/image/upload/v1643666032/assets/Sign%20up/banner-registro_vzgark.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    padding-bottom: 0px !important;
+    background-size: 100% !important;
+}
+
+.full-page {
+    background-image: url('https://res.cloudinary.com/mistrades-com/image/upload/v1649870836/assets/fondo_r7arg0.jpg') !important;
+}
+
+.mini-icon{
+    height: 45px !important;
+    width: 45px !important;
+}
+
+.info-title {
+    margin-bottom: 7px !important;
+    font-weight: 700 !important;
+}
+
+.logo {
+    width: 80% !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .card-title {
+        margin-top: 20px !important;
+        font-size: 40px !important;
+    }
+    .card-header {
+        height: 100px !important;
+    }
+    .logo {
+        padding-left: 30px !important;
+    }
+}

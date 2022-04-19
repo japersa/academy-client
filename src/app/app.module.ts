@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+
 // Core Modules
 import { CoreModule } from './core/core.module';
 
@@ -26,6 +27,7 @@ import { SharedModule } from './shared/shared.module';
 import { ComponentsModule } from './shared/components/components.module';
 
 import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { environment } from 'src/environments/environment';
     SharedModule,
     FeaturesModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

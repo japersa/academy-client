@@ -15,7 +15,10 @@ export class FirebaseStorageService {
 
   course: any = {};
 
+  downloadURLsFiles = [];
+
   uploadPercent: Observable<number>;
+  uploadPercentFiles: Observable<number>;
 
   constructor(private storage: AngularFireStorage,
     private editUserService: EditUserService,
@@ -25,10 +28,9 @@ export class FirebaseStorageService {
     public notificationService: NotificationsService) { }
 
   uploadAvatar(event) {
-    const randomId = Math.random().toString(36).substring(2);
 
     const file = event.target.files[0];
-    const filePath = `/mistrades/uploads/avatares/${randomId}`;
+    const filePath = `/mistrades/uploads/avatares/${this.userDataService.getUsername()}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -180,7 +182,8 @@ export class FirebaseStorageService {
             title: dataForm.title,
             description: dataForm.description,
             video: videoUrl,
-            module: dataForm.module
+            module: dataForm.module,
+            files: this.downloadURLsFiles
           }
 
           console.log('topic', data);
@@ -200,8 +203,36 @@ export class FirebaseStorageService {
 
   }
 
+  uploadCourseFiles(event) {
+
+    const files = event.target.files;
+
+    for (const file of files) {
+      const randomId = Math.random().toString(36).substring(2);
+
+      const filePath = `/mistrades/uploads/courses/files/${randomId + '-' + Date.now()}`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+
+      this.downloadURLsFiles = [];
+
+      // observe percentage changes
+      this.uploadPercentFiles = task.percentageChanges();
+
+      // get notified when the download URL is available
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.downloadURLsFiles.push({name: file.name, path: filePath, url})
+          });
+        })
+      ).subscribe();
+
+    }
+
+  }
+
   updateCourseVideo(event, dataForm, id: string) {
-    console.log(event);
 
     if (event === (undefined || null)) {
       this.updateVideo(dataForm, id)

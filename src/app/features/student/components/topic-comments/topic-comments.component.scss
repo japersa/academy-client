@@ -1,0 +1,32 @@
+.wrapper {
+    overflow-y: scroll;
+}
+.card {
+    border: none;
+    border-radius: 4px;
+    width: 100% !important;
+}
+
+.badge {
+    padding: 7px;
+    padding-right: 9px;
+    padding-left: 16px;
+    box-shadow: 5px 6px 6px 2px #e9ecef
+}
+
+.user-img {
+    margin-top: 4px
+}
+
+.icons i {
+    margin-left: 8px
+}
+
+.reply small {
+    color: #b7b4b4
+}
+
+.reply small:hover {
+    color: green;
+    cursor: pointer
+}

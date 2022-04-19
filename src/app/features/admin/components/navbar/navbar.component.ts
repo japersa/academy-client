@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
 import { UserDataService } from '../../../../core/services/user-data.service';
+import { NotificationsService } from '../../../../core/services/notifications.service';
 
 var misc: any = {
   sidebar_mini_active: true
@@ -24,8 +25,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     public toastr: ToastrService,
     private authService: AuthService,
-    public userDataService: UserDataService
+    public userDataService: UserDataService,
+    private notificationsService: NotificationsService
   ) {
+
   }
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
   updateColor = () => {
@@ -70,6 +73,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.notificationsService.getDBNotifications();
+
     window.addEventListener('resize', this.updateColor);
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];

@@ -1,0 +1,19 @@
+.notification {
+    background: #0AC116 !important;
+    color: #ffffff;
+    border-radius: 0.875rem;
+    height: 6px;
+    width: 6px;
+    position: absolute;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    top: 10px;
+    right: 10px;
+    border: 1px solid #0AC116 !important;
+}
+
+.noti-icon {
+    height: 30px !important;
+    width: 30px !important;
+}

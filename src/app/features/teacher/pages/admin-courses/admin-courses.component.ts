@@ -30,7 +30,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   topics = [];
   topicEdit = {};
 
-  showFormCreateTopic = false;
+  showFormCreateTopic = true;
   showFormEditTopic = false;
 
   // QUIZZES
@@ -381,6 +381,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     // GET TOPICS
     this.subscription3$ = this.coursesService.getTopics().subscribe(res => {
       Object.assign(this.topics, res);
+      console.log(res);
+      
     },
       error => {
         console.log('Error: ', error);

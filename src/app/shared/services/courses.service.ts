@@ -49,7 +49,7 @@ export class CoursesService {
   }
 
   getModuleById(id: string): Observable<any> {
-    const route = `/retrieve/modules/${id}/`;
+    const route = `/retrieve/module/${id}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 

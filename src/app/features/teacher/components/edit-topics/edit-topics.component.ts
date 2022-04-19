@@ -85,6 +85,8 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   getTopicName() {
     this.subscription3$ = this.coursesService.getModuleById(this.topic.module_id).subscribe(res => {
       this.currentModule = res.id
+      console.log(res);
+      
     },
       error => {
         console.log(error.error);

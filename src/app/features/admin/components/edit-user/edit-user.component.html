@@ -56,28 +56,30 @@
                         <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
                     </ng-container>
                 </div>
-                <div class="  col-md-6">
-                    <div class=" row">
-                        <label class=" col-sm-2 col-form-label">
-                            Suscripción
-                        </label>
-                        <div class=" col-sm-10 checkbox-radios">
-                            <div *ngFor="let s of subscriptions" class=" form-check form-check-radio">
-                                <label class=" form-check-label">
-                                    <input class=" form-check-input" formControlName="subscription" type="radio"
-                                        [value]="s.sub" required />
-                                    <span class=" form-check-sign"> </span> {{s.name | titlecase}}
-                                </label>
+                <ng-container *ngIf="createUserForm.value.role === 'teacher' || createUserForm.value.role ===  'student'">
+                    <div class="  col-md-6">
+                        <div class=" row">
+                            <label class=" col-sm-2 col-form-label">
+                                Suscripción
+                            </label>
+                            <div class=" col-sm-10 checkbox-radios">
+                                <div *ngFor="let s of subscriptions" class=" form-check form-check-radio">
+                                    <label class=" form-check-label">
+                                        <input class=" form-check-input" formControlName="subscription" type="radio"
+                                            [value]="s.sub" required />
+                                        <span class=" form-check-sign"> </span> {{s.name | titlecase}}
+                                    </label>
+                                </div>
                             </div>
                         </div>
+                        <ng-container *ngIf="createUserForm.value.subscription === 'basic' && courses.length > 0">
+                            <label> Curso </label>
+                            <select class="form-select form-group d-block" formControlName="courses_ids" size="4" multiple>
+                                <option *ngFor="let c of courses" [value]="c?.id">{{ c?.title | titlecase}}</option>
+                            </select>
+                        </ng-container>
                     </div>
-                    <ng-container *ngIf="createUserForm.value.subscription === 'basic' && courses.length > 0">
-                        <label> Curso </label>
-                        <select class="form-select form-group d-block" formControlName="courses_ids" size="4" multiple>
-                            <option *ngFor="let c of courses" [value]="c?.id">{{ c?.title | titlecase}}</option>
-                        </select>
-                    </ng-container>
-                </div>
+                </ng-container>
             </div>
             <div class=" card-footer">
                 <button class=" btn btn-fill btn-primary" [disabled]="createUserForm.invalid" type="submit">

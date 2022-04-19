@@ -95,7 +95,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
     let data = {}
 
-    if (dataFrom.subscription === 'basic') {
+    if (dataFrom.subscription === SUBS.BASIC) {
       data = {
         username: dataFrom.email,
         first_name: dataFrom.first_name,

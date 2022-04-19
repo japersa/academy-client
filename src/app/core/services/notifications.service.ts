@@ -1,11 +1,24 @@
-import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
+import { take } from 'rxjs/operators';
+
+const apiURL = environment.apiURL;
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
-  constructor(public toastr: ToastrService) { }
+
+  public notifications = [];
+
+  subscription1$: Subscription;
+
+  headers = new HttpHeaders();
+
+  constructor(private http: HttpClient, public toastr: ToastrService) { }
 
   showNotification(from: string, align: string, text: string, color: number) {
 
@@ -79,4 +92,18 @@ export class NotificationsService {
         break;
     }
   }
+
+  getDBNotifications() {
+    const route = '/list/my/notifications/';
+
+    this.subscription1$ = this.http.get<any>(`${apiURL}${route}`, { headers: this.headers }).pipe(take(1)).subscribe(res => {
+      console.log('Notifications: ',res);
+      // Object.assign(this.unansweredQuestion, res)
+    },
+      error => {
+        console.log('error ' + error.error);
+      });
+
+  }
+
 }
