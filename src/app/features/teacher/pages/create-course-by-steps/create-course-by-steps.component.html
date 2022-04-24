@@ -6,14 +6,17 @@
         </ol>
         <div class="col-md-10 mr-auto ml-auto">
             <div class=" wizard-container">
-                <div class="bs-stepper card card-wizard" data-color="red" id="wizardProfile">
-                    <div class="card-header text-center">
-                        <h3 class=" card-title">Wizard</h3>
-                        <h5 class=" description">
+                <div class="bs-stepper card card-wizard" data-color="primary" id="wizardProfile">
+                    <div class="card-header text-left">
+                        <h3 class=" card-title">CREAR NUEVO CURSO</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quibusdam vel recusandae
+                            neque! Numquam inventore autem iusto? Nemo, itaque maxime! At, asperiores. Voluptates,
+                            inventore. Amet non praesentium quidem saepe adipisci?</p>
+                        <h2 class="description mt-40">
                             Crear curso paso a paso
-                        </h5>
-                        <div class=" wizard-navigation">
-                            <div class=" progress-with-circle">
+                        </h2>
+                        <div class=" wizard-navigation progress-primary">
+                            <div class=" progress-with-circle progress-primary">
                                 <progressbar class="progress-bar" [value]="value">
                                 </progressbar>
                             </div>
@@ -22,26 +25,27 @@
                                     <a class="step-trigger nav-link active" [ngClass]="{ checked: checked }" (click)="
                                     value = 15; $event.preventDefault(); checked = true
                                   ">
-                                        <i class=" tim-icons icon-single-02" (click)="checked = true">
-                                        </i>
                                         <p (click)="checked = true">Curso</p>
+                                    </a>
+                                </li>
+                                <li class="step nav-item" data-target="#module">
+                                    <a class="step-trigger nav-link active" [ngClass]="{ checked: checked }" (click)="
+                                    value = 38; $event.preventDefault(); checked = true
+                                  ">
+                                        <p (click)="checked = true">Módulo</p>
                                     </a>
                                 </li>
                                 <li class="step nav-item" data-target="#topics">
                                     <a class="step-trigger nav-link" [ngClass]="{ checked: checked1 }" (click)="
-                                    value = 50; $event.preventDefault(); checked1 = true
+                                    value = 64; $event.preventDefault(); checked1 = true
                                   ">
-                                        <i class=" tim-icons icon-settings-gear-63" (click)="checked1 = true">
-                                        </i>
                                         <p (click)="checked1 = true">Temarios</p>
                                     </a>
                                 </li>
                                 <li class="step nav-item" data-target="#quizzes">
                                     <a class="step-trigger nav-link" [ngClass]="{ checked: checked2 }" (click)="
-                                    value = 85; $event.preventDefault(); checked2 = true
+                                    value = 100; $event.preventDefault(); checked2 = true
                                   ">
-                                        <i class=" tim-icons icon-delivery-fast" (click)="checked2 = true">
-                                        </i>
                                         <p (click)="checked2 = true">Exámen</p>
                                     </a>
                                 </li>
@@ -50,19 +54,16 @@
                     </div>
                     <div class="bs-stepper-content card-body">
                         <div class=" tab-content">
-                            <!-- COURSE AND MODULES -->
+                            <!-- COURSE -->
                             <div class=" tab-pane show" id="course">
                                 <div class=" row justify-content-center mt-5">
                                     <!-- COURSE -->
                                     <ng-container *ngIf="showCourse">
                                         <form class=" form" [formGroup]="courseForm"
                                             (ngSubmit)="createCourse(courseForm.value)" role="form">
-                                            <div class=" col-sm-12">
-                                                <h5 class=" info-text"> Comencemos con la información básica</h5>
-                                            </div>
 
-                                            <div class=" col-sm-12 text-center">
-                                                <h3> Crear curso</h3>
+                                            <div class=" col-sm-12 text-left">
+                                                <h3 class="card-subtitle"> CREAR NUEVO CURSO</h3>
                                             </div>
 
                                             <div class="row p-3">
@@ -133,6 +134,8 @@
                                                             *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small>
                                                         <br>
                                                     </ng-container>
+
+
                                                 </div>
                                                 <div class="col-sm-6">
 
@@ -166,17 +169,23 @@
                                             <div class="col-sm-12">
                                                 <button class=" btn btn-fill btn-primary"
                                                     [disabled]="courseForm.invalid" type="submit">
-                                                    Enviar
+                                                    Guardar
                                                 </button>
                                                 <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()"
                                                     type="button">
-                                                    Cancelar
+                                                    Borrar
                                                 </button>
                                             </div>
                                         </form>
                                     </ng-container>
-                                    <!-- MODULE -->
-                                    <ng-container *ngIf="!showCourse">
+
+                                </div>
+                            </div>
+                            <!-- MODULE -->
+                            <div class=" tab-pane show" id="module">
+                                <div class=" row justify-content-center mt-5">
+
+                                    <ng-container *ngIf="showModule">
                                         <form [formGroup]="moduleForm" (ngSubmit)="createModule(moduleForm.value)"
                                             role="form">
                                             <div class=" col-sm-12">
@@ -198,7 +207,7 @@
                                                     <ng-container *ngFor="let validation of validationMessages.title">
                                                         <small class="text-danger d-block"
                                                             *ngIf="moduleForm.get('name').hasError(validation.type) &&
-                                                                        (moduleForm.get('name').dirty || moduleForm.get('name').touched) ">
+                                                                            (moduleForm.get('name').dirty || moduleForm.get('name').touched) ">
                                                             {{validation.message}}
                                                         </small>
                                                     </ng-container>
@@ -249,6 +258,7 @@
                                             </div>
                                         </form>
                                     </ng-container>
+
                                 </div>
                             </div>
                             <!-- TOPICS -->
@@ -489,15 +499,17 @@
                     </div>
                     <div class=" card-footer">
                         <div class=" pull-right">
-                            <input class=" btn btn-next btn-fill btn-danger btn-wd" name="next" type="submit"
-                                value="SIGUIENTE" (click)="next()" />
+                            <input class="btn btn-simple btn-primary btn-lg" name="next" type="submit"
+                                value="SIGUIENTE PASO" (click)="next()" />
+
+                            <!-- btn btn-simple btn-twitter -->
 
                             <input class=" btn btn-finish btn-fill btn-primary btn-wd" name="finish" type="button"
                                 value="FINALIZAR" />
                         </div>
                         <div class=" pull-left">
-                            <input class=" btn btn-previous btn-fill btn-default btn-wd" name="previous" type="button"
-                                (click)="previous()" value="ANTERIOR" />
+                            <input class=" btn btn-simple btn-danger btn-lg" name="previous" type="button"
+                                (click)="previous()" value="ANTERIOR ANTERIOR" />
                         </div>
                         <div class=" clearfix"></div>
                     </div>

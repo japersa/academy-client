@@ -24,6 +24,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   courseForm: FormGroup;
 
   // MODULES
+  showModule = true;
 
   moduleForm: FormGroup;
   modules = [];
@@ -150,7 +151,6 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
     this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
     this.subscription1$ = this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
       this.courseForm.reset();
-      this.showCourse = false;
       this.event = null;
       this.errorMessage = '';
     })).subscribe();
@@ -304,9 +304,9 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
     // if (this.formWizard.valid) {
     //   console.log("aici");
     // }
-    if (this.value < 51) {
+    if (this.value < 77) {
       this.step++;
-      this.value += 35;
+      this.value += 24;
     }
     if (this.step === 1) {
       this.checked = true;
@@ -320,7 +320,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   previous() {
     this.stepper.previous();
     if (this.value > 15) {
-      this.value -= 35;
+      this.value -= 24;
       this.step--;
     }
   }
