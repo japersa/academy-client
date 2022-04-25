@@ -33,6 +33,11 @@ const routes: Routes = [
         loadChildren: () => import('./features/auth/pages/forget-password/forget-password.module')
           .then(m => m.ForgetPasswordModule)
       },
+      {
+        path: 'pricing', // falta disenho
+        loadChildren: () => import('./features/auth/pages/pricing/pricing.module')
+          .then(m => m.PricingModule)
+      },
     ]
   },
   {
