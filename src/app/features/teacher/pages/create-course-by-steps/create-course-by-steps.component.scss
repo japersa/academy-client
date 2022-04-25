@@ -50,3 +50,20 @@
     border-width: 1px !important;
     border-radius: 3px !important;
 }
+
+h6 {
+    color: #0AC116 !important;
+}
+
+small, label {
+    color: white !important;
+}
+
+.text-danger{
+    color: var(--danger) !important;
+}
+
+.text-respuesta {
+    color: var(--primary) !important;
+    font-size: 1.2em !important;
+}

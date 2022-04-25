@@ -22,7 +22,9 @@
         </div>
         <div class=" card-body">
           <!--GRAFICA DE NUEVOS ESTUDIANTES (bug)-->
-          <div class=" chart-area"><canvas id="chartBig1"> </canvas></div>
+          <div class=" chart-area">
+            <canvas id="chartBig1"> </canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -121,7 +123,7 @@
         <h2>Cursos</h2>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right d-none d-lg-block d-md-none d-lg-none">
-        <button class="btn btn-primary " type="button" >CREAR CURSO</button>
+        <button class="btn btn-primary " type="button">CREAR CURSO</button>
       </div>
       <hr style="width: 100%;" color="green">
       <div *ngFor="let c of courses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
@@ -130,7 +132,8 @@
           height: 200px;" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{ (c.title.length > 20 ? c.title + '...' : c.title) | uppercase | slice:0:20}}</h5>
-            <button class="btn btn-simple btn-primary btn-block" type="button" (click)="goToCourseDetail(c.id)">IR AL CURSO</button>
+            <button class="btn btn-simple btn-primary btn-block" type="button" (click)="goToCourseDetail(c.id)">IR AL
+              CURSO</button>
           </div>
         </div>
       </div>

@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     //   });
   }
 
-  //Muestra el total de alumnos, docentes y administradores
+  // Muestra el total de alumnos, docentes y administradores
   showGeneralStatistics() {
     this.subscription3$ = this.dashboardService
       .getUsersByCount()
@@ -72,41 +72,47 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       );
   }
-  //Le dá los valores a los labels de la gráfica de nuevos usuarios
+  // Le dá los valores a los labels de la gráfica de nuevos usuarios
   setDataLabel() {
-    var currentMonth = new Date().getMonth();
-    var normalYear = this.dataLabel;
-    var moddedYear = [];
-    var variableMonth = currentMonth;
-    for (var i = normalYear.length - 1; i >= 0; i--) {
+    const currentMonth = new Date().getMonth();
+    const normalYear = this.dataLabel;
+    const moddedYear = [];
+    let variableMonth = currentMonth;
+    for (let i = normalYear.length - 1; i >= 0; i--) {
       moddedYear[i] = normalYear[variableMonth];
       variableMonth = variableMonth - 1;
       if (variableMonth < 0) {
         variableMonth = 11;
       }
-      if (variableMonth == currentMonth) {
+      if (variableMonth === currentMonth) {
         break;
       }
     }
     this.dataLabel = moddedYear;
     return this.dataLabel;
   }
-  //Llena la gráfica con la información de nuevos usuarios por mes
-  fillChart() {
+
+  // Llena la gráfica con la información de nuevos usuarios por mes
+  getDataChart() {
     this.subscription2$ = this.dashboardService.getUsersByCount().pipe(take(1)).subscribe(
       (res) => {
-        //debugger
-        var data = res.avg_users_months[0];
-        var currentMonth = new Date().getMonth();
-        var count = 0;
-        for (var i = 11; i >= 0; i--) {
-          if (data[i] != undefined) {
-            this.dataChart.push(data[i].users)
+        // debugger
+
+        const data = res.avg_users_months[0];
+        let count = 0;
+
+        for (let i = 11; i >= 0; i--) {
+
+          if (data[i] !== undefined) {
+            this.dataChart.push(data[i]?.users)
+
           } else {
             this.dataChart.push(0)
           }
           count++
         }
+
+        this.fillChart()
 
         this.dataChartFix = [
           '' + this.dataChart[0],
@@ -130,36 +136,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  fillCourses() {
-    this.subscription1$ = this.dashboardService.getAdminCourses().pipe(take(1)).subscribe(res => {
-
-      Object.assign(this.courses, res);
-
-    },
-      error => {
-        console.log(error);
-      });
-  }
-
-  goToCourseDetail(id: string) {
-
-    this.router.navigate([`/courses/${id}`])
-
-  }
-
-  ngOnInit() {
-    //debugger
-    this.getAdmins();
-    this.setDataLabel();
-    this.showGeneralStatistics();
-    this.fillChart();
-    this.fillCourses();
-
-    // Subs
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-    this.subscriptions.push(this.subscription3$);
-
+  fillChart() {
     var gradientChartOptionsConfigurationWithTooltipRed: any = {
       maintainAspectRatio: false,
       legend: {
@@ -262,7 +239,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]
+            data: this.dataChart
             // this.dataChart
           },
         ],
@@ -270,6 +247,39 @@ export class DashboardComponent implements OnInit, OnDestroy {
       options: gradientChartOptionsConfigurationWithTooltipRed,
     };
     this.myChartData = new Chart(this.ctx, config);
+
+  }
+
+  getCourses() {
+    this.subscription1$ = this.dashboardService.getAdminCourses().pipe(take(1)).subscribe(res => {
+
+      Object.assign(this.courses, res);
+
+    },
+      error => {
+        console.log(error);
+      });
+  }
+
+  goToCourseDetail(id: string) {
+
+    this.router.navigate([`/courses/${id}`])
+
+  }
+
+  ngOnInit() {
+    //debugger
+    this.getAdmins();
+    this.setDataLabel();
+    this.showGeneralStatistics();
+    this.getDataChart();
+    this.getCourses();
+
+    // Subs
+    this.subscriptions.push(this.subscription1$);
+    this.subscriptions.push(this.subscription2$);
+    this.subscriptions.push(this.subscription3$);
+
   }
 
   ngOnDestroy(): void {

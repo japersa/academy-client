@@ -20,12 +20,9 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   event = null;
 
   // COURSE
-  showCourse = true;
   courseForm: FormGroup;
 
   // MODULES
-  showModule = true;
-
   moduleForm: FormGroup;
   modules = [];
 
@@ -44,17 +41,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   checked = false;
   checked1 = false;
   checked2 = false;
-
-  focus;
-  focus1;
-  focus2;
-  focus3;
-  focus4;
-
-  focusTouched;
-  focus1Touched;
-  focus2Touched;
-  focus3Touched;
+  checked3 = false;
 
   public formWizard: FormGroup;
   wizard = false;
@@ -170,7 +157,6 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
       this.notificationsService.showNotification('bottom', 'center', 'Módulo creado con éxito', 2);
       this.moduleForm.reset();
       this.modules.push(res);
-      this.showCourse = false;
       this.event = null;
       this.errorMessage = '';
     },
@@ -330,8 +316,28 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
 
   // GENERAL
 
-  cancelCreate() {
-    this.showCourse = !this.showCourse;
+  reset(form: number) {
+    switch (form) {
+      case 1:
+        this.courseForm.reset();
+        break;
+
+      case 2:
+        this.moduleForm.reset();
+        break;
+
+      case 3:
+        this.topicForm.reset();
+        break;
+
+      case 4:
+        this.quizForm.reset();
+        break;
+
+      default:
+        break;
+    }
+
   }
 
   ngOnInit() {

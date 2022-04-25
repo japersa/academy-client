@@ -1,6 +1,6 @@
 <div class="content">
   <div class="row">
-    <div class="col-md-8">
+    <div class="offset-md-1 col-md-7">
       <div class="card">
         <div class="card-header">
           <h4 class="title">Editar perfil</h4>
@@ -71,11 +71,12 @@
             <div class="card-footer">
               <div class="row">
                 <div class="col-md-6 pr-md-1">
-                  <button class="btn btn-fill btn-primary" [disabled]="updateForm.invalid" type="submit">Guardar</button>
+                  <button class="btn btn-fill btn-primary" [disabled]="updateForm.invalid"
+                    type="submit">GUARDAR</button>
                 </div>
                 <div class=" pull-right col-md-6 pl-md-1" *ngIf="showButtonPassword">
                   <button type="button" class="btn btn-link text-primary text-uppercase" (click)="showUpdatePassword()">
-                    Actualizar contraseña
+                    CAMBIAR CONTRASEÑA
                   </button>
                 </div>
               </div>
@@ -85,7 +86,7 @@
       </div>
       <div class="card" *ngIf="showPasswordField">
         <div class="card-header">
-          <h4 class="title">Actualizar contraseña</h4>
+          <h4 class="title">CAMBIAR CONTRASEÑA</h4>
         </div>
         <div class="card-body">
           <form class="form" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword(updatePasswordForm.value)"
@@ -118,7 +119,8 @@
             <div class="card-footer">
               <div class="row">
                 <div class="col-md-6 pr-md-1">
-                  <button class="btn btn-fill btn-primary" [disabled]="updatePasswordForm.invalid"  type="submit">Actualizar</button>
+                  <button class="btn btn-fill btn-primary" [disabled]="updatePasswordForm.invalid"
+                    type="submit">Actualizar</button>
                 </div>
                 <div class="col-md-6 pl-md-1">
                   <button class="btn btn-fill btn-danger" (click)="showUpdatePassword()"> Cancelar</button>
@@ -281,15 +283,12 @@
       </div>
 
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card card-user">
         <div class="card-body">
           <p class="card-text"></p>
           <div class="author">
-            <div class="block block-one"></div>
-            <div class="block block-two"></div>
-            <div class="block block-three"></div>
-            <div class="block block-four"></div>
+
             <a href="javascript:void(0)">
               <app-picture-upload></app-picture-upload>
 
@@ -297,10 +296,9 @@
             </a>
           </div>
           <div class="card-description" style="text-align: center">
+            <p class="description text-primary">{{rol | titlecase}}</p>
+            <p>{{username}}</p>
             <p class="description">{{ userDataService?.userData$?.value.subscription | titlecase}}</p>
-            <p class="description">{{rol | titlecase}}</p>
-            {{username}} <br>
-            {{ userDataService?.userData$?.value.phone_number }}
           </div>
         </div>
       </div>

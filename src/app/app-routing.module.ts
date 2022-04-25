@@ -11,7 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'course-by-steps',
+    redirectTo: 'ama',
     pathMatch: 'full'
   },
   {
@@ -46,7 +46,7 @@ const routes: Routes = [
           .then(m => m.DashboardModule)
       },
       {
-        path: 'profile', // falta disenho
+        path: 'profile', // revision
         loadChildren: () => import('./shared/pages/user/user-profile.module')
           .then(m => m.UserModule)
       },
@@ -56,7 +56,7 @@ const routes: Routes = [
           .then(m => m.AdminsModule)
       },
       {
-        path: 'course-by-steps', // falta disenho
+        path: 'course-by-steps', // revision
         loadChildren: () => import('./features/teacher/pages/create-course-by-steps/create-course-by-steps.module')
           .then(m => m.CreateCourseByStepsModule)
       },
@@ -66,7 +66,7 @@ const routes: Routes = [
           .then(m => m.AdminCoursesModule)
       },
       {
-        path: 'ama', // ama
+        path: 'ama', // revision
         loadChildren: () => import('./features/teacher/pages/ama/ama.module')
           .then(m => m.AmaModule)
       },
@@ -76,22 +76,22 @@ const routes: Routes = [
           .then(m => m.CoursesModule)
       },
       {
-        path: 'subscription', // ama
+        path: 'subscription', // falta disenho
         loadChildren: () => import('./shared/pages/subscription/subscription.module')
           .then(m => m.SubscriptionModule)
       },
       {
-        path: 'home', // ama
+        path: 'home',
         loadChildren: () => import('./shared/pages/home/home.module')
           .then(m => m.HomeModule)
       },
       {
-        path: 'test',
+        path: 'test', // falta terminar
         loadChildren: () => import('./features/student/pages/test/test.module')
           .then(m => m.TestModule)
       },
       {
-        path: 'class',
+        path: 'class',  // falta terminar
         loadChildren: () => import('./features/student/pages/class/class.module')
           .then(m => m.ClassModule)
       },
