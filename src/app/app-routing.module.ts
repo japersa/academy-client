@@ -51,7 +51,7 @@ const routes: Routes = [
           .then(m => m.DashboardModule)
       },
       {
-        path: 'profile', // revision
+        path: 'profile',
         loadChildren: () => import('./shared/pages/user/user-profile.module')
           .then(m => m.UserModule)
       },
@@ -61,7 +61,7 @@ const routes: Routes = [
           .then(m => m.AdminsModule)
       },
       {
-        path: 'course-by-steps', // revision
+        path: 'course-by-steps',
         loadChildren: () => import('./features/teacher/pages/create-course-by-steps/create-course-by-steps.module')
           .then(m => m.CreateCourseByStepsModule)
       },
@@ -71,7 +71,7 @@ const routes: Routes = [
           .then(m => m.AdminCoursesModule)
       },
       {
-        path: 'ama', // revision
+        path: 'ama',
         loadChildren: () => import('./features/teacher/pages/ama/ama.module')
           .then(m => m.AmaModule)
       },

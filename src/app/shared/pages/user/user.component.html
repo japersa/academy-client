@@ -1,4 +1,8 @@
 <div class="content">
+  <div class="offset-md-1 col-md-7">
+    <h4 class="text-primary">{{rol | titlecase}}</h4>
+    <h1 class="text-primary title">{{userDataService?.userData$?.value.first_name | uppercase}}</h1>
+  </div>
   <div class="row">
     <div class="offset-md-1 col-md-7">
       <div class="card">
@@ -131,161 +135,10 @@
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-header">
-          <h4 class="title">Cursos</h4>
-        </div>
-        <div class="card-body">
-          <div class=" row">
-            <div class="col-lg-4 col-md-5">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-5">
-                      <div class="info-icon text-center icon-warning">
-                        <i class="tim-icons icon-chat-33"> </i>
-                      </div>
-                    </div>
-                    <div class="col-7">
-                      <div class="numbers">
-                        <p class="card-category">Curso</p>
-                        <h6 class="card-title">Fundamentos del trading</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <hr />
-                  <div class="stats">
-                    <button class="btn btn-simple btn-info btn-sm pull-left" type="submit">
-                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-5">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-5">
-                      <div class="info-icon text-center icon-primary">
-                        <i class="tim-icons icon-shape-star"> </i>
-                      </div>
-                    </div>
-                    <div class="col-7">
-                      <div class="numbers">
-                        <p class="card-category">Curso</p>
-                        <h6 class="card-title">+45k</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <hr />
-
-                  <div class="stats">
-                    <button class="btn btn-simple btn-info btn-sm" type="submit">
-                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-5">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-5">
-                      <div class="info-icon text-center icon-success">
-                        <i class="tim-icons icon-single-02"> </i>
-                      </div>
-                    </div>
-                    <div class="col-7">
-                      <div class="numbers">
-                        <p class="card-category">Curso</p>
-                        <h6 class="card-title">150,000</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <hr />
-
-                  <div class="stats">
-                    <button class="btn btn-simple btn-info btn-sm" type="submit">
-                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-5">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-5">
-                      <div class="info-icon text-center icon-danger">
-                        <i class="tim-icons icon-molecule-40"> </i>
-                      </div>
-                    </div>
-                    <div class="col-7">
-                      <div class="numbers">
-                        <p class="card-category">Curso</p>
-                        <h6 class="card-title">¿Cómo invertir mi capital?</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <hr />
-
-                  <div class="stats">
-                    <button class="btn btn-simple btn-info btn-sm" type="submit">
-                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-5">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-5">
-                      <div class="info-icon text-center icon-danger">
-                        <i class="tim-icons icon-molecule-40"> </i>
-                      </div>
-                    </div>
-                    <div class="col-7">
-                      <div class="numbers">
-                        <p class="card-category">Curso</p>
-                        <h6 class="card-title">¿Cómo invertir mi capital?</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <hr />
-
-                  <div class="stats">
-
-                    <button class="btn btn-simple btn-info btn-sm" type="submit">
-                      <i class="tim-icons icon-double-right"> </i> Ingresar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="card-footer">
-          <!--<button class="btn btn-fill btn-success" type="submit">
-            Actualizar
-          </button>-->
-        </div>
-      </div>
-
     </div>
     <div class="col-md-3">
       <div class="card card-user">
-        <div class="card-body">
+        <div class="card-body p-0 pt-3 pb-3">
           <p class="card-text"></p>
           <div class="author">
 
@@ -304,4 +157,30 @@
       </div>
     </div>
   </div>
+
+  <div class="offset-md-1 col-md-10">
+
+    <div class="col-12">
+      <h2 class="mt-2 mb-0">Cursos</h2>
+      <hr style="width: 100%;" color="green">
+    </div>
+
+    <div class=" row">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
+        <div class="card">
+          <img class="card-img-top"
+            src="https://firebasestorage.googleapis.com/v0/b/mistrades-b043d.appspot.com/o/mistrades%2Fuploads%2Fcourses%2Fcovers%2F7zhjnv4l7p?alt=media&token=ba9e5a3e-8e1d-4c8f-9907-60dbd4780d60"
+            alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title text-center">MECÁNICA CUÁNTICA</h5>
+            <button class="btn btn-simple btn-primary btn-block" type="button">DESCARGAR CERTIFICADO</button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
 </div>
