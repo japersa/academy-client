@@ -1,5 +1,33 @@
+.card {
+    background-color: rgb(0, 0, 0, 0.55) !important;
+    border-radius: 10px !important;
+}
+
+.card-title {
+    font-size: 3em !important;
+    font-weight: 600 !important;
+    color: #0AC116 !important;
+}
+
+.border {
+    border: var(--primary) solid !important;
+    border-width: 1px !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+}
+
+.form-control {
+    border-width: 1px !important;
+    border-radius: 10px !important;
+}
+
+label {
+    color: var(--primary) !important;
+    font-size: 1.2em !important;
+}
+
 .wrapper {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .card {
     border: none;
@@ -29,4 +57,9 @@
 .reply small:hover {
     color: green;
     cursor: pointer
+}
+
+textarea {
+    background-color:  #cdcdc3 !important;
+    color: #031e2f !important;
 }

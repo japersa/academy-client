@@ -1,48 +1,86 @@
 <div class=" content">
-    <div class=" row">
+    <div class="row">
         <ol class=" breadcrumb bg-transparent ml-3">
             <li class=" breadcrumb-item text-primary">Curso</li>
             <li class=" breadcrumb-item active">Un curso</li>
         </ol>
-        <div class="col-12">
-            <app-course-navbar></app-course-navbar>
+        <div class="col-12 p-0 m-0">
 
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <div class="video-player-wrapper">
-                            <!-- <h2>Angular Video Player with Controls Example</h2> -->
-                            <vg-player *ngIf="source">
-                                <vg-overlay-play></vg-overlay-play>
-                                <vg-buffering></vg-buffering>
-                                <vg-scrub-bar>
-                                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                                </vg-scrub-bar>
-                                <vg-controls>
-                                    <vg-play-pause></vg-play-pause>
-                                    <vg-playback-button></vg-playback-button>
-                                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-                                    <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
-                                    <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
-                                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-                                    <vg-track-selector></vg-track-selector>
-                                    <vg-mute></vg-mute>
-                                    <vg-volume></vg-volume>
-                                    <vg-fullscreen></vg-fullscreen>
-                                </vg-controls>
-                                <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
-                                    <source [src]="source">
-                                    <!-- <source src="http://static.videogular.com/assets/videos/videogular.ogg" type="video/ogg">
-                                <source [src]="source" type="video/mp4">  -->
-                                    <track kind="subtitles" label="English"
-                                        src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" srclang="en"
-                                        default>
-                                    <track kind="subtitles" label="Español"
-                                        src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt"
-                                        srclang="es">
-                                </video>
-                            </vg-player>
+                        <div class="card">
+                            <div class="card-title">Módulo Intro al trading</div>
+                            <div class="video-player-wrapper">
+                                <!-- <h2>Angular Video Player with Controls Example</h2> -->
+                                <vg-player *ngIf="source">
+                                    <vg-overlay-play></vg-overlay-play>
+                                    <vg-buffering></vg-buffering>
+                                    <vg-scrub-bar>
+                                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                                    </vg-scrub-bar>
+                                    <vg-controls>
+                                        <vg-play-pause></vg-play-pause>
+                                        <vg-playback-button></vg-playback-button>
+                                        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                                        <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+                                        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+                                        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                                        <vg-track-selector></vg-track-selector>
+                                        <vg-mute></vg-mute>
+                                        <vg-volume></vg-volume>
+                                        <vg-fullscreen></vg-fullscreen>
+                                    </vg-controls>
+                                    <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
+                                        <source [src]="source">
+                                        <!-- <source src="http://static.videogular.com/assets/videos/videogular.ogg" type="video/ogg">
+                                    <source [src]="source" type="video/mp4">  -->
+                                        <track kind="subtitles" label="English"
+                                            src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" srclang="en"
+                                            default>
+                                        <track kind="subtitles" label="Español"
+                                            src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt"
+                                            srclang="es">
+                                    </video>
+                                </vg-player>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="subtitle mb-1">Título clase</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi dolorem necessitatibus iusto explicabo et placeat temporibus quo provident laudantium optio cumque ratione impedit sapiente harum dolorum, soluta perspiciatis animi tempora!</p>
+                            <div class="row mt-4 ">
+                                <div class="col-6 border-right">
+                                    <h4 class="text-primary">Recursos Adicionales</h4>
+                                    <div class="card mb-3">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img  src="https://res.cloudinary.com/mistrades-com/image/upload/v1651256384/assets/icono-descargar-2_vibcgp.png" alt="">
+                                            </div>
+                                            <div class="col-9 d-flex align-items-center">
+                                                <small class="text-white">worksheet-describing-people.pdf</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img  src="https://res.cloudinary.com/mistrades-com/image/upload/v1651256384/assets/icono-descargar-2_vibcgp.png" alt="">
+                                            </div>
+                                            <div class="col-9 d-flex align-items-center">
+                                                <small class="text-white">worksheet-describing-people.pdf</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-block">
+                                        <h4 class="text-primary">Links de Descargas</h4>
+                                        <p class="h5 m-0 p-0 text-primary">Metatrader 5:</p>
+                                        <small class="text-white">https://cloudinary.com/console/c-e3fd9d933e05a4folders/bf4247b8bc0947c19c146365aef679fc72bf4247b8bc0947c19c146365aef679fc72</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">

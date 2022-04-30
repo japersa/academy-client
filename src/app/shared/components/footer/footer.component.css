@@ -7,11 +7,21 @@ img {
 nav-link {
     font-size: 3em !important;
 }
-
+/* 
 a{
     color: white !important;
-}
+} */
 
 .fa-brands::before {
+    /* display: flex !important;
+    justify-content: end !important; */
     border-radius: 20px !important;
+    color: #cdcdc3 !important;
+    margin-right: 5px !important;
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+    .nones {
+        display: none !important;
+    }
 }

@@ -15,6 +15,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
   source: any = null;
   course: any = {};
 
+  shouldExpand = true
+
   courseId = '';
 
   subscription1$: Subscription;
@@ -31,6 +33,12 @@ export class CoursesComponent implements OnInit, OnDestroy {
     });
 
 
+  }
+
+  getGeight() {
+    console.log(`height: ${this.course.modules.length * 50 }% !important`);
+    
+    return `height: ${this.course.modules.length * 50}% !important`;
   }
 
   loadCourse() {
