@@ -71,7 +71,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
       description: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(500)
+        Validators.maxLength(2000)
       ])),
       price: new FormControl('', Validators.compose([
         Validators.required,

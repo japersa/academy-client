@@ -263,7 +263,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   goToCourseDetail(id: string) {
 
-    this.router.navigate([`/courses/${id}`])
+    this.router.navigate([`/course/${id}`]) 
 
   }
 

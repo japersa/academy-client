@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
@@ -23,9 +23,11 @@ export class CoursesComponent implements OnInit, OnDestroy {
   subscription2$: Subscription;
   subscriptions: Subscription[] = [];
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService,
+    private router: Router
   ) {
 
     this.subscription1$ = this.route.paramMap.subscribe((params: ParamMap) => {
@@ -35,9 +37,14 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   }
 
+  goToTopicDetail(topicId: string) {
+    console.log(topicId);
+    this.router.navigate([`/class/${topicId}`])
+  }
+
   getGeight() {
-    console.log(`height: ${this.course.modules.length * 50 }% !important`);
-    
+    console.log(`height: ${this.course.modules.length * 50}% !important`);
+
     return `height: ${this.course.modules.length * 50}% !important`;
   }
 

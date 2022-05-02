@@ -12,6 +12,8 @@ const apiURL = environment.apiURL;
 })
 export class CoursesService {
 
+  course: object = {}
+
   headers = new HttpHeaders();
 
   constructor(private http: HttpClient) { }
@@ -76,6 +78,11 @@ export class CoursesService {
   // Topics
   getTopics(): Observable<any> {
     const route = '/my/topics/';
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  getTopicById(id: string): Observable<any> {
+    const route = `/list/topics/${id}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 

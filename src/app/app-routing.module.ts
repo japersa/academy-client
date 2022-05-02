@@ -11,7 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'class',
+    redirectTo: 'test',
     pathMatch: 'full'
   },
   {
@@ -34,7 +34,7 @@ const routes: Routes = [
           .then(m => m.ForgetPasswordModule)
       },
       {
-        path: 'pricing', // falta disenho
+        path: 'pricing', // revisar
         loadChildren: () => import('./features/auth/pages/pricing/pricing.module')
           .then(m => m.PricingModule)
       },
@@ -76,12 +76,12 @@ const routes: Routes = [
           .then(m => m.AmaModule)
       },
       {
-        path: 'courses/:id',
+        path: 'course/:id',
         loadChildren: () => import('./features/student/pages/courses/courses.module')
           .then(m => m.CoursesModule)
       },
       {
-        path: 'subscription', // falta disenho
+        path: 'subscription', // revisar
         loadChildren: () => import('./shared/pages/subscription/subscription.module')
           .then(m => m.SubscriptionModule)
       },
@@ -96,7 +96,7 @@ const routes: Routes = [
           .then(m => m.TestModule)
       },
       {
-        path: 'class',  // falta terminar
+        path: 'class/:id',  // falta terminar
         loadChildren: () => import('./features/student/pages/class/class.module')
           .then(m => m.ClassModule)
       },

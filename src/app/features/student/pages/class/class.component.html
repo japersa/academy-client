@@ -10,10 +10,10 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <div class="card">
-                            <div class="card-title">Módulo Intro al trading</div>
+                            <div class="card-title">{{ topic?.module_name | titlecase }}</div>
                             <div class="video-player-wrapper">
                                 <!-- <h2>Angular Video Player with Controls Example</h2> -->
-                                <vg-player *ngIf="source">
+                                <vg-player >
                                     <vg-overlay-play></vg-overlay-play>
                                     <vg-buffering></vg-buffering>
                                     <vg-scrub-bar>
@@ -27,28 +27,27 @@
                                         <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
                                         <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
                                         <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-                                        <vg-track-selector></vg-track-selector>
                                         <vg-mute></vg-mute>
                                         <vg-volume></vg-volume>
                                         <vg-fullscreen></vg-fullscreen>
                                     </vg-controls>
                                     <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
-                                        <source [src]="source">
+                                        <source [src]="topic?.video">
                                         <!-- <source src="http://static.videogular.com/assets/videos/videogular.ogg" type="video/ogg">
                                     <source [src]="source" type="video/mp4">  -->
-                                        <track kind="subtitles" label="English"
+                                        <!-- <track kind="subtitles" label="English"
                                             src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" srclang="en"
                                             default>
                                         <track kind="subtitles" label="Español"
                                             src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt"
-                                            srclang="es">
+                                            srclang="es"> -->
                                     </video>
                                 </vg-player>
                             </div>
                         </div>
                         <div>
-                            <h1 class="subtitle mb-1">Título clase</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi dolorem necessitatibus iusto explicabo et placeat temporibus quo provident laudantium optio cumque ratione impedit sapiente harum dolorum, soluta perspiciatis animi tempora!</p>
+                            <h1 class="subtitle mb-1">{{topic?.title | titlecase}}</h1>
+                            <p>{{topic?.description | titlecase}}</p>
                             <div class="row mt-4 ">
                                 <div class="col-6 border-right">
                                     <h4 class="text-primary">Recursos Adicionales</h4>
@@ -77,14 +76,14 @@
                                     <div class="d-block">
                                         <h4 class="text-primary">Links de Descargas</h4>
                                         <p class="h5 m-0 p-0 text-primary">Metatrader 5:</p>
-                                        <small class="text-white">https://cloudinary.com/console/c-e3fd9d933e05a4folders/bf4247b8bc0947c19c146365aef679fc72bf4247b8bc0947c19c146365aef679fc72</small>
+                                        <small class="text-white">{{'https://cloudinary.com/console/c-e3fd9d933e05a4folders/bf4247b8bc0947c19c146365aef679fc72bf4247b8bc0947c19c146365aef679fc72' | slice:0:40}}</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <app-topic-comments></app-topic-comments>
+                        <app-topic-comments [comments]="topic?.comments"></app-topic-comments>
                     </div>
                 </div>
             </div>

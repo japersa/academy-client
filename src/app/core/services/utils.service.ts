@@ -117,11 +117,17 @@ export class UtilsService {
       { type: 'minlength', message: 'El título debe de contener al menos 8 caracteres' },
       { type: 'maxlength', message: 'El título debe de tener entre 8 y 100 caracteres' }
     ],
+    title_link: [
+      { type: 'required', message: 'El título es obligatorio' },
+    ],
+    link: [
+      { type: 'required', message: 'El link es obligatorio' },
+    ],
 
     description: [
       { type: 'required', message: 'La descripción es obligatoria' },
       { type: 'minlength', message: 'La descripción debe de contener al menos 8 caracteres' },
-      { type: 'maxlength', message: 'La descripción debe de tener entre 8 y 500 caracteres' }
+      { type: 'maxlength', message: 'La descripción debe de tener entre 8 y 2000 caracteres' }
     ],
 
     price: [

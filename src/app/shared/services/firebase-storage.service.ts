@@ -178,10 +178,13 @@ export class FirebaseStorageService {
       finalize(() => {
         fileRef.getDownloadURL().pipe(take(1)).subscribe(videoUrl => {
 
+          console.log(fileRef, filePath);
+          
+
           const data = {
             title: dataForm.title,
             description: dataForm.description,
-            video: videoUrl,
+            video: filePath,
             module: dataForm.module,
             files: this.downloadURLsFiles
           }

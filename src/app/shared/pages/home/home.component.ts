@@ -20,9 +20,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   subscription3$: Subscription;
   subscriptions: Subscription[] = [];
 
-  constructor(private coursesService: CoursesService,
+  constructor(
+    private coursesService: CoursesService,
     public userDataService: UserDataService,
-    private router: Router) { }
+    private router: Router
+    ) { }
 
   fillCourses() {
     this.subscription1$ = this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
@@ -35,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   goToCourseDetail(id: string) {
 
-    this.router.navigate([`/courses/${id}`])
+    this.router.navigate([`/course/${id}`])
 
   }
 

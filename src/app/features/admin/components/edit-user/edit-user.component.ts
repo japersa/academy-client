@@ -116,7 +116,7 @@ export class EditUserComponent implements OnInit {
         subscription: dataFrom.subscription,
         email: dataFrom.email
       }
-    }
+    }    
 
     this.subscription$ = this.registerService.editUser(data, this.user.id).pipe(take(1)).subscribe(res => {
       this.showEvent.emit(false);

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { Subscription } from 'rxjs';
@@ -56,9 +56,37 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
         Validators.required,
       ])),
       files: new FormControl('', Validators.compose([
-      ]))
+      ])),
+      links: new FormArray([
+        this.formBuilder.group({
+          title: new FormControl('', Validators.compose([
+            Validators.required,
+          ])),
+          link: new FormControl('', Validators.compose([
+            Validators.required,
+          ])),
+        })
+      ], [Validators.required]),
     });
 
+  }
+
+  addNewLink() {
+    const itemsArr = this.topicForm.get('links') as FormArray;
+    const newItem = this.formBuilder.group({
+      title: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      link: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+    })
+    itemsArr.push(newItem)
+  }
+
+  removeItem(i) {
+    const arr = this.topicForm.get('links') as FormArray;
+    arr.removeAt(i);
   }
 
   createTopic(dataForm: any) {
