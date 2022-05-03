@@ -52,12 +52,17 @@ label.box {
 }
 
 label.box:hover {
-    background: var(--secondary);
-    color: var(--default);
+    background: var(--secondary) !important;
+}
+label.box:hover > .course{
+    color: var(--dark) !important;
+}
+
+label.box {
+    color: var(--white) !important;
 }
 
 label.box .course {
-    color: #ddd;
     display: flex;
     align-items: center;
     width: 100%
@@ -74,11 +79,6 @@ label.box .circle {
 
 input[type="radio"] {
     display: none
-}
-
-.btn.btn-primary {
-    border-radius: 25px;
-    margin-top: 20px
 }
 
 @media(max-width: 450px) {

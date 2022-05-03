@@ -34,7 +34,7 @@ const routes: Routes = [
           .then(m => m.ForgetPasswordModule)
       },
       {
-        path: 'pricing', // revisar
+        path: 'pricing',
         loadChildren: () => import('./features/auth/pages/pricing/pricing.module')
           .then(m => m.PricingModule)
       },
@@ -81,7 +81,7 @@ const routes: Routes = [
           .then(m => m.CoursesModule)
       },
       {
-        path: 'subscription', // revisar
+        path: 'subscription',
         loadChildren: () => import('./shared/pages/subscription/subscription.module')
           .then(m => m.SubscriptionModule)
       },
@@ -91,7 +91,7 @@ const routes: Routes = [
           .then(m => m.HomeModule)
       },
       {
-        path: 'test', // falta terminar
+        path: 'test', // 
         loadChildren: () => import('./features/student/pages/test/test.module')
           .then(m => m.TestModule)
       },

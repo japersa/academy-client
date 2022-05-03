@@ -26,7 +26,7 @@
 
 // CREDIT CARD
 ._card {
-    max-width: 320px;
+    max-width: 100%;
     height: 190px;
     background-color: rgba(0, 0, 0, 0.55) !important;
     border: var(--white) 2px solid !important;
@@ -41,7 +41,9 @@
 }
 
 .card__front {
+    position: relative !important;
     padding: 18px;
+    width: 100% !important;
 }
 
 .card__logo {
@@ -70,10 +72,10 @@
     margin-top: 20px;
 }
 
-.card__space-75 {
-    width: 75%;
-    float: left;
-}
+// .card__space-75 {
+//     width: 75%;
+//     float: left;
+// }
 
 .card__space-25 {
     width: 25%;
