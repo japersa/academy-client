@@ -30,7 +30,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   topics = [];
   topicEdit = {};
 
-  showFormCreateTopic = true;
+  showFormCreateTopic = false;
   showFormEditTopic = false;
 
   // QUIZZES
@@ -40,19 +40,6 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   showFormCreateQuizzes = false;
   showFormEditQuizzes = false;
 
-  // OTHERS
-  subscription$: Subscription;
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscription4$: Subscription;
-  subscription5$: Subscription;
-  subscription6$: Subscription;
-  subscription7$: Subscription;
-  subscription8$: Subscription;
-  subscription9$: Subscription;
-
-  subscriptions: Subscription[] = [];
 
   constructor(private coursesService: CoursesService) { }
 
@@ -102,7 +89,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       .then(result => {
         if (result.value) {
 
-          this.subscription1$ = this.coursesService.deleteCourse(courseId).pipe(take(1)).subscribe(res => {
+          this.coursesService.deleteCourse(courseId).subscribe(res => {
             this.loadData();
             swal.fire({
               title: 'Eliminado!',
@@ -143,7 +130,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   getModulesByCourseId(courseId: string) {
 
-    this.subscription7$ = this.coursesService.getModulesByCourseId(courseId).pipe(take(1)).subscribe(res => {
+    this.coursesService.getModulesByCourseId(courseId).subscribe(res => {
       this.modules.length = 0;
       Object.assign(this.modules, res)
     },
@@ -176,7 +163,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       .then(result => {
         if (result.value) {
 
-          this.subscription1$ = this.coursesService.deleteModule(moduleId).pipe(take(1)).subscribe(res => {
+          this.coursesService.deleteModule(moduleId).subscribe(res => {
             this.loadData();
             swal.fire({
               title: 'Eliminado!',
@@ -216,7 +203,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   getTopicByModuleId(courseId: string) {
 
-    this.subscription8$ = this.coursesService.getTopicsByModuleId(courseId).pipe(take(1)).subscribe(res => {
+    this.coursesService.getTopicsByModuleId(courseId).subscribe(res => {
       this.topics.length = 0;
       Object.assign(this.topics, res)
     },
@@ -249,7 +236,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       .then(result => {
         if (result.value) {
 
-          this.subscription1$ = this.coursesService.deleteTopic(topicId).pipe(take(1)).subscribe(res => {
+          this.coursesService.deleteTopic(topicId).subscribe(res => {
             this.loadData();
             swal.fire({
               title: 'Eliminado!',
@@ -289,7 +276,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   getQuizzesByCourseId(courseId: string) {
 
-    this.subscription9$ = this.coursesService.getQuizzesByCourseId(courseId).pipe(take(1)).subscribe(res => {
+    this.coursesService.getQuizzesByCourseId(courseId).subscribe(res => {
       this.quizzes.length = 0;
       Object.assign(this.quizzes, res)
     },
@@ -322,7 +309,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       .then(result => {
         if (result.value) {
 
-          this.subscription6$ = this.coursesService.deleteQuiz(quizId).pipe(take(1)).subscribe(res => {
+          this.coursesService.deleteQuiz(quizId).subscribe(res => {
             this.loadData();
             swal.fire({
               title: 'Eliminado!',
@@ -363,7 +350,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     this.quizzes.length = 0;
 
     // GET COURSES
-    this.subscription$ = this.coursesService.getCourses().subscribe(res => {
+    this.coursesService.getCourses().subscribe(res => {
       Object.assign(this.courses, res);
     },
       error => {
@@ -371,7 +358,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       }
     )
     // GET MODULES
-    this.subscription2$ = this.coursesService.getModules().subscribe(res => {
+    this.coursesService.getModules().subscribe(res => {
       Object.assign(this.modules, res);
     },
       error => {
@@ -379,17 +366,15 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
       }
     )
     // GET TOPICS
-    this.subscription3$ = this.coursesService.getTopics().subscribe(res => {
+    this.coursesService.getTopics().subscribe(res => {
       Object.assign(this.topics, res);
-      console.log(res);
-      
     },
       error => {
         console.log('Error: ', error);
       }
     )
     // GET QUIZZES
-    this.subscription5$ = this.coursesService.getQuizzes().subscribe(res => {
+    this.coursesService.getQuizzes().subscribe(res => {
       Object.assign(this.quizzes, res);
     },
       error => {
@@ -415,27 +400,9 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadData();
-
-    // Subs
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-    this.subscriptions.push(this.subscription3$);
-    this.subscriptions.push(this.subscription4$);
-    this.subscriptions.push(this.subscription5$);
-    this.subscriptions.push(this.subscription6$);
-    this.subscriptions.push(this.subscription7$);
-    this.subscriptions.push(this.subscription8$);
-    this.subscriptions.push(this.subscription9$);
-
   }
 
-
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 }

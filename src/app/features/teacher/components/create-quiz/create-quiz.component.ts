@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
@@ -21,10 +21,6 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
 
   @Output() showEvent = new EventEmitter<boolean>();
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
@@ -35,6 +31,40 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.quizForm = this.formBuilder.group({
+
+      course: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+
+      questions: new FormArray([
+        this.formBuilder.group({
+          question: new FormControl('', Validators.compose([
+            Validators.required, Validators.minLength(10), Validators.maxLength(100)
+          ])),
+          optionOne: new FormControl('', Validators.compose([
+            Validators.required, Validators.required, Validators.minLength(2)
+          ])),
+          optionTwo: new FormControl('', Validators.compose([
+            Validators.required, Validators.minLength(2)
+          ])),
+          optionThree: new FormControl('', Validators.compose([
+          ])),
+          optionFour: new FormControl('', Validators.compose([
+          ])),
+
+          answer: new FormControl('', Validators.compose([
+            Validators.required
+          ])),
+        })
+      ], [Validators.required]),
+
+    });
+
+  }
+
+  addNewItem() {
+    const itemsArr = this.quizForm.get('questions') as FormArray;
+    const newItem = this.formBuilder.group({
       question: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ])),
@@ -48,18 +78,22 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
       ])),
       optionFour: new FormControl('', Validators.compose([
       ])),
-      course: new FormControl('', Validators.compose([
-        Validators.required
-      ])),
+
       answer: new FormControl('', Validators.compose([
         Validators.required
       ])),
-    });
+    })
+    itemsArr.push(newItem)
+  }
 
+  removeItem(i) {
+    const arr = this.quizForm.get('questions') as FormArray;
+    arr.removeAt(i);
   }
 
   createQuiz(dataForm: any) {
-    this.subscription2$ = this.coursesService.createQuiz(dataForm).subscribe(res => {
+
+    this.coursesService.createQuiz(dataForm).subscribe(res => {
       this.notificationsService.showNotification('bottom', 'center', 'Quiz creado con éxito', 2);
       this.errorMessage = '';
       this.quizForm.reset();
@@ -75,7 +109,7 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
 
   loadCourses() {
 
-    this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
+    this.coursesService.getCourses().subscribe(res => {
       Object.assign(this.courses, res)
     },
       error => {
@@ -90,17 +124,12 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this.loadCourses()
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
+
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 }

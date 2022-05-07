@@ -24,7 +24,11 @@ select {
     background-color: rgb(0, 0, 0, 0.25) !important;
 }
 
-
+.mt-40 {
+    margin-top: 50px !important;
+    font-weight: 500 !important;
+    color: white !important;
+}
 
 .card-title {
     font-size: 3em !important;
@@ -32,11 +36,6 @@ select {
     color: #0AC116 !important;
 }
 
-.mt-40 {
-    margin-top: 50px !important;
-    font-weight: 500 !important;
-    color: white !important;
-}
 
 .card-subtitle {
     font-size: 1.5em !important;

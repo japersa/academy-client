@@ -40,8 +40,6 @@ export class ClassComponent implements OnInit, OnDestroy {
 
   getTopic(topicId: string) {
     this.subscription2$ = this.coursesService.getTopicById(topicId).subscribe(res => {
-      console.log(res);
-      
       Object.assign(this.topic, res[0])
     },
       error => {

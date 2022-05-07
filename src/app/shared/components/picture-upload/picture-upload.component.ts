@@ -66,6 +66,14 @@ export class PictureUploadComponent implements OnInit {
   handleSubmit($event) {
     $event.preventDefault();
     this.firebaseStorageService.uploadAvatar(this.imgEvent);
+    this.firebaseStorageService.uploadPercent.subscribe(
+      {
+        complete: () => {
+          this.file = null
+          this.firebaseStorageService.uploadPercent = null;
+        }
+      }
+    );
   }
 
 }

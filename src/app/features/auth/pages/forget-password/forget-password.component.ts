@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { ForgetPasswordService } from '../../services/forget-password.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +25,7 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
+    private router: Router,
     private forgetPasswordService: ForgetPasswordService) {
 
     this.validationMessages = utilsService.getValidationMessages();
@@ -48,6 +50,7 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
     this.subscription$ = this.forgetPasswordService.register(data).pipe(take(1)).subscribe(res => {
       this.notificationService.showNotification('bottom', 'center', 'Se ha enviado la solicitud de cambio de clave correctamente', 2);
       this.registerForm.reset();
+      this.router.navigate(['/sign-in'])
 
     },
       error => {

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { RegisterService } from '../../services/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,11 +18,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   validationMessages: any;
   errorMessage: string | null;
 
-  subscription$: Subscription;
-
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
+    private router: Router,
     private registerService: RegisterService) {
 
     this.validationMessages = utilsService.getValidationMessages();
@@ -54,11 +54,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: dataFrom.password
     }
 
-    this.subscription$ = this.registerService.register(data).pipe(take(1)).subscribe(res => {
-      console.log(res);
+    this.registerService.register(data).subscribe(res => {
       this.notificationService.showNotification('bottom', 'center', 'Te has registrado correctamente', 2);
       this.registerForm.reset();
-
+      this.router.navigate(['/sign-in'])
     },
       error => {
         this.errorMessage = error.error;

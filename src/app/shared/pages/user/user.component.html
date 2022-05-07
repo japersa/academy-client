@@ -15,7 +15,7 @@
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Nombre </label>
-                  <input class="form-control" type="text" placeholder="Nombre"
+                  <input class="form-control text-uppercase" type="text" placeholder="Nombre"
                     [(ngModel)]="userDataService?.userData$?.value.first_name" formControlName="first_name" />
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.first_name">
@@ -28,8 +28,9 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Apellido </label>
-                  <input class="form-control" type="text" [(ngModel)]="userDataService?.userData$?.value.last_name"
-                    placeholder="Apellido" formControlName="last_name" />
+                  <input class="form-control  text-uppercase" type="text"
+                    [(ngModel)]="userDataService?.userData$?.value.last_name" placeholder="Apellido"
+                    formControlName="last_name" />
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.last_name">
                   <small class="text-danger d-block" *ngIf="updateForm.get('last_name').hasError(validation.type) &&
@@ -43,7 +44,7 @@
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Dirección de Email </label>
-                  <input class=" form-control" [(ngModel)]="userDataService?.userData$?.value.username"
+                  <input class=" form-control  text-uppercase" [(ngModel)]="userDataService?.userData$?.value.username"
                     formControlName="email" placeholder="Email" type="email" (blur)="focus = false"
                     (focus)="focus = true" />
                 </div>
@@ -57,7 +58,7 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Teléfono </label>
-                  <input class="form-control" placeholder="Teléfono"
+                  <input class="form-control  text-uppercase" placeholder="Teléfono"
                     [(ngModel)]="userDataService?.userData$?.value.phone_number" formControlName="phone_number"
                     type="tel" (blur)="focus = false" (focus)="focus = true" />
                 </div>

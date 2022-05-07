@@ -24,8 +24,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   errorMessage: string | null;
 
-  subscription$: Subscription;
-
   constructor(
     private formBuilder: FormBuilder,
     private utilsService: UtilsService,
@@ -58,18 +56,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: data.password
     }
 
-    this.subscription$ = this.authenticationService.doLogin(CREDENTIALS).pipe(take(1)).subscribe(res => {
+    this.authenticationService.doLogin(CREDENTIALS).subscribe(res => {
 
       this.notificationService.showNotification('bottom', 'center', 'Has iniciado sesión correctamente', 2);
       this.errorMessage = '';
 
-      console.log(res);
-      
-
       this.loginForm.reset();
 
       setTimeout(() => {
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/home'])
       }, 300);
 
     },

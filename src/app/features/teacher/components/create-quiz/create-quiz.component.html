@@ -5,68 +5,99 @@
         </div>
         <div class="card-body row">
             <div class="  col-md-6">
-                <label> Pregunta </label>
-                <div class=" form-group">
-                    <textarea class="form-control" formControlName="question" placeholder="Ingrese las pregunta"
-                        rows="2" required></textarea>
+
+
+                <div class="form-group" formArrayName="questions">
+                    <label for="questions">Preguntas</label>
+                    <div *ngFor="let item of quizForm.controls.questions['controls']; let i = index;"
+                        [formGroupName]="i" id="questions">
+
+
+
+                        <fieldset class="form-group">
+
+                            <label> Pregunta </label>
+                            <div class=" form-group">
+                                <textarea class="form-control" formControlName="question"
+                                    placeholder="Ingrese las pregunta" rows="2" required></textarea>
+                            </div>
+
+                            <ng-container *ngFor="let validation of validationMessages.question">
+                                <small class="text-danger"
+                                    *ngIf="this.quizForm.controls.questions['controls'][0].get('question').hasError(validation.type) &&
+                    (this.quizForm.controls.questions['controls'][0].get('question').dirty || this.quizForm.controls.questions['controls'][0].get('question').touched) ">
+                                    {{validation.message}}
+                                </small>
+                            </ng-container>
+
+                            <h4 class="card-subtitle">Respuestas</h4>
+
+                            <label>1. Opción </label>
+                            <div class=" form-group">
+                                <textarea class="form-control" formControlName="optionOne"
+                                    placeholder="Ingrese la primera opción de respuesta" rows="2" required></textarea>
+                            </div>
+                            <ng-container *ngFor="let validation of validationMessages.optionOne">
+                                <small class="d-block text-danger"
+                                    *ngIf="this.quizForm.controls.questions['controls'][0].get('optionOne').hasError(validation.type) &&
+                    (this.quizForm.controls.questions['controls'][0].get('optionOne').dirty || this.quizForm.controls.questions['controls'][0].get('optionOne').touched) ">
+                                    {{validation.message}}
+                                </small>
+                            </ng-container>
+
+                            <label>2. Opción </label>
+                            <div class=" form-group">
+                                <textarea class="form-control" formControlName="optionTwo"
+                                    placeholder="Ingrese la segunda opción de respuesta" rows="2"></textarea>
+                            </div>
+
+                            <ng-container *ngFor="let validation of validationMessages.optionTwo">
+                                <small class="d-block text-danger"
+                                    *ngIf="this.quizForm.controls.questions['controls'][0].get('optionTwo').hasError(validation.type) &&
+                    (this.quizForm.controls.questions['controls'][0].get('optionTwo').dirty || this.quizForm.controls.questions['controls'][0].get('optionTwo').touched) ">
+                                    {{validation.message}}
+                                </small>
+                            </ng-container>
+
+
+                            <label>3. Opción </label>
+                            <div class=" form-group">
+                                <textarea class="form-control" formControlName="optionThree"
+                                    placeholder="Ingrese la tercera opción de respuesta" rows="2"></textarea>
+                            </div>
+
+                            <label>4. Opción</label>
+                            <div class=" form-group">
+                                <textarea class="form-control" formControlName="optionFour"
+                                    placeholder="Ingrese la cuarta opción de respuesta" rows="2"></textarea>
+                            </div>
+
+                            <label> Respuesta correcta </label>
+                            <select class="form-select form-group d-block" formControlName="answer" size="4">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+
+
+                            <button (click)="removeItem(i)" class=" btn btn-simple btn-danger" type="button">
+                                Eliminar pregunta
+                            </button>
+                        </fieldset>
+
+
+
+                    </div>
+                    <button (click)="addNewItem()" class=" btn btn-simple btn-primary" type="button">
+                       Agregar pregunta
+                    </button>
+
                 </div>
-                <ng-container *ngFor="let validation of validationMessages.question">
-                    <small class="text-danger d-block" *ngIf="quizForm.get('question').hasError(validation.type) &&
-                                (quizForm.get('question').dirty || quizForm.get('question').touched) ">
-                        {{validation.message}}
-                    </small>
-                </ng-container>
-                <fieldset class="form-group">
-                    <h4 class=" card-title">Respuestas</h4>
-
-                    <label>1. Opción </label>
-                    <div class=" form-group">
-                        <textarea class="form-control" formControlName="optionOne"
-                            placeholder="Ingrese la primera opción de respuesta" rows="2" required></textarea>
-                    </div>
-                    <ng-container *ngFor="let validation of validationMessages.optionOne">
-                        <small class="text-danger d-block" *ngIf="quizForm.get('optionOne').hasError(validation.type) &&
-                                    (quizForm.get('optionOne').dirty || quizForm.get('optionOne').touched) ">
-                            {{validation.message}}
-                        </small>
-                    </ng-container>
-
-                    <label>2. Opción </label>
-                    <div class=" form-group">
-                        <textarea class="form-control" formControlName="optionTwo"
-                            placeholder="Ingrese la segunda opción de respuesta" rows="2"></textarea>
-                    </div>
-                    <ng-container *ngFor="let validation of validationMessages.optionTwo">
-                        <small class="text-danger d-block" *ngIf="quizForm.get('optionTwo').hasError(validation.type) &&
-                                    (quizForm.get('optionTwo').dirty || quizForm.get('optionTwo').touched) ">
-                            {{validation.message}}
-                        </small>
-                    </ng-container>
-
-                    <label>3. Opción </label>
-                    <div class=" form-group">
-                        <textarea class="form-control" formControlName="optionThree"
-                            placeholder="Ingrese la tercera opción de respuesta" rows="2"></textarea>
-                    </div>
-
-                    <label>4. Opción</label>
-                    <div class=" form-group">
-                        <textarea class="form-control" formControlName="optionFour"
-                            placeholder="Ingrese la cuarta opción de respuesta" rows="2"></textarea>
-                    </div>
-
-
-                </fieldset>
 
             </div>
             <div class=" col-md-6">
-                <label> Respuesta correcta </label>
-                <select class="form-select form-group d-block" formControlName="answer" size="4">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
+   
 
                 <label> Curso </label>
                 <select class="form-select form-group d-block" formControlName="course" size="4">
@@ -97,6 +128,7 @@
                 </div>
 
             </div>
+
 
         </div>
         <div class=" card-footer">
