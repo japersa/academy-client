@@ -351,7 +351,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
     // GET COURSES
     this.coursesService.getCourses().subscribe(res => {
-      Object.assign(this.courses, res);
+      Object.assign(this.courses, res.my_courses_created);
     },
       error => {
         console.log('Error: ', error);
@@ -367,6 +367,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     )
     // GET TOPICS
     this.coursesService.getTopics().subscribe(res => {
+      console.log(res);
       Object.assign(this.topics, res);
     },
       error => {

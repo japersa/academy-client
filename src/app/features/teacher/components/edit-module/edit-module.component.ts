@@ -24,11 +24,6 @@ export class EditModuleComponent implements OnInit, OnDestroy {
 
   errorMessage: string | null;
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
@@ -50,7 +45,7 @@ export class EditModuleComponent implements OnInit, OnDestroy {
   }
 
   editarModule(dataForm: any) {
-    this.subscription2$ = this.coursesService.updateModule(dataForm, this.module.id).subscribe(res => {
+    this.coursesService.updateModule(dataForm, this.module.id).subscribe(res => {
       this.notificationsService.showNotification('bottom', 'center', 'Módulo editado con éxito', 2);
       this.errorMessage = '';
       this.moduleForm.reset();
@@ -71,8 +66,8 @@ export class EditModuleComponent implements OnInit, OnDestroy {
 
   loadCourses() {
 
-    this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
-      Object.assign(this.courses, res);
+    this.coursesService.getCourses().subscribe(res => {
+      Object.assign(this.courses, res.my_courses_created);
     },
       error => {
         console.log(error.error);
@@ -86,7 +81,7 @@ export class EditModuleComponent implements OnInit, OnDestroy {
   }
 
   getCourseName() {
-    this.subscription3$ = this.coursesService.getCourseById(this.module.course).subscribe(res => {
+    this.coursesService.getCourseById(this.module.course).subscribe(res => {
       this.currentCourse = res.title
     },
       error => {
@@ -99,17 +94,10 @@ export class EditModuleComponent implements OnInit, OnDestroy {
     this.loadCourses();
     this.setValues();
     this.getCourseName();
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-    this.subscriptions.push(this.subscription3$);
+
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 }

@@ -18,13 +18,13 @@
                         <div class="col-12">
                             <h3 class="text-primary">{{t?.name | titlecase}}</h3>
                         </div>
-                        <div *ngFor="let c of t?.topics" class="col-12">
+                        <div  class="col-12" *ngIf="t?.topics.length > 0">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body" >
 
                                     <!-- Timeline -->
                                     <ul class="timeline">
-                                        <a class="nav-link " href="javascript:void(0)" (click)="goToTopicDetail(c.id)">
+                                        <a *ngFor="let c of t?.topics" class="nav-link " href="javascript:void(0)" (click)="goToTopicDetail(c.id)">
                                             <li class="timeline-item bg-transparent rounded ml-3 p-4 shadow nav-item">
                                                 <h2 class="h3 text-primary mb-0">{{c?.title | titlecase}}</h2>
                                                 <p class="text-small mt-2 font-weight-light">

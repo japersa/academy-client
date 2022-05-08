@@ -28,11 +28,6 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   @Input() topic = null;
   @Output() showEvent = new EventEmitter<boolean>();
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
@@ -79,14 +74,12 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   }
 
   setValues() {
-    this.topicForm.patchValue({ title: this.topic.title, description: this.topic.description})
+    this.topicForm.patchValue({ title: this.topic.title, description: this.topic.description })
   }
 
   getTopicName() {
-    this.subscription3$ = this.coursesService.getModuleById(this.topic.module_id).subscribe(res => {
-      this.currentModule = res.id
-      console.log(res);
-      
+    this.coursesService.getModuleById(this.topic.module_id).subscribe(res => {
+      this.currentModule = res.name
     },
       error => {
         console.log(error.error);
@@ -96,7 +89,7 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
 
   loadModules() {
 
-    this.subscription1$ = this.coursesService.getModules().subscribe(res => {
+    this.coursesService.getModules().subscribe(res => {
       Object.assign(this.modules, res);
     },
       error => {
@@ -110,17 +103,9 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
     this.loadModules();
     this.getTopicName();
     this.setValues();
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-    this.subscriptions.push(this.subscription3$);
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 }

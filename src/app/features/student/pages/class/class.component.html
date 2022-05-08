@@ -1,8 +1,17 @@
 <div class=" content">
     <div class="row">
         <ol class=" breadcrumb bg-transparent ml-3">
-            <li class=" breadcrumb-item text-primary">Curso</li>
-            <li class=" breadcrumb-item active">Un curso</li>
+            <li class=" breadcrumb-item text-primary">
+                <a [routerLink]="['/home']">
+                    Home
+                </a>
+            </li>
+            <li class=" breadcrumb-item text-primary">
+                <a href="javascript:void(0)" (click)="seeCourse()">
+                    Curso
+                </a>
+            </li>
+            <li class=" breadcrumb-item active">{{ topic?.course_name }}</li>
         </ol>
         <div class="col-12 p-0 m-0">
 
@@ -13,7 +22,7 @@
                             <div class="card-title">{{ topic?.module_name | titlecase }}</div>
                             <div class="video-player-wrapper">
                                 <!-- <h2>Angular Video Player with Controls Example</h2> -->
-                                <vg-player >
+                                <vg-player>
                                     <vg-overlay-play></vg-overlay-play>
                                     <vg-buffering></vg-buffering>
                                     <vg-scrub-bar>
@@ -31,23 +40,17 @@
                                         <vg-volume></vg-volume>
                                         <vg-fullscreen></vg-fullscreen>
                                     </vg-controls>
-                                    <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
-                                        <source [src]="topic?.video">
-                                        <!-- <source src="http://static.videogular.com/assets/videos/videogular.ogg" type="video/ogg">
-                                    <source [src]="source" type="video/mp4">  -->
-                                        <!-- <track kind="subtitles" label="English"
-                                            src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt" srclang="en"
-                                            default>
-                                        <track kind="subtitles" label="Español"
-                                            src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt"
-                                            srclang="es"> -->
+                                    <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto"
+                                        [src]="source | async" type="video/mp4" crossorigin>
                                     </video>
                                 </vg-player>
                             </div>
 
                             <div class="">
-                                <button class="btn btn-primary btn-simple">Anterior</button>
-                                <button class="btn btn-primary">Siguiente</button>
+                                <button class="btn btn-primary btn-simple" [ngClass]="previus === null ? 'd-none': ''"
+                                    (click)="previusClass()">Anterior</button>
+                                <button class="btn btn-primary" [ngClass]="next === null ? 'd-none': ''"
+                                    (click)="nextClass()">Siguiente</button>
                             </div>
                         </div>
                         <div>
@@ -56,39 +59,45 @@
                             <div class="row mt-4 ">
                                 <div class="col-6 border-right">
                                     <h4 class="text-primary">Recursos Adicionales</h4>
-                                    <div class="card mb-3">
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <img  src="https://res.cloudinary.com/mistrades-com/image/upload/v1651256384/assets/icono-descargar-2_vibcgp.png" alt="">
-                                            </div>
-                                            <div class="col-9 d-flex align-items-center">
-                                                <small class="text-white">worksheet-describing-people.pdf</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card mb-3">
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <img  src="https://res.cloudinary.com/mistrades-com/image/upload/v1651256384/assets/icono-descargar-2_vibcgp.png" alt="">
-                                            </div>
-                                            <div class="col-9 d-flex align-items-center">
-                                                <small class="text-white">worksheet-describing-people.pdf</small>
+                                    <ng-container *ngFor="let f of topic.files">
+                                        <div class="card mb-3">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <img src="https://res.cloudinary.com/mistrades-com/image/upload/v1651256384/assets/icono-descargar-2_vibcgp.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="col-9 d-flex align-items-center">
+                                                    <a [href]="f.url" target="_blank" download>
+                                                        <small class="text-white">{{ f?.name }}</small>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </ng-container>
+
                                 </div>
                                 <div class="col-6">
                                     <div class="d-block">
                                         <h4 class="text-primary">Links de Descargas</h4>
-                                        <p class="h5 m-0 p-0 text-primary">Metatrader 5:</p>
-                                        <small class="text-white">{{'https://cloudinary.com/console/c-e3fd9d933e05a4folders/bf4247b8bc0947c19c146365aef679fc72bf4247b8bc0947c19c146365aef679fc72' | slice:0:40}}</small>
+                                        <ng-container *ngFor="let l of topic.links">
+                                            <div class="mb-3">
+                                                <p class="h5 m-0 p-0 text-primary">{{l.title | slice:0:40}}:</p>
+                                                <a [href]="l.link" target="_blank">
+                                                    <small class="text-white">{{l.link | slice:0:40}}</small>
+                                                </a>
+                                            </div>
+                                        </ng-container>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <app-topic-comments [comments]="topic?.comments"></app-topic-comments>
+                        <ng-container *ngIf="topic.comments">
+                            <app-topic-comments  [comments]="topic?.comments"></app-topic-comments>
+                        </ng-container>
+                        
                     </div>
                 </div>
             </div>

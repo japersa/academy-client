@@ -19,12 +19,12 @@
                 </ng-container>
                 <label> Curso </label>
                 <select class="form-select form-group d-block" formControlName="course" size="4">
-                    <option *ngFor="let c of courses" [value]="c?.id" [selected]="module.course  === c?.id">
+                    <option *ngFor="let c of courses" [value]="c?.id" >
                         {{ c?.title | titlecase}}</option>
                 </select>
                 <p class="mt-2 text-info"> Curso actual: {{currentCourse | titlecase}} </p>
 
-                <ng-container *ngFor="let validation of validationMessages.title">
+                <ng-container *ngFor="let validation of validationMessages.course">
                     <small class="text-danger d-block" *ngIf="moduleForm.get('course').hasError(validation.type) &&
                                 (moduleForm.get('course').dirty || moduleForm.get('course').touched) ">
                         {{validation.message}}

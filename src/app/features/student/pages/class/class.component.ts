@@ -15,13 +15,11 @@ export class ClassComponent implements OnInit, OnDestroy {
   topicId = '';
   topic: any = {};
 
-  profileUrl: Observable<string | null>;
-  source = '';
+  allClass = [];
+  next = '';
+  previus = '';
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscriptions: Subscription[] = [];
+  source: Observable<string | null>;
 
   constructor(
     private storage: AngularFireStorage,
@@ -30,43 +28,50 @@ export class ClassComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
   ) {
-
-    const ref = this.storage.ref('/mistrades/uploads/courses/videos/3i34sgg47t8');
-    this.profileUrl = ref.getDownloadURL();
-
-    this.profileUrl.subscribe(res => this.source = res)
-
   }
 
   getTopic(topicId: string) {
-    this.subscription2$ = this.coursesService.getTopicById(topicId).subscribe(res => {
-      Object.assign(this.topic, res[0])
-    },
-      error => {
-        console.log(error.error);
+    this.coursesService.getTopicById(topicId).subscribe(
+      {
+        next: (res) => {
+          console.log(res);
+          this.topic = res.result
+          this.getVideo(res.result.video);
+          Object.assign(this.allClass, res.all);
+          this.next = res.next.topicID;
+          this.previus = res.previus.topicID;
+        },
+        error: (e) => console.log(e.error),
       }
-    );
+    )
+  }
 
+  getVideo(url: string) {
+    const ref = this.storage.ref(url);
+    this.source = ref.getDownloadURL();
+  }
 
+  nextClass() {
+    this.router.navigate(['/class/', this.next]);
+  }
+  previusClass() {
+    this.router.navigate(['/class/', this.previus]);
+  }
+
+  seeCourse() {
+    this.router.navigate(['/course/', this.topic.course_id]);
   }
 
   ngOnInit(): void {
 
-    this.subscription1$ = this.route.paramMap.subscribe((params: ParamMap) => {
+    this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
-      console.log(id);
       this.getTopic(id);
     });
 
   }
 
   ngOnDestroy(): void {
-
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 

@@ -15,20 +15,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   courses = [];
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(
     private coursesService: CoursesService,
     public userDataService: UserDataService,
     private router: Router
-    ) { }
+  ) { }
 
   fillCourses() {
-    this.subscription1$ = this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
-      Object.assign(this.courses, res);
+    this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
+      Object.assign(this.courses, res.my_courses_created);
+      Object.assign(this.courses, res.my_enrolled_courses);
     },
       error => {
         console.log(error);
@@ -43,17 +39,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fillCourses();
-    // Subs
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
+
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 }

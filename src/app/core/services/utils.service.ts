@@ -155,6 +155,11 @@ export class UtilsService {
       { type: 'required', message: 'La pregunta número dos es obligatoria' },
       { type: 'minlength', message: 'La pregunta número dos debe de contener al menos 2 caracteres' },
     ],
+    comment: [
+      { type: 'required', message: 'El comentario es obligatorio' },
+      { type: 'minlength', message: 'El comentario debe de contener al menos 8 caracteres' },
+      { type: 'maxlength', message: 'El comentario debe de tener entre 8 y 500 caracteres' }
+    ],
 
   };
 

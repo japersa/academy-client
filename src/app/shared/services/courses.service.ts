@@ -82,7 +82,7 @@ export class CoursesService {
   }
 
   getTopicById(id: string): Observable<any> {
-    const route = `/list/topics/${id}/`;
+    const route = `/detail/topics/${id}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 

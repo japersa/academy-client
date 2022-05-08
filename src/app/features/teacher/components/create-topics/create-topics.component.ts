@@ -60,13 +60,11 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
       links: new FormArray([
         this.formBuilder.group({
           title: new FormControl('', Validators.compose([
-            Validators.required,
           ])),
           link: new FormControl('', Validators.compose([
-            Validators.required,
           ])),
         })
-      ], [Validators.required]),
+      ], []),
     });
 
   }
@@ -94,7 +92,12 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
     this.firebaseStorageService.uploadCourseVideo(this.eventVideo, dataForm);
     this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
       this.showEvent.emit(false);
-    })).subscribe();
+    })).subscribe({
+      complete: () => {
+        this.firebaseStorageService.uploadPercent = null;
+        this.firebaseStorageService.uploadPercentFiles = null;
+      }
+    });
   }
 
   createTopicFile() {

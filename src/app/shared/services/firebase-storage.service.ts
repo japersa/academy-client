@@ -56,7 +56,7 @@ export class FirebaseStorageService {
               })
         })
       }))
-      .subscribe(res => console.log(res))
+      .subscribe()
 
   }
 
@@ -96,7 +96,7 @@ export class FirebaseStorageService {
             })
         })
       }))
-      .subscribe(res => console.log(res))
+      .subscribe()
 
   }
 
@@ -140,7 +140,7 @@ export class FirebaseStorageService {
             })
         })
       }))
-      .subscribe(res => console.log(res))
+      .subscribe()
 
   }
 
@@ -178,19 +178,17 @@ export class FirebaseStorageService {
       finalize(() => {
         fileRef.getDownloadURL().pipe(take(1)).subscribe(videoUrl => {
 
-          console.log(fileRef, filePath);
-          
+          console.log(dataForm);
+
 
           const data = {
             title: dataForm.title,
             description: dataForm.description,
             video: filePath,
             module: dataForm.module,
-            files: this.downloadURLsFiles
+            files: this.downloadURLsFiles,
+            links: dataForm.links
           }
-
-          console.log('topic', data);
-
 
           this.coursesService.createTopic(data).pipe(take(1)).subscribe(res => {
             this.notificationService.showNotification('bottom', 'center', 'Temario creado con éxito', 2);
@@ -202,7 +200,7 @@ export class FirebaseStorageService {
             })
         })
       }))
-      .subscribe(res => console.log(res))
+      .subscribe()
 
   }
 
@@ -226,7 +224,7 @@ export class FirebaseStorageService {
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
-            this.downloadURLsFiles.push({name: file.name, path: filePath, url})
+            this.downloadURLsFiles.push({ name: file.name, path: filePath, url })
           });
         })
       ).subscribe();
@@ -256,16 +254,20 @@ export class FirebaseStorageService {
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
       finalize(() => {
-        fileRef.getDownloadURL().pipe(take(1)).subscribe(videoUrl => {
+        fileRef.getDownloadURL().subscribe(videoUrl => {
 
           const data = {
             title: dataForm.title,
             description: dataForm.description,
             video: videoUrl,
-            module: dataForm.module
+            module: dataForm.module,
+            links: dataForm.links
           }
 
-          this.coursesService.updateTopic(data, id).pipe(take(1)).subscribe(res => {
+          console.log(data);
+
+
+          this.coursesService.updateTopic(data, id).subscribe(res => {
             this.notificationService.showNotification('bottom', 'center', 'Temario editado con éxito', 2);
 
           },
@@ -275,7 +277,7 @@ export class FirebaseStorageService {
             })
         })
       }))
-      .subscribe(res => console.log(res))
+      .subscribe()
 
   }
 
