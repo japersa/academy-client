@@ -60,9 +60,6 @@ export class EditUserComponent implements OnInit {
 
   @Output() showEvent = new EventEmitter<boolean>();
 
-  subscription$: Subscription;
-  subscription1$: Subscription;
-
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     private coursesService: CoursesService,
@@ -116,9 +113,8 @@ export class EditUserComponent implements OnInit {
         subscription: dataFrom.subscription,
         email: dataFrom.email
       }
-    }    
-
-    this.subscription$ = this.registerService.editUser(data, this.user.id).pipe(take(1)).subscribe(res => {
+    }
+    this.registerService.editUser(data, this.user.id).pipe(take(1)).subscribe(res => {
       this.showEvent.emit(false);
       this.notificationService.showNotification('bottom', 'center', 'Usuario editado correctamente', 2);
       this.createUserForm.reset();
@@ -137,8 +133,8 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.subscription1$ = this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
-      this.courses = res;
+    this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
+      this.courses = res.my_courses_created;
     },
       error => {
         console.log(error.error);

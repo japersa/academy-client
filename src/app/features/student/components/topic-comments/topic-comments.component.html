@@ -34,24 +34,45 @@
                     <h5>Comentarios ( {{ comments.length }} )</h5>
                 </div>
                 <ng-container *ngIf="comments.length > 0">
-                    <div class="card p-3">
-
-                        <div class="d-flex justify-content-between align-items-center mt-2 " *ngFor="let c of comments">
-                            <div class=" d-flex flex-row align-items-start">
-                                <img [src]="c?.author?.image_profile  !== '' ? c?.author?.image_profile : 'assets/img/placeholder.jpg'"
-                                    width="40" class="user-img rounded-circle mr-2">
-                                <span class="m-0 p-0">
-                                    <small
-                                        class="font-weight-bold m-0 p-0 text-primary">{{ (c?.author?.first_name ? c?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
-                                    <br>
-                                    <div class="d-block">
-                                        <small class="text-right"> {{ c?.created_at | date}} </small>
-                                    </div>
-                                    <small class="text-white m-0 p-o">{{ c?.body }}. </small>
-                                </span>
-
+                    <div class="card p-3 mb-4">
+                        <ng-container *ngFor="let c of comments">
+                            <div class="d-flex justify-content-between align-items-center mt-2 " >
+                                <div class=" d-flex flex-row align-items-start">
+                                    <img [src]="c?.author?.image_profile  !== '' ? c?.author?.image_profile : 'assets/img/placeholder.jpg'"
+                                        width="40" class="user-img rounded-circle mr-2">
+                                    <span class="m-0 p-0">
+                                        <small
+                                            class="font-weight-bold m-0 p-0 text-primary">{{ (c?.author?.first_name ? c?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
+                                        <br>
+                                        <div class="d-block">
+                                            <small class="text-right"> {{ c?.created_at | date}} </small>
+                                        </div>
+                                        <small class="text-white m-0 p-o">{{ c?.body }}. </small>
+                                    </span>
+    
+                                </div>
                             </div>
-                        </div>
+                            <ng-container *ngIf="c.answer">
+                                <div class="d-flex justify-content-between align-items-center mt-2 response" >
+                                    <div class=" d-flex flex-row align-items-start">
+                                        <img [src]="c?.answer?.author?.image_profile  !== '' ? c?.answer?.author?.image_profile : 'assets/img/placeholder.jpg'"
+                                            width="40" class="user-img rounded-circle mr-2">
+                                        <span class="m-0 p-0">
+                                            <small
+                                                class="font-weight-bold m-0 p-0 text-primary">{{ (c?.answer?.author?.first_name ? c?.answer?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
+                                            <br> 
+                                            <div class="d-block">
+                                                <small class="text-right"> {{ c?.answer?.created_at | date}} </small>
+                                            </div>
+                                            <small class="text-white m-0 p-o">{{ c?.answer?.body }}. </small>
+                                        </span>
+        
+                                    </div>
+                                </div>
+                            </ng-container>
+                            
+                        </ng-container>
+                        
                     </div>
                 </ng-container>
             </div>

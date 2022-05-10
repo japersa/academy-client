@@ -64,9 +64,11 @@ export class ClassComponent implements OnInit, OnDestroy {
   previusClass() {
     this.router.navigate(['/class/', this.previus]);
   }
-
   seeCourse() {
     this.router.navigate(['/course/', this.topic.course_id]);
+  }
+  setClass(id) {
+    this.router.navigate(['/class/', id]);
   }
 
   ngOnInit(): void {

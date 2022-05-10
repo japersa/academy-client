@@ -84,9 +84,8 @@ export class FirebaseStorageService {
             path_preview_image: imgUrl
           }
 
-          this.coursesService.createCourse(data).pipe(take(1)).subscribe(res => {
+          this.coursesService.createCourse(data).subscribe(res => {
             Object.assign(this.course, res)
-
             this.notificationService.showNotification('bottom', 'center', 'Curso creado con éxito', 2);
 
           },
@@ -176,10 +175,9 @@ export class FirebaseStorageService {
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
       finalize(() => {
-        fileRef.getDownloadURL().pipe(take(1)).subscribe(videoUrl => {
+        fileRef.getDownloadURL().subscribe(videoUrl => {
 
           console.log(dataForm);
-
 
           const data = {
             title: dataForm.title,
@@ -190,7 +188,7 @@ export class FirebaseStorageService {
             links: dataForm.links
           }
 
-          this.coursesService.createTopic(data).pipe(take(1)).subscribe(res => {
+          this.coursesService.createTopic(data).subscribe(res => {
             this.notificationService.showNotification('bottom', 'center', 'Temario creado con éxito', 2);
 
           },

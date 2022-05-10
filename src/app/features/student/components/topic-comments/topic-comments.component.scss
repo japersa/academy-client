@@ -6,7 +6,15 @@
 .card-title {
     font-size: 3em !important;
     font-weight: 600 !important;
-    color: #0AC116 !important;
+    color: var(--primary) !important;
+}
+
+.response {
+    background-color: rgba(50, 51, 50, 0.55) !important;
+    border-left: var(--primary) solid !important;
+    border-width: 1px !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
 }
 
 .border {

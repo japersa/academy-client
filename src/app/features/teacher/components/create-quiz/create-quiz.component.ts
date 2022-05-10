@@ -93,6 +93,8 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
 
   createQuiz(dataForm: any) {
 
+    console.log(dataForm);
+
     this.coursesService.createQuiz(dataForm).subscribe(res => {
       this.notificationsService.showNotification('bottom', 'center', 'Quiz creado con éxito', 2);
       this.errorMessage = '';

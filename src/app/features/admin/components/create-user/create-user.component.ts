@@ -57,11 +57,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   @Output() showEvent = new EventEmitter<boolean>();
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-
-  subscriptions$: Subscription[] = [];
-
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
@@ -95,9 +90,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
     let data = {}
 
-    console.log(data);
-    
-
     if (dataFrom.subscription === SUBS.BASIC) {
       data = {
         username: dataFrom.email,
@@ -119,7 +111,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.subscription2$ = this.registerService.registerByRole(data).pipe(take(1)).subscribe(res => {
+    this.registerService.registerByRole(data).pipe(take(1)).subscribe(res => {
       this.showEvent.emit(false);
       this.notificationService.showNotification('bottom', 'center', 'Usuario registrado correctamente', 2);
       this.createUserForm.reset();
@@ -139,24 +131,18 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.subscription1$ = this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
-      this.courses = res;
+    this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
+      this.courses = res.my_courses_created;
     },
       error => {
         console.log(error.error);
       });
 
-    // Subs
-    this.subscriptions$.push(this.subscription1$);
-    this.subscriptions$.push(this.subscription2$);
+
   }
 
   ngOnDestroy(): void {
-    this.subscriptions$.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
+
   }
 
 

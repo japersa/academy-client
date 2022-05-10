@@ -61,8 +61,9 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   createTopic(dataForm: any) {
     this.firebaseStorageService.updateCourseVideo(this.event, dataForm, this.topic.id);
     this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
-      this.showEvent.emit(false);
-    })).subscribe();
+      this.firebaseStorageService.uploadPercent = null;
+      this.firebaseStorageService.uploadPercentFiles = null;
+    })).subscribe(() => setTimeout(() => this.showEvent.emit(false), 2000));
   }
 
   handleVideoChange(event) {

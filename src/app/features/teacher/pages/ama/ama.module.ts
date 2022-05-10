@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { AmaRoutingModule } from './ama-routing.module';
 import { AmaComponent } from './ama.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReplyCommentComponent } from './reply-comment/reply-comment.component';
 
 
 @NgModule({
-  declarations: [AmaComponent],
+  declarations: [AmaComponent, ReplyCommentComponent],
   imports: [
     CommonModule,
     AmaRoutingModule,

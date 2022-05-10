@@ -4,7 +4,6 @@ import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-course',
@@ -58,9 +57,11 @@ export class EditCourseComponent implements OnInit {
 
   createCourse(dataForm: any) {
     this.firebaseStorageService.updateCourseCover(this.event, dataForm, this.course.id);
-    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
-      this.showEvent.emit(false);
-    })).subscribe();
+    this.firebaseStorageService.uploadPercent.subscribe(() => {
+      this.firebaseStorageService.uploadPercent = null;
+      setTimeout(() => this.showEvent.emit(false), 2000);
+    }
+    );
   }
 
   cancelCreate() {

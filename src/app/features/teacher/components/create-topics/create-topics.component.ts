@@ -88,14 +88,15 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
   }
 
   createTopic(dataForm: any) {
-    this.createTopicFile();
+    if (this.eventFiles) {
+      this.createTopicFile();
+    }
     this.firebaseStorageService.uploadCourseVideo(this.eventVideo, dataForm);
-    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
-      this.showEvent.emit(false);
-    })).subscribe({
+    this.firebaseStorageService.uploadPercent.subscribe({
       complete: () => {
         this.firebaseStorageService.uploadPercent = null;
         this.firebaseStorageService.uploadPercentFiles = null;
+        setTimeout(() => this.showEvent.emit(false), 2000);
       }
     });
   }

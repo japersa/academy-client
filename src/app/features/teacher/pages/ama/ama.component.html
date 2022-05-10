@@ -39,34 +39,11 @@
                                             <div class="d-block">
                                                 <small class="text-right">{{ c?.created_at | date}} </small>
                                             </div>
-                                            <form class=" form" [formGroup]="commentForm"
-                                                (ngSubmit)="createReply(commentForm.value)" role="form">
                                             <p class="text-white m-0 p-o"> {{ c?.body }}. </p>
                                             <hr class="text-left">
-                                                <div class="form-group">
-                                                    <label for="response"> Pregunta </label>
-
-                                                    <textarea class="form-control" id="response" rows="3"
-                                                        class="form-control" placeholder=""
-                                                        formControlName="body"></textarea>
-                                                    <ng-container *ngFor="let validation of validationMessages.comment">
-                                                        <small class="form-text text-danger" *ngIf=" commentForm.get('body').hasError(validation.type) &&
-                                        (commentForm.get('body').dirty ||
-                                          commentForm.get('body').touched) ">
-                                                            {{validation.message}}
-                                                        </small>
-                                                    </ng-container>
-
-                                                    <ng-container *ngIf="errorMessage">
-                                                        <small class="text-danger"
-                                                            *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small>
-                                                        <br>
-                                                    </ng-container>
-
-                                                    <button class="btn btn-primary btn-sm mt-2"
-                                                        [disabled]="commentForm.invalid">Responder</button>
-                                                </div>
-                                            </form>
+                                            <ng-container *ngIf="c">
+                                                <app-reply-comment [comment]="c" (loadUnanswered)="getUnansweredQuestions()"></app-reply-comment>
+                                            </ng-container>
                                         </span>
 
                                     </div>

@@ -21,7 +21,6 @@
                         <div class="card">
                             <div class="card-title">{{ topic?.module_name | titlecase }}</div>
                             <div class="video-player-wrapper">
-                                <!-- <h2>Angular Video Player with Controls Example</h2> -->
                                 <vg-player>
                                     <vg-overlay-play></vg-overlay-play>
                                     <vg-buffering></vg-buffering>
@@ -57,7 +56,7 @@
                             <h1 class="subtitle mb-1">{{topic?.title | titlecase}}</h1>
                             <p>{{topic?.description | titlecase}}</p>
                             <div class="row mt-4 ">
-                                <div class="col-6 border-right">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 border-right">
                                     <h4 class="text-primary">Recursos Adicionales</h4>
                                     <ng-container *ngFor="let f of topic.files">
                                         <div class="card mb-3">
@@ -74,9 +73,6 @@
                                             </div>
                                         </div>
                                     </ng-container>
-
-                                </div>
-                                <div class="col-6">
                                     <div class="d-block">
                                         <h4 class="text-primary">Links de Descargas</h4>
                                         <ng-container *ngFor="let l of topic.links">
@@ -89,6 +85,17 @@
                                         </ng-container>
 
                                     </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="card units">
+                                        <h6>Unidades</h6>
+                                        <ng-container *ngFor="let c of allClass; index as i">
+                                            <a href="javascript:void(0)" class="mb-2" [ngClass]=" c.seen ? 'seen' : 'no-seen' " (click)="setClass(c.id)">
+                                                {{(i+1) +' '+ c.title }}
+                                            </a>
+                                        </ng-container>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +104,6 @@
                         <ng-container *ngIf="topic.comments">
                             <app-topic-comments  [comments]="topic?.comments"></app-topic-comments>
                         </ng-container>
-                        
                     </div>
                 </div>
             </div>

@@ -1,0 +1,18 @@
+.reply small {
+    color: #b7b4b4
+}
+
+.reply small:hover {
+    color: green;
+    cursor: pointer
+}
+
+textarea {
+    background-color:  #cdcdc3 !important;
+    color: #031e2f !important;
+}
+
+label {
+    color: var(--primary) !important;
+    font-size: 1.2em !important;
+}

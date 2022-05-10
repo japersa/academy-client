@@ -60,9 +60,10 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
 
   createCourse(dataForm: any) {
     this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
-    this.suscription$ = this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
-      this.showEvent.emit(false);
-    })).subscribe();
+    this.suscription$ = this.firebaseStorageService.uploadPercent.pipe().subscribe(() => {
+      this.firebaseStorageService.uploadPercent = null;
+      setTimeout(() => this.showEvent.emit(false), 2000);
+    });
   }
 
   cancelCreate() {

@@ -91,8 +91,8 @@ export class CoursesService {
     return this.http.patch<any>(`${apiURL}${route}`, { seen: true }, { headers: this.headers });
   }
 
-  getTopicsByModuleId(courseId: string): Observable<any> {
-    const route = `/list/topics/${courseId}/`;
+  getTopicsByModuleId(moduleId: string): Observable<any> {
+    const route = `/list/topics/${moduleId}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
@@ -123,81 +123,8 @@ export class CoursesService {
   }
 
   createQuiz(dataForm: any): Observable<any> {
-
-    const correctAnswer = dataForm.answer
-    const answersArr = []
-
-    const DATA = {
-      question: dataForm.question,
-      course: dataForm.course,
-      answers: answersArr
-    }
-
-    Object.entries(dataForm).forEach(([key, value]) => {
-
-      switch (key.toString()) {
-        case 'optionOne':
-          if (correctAnswer === '1') {
-            answersArr.push({
-              option: value,
-              isCorrect: true
-            })
-            break;
-          }
-          answersArr.push({
-            option: value,
-            isCorrect: false
-          })
-          break;
-        case 'optionTwo':
-          if (correctAnswer === '2') {
-            answersArr.push({
-              option: value,
-              isCorrect: true
-            })
-            break;
-          }
-          answersArr.push({
-            option: value,
-            isCorrect: false
-          })
-          break;
-        case 'optionThree':
-          if (correctAnswer === '3') {
-            answersArr.push({
-              option: value,
-              isCorrect: true
-            })
-            break;
-          }
-          answersArr.push({
-            option: value,
-            isCorrect: false
-          })
-          break;
-        case 'optionFour':
-          if (correctAnswer === '4') {
-            answersArr.push({
-              option: value,
-              isCorrect: true
-            })
-            break;
-          }
-          answersArr.push({
-            option: value,
-            isCorrect: false
-          })
-          break;
-
-        default:
-          break;
-      }
-
-
-    });
-
     const route = '/create/quiz/';
-    return this.http.post<any>(`${apiURL}${route}`, DATA, { headers: this.headers });
+    return this.http.post<any>(`${apiURL}${route}`, dataForm, { headers: this.headers });
   }
 
   createQuizByStep(DATA: any): Observable<any> {

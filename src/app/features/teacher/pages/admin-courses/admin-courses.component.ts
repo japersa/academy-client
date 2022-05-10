@@ -40,11 +40,10 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   showFormCreateQuizzes = false;
   showFormEditQuizzes = false;
 
-
   constructor(private coursesService: CoursesService) { }
 
   changeStateShow(value: boolean) {
-    this.loadData()
+    this.loadData();
     // Courses
     this.showFormCreateCourse = value;
     this.showFormEditCourse = value;
@@ -90,7 +89,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
         if (result.value) {
 
           this.coursesService.deleteCourse(courseId).subscribe(res => {
-            this.loadData();
+            this.loadCourses();
             swal.fire({
               title: 'Eliminado!',
               text: 'La orden ha sido ejecutada',
@@ -164,7 +163,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
         if (result.value) {
 
           this.coursesService.deleteModule(moduleId).subscribe(res => {
-            this.loadData();
+            this.loadModules();
             swal.fire({
               title: 'Eliminado!',
               text: 'La orden ha sido ejecutada',
@@ -237,7 +236,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
         if (result.value) {
 
           this.coursesService.deleteTopic(topicId).subscribe(res => {
-            this.loadData();
+            this.loadTopics();
             swal.fire({
               title: 'Eliminado!',
               text: 'La orden ha sido ejecutada',
@@ -310,7 +309,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
         if (result.value) {
 
           this.coursesService.deleteQuiz(quizId).subscribe(res => {
-            this.loadData();
+            this.loadQuizes();
             swal.fire({
               title: 'Eliminado!',
               text: 'La orden ha sido ejecutada',
@@ -342,62 +341,59 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   }
 
-  loadData() {
-
-    this.courses.length = 0;
-    this.modules.length = 0;
-    this.topics.length = 0;
-    this.quizzes.length = 0;
-
+  loadCourses() {
     // GET COURSES
     this.coursesService.getCourses().subscribe(res => {
-      Object.assign(this.courses, res.my_courses_created);
+      this.courses = res.my_courses_created;
     },
       error => {
         console.log('Error: ', error);
       }
     )
-    // GET MODULES
-    this.coursesService.getModules().subscribe(res => {
-      Object.assign(this.modules, res);
-    },
-      error => {
-        console.log('Error: ', error);
-      }
-    )
-    // GET TOPICS
-    this.coursesService.getTopics().subscribe(res => {
-      console.log(res);
-      Object.assign(this.topics, res);
-    },
-      error => {
-        console.log('Error: ', error);
-      }
-    )
-    // GET QUIZZES
-    this.coursesService.getQuizzes().subscribe(res => {
-      Object.assign(this.quizzes, res);
-    },
-      error => {
-        console.log('Error: ', error);
-      }
-    )
-
   }
 
-  // Tracks
-  // trackCourse(index, c) {
-  //   return c.id
-  // }
-  // trackModule(index, m) {
-  //   return m.id
-  // }
-  // trackTopics(index, t) {
-  //   return t.id
-  // }
-  // trackQuiz(index, q) {
-  //   return q.id
-  // }
+  loadModules() {
+    // GET MODULES
+    this.coursesService.getModules().subscribe(res => {
+      this.modules = res;
+    },
+      error => {
+        console.log('Error: ', error);
+      }
+    )
+  }
+
+  loadTopics() {
+    // GET TOPICS
+    this.coursesService.getTopics().subscribe(res => {
+      this.topics = res;
+    },
+      error => {
+        console.log('Error: ', error);
+      }
+    )
+  }
+
+  loadQuizes() {
+
+    // GET QUIZZES
+    this.coursesService.getQuizzes().subscribe(res => {
+      this.quizzes = res;
+    },
+      error => {
+        console.log('Error: ', error);
+      }
+    )
+  }
+
+  loadData() {
+
+    this.loadCourses();
+    this.loadModules();
+    this.loadTopics();
+    this.loadQuizes();
+
+  }
 
   ngOnInit(): void {
     this.loadData();
