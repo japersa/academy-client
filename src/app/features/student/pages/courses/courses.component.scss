@@ -70,18 +70,38 @@ li.timeline-item {
 }
 
 /* Timeline item circle marker */
-li.timeline-item::before {
-    content: ' ';
-    background: var(--white);
-    display: inline-block;
-    position: absolute;
-    border-radius: 50%;
-    border: 3px solid var(--primary);
-    left: 8px;
-    width: 20px;
-    height: 20px;
-    z-index: 400;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+
+.no-seen {
+    li.timeline-item::before {
+        content: ' ';
+        background: var(--white);
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid var(--primary);
+        left: 8px;
+        width: 20px;
+        height: 20px;
+        z-index: 400;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.seen {
+    li.timeline-item::before {
+        content: ' ';
+        background: var(--primary);
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid var(--primary);
+        left: 8px;
+        width: 20px;
+        height: 20px;
+        z-index: 400;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
 }
 
 

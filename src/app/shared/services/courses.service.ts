@@ -86,6 +86,11 @@ export class CoursesService {
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
+  masrkTopicAsSeen(id: string) {
+    const route = `/update/topic/${id}/`;
+    return this.http.patch<any>(`${apiURL}${route}`, { seen: true }, { headers: this.headers });
+  }
+
   getTopicsByModuleId(courseId: string): Observable<any> {
     const route = `/list/topics/${courseId}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });

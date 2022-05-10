@@ -9,10 +9,10 @@
       <p>Continúa aprendiendo mediante su subscripción
         <strong>{{userDataService?.userData$?.value?.subscription | titlecase}}</strong> </p>
     </div>
-    <div class="row">
+    <div class="row" style="width: 100% !important;">
       <div class="col-12">
         <h2 class="mt-4">Cursos</h2>
-        <hr style="width: 100%;" color="green">
+        <hr style="width: 100% !important;" color="green">
       </div>
       <div *ngFor="let c of courses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
         <div class="card">

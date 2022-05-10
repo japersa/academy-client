@@ -20,4 +20,9 @@ export class TopicCommentsService {
     return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 
+  createReplyComment(data): Observable<any> {
+    const route = '/create/reply/comment/';
+    return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
+  }
+
 }

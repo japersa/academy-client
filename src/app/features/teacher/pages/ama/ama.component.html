@@ -23,47 +23,56 @@
                         </div>
 
                         <div class="headings d-flex justify-content-between align-items-center mb-3">
-                            <h5>Preguntas (6)</h5>
+                            <h5>Preguntas ({{unansweredQuestion.length}})</h5>
                         </div>
                         <div class="card p-3">
 
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class=" d-flex flex-row align-items-start">
-                                    <img src="https://i.imgur.com/hczKIze.jpg" width="40"
-                                        class="user-img rounded-circle mr-2">
-                                    <span class="m-0 p-0">
-                                        <small class="font-weight-bold m-0 p-0 text-primary">james_olesenn</small> <br>
-                                        <div class="d-block">
-                                            <small class="text-right">2 de agosto 2020</small>
-                                        </div>
-                                        <p class="text-white m-0 p-o">Lorem ipsum dolor sit amet consectetur,
-                                            adipisicing
-                                            elit. Adipisci et labore obcaecati nesciunt iure similique, cum expedita
-                                            optio
-                                            esse delectus temporibus quidem voluptas nulla vero libero officiis sequi
-                                            molestiae aperiam. </p>
-                                        <hr class="text-left">
-                                        <div class="form-group">
-                                            <label for="response"> Respuesta </label>
+                            <ng-container *ngFor="let c of unansweredQuestion">
+                                <div class=" mt-3">
+                                    <div class=" d-flex flex-row align-items-start">
+                                        <img [src]="c?.author?.image_profile  !== '' ? c?.author?.image_profile : 'assets/img/placeholder.jpg'"
+                                            width="40" class="user-img rounded-circle mr-2">
+                                        <span class="m-0 p-0 w">
+                                            <small
+                                                class="font-weight-bold m-0 p-0 text-primary">{{ (c?.author?.first_name ? c?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
+                                            <br>
+                                            <div class="d-block">
+                                                <small class="text-right">{{ c?.created_at | date}} </small>
+                                            </div>
+                                            <form class=" form" [formGroup]="commentForm"
+                                                (ngSubmit)="createReply(commentForm.value)" role="form">
+                                            <p class="text-white m-0 p-o"> {{ c?.body }}. </p>
+                                            <hr class="text-left">
+                                                <div class="form-group">
+                                                    <label for="response"> Pregunta </label>
 
-                                            <textarea class="form-control" id="response" rows="3" class="form-control"
-                                                placeholder="" formControlName="first_name"></textarea>
+                                                    <textarea class="form-control" id="response" rows="3"
+                                                        class="form-control" placeholder=""
+                                                        formControlName="body"></textarea>
+                                                    <ng-container *ngFor="let validation of validationMessages.comment">
+                                                        <small class="form-text text-danger" *ngIf=" commentForm.get('body').hasError(validation.type) &&
+                                        (commentForm.get('body').dirty ||
+                                          commentForm.get('body').touched) ">
+                                                            {{validation.message}}
+                                                        </small>
+                                                    </ng-container>
 
-                                        </div>
-                                        <!-- <ng-container *ngFor="let validation of validationMessages.first_name">
-                                            <small class="text-danger d-block" *ngIf="updateForm.get('first_name').hasError(validation.type) &&
-                                                  (updateForm.get('first_name').dirty || updateForm.get('first_name').touched) ">
-                                              {{validation.message}}
-                                            </small>
-                                          </ng-container> -->
-                                        <button class="btn btn-primary btn-sm ">Responder</button>
-                                    </span>
+                                                    <ng-container *ngIf="errorMessage">
+                                                        <small class="text-danger"
+                                                            *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small>
+                                                        <br>
+                                                    </ng-container>
 
+                                                    <button class="btn btn-primary btn-sm mt-2"
+                                                        [disabled]="commentForm.invalid">Responder</button>
+                                                </div>
+                                            </form>
+                                        </span>
+
+                                    </div>
                                 </div>
-                            </div>
+                            </ng-container>
 
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                            </div>
                         </div>
                     </div>
 

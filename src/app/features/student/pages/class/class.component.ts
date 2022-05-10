@@ -12,7 +12,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class ClassComponent implements OnInit, OnDestroy {
 
-  topicId = '';
   topic: any = {};
 
   allClass = [];
@@ -40,8 +39,16 @@ export class ClassComponent implements OnInit, OnDestroy {
           Object.assign(this.allClass, res.all);
           this.next = res.next.topicID;
           this.previus = res.previus.topicID;
+
         },
         error: (e) => console.log(e.error),
+        complete: () => {
+
+          if (this.topic.seen === false) {
+            this.coursesService.masrkTopicAsSeen(this.topic.id).subscribe();
+          }
+
+        }
       }
     )
   }
@@ -68,6 +75,8 @@ export class ClassComponent implements OnInit, OnDestroy {
       const id = params.get('id');
       this.getTopic(id);
     });
+
+
 
   }
 

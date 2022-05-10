@@ -110,7 +110,7 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
   loadCourses() {
 
     this.coursesService.getCourses().subscribe(res => {
-      Object.assign(this.courses, res)
+      Object.assign(this.courses, res.my_courses_created);
     },
       error => {
         console.log(error.error);
