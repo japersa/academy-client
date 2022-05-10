@@ -44,7 +44,7 @@ export class EditCourseComponent implements OnInit {
         Validators.minLength(8),
         Validators.maxLength(500)
       ])),
-      price: new FormControl('', Validators.compose([
+      price: new FormControl('0', Validators.compose([
         Validators.required,
         Validators.minLength(1),
         Validators.pattern('^\\d+\\.?\\d{0,2}$')]

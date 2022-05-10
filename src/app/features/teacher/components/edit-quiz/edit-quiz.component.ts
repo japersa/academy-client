@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
@@ -23,11 +23,6 @@ export class EditQuizComponent implements OnInit, OnDestroy {
   @Input() quiz = null;
   @Output() showEvent = new EventEmitter<boolean>();
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
@@ -38,6 +33,40 @@ export class EditQuizComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.quizForm = this.formBuilder.group({
+
+      course: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+
+      questions: new FormArray([
+        this.formBuilder.group({
+          question: new FormControl('', Validators.compose([
+            Validators.required, Validators.minLength(10), Validators.maxLength(100)
+          ])),
+          optionOne: new FormControl('', Validators.compose([
+            Validators.required, Validators.required, Validators.minLength(2)
+          ])),
+          optionTwo: new FormControl('', Validators.compose([
+            Validators.required, Validators.minLength(2)
+          ])),
+          optionThree: new FormControl('', Validators.compose([
+          ])),
+          optionFour: new FormControl('', Validators.compose([
+          ])),
+
+          answer: new FormControl('', Validators.compose([
+            Validators.required
+          ])),
+        })
+      ], [Validators.required]),
+
+    });
+
+  }
+
+  addNewItem() {
+    const itemsArr = this.quizForm.get('questions') as FormArray;
+    const newItem = this.formBuilder.group({
       question: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ])),
@@ -51,18 +80,21 @@ export class EditQuizComponent implements OnInit, OnDestroy {
       ])),
       optionFour: new FormControl('', Validators.compose([
       ])),
-      course: new FormControl('', Validators.compose([
-        Validators.required
-      ])),
+
       answer: new FormControl('', Validators.compose([
         Validators.required
       ])),
-    });
+    })
+    itemsArr.push(newItem)
+  }
 
+  removeItem(i) {
+    const arr = this.quizForm.get('questions') as FormArray;
+    arr.removeAt(i);
   }
 
   editQuiz(dataForm: any) {
-    this.subscription2$ = this.coursesService.updateQuiz(dataForm, this.quiz.id).subscribe(res => {
+    this.coursesService.updateQuiz(dataForm, this.quiz.id).subscribe(res => {
       this.notificationsService.showNotification('bottom', 'center', 'Quiz actualizado con éxito', 2);
       this.errorMessage = '';
       this.quizForm.reset();
@@ -78,8 +110,8 @@ export class EditQuizComponent implements OnInit, OnDestroy {
 
   loadCourses() {
 
-    this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
-      Object.assign(this.courses, res)
+    this.coursesService.getCourses().subscribe(res => {
+      Object.assign(this.courses, res.my_courses_created);
     },
       error => {
         console.log(error.error);
@@ -89,9 +121,7 @@ export class EditQuizComponent implements OnInit, OnDestroy {
   }
 
   getCourseName() {
-    this.subscription3$ = this.coursesService.getCourseById(this.quiz.course_id).subscribe(res => {
-      console.log(res);
-
+    this.coursesService.getCourseById(this.quiz.course_id).subscribe(res => {
       this.currentCourse = res.title
     },
       error => {
@@ -104,20 +134,47 @@ export class EditQuizComponent implements OnInit, OnDestroy {
     this.showEvent.emit(false);
   }
 
+  setValues(question: any) {
+
+    const itemsArr = this.quizForm.get('questions') as FormArray;
+    this.quizForm.patchValue(question);
+    this.removeItem(question.questions[0])
+
+    question.questions.forEach(e => {
+
+      const newItem = this.formBuilder.group({
+        question: new FormControl('', Validators.compose([
+          Validators.required, Validators.minLength(10), Validators.maxLength(100)
+        ])),
+        optionOne: new FormControl('', Validators.compose([
+          Validators.required, Validators.required, Validators.minLength(2)
+        ])),
+        optionTwo: new FormControl('', Validators.compose([
+          Validators.required, Validators.minLength(2)
+        ])),
+        optionThree: new FormControl('', Validators.compose([
+        ])),
+        optionFour: new FormControl('', Validators.compose([
+        ])),
+        answer: new FormControl('', Validators.compose([
+          Validators.required
+        ])),
+      })
+      itemsArr.push(newItem)
+
+    });
+  }
+
+
   ngOnInit(): void {
+
     this.loadCourses();
     this.getCourseName();
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-    this.subscriptions.push(this.subscription3$);
+    this.setValues(this.quiz);
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
+
   }
 
 

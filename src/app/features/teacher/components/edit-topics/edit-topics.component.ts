@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
@@ -16,7 +16,8 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
 
   modules = [];
 
-  event = null;
+  eventFiles = null;
+  eventVideo = null;
 
   currentModule = '';
 
@@ -51,32 +52,95 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
         Validators.maxLength(500)
       ])),
       video: new FormControl('', Validators.compose([
+        Validators.required,
       ])),
       files: new FormControl('', Validators.compose([
-      ]))
+      ])),
+      links: new FormArray([
+        this.formBuilder.group({
+          title: new FormControl('', Validators.compose([
+          ])),
+          link: new FormControl('', Validators.compose([
+          ])),
+        })
+      ], []),
     });
 
   }
 
+  addNewLink() {
+    const itemsArr = this.topicForm.get('links') as FormArray;
+    const newItem = this.formBuilder.group({
+      title: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      link: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+    })
+    itemsArr.push(newItem)
+  }
+
+  removeItem(i) {
+    const arr = this.topicForm.get('links') as FormArray;
+    arr.removeAt(i);
+  }
+
   createTopic(dataForm: any) {
-    this.firebaseStorageService.updateCourseVideo(this.event, dataForm, this.topic.id);
-    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
-      this.firebaseStorageService.uploadPercent = null;
-      this.firebaseStorageService.uploadPercentFiles = null;
-    })).subscribe(() => setTimeout(() => this.showEvent.emit(false), 2000));
+    if (this.eventFiles) {
+      this.createTopicFile();
+    }
+    this.firebaseStorageService.updateCourseVideo(this.eventVideo, dataForm, this.topic.id);
+    this.firebaseStorageService.uploadPercent.subscribe({
+      complete: () => {
+        this.firebaseStorageService.uploadPercent = null;
+        this.firebaseStorageService.uploadPercentFiles = null;
+        setTimeout(() => this.showEvent.emit(false), 2000);
+      }
+    });
   }
 
   handleVideoChange(event) {
-    this.event = event;
+    this.eventVideo = event;
   }
+
+  handleFilesChange(event) {
+    this.eventFiles = event;
+  }
+
+  createTopicFile() {
+    this.firebaseStorageService.uploadCourseFiles(this.eventFiles);
+    this.firebaseStorageService.uploadPercentFiles.subscribe();
+  }
+
 
   cancelCreate() {
     this.showEvent.emit(false);
   }
 
-  setValues() {
-    this.topicForm.patchValue({ title: this.topic.title, description: this.topic.description })
+  setValues(topic: any) {
+
+    const itemsArr = this.topicForm.get('links') as FormArray;
+    this.topicForm.patchValue({
+      title: this.topic.title,
+      description: this.topic.description,
+      links: this.topic.links
+    })
+    this.removeItem(topic.links[0])
+
+    topic.links.forEach(e => {
+
+      const newItem = this.formBuilder.group({
+        title: new FormControl('', Validators.compose([
+        ])),
+        link: new FormControl('', Validators.compose([
+        ])),
+      })
+      itemsArr.push(newItem)
+
+    });
   }
+
 
   getTopicName() {
     this.coursesService.getModuleById(this.topic.module_id).subscribe(res => {
@@ -103,7 +167,7 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadModules();
     this.getTopicName();
-    this.setValues();
+    this.setValues(this.topicForm);
   }
 
   ngOnDestroy(): void {

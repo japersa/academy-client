@@ -46,7 +46,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
         Validators.minLength(8),
         Validators.maxLength(2000)
       ])),
-      price: new FormControl('', Validators.compose([
+      price: new FormControl('0', Validators.compose([
         Validators.required,
         Validators.minLength(1),
         Validators.pattern('^\\d+\\.?\\d{0,2}$')]
