@@ -5,6 +5,7 @@ import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { UserDataService } from '../../../../core/services/user-data.service';
 
 @Component({
   selector: 'app-create-module',
@@ -22,15 +23,13 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
   @Output() showEvent = new EventEmitter<boolean>();
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscriptions: Subscription[] = [];
 
   constructor(
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
     private coursesService: CoursesService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private userDataService: UserDataService
   ) {
 
     this.validationMessages = utilsService.getValidationMessages();
@@ -47,7 +46,7 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
   }
 
   createModule(dataForm: any) {
-    this.subscription2$ = this.coursesService.createModule(dataForm).subscribe(res => {
+    this.coursesService.createModule(dataForm).subscribe(res => {
       this.notificationsService.showNotification('bottom', 'center', 'Módulo creado con éxito', 2);
       this.errorMessage = '';
       this.moduleForm.reset();
@@ -68,8 +67,13 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
   loadCourses() {
 
-    this.subscription1$ = this.coursesService.getCourses().subscribe(res => {
-      Object.assign(this.courses, res.my_courses_created);
+    this.coursesService.getCourses().subscribe(res => {
+      if (this.userDataService.userData$.value.rol === 'admin') {
+        this.courses = res.all;
+      }
+      if (this.userDataService.userData$.value.rol === 'teacher') {
+        this.courses = res.my_courses_created;
+      }
     },
       error => {
         console.log(error.error);
@@ -79,17 +83,10 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadCourses()
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
+    this.loadCourses();
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 }

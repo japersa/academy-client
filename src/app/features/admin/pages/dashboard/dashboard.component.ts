@@ -38,29 +38,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   courses = [];
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(private dashboardService: DashboardService, private router: Router) { }
-
-  getAdmins() {
-
-    // this.subscription$ = this.dashboardService.getAdmins().pipe(take(1)).subscribe(res => {
-    //   console.log(res);
-
-    // },
-    //   error => {
-    //     console.log(error);
-    //   });
-  }
 
   // Muestra el total de alumnos, docentes y administradores
   showGeneralStatistics() {
-    this.subscription3$ = this.dashboardService
+    this.dashboardService
       .getUsersByCount()
-      .pipe(take(1))
       .subscribe(
         (res) => {
           this.total_students = res.total_students;
@@ -94,7 +77,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   // Llena la gráfica con la información de nuevos usuarios por mes
   getDataChart() {
-    this.subscription2$ = this.dashboardService.getUsersByCount().pipe(take(1)).subscribe(
+    this.dashboardService.getUsersByCount().pipe(take(1)).subscribe(
       (res) => {
         // debugger
 
@@ -251,7 +234,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getCourses() {
-    this.subscription1$ = this.dashboardService.getAdminCourses().pipe(take(1)).subscribe(res => {
+    this.dashboardService.getAdminCourses().pipe(take(1)).subscribe(res => {
 
       Object.assign(this.courses, res);
 
@@ -263,31 +246,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   goToCourseDetail(id: string) {
 
-    this.router.navigate([`/course/${id}`]) 
+    this.router.navigate([`/course/${id}`])
 
   }
 
   ngOnInit() {
-    //debugger
-    this.getAdmins();
+
     this.setDataLabel();
     this.showGeneralStatistics();
     this.getDataChart();
     this.getCourses();
 
-    // Subs
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-    this.subscriptions.push(this.subscription3$);
-
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
   public updateOptions() {

@@ -131,7 +131,7 @@
           <img class="card-img-top" [src]="c?.path_preview_image" style="width: 100%;
           height: 200px;" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{ (c.title.length > 20 ? c.title + '...' : c.title) | uppercase | slice:0:20}}</h5>
+            <h5 class="card-title text-center">{{ (c.title.length > 20 ? c.title  + '...' : c.title) | uppercase }} </h5>
             <button class="btn btn-simple btn-primary btn-block" type="button" (click)="goToCourseDetail(c.id)">IR AL
               CURSO</button>
           </div>

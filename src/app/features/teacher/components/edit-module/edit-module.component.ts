@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
+import { UserDataService } from '../../../../core/services/user-data.service';
 
 @Component({
   selector: 'app-edit-module',
@@ -28,7 +29,8 @@ export class EditModuleComponent implements OnInit, OnDestroy {
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
     private coursesService: CoursesService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private userDataService: UserDataService
   ) {
 
     this.validationMessages = utilsService.getValidationMessages();
@@ -67,7 +69,12 @@ export class EditModuleComponent implements OnInit, OnDestroy {
   loadCourses() {
 
     this.coursesService.getCourses().subscribe(res => {
-      Object.assign(this.courses, res.my_courses_created);
+      if (this.userDataService.userData$.value.rol === 'admin') {
+        this.courses = res.all;
+      }
+      if (this.userDataService.userData$.value.rol === 'teacher') {
+        this.courses = res.my_courses_created;
+      }
     },
       error => {
         console.log(error.error);

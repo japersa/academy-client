@@ -92,7 +92,7 @@ export class CoursesService {
   }
 
   getTopicsByModuleId(moduleId: string): Observable<any> {
-    const route = `/list/topics/${moduleId}/`;
+    const route = `/list/topics-by-module/${moduleId}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 

@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CoursesService } from '../../../../shared/services/courses.service';
-import { take } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 import swal from 'sweetalert2';
+import { UserDataService } from '../../../../core/services/user-data.service';
 
 
 @Component({
@@ -40,7 +39,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   showFormCreateQuizzes = false;
   showFormEditQuizzes = false;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService,
+    private userDataService: UserDataService) { }
 
   changeStateShow(value: boolean) {
     this.loadData();
@@ -344,7 +344,14 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   loadCourses() {
     // GET COURSES
     this.coursesService.getCourses().subscribe(res => {
-      this.courses = res.my_courses_created;
+
+      if (this.userDataService.userData$.value.rol === 'admin') {
+        this.courses = res.all;
+      }
+      if (this.userDataService.userData$.value.rol === 'teacher') {
+        this.courses = res.my_courses_created;
+      }
+
     },
       error => {
         console.log('Error: ', error);

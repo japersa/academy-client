@@ -22,9 +22,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   fillCourses() {
-    this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
-      Object.assign(this.courses, res.my_courses_created);
-      Object.assign(this.courses, res.my_enrolled_courses);
+    this.coursesService.getCourses().subscribe(res => {
+
+      if (this.userDataService.userData$.value.rol === 'admin') {
+        this.courses = res.all;
+      }
+      if (this.userDataService.userData$.value.rol === 'teacher') {
+        this.courses = res.my_courses_created;
+      }
+      if (this.userDataService.userData$.value.rol === 'student') {
+        this.courses = res.my_enrolled_courses;
+      }
     },
       error => {
         console.log(error);
