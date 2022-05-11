@@ -33,13 +33,11 @@ export class ClassComponent implements OnInit, OnDestroy {
     this.coursesService.getTopicById(topicId).subscribe(
       {
         next: (res) => {
-          console.log(res);
           this.topic = res.result
           this.getVideo(res.result.video);
           Object.assign(this.allClass, res.all);
           this.next = res.next.topicID;
           this.previus = res.previus.topicID;
-
         },
         error: (e) => console.log(e.error),
         complete: () => {

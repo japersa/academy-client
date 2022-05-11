@@ -1,0 +1,39 @@
+[debug] [2022-05-11T21:04:38.792Z] ----------------------------------------------------------------------
+[debug] [2022-05-11T21:04:38.793Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2022-05-11T21:04:38.793Z] CLI Version:   10.8.0
+[debug] [2022-05-11T21:04:38.793Z] Platform:      darwin
+[debug] [2022-05-11T21:04:38.794Z] Node Version:  v16.13.0
+[debug] [2022-05-11T21:04:38.797Z] Time:          Wed May 11 2022 16:04:38 GMT-0500 (Colombia Standard Time)
+[debug] [2022-05-11T21:04:38.797Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-05-11T21:04:38.799Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-05-11T21:04:38.873Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-05-11T21:04:38.873Z] > authorizing via signed-in user (mistradesoftware@gmail.com)
+[debug] [2022-05-11T21:04:38.874Z] [iam] checking project mistrades-b043d for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-05-11T21:04:38.874Z] > refreshing access token with scopes: []
+[debug] [2022-05-11T21:04:38.874Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-05-11T21:04:39.054Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","date":"Wed, 11 May 2022 21:04:39 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-05-11T21:04:39.095Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mistrades-b043d:testIamPermissions [none]
+[debug] [2022-05-11T21:04:39.095Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mistrades-b043d:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-05-11T21:04:39.284Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-05-11T21:04:39.284Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2022-05-11T21:04:39.608Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mistrades-b043d:testIamPermissions 200
+[debug] [2022-05-11T21:04:39.608Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mistrades-b043d:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-05-11T21:04:39.609Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mistrades-b043d [none]
+[debug] [2022-05-11T21:04:40.239Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mistrades-b043d 200
+[debug] [2022-05-11T21:04:40.240Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mistrades-b043d {"projectId":"mistrades-b043d","projectNumber":"508708256791","displayName":"mistrades","name":"projects/mistrades-b043d","resources":{"hostingSite":"mistrades-b043d","storageBucket":"mistrades-b043d.appspot.com","locationId":"us-east4"},"state":"ACTIVE"}
+[info] 
+[info] === Deploying to 'mistrades-b043d'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-05-11T21:04:40.242Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mistrades-b043d [none]
+[debug] [2022-05-11T21:04:40.586Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mistrades-b043d 200
+[debug] [2022-05-11T21:04:40.586Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mistrades-b043d {"projectId":"mistrades-b043d","projectNumber":"508708256791","displayName":"mistrades","name":"projects/mistrades-b043d","resources":{"hostingSite":"mistrades-b043d","storageBucket":"mistrades-b043d.appspot.com","locationId":"us-east4"},"state":"ACTIVE"}
+[debug] [2022-05-11T21:04:40.590Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/508708256791/sites/mistrades-b043d/versions [none]
+[debug] [2022-05-11T21:04:40.590Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/508708256791/sites/mistrades-b043d/versions {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-05-11T21:04:41.850Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/508708256791/sites/mistrades-b043d/versions 200
+[debug] [2022-05-11T21:04:41.850Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/508708256791/sites/mistrades-b043d/versions {"name":"projects/508708256791/sites/mistrades-b043d/versions/813d4364a6168fa8","status":"CREATED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[mistrades-b043d]: beginning deploy... 
+[info] i  hosting[mistrades-b043d]: found 305 files in dist 
+[debug] [2022-05-11T21:04:41.898Z] [hosting] uploading with 200 concurrency

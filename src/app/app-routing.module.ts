@@ -11,7 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'class/7',
+    redirectTo: 'notifications',
     pathMatch: 'full'
   },
   {
@@ -91,14 +91,19 @@ const routes: Routes = [
           .then(m => m.HomeModule)
       },
       {
-        path: 'test', // 
+        path: 'test', // falta terminar
         loadChildren: () => import('./features/student/pages/test/test.module')
           .then(m => m.TestModule)
       },
       {
-        path: 'class/:id',  // falta terminar
+        path: 'class/:id',
         loadChildren: () => import('./features/student/pages/class/class.module')
           .then(m => m.ClassModule)
+      },
+      {
+        path: 'notifications', // falta terminar
+        loadChildren: () => import('./shared/pages/notifications/notifications.module')
+          .then(m => m.NotificationsModule)
       },
     ]
   },

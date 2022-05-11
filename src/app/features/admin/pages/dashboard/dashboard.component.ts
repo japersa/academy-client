@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import Chart from 'chart.js';
-import { Subscription } from 'rxjs';
 import { DashboardService } from '../../services/dashboard.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';

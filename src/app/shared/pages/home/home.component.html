@@ -14,12 +14,15 @@
         <h2 class="mt-4">Cursos</h2>
         <hr style="width: 100% !important;" color="green">
       </div>
+
       <div *ngFor="let c of courses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
         <div class="card">
           <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title text-center">{{ (c.title.length > 20 ? c.title  + '...' : c.title) | uppercase }} </h5>
-            <button class="btn btn-simple btn-primary btn-block" type="button" (click)="goToCourseDetail(c.id)">IR AL CURSO</button>
+            <h5 class="card-title text-center">{{ (c.title.length > 20 ? c.title  + '...' : c.title) | uppercase }}
+            </h5>
+            <button class="btn btn-simple btn-primary btn-block" type="button" (click)="goToCourseDetail(c.id)">IR AL
+              CURSO</button>
           </div>
         </div>
       </div>

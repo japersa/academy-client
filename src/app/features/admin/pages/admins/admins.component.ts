@@ -18,12 +18,6 @@ export class AdminsComponent implements OnInit, OnDestroy {
   role = 'administradores'
   users = [];
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscription4$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(private dashboardService: DashboardService) {
   }
 
@@ -45,7 +39,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
   getAdmins() {
     this.users.length = 0;
     this.role = 'administradores'
-    this.subscription1$ = this.dashboardService.getUsersByRole(ROLES_ENUM.ADMIN).pipe(take(1)).subscribe(res => {
+    this.dashboardService.getUsersByRole(ROLES_ENUM.ADMIN).pipe(take(1)).subscribe(res => {
       Object.assign(this.users, res)
     },
       error => {
@@ -56,7 +50,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
   getStudents() {
     this.users.length = 0;
     this.role = 'estudiantes'
-    this.subscription2$ = this.dashboardService.getUsersByRole(ROLES_ENUM.STUDENT).pipe(take(1)).subscribe(res => {
+    this.dashboardService.getUsersByRole(ROLES_ENUM.STUDENT).pipe(take(1)).subscribe(res => {
       Object.assign(this.users, res)
     },
       error => {
@@ -67,10 +61,10 @@ export class AdminsComponent implements OnInit, OnDestroy {
   getTeachers() {
     this.users.length = 0;
     this.role = 'profesores'
-    this.subscription3$ = this.dashboardService.getUsersByRole(ROLES_ENUM.TEACHER).pipe(take(1)).subscribe(res => {
+    this.dashboardService.getUsersByRole(ROLES_ENUM.TEACHER).pipe(take(1)).subscribe(res => {
       Object.assign(this.users, res)
       console.log(res);
-      
+
     },
       error => {
         console.log('error ' + error.error);
@@ -96,7 +90,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
       .then(result => {
         if (result.value) {
 
-          this.subscription4$ = this.dashboardService.deleteUser(userId).pipe(take(1)).subscribe(res => {
+          this.dashboardService.deleteUser(userId).subscribe(res => {
 
             swal.fire({
               title: 'Eliminado!',
@@ -133,19 +127,9 @@ export class AdminsComponent implements OnInit, OnDestroy {
 
     this.getAdmins();
 
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-    this.subscriptions.push(this.subscription3$);
-    this.subscriptions.push(this.subscription4$);
-
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    });
   }
 
 }

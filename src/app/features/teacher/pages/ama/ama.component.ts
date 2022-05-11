@@ -16,7 +16,7 @@ export class AmaComponent implements OnInit, OnDestroy {
   getUnansweredQuestions() {
 
     this.amaService.getUnansweredQuestions().subscribe(res => {
-      Object.assign(this.unansweredQuestion, res);
+      this.unansweredQuestion = res;
     },
       error => {
         console.log('error ' + error.error);
