@@ -32,7 +32,6 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
 
   // QUIZZES
   quizForm: FormGroup;
-  quizzes = [];
 
   // STEPPER
 
@@ -86,24 +85,6 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
     });
 
     // TOPIC FORM
-    // this.topicForm = this.formBuilder.group({
-    //   module: new FormControl('', Validators.compose([
-    //     Validators.required,
-    //   ])),
-    //   title: new FormControl('', Validators.compose([
-    //     Validators.required, Validators.minLength(8), Validators.maxLength(100)
-    //   ])),
-    //   description: new FormControl('', Validators.compose([
-    //     Validators.required,
-    //     Validators.minLength(8),
-    //     Validators.maxLength(500)
-    //   ])),
-    //   video: new FormControl('', Validators.compose([
-    //     Validators.required,
-    //   ])),
-    //   files: new FormControl('', Validators.compose([
-    //   ]))
-    // });
 
     this.topicForm = this.formBuilder.group({
       module: new FormControl('', Validators.compose([
@@ -134,22 +115,29 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
 
     // QUIZ FORM
     this.quizForm = this.formBuilder.group({
-      question: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(10), Validators.maxLength(100)
-      ])),
-      optionOne: new FormControl('', Validators.compose([
-        Validators.required, Validators.required, Validators.minLength(2)
-      ])),
-      optionTwo: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(2)
-      ])),
-      optionThree: new FormControl('', Validators.compose([
-      ])),
-      optionFour: new FormControl('', Validators.compose([
-      ])),
-      answer: new FormControl('', Validators.compose([
-        Validators.required
-      ])),
+
+      questions: new FormArray([
+        this.formBuilder.group({
+          question: new FormControl('', Validators.compose([
+            Validators.required, Validators.minLength(10), Validators.maxLength(100)
+          ])),
+          optionOne: new FormControl('', Validators.compose([
+            Validators.required, Validators.required, Validators.minLength(2)
+          ])),
+          optionTwo: new FormControl('', Validators.compose([
+            Validators.required, Validators.minLength(2)
+          ])),
+          optionThree: new FormControl('', Validators.compose([
+          ])),
+          optionFour: new FormControl('', Validators.compose([
+          ])),
+
+          answer: new FormControl('', Validators.compose([
+            Validators.required
+          ])),
+        })
+      ], [Validators.required]),
+
     });
 
   }
@@ -236,87 +224,20 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
     this.event = event;
   }
 
-
   handleFilesChange(event) {
     this.eventFiles = event;
   }
 
   // QUIZZES
+
   createQuiz(dataForm: any) {
 
-    const correctAnswer = dataForm.answer
-    const answersArr = []
-
     const DATA = {
-      question: dataForm.question,
       course: this.firebaseStorageService.course.id,
-      answers: answersArr
+      questions: dataForm.questions
     }
 
-    Object.entries(dataForm).forEach(([key, value]) => {
-
-      switch (key.toString()) {
-        case 'optionOne':
-          if (correctAnswer === '1') {
-            answersArr.push({
-              option: value,
-              isCorrect: true
-            })
-            break;
-          }
-          answersArr.push({
-            option: value,
-            isCorrect: false
-          })
-          break;
-        case 'optionTwo':
-          if (correctAnswer === '2') {
-            answersArr.push({
-              option: value,
-              isCorrect: true
-            })
-            break;
-          }
-          answersArr.push({
-            option: value,
-            isCorrect: false
-          })
-          break;
-        case 'optionThree':
-          if (correctAnswer === '3') {
-            answersArr.push({
-              option: value,
-              isCorrect: true
-            })
-            break;
-          }
-          answersArr.push({
-            option: value,
-            isCorrect: false
-          })
-          break;
-        case 'optionFour':
-          if (correctAnswer === '4') {
-            answersArr.push({
-              option: value,
-              isCorrect: true
-            })
-            break;
-          }
-          answersArr.push({
-            option: value,
-            isCorrect: false
-          })
-          break;
-
-        default:
-          break;
-      }
-
-    });
-
     this.coursesService.createQuiz(DATA).subscribe(res => {
-      this.quizzes.push(res);
       this.notificationsService.showNotification('bottom', 'center', 'Quiz creado con éxito', 2);
       this.errorMessage = '';
       this.quizForm.reset();
@@ -327,6 +248,35 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
         this.notificationsService.showNotification('bottom', 'center', 'Error al crear quiz', 4);
       }
     );
+  }
+
+  addNewQ() {
+    const itemsArr = this.quizForm.get('questions') as FormArray;
+    const newItem = this.formBuilder.group({
+      question: new FormControl('', Validators.compose([
+        Validators.required, Validators.minLength(10), Validators.maxLength(100)
+      ])),
+      optionOne: new FormControl('', Validators.compose([
+        Validators.required, Validators.required, Validators.minLength(2)
+      ])),
+      optionTwo: new FormControl('', Validators.compose([
+        Validators.required, Validators.minLength(2)
+      ])),
+      optionThree: new FormControl('', Validators.compose([
+      ])),
+      optionFour: new FormControl('', Validators.compose([
+      ])),
+
+      answer: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+    })
+    itemsArr.push(newItem)
+  }
+
+  removeQ(i) {
+    const arr = this.quizForm.get('questions') as FormArray;
+    arr.removeAt(i);
   }
 
   // STEPPER
