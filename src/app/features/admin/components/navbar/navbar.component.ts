@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     public toastr: ToastrService,
     private authService: AuthService,
     public userDataService: UserDataService,
-    // private notificationsService: NotificationsService
   ) {
 
   }
@@ -73,9 +72,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-    // this.notificationsService.getDBNotifications();
-
     window.addEventListener('resize', this.updateColor);
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];

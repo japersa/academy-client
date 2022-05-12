@@ -67,7 +67,7 @@
                                                 </div>
                                                 <div class="col-9 d-flex align-items-center">
                                                     <a [href]="f.url" target="_blank" download>
-                                                        <small class="text-white">{{ f?.name }}</small>
+                                                        <small class="text-white">{{ f?.name | slice:0:40 }}</small>
                                                     </a>
                                                 </div>
                                             </div>

@@ -36,7 +36,6 @@
                                                         <tr>
                                                             <th class=" text-center">id</th>
                                                             <th>Nombre</th>
-                                                            <th class=" text-center">Estado</th>
                                                             <th class=" text-center">Fecha de creación</th>
                                                             <th class=" text-right">Acciones</th>
                                                         </tr>
@@ -45,8 +44,6 @@
                                                         <tr *ngFor="let c of courses; index as i; trackBy: trackCourse">
                                                             <td class=" text-center">{{ c?.id }}</td>
                                                             <td>{{ c?.title | titlecase}}</td>
-                                                            <td class=" text-center">
-                                                                {{ c?.is_active.toString() | uppercase }}</td>
                                                             <td class=" text-center">{{c?.created_at | date}}</td>
                                                             <td class=" text-right">
                                                                 <button
@@ -96,12 +93,14 @@
                                                     CREAR MÓDULO
                                                 </button>
                                                 <div class=" dropdown d-inline" dropdown>
-                                                    <button class=" btn btn-default dropdown-toggle btn-link btn-icon dropdown-toggle"
+                                                    <button
+                                                        class=" btn btn-default dropdown-toggle btn-link btn-icon dropdown-toggle"
                                                         data-toggle="dropdown" dropdownToggle type="button">
                                                         <i class=" tim-icons icon-settings-gear-63"> </i>
                                                     </button>
                                                     <div class=" dropdown-menu dropdown-menu-right" *dropdownMenu>
-                                                        <a class=" dropdown-item" *ngFor="let c of courses" (click)="getModulesByCourseId(c.id)" > {{c.title}} </a>
+                                                        <a class=" dropdown-item" *ngFor="let c of courses"
+                                                            (click)="getModulesByCourseId(c.id)"> {{c.title}} </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,12 +177,15 @@
                                                     CREAR TEMARIO
                                                 </button>
                                                 <div class=" dropdown d-inline" dropdown>
-                                                    <button class=" btn btn-default dropdown-toggle btn-link btn-icon dropdown-toggle"
+                                                    <button
+                                                        class=" btn btn-default dropdown-toggle btn-link btn-icon dropdown-toggle"
                                                         data-toggle="dropdown" dropdownToggle type="button">
                                                         <i class=" tim-icons icon-settings-gear-63"> </i>
                                                     </button>
                                                     <div class=" dropdown-menu dropdown-menu-right" *dropdownMenu>
-                                                        <a class=" dropdown-item" *ngFor="let c of modules" (click)="getTopicByModuleId(c.id)" > {{c.name + ' | ' + c.course_name | titlecase}} </a>
+                                                        <a class=" dropdown-item" *ngFor="let c of modules"
+                                                            (click)="getTopicByModuleId(c.id)">
+                                                            {{c.name + ' | ' + c.course_name | titlecase}} </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,7 +209,8 @@
                                                             <td class=" text-center">{{ t?.id }}</td>
                                                             <td>{{ t?.title | titlecase}}</td>
                                                             <td class=" text-center">{{t?.module_id }}</td>
-                                                            <td class=" text-center">{{ t?.module_name | titlecase}}</td>
+                                                            <td class=" text-center">{{ t?.module_name | titlecase}}
+                                                            </td>
                                                             <td class=" text-center">{{t?.created_at | date}}</td>
                                                             <td class=" text-right">
                                                                 <button

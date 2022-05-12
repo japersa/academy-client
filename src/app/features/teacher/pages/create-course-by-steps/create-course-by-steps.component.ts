@@ -47,12 +47,6 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   wizard = false;
   step = 1;
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscription3$: Subscription;
-  subscription4$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(private utilsService: UtilsService,
     private formBuilder: FormBuilder,
     public firebaseStorageService: FirebaseStorageService,
@@ -136,7 +130,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   // COURSE
   createCourse(dataForm: any) {
     this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
-    this.subscription1$ = this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
+    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
       this.courseForm.reset();
       this.event = null;
       this.errorMessage = '';
@@ -153,7 +147,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
       name: dataForm.name,
       course: this.firebaseStorageService.course.id
     }
-    this.subscription2$ = this.coursesService.createModule(data).subscribe(res => {
+    this.coursesService.createModule(data).subscribe(res => {
       this.notificationsService.showNotification('bottom', 'center', 'Módulo creado con éxito', 2);
       this.moduleForm.reset();
       this.modules.push(res);
@@ -170,8 +164,6 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
 
   // TOPICS
   createTopic(dataForm: any) {
-    console.log('dat topic', dataForm);
-    console.log('modu', this.modules);
 
     this.firebaseStorageService.uploadCourseVideo(this.event, dataForm);
     this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
@@ -258,7 +250,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
 
     });
 
-    this.subscription2$ = this.coursesService.createQuiz(DATA).subscribe(res => {
+    this.coursesService.createQuiz(DATA).subscribe(res => {
       this.quizzes.push(res);
       this.notificationsService.showNotification('bottom', 'center', 'Quiz creado con éxito', 2);
       this.errorMessage = '';
@@ -341,12 +333,6 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-    this.subscriptions.push(this.subscription3$);
-    this.subscriptions.push(this.subscription4$);
-
     var wizard = document.getElementsByClassName('card-wizard')[0];
     wizard.classList.add('active');
     var stepper = document.getElementById('wizardProfile');
@@ -358,11 +344,6 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    });
   }
 
 }

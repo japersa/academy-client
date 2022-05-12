@@ -39,13 +39,25 @@
                                             </div>
                                             <p class="text-white m-0 p-o"> {{ c?.body?.comment }}. </p>
                                             <br>
-                                            <small
-                                                class="font-weight-bold m-0 p-0 text-primary">{{ (c?.body?.topic_author_name ? c?.body?.topic_author_name : 'User ' + c.id) | titlecase}}</small>
-                                            <br>
-                                            <div class="d-block">
-                                                <small class="text-gray">{{ c?.body?.reply_comment_created_at | date}} </small>
-                                            </div>
-                                            <p class="text-white m-0 p-o"> {{ c?.body?.reply_comment }}. </p>
+                                            <ng-container *ngIf="c.body.reply_comment">
+                                                <div class=" d-flex flex-row align-items-start">
+                                                    <img [src]="c?.body?.author_image_profile  !== '' ? c?.body?.author_image_profile : 'assets/img/placeholder.jpg'"
+                                                        width="40" class="user-img rounded-circle mr-2">
+                                                    <span class="m-0 p-0 w">
+                                                        <small
+                                                            class="font-weight-bold m-0 p-0 text-primary">{{ (c?.body?.author_name ? c?.body?.author_name : 'User ' + c.id) | titlecase}}</small>
+                                                        <br>
+                                                        <div class="d-block">
+                                                            <small
+                                                                class="text-gray">{{ c?.body?.reply_comment_created_at | date}}
+                                                            </small>
+                                                        </div>
+                                                        <p class="text-white m-0 p-o"> {{ c?.body?.reply_comment }}.
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </ng-container>
+
                                             <hr class="text-left">
                                         </span>
 
