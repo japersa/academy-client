@@ -26,10 +26,6 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
 
   @Output() showEvent = new EventEmitter<boolean>();
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscriptions: Subscription[] = [];
-
   constructor(
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
@@ -120,7 +116,7 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
 
   loadModules() {
 
-    this.subscription1$ = this.coursesService.getModules().subscribe(res => {
+    this.coursesService.getModules().subscribe(res => {
       Object.assign(this.modules, res);
     },
       error => {
@@ -132,17 +128,9 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadModules()
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
   }
 
   ngOnDestroy(): void {
-
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 }

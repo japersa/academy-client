@@ -23,8 +23,6 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
 
   errorMessage: string | null;
 
-  suscription$: Subscription;
-
   constructor(
     private utilsService: UtilsService,
     private formBuilder: FormBuilder,
@@ -60,7 +58,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
 
   createCourse(dataForm: any) {
     this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
-    this.suscription$ = this.firebaseStorageService.uploadPercent.pipe().subscribe(() => {
+    this.firebaseStorageService.uploadPercent.subscribe(() => {
       this.firebaseStorageService.uploadPercent = null;
       setTimeout(() => this.showEvent.emit(false), 2000);
     });
@@ -78,9 +76,6 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.suscription$ !== undefined) {
-      this.suscription$.unsubscribe();
-    }
   }
 
 }

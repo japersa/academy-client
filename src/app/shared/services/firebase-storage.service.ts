@@ -75,7 +75,7 @@ export class FirebaseStorageService {
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
       finalize(() => {
-        fileRef.getDownloadURL().pipe(take(1)).subscribe(imgUrl => {
+        fileRef.getDownloadURL().subscribe(imgUrl => {
 
           const data = {
             title: dataForm.title,
@@ -176,8 +176,6 @@ export class FirebaseStorageService {
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(videoUrl => {
-
-          console.log(dataForm);
 
           const data = {
             title: dataForm.title,

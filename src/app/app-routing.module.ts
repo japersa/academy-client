@@ -11,7 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'notifications',
+    redirectTo: 'course-by-steps',
     pathMatch: 'full'
   },
   {

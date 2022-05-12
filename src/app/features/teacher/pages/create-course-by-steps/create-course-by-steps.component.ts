@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import Stepper from 'bs-stepper';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
@@ -18,6 +18,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   validationMessages: any;
   errorMessage: string | null;
   event = null;
+  eventFiles = null;
 
   // COURSE
   courseForm: FormGroup;
@@ -59,7 +60,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
     this.courseForm = this.formBuilder.group({
       title: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(8),
         Validators.maxLength(100)
       ])),
       description: new FormControl('', Validators.compose([
@@ -67,7 +68,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
         Validators.minLength(8),
         Validators.maxLength(2000)
       ])),
-      price: new FormControl('', Validators.compose([
+      price: new FormControl('0', Validators.compose([
         Validators.required,
         Validators.minLength(1),
         Validators.pattern('^\\d+\\.?\\d{0,2}$')]
@@ -80,11 +81,30 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
     // MODULE FORM
     this.moduleForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(3), Validators.maxLength(100)
-      ]))
+        Validators.required, Validators.minLength(8), Validators.maxLength(100)
+      ])),
     });
 
     // TOPIC FORM
+    // this.topicForm = this.formBuilder.group({
+    //   module: new FormControl('', Validators.compose([
+    //     Validators.required,
+    //   ])),
+    //   title: new FormControl('', Validators.compose([
+    //     Validators.required, Validators.minLength(8), Validators.maxLength(100)
+    //   ])),
+    //   description: new FormControl('', Validators.compose([
+    //     Validators.required,
+    //     Validators.minLength(8),
+    //     Validators.maxLength(500)
+    //   ])),
+    //   video: new FormControl('', Validators.compose([
+    //     Validators.required,
+    //   ])),
+    //   files: new FormControl('', Validators.compose([
+    //   ]))
+    // });
+
     this.topicForm = this.formBuilder.group({
       module: new FormControl('', Validators.compose([
         Validators.required,
@@ -101,7 +121,15 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
         Validators.required,
       ])),
       files: new FormControl('', Validators.compose([
-      ]))
+      ])),
+      links: new FormArray([
+        this.formBuilder.group({
+          title: new FormControl('', Validators.compose([
+          ])),
+          link: new FormControl('', Validators.compose([
+          ])),
+        })
+      ], []),
     });
 
     // QUIZ FORM
@@ -130,11 +158,12 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   // COURSE
   createCourse(dataForm: any) {
     this.firebaseStorageService.uploadCourseCover(this.event, dataForm);
-    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
+    this.firebaseStorageService.uploadPercent.subscribe(() => {
+      this.firebaseStorageService.uploadPercent = null;
       this.courseForm.reset();
       this.event = null;
       this.errorMessage = '';
-    })).subscribe();
+    });
   }
 
   handleImageChange(event) {
@@ -142,6 +171,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   }
 
   // MODULE
+
   createModule(dataForm: any) {
     const data = {
       name: dataForm.name,
@@ -163,17 +193,52 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   }
 
   // TOPICS
-  createTopic(dataForm: any) {
 
+  createTopic(dataForm: any) {
+    if (this.eventFiles) {
+      this.createTopicFile();
+    }
     this.firebaseStorageService.uploadCourseVideo(this.event, dataForm);
-    this.firebaseStorageService.uploadPercent.pipe(finalize(() => {
-      this.topicForm.reset();
-      this.event = null;
-    })).subscribe();
+    this.firebaseStorageService.uploadPercent.subscribe({
+      complete: () => {
+        this.firebaseStorageService.uploadPercent = null;
+        this.firebaseStorageService.uploadPercentFiles = null;
+        this.topicForm.reset();
+        this.event = null;
+      }
+    });
+  }
+
+  createTopicFile() {
+    this.firebaseStorageService.uploadCourseFiles(this.eventFiles);
+    this.firebaseStorageService.uploadPercentFiles.subscribe();
+  }
+
+  addNewLink() {
+    const itemsArr = this.topicForm.get('links') as FormArray;
+    const newItem = this.formBuilder.group({
+      title: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      link: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+    })
+    itemsArr.push(newItem)
+  }
+
+  removeItem(i) {
+    const arr = this.topicForm.get('links') as FormArray;
+    arr.removeAt(i);
   }
 
   handleVideoChange(event) {
     this.event = event;
+  }
+
+
+  handleFilesChange(event) {
+    this.eventFiles = event;
   }
 
   // QUIZZES

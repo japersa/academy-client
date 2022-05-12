@@ -31,16 +31,6 @@
                         {{validation.message}}
                     </small>
                 </ng-container>
-                <!-- <label> Precio </label>
-                <div class=" form-group">
-                    <input class=" form-control" formControlName="price" placeholder="Precio" type="text" required />
-                </div>
-                <ng-container *ngFor="let validation of validationMessages.price">
-                    <small class="form-text text-danger d-block" *ngIf="courseForm.get('price').hasError(validation.type) &&
-                    (courseForm.get('price').dirty || courseForm.get('price').touched) ">
-                        {{validation.message}}
-                    </small>
-                </ng-container> -->
 
                 <label for="formFileSm" class="form-label ">Imágen de portada</label>
                 <input class=" form-control" formControlName="path_preview_image" (change)="handleImageChange($event)"

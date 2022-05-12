@@ -56,20 +56,14 @@
                         <div class=" tab-content">
                             <!-- COURSE -->
                             <div class=" tab-pane show" id="course">
-                                <!-- COURSE -->
                                 <form class=" form" [formGroup]="courseForm" (ngSubmit)="createCourse(courseForm.value)"
                                     role="form">
+
                                     <div class=" card-header">
-                                        <div class=" card-header">
-                                            <div class=" col-sm-12 text-left">
-                                                <h3 class="card-subtitle"> CREAR NUEVO CURSO</h3>
-                                            </div>
-                                        </div>
+                                        <h4 class=" card-title">Crear curso</h4>
                                     </div>
-
-
-                                    <div class="row p-3">
-                                        <div class=" col-sm-6">
+                                    <div class=" card-body row">
+                                        <div class="  col-md-6">
 
                                             <label> Título </label>
                                             <div class=" form-group">
@@ -79,7 +73,7 @@
                                             <ng-container *ngFor="let validation of validationMessages.title">
                                                 <small class="form-text text-danger d-block"
                                                     *ngIf="courseForm.get('title').hasError(validation.type) &&
-                                                                        (courseForm.get('title').dirty || courseForm.get('title').touched) ">
+                                                            (courseForm.get('title').dirty || courseForm.get('title').touched) ">
                                                     {{validation.message}}
                                                 </small>
                                             </ng-container>
@@ -93,25 +87,12 @@
                                             <ng-container *ngFor="let validation of validationMessages.description">
                                                 <small class="form-text text-danger d-block"
                                                     *ngIf="courseForm.get('description').hasError(validation.type) &&
-                                                                        (courseForm.get('description').dirty || courseForm.get('description').touched) ">
-                                                    {{validation.message}}
-                                                </small>
-                                            </ng-container>
-                                            <label> Precio </label>
-                                            <div class=" form-group">
-                                                <input class=" form-control" formControlName="price"
-                                                    placeholder="Precio" type="text" required />
-                                            </div>
-                                            <ng-container *ngFor="let validation of validationMessages.price">
-                                                <small class="form-text text-danger d-block"
-                                                    *ngIf="courseForm.get('price').hasError(validation.type) &&
-                                                            (courseForm.get('price').dirty || courseForm.get('price').touched) ">
+                                                            (courseForm.get('description').dirty || courseForm.get('description').touched) ">
                                                     {{validation.message}}
                                                 </small>
                                             </ng-container>
 
-                                            <label for="formFileSm" class="form-label ">Imágen de
-                                                portada</label>
+                                            <label for="formFileSm" class="form-label ">Imágen de portada</label>
                                             <input class=" form-control" formControlName="path_preview_image"
                                                 (change)="handleImageChange($event)" id="formFileSm" type="file"
                                                 accept="image/png, image/jpeg" required />
@@ -122,8 +103,7 @@
                                                         <progressbar
                                                             [value]="firebaseStorageService.uploadPercent | async">
                                                             <span class=" progress-value">
-                                                                {{firebaseStorageService.uploadPercent | async}}
-                                                            </span>
+                                                                {{firebaseStorageService.uploadPercent | async}} </span>
                                                         </progressbar>
                                                     </div>
                                                 </div>
@@ -132,41 +112,30 @@
 
                                             <ng-container *ngIf="errorMessage">
                                                 <small class="text-danger"
-                                                    *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small>
-                                                <br>
+                                                    *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
                                             </ng-container>
 
-
                                         </div>
-                                        <div class="col-sm-6">
-
+                                        <div class="  col-md-6">
                                             <div class="mt-2">
                                                 <h6>Instrucciones</h6>
-                                                <small>Bienvenido, para continuar necesita llenar todos los
-                                                    campos
+                                                <small>Bienvenido, para continuar necesita llenar todos los campos
                                                     correspondientes a los cursos,
-                                                    una vez estos campos sean diligenciados presiona el
-                                                    botón de
-                                                    enviar
-                                                    y
-                                                    puedes seguir en la
+                                                    una vez estos campos sean diligenciados presiona el botón de enviar
+                                                    y puedes seguir en la
                                                     sección de <strong>Módulos</strong>.</small>
                                             </div>
                                             <div class="mt-3">
                                                 <h6>Restricciones</h6>
-                                                <small class="d-block">El campo de imágen de portada solo
-                                                    permite
-                                                    imágenes
-                                                    en formato <strong>JPG y
+                                                <small class="d-block">El campo de imágen de portada solo permite
+                                                    imágenes en formato <strong>JPG y
                                                         PNG</strong>.</small>
                                                 <small class="d-block">El precio en decimal se delimitan por
-                                                    <strong>punto
-                                                        (.)</strong> además de <strong>dos</strong>
+                                                    <strong>punto (.)</strong> además de <strong>dos</strong>
                                                     decimales.</small>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-sm-12">
                                         <button class=" btn btn-fill btn-primary" [disabled]="courseForm.invalid"
                                             type="submit">
@@ -259,7 +228,7 @@
                             </div>
                             <!-- TOPICS -->
                             <div class="show tab-pane" id="topics">
-                                <form [formGroup]="topicForm" (ngSubmit)="createTopic(topicForm.value)" role="form">
+                                <!-- <form [formGroup]="topicForm" (ngSubmit)="createTopic(topicForm.value)" role="form">
                                     <div class=" card-header">
                                         <div class=" col-sm-12 text-left">
                                             <h3 class="card-subtitle"> CREAR TEMARIOS</h3>
@@ -360,7 +329,165 @@
                                             Cancelar
                                         </button>
                                     </div>
+                                </form> -->
+
+                                <form [formGroup]="topicForm" (ngSubmit)="createTopic(topicForm.value)" role="form">
+                                    <div class=" card-header">
+                                        <h4 class=" card-title">Crear Temario</h4>
+                                    </div>
+                                    <div class=" card-body row">
+                                        <div class="col-md-6">
+
+                                            <label> Título </label>
+                                            <div class=" form-group">
+                                                <input class=" form-control" formControlName="title"
+                                                    placeholder="Título" type="text" required />
+                                            </div>
+                                            <ng-container *ngFor="let validation of validationMessages.title">
+                                                <small class="text-danger d-block"
+                                                    *ngIf="topicForm.get('title').hasError(validation.type) &&
+                                                            (topicForm.get('title').dirty || topicForm.get('title').touched) ">
+                                                    {{validation.message}}
+                                                </small>
+                                            </ng-container>
+                                            <label> Descripción </label>
+                                            <div class=" form-group">
+
+                                                <textarea class="form-control" formControlName="description"
+                                                    placeholder="Descripción" rows="3" required></textarea>
+
+                                            </div>
+                                            <ng-container *ngFor="let validation of validationMessages.description">
+                                                <small class="text-danger d-block"
+                                                    *ngIf="topicForm.get('description').hasError(validation.type) &&
+                                                            (topicForm.get('description').dirty || topicForm.get('description').touched) ">
+                                                    {{validation.message}}
+                                                </small>
+                                            </ng-container>
+
+
+                                            <label for="formFileSm" class="form-label ">Vídeo</label>
+                                            <input class=" form-control" formControlName="video" id="formFileSm"
+                                                type="file" accept="video/mp4, video/ogg"
+                                                (change)="handleVideoChange($event)" required />
+                                            <ng-container *ngIf="firebaseStorageService.uploadPercent">
+                                                <div class=" progress-container">
+                                                    <span class=" progress-badge"> Subiendo </span>
+                                                    <div class=" progress">
+                                                        <progressbar
+                                                            [value]="firebaseStorageService.uploadPercent | async">
+                                                            <span class=" progress-value">
+                                                                {{firebaseStorageService.uploadPercent | async}}</span>
+                                                        </progressbar>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+
+                                            <label class="form-label "> Módulo </label>
+                                            <select class="form-select form-group d-block" formControlName="module"
+                                                size="8">
+                                                <option *ngFor="let m of modules" [value]="m?.id">
+                                                    {{ m?.name | titlecase}}</option>
+
+                                            </select>
+
+                                            <label for="formFileSm" class="form-label mt-2 ">Archivos</label>
+                                            <input class=" form-control" formControlName="files" id="formFileSm"
+                                                multiple (change)="handleFilesChange($event)" type="file" />
+                                            <ng-container *ngIf="firebaseStorageService.uploadPercentFiles">
+                                                <div class=" progress-container">
+                                                    <span class=" progress-badge"> Subiendo </span>
+                                                    <div class=" progress">
+                                                        <progressbar
+                                                            [value]="firebaseStorageService.uploadPercentFiles | async">
+                                                            <span class=" progress-value">
+                                                                {{firebaseStorageService.uploadPercentFiles | async}}</span>
+                                                        </progressbar>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+
+                                            <div class="form-group" formArrayName="links">
+                                                <label for="items">Links</label>
+                                                <div *ngFor="let item of topicForm.controls.links['controls']; let i = index;"
+                                                    [formGroupName]="i" id="items">
+                                                    <div class="row form-group">
+                                                        <div class="col-6">
+                                                            <input class="form-control" placeholder="Título" type="text"
+                                                                formControlName="title">
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <input class="form-control" placeholder="link" type="link"
+                                                                formControlName="link">
+                                                        </div>
+
+                                                        <div class="col-1">
+                                                            <button (click)="removeItem(i)"
+                                                                class=" btn btn-icon btn-danger" type="button">
+                                                                <span class=" btn-inner--icon"> <i
+                                                                        class=" tim-icons icon-simple-delete">
+                                                                    </i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <ng-container
+                                                        *ngFor="let validation of validationMessages.title_link">
+                                                        <small class="text-danger"
+                                                            *ngIf="this.topicForm.controls.links['controls'][0].get('title').hasError(validation.type) &&
+                                            (this.topicForm.controls.links['controls'][0].get('title').dirty || this.topicForm.controls.links['controls'][0].get('title').touched) ">
+                                                            {{'- ' + validation.message}}
+                                                        </small>
+                                                    </ng-container>
+                                                    <ng-container *ngFor="let validation of validationMessages.link">
+                                                        <small class="text-danger"
+                                                            *ngIf="this.topicForm.controls.links['controls'][0].get('link').hasError(validation.type) &&
+                                            (this.topicForm.controls.links['controls'][0].get('link').dirty || this.topicForm.controls.links['controls'][0].get('link').touched) ">
+                                                            {{'  - ' + validation.message}}
+                                                        </small>
+                                                    </ng-container>
+
+                                                </div>
+                                                <button (click)="addNewLink()" class=" btn btn-icon btn-default"
+                                                    type="button">
+                                                    <span class=" btn-inner--icon"> <i
+                                                            class=" tim-icons icon-simple-add"> </i> </span>
+                                                </button>
+                                            </div>
+
+                                            <ng-container *ngIf="errorMessage">
+                                                <small class="text-danger"
+                                                    *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                                            </ng-container>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mt-2">
+                                                <h6>Instrucciones</h6>
+                                                <small>Hasta aquí has creado un curso, sus módulos, y ahora agregaremos
+                                                    cada uno de los temas a su
+                                                    respectivo módulo.</small>
+                                            </div>
+                                            <div class="mt-3">
+                                                <h6>Restricciones</h6>
+                                                <small class="d-block">Es obligatorio agregar un vídeo en formato
+                                                    <strong>mp4</strong> o
+                                                    <strong>ogg</strong>.</small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class=" card-footer">
+                                        <button class=" btn btn-fill btn-primary" [disabled]="topicForm.invalid"
+                                            type="submit">
+                                            Enviar
+                                        </button>
+                                        <button class=" btn btn-fill btn-danger ml-2" (click)="reset(3)" type="button">
+                                            Cancelar
+                                        </button>
+                                    </div>
                                 </form>
+
                             </div>
                             <!-- QUIZZES -->
                             <div class="show tab-pane" id="quizzes">
@@ -370,7 +497,7 @@
                                             <h3 class="card-subtitle"> CREAR EXAMEN</h3>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="card-body row">
                                         <div class="  col-md-6">
                                             <label> PREGUNTA </label>
