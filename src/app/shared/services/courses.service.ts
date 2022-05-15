@@ -29,6 +29,7 @@ export class CoursesService {
     const route = '/my/courses/';
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
+
   getCourseById(id: string): Observable<any> {
     const route = `/retrieve/course/${id}/`;
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
@@ -93,6 +94,11 @@ export class CoursesService {
 
   getTopicsByModuleId(moduleId: string): Observable<any> {
     const route = `/list/topics-by-module/${moduleId}/`;
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  getKeepWatching(): Observable<any> {
+    const route = '/unseen/topics/';
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 

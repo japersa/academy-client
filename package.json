@@ -33,6 +33,7 @@
     "d3-scale": "3.2.1",
     "devextreme": "19.2.6",
     "devextreme-angular": "^19.2.6",
+    "firebase": "^7.13.2",
     "fullcalendar": "3.10.1",
     "jw-bootstrap-switch-ng2": "2.0.5",
     "ngx-bootstrap": "5.3.2",
@@ -43,10 +44,10 @@
     "rollbar": "^2.24.0",
     "rxjs": "6.5.4",
     "stream": "0.0.2",
+    "survey-angular": "^1.9.29",
     "sweetalert2": "10.3.5",
     "tslib": "^1.10.0",
-    "zone.js": "^0.10.3",
-    "firebase": "^7.13.2"
+    "zone.js": "^0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.900.3",

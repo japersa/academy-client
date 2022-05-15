@@ -1,8 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { DashboardService } from '../../../features/admin/services/dashboard.service';
-import { take } from 'rxjs/operators';
 import { CoursesService } from '../../services/courses.service';
 import { UserDataService } from '../../../core/services/user-data.service';
 
@@ -11,7 +8,7 @@ import { UserDataService } from '../../../core/services/user-data.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   courses = [];
 
@@ -47,10 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fillCourses();
+    this.coursesService.getKeepWatching().subscribe(r => console.log(r))
 
   }
-
-  ngOnDestroy(): void {
-  }
-
 }

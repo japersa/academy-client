@@ -76,8 +76,6 @@ export class ClassComponent implements OnInit, OnDestroy {
       this.getTopic(id);
     });
 
-
-
   }
 
   ngOnDestroy(): void {

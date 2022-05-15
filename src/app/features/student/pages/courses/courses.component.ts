@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 
@@ -10,7 +8,7 @@ import { NotificationsService } from '../../../../core/services/notifications.se
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss']
 })
-export class CoursesComponent implements OnInit, OnDestroy {
+export class CoursesComponent implements OnInit {
 
   source: any = null;
   course: any = {};
@@ -19,9 +17,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   courseId = '';
 
-  subscription1$: Subscription;
-  subscription2$: Subscription;
-  subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +25,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
 
-    this.subscription1$ = this.route.paramMap.subscribe((params: ParamMap) => {
+    this.route.paramMap.subscribe((params: ParamMap) => {
       this.courseId = params.get('id');
     });
 
@@ -43,15 +38,11 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   getGeight() {
-    console.log(`height: ${this.course.modules.length * 50}% !important`);
-
     return `height: ${this.course.modules.length * 50}% !important`;
   }
 
   loadCourse() {
-    this.subscription2$ = this.coursesService.getCourseById(this.courseId).subscribe(res => {
-      console.log(res);
-
+    this.coursesService.getCourseById(this.courseId).subscribe(res => {
       Object.assign(this.course, res)
       this.notificationsService.showNotification('bottom', 'center', 'Curso cargado con éxito', 2);
     },
@@ -64,16 +55,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadCourse();
-    this.subscriptions.push(this.subscription1$);
-    this.subscriptions.push(this.subscription2$);
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      if (subscription !== undefined) {
-        subscription.unsubscribe();
-      }
-    })
   }
 
 }
