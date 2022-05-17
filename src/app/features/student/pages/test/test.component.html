@@ -10,8 +10,12 @@
             <div class="container mt-4 mb-5">
                 <div class="row">
 
-                    <div class="col-12 bg-gray">
-                        <div id="surveyElement"></div>
+                    <div class="col-12 ">
+                        <ng-container *ngIf="courseId">
+                            <div class="custom">
+                                <app-survey [courseId]="courseId"></app-survey>
+                            </div>
+                        </ng-container>
                     </div>
 
                     <!-- <div class="survey-container contentcontainer codecontainer">

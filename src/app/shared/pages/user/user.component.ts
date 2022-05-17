@@ -34,8 +34,6 @@ export class UserComponent implements OnInit, OnDestroy {
   errorPassMessage: any;
   errorMessage: string | null;
 
-  subscription$: Subscription;
-
   focus;
   focus1;
   focus2;
@@ -101,7 +99,7 @@ export class UserComponent implements OnInit, OnDestroy {
   // Actualizar info del usuario
   updateUser(dataFrom: any) {
 
-    this.subscription$ = this.editUserService.updateUser(dataFrom).pipe(take(1)).subscribe(res => {
+    this.editUserService.updateUser(dataFrom).subscribe(res => {
       this.userDataService.userData$.next(res);
       this.storageService.set('userData', res);
 
@@ -121,7 +119,7 @@ export class UserComponent implements OnInit, OnDestroy {
       old_password: dataFrom.old_password,
       password: dataFrom.password,
     }
-    this.subscription$ = this.updatePasswordService.updatePassword(data).pipe(take(1)).subscribe(res => {
+    this.updatePasswordService.updatePassword(data).subscribe(res => {
       this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);
       this.updatePasswordForm.reset();
       this.showUpdatePassword();
