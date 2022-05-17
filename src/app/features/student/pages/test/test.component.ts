@@ -1,8 +1,9 @@
 import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { Model, StylesManager, SurveyNG } from 'survey-angular';
 // import 'survey-angular/survey.css';
+import { NotificationsService } from '../../../../core/services/notifications.service';
 
 StylesManager.applyTheme('modern');
 
@@ -19,6 +20,8 @@ const myCss = {
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
+
+  courseId = '';
 
   test: any = {};
 
@@ -51,6 +54,8 @@ export class TestComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private coursesService: CoursesService,
+    private router: Router,
+    private notificationsService: NotificationsService,
   ) { }
 
   getTest(courseId: string) {
@@ -76,8 +81,25 @@ export class TestComponent implements OnInit {
             const result = sender.data;
             result['correct_answers'] = sender.getCorrectedAnswerCount();
             result['no_of_questions'] = sender.getQuizQuestionCount();
-            console.log(result['correct_answers']);
-            console.log(result['no_of_questions']);
+            const isApprove: boolean = result['correct_answers'] / result['no_of_questions'] >= 0.8 ? true : false;
+
+            if (isApprove) {
+              this.coursesService.approveCourse(this.courseId).subscribe({
+                next: (r) => console.log(r),
+                error: (e) => console.log(e.error),
+                complete: () => {
+                  this.notificationsService.showNotification('bottom', 'center', 'Curso aprobado con éxito', 2);
+                  setTimeout(() => {
+                    this.router.navigate([`/home`])
+                  }, 20000)
+                }
+              });
+            } else {
+              this.notificationsService.showNotification('bottom', 'center', 'Curso no aprobado con éxito', 2);
+              setTimeout(() => {
+                this.router.navigate([`/home`])
+              }, 20000)
+            }
 
           });
         }
@@ -117,6 +139,7 @@ export class TestComponent implements OnInit {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
+      this.courseId = id;
       this.getTest(id);
     });
 

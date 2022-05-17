@@ -40,9 +40,14 @@ export class CoursesService {
     return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 
-  deleteCourse(id: string) {
+  deleteCourse(id: string): Observable<any> {
     const route = `/delete/course/${id}/`;
     return this.http.delete<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  approveCourse(id: string): Observable<any> {
+    const route = `/approve/course/`;
+    return this.http.post<any>(`${apiURL}${route}`, { course_id: id }, { headers: this.headers });
   }
 
   // Modules
