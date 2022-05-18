@@ -8,6 +8,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EditUserService } from '../../services/edit-user.service';
 import { StorageService } from '../../../core/services/storage.service';
+import { CoursesService } from '../../services/courses.service';
 
 
 @Component({
@@ -25,8 +26,8 @@ export class UserComponent implements OnInit, OnDestroy {
   public last_name = this.userDataService.userData$.value.last_name;
   public username = this.userDataService.userData$.value.username;
 
-  showPasswordField: boolean = false;
-  showButtonPassword: boolean = true;
+  showPasswordField = false;
+  showButtonPassword = true;
 
   updateForm: FormGroup;
   updatePasswordForm: FormGroup;
@@ -46,6 +47,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private editUserService: EditUserService,
     public userDataService: UserDataService,
     public updatePasswordService: UpdatePasswordService,
+    private coursesService: CoursesService
   ) {
     this.validationMessages = utilsService.getValidationMessages();
 
@@ -131,10 +133,21 @@ export class UserComponent implements OnInit, OnDestroy {
       });
   }
 
+  getApprovedCourses() {
+    this.coursesService.myApprovedCourse().subscribe(
+      {
+        next: (r) => console.log(r),
+        error: (e) => console.log(e.error)
+      }
+    );
+  }
+
   ngOnInit() {
+
+    this.getApprovedCourses();
+
     this.setRol();
-    /*console.log(this.userDataService.userData$.value.rol);
-    console.log(this.userDataService.userData$);*/
+
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('register-page');
   }

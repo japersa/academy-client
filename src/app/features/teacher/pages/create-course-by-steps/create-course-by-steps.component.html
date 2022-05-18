@@ -1,8 +1,14 @@
 <div class=" content">
     <div class=" row">
         <ol class=" breadcrumb bg-transparent ml-3">
-            <li class=" breadcrumb-item text-primary">Dashboard</li>
-            <li class=" breadcrumb-item active">Crear curso / Paso a paso</li>
+            <li class=" breadcrumb-item text-primary">
+                <a routerLink="/dashboard">
+                    Dashboard
+                </a>
+            </li>
+            <li class=" breadcrumb-item">
+                Crear curso Paso a paso
+            </li>
         </ol>
         <div class="col-md-10 mr-auto ml-auto">
             <div class=" wizard-container">
@@ -389,7 +395,7 @@
                             </div>
                             <!-- QUIZZES -->
                             <div class="show tab-pane" id="quizzes">
-                      
+
                                 <form [formGroup]="quizForm" (ngSubmit)="createQuiz(quizForm.value)" role="form">
                                     <div class=" card-header">
                                         <h4 class=" card-title">Crear exámen</h4>
@@ -481,8 +487,8 @@
                                                         </select>
 
 
-                                                        <button (click)="removeQ(i)"
-                                                            class=" btn btn-simple btn-danger" type="button">
+                                                        <button (click)="removeQ(i)" class=" btn btn-simple btn-danger"
+                                                            type="button">
                                                             Eliminar pregunta
                                                         </button>
                                                     </fieldset>

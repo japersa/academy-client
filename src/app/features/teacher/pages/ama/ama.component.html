@@ -1,8 +1,14 @@
 <div class=" content">
     <div class=" row">
         <ol class=" breadcrumb bg-transparent ml-3">
-            <li class=" breadcrumb-item text-primary">Dashboard</li>
-            <li class=" breadcrumb-item active">Dudas y consultas</li>
+            <li class=" breadcrumb-item text-primary">
+                <a routerLink="/dashboard">
+                    Dashboard
+                </a>
+            </li>
+            <li class=" breadcrumb-item">
+                Dudas y consultas
+            </li>
         </ol>
         <div class="col-md-12">
             <div class="offset-md-1 col-md-8">
@@ -42,7 +48,8 @@
                                             <p class="text-white m-0 p-o"> {{ c?.body }}. </p>
                                             <hr class="text-left">
                                             <ng-container *ngIf="c">
-                                                <app-reply-comment [comment]="c" (loadUnanswered)="getUnansweredQuestions()"></app-reply-comment>
+                                                <app-reply-comment [comment]="c"
+                                                    (loadUnanswered)="getUnansweredQuestions()"></app-reply-comment>
                                             </ng-container>
                                         </span>
 

@@ -50,6 +50,11 @@ export class CoursesService {
     return this.http.post<any>(`${apiURL}${route}`, { course_id: id }, { headers: this.headers });
   }
 
+  myApprovedCourse(): Observable<any> {
+    const route = `/list/my/courses-approve/`;
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
   // Modules
   getModules(): Observable<any> {
     const route = '/my/modules/';

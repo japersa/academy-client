@@ -1,9 +1,12 @@
 <div class=" content">
   <div class=" row">
-    <!-- <ol class=" breadcrumb bg-transparent ml-3">
-            <li class=" breadcrumb-item text-primary">Dashboard</li>
-            <li class=" breadcrumb-item active">Dudas y consultas</li>
-        </ol> -->
+    <ol class=" breadcrumb bg-transparent ml-3">
+      <li class=" breadcrumb-item text-primary">
+          <a routerLink="/home">
+              Inicio
+          </a>
+      </li>
+  </ol>
     <div class="col-12">
       <h3 class="m-0">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
       <p>Continúa aprendiendo mediante su subscripción

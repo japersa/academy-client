@@ -1,8 +1,14 @@
 <div class=" content">
     <div class=" row">
         <ol class=" breadcrumb bg-transparent ml-3">
-            <li class=" breadcrumb-item text-primary"  routerLink="/dashboard" >Dashboard</li>
-            <li class=" breadcrumb-item active">Roles</li>
+            <li class=" breadcrumb-item text-primary">
+                <a routerLink="/dashboard">
+                    Dashboard
+                </a>
+            </li>
+            <li class=" breadcrumb-item">
+                Roles
+            </li>
             <ng-container *ngIf="showFormCreateUser">
                 <li class=" breadcrumb-item active">Crear</li>
             </ng-container>

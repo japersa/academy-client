@@ -1,4 +1,14 @@
 <div class="content">
+  <ol class=" breadcrumb bg-transparent ml-3">
+    <li class=" breadcrumb-item text-primary">
+        <a routerLink="/home">
+            Inicio
+        </a>
+    </li>
+    <li class=" breadcrumb-item">
+        Profile
+    </li>
+</ol>
   <div class="offset-md-1 col-md-7">
     <h4 class="text-primary">{{rol | titlecase}}</h4>
     <h1 class="text-primary title">{{userDataService?.userData$?.value.first_name | uppercase}}</h1>
