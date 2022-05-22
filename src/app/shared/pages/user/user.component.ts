@@ -18,8 +18,7 @@ import { CoursesService } from '../../services/courses.service';
 })
 export class UserComponent implements OnInit, OnDestroy {
 
-
-  phone = new FormControl('');
+  approvedCourses = [];
 
   public rol = '';
   public first_name = this.userDataService.userData$.value.first_name;
@@ -136,7 +135,7 @@ export class UserComponent implements OnInit, OnDestroy {
   getApprovedCourses() {
     this.coursesService.myApprovedCourse().subscribe(
       {
-        next: (r) => console.log(r),
+        next: (r) => this.approvedCourses = r,
         error: (e) => console.log(e.error)
       }
     );

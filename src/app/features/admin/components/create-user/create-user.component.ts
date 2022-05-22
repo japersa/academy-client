@@ -8,6 +8,7 @@ import { RegisterService } from '../../../auth/services/register.service';
 import { take } from 'rxjs/operators';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { SUBS_ENUM } from '../../../../shared/enum/subcriptions.enum';
+import { UserDataService } from '../../../../core/services/user-data.service';
 
 const ROLES = ROLES_ENUM;
 const SUBS = SUBS_ENUM;
@@ -60,6 +61,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
+    private userDataService: UserDataService,
     private coursesService: CoursesService,
     private registerService: RegisterService) {
     this.validationMessages = utilsService.getValidationMessages();
@@ -132,7 +134,12 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
-      this.courses = res.my_courses_created;
+      if (this.userDataService.userData$.value.rol === 'admin') {
+        this.courses = res.all;
+      }
+      if (this.userDataService.userData$.value.rol === 'teacher') {
+        this.courses = res.my_courses_created;
+      }
     },
       error => {
         console.log(error.error);

@@ -97,9 +97,9 @@ export class CoursesService {
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
-  masrkTopicAsSeen(id: string) {
-    const route = `/update/topic/${id}/`;
-    return this.http.patch<any>(`${apiURL}${route}`, { seen: true }, { headers: this.headers });
+  markTopicAsSeen(id: string) {
+    const route = '/last-seen/topic/';
+    return this.http.post<any>(`${apiURL}${route}`, { topic_id: id }, { headers: this.headers });
   }
 
   getTopicsByModuleId(moduleId: string): Observable<any> {
@@ -108,7 +108,7 @@ export class CoursesService {
   }
 
   getKeepWatching(): Observable<any> {
-    const route = '/unseen/topics/';
+    const route = '/seeing/topics/';
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 

@@ -33,7 +33,6 @@ export class CoursesComponent implements OnInit {
   }
 
   goToTopicDetail(topicId: string) {
-    console.log(topicId);
     this.router.navigate([`/class/${topicId}`])
   }
 
@@ -44,7 +43,6 @@ export class CoursesComponent implements OnInit {
   loadCourse() {
     this.coursesService.getCourseById(this.courseId).subscribe(res => {
       Object.assign(this.course, res)
-      this.notificationsService.showNotification('bottom', 'center', 'Curso cargado con éxito', 2);
     },
       error => {
         console.log(error.error);

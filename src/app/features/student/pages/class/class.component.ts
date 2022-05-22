@@ -43,7 +43,8 @@ export class ClassComponent implements OnInit, OnDestroy {
         complete: () => {
 
           if (this.topic.seen === false) {
-            this.coursesService.masrkTopicAsSeen(this.topic.id).subscribe();
+            this.coursesService.markTopicAsSeen(this.topic.id).subscribe(r=> console.log(r)
+            );
           }
 
         }

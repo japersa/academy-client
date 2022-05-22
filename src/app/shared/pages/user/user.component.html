@@ -113,12 +113,6 @@
                   <input class="form-control" type="password" placeholder="Contraseña actual"
                     formControlName="old_password" />
                 </div>
-                <!--<ng-container *ngFor="let validation of validationMessages.old_password">
-                    <small class="text-danger d-block" *ngIf="updateForm.get('password').hasError(validation.type) &&
-                    (updateForm.get('password').dirty || updateForm.get('password').touched) ">
-                      {{validation.message}}
-                    </small>
-                  </ng-container>-->
               </div>
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
@@ -170,25 +164,27 @@
   </div>
 
   <div class="offset-md-1 col-md-10">
-
+  
     <div class="col-12">
       <h2 class="mt-2 mb-0">Cursos</h2>
       <hr style="width: 100%;" color="green">
     </div>
 
     <div class=" row">
-      <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card">
-          <img class="card-img-top"
-            src="https://firebasestorage.googleapis.com/v0/b/mistrades-b043d.appspot.com/o/mistrades%2Fuploads%2Fcourses%2Fcovers%2F7zhjnv4l7p?alt=media&token=ba9e5a3e-8e1d-4c8f-9907-60dbd4780d60"
-            alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title text-center">MECÁNICA CUÁNTICA</h5>
-            <button class="btn btn-simple btn-primary btn-block" type="button">DESCARGAR CERTIFICADO</button>
+
+      <ng-container *ngFor="let c of approvedCourses">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
+          <div class="card">
+            <img class="card-img-top"
+            [src]="c?.path_preview_image"
+              alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}</h5>
+                <button class="btn btn-simple btn-primary btn-block" type="button">DESCARGAR CERTIFICADO</button>
+            </div>
           </div>
         </div>
-      </div>
-
+      </ng-container>
 
     </div>
 
