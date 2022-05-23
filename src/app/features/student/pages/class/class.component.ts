@@ -35,16 +35,18 @@ export class ClassComponent implements OnInit, OnDestroy {
         next: (res) => {
           this.topic = res.result
           this.getVideo(res.result.video);
-          Object.assign(this.allClass, res.all);
+          this.allClass = res.all;
           this.next = res.next.topicID;
           this.previus = res.previus.topicID;
+          console.log(res);
+          
         },
         error: (e) => console.log(e.error),
         complete: () => {
+          console.log('complete');
 
-          if (this.topic.seen === false) {
-            this.coursesService.markTopicAsSeen(this.topic.id).subscribe(r=> console.log(r)
-            );
+          if (true) {
+            this.coursesService.markTopicAsSeen(this.topic.id).subscribe(r => console.log(r));
           }
 
         }

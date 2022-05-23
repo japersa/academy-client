@@ -46,7 +46,7 @@
 
       <div *ngFor="let c of continueLearningCourses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
         <div class="card">
-          <img class="card-img-top" [src]="c?.course_path_preview_image" alt="Card image cap">
+          <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title text-center">
               {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
