@@ -11,7 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/subscription',
     pathMatch: 'full'
   },
   {
@@ -38,6 +38,17 @@ const routes: Routes = [
         loadChildren: () => import('./features/auth/pages/pricing/pricing.module')
           .then(m => m.PricingModule)
       },
+      {
+        path: 'success',
+        loadChildren: () => import('./features/auth/pages/success/success.module')
+          .then(m => m.SuccessModule)
+      },
+      {
+        path: 'cancel',
+        loadChildren: () => import('./features/auth/pages/cancel/cancel.module')
+          .then(m => m.CancelModule)
+      },
+
     ]
   },
   {

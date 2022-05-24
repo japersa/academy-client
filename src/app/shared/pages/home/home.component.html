@@ -13,50 +13,28 @@
         <strong>{{userDataService?.userData$?.value?.subscription | titlecase}}</strong> </p>
     </div>
 
-
-    <!-- slides.component.html -->
-    <!-- 
-    <div class="row">
-      <swiper [slidesPerView]="3" [spaceBetween]="50" [navigation]="true" [centeredSlides]="true" [keyboard]="{
-    enabled: true
-  }" [virtual]="true" class="my-swiper">
-        <ng-template swiperSlide *ngFor="let c of continueLearningCourses ">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-            <div class="card">
-              <img class="card-img-top" [src]="c?.course_path_preview_image" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title text-center">
-                  {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
-                </h5>
-                <button class="btn btn-simple btn-primary btn-block" type="button"
-                  [routerLink]="['/class', c.id]">CONTINUAR
-                  VIENDO</button>
-              </div>
+    <ng-container *ngIf="continueLearningCourses.length > 0">
+      <div class="row" style="width: 100% !important;">
+        <div class="col-12">
+          <h2 class="mt-4">Continuar viendo</h2>
+          <hr style="width: 100% !important;" color="green">
+        </div>
+        <div *ngFor="let c of continueLearningCourses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
+          <div class="card">
+            <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title text-center">
+                {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
+              </h5>
+              <button class="btn btn-simple btn-primary btn-block" type="button"
+                [routerLink]="['/class', c.id]">CONTINUAR
+                VIENDO</button>
             </div>
-          </div>
-        </ng-template>
-      </swiper>
-    </div> -->
-
-    <div class="row" style="width: 100% !important;">
-      <div class="col-12">
-        <h2 class="mt-4">Continuar viendo</h2>
-        <hr style="width: 100% !important;" color="green">
-      </div>
-
-      <div *ngFor="let c of continueLearningCourses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card">
-          <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title text-center">
-              {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
-            </h5>
-            <button class="btn btn-simple btn-primary btn-block" type="button" [routerLink]="['/class', c.id]">CONTINUAR
-              VIENDO</button>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+
     <div class="row" style="width: 100% !important;">
       <div class="col-12">
         <h2 class="mt-4">Cursos</h2>

@@ -42,7 +42,8 @@ export class CoursesComponent implements OnInit {
 
   loadCourse() {
     this.coursesService.getCourseById(this.courseId).subscribe(res => {
-      Object.assign(this.course, res)
+      Object.assign(this.course, res);
+      console.log(res);
     },
       error => {
         console.log(error.error);

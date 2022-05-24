@@ -98,8 +98,6 @@ export class CoursesService {
   }
 
   markTopicAsSeen(id: string) {
-    console.log(id);
-
     const route = '/last-seen/topic/';
     return this.http.post<any>(`${apiURL}${route}`, { topic: id }, { headers: this.headers });
   }

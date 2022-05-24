@@ -22,138 +22,212 @@
                             src="https://res.cloudinary.com/mistrades-com/image/upload/v1647911304/assets/logo-principal_pfnrav.png"
                             alt="">
                     </div>
+
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-7 col-md-5">
-                            <div class=" card-stats">
-                                <div class="card-body">
-                                    <table>
-                                        <thead>
+                    <ng-container *ngIf="role === 'basic'; else elseTemplate">
+
+                        <div class="row">
+                            <div class="col-lg-7 col-md-5">
+                                <div class=" card-stats">
+                                    <div class="card-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <!-- <i class="tim-icons icon-alert-circle-exc icon-success"></i> -->
+                                                    </th>
+                                                    <th>
+                                                        <p class="h3 mb-2">Plan Full</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
                                             <tr>
-                                                <th>
-                                                    <!-- <i class="tim-icons icon-alert-circle-exc icon-success"></i> -->
-                                                </th>
-                                                <th>
-                                                    <p class="h3 mb-2">Plan Pro</p>
-                                                </th>
+
                                             </tr>
-                                        </thead>
-                                        <tr>
-
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <i class="tim-icons icon-check-2 icon-primary"></i>
-                                            </td>
-                                            <td>
-                                                <p class="card-text"> Acceso a la escuela de Inglés y Escuela de
-                                                    Startups.</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <i class="tim-icons icon-check-2 icon-primary"></i>
-                                            </td>
-                                            <td>
-                                                <p class="card-text"> Mentoría para dos personas.</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <i class="tim-icons icon-check-2 icon-primary"></i>
-                                            </td>
-                                            <td>
-                                                <p class="card-text"> Mentorías semanales en grupo o en vivo.</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <i class="tim-icons icon-check-2 icon-primary"></i>
-                                            </td>
-                                            <td>
-                                                <p class="card-text"> Participa en foros con tu Startup.</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <i class="tim-icons icon-check-2 icon-primary"></i>
-                                            </td>
-                                            <td>
-                                                <p class="card-text"> Acceso VIP a conferencias, online y presencial.
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <i class="tim-icons icon-check-2 icon-primary"></i>
-                                            </td>
-                                            <td>
-                                                <p class="card-text"> Descarga tus clases con la App para estudiar sin
-                                                    conexión.</p>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-md-5">
-                            <div class=" card-stats">
-                                <div class="card-body">
-
-                                    <div class="_card">
-                                        <div class="card__front card__part">
-                                            <img class="card__front-square card__square"
-                                                src="https://res.cloudinary.com/mistrades-com/image/upload/v1644824244/assets/Cards/visa-logo_ugposw.png">
-                                            <!-- <p class="card__front-square card__square h2">VISA</p> -->
-                                            <img class="card__front-logo card__logo"
-                                                src="https://res.cloudinary.com/mistrades-com/image/upload/v1651370323/assets/Cards/Screen_Shot_2022-04-30_at_8.58.26_PM_x6wqpc.png">
-                                            <p class="card_numer">**** **** **** 6258</p>
-                                            <div class="row">
-                                                <div class="col-9">
-                                                    <span class="card__label">Card holder</span>
-                                                    <p class="card__info">John Doe</p>
-                                                </div>
-                                                <div class="col-3 d-flex align-item-end ">
-                                                    <span class="card__label d-block">Expires</span>
-                                                    <p class="card__info d-block">10/25</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
-                                    <div>
-
-                                        <div class="stats">
-
-                                            <button class="btn btn-simple btn-primary btn-sm" type="submit">
-                                                <!-- <i class="tim-icons icon-double-right"> </i>  -->
-                                                Pagar
-                                            </button>
-                                        </div>
+                                            <tr>
+                                                <td>
+                                                    <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                </td>
+                                                <td>
+                                                    <p class="card-text"> Acceso a todos los cursos</p>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Mentoría para dos personas.</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Mentorías semanales en grupo o en vivo.</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Participa en foros con tu Startup.</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Acceso VIP a conferencias, online y presencial.
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Descarga tus clases con la App para estudiar sin
+                                                            conexión.</p>
+                                                    </td>
+                                                </tr> -->
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12 col-md-5">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-5">
-                                    <button class="btn btn-primary btn-lg" type="submit">
-                                        <!-- <i class="tim-icons icon-double-right"> </i>  -->
-                                        ACTUALIZAR MI PLAN
-                                    </button>
-                                </div>
-                                <!-- <div class="col-lg-4 col-md-5">
-                                    <button class="btn btn-simple btn-primary btn-sm" type="submit">
-                                        QUIERO PERDER MI ACCESO
-                                    </button>
-                                </div> -->
-                            </div>
+                            <div class="col-lg-5 col-md-5 text-center">
 
+
+                                <h3 class="text-primary ">ACTUALIZAR MI PLAN A FULL</h3>
+
+                                <form action="https://www.coinpayments.net/index.php" method="post">
+                                    <input type="hidden" name="cmd" value="_pay_simple">
+                                    <input type="hidden" name="reset" value="1">
+                                    <input type="hidden" name="merchant" value="9f135a6a18337044fc156365bb6e8855">
+                                    <input type="hidden" name="item_name" value="Full">
+                                    <input type="hidden" name="item_desc" value="asd">
+                                    <input type="hidden" name="currency" value="USD">
+                                    <input type="hidden" name="amountf" value="1">
+                                    <input type="hidden" name="want_shipping" value="0">
+                                    <input type="hidden" name="success_url"
+                                        value="https://mistrades-b043d.web.app/home">
+                                    <input type="hidden" name="cancel_url" value="https://mistrades-b043d.web.app/home">
+                                    <input type="hidden" name="ipn_url"
+                                        value="https://academy-api-dev.herokuapp.com/full/payment/">
+                                    <input type="image" src="https://www.coinpayments.net/images/pub/buynow-grey.png"
+                                        alt="Buy Now with CoinPayments.net">
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+
+                        <div class="row">
+                            <div class="col-lg-7 col-md-5">
+                                <div class=" card-stats">
+                                    <div class="card-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <!-- <i class="tim-icons icon-alert-circle-exc icon-success"></i> -->
+                                                    </th>
+                                                    <th>
+                                                        <p class="h3 mb-2">Plan VIP Autogestión</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tr>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                </td>
+                                                <td>
+                                                    <p class="card-text"> Acceso a todos los cursos</p>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Mentoría para dos personas.</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Mentorías semanales en grupo o en vivo.</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Participa en foros con tu Startup.</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Acceso VIP a conferencias, online y presencial.
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p class="card-text"> Descarga tus clases con la App para estudiar sin
+                                                            conexión.</p>
+                                                    </td>
+                                                </tr> -->
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 text-center">
+
+                                <h3 class="text-primary ">ACTUALIZAR MI PLAN A AUTOGESTION VIP</h3>
+
+                                <form action="https://www.coinpayments.net/index.php" method="post">
+                                    <input type="hidden" name="cmd" value="_pay_simple">
+                                    <input type="hidden" name="reset" value="1">
+                                    <input type="hidden" name="merchant" value="9f135a6a18337044fc156365bb6e8855">
+                                    <input type="hidden" name="item_name" value="autogestion vip">
+                                    <input type="hidden" name="item_desc" value="asd">
+                                    <input type="hidden" name="currency" value="USD">
+                                    <input type="hidden" name="amountf" value="1">
+                                    <input type="hidden" name="want_shipping" value="0">
+                                    <input type="hidden" name="success_url"
+                                        value="https://mistrades-b043d.web.app/home">
+                                    <input type="hidden" name="cancel_url" value="https://mistrades-b043d.web.app/home">
+                                    <input type="hidden" name="ipn_url"
+                                        value="https://academy-api-dev.herokuapp.com/basic/payment/">
+                                    <input type="image" src="https://www.coinpayments.net/images/pub/buynow-grey.png"
+                                        alt="Buy Now with CoinPayments.net">
+                                </form>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </ng-template>
                 </div>
             </div>
         </div>

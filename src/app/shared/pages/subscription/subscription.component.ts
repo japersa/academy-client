@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDataService } from '../../../core/services/user-data.service';
 
 @Component({
   selector: 'app-subscription',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscriptionComponent implements OnInit {
 
-  constructor() { }
+  role: string = null;
+
+  constructor(public userDataService: UserDataService) { 
+    this.role = this.userDataService.userData$.value.subscription;
+
+  }
 
   ngOnInit(): void {
+    console.log(this.role );
+    
   }
 
 }

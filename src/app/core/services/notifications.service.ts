@@ -90,18 +90,6 @@ export class NotificationsService {
     }
   }
 
-  // getDBNotifications() {
-
-  //   this.subscription1$ = this.http.get<any>(`${apiURL}${route}`, { headers: this.headers }).subscribe(res => {
-  //     console.log('Notifications: ',res);
-  //     // Object.assign(this.unansweredQuestion, res)
-  //   },
-  //     error => {
-  //       console.log('error ' + error.error);
-  //     });
-
-  // }
-
   getDBNotifications(): Observable<any> {
     const route = '/list/my/notifications/';
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });

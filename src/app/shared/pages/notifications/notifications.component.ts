@@ -18,6 +18,8 @@ export class NotificationsComponent implements OnInit {
 
     this.notificationsService.getDBNotifications().subscribe(res => {
       this.notificaciones = res;
+      console.log(res);
+
     },
       error => {
         console.log('error ' + error.error);
