@@ -12,8 +12,8 @@ import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-la
 import { AppRoutingModule } from './app-routing.module';
 
 // Firebase
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 
 // Core Modules

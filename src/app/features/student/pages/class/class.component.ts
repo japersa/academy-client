@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, Subscription } from 'rxjs';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { UserDataService } from '../../../../core/services/user-data.service';
