@@ -33,7 +33,7 @@
     "d3-scale": "3.2.1",
     "devextreme": "19.2.6",
     "devextreme-angular": "^19.2.6",
-    "firebase": "^7.13.2",
+    "firebase": "^9.8.3",
     "fullcalendar": "3.10.1",
     "jw-bootstrap-switch-ng2": "2.0.5",
     "ngx-bootstrap": "8.0.0",
