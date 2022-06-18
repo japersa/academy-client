@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 // Layouts
 import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { QuicklinkStrategy } from 'ngx-quicklink';
 
 const routes: Routes = [
   {
@@ -129,7 +130,7 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules,
+      preloadingStrategy: QuicklinkStrategy,
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
       scrollOffset: [0, 64]

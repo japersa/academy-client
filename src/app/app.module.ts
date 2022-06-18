@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
 
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
@@ -42,6 +43,7 @@ import { environment } from 'src/environments/environment';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    QuicklinkModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     ToastrModule.forRoot(),
