@@ -1,3 +1,21 @@
 export const environment = {
-  production: true
+  production: true,
+  environmentName: 'Development',
+  apiURL: 'https://icex-prd.herokuapp.com/',
+  rollbarConfig: {
+    accessToken: '748115ffc5b04e71ba4d73da8ca51159',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+  },
+  firebaseConfig: {
+    apiKey: 'AIzaSyCJFz1-2eop1L6R4mIyUS9KHbP4tOFLQi0',
+    authDomain: 'icex-prd.firebaseapp.com',
+    projectId: 'icex-prd',
+    storageBucket: 'icex-prd.appspot.com',
+    messagingSenderId: '783879619764',
+    appId: '1:783879619764:web:e77be40c1689dd8a8883e1'
+  },
+  recaptcha: {
+    siteKey: '6LdJGV4fAAAAAMXk2Faeso4ZvN8LbiXElUhwU2pB',
+  }
 };
