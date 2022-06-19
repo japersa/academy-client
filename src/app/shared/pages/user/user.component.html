@@ -10,8 +10,8 @@
     </li>
 </ol>
   <div class="offset-md-1 col-md-7">
-    <h4 class="text-primary">{{rol | titlecase}}</h4>
-    <h1 class="text-primary title">{{userDataService?.userData$?.value.first_name | uppercase}}</h1>
+    <h4 class="text-secondary">{{rol | titlecase}}</h4>
+    <h1 class="text-secondary title">{{userDataService?.userData$?.value.first_name | uppercase}}</h1>
   </div>
   <div class="row">
     <div class="offset-md-1 col-md-7">
@@ -150,7 +150,7 @@
             <a href="javascript:void(0)">
               <app-picture-upload></app-picture-upload>
 
-              <h5 class="title"> {{first_name | titlecase}} {{last_name | titlecase}} </h5>
+              <h5 class="title text-secondary"> {{first_name | titlecase}} {{last_name | titlecase}} </h5>
             </a>
           </div>
           <div class="card-description" style="text-align: center">
@@ -166,8 +166,8 @@
   <div class="offset-md-1 col-md-10">
   
     <div class="col-12">
-      <h2 class="mt-2 mb-0">Cursos</h2>
-      <hr style="width: 100%;" color="green">
+      <h2 class="mt-2 mb-0  text-secondary">Cursos</h2>
+      <hr style="width: 100%;" color="cyan">
     </div>
 
     <div class=" row">
@@ -180,7 +180,7 @@
               alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title text-center">{{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}</h5>
-                <button class="btn btn-simple btn-primary btn-block" type="button">DESCARGAR CERTIFICADO</button>
+                <button class="btn btn-simple btn-secondary btn-block" type="button">DESCARGAR CERTIFICADO</button>
             </div>
           </div>
         </div>

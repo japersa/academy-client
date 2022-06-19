@@ -1,8 +1,6 @@
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../../../core/services/storage.service';

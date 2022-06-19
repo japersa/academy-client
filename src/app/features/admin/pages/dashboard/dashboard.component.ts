@@ -197,9 +197,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
-    gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
-    gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
+    gradientStroke.addColorStop(1, 'rgba(134, 66, 66,0.15)');
+    gradientStroke.addColorStop(0.4, 'rgba(134, 66, 66,0.0)'); //green colors
+    gradientStroke.addColorStop(0, 'rgba(134, 66, 66,0)'); //green colors
 
     var config = {
       type: 'line',
@@ -210,13 +210,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
             label: 'Nuevos usuarios',
             fill: true,
             backgroundColor: gradientStroke,
-            borderColor: '#0AC116',
+            borderColor: '#DD0005',
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            pointBackgroundColor: '#0AC116',
+            pointBackgroundColor: '#DD0005',
             pointBorderColor: 'rgba(255,255,255,0)',
-            pointHoverBackgroundColor: '#0AC116',
+            pointHoverBackgroundColor: '#DD0005',
             pointBorderWidth: 20,
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,

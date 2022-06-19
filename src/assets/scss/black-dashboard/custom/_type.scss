@@ -42,11 +42,11 @@ h6 {
 }
 
 a {
-  color: $primary-states;
-  font-weight: $font-weight-light;
+  color: $default-states;
+  font-weight: $font-weight-bold;
   &:hover,
   &:focus {
-    color: $primary;
+    color: $secondary;
   }
 }
 h1,

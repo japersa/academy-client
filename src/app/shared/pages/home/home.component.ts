@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   courses = [];
   continueLearningCourses = [];
 
+  public dashboardColor: boolean = false;
+
   slides$ = new BehaviorSubject<any>([]);
 
   constructor(

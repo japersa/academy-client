@@ -12,7 +12,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/subscription',
+    redirectTo: '/profile',
     pathMatch: 'full'
   },
   {
@@ -20,32 +20,32 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: 'sign-in',
+        path: 'sign-in', // revisar
         loadChildren: () => import('./features/auth/pages/login/login.module')
           .then(m => m.LoginModule)
       },
       {
-        path: 'sign-up',
+        path: 'sign-up', // revisar
         loadChildren: () => import('./features/auth/pages/register/register.module')
           .then(m => m.RegisterModule)
       },
       {
-        path: 'forget-password',
+        path: 'forget-password', // revisar
         loadChildren: () => import('./features/auth/pages/forget-password/forget-password.module')
           .then(m => m.ForgetPasswordModule)
       },
       {
-        path: 'pricing',
+        path: 'pricing', // ????
         loadChildren: () => import('./features/auth/pages/pricing/pricing.module')
           .then(m => m.PricingModule)
       },
       {
-        path: 'success',
+        path: 'success', // revisar
         loadChildren: () => import('./features/auth/pages/success/success.module')
           .then(m => m.SuccessModule)
       },
       {
-        path: 'cancel',
+        path: 'cancel', // revisar
         loadChildren: () => import('./features/auth/pages/cancel/cancel.module')
           .then(m => m.CancelModule)
       },
@@ -58,12 +58,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
+        path: '', // REVISAR
         loadChildren: () => import('./features/admin/pages/dashboard/dashboard.module')
           .then(m => m.DashboardModule)
       },
       {
-        path: 'profile',
+        path: 'profile', // 
         loadChildren: () => import('./shared/pages/user/user-profile.module')
           .then(m => m.UserModule)
       },
