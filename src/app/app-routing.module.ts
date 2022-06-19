@@ -12,7 +12,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/profile',
+    redirectTo: '/admin-courses',
     pathMatch: 'full'
   },
   {
@@ -63,22 +63,22 @@ const routes: Routes = [
           .then(m => m.DashboardModule)
       },
       {
-        path: 'profile', // 
+        path: 'profile', // REVISAR
         loadChildren: () => import('./shared/pages/user/user-profile.module')
           .then(m => m.UserModule)
       },
       {
-        path: 'roles',
+        path: 'roles', // REVISAR
         loadChildren: () => import('./features/admin/pages/admins/admins.module')
           .then(m => m.AdminsModule)
       },
       {
-        path: 'course-by-steps',
+        path: 'course-by-steps', // TERMINAR
         loadChildren: () => import('./features/teacher/pages/create-course-by-steps/create-course-by-steps.module')
           .then(m => m.CreateCourseByStepsModule)
       },
       {
-        path: 'admin-courses',
+        path: 'admin-courses', // 
         loadChildren: () => import('./features/teacher/pages/admin-courses/admin-courses.module')
           .then(m => m.AdminCoursesModule)
       },

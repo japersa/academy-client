@@ -42,9 +42,9 @@
                     <div class=" card-body">
                         <div class=" table-responsive">
                             <table class=" table">
-                                <thead class=" text-primary">
+                                <thead >
                                     <tr>
-                                        <th class=" text-center">#</th>
+                                        <th class="text-center">#</th>
                                         <th>Nombres</th>
                                         <th>Apellidos</th>
                                         <th class=" text-center">email</th>
@@ -56,7 +56,7 @@
                                         <td class=" text-center">
                                             <div class=" photo">
                                                 <img alt="Table image"
-                                                    [src]=" u.img ? u.img : 'assets/img/default-avatar.png'" />
+                                                    [src]=" u.img ? u.img : 'http://localhost:4200/assets/img/placeholder.jpg'" />
                                             </div>
                                         </td>
                                         <td>{{ u?.first_name }}</td>

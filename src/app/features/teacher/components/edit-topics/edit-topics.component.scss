@@ -1,7 +1,23 @@
+select {
+    // A reset of styles, including removing the default dropdown arrow
+    appearance: none;
+    // Additional resets for further consistency
+    background-color: transparent;
+    border: none;
+    color: var(--primary);
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+}
+
 .card-title {
     font-size: 3em !important;
     font-weight: 600 !important;
-    color: #0AC116 !important;
+    color: var(--secondary) !important;
 }
 
 .mt-40 {
@@ -13,7 +29,7 @@
 .card-subtitle {
     font-size: 1.5em !important;
     font-weight: 600 !important;
-    color: #0AC116 !important;
+    color: var(--secondary) !important;
 }
 
 .card  {
@@ -21,25 +37,25 @@
 }
 
 .card-body  {
-    background-color: rgb(0, 0, 0, 0.25) !important;
+    background-color: rgb(0, 0, 0, 0.1) !important;
 }
 
 .card-footer  {
-    background-color: rgb(0, 0, 0, 0.25) !important;
+    background-color: rgb(0, 0, 0, 0.1) !important;
 }
 
 .form-control {
-    border-color: #0AC116;
+    border-color: var(--secondary);
     border-width: 1px !important;
     border-radius: 3px !important;
 }
 
 h6 {
-    color: #0AC116 !important;
+    color: var(--secondary) !important;
 }
 
 small, label {
-    color: white !important;
+    color: var(--secondary) !important;
 }
 
 .text-danger{

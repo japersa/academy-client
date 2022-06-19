@@ -6,11 +6,11 @@
     </button>
   </div>
   <ng-container *ngIf="userDataService?.userData$?.value?.rol !== 'student'">
-    <div class="sidebar " data='white'>
+    <div class="sidebar " data='secondary'>
       <app-sidebar></app-sidebar>
     </div>
   </ng-container>
-  <div class="main-panel " data='white'>
+  <div class="main-panel " data='cyan'>
     <app-navbar></app-navbar>
     <router-outlet></router-outlet>
     <app-footer *ngIf="router.url != '/maps/full-screen'"></app-footer>

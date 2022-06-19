@@ -14,12 +14,10 @@ select {
     line-height: inherit;
 }
 
-
-
 .card-title {
     font-size: 3em !important;
     font-weight: 600 !important;
-    color: #0AC116 !important;
+    color: var(--secondary) !important;
 }
 
 .mt-40 {
@@ -31,7 +29,7 @@ select {
 .card-subtitle {
     font-size: 1.5em !important;
     font-weight: 600 !important;
-    color: #0AC116 !important;
+    color: var(--secondary) !important;
 }
 
 .card  {
@@ -39,25 +37,25 @@ select {
 }
 
 .card-body  {
-    background-color: rgb(0, 0, 0, 0.25) !important;
+    background-color: rgb(0, 0, 0, 0.1) !important;
 }
 
 .card-footer  {
-    background-color: rgb(0, 0, 0, 0.25) !important;
+    background-color: rgb(0, 0, 0, 0.1) !important;
 }
 
 .form-control {
-    border-color: #0AC116;
+    border-color: var(--secondary);
     border-width: 1px !important;
     border-radius: 3px !important;
 }
 
 h6 {
-    color: #0AC116 !important;
+    color: var(--secondary) !important;
 }
 
 small, label {
-    color: white !important;
+    color: var(--secondary) !important;
 }
 
 .text-danger{
