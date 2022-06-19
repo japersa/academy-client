@@ -31,33 +31,33 @@
                         <div class="headings d-flex justify-content-between align-items-center mb-3">
                             <h5>Preguntas ({{unansweredQuestion.length}})</h5>
                         </div>
-                        <div class="card p-3">
+                        <ng-container *ngIf="unansweredQuestion.length > 0">
+                            <div class="card p-3">
+                                <ng-container *ngFor="let c of unansweredQuestion">
+                                    <div class=" mt-3">
+                                        <div class=" d-flex flex-row align-items-start">
+                                            <img [src]="c?.author?.image_profile  !== '' ? c?.author?.image_profile : 'http://localhost:4200/assets/img/placeholder.jpg'"
+                                                width="40" class="user-img rounded-circle mr-2">
+                                            <span class="m-0 p-0 w">
+                                                <small
+                                                    class="font-weight-bold m-0 p-0 text-primary">{{ (c?.author?.first_name ? c?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
+                                                <br>
+                                                <div class="d-block">
+                                                    <small class="text-right">{{ c?.created_at | date}} </small>
+                                                </div>
+                                                <p class="text-white m-0 p-o"> {{ c?.body }}. </p>
+                                                <hr class="text-left">
+                                                <ng-container *ngIf="c">
+                                                    <app-reply-comment [comment]="c"
+                                                        (loadUnanswered)="getUnansweredQuestions()"></app-reply-comment>
+                                                </ng-container>
+                                            </span>
 
-                            <ng-container *ngFor="let c of unansweredQuestion">
-                                <div class=" mt-3">
-                                    <div class=" d-flex flex-row align-items-start">
-                                        <img [src]="c?.author?.image_profile  !== '' ? c?.author?.image_profile : 'assets/img/placeholder.jpg'"
-                                            width="40" class="user-img rounded-circle mr-2">
-                                        <span class="m-0 p-0 w">
-                                            <small
-                                                class="font-weight-bold m-0 p-0 text-primary">{{ (c?.author?.first_name ? c?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
-                                            <br>
-                                            <div class="d-block">
-                                                <small class="text-right">{{ c?.created_at | date}} </small>
-                                            </div>
-                                            <p class="text-white m-0 p-o"> {{ c?.body }}. </p>
-                                            <hr class="text-left">
-                                            <ng-container *ngIf="c">
-                                                <app-reply-comment [comment]="c"
-                                                    (loadUnanswered)="getUnansweredQuestions()"></app-reply-comment>
-                                            </ng-container>
-                                        </span>
-
+                                        </div>
                                     </div>
-                                </div>
-                            </ng-container>
-
-                        </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
                     </div>
 
                 </div>

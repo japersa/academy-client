@@ -1,24 +1,23 @@
-
 .content {
-    background-image: url('https://res.cloudinary.com/mistrades-com/image/upload/v1649870836/assets/fondo_r7arg0.jpg') !important;
+    background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important;
 }
 
 .card {
-    background-color: rgb(0, 0, 0, 0.55) !important;
+    background-color: rgb(0, 0, 0, 0.1) !important;
     border-radius: 10px !important;
 }
 
 .card-title {
     font-size: 3em !important;
     font-weight: 600 !important;
-    color: #0AC116 !important;
+    color: var(--secondary) !important;
 }
 
 hr {
     width: 70% !important;
     border-radius: 1px !important;
     border-bottom: 1px solid !important;
-    color: var(--primary) !important;
+    color: var(--cyan) !important;
 }
 
 .form-control {

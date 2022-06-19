@@ -12,7 +12,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/admin-courses',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
@@ -78,12 +78,12 @@ const routes: Routes = [
           .then(m => m.CreateCourseByStepsModule)
       },
       {
-        path: 'admin-courses', // 
+        path: 'admin-courses', // REVISAR
         loadChildren: () => import('./features/teacher/pages/admin-courses/admin-courses.module')
           .then(m => m.AdminCoursesModule)
       },
       {
-        path: 'ama',
+        path: 'ama',  // REVISAR
         loadChildren: () => import('./features/teacher/pages/ama/ama.module')
           .then(m => m.AmaModule)
       },
@@ -93,12 +93,12 @@ const routes: Routes = [
           .then(m => m.CoursesModule)
       },
       {
-        path: 'subscription',
+        path: 'subscription', // REVISAR
         loadChildren: () => import('./shared/pages/subscription/subscription.module')
           .then(m => m.SubscriptionModule)
       },
       {
-        path: 'home',
+        path: 'home', // REVISAR
         loadChildren: () => import('./shared/pages/home/home.module')
           .then(m => m.HomeModule)
       },
@@ -113,7 +113,7 @@ const routes: Routes = [
           .then(m => m.ClassModule)
       },
       {
-        path: 'notifications',
+        path: 'notifications', // REVISAR
         loadChildren: () => import('./shared/pages/notifications/notifications.module')
           .then(m => m.NotificationsModule)
       },
