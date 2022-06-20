@@ -12,7 +12,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/class/1',
     pathMatch: 'full'
   },
   {
@@ -88,7 +88,7 @@ const routes: Routes = [
           .then(m => m.AmaModule)
       },
       {
-        path: 'course/:id',
+        path: 'course/:id', // REVISAR
         loadChildren: () => import('./features/student/pages/courses/courses.module')
           .then(m => m.CoursesModule)
       },
@@ -108,7 +108,7 @@ const routes: Routes = [
           .then(m => m.TestModule)
       },
       {
-        path: 'class/:id',
+        path: 'class/:id', // REVISAR
         loadChildren: () => import('./features/student/pages/class/class.module')
           .then(m => m.ClassModule)
       },

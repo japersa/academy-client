@@ -18,7 +18,7 @@
                 <div class="headings d-flex justify-content-between align-items-center mb-3">
                     <h2 class="title m-0">{{ course?.title | uppercase}}</h2>
 
-                    <button type="button" class="btn btn-simple btn-primary"
+                    <button type="button" class="btn btn-primary"
                         [routerLink]="['/test', courseId]">Presentar
                         exámen</button>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="row" *ngFor="let t of course.modules">
                             <div class="col-12">
-                                <h3 class="text-primary">{{t?.name | titlecase}}</h3>
+                                <h3 class="text-secondary">{{t?.name | titlecase}}</h3>
                             </div>
                             <div class="col-12" *ngIf="t?.topics.length > 0">
                                 <div class="card">
@@ -41,7 +41,7 @@
                                                 (click)="goToTopicDetail(c.id)" [class]="c.seen ?  'seen' : 'no-seen '">
                                                 <li
                                                     class="timeline-item bg-transparent rounded ml-3 p-4 shadow nav-item">
-                                                    <h2 class="h3 text-primary mb-0">{{c?.title | titlecase}}</h2>
+                                                    <h2 class="h3 text-secondary mb-0">{{c?.title | titlecase}}</h2>
                                                     <p class="text-small mt-2 font-weight-light">
                                                         {{c?.description | titlecase}}
                                                     </p>

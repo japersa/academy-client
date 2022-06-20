@@ -3,16 +3,16 @@
 }
 
 .reply small:hover {
-    color: green;
+    color: darkblue;
     cursor: pointer
 }
 
 textarea {
     background-color:  #cdcdc3 !important;
-    color: #031e2f !important;
+    color: var(--default) !important;
 }
 
 label {
-    color: var(--primary) !important;
+    color: var(--secondary) !important;
     font-size: 1.2em !important;
 }

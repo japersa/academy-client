@@ -43,7 +43,7 @@
             </div>
             <div class=" col-7">
               <div class=" numbers">
-                <p class=" card-category">Estudiantes totales</p>
+                <p class=" card-category ">Estudiantes totales</p>
                 <h3 class=" card-title">{{total_students}}</h3>
               </div>
             </div>
@@ -132,7 +132,7 @@
           height: 200px;" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title text-center">{{ (c.title.length > 20 ? c.title  + '...' : c.title) | uppercase }} </h5>
-            <button class="btn btn-simple btn-secondary btn-block" type="button" (click)="goToCourseDetail(c.id)">IR AL
+            <button class="btn btn-secondary btn-block" type="button" (click)="goToCourseDetail(c.id)">IR AL
               CURSO</button>
           </div>
         </div>
