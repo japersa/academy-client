@@ -1,11 +1,11 @@
 <div class=" card text-left">
     <form [formGroup]="quizForm" (ngSubmit)="createQuiz(quizForm.value)" role="form">
-        <div class=" card-header">
-            <h4 class=" card-title">Crear exámen</h4>
-        </div>
-        <div class="card-body row">
-            <div class="  col-md-6">
 
+        <div class="card-body row">
+            <div class="col-12">
+                <h4 class=" card-title mt-5">Crear exámen</h4>
+            </div>
+            <div class="  col-md-6">
 
                 <div class="form-group" formArrayName="questions">
                     <label for="questions">Preguntas</label>
@@ -90,14 +90,13 @@
 
                     </div>
                     <button (click)="addNewItem()" class=" btn btn-simple btn-secondary" type="button">
-                       Agregar pregunta
+                        Agregar pregunta
                     </button>
 
                 </div>
 
             </div>
             <div class=" col-md-6">
-   
 
                 <label> Curso </label>
                 <select class="form-select form-group d-block" formControlName="course" size="4">
@@ -129,15 +128,16 @@
 
             </div>
 
+            <div class="col-sm-12 mb-5 mb-5">
+                <button class=" btn btn-fill btn-secondary" [disabled]="quizForm.invalid" type="submit">
+                    Enviar
+                </button>
+                <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
+                    Cancelar
+                </button>
+            </div>
 
         </div>
-        <div class=" card-footer">
-            <button class=" btn btn-fill btn-primary" [disabled]="quizForm.invalid" type="submit">
-                Enviar
-            </button>
-            <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
-                Cancelar
-            </button>
-        </div>
+
     </form>
 </div>

@@ -48,7 +48,7 @@
                                                         class="font-weight-bold m-0 p-0 text-primary">{{ c?.type_notification +  ' ' | uppercase}}</small>
                                                     <small class="text-gray">{{ c?.created_at | date}} </small>
                                                 </div>
-                                                <p class="text-white m-0 p-o"> {{ c?.body?.comment }}. </p>
+                                                <p class="text-default m-0 p-o"> {{ c?.body?.comment }}. </p>
                                                 <br>
                                                 <ng-container *ngIf="c.body.reply_comment">
                                                     <div class=" d-flex flex-row align-items-start">
@@ -63,7 +63,7 @@
                                                                     class="text-gray">{{ c?.body?.reply_comment_created_at | date}}
                                                                 </small>
                                                             </div>
-                                                            <p class="text-white m-0 p-o"> {{ c?.body?.reply_comment }}.
+                                                            <p class="text-default m-0 p-o"> {{ c?.body?.reply_comment }}.
                                                             </p>
                                                         </span>
                                                     </div>

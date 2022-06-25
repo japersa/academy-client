@@ -47,11 +47,6 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  goToCourseDetail(id: string) {
-
-    this.router.navigate([`/course/${id}`])
-
-  }
 
   ngOnInit(): void {
     this.fillCourses();

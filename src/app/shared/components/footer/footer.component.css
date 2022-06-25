@@ -1,22 +1,19 @@
 img {
-    width: 4em !important;
-    height: 4em !important;
+    width: 100px !important;
     margin: 10px !important;
 }
 
 nav-link {
     font-size: 3em !important;
 }
-/* 
-a{
-    color: white !important;
-} */
+
+
 
 .fa-brands::before {
     /* display: flex !important;
     justify-content: end !important; */
     border-radius: 20px !important;
-    color: #cdcdc3 !important;
+    color: #333333 !important;
     margin-right: 5px !important;
 }
 

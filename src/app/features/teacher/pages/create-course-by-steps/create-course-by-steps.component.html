@@ -58,17 +58,18 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="bs-stepper-content card-body">
+                    <div class="bs-stepper-content card">
                         <div class=" tab-content">
                             <!-- COURSE -->
                             <div class=" tab-pane show" id="course">
                                 <form class=" form" [formGroup]="courseForm" (ngSubmit)="createCourse(courseForm.value)"
                                     role="form">
 
-                                    <div class=" card-header">
-                                        <h4 class=" card-title">Crear curso</h4>
-                                    </div>
                                     <div class=" card-body row">
+                                        <div class="col-12">
+                                            <h4 class=" card-title  mt-5">Crear curso</h4>
+                                        </div>
+
                                         <div class="  col-md-6">
 
                                             <label> Título </label>
@@ -141,15 +142,16 @@
                                                     decimales.</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <button class=" btn btn-fill btn-secodnary" [disabled]="courseForm.invalid"
-                                            type="submit">
-                                            Guardar
-                                        </button>
-                                        <button class=" btn btn-fill btn-danger ml-2" (click)="reset(1)" type="button">
-                                            Borrar
-                                        </button>
+                                        <div class="col-sm-12 mb-5">
+                                            <button class=" btn btn-fill btn-secodnary" [disabled]="courseForm.invalid"
+                                                type="submit">
+                                                Guardar
+                                            </button>
+                                            <button class=" btn btn-fill btn-danger ml-2" (click)="reset(1)"
+                                                type="button">
+                                                Borrar
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
 
@@ -158,13 +160,11 @@
                             <div class=" tab-pane show" id="module">
 
                                 <form [formGroup]="moduleForm" (ngSubmit)="createModule(moduleForm.value)" role="form">
-                                    <div class=" card-header">
-                                        <div class=" col-sm-12 text-left">
-                                            <h3 class="card-subtitle"> CREAR MÓDULOS DEL CURSO</h3>
-                                        </div>
-                                    </div>
 
-                                    <div class="row p-3">
+                                    <div class="row p-3 card-body">
+                                        <div class="col-12">
+                                            <h3 class="card-subtitle mt-5"> CREAR MÓDULOS DEL CURSO</h3>
+                                        </div>
                                         <div class="col-sm-6">
 
                                             <label> Título </label>
@@ -200,7 +200,6 @@
 
                                         <div class="col-sm-6">
 
-
                                             <div class="mt-2">
                                                 <h6>Instrucciones</h6>
                                                 <small>Ya has creado un curso, es hora de que fijemos sus
@@ -216,19 +215,20 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-sm-12 mb-5">
+                                            <button class=" btn btn-fill btn-secodnary" [disabled]="moduleForm.invalid"
+                                                type="submit">
+                                                Enviar
+                                            </button>
+                                            <button class=" btn btn-fill btn-danger ml-2" (click)="reset(2)"
+                                                type="button">
+                                                Cancelar
+                                            </button>
+                                        </div>
+
                                     </div>
 
 
-
-                                    <div class="col-sm-12">
-                                        <button class=" btn btn-fill btn-secodnary" [disabled]="moduleForm.invalid"
-                                            type="submit">
-                                            Enviar
-                                        </button>
-                                        <button class=" btn btn-fill btn-danger ml-2" (click)="reset(2)" type="button">
-                                            Cancelar
-                                        </button>
-                                    </div>
                                 </form>
 
                             </div>
@@ -236,10 +236,10 @@
                             <div class="show tab-pane" id="topics">
 
                                 <form [formGroup]="topicForm" (ngSubmit)="createTopic(topicForm.value)" role="form">
-                                    <div class=" card-header">
-                                        <h4 class=" card-title">Crear Temario</h4>
-                                    </div>
-                                    <div class=" card-body row">
+                                    <div class="card-body row">
+                                        <div class="col-12">
+                                            <h3 class="card-title mt-5"> Crear Temario</h3>
+                                        </div>
                                         <div class="col-md-6">
 
                                             <label> Título </label>
@@ -380,15 +380,16 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div class=" card-footer">
-                                        <button class=" btn btn-fill btn-secodnary" [disabled]="topicForm.invalid"
-                                            type="submit">
-                                            Enviar
-                                        </button>
-                                        <button class=" btn btn-fill btn-danger ml-2" (click)="reset(3)" type="button">
-                                            Cancelar
-                                        </button>
+                                        <div class="col-sm-12 mb-5 mb-5">
+                                            <button class=" btn btn-fill btn-secodnary" [disabled]="topicForm.invalid"
+                                                type="submit">
+                                                Enviar
+                                            </button>
+                                            <button class=" btn btn-fill btn-danger ml-2" (click)="reset(3)"
+                                                type="button">
+                                                Cancelar
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
 
@@ -397,12 +398,14 @@
                             <div class="show tab-pane" id="quizzes">
 
                                 <form [formGroup]="quizForm" (ngSubmit)="createQuiz(quizForm.value)" role="form">
-                                    <div class=" card-header">
-                                        <h4 class=" card-title">Crear exámen</h4>
-                                    </div>
-                                    <div class="card-body row">
-                                        <div class="  col-md-6">
 
+                                    <div class="card-body row">
+
+                                        <div class="col-12">
+                                            <h3 class="card-title mt-5">Crear exámen</h3>
+                                        </div>
+
+                                        <div class="  col-md-6">
 
                                             <div class="form-group" formArrayName="questions">
                                                 <label for="questions">Preguntas</label>
@@ -496,7 +499,7 @@
 
 
                                                 </div>
-                                                <button (click)="addNewQ()" class=" btn btn-simple btn-primary"
+                                                <button (click)="addNewQ()" class=" btn btn-simple btn-secondary"
                                                     type="button">
                                                     Agregar pregunta
                                                 </button>
@@ -523,25 +526,25 @@
 
                                         </div>
 
-
-                                    </div>
-                                    <div class=" card-footer">
-                                        <button class=" btn btn-fill btn-secodnary" [disabled]="quizForm.invalid"
-                                            type="submit">
-                                            Enviar
-                                        </button>
-                                        <button class=" btn btn-fill btn-danger ml-2" (click)="reset(4)" type="button">
-                                            Cancelar
-                                        </button>
+                                        <div class="col-sm-12 mb-5 mb-5">
+                                            <button class=" btn btn-fill btn-secodnary" [disabled]="quizForm.invalid"
+                                                type="submit">
+                                                Enviar
+                                            </button>
+                                            <button class=" btn btn-fill btn-danger ml-2" (click)="reset(4)"
+                                                type="button">
+                                                Cancelar
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class=" card-footer">
+                    <div class=" card-header">
                         <div class=" pull-right">
-                            <input class="btn btn btn-secondary btn-lg" name="next" type="submit"
-                                value="SIGUIENTE PASO" (click)="next()" />
+                            <input class="btn btn btn-secondary btn-lg" name="next" type="submit" value="SIGUIENTE PASO"
+                                (click)="next()" />
 
                             <!-- btn btn-simple btn-twitter -->
 

@@ -14,7 +14,7 @@ const myCss = {
   // },
   title: 'text-primary',
   navigationButton: 'btn btn-primary btn-lg',
-  timerRoot: 'text-white',
+  timerRoot: 'text-default',
   completedPage: 'sv-completedpage bg-transparent',
 
   radiogroup: {
@@ -23,7 +23,7 @@ const myCss = {
     item: 'sv-item sv-radio sv-selectbase__item',
     itemOnError: 'sv-item--error',
     itemInline: 'sv-selectbase__item--inline',
-    label: 'sd-selectbase__label text-white',
+    label: 'sd-selectbase__label text-default',
     labelChecked: '',
     itemDisabled: 'sv-item--disabled sv-radio--disabled',
     itemChecked: 'sv-item--checked sv-radio--checked',

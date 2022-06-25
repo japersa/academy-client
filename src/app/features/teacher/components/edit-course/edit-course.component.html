@@ -1,9 +1,12 @@
 <div class=" card text-left">
     <form [formGroup]="courseForm" (ngSubmit)="createCourse(courseForm.value)" role="form">
-        <div class=" card-header">
-            <h4 class=" card-title">Editar curso</h4>
-        </div>
+
         <div class="card-body row">
+
+            <div class="col-12">
+                <h4 class=" card-title mt-5">Editar curso</h4>
+            </div>
+
             <div class="  col-md-6">
                 <label> Título </label>
                 <div class=" form-group">
@@ -78,14 +81,17 @@
                         <strong>dos</strong> decimales.</small>
                 </div>
             </div>
+
+            <div class="col-sm-12 mb-5 mb-5">
+                <button class=" btn btn-fill btn-secondary" [disabled]="courseForm.invalid" type="submit">
+                    Enviar
+                </button>
+                <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
+                    Cancelar
+                </button>
+            </div>
+
         </div>
-        <div class=" card-footer">
-            <button class=" btn btn-fill btn-primary" [disabled]="courseForm.invalid" type="submit">
-                Enviar
-            </button>
-            <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">
-                Cancelar
-            </button>
-        </div>
+
     </form>
 </div>

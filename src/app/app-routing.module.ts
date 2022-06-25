@@ -12,7 +12,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/class/1',
+    redirectTo: '/test/1',
     pathMatch: 'full'
   },
   {
@@ -20,32 +20,32 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: 'sign-in', // revisar
+        path: 'sign-in',
         loadChildren: () => import('./features/auth/pages/login/login.module')
           .then(m => m.LoginModule)
       },
       {
-        path: 'sign-up', // revisar
+        path: 'sign-up',
         loadChildren: () => import('./features/auth/pages/register/register.module')
           .then(m => m.RegisterModule)
       },
       {
-        path: 'forget-password', // revisar
+        path: 'forget-password',
         loadChildren: () => import('./features/auth/pages/forget-password/forget-password.module')
           .then(m => m.ForgetPasswordModule)
       },
       {
-        path: 'pricing', // ????
+        path: 'pricing',
         loadChildren: () => import('./features/auth/pages/pricing/pricing.module')
           .then(m => m.PricingModule)
       },
       {
-        path: 'success', // revisar
+        path: 'success',
         loadChildren: () => import('./features/auth/pages/success/success.module')
           .then(m => m.SuccessModule)
       },
       {
-        path: 'cancel', // revisar
+        path: 'cancel',
         loadChildren: () => import('./features/auth/pages/cancel/cancel.module')
           .then(m => m.CancelModule)
       },
@@ -58,47 +58,47 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '', // REVISAR
+        path: '',
         loadChildren: () => import('./features/admin/pages/dashboard/dashboard.module')
           .then(m => m.DashboardModule)
       },
       {
-        path: 'profile', // REVISAR
+        path: 'profile',
         loadChildren: () => import('./shared/pages/user/user-profile.module')
           .then(m => m.UserModule)
       },
       {
-        path: 'roles', // REVISAR
+        path: 'roles',
         loadChildren: () => import('./features/admin/pages/admins/admins.module')
           .then(m => m.AdminsModule)
       },
       {
-        path: 'course-by-steps', // TERMINAR
+        path: 'course-by-steps',
         loadChildren: () => import('./features/teacher/pages/create-course-by-steps/create-course-by-steps.module')
           .then(m => m.CreateCourseByStepsModule)
       },
       {
-        path: 'admin-courses', // REVISAR
+        path: 'admin-courses',
         loadChildren: () => import('./features/teacher/pages/admin-courses/admin-courses.module')
           .then(m => m.AdminCoursesModule)
       },
       {
-        path: 'ama',  // REVISAR
+        path: 'ama',
         loadChildren: () => import('./features/teacher/pages/ama/ama.module')
           .then(m => m.AmaModule)
       },
       {
-        path: 'course/:id', // REVISAR
+        path: 'course/:id',
         loadChildren: () => import('./features/student/pages/courses/courses.module')
           .then(m => m.CoursesModule)
       },
       {
-        path: 'subscription', // REVISAR
+        path: 'subscription',
         loadChildren: () => import('./shared/pages/subscription/subscription.module')
           .then(m => m.SubscriptionModule)
       },
       {
-        path: 'home', // REVISAR
+        path: 'home',
         loadChildren: () => import('./shared/pages/home/home.module')
           .then(m => m.HomeModule)
       },
@@ -108,12 +108,12 @@ const routes: Routes = [
           .then(m => m.TestModule)
       },
       {
-        path: 'class/:id', // REVISAR
+        path: 'class/:id',
         loadChildren: () => import('./features/student/pages/class/class.module')
           .then(m => m.ClassModule)
       },
       {
-        path: 'notifications', // REVISAR
+        path: 'notifications',
         loadChildren: () => import('./shared/pages/notifications/notifications.module')
           .then(m => m.NotificationsModule)
       },
