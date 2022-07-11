@@ -63,6 +63,13 @@ export class UserComponent implements OnInit, OnDestroy {
       phone_number: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(5)])),
+      birth_date: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      identity_card: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+
     });
     this.updatePasswordForm = this.formBuilder.group({
       old_password: new FormControl('', Validators.compose([
@@ -99,6 +106,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   // Actualizar info del usuario
   updateUser(dataFrom: any) {
+
+    dataFrom.username = dataFrom.email
 
     this.editUserService.updateUser(dataFrom).subscribe(res => {
       this.userDataService.userData$.next(res);

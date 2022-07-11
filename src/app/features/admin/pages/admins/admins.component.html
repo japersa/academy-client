@@ -42,12 +42,16 @@
                     <div class=" card-body">
                         <div class=" table-responsive">
                             <table class=" table">
-                                <thead >
+                                <thead>
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>Nombres</th>
                                         <th>Apellidos</th>
                                         <th class=" text-center">email</th>
+                                        <th class=" text-center">subscription</th>
+                                        <th class=" text-center">identificación</th>
+                                        <th class=" text-center">teléfono</th>
+                                        <th class=" text-center">fecha nacimiento</th>
                                         <th class=" text-right">Actions</th>
                                     </tr>
                                 </thead>
@@ -56,12 +60,16 @@
                                         <td class=" text-center">
                                             <div class=" photo">
                                                 <img alt="Table image"
-                                                    [src]=" u.img ? u.img : 'http://localhost:4200/assets/img/placeholder.jpg'" />
+                                                    [src]=" u.img ? u.img : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'" />
                                             </div>
                                         </td>
                                         <td>{{ u?.first_name }}</td>
                                         <td>{{ u?.last_name }}</td>
                                         <td class=" text-center">{{u?.username}}</td>
+                                        <td class=" text-center">{{u?.subscription}}</td>
+                                        <td class=" text-center">{{u?.identity_card}}</td>
+                                        <td class=" text-center">{{u?.phone_number}}</td>
+                                        <td class=" text-center">{{u?.birth_date}}</td>
                                         <td class=" text-right">
                                             <button class=" btn btn-success btn-link btn-sm btn-icon"
                                                 (click)="editUser(u)" tooltip="Editar" type="button">

@@ -7,7 +7,9 @@ nav-link {
     font-size: 3em !important;
 }
 
-
+.class-user {
+    padding: 20px 30px 30px 20px !important;
+}
 
 .fa-brands::before {
     /* display: flex !important;

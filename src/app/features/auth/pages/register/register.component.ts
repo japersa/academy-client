@@ -33,9 +33,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
       last_name: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3)])),
+      birth_date: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      identity_card: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      phone_number: new FormControl('', Validators.compose([
+        Validators.required,
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(8)
@@ -47,14 +56,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   registerUser(dataFrom: any) {
 
-    const data = {
-      first_name: dataFrom.first_name,
-      last_name: dataFrom.last_name,
-      username: dataFrom.email,
-      password: dataFrom.password
-    }
+    dataFrom.username = dataFrom.email;
 
-    this.registerService.register(data).subscribe(res => {
+    this.registerService.register(dataFrom).subscribe(res => {
       this.notificationService.showNotification('bottom', 'center', 'Te has registrado correctamente', 2);
       this.registerForm.reset();
       this.router.navigate(['/sign-in'])

@@ -1,5 +1,5 @@
 <div class="d-none d-sm-block">
-  <footer class="footer">
+  <footer class="footer" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
     <div class=" container-fluid">
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-6">
@@ -55,7 +55,7 @@
  </div>
 
 <div class="d-block d-sm-none">
-  <footer class="footer p-3">
+  <footer class="footer p-3" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
     <div class=" container-fluid">
       <div class="row">
         <div class="col-12 d-flex align-items-center justify-content-center">

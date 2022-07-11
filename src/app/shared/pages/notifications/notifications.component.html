@@ -1,4 +1,4 @@
-<div class=" content">
+<div class=" content"  [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
     <div class=" row">
         <ol class=" breadcrumb bg-transparent ml-3">
             <li class=" breadcrumb-item text-primary">
@@ -37,7 +37,7 @@
                                 <ng-container *ngFor="let c of notificaciones">
                                     <div class=" mt-3">
                                         <div class=" d-flex flex-row align-items-start">
-                                            <img [src]="c?.student?.image_profile  !== '' ? c?.student?.image_profile : 'assets/img/placeholder.jpg'"
+                                            <img [src]="c?.student?.image_profile  !== '' ? c?.student?.image_profile : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'"
                                                 width="40" class="user-img rounded-circle mr-2">
                                             <span class="m-0 p-0 w">
                                                 <small
@@ -52,7 +52,7 @@
                                                 <br>
                                                 <ng-container *ngIf="c.body.reply_comment">
                                                     <div class=" d-flex flex-row align-items-start">
-                                                        <img [src]="c?.teacher?.image_profile  !== '' ? c?.teacher?.image_profile  : 'assets/img/placeholder.jpg'"
+                                                        <img [src]="c?.teacher?.image_profile  !== '' ? c?.teacher?.image_profile  : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'"
                                                             width="40" class="user-img rounded-circle mr-2">
                                                         <span class="m-0 p-0 w">
                                                             <small

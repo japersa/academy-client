@@ -52,8 +52,6 @@ export class HomeComponent implements OnInit {
     this.fillCourses();
     this.coursesService.getKeepWatching().subscribe(r => {
       this.continueLearningCourses = r;
-      console.log(r);
-
     });
 
   }

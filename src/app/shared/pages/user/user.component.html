@@ -1,14 +1,14 @@
-<div class="content">
+<div class="content" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
   <ol class=" breadcrumb bg-transparent ml-3">
     <li class=" breadcrumb-item text-primary">
-        <a routerLink="/home">
-            Inicio
-        </a>
+      <a routerLink="/home">
+        Inicio
+      </a>
     </li>
     <li class=" breadcrumb-item">
-        Profile
+      Profile
     </li>
-</ol>
+  </ol>
   <div class="offset-md-1 col-md-7">
     <h4 class="text-secondary">{{rol | titlecase}}</h4>
     <h1 class="text-secondary title">{{userDataService?.userData$?.value.first_name | uppercase}}</h1>
@@ -61,6 +61,38 @@
                 <ng-container *ngFor="let validation of validationMessages.email">
                   <small class="text-danger" *ngIf="updateForm.get('email').hasError(validation.type) &&
                   (updateForm.get('email').dirty || updateForm.get('email').touched) ">
+                    {{validation.message}}
+                  </small>
+                </ng-container>
+              </div>
+              <div class="col-md-6 pl-md-1">
+                <div class="form-group">
+                  <label> Fecha de nacimiento </label>
+                  <input class="form-control  text-uppercase"
+                    [(ngModel)]="userDataService?.userData$?.value.birth_date" type="date" class="form-control"
+                    formControlName="birth_date" id="birth_date" id="birth_date" (blur)="focus = false"
+                    (focus)="focus = true" />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.birth_date">
+                  <small class="form-text text-danger" *ngIf="updateForm.get('birth_date').hasError(validation.type) &&
+                        (updateForm.get('birth_date').dirty || updateForm.get('birth_date').touched) ">
+                    {{validation.message}}
+                  </small>
+                </ng-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                  <label> DNI / C.C / PASAPORTE </label>
+                  <input class=" form-control  text-uppercase"
+                    [(ngModel)]="userDataService?.userData$?.value.identity_card" formControlName="identity_card"
+                    id="identity_card" id="identity_card" placeholder="Escriba su documento de identidad" type="text"
+                    (blur)="focus = false" (focus)="focus = true" />
+                </div>
+                <ng-container *ngFor="let validation of validationMessages.identity_card">
+                  <small class="form-text text-danger" *ngIf="updateForm.get('identity_card').hasError(validation.type) &&
+                        (updateForm.get('identity_card').dirty || updateForm.get('identity_card').touched) ">
                     {{validation.message}}
                   </small>
                 </ng-container>
@@ -164,7 +196,7 @@
   </div>
 
   <div class="offset-md-1 col-md-10">
-  
+
     <div class="col-12">
       <h2 class="mt-2 mb-0  text-secondary">Cursos</h2>
       <hr style="width: 100%;" color="cyan">
@@ -175,12 +207,11 @@
       <ng-container *ngFor="let c of approvedCourses">
         <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
           <div class="card">
-            <img class="card-img-top"
-            [src]="c?.path_preview_image"
-              alt="Card image cap">
+            <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title text-center">{{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}</h5>
-                <button class="btn btn-simple btn-secondary btn-block" type="button">DESCARGAR CERTIFICADO</button>
+              <h5 class="card-title text-center">
+                {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}</h5>
+              <button class="btn btn-simple btn-secondary btn-block" type="button">DESCARGAR CERTIFICADO</button>
             </div>
           </div>
         </div>

@@ -33,7 +33,7 @@ export class PictureUploadComponent implements OnInit {
     this.imagePreviewUrl =
       this.avatar !== ''
         ? this.userDataService.userData$?.value?.image_profile
-        : 'assets/img/placeholder.jpg';
+        : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg';
   }
 
   handleImageChange($event) {
@@ -58,8 +58,8 @@ export class PictureUploadComponent implements OnInit {
     this.file = null;
     this.imagePreviewUrl =
       this.avatar
-        ? 'assets/img/placeholder.jpg'
-        : 'assets/img/placeholder.jpg';
+        ? 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'
+        : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg';
     this.fileInput.nativeElement.value = null;
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
+import { UserDataService } from '../../../../core/services/user-data.service';
 
 @Component({
   selector: 'app-courses',
@@ -22,6 +23,7 @@ export class CoursesComponent implements OnInit {
     private route: ActivatedRoute,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService,
+    public userDataService: UserDataService,
     private router: Router
   ) {
 

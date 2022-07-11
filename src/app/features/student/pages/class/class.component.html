@@ -1,4 +1,4 @@
-<div class=" content">
+<div class=" content"  [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
     <div class="row">
         <ol class=" breadcrumb bg-transparent ml-3">
             <li class=" breadcrumb-item text-primary">

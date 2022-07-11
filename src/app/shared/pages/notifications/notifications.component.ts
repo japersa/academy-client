@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../../../core/services/notifications.service';
+import { UserDataService } from '../../../core/services/user-data.service';
 
 @Component({
   selector: 'app-notifications',
@@ -11,7 +12,8 @@ export class NotificationsComponent implements OnInit {
   notificaciones = [];
 
   constructor(
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    public userDataService: UserDataService
   ) { }
 
   getNotifications() {

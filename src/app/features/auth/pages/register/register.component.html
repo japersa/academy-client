@@ -3,10 +3,27 @@
     <div class=" container">
       <div class=" row">
         <div class=" col-md-5 ml-auto">
-          <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598120/assets/logo-icex-header_nxutwk.png" class="mt-4 logo" alt="">
+          <img
+            src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598120/assets/logo-icex-header_nxutwk.png"
+            class="mt-4 logo" alt="">
           <div class=" info-area info-horizontal mt-5">
             <div class=" icon icon-warning">
-              <img class="mini-icon" src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655659998/assets/icons/educacion-personalizada_bdtfex.png" alt="">
+              <img class="mini-icon"
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559108/assets/icons/autogestion_ymjbvv.png"
+                alt="">
+            </div>
+            <div class=" description">
+              <h3 class=" info-title text-secondary">AUTOGESTIÓN DE FONDOS</h3>
+              <p class=" description">
+                Multiplicar tú capital ahora es mucho más seguro y efectivo!
+              </p>
+            </div>
+          </div>
+          <div class=" info-area info-horizontal">
+            <div class=" icon icon-warning">
+              <img class="mini-icon"
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655659998/assets/icons/educacion-personalizada_bdtfex.png"
+                alt="">
             </div>
             <div class=" description">
               <h3 class=" info-title text-secondary">EDUCACIÓN PERSONALIZADA</h3>
@@ -17,7 +34,9 @@
           </div>
           <div class=" info-area info-horizontal">
             <div class=" icon icon-primary">
-              <img class="mini-icon" src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660652/assets/icons/contenido-de-calidad_moxull.png" alt="">
+              <img class="mini-icon"
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660652/assets/icons/contenido-de-calidad_moxull.png"
+                alt="">
             </div>
             <div class=" description">
               <h3 class=" info-title  text-secondary">CONTENIDO DE CALIDAD</h3>
@@ -28,7 +47,9 @@
           </div>
           <div class=" info-area info-horizontal">
             <div class=" icon icon-info">
-              <img class="mini-icon" src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660681/assets/icons/compromiso-en-tu-proceso_fmjbxy.png" alt="">
+              <img class="mini-icon"
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660681/assets/icons/compromiso-en-tu-proceso_fmjbxy.png"
+                alt="">
             </div>
             <div class=" description">
               <h3 class=" info-title text-secondary">
@@ -41,8 +62,7 @@
         </div>
         <div class=" col-md-7 mr-auto">
           <div class=" card card-register card-white">
-            <div class=" card-header"
-           >
+            <div class=" card-header">
               <!-- <img alt="Card image" class=" card-img"
                 src="https://res.cloudinary.com/mistrades-com/image/upload/v1643666032/assets/Sign%20up/banner-registro_vzgark.png" /> -->
 
@@ -87,29 +107,82 @@
                   </ng-container>
                 </ng-container>
 
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" formControlName="email" id="email" id="email"
-                    placeholder="Escriba su email">
-                  <ng-container *ngFor="let validation of validationMessages.email">
-                    <small class="form-text text-danger" *ngIf="registerForm.get('email').hasError(validation.type) &&
-                          (registerForm.get('email').dirty || registerForm.get('email').touched) ">
-                      {{validation.message}}
-                    </small>
-                  </ng-container>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" formControlName="email" id="email" id="email"
+                        placeholder="Escriba su email">
+                      <ng-container *ngFor="let validation of validationMessages.email">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('email').hasError(validation.type) &&
+                              (registerForm.get('email').dirty || registerForm.get('email').touched) ">
+                          {{validation.message}}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="identity_card">DNI / C.C / PASAPORTE</label>
+                      <input type="text" class="form-control" formControlName="identity_card" id="identity_card"
+                        id="identity_card" placeholder="Escriba su documento de identidad">
+                      <ng-container *ngFor="let validation of validationMessages.identity_card">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('identity_card').hasError(validation.type) &&
+                              (registerForm.get('identity_card').dirty || registerForm.get('identity_card').touched) ">
+                          {{validation.message}}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+
                 </div>
 
-                <div class="form-group">
-                  <label for="pass">Contraseña</label>
-                  <input type="password" class="form-control" formControlName="password" id="pass"
-                    placeholder="Ingrese su contraseña">
-                  <ng-container *ngFor="let validation of validationMessages.password">
-                    <small class="form-text text-danger" *ngIf="registerForm.get('password').hasError(validation.type) &&
-                    (registerForm.get('password').dirty || registerForm.get('password').touched) ">
-                      {{validation.message}}
-                    </small>
-                  </ng-container>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="birth_date">Fecha de nacimiento</label>
+                      <input type="date" class="form-control" formControlName="birth_date" id="birth_date"
+                        id="birth_date">
+                      <ng-container *ngFor="let validation of validationMessages.birth_date">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('birth_date').hasError(validation.type) &&
+                              (registerForm.get('birth_date').dirty || registerForm.get('birth_date').touched) ">
+                          {{validation.message}}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="phone_number">Télefono (incluye el código del país)</label>
+                      <input type="tel" class="form-control" formControlName="phone_number" id="phone_number"
+                        id="phone_number" placeholder="573212976573">
+                      <ng-container *ngFor="let validation of validationMessages.phone_number">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('phone_number').hasError(validation.type) &&
+                              (registerForm.get('phone_number').dirty || registerForm.get('phone_number').touched) ">
+                          {{validation.message}}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
                 </div>
+
+                <div class="row">
+
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="pass">Contraseña</label>
+                      <input type="password" class="form-control" formControlName="password" id="pass"
+                        placeholder="Ingrese su contraseña">
+                      <ng-container *ngFor="let validation of validationMessages.password">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('password').hasError(validation.type) &&
+                        (registerForm.get('password').dirty || registerForm.get('password').touched) ">
+                          {{validation.message}}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+
 
                 <div class=" form-check text-left">
                   <label class=" form-check-label">

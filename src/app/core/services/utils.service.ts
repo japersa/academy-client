@@ -160,6 +160,12 @@ export class UtilsService {
       { type: 'minlength', message: 'El comentario debe de contener al menos 8 caracteres' },
       { type: 'maxlength', message: 'El comentario debe de tener entre 8 y 500 caracteres' }
     ],
+    identity_card: [
+      { type: 'required', message: 'El documento de identidad es obligatorio' },
+    ],
+    birth_date: [
+      { type: 'required', message: 'La fecha de nacimiento es obligatoria' },
+    ],
 
   };
 

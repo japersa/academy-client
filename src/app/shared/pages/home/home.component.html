@@ -1,4 +1,4 @@
-<div class=" content">
+<div class="content" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
   <div class=" row">
     <ol class=" breadcrumb bg-transparent ml-3">
       <li class=" breadcrumb-item text-primary">
@@ -11,6 +11,15 @@
       <h3 class="m-0">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
       <p>Continúa aprendiendo mediante su subscripción
         <strong>{{userDataService?.userData$?.value?.subscription | titlecase}}</strong> </p>
+        <div class="row d-flex justify-content-center mt-4">
+          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9  ">
+            <iframe width="100%" height="550"  style="border-radius:20px" src="https://www.youtube.com/embed/MWHr8Ndpmas"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
     </div>
 
     <ng-container *ngIf="continueLearningCourses.length > 0">
@@ -48,7 +57,7 @@
             <h5 class="card-title text-center">
               {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
             </h5>
-            <button class="btn btn-secondary btn-block" type="button"  [routerLink]="['/course', c.id]">IR AL
+            <button class="btn btn-secondary btn-block" type="button" [routerLink]="['/course', c.id]">IR AL
               CURSO</button>
           </div>
         </div>

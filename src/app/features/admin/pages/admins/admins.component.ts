@@ -62,9 +62,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
     this.users.length = 0;
     this.role = 'profesores'
     this.dashboardService.getUsersByRole(ROLES_ENUM.TEACHER).pipe(take(1)).subscribe(res => {
-      Object.assign(this.users, res)
-      console.log(res);
-
+      Object.assign(this.users, res);
     },
       error => {
         console.log('error ' + error.error);
