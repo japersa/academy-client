@@ -26,6 +26,11 @@ export class UtilsService {
       { type: 'minlength', message: 'El nombre de usuario debe de ser de 3 o más caracteres' }
     ],
 
+    deferred_name: [
+      { type: 'required', message: 'El nombre del referido es obligatorio' },
+      { type: 'minlength', message: 'El nombre del referido debe de tener más de dos caracteres' }
+    ],
+
     email: [
       { type: 'required', message: 'El email es obligatorio' },
       { type: 'pattern', message: 'El formato del email es inválido' }

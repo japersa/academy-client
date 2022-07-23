@@ -167,6 +167,36 @@
                 </div>
 
                 <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="deferred_name">Nombre de referido</label>
+                      <input type="text" class="form-control" placeholder="Escriba el nombre del referido"
+                        formControlName="deferred_name" id="deferred_name">
+                      <ng-container *ngFor="let validation of validationMessages.deferred_name">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('deferred_name').hasError(validation.type) &&
+                              (registerForm.get('deferred_name').dirty || registerForm.get('deferred_name').touched) ">
+                          {{validation.message}}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="deferred_document_number">DNI / C.C / PASAPORTE - Referido</label>
+                      <input type="text" class="form-control" formControlName="deferred_document_number"
+                        id="deferred_document_number" placeholder="Escriba el documento del referido">
+                      <ng-container *ngFor="let validation of validationMessages.identity_card">
+                        <small class="form-text text-danger"
+                          *ngIf="registerForm.get('deferred_document_number').hasError(validation.type) &&
+                              (registerForm.get('deferred_document_number').dirty || registerForm.get('deferred_document_number').touched) ">
+                          {{validation.message}}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
 
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
@@ -181,26 +211,23 @@
                       </ng-container>
                     </div>
                   </div>
+
+                  <div class=" form-check text-left">
+                    Al suscribirse aceptas los
+                    <a href="javascript:void(0)"> términos y condiciones </a> .
+                  </div>
+
+                  <ng-container *ngIf="errorMessage">
+                    <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                  </ng-container>
+
                 </div>
-
-
-                <div class=" form-check text-left">
-                  <label class=" form-check-label">
-                    <input class=" form-check-input" type="checkbox" required />
-
-                    <span class=" form-check-sign"> </span> He leído y acepto los
-                    <a href="javascript:void(0)"> terminos y condiciones </a> .
-                  </label>
-                </div>
-                <ng-container *ngIf="errorMessage">
-                  <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
-                </ng-container>
-
                 <div class=" card-footer">
                   <button class=" btn btn-secondary btn-lg" [disabled]="registerForm.invalid" type="submit">
                     Registrarse
                   </button>
                 </div>
+
               </form>
             </div>
           </div>
