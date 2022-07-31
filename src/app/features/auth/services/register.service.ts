@@ -30,4 +30,9 @@ export class RegisterService {
     return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 
+  getUser(): Observable<any> {
+    const route = '/profile/me/';
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
 }

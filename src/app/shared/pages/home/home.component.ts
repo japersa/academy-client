@@ -6,6 +6,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 import SwiperCore, { Keyboard, Pagination, Navigation, Virtual } from 'swiper';
 import { NotificationsService } from '../../../core/services/notifications.service';
+import { RegisterService } from '../../../features/auth/services/register.service';
+import { StorageService } from '../../../core/services/storage.service';
 SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
 
 
@@ -26,7 +28,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
+    private registerService: RegisterService,
     public userDataService: UserDataService,
+    private storageService: StorageService,
     private notificationsService: NotificationsService
   ) { }
 
@@ -48,8 +52,22 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  getUser() {
+    this.registerService.getUser().subscribe(
+      {
+        next: (r) => {
+          this.userDataService.userData$.next(r);
+          this.storageService.set('userData', r);
+        },
+        error: (e) => {
+          console.log(e.error);
+        }
+      }
+    )
+  }
 
   ngOnInit(): void {
+    this.getUser();
     this.fillCourses();
     this.coursesService.getKeepWatching().subscribe(r => {
       this.continueLearningCourses = r;
