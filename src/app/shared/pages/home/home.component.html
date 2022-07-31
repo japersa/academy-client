@@ -9,17 +9,26 @@
     </ol>
     <div class="col-12">
       <h3 class="m-0">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
-      <p>Continúa aprendiendo mediante su subscripción
-        <strong>{{userDataService?.userData$?.value?.subscription | titlecase}}</strong> </p>
-        <div class="row d-flex justify-content-center mt-4">
-          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9  ">
-            <iframe width="100%" height="550"  style="border-radius:20px" src="https://www.youtube.com/embed/MWHr8Ndpmas"
-              title="YouTube video player" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
+      <ng-container
+        *ngIf="userDataService?.userData$?.value?.subscription != 'none'; else elseTemplate">
+        <p>Continúa aprendiendo mediante su subscripción
+          <strong>{{userDataService?.userData$?.value?.subscription | titlecase}}</strong> </p>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <p>Hemos detectado que aún no tienes una subscripción activa, te animamos a conseguir una
+          <a routerLink="/subscription">aquí</a>.</p>
+      </ng-template>
+
+
+      <div class="row d-flex justify-content-center mt-4">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9  ">
+          <iframe width="100%" height="550" style="border-radius:20px" src="https://www.youtube.com/embed/MWHr8Ndpmas"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
         </div>
+      </div>
     </div>
 
     <ng-container *ngIf="continueLearningCourses.length > 0">

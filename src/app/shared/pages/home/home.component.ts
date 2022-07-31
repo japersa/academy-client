@@ -2,9 +2,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoursesService } from '../../services/courses.service';
 import { UserDataService } from '../../../core/services/user-data.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import SwiperCore, { Keyboard, Pagination, Navigation, Virtual } from 'swiper';
+import { NotificationsService } from '../../../core/services/notifications.service';
 SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
 
 
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     public userDataService: UserDataService,
-    private router: Router
+    private notificationsService: NotificationsService
   ) { }
 
   fillCourses() {
@@ -53,6 +54,10 @@ export class HomeComponent implements OnInit {
     this.coursesService.getKeepWatching().subscribe(r => {
       this.continueLearningCourses = r;
     });
+
+    if (this.userDataService.userData$.value.subscription === 'none') {
+      this.notificationsService.showNotification('top', 'center', 'Aún no tienes una subscripción, puedes obtenerla rápidamente <a href="/subscription">AQUÍ</a>.</p>', 3);
+    }
 
   }
 }

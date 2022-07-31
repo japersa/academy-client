@@ -25,7 +25,7 @@
 
                 </div>
                 <div class="card-body">
-                    <ng-container *ngIf="role === 'basic'; else elseTemplate">
+                    <ng-container *ngIf="role === 'none'; else elseTemplate">
 
                         <div class="row">
                             <div class="col-lg-7 col-md-5">
@@ -42,59 +42,14 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tr>
-
-                                            </tr>
-                                            <tr>
+                                            <tr *ngFor="let item of featuresFull">
                                                 <td>
-                                                    <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    <i [class]="item.icon"></i>
                                                 </td>
                                                 <td>
-                                                    <p class="card-text"> Acceso a todos los cursos</p>
+                                                    <p class="card-text">{{ item.title }}</p>
                                                 </td>
                                             </tr>
-                                            <!-- <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Mentoría para dos personas.</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Mentorías semanales en grupo o en vivo.</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Participa en foros con tu Startup.</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Acceso VIP a conferencias, online y presencial.
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Descarga tus clases con la App para estudiar sin
-                                                            conexión.</p>
-                                                    </td>
-                                                </tr> -->
                                         </table>
                                     </div>
                                 </div>
@@ -140,59 +95,14 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tr>
-
-                                            </tr>
-                                            <tr>
+                                            <tr *ngFor="let item of featuresVIP">
                                                 <td>
-                                                    <i class="tim-icons icon-check-2 icon-primary"></i>
+                                                    <i [class]="item.icon"></i>
                                                 </td>
                                                 <td>
-                                                    <p class="card-text"> Acceso a todos los cursos</p>
+                                                    <p class="card-text">{{ item.title }}</p>
                                                 </td>
                                             </tr>
-                                            <!-- <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Mentoría para dos personas.</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Mentorías semanales en grupo o en vivo.</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Participa en foros con tu Startup.</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Acceso VIP a conferencias, online y presencial.
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <i class="tim-icons icon-check-2 icon-primary"></i>
-                                                    </td>
-                                                    <td>
-                                                        <p class="card-text"> Descarga tus clases con la App para estudiar sin
-                                                            conexión.</p>
-                                                    </td>
-                                                </tr> -->
                                         </table>
                                     </div>
                                 </div>
