@@ -110,10 +110,11 @@ export class EditUserComponent implements OnInit {
         first_name: dataFrom.first_name,
         last_name: dataFrom.last_name,
         rol: dataFrom.role,
-        subscription: dataFrom.subscription,
+        subscription: "none",
         email: dataFrom.email
       }
     }
+    
     this.registerService.editUser(data, this.user.id).pipe(take(1)).subscribe(res => {
       this.showEvent.emit(false);
       this.notificationService.showNotification('bottom', 'center', 'Usuario editado correctamente', 2);

@@ -53,26 +53,29 @@ export class HomeComponent implements OnInit {
   }
 
   getUser() {
-    this.registerService.getUser().subscribe(
-      {
-        next: (r) => {
-          this.userDataService.userData$.next(r);
-          this.storageService.set('userData', r);
-        },
-        error: (e) => {
-          console.log(e.error);
+    setTimeout(() => {
+      this.registerService.getUser().subscribe(
+        {
+          next: (r) => {
+            this.userDataService.userData$.next(r);
+            this.storageService.set('userData', r);
+          },
+          error: (e) => {
+            console.log(e.error);
+          }
         }
-      }
-    )
+      )
+    }, 200);
   }
 
+
+
   ngOnInit(): void {
-    this.getUser();
     this.fillCourses();
     this.coursesService.getKeepWatching().subscribe(r => {
       this.continueLearningCourses = r;
     });
-
+    // this.getUser();
     if (this.userDataService.userData$.value.subscription === 'none') {
       this.notificationsService.showNotification('top', 'center', 'Aún no tienes una subscripción, puedes obtenerla rápidamente <a href="/subscription">AQUÍ</a>.</p>', 3);
     }
