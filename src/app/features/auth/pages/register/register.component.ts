@@ -46,8 +46,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
       phone_number: new FormControl('', Validators.compose([
         Validators.required,
       ])),
-      deferred_name: new FormControl(''),
-      deferred_document_number: new FormControl(''),
+      deferred_name: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      deferred_document_number: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
       password: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(8)
       ]))

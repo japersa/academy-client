@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
     this.coursesService.getKeepWatching().subscribe(r => {
       this.continueLearningCourses = r;
     });
-    // this.getUser();
+    this.getUser();
     if (this.userDataService.userData$.value.subscription === 'none') {
       this.notificationsService.showNotification('top', 'center', 'Aún no tienes una subscripción, puedes obtenerla rápidamente <a href="/subscription">AQUÍ</a>.</p>', 3);
     }

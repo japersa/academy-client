@@ -12,8 +12,8 @@
       <ng-container
         *ngIf="userDataService?.userData$?.value?.subscription != 'none';else elseTemplate">
         <p>Continúa aprendiendo mediante su subscripción
-          <!-- <strong>{{userDataService?.userData$?.value?.subscription | titlecase}}</strong> </p> -->
-          <strong>Basic</strong> </p>
+          <strong>{{userDataService?.userData$?.value?.subscription | titlecase}}</strong> 
+          </p>
       </ng-container>
       <ng-template #elseTemplate>
         <p>Hemos detectado que aún no tienes una subscripción activa, te animamos a conseguir una

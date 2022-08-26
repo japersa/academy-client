@@ -15,6 +15,7 @@ export class AuthInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const skipIntercept = request.headers.has('skip-auth');
+    const token = this.userDataService.getAccessToken();
 
     if (skipIntercept) {
 
@@ -28,11 +29,9 @@ export class AuthInterceptor {
       return next.handle(request);
 
     } else {
-      const token = this.userDataService.getAccessToken();
 
       if (token) {
         request = request.clone({
-          headers: request.headers.delete('skip-auth'),
           setHeaders: {
             'Content-Type': 'application/json',
             authorization: `Token ${token.replace('"', '')}`,

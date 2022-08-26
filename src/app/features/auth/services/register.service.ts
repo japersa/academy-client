@@ -31,8 +31,11 @@ export class RegisterService {
   }
 
   getUser(): Observable<any> {
+    // const route = '/profile/me/';
+    // return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+    const HEADERS = new HttpHeaders();
     const route = '/profile/me/';
-    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+    return this.http.get<any>(`${apiURL}${route}`, { headers: HEADERS });
   }
 
 }
