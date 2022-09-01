@@ -144,7 +144,8 @@ export class UserComponent implements OnInit, OnDestroy {
   getApprovedCourses() {
     this.coursesService.myApprovedCourse().subscribe(
       {
-        next: (r) => this.approvedCourses = r,
+        next: (r) => {this.approvedCourses = r; console.log(r);
+        },
         error: (e) => console.log(e.error)
       }
     );
