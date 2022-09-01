@@ -45,7 +45,7 @@ export class EditUserComponent implements OnInit {
       sub: SUBS.BASIC
     },
     {
-      name: 'Full',
+      name: 'Icex AG',
       sub: SUBS.FULL
     }
   ]
@@ -110,7 +110,7 @@ export class EditUserComponent implements OnInit {
         first_name: dataFrom.first_name,
         last_name: dataFrom.last_name,
         rol: dataFrom.role,
-        subscription: "none",
+        subscription: dataFrom.subscription,
         email: dataFrom.email
       }
     }

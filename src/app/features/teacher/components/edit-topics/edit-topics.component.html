@@ -33,7 +33,7 @@
 
                 <label for="formFileSm" class="form-label ">Vídeo</label>
                 <input class=" form-control" formControlName="video" id="formFileSm" type="file"
-                    accept="video/mp4, video/ogg" (change)="handleVideoChange($event)" required />
+                    accept="video/mp4, video/ogg" (change)="handleVideoChange($event)" />
                 <ng-container *ngIf="firebaseStorageService.uploadPercent">
                     <div class=" progress-container">
                         <span class=" progress-badge"> Subiendo </span>
@@ -129,7 +129,7 @@
 
         </div>
         <div class=" card-footer">
-            <button class=" btn btn-fill btn-primary" [disabled]="topicForm.invalid" type="submit">
+            <button class=" btn btn-fill btn-secondary" [disabled]="topicForm.invalid" type="submit">
                 Enviar
             </button>
             <button class=" btn btn-fill btn-danger ml-2" (click)="cancelCreate()" type="button">

@@ -150,7 +150,7 @@ export class FirebaseStorageService {
       price: dataForm.price,
     }
 
-    this.coursesService.updateCourse(data, id).pipe(take(1)).subscribe(res => {
+    this.coursesService.updateCourse(data, id).subscribe(res => {
       this.notificationService.showNotification('bottom', 'center', 'Curso editado con éxito', 2);
     },
       error => {
@@ -255,13 +255,10 @@ export class FirebaseStorageService {
           const data = {
             title: dataForm.title,
             description: dataForm.description,
-            video: videoUrl,
+            video: filePath,
             module: dataForm.module,
             links: dataForm.links
           }
-
-          console.log(data);
-
 
           this.coursesService.updateTopic(data, id).subscribe(res => {
             this.notificationService.showNotification('bottom', 'center', 'Temario editado con éxito', 2);
@@ -278,15 +275,18 @@ export class FirebaseStorageService {
   }
 
   updateVideo(dataForm, id: string) {
-    const data = {
+    const data: any = {
       title: dataForm.title,
       description: dataForm.description,
       module: dataForm.module
     }
 
-    this.coursesService.updateTopic(data, id).pipe(take(1)).subscribe(res => {
-      this.notificationService.showNotification('bottom', 'center', 'Temario creado con éxito', 2);
+    if (this.downloadURLsFiles.length > 0) {
+      data.files = this.downloadURLsFiles
+    }
 
+    this.coursesService.updateTopic(data, id).subscribe(res => {
+      this.notificationService.showNotification('bottom', 'center', 'Temario creado con éxito', 2);
     },
       error => {
         console.log('Error: ', error.error);

@@ -33,6 +33,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
   changeStateShow(value: boolean) {
     this.showFormCreateUser = value;
     this.showFormEditUser = value;
+    this.getAll();
   }
 
 
@@ -51,8 +52,6 @@ export class AdminsComponent implements OnInit, OnDestroy {
     this.users.length = 0;
     this.role = 'estudiantes'
     this.dashboardService.getUsersByRole(ROLES_ENUM.STUDENT).subscribe(res => {
-      console.log(res);
-
       Object.assign(this.users, res)
     },
       error => {
@@ -69,6 +68,12 @@ export class AdminsComponent implements OnInit, OnDestroy {
       error => {
         console.log('error ' + error.error);
       });
+  }
+
+  getAll() {
+    this.getStudents();
+    this.getTeachers();
+    this.getAdmins();
   }
 
   deleteUser(userId: string) {

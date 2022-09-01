@@ -7,6 +7,15 @@ import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { finalize } from 'rxjs/operators';
 
+function clean(obj) {
+  for (var propName in obj) {
+    if (obj[propName] === null || obj[propName] === '') {
+      delete obj[propName];
+    }
+  }
+  return obj
+}
+
 @Component({
   selector: 'app-edit-topics',
   templateUrl: './edit-topics.component.html',
@@ -51,17 +60,12 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
         Validators.minLength(8),
         Validators.maxLength(500)
       ])),
-      video: new FormControl('', Validators.compose([
-        Validators.required,
-      ])),
-      files: new FormControl('', Validators.compose([
-      ])),
+      video: new FormControl(null),
+      files: new FormControl(null),
       links: new FormArray([
         this.formBuilder.group({
-          title: new FormControl('', Validators.compose([
-          ])),
-          link: new FormControl('', Validators.compose([
-          ])),
+          title: new FormControl(null),
+          link: new FormControl(null,),
         })
       ], []),
     });
@@ -87,17 +91,22 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   }
 
   createTopic(dataForm: any) {
+
+    dataForm = clean(dataForm);
+    console.log(dataForm);
+
     if (this.eventFiles) {
       this.createTopicFile();
     }
     this.firebaseStorageService.updateCourseVideo(this.eventVideo, dataForm, this.topic.id);
     this.firebaseStorageService.uploadPercent.subscribe({
-      complete: () => {
+      complete: () => {        
         this.firebaseStorageService.uploadPercent = null;
         this.firebaseStorageService.uploadPercentFiles = null;
         setTimeout(() => this.showEvent.emit(false), 2000);
       }
     });
+
   }
 
   handleVideoChange(event) {

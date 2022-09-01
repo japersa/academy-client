@@ -33,6 +33,8 @@ export class ClassComponent implements OnInit, OnDestroy {
     this.coursesService.getTopicById(topicId).subscribe(
       {
         next: (res) => {
+          console.log(res);
+          
           this.topic = res.result
           this.getVideo(res.result.video);
           this.allClass = res.all;
@@ -52,6 +54,8 @@ export class ClassComponent implements OnInit, OnDestroy {
   getVideo(url: string) {
     const ref = this.storage.ref(url);
     this.source = ref.getDownloadURL();
+    console.log(this.source);
+    
   }
 
   nextClass() {

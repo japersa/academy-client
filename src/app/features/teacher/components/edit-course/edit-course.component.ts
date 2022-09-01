@@ -5,6 +5,15 @@ import { FirebaseStorageService } from '../../../../shared/services/firebase-sto
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 
+function clean(obj) {
+  for (var propName in obj) {
+    if (obj[propName] === null || obj[propName] === '') {
+      delete obj[propName];
+    }
+  }
+  return obj
+}
+
 @Component({
   selector: 'app-edit-course',
   templateUrl: './edit-course.component.html',
@@ -49,19 +58,43 @@ export class EditCourseComponent implements OnInit {
         Validators.minLength(1),
         Validators.pattern('^\\d+\\.?\\d{0,2}$')]
       )),
-      path_preview_image: new FormControl('', Validators.compose([
+      path_preview_image: new FormControl(null, Validators.compose([
       ]))
     });
 
   }
 
   createCourse(dataForm: any) {
-    this.firebaseStorageService.updateCourseCover(this.event, dataForm, this.course.id);
-    this.firebaseStorageService.uploadPercent.subscribe(() => {
-      this.firebaseStorageService.uploadPercent = null;
-      setTimeout(() => this.showEvent.emit(false), 2000);
+
+    dataForm = clean(dataForm)
+
+    if (dataForm.path_preview_image) {
+      this.firebaseStorageService.updateCourseCover(this.event, dataForm, this.course.id);
+      this.firebaseStorageService.uploadPercent.subscribe(() => {
+        this.firebaseStorageService.uploadPercent = null;
+        setTimeout(() => this.showEvent.emit(false), 2000);
+      }
+      );
+    } else {
+
+      const data = {
+        title: dataForm.title,
+        description: dataForm.description,
+      }
+
+      this.coursesService.updateCourse(data, this.course.id).subscribe(res => {
+        setTimeout(() => this.showEvent.emit(false), 2000);
+        this.notificationsService.showNotification('bottom', 'center', 'Curso editado con éxito', 2);
+
+      },
+        error => {
+          console.log('Error: ', error.error);
+          this.notificationsService.showNotification('bottom', 'center', 'Error al editar curso', 4);
+        })
+
     }
-    );
+
+
   }
 
   cancelCreate() {

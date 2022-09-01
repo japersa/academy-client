@@ -45,7 +45,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       sub: SUBS.BASIC
     },
     {
-      name: 'Full',
+      name: 'Icex AG',
       sub: SUBS.FULL
     }
   ]

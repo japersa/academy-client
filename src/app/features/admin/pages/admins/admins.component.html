@@ -70,7 +70,11 @@
                                         <td>{{ u?.first_name }}</td>
                                         <td>{{ u?.last_name }}</td>
                                         <td class=" text-center">{{u?.username}}</td>
-                                        <td class=" text-center">{{u?.subscription}}</td>
+                                        <td class=" text-center" *ngIf="u?.subscription === 'full'; else elseTemplate">
+                                            Icex AG</td>
+                                        <ng-template #elseTemplate>
+                                            <td class=" text-center">{{u?.subscription}}</td>
+                                        </ng-template>
                                         <td class=" text-center">{{u?.identity_card}}</td>
                                         <td class=" text-center">{{u?.phone_number}}</td>
                                         <td class=" text-center">{{u?.birth_date}}</td>

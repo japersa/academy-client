@@ -25,7 +25,7 @@ export class RegisterService {
     return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }
 
-  editUser(data: any, id: string): Observable<any> {
+  editUser(data: any, id: string): Observable<any> {    
     const route = `/update/user/${id}/`;
     return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
   }

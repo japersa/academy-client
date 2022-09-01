@@ -188,7 +188,12 @@
           <div class="card-description" style="text-align: center">
             <p class="description text-primary">{{rol | titlecase}}</p>
             <p>{{username}}</p>
-            <p class="description">{{ userDataService?.userData$?.value.subscription | titlecase}}</p>
+            <!-- <p class="description">{{ userDataService?.userData$?.value.subscription | titlecase}}</p> -->
+            <p class="description" *ngIf="userDataService?.userData$?.value.subscription === 'full'; else elseTemplate">
+              Icex AG</p>
+          <ng-template #elseTemplate>
+              <p class="description">{{userDataService?.userData$?.value.subscription | titlecase}}</p>
+          </ng-template>
           </div>
         </div>
       </div>

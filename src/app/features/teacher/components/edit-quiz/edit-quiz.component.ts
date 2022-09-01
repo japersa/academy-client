@@ -110,7 +110,7 @@ export class EditQuizComponent implements OnInit, OnDestroy {
 
   loadCourses() {
 
-    this.coursesService.getCourses().subscribe(res => {
+    this.coursesService.getCourses().subscribe(res => {            
       Object.assign(this.courses, res.my_courses_created);
     },
       error => {
@@ -122,6 +122,7 @@ export class EditQuizComponent implements OnInit, OnDestroy {
 
   getCourseName() {
     this.coursesService.getCourseById(this.quiz.course_id).subscribe(res => {
+            
       this.currentCourse = res.title
     },
       error => {
@@ -134,32 +135,34 @@ export class EditQuizComponent implements OnInit, OnDestroy {
     this.showEvent.emit(false);
   }
 
-  setValues(question: any) {
+  setValues(form: any) {
 
     const itemsArr = this.quizForm.get('questions') as FormArray;
-    this.quizForm.patchValue(question);
-    this.removeItem(question.questions[0])
 
-    question.questions.forEach(e => {
+    this.quizForm.patchValue(form);
+    this.removeItem(form.questions[0])
+
+    form.questions.forEach(e => {
 
       const newItem = this.formBuilder.group({
-        question: new FormControl('', Validators.compose([
+        question: new FormControl(e.question, Validators.compose([
           Validators.required, Validators.minLength(10), Validators.maxLength(100)
         ])),
-        optionOne: new FormControl('', Validators.compose([
+        optionOne: new FormControl(e.optionOne, Validators.compose([
           Validators.required, Validators.required, Validators.minLength(2)
         ])),
-        optionTwo: new FormControl('', Validators.compose([
+        optionTwo: new FormControl(e.optionTwo, Validators.compose([
           Validators.required, Validators.minLength(2)
         ])),
-        optionThree: new FormControl('', Validators.compose([
+        optionThree: new FormControl(e.optionThree, Validators.compose([
         ])),
-        optionFour: new FormControl('', Validators.compose([
+        optionFour: new FormControl(e.optionFour, Validators.compose([
         ])),
-        answer: new FormControl('', Validators.compose([
+        answer: new FormControl(e.answer, Validators.compose([
           Validators.required
         ])),
       })
+
       itemsArr.push(newItem)
 
     });
