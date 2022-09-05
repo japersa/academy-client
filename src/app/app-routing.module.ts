@@ -12,7 +12,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/profile',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {

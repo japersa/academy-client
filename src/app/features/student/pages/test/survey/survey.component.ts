@@ -109,15 +109,15 @@ export class SurveyComponent implements OnInit {
                 complete: () => {
                   this.notificationsService.showNotification('bottom', 'center', 'Curso aprobado con éxito', 2);
                   setTimeout(() => {
-                    this.router.navigate([`/home`])
-                  }, 20000)
+                    this.router.navigate([`/profile`])
+                  }, 1000)
                 }
               });
             } else {
               this.notificationsService.showNotification('bottom', 'center', 'Curso no aprobado con éxito', 4);
               setTimeout(() => {
                 this.router.navigate([`/home`])
-              }, 20000)
+              }, 1000)
             }
 
           });

@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-md-5 text-center">
+                            <div *ngIf="this.userDataService.userData$.value.subscription !== 'full'" class="col-lg-5 col-md-5 text-center">
 
                                 <h3 class="text-primary ">ACTUALIZAR MI PLAN A AUTOGESTION VIP</h3>
 

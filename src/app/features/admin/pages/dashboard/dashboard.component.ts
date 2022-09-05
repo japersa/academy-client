@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import Chart from 'chart.js';
 import { DashboardService } from '../../services/dashboard.service';
-import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -55,44 +54,50 @@ export class DashboardComponent implements OnInit, OnDestroy {
       );
   }
   // Le dá los valores a los labels de la gráfica de nuevos usuarios
-  setDataLabel() {
-    const currentMonth = new Date().getMonth();
-    const normalYear = this.dataLabel;
-    const moddedYear = [];
-    let variableMonth = currentMonth;
-    for (let i = normalYear.length - 1; i >= 0; i--) {
-      moddedYear[i] = normalYear[variableMonth];
-      variableMonth = variableMonth - 1;
-      if (variableMonth < 0) {
-        variableMonth = 11;
-      }
-      if (variableMonth === currentMonth) {
-        break;
-      }
-    }
-    this.dataLabel = moddedYear;
-    return this.dataLabel;
-  }
+  // setDataLabel() {
+  //   const currentMonth = new Date().getMonth();
+  //   const normalYear = this.dataLabel;
+  //   const moddedYear = [];
+  //   let variableMonth = currentMonth;
+  //   for (let i = normalYear.length - 1; i >= 0; i--) {
+  //     moddedYear[i] = normalYear[variableMonth];
+  //     variableMonth = variableMonth - 1;
+  //     if (variableMonth < 0) {
+  //       variableMonth = 11;
+  //     }
+  //     if (variableMonth === currentMonth) {
+  //       break;
+  //     }
+  //   }
+  //   this.dataLabel = moddedYear;
+  //   return this.dataLabel;
+  // }
 
   // Llena la gráfica con la información de nuevos usuarios por mes
   getDataChart() {
-    this.dashboardService.getUsersByCount().pipe(take(1)).subscribe(
+    this.dashboardService.getUsersByCount().subscribe(
       (res) => {
         // debugger
+        console.log(res);
 
         const data = res.avg_users_months[0];
-        let count = 0;
 
-        for (let i = 11; i >= 0; i--) {
+        for (let i = 0; i < 12; i++) {
 
-          if (data[i] !== undefined) {
-            this.dataChart.push(data[i]?.users)
+          if (data[i]) {
+            console.log('data',data[i]);
+            
+            const date = data[i]?.date
+            const [year, month] = date.split('-');
 
-          } else {
-            this.dataChart.push(0)
-          }
-          count++
+            const finalMonth = parseInt(month) - 1;
+            
+            this.dataChart[finalMonth] = data[i]?.users;
+
+          } 
         }
+
+
 
         this.fillChart()
 
@@ -110,6 +115,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           '' + this.dataChart[10],
           '' + this.dataChart[11],
         ];
+
+        console.log(this.dataChartFix);
+
+
         return this.dataChartFix
       },
       (error) => {
@@ -172,8 +181,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     };
     var chart_labels = this.dataLabel;
     this.datasets =
-      // this.dataChart,
-      //this.dataChartFix,
       [parseInt(this.dataChart[0], 10),
       parseInt(this.dataChart[1], 10),
       parseInt(this.dataChart[2], 10),
@@ -187,9 +194,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       parseInt(this.dataChart[10], 10),
       parseInt(this.dataChart[11], 10),]
       ;
-    // this.data = this.datasets;
-    // this.data = ["1",2,3,4,4,5,6,7,8,9,"10","11"];
-    // this.data = this.dataChart;
+
     this.data = this.dataChartFix;
 
     this.canvas = document.getElementById('chartBig1');
@@ -222,7 +227,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
             pointHoverBorderWidth: 15,
             pointRadius: 4,
             data: this.dataChart
-            // this.dataChart
           },
         ],
       },
@@ -233,10 +237,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getCourses() {
-    this.dashboardService.getAdminCourses().pipe(take(1)).subscribe(res => {
-
+    this.dashboardService.getAdminCourses().subscribe(res => {
       Object.assign(this.courses, res);
-
     },
       error => {
         console.log(error);
@@ -244,25 +246,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   goToCourseDetail(id: string) {
-
     this.router.navigate([`/course/${id}`])
-
   }
 
   ngOnInit() {
-
-    this.setDataLabel();
+    // this.setDataLabel();
     this.showGeneralStatistics();
     this.getDataChart();
     this.getCourses();
-
   }
 
   ngOnDestroy(): void {
   }
 
-  public updateOptions() {
-    this.myChartData.data.datasets[0].data = this.data;
-    this.myChartData.update();
-  }
 }

@@ -543,7 +543,7 @@
                     </div>
                     <div class=" card-header">
                         <div class=" pull-right">
-                            <input class="btn btn btn-secondary btn-lg" name="next" type="submit" value="SIGUIENTE PASO"
+                            <input class="btn btn btn-secondary btn-lg" *ngIf="value < 100" name="next" type="submit" value="SIGUIENTE PASO"
                                 (click)="next()" />
 
                             <!-- btn btn-simple btn-twitter -->
@@ -551,9 +551,9 @@
                             <input class=" btn btn-finish btn-fill btn-primary btn-wd" name="finish" type="button"
                                 value="FINALIZAR" />
                         </div>
-                        <div class=" pull-left">
+                        <div class=" pull-left" *ngIf="value > 15">
                             <input class=" btn btn btn-secondary btn-lg" name="previous" type="button"
-                                (click)="previous()" value="ANTERIOR ANTERIOR" />
+                                (click)="previous()" value="ANTERIOR" />
                         </div>
                         <div class=" clearfix"></div>
                     </div>
