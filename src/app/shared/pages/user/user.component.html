@@ -216,7 +216,9 @@
             <div class="card-body">
               <h5 class="card-title text-center">
                 {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}</h5>
-              <button class="btn btn-simple btn-secondary btn-block" type="button">DESCARGAR CERTIFICADO</button>
+                <a [href]="c.certificate_url" target="_blank" rel="noopener noreferrer" download>
+                  <button class="btn btn-simple btn-secondary btn-block" type="button">DESCARGAR CERTIFICADO</button>
+                </a>
             </div>
           </div>
         </div>
