@@ -68,10 +68,9 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Fecha de nacimiento </label>
-                  <input class="form-control  text-uppercase"
-                    [(ngModel)]="userDataService?.userData$?.value.birth_date" type="date" class="form-control"
-                    formControlName="birth_date" id="birth_date" id="birth_date" (blur)="focus = false"
-                    (focus)="focus = true" />
+                  <input class="form-control  text-uppercase" [(ngModel)]="userDataService?.userData$?.value.birth_date"
+                    type="date" class="form-control" formControlName="birth_date" id="birth_date" id="birth_date"
+                    (blur)="focus = false" (focus)="focus = true" />
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.birth_date">
                   <small class="form-text text-danger" *ngIf="updateForm.get('birth_date').hasError(validation.type) &&
@@ -191,9 +190,9 @@
             <!-- <p class="description">{{ userDataService?.userData$?.value.subscription | titlecase}}</p> -->
             <p class="description" *ngIf="userDataService?.userData$?.value.subscription === 'full'; else elseTemplate">
               Icex AG</p>
-          <ng-template #elseTemplate>
+            <ng-template #elseTemplate>
               <p class="description">{{userDataService?.userData$?.value.subscription | titlecase}}</p>
-          </ng-template>
+            </ng-template>
           </div>
         </div>
       </div>
@@ -216,9 +215,8 @@
             <div class="card-body">
               <h5 class="card-title text-center">
                 {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}</h5>
-                <a [href]="c.certificate_url" target="_blank" rel="noopener noreferrer" download>
-                  <button class="btn btn-simple btn-secondary btn-block" type="button">DESCARGAR CERTIFICADO</button>
-                </a>
+              <button class="btn btn-simple btn-secondary btn-block" type="button"
+                (click)="generateCertificate(c.id)">DESCARGAR CERTIFICADO</button>
             </div>
           </div>
         </div>

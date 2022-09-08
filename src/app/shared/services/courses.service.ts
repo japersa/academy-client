@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const apiURL = environment.apiURL;
 
@@ -28,6 +29,12 @@ export class CoursesService {
   getCourses(): Observable<any> {
     const route = '/my/courses/';
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
+  getCertificate(course_id: string): Observable<HttpResponse<Blob>> {
+
+    const route = `/certificate/${course_id}/`;
+    return this.http.get<Blob>(`${apiURL}${route}`, { observe: 'response', responseType: 'blob' as 'json'});
   }
 
   getCourseById(id: string): Observable<any> {

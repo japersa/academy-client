@@ -144,9 +144,32 @@ export class UserComponent implements OnInit, OnDestroy {
   getApprovedCourses() {
     this.coursesService.myApprovedCourse().subscribe(
       {
-        next: (r) => {this.approvedCourses = r; console.log(r);
+        next: (r) => {
+          this.approvedCourses = r; console.log(r);
         },
         error: (e) => console.log(e.error)
+      }
+    );
+  }
+
+  generateCertificate(courseId: string) {
+    console.log(courseId);
+
+    this.coursesService.getCertificate(courseId).subscribe(
+      {
+        next: (response) => {
+
+          const downloadLink = document.createElement('a');
+          downloadLink.href = URL.createObjectURL(new Blob([response.body], { type: response.body.type }));
+
+          // const contentDisposition = response.headers.get('content-disposition');
+          const fileName = `${crypto.randomUUID()}.pdf`;
+          downloadLink.download = fileName;
+
+          downloadLink.click();
+        },
+        error: (e) => console.log(e),
+        complete: () => console.log('complete')
       }
     );
   }
