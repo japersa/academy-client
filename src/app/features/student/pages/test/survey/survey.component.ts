@@ -3,7 +3,6 @@ import { Model, StylesManager, SurveyNG } from 'survey-angular';
 import { CoursesService } from '../../../../../shared/services/courses.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from '../../../../../core/services/notifications.service';
-import 'survey-angular/modern.css';
 
 StylesManager.applyTheme('modern');
 
