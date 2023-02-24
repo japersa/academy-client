@@ -24,7 +24,7 @@
     "@fullcalendar/core": "4.3.1",
     "@fullcalendar/daygrid": "4.3.0",
     "@fullcalendar/interaction": "4.3.0",
-    "@swimlane/ngx-datatable": "18.0.0",
+    "@swimlane/ngx-datatable": "20.1.0",
     "@videogular/ngx-videogular": "^5.0.1",
     "angular2-multiselect-dropdown": "4.6.6",
     "bs-stepper": "1.7.0",
