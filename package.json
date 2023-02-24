@@ -28,7 +28,7 @@
     "@videogular/ngx-videogular": "^7.0.1",
     "angular2-multiselect-dropdown": "5.0.4",
     "bs-stepper": "1.7.0",
-    "chart.js": "2.9.4",
+    "chart.js": "4.2.1",
     "core-js": "3.8.1",
     "d3-scale": "^4.0.2",
     "devextreme": "^22.2.4",
