@@ -50,6 +50,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
+  get email() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
+  
   loginUser(data: any) {
 
     const CREDENTIALS = {
