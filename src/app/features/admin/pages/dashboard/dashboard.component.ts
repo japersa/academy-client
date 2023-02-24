@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import Chart from 'chart.js';
 import { DashboardService } from '../../services/dashboard.service';
 import { Router } from '@angular/router';
 
@@ -17,22 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public total_students: number = 0;
   public total_admins: number = 0;
   public total_teachers: number = 0;
-  public dataChart = [];
-  public dataLabel = [
-    'ENE',
-    'FEB',
-    'MAR',
-    'ABR',
-    'MAY',
-    'JUN',
-    'JUL',
-    'AGO',
-    'SEP',
-    'OCT',
-    'NOV',
-    'DEC',
-  ];
-  public dataChartFix;
+ 
 
   courses = [];
 
@@ -53,188 +37,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       );
   }
-  // Le dá los valores a los labels de la gráfica de nuevos usuarios
-  // setDataLabel() {
-  //   const currentMonth = new Date().getMonth();
-  //   const normalYear = this.dataLabel;
-  //   const moddedYear = [];
-  //   let variableMonth = currentMonth;
-  //   for (let i = normalYear.length - 1; i >= 0; i--) {
-  //     moddedYear[i] = normalYear[variableMonth];
-  //     variableMonth = variableMonth - 1;
-  //     if (variableMonth < 0) {
-  //       variableMonth = 11;
-  //     }
-  //     if (variableMonth === currentMonth) {
-  //       break;
-  //     }
-  //   }
-  //   this.dataLabel = moddedYear;
-  //   return this.dataLabel;
-  // }
-
-  // Llena la gráfica con la información de nuevos usuarios por mes
-  getDataChart() {
-    this.dashboardService.getUsersByCount().subscribe(
-      (res) => {
-        // debugger
-        console.log(res);
-
-        const data = res.avg_users_months[0];
-
-        for (let i = 0; i < 12; i++) {
-
-          if (data[i]) {
-            console.log('data',data[i]);
-            
-            const date = data[i]?.date
-            const [year, month] = date.split('-');
-
-            const finalMonth = parseInt(month) - 1;
-            
-            this.dataChart[finalMonth] = data[i]?.users;
-
-          } 
-        }
 
 
-
-        this.fillChart()
-
-        this.dataChartFix = [
-          '' + this.dataChart[0],
-          '' + this.dataChart[1],
-          '' + this.dataChart[2],
-          '' + this.dataChart[3],
-          '' + this.dataChart[4],
-          '' + this.dataChart[5],
-          '' + this.dataChart[6],
-          '' + this.dataChart[7],
-          '' + this.dataChart[8],
-          '' + this.dataChart[9],
-          '' + this.dataChart[10],
-          '' + this.dataChart[11],
-        ];
-
-        console.log(this.dataChartFix);
-
-
-        return this.dataChartFix
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  fillChart() {
-    var gradientChartOptionsConfigurationWithTooltipRed: any = {
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-
-      tooltips: {
-        backgroundColor: '#f5f5f5',
-        titleFontColor: '#333',
-        bodyFontColor: '#666',
-        bodySpacing: 4,
-        xPadding: 12,
-        mode: 'nearest',
-        intersect: 0,
-        position: 'nearest'
-      },
-      responsive: true,
-      scales: {
-        yAxes: [
-          {
-            barPercentage: 1.6,
-            gridLines: {
-              drawBorder: false,
-              color: 'rgba(29,140,248,0.0)',
-              zeroLineColor: 'transparent'
-            },
-            ticks: {
-              suggestedMin: 60,
-              suggestedMax: 125,
-              padding: 20,
-              fontColor: '#9a9a9a'
-            }
-          }
-        ],
-
-        xAxes: [
-          {
-            barPercentage: 1.6,
-            gridLines: {
-              drawBorder: false,
-              color: 'rgba(233,32,16,0.1)',
-              zeroLineColor: 'transparent'
-            },
-            ticks: {
-              padding: 20,
-              fontColor: '#9a9a9a'
-            }
-          }
-        ]
-      }
-    };
-    var chart_labels = this.dataLabel;
-    this.datasets =
-      [parseInt(this.dataChart[0], 10),
-      parseInt(this.dataChart[1], 10),
-      parseInt(this.dataChart[2], 10),
-      parseInt(this.dataChart[3], 10),
-      parseInt(this.dataChart[4], 10),
-      parseInt(this.dataChart[5], 10),
-      parseInt(this.dataChart[6], 10),
-      parseInt(this.dataChart[7], 10),
-      parseInt(this.dataChart[8], 10),
-      parseInt(this.dataChart[9], 10),
-      parseInt(this.dataChart[10], 10),
-      parseInt(this.dataChart[11], 10),]
-      ;
-
-    this.data = this.dataChartFix;
-
-    this.canvas = document.getElementById('chartBig1');
-    this.ctx = this.canvas.getContext('2d');
-
-    var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke.addColorStop(1, 'rgba(134, 66, 66,0.15)');
-    gradientStroke.addColorStop(0.4, 'rgba(134, 66, 66,0.0)'); //green colors
-    gradientStroke.addColorStop(0, 'rgba(134, 66, 66,0)'); //green colors
-
-    var config = {
-      type: 'line',
-      data: {
-        labels: chart_labels,
-        datasets: [
-          {
-            label: 'Nuevos usuarios',
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: '#DD0005',
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: '#DD0005',
-            pointBorderColor: 'rgba(255,255,255,0)',
-            pointHoverBackgroundColor: '#DD0005',
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: this.dataChart
-          },
-        ],
-      },
-      options: gradientChartOptionsConfigurationWithTooltipRed,
-    };
-    this.myChartData = new Chart(this.ctx, config);
-
-  }
 
   getCourses() {
     this.dashboardService.getAdminCourses().subscribe(res => {
@@ -250,9 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.setDataLabel();
     this.showGeneralStatistics();
-    this.getDataChart();
     this.getCourses();
   }
 
