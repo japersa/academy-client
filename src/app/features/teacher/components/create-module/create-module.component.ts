@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { UtilsService } from '../../../../core/services/utils.service';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators, UntypedFormGroup } from '@angular/forms';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
   courses = []
 
-  moduleForm: FormGroup;
+  moduleForm: UntypedFormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
@@ -26,7 +26,7 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService,
     private userDataService: UserDataService
@@ -35,10 +35,10 @@ export class CreateModuleComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.moduleForm = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([
+      name: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
-      course: new FormControl('', Validators.compose([
+      course: new UntypedFormControl('', Validators.compose([
         Validators.required
       ])),
     });

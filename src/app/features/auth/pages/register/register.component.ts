@@ -1,6 +1,6 @@
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { UtilsService } from '../../../../core/services/utils.service';
@@ -14,11 +14,11 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   validationMessages: any;
   errorMessage: string | null;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
     private router: Router,
@@ -27,32 +27,32 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.registerForm = this.formBuilder.group({
-      first_name: new FormControl('', Validators.compose([
+      first_name: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3)])),
-      last_name: new FormControl('', Validators.compose([
+      last_name: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3)])),
-      birth_date: new FormControl('', Validators.compose([
+      birth_date: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      identity_card: new FormControl('', Validators.compose([
+      identity_card: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      email: new FormControl('', Validators.compose([
+      email: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      phone_number: new FormControl('', Validators.compose([
+      phone_number: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      deferred_name: new FormControl('', Validators.compose([
+      deferred_name: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      deferred_document_number: new FormControl('', Validators.compose([
+      deferred_document_number: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      password: new FormControl('', Validators.compose([
+      password: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(8)
       ]))
     }

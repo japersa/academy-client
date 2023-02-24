@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators, UntypedFormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
@@ -16,7 +16,7 @@ export class EditQuizComponent implements OnInit, OnDestroy {
   courses = []
   currentCourse = '';
 
-  quizForm: FormGroup;
+  quizForm: UntypedFormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
@@ -26,7 +26,7 @@ export class EditQuizComponent implements OnInit, OnDestroy {
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService,
     public userDataService: UserDataService
@@ -36,27 +36,27 @@ export class EditQuizComponent implements OnInit, OnDestroy {
 
     this.quizForm = this.formBuilder.group({
 
-      course: new FormControl('', Validators.compose([
+      course: new UntypedFormControl('', Validators.compose([
         Validators.required
       ])),
 
-      questions: new FormArray([
+      questions: new UntypedFormArray([
         this.formBuilder.group({
-          question: new FormControl('', Validators.compose([
+          question: new UntypedFormControl('', Validators.compose([
             Validators.required, Validators.minLength(10), Validators.maxLength(100)
           ])),
-          optionOne: new FormControl('', Validators.compose([
+          optionOne: new UntypedFormControl('', Validators.compose([
             Validators.required, Validators.required, Validators.minLength(2)
           ])),
-          optionTwo: new FormControl('', Validators.compose([
+          optionTwo: new UntypedFormControl('', Validators.compose([
             Validators.required, Validators.minLength(2)
           ])),
-          optionThree: new FormControl('', Validators.compose([
+          optionThree: new UntypedFormControl('', Validators.compose([
           ])),
-          optionFour: new FormControl('', Validators.compose([
+          optionFour: new UntypedFormControl('', Validators.compose([
           ])),
 
-          answer: new FormControl('', Validators.compose([
+          answer: new UntypedFormControl('', Validators.compose([
             Validators.required
           ])),
         })
@@ -67,23 +67,23 @@ export class EditQuizComponent implements OnInit, OnDestroy {
   }
 
   addNewItem() {
-    const itemsArr = this.quizForm.get('questions') as FormArray;
+    const itemsArr = this.quizForm.get('questions') as UntypedFormArray;
     const newItem = this.formBuilder.group({
-      question: new FormControl('', Validators.compose([
+      question: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ])),
-      optionOne: new FormControl('', Validators.compose([
+      optionOne: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.required, Validators.minLength(2)
       ])),
-      optionTwo: new FormControl('', Validators.compose([
+      optionTwo: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(2)
       ])),
-      optionThree: new FormControl('', Validators.compose([
+      optionThree: new UntypedFormControl('', Validators.compose([
       ])),
-      optionFour: new FormControl('', Validators.compose([
+      optionFour: new UntypedFormControl('', Validators.compose([
       ])),
 
-      answer: new FormControl('', Validators.compose([
+      answer: new UntypedFormControl('', Validators.compose([
         Validators.required
       ])),
     })
@@ -91,7 +91,7 @@ export class EditQuizComponent implements OnInit, OnDestroy {
   }
 
   removeItem(i) {
-    const arr = this.quizForm.get('questions') as FormArray;
+    const arr = this.quizForm.get('questions') as UntypedFormArray;
     arr.removeAt(i);
   }
 
@@ -145,7 +145,7 @@ export class EditQuizComponent implements OnInit, OnDestroy {
 
   setValues(form: any) {
 
-    const itemsArr = this.quizForm.get('questions') as FormArray;
+    const itemsArr = this.quizForm.get('questions') as UntypedFormArray;
 
     this.quizForm.patchValue(form);
     this.removeItem(form.questions[0])
@@ -153,20 +153,20 @@ export class EditQuizComponent implements OnInit, OnDestroy {
     form.questions.forEach(e => {
 
       const newItem = this.formBuilder.group({
-        question: new FormControl(e.question, Validators.compose([
+        question: new UntypedFormControl(e.question, Validators.compose([
           Validators.required, Validators.minLength(10), Validators.maxLength(100)
         ])),
-        optionOne: new FormControl(e.optionOne, Validators.compose([
+        optionOne: new UntypedFormControl(e.optionOne, Validators.compose([
           Validators.required, Validators.required, Validators.minLength(2)
         ])),
-        optionTwo: new FormControl(e.optionTwo, Validators.compose([
+        optionTwo: new UntypedFormControl(e.optionTwo, Validators.compose([
           Validators.required, Validators.minLength(2)
         ])),
-        optionThree: new FormControl(e.optionThree, Validators.compose([
+        optionThree: new UntypedFormControl(e.optionThree, Validators.compose([
         ])),
-        optionFour: new FormControl(e.optionFour, Validators.compose([
+        optionFour: new UntypedFormControl(e.optionFour, Validators.compose([
         ])),
-        answer: new FormControl(e.answer, Validators.compose([
+        answer: new UntypedFormControl(e.answer, Validators.compose([
           Validators.required
         ])),
       })

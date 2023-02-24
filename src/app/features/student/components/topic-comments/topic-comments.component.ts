@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -19,14 +19,14 @@ export class TopicCommentsComponent implements OnInit {
 
   topicId = '';
 
-  commentForm: FormGroup;
+  commentForm: UntypedFormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private topicCommentsService: TopicCommentsService,
     private route: ActivatedRoute,
     private notificationsService: NotificationsService,
@@ -36,7 +36,7 @@ export class TopicCommentsComponent implements OnInit {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.commentForm = this.formBuilder.group({
-      body: new FormControl('', Validators.compose([
+      body: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(8), Validators.maxLength(500)
       ])),
     });

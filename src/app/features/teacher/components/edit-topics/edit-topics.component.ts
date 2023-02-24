@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators, UntypedFormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
@@ -30,7 +30,7 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
 
   currentModule = '';
 
-  topicForm: FormGroup;
+  topicForm: UntypedFormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
@@ -40,7 +40,7 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     public firebaseStorageService: FirebaseStorageService,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService
@@ -49,23 +49,23 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.topicForm = this.formBuilder.group({
-      module: new FormControl('', Validators.compose([
+      module: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      title: new FormControl('', Validators.compose([
+      title: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
-      description: new FormControl('', Validators.compose([
+      description: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(500)
       ])),
-      video: new FormControl(null),
-      files: new FormControl(null),
-      links: new FormArray([
+      video: new UntypedFormControl(null),
+      files: new UntypedFormControl(null),
+      links: new UntypedFormArray([
         this.formBuilder.group({
-          title: new FormControl(null),
-          link: new FormControl(null,),
+          title: new UntypedFormControl(null),
+          link: new UntypedFormControl(null,),
         })
       ], []),
     });
@@ -73,12 +73,12 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   }
 
   addNewLink() {
-    const itemsArr = this.topicForm.get('links') as FormArray;
+    const itemsArr = this.topicForm.get('links') as UntypedFormArray;
     const newItem = this.formBuilder.group({
-      title: new FormControl('', Validators.compose([
+      title: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      link: new FormControl('', Validators.compose([
+      link: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
     })
@@ -86,7 +86,7 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
   }
 
   removeItem(i) {
-    const arr = this.topicForm.get('links') as FormArray;
+    const arr = this.topicForm.get('links') as UntypedFormArray;
     arr.removeAt(i);
   }
 
@@ -129,7 +129,7 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
 
   setValues(topic: any) {
 
-    const itemsArr = this.topicForm.get('links') as FormArray;
+    const itemsArr = this.topicForm.get('links') as UntypedFormArray;
     this.topicForm.patchValue({
       title: this.topic.title,
       description: this.topic.description,
@@ -140,9 +140,9 @@ export class EditTopicsComponent implements OnInit, OnDestroy {
     topic.links.forEach(e => {
 
       const newItem = this.formBuilder.group({
-        title: new FormControl('', Validators.compose([
+        title: new UntypedFormControl('', Validators.compose([
         ])),
-        link: new FormControl('', Validators.compose([
+        link: new UntypedFormControl('', Validators.compose([
         ])),
       })
       itemsArr.push(newItem)

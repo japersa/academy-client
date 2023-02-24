@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { UtilsService } from '../../../../core/services/utils.service';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   validationMessages: any;
   errorMessage: string | null;
 
@@ -22,7 +22,7 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
   focus;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
     private router: Router,
@@ -31,7 +31,7 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.registerForm = this.formBuilder.group({
-      email: new FormControl('', Validators.compose([
+      email: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]))
     }

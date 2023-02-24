@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class CreateCourseComponent implements OnInit, OnDestroy {
 
-  courseForm: FormGroup;
+  courseForm: UntypedFormGroup;
   validationMessages: any;
 
   event = null;
@@ -25,7 +25,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     public firebaseStorageService: FirebaseStorageService,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService
@@ -34,22 +34,22 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.courseForm = this.formBuilder.group({
-      title: new FormControl('', Validators.compose([
+      title: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(100)
       ])),
-      description: new FormControl('', Validators.compose([
+      description: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(2000)
       ])),
-      price: new FormControl('0', Validators.compose([
+      price: new UntypedFormControl('0', Validators.compose([
         Validators.required,
         Validators.minLength(1),
         Validators.pattern('^\\d+\\.?\\d{0,2}$')]
       )),
-      path_preview_image: new FormControl('', Validators.compose([
+      path_preview_image: new UntypedFormControl('', Validators.compose([
       ])
       )
     });

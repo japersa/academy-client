@@ -133,7 +133,6 @@
       }
     }
   },
-  "defaultProject": "black-dashboard-pro-angular",
   "cli": {
     "analytics": false
   }

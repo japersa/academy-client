@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
@@ -20,14 +20,14 @@ export class EditModuleComponent implements OnInit, OnDestroy {
 
   currentCourse = '';
 
-  moduleForm: FormGroup;
+  moduleForm: UntypedFormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService,
     private userDataService: UserDataService
@@ -36,10 +36,10 @@ export class EditModuleComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.moduleForm = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([
+      name: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
-      course: new FormControl('', Validators.compose([
+      course: new UntypedFormControl('', Validators.compose([
         Validators.required
       ])),
     });

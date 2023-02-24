@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { RegisterService } from '../../../auth/services/register.service';
@@ -54,13 +54,13 @@ export class EditUserComponent implements OnInit {
 
   @Input() user = null;
 
-  createUserForm: FormGroup;
+  createUserForm: UntypedFormGroup;
   validationMessages: any;
   errorMessage: string | null;
 
   @Output() showEvent = new EventEmitter<boolean>();
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private utilsService: UtilsService,
     private coursesService: CoursesService,
     public notificationService: NotificationsService,
@@ -68,21 +68,21 @@ export class EditUserComponent implements OnInit {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.createUserForm = this.formBuilder.group({
-      first_name: new FormControl('', Validators.compose([
+      first_name: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3)])),
-      last_name: new FormControl('', Validators.compose([
+      last_name: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3)])),
-      email: new FormControl('', Validators.compose([
+      email: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
-      role: new FormControl('', Validators.compose([
+      role: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      courses_ids: new FormControl('', Validators.compose([
+      courses_ids: new UntypedFormControl('', Validators.compose([
       ])),
-      subscription: new FormControl('', Validators.compose([
+      subscription: new UntypedFormControl('', Validators.compose([
       ])),
     }
     );

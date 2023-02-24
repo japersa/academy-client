@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators, UntypedFormArray } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
   eventFiles = null;
   eventVideo = null;
 
-  topicForm: FormGroup;
+  topicForm: UntypedFormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
@@ -28,7 +28,7 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     public firebaseStorageService: FirebaseStorageService,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService
@@ -37,27 +37,27 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.topicForm = this.formBuilder.group({
-      module: new FormControl('', Validators.compose([
+      module: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      title: new FormControl('', Validators.compose([
+      title: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
-      description: new FormControl('', Validators.compose([
+      description: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(500)
       ])),
-      video: new FormControl('', Validators.compose([
+      video: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      files: new FormControl('', Validators.compose([
+      files: new UntypedFormControl('', Validators.compose([
       ])),
-      links: new FormArray([
+      links: new UntypedFormArray([
         this.formBuilder.group({
-          title: new FormControl('', Validators.compose([
+          title: new UntypedFormControl('', Validators.compose([
           ])),
-          link: new FormControl('', Validators.compose([
+          link: new UntypedFormControl('', Validators.compose([
           ])),
         })
       ], []),
@@ -66,12 +66,12 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
   }
 
   addNewLink() {
-    const itemsArr = this.topicForm.get('links') as FormArray;
+    const itemsArr = this.topicForm.get('links') as UntypedFormArray;
     const newItem = this.formBuilder.group({
-      title: new FormControl('', Validators.compose([
+      title: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      link: new FormControl('', Validators.compose([
+      link: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
     })
@@ -79,7 +79,7 @@ export class CreateTopicsComponent implements OnInit, OnDestroy {
   }
 
   removeItem(i) {
-    const arr = this.topicForm.get('links') as FormArray;
+    const arr = this.topicForm.get('links') as UntypedFormArray;
     arr.removeAt(i);
   }
 

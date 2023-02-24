@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../../core/services/utils.service';
 import { TopicCommentsService } from '../../../../../shared/services/topic-comments.service';
 import { NotificationsService } from '../../../../../core/services/notifications.service';
@@ -14,14 +14,14 @@ export class ReplyCommentComponent implements OnInit {
   @Input() comment = null;
   @Output() loadUnanswered = new EventEmitter<any>();
 
-  commentForm: FormGroup;
+  commentForm: UntypedFormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private topicCommentsService: TopicCommentsService,
     private notificationsService: NotificationsService,
   ) {
@@ -29,7 +29,7 @@ export class ReplyCommentComponent implements OnInit {
     this.validationMessages = utilsService.getValidationMessages();
 
     this.commentForm = this.formBuilder.group({
-      body: new FormControl('', Validators.compose([
+      body: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(8), Validators.maxLength(500)
       ])),
     });

@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators, UntypedFormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
@@ -15,7 +15,7 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
 
   courses = []
 
-  quizForm: FormGroup;
+  quizForm: UntypedFormGroup;
   validationMessages: any;
 
   errorMessage: string | null;
@@ -24,7 +24,7 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
 
   constructor(
     private utilsService: UtilsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService,
     private userDataService: UserDataService
@@ -34,27 +34,27 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
 
     this.quizForm = this.formBuilder.group({
 
-      course: new FormControl('', Validators.compose([
+      course: new UntypedFormControl('', Validators.compose([
         Validators.required
       ])),
 
-      questions: new FormArray([
+      questions: new UntypedFormArray([
         this.formBuilder.group({
-          question: new FormControl('', Validators.compose([
+          question: new UntypedFormControl('', Validators.compose([
             Validators.required, Validators.minLength(10), Validators.maxLength(100)
           ])),
-          optionOne: new FormControl('', Validators.compose([
+          optionOne: new UntypedFormControl('', Validators.compose([
             Validators.required, Validators.required, Validators.minLength(2)
           ])),
-          optionTwo: new FormControl('', Validators.compose([
+          optionTwo: new UntypedFormControl('', Validators.compose([
             Validators.required, Validators.minLength(2)
           ])),
-          optionThree: new FormControl('', Validators.compose([
+          optionThree: new UntypedFormControl('', Validators.compose([
           ])),
-          optionFour: new FormControl('', Validators.compose([
+          optionFour: new UntypedFormControl('', Validators.compose([
           ])),
 
-          answer: new FormControl('', Validators.compose([
+          answer: new UntypedFormControl('', Validators.compose([
             Validators.required
           ])),
         })
@@ -65,23 +65,23 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
   }
 
   addNewItem() {
-    const itemsArr = this.quizForm.get('questions') as FormArray;
+    const itemsArr = this.quizForm.get('questions') as UntypedFormArray;
     const newItem = this.formBuilder.group({
-      question: new FormControl('', Validators.compose([
+      question: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ])),
-      optionOne: new FormControl('', Validators.compose([
+      optionOne: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.required, Validators.minLength(2)
       ])),
-      optionTwo: new FormControl('', Validators.compose([
+      optionTwo: new UntypedFormControl('', Validators.compose([
         Validators.required, Validators.minLength(2)
       ])),
-      optionThree: new FormControl('', Validators.compose([
+      optionThree: new UntypedFormControl('', Validators.compose([
       ])),
-      optionFour: new FormControl('', Validators.compose([
+      optionFour: new UntypedFormControl('', Validators.compose([
       ])),
 
-      answer: new FormControl('', Validators.compose([
+      answer: new UntypedFormControl('', Validators.compose([
         Validators.required
       ])),
     })
@@ -89,7 +89,7 @@ export class CreateQuizComponent implements OnInit, OnDestroy {
   }
 
   removeItem(i) {
-    const arr = this.quizForm.get('questions') as FormArray;
+    const arr = this.quizForm.get('questions') as UntypedFormArray;
     arr.removeAt(i);
   }
 
