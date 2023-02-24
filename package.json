@@ -46,7 +46,7 @@
     "rxjs": "7.8.0",
     "stream": "0.0.2",
     "survey-angular": "^1.9.75",
-    "sweetalert2": "10.3.5",
+    "sweetalert2": "11.7.2",
     "swiper": "^6.8.4",
     "tslib": "^2.5.0",
     "zone.js": "~0.11.4"
