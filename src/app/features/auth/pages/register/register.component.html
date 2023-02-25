@@ -1,162 +1,155 @@
 <div class="full-page register-page">
-  <div class=" content">
-    <div class=" container">
-      <div class=" row">
-        <div class=" col-md-5 ml-auto">
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 ml-auto">
           <img
             src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598120/assets/logo-icex-header_nxutwk.png"
-            class="mt-4 logo" alt="">
-          <div class=" info-area info-horizontal mt-5">
-            <div class=" icon icon-warning">
-              <img class="mini-icon"
+            class="mt-4 logo"
+            alt=""
+          />
+          <div class="info-area info-horizontal mt-5">
+            <div class="icon icon-warning">
+              <img
+                class="mini-icon"
                 src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559108/assets/icons/autogestion_ymjbvv.png"
-                alt="">
+                alt=""
+              />
             </div>
-            <div class=" description">
-              <h3 class=" info-title text-secondary">AUTOGESTIÓN DE FONDOS</h3>
-              <p class=" description">
+            <div class="description">
+              <h3 class="info-title text-secondary">AUTOGESTIÓN DE FONDOS</h3>
+              <p class="description">
                 Multiplicar tú capital ahora es mucho más seguro y efectivo!
               </p>
             </div>
           </div>
-          <div class=" info-area info-horizontal">
-            <div class=" icon icon-warning">
-              <img class="mini-icon"
+          <div class="info-area info-horizontal">
+            <div class="icon icon-warning">
+              <img
+                class="mini-icon"
                 src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655659998/assets/icons/educacion-personalizada_bdtfex.png"
-                alt="">
+                alt=""
+              />
             </div>
-            <div class=" description">
-              <h3 class=" info-title text-secondary">EDUCACIÓN PERSONALIZADA</h3>
-              <p class=" description">
-                Te ayudaremos a iniciar en el mundo del trading guiandote en tu proceso.
+            <div class="description">
+              <h3 class="info-title text-secondary">EDUCACIÓN PERSONALIZADA</h3>
+              <p class="description">
+                Te ayudaremos a iniciar en el mundo del trading guiandote en tu
+                proceso.
               </p>
             </div>
           </div>
-          <div class=" info-area info-horizontal">
-            <div class=" icon icon-primary">
-              <img class="mini-icon"
+          <div class="info-area info-horizontal">
+            <div class="icon icon-primary">
+              <img
+                class="mini-icon"
                 src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660652/assets/icons/contenido-de-calidad_moxull.png"
-                alt="">
+                alt=""
+              />
             </div>
-            <div class=" description">
-              <h3 class=" info-title  text-secondary">CONTENIDO DE CALIDAD</h3>
-              <p class=" description">
-                Nuestros Traders estarán disponibles para ayudarte en todo momento.
+            <div class="description">
+              <h3 class="info-title text-secondary">CONTENIDO DE CALIDAD</h3>
+              <p class="description">
+                Nuestros Traders estarán disponibles para ayudarte en todo
+                momento.
               </p>
             </div>
           </div>
-          <div class=" info-area info-horizontal">
-            <div class=" icon icon-info">
-              <img class="mini-icon"
+          <div class="info-area info-horizontal">
+            <div class="icon icon-info">
+              <img
+                class="mini-icon"
                 src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660681/assets/icons/compromiso-en-tu-proceso_fmjbxy.png"
-                alt="">
+                alt=""
+              />
             </div>
-            <div class=" description">
-              <h3 class=" info-title text-secondary">
-                COMPROMISO EN TU PROCESO</h3>
-              <p class=" description">
-                Nuestros equipo analiza el mercado buscando las mejores oportunidades de inversión.
+            <div class="description">
+              <h3 class="info-title text-secondary">
+                COMPROMISO EN TU PROCESO
+              </h3>
+              <p class="description">
+                Nuestros equipo analiza el mercado buscando las mejores
+                oportunidades de inversión.
               </p>
             </div>
           </div>
         </div>
-        <div class=" col-md-7 mr-auto">
-          <div class=" card card-register card-white">
-            <div class=" card-header">
-              <!-- <img alt="Card image" class=" card-img"
-                src="https://res.cloudinary.com/mistrades-com/image/upload/v1643666032/assets/Sign%20up/banner-registro_vzgark.png" /> -->
-
-              <h1 class=" card-title" style="text-align: right; color: hsl(0, 0%, 50%);">Registro</h1>
-
+        <div class="col-md-7 mr-auto">
+          <div class="card card-register card-white">
+            <div class="card-header">
+              <h1
+                class="card-title"
+                style="text-align: right; color: hsl(0, 0%, 50%)"
+              >
+                Registro
+              </h1>
             </div>
-            <div class=" card-body">
-              <form class="form" [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)" role="form">
-
-                <div class="row">
-
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
-                      <label for="names">Nombres</label>
-                      <input type="text" class="form-control" formControlName="first_name" id="names"
-                        placeholder="Ingrese sus nombres">
-                        <ng-container *ngFor="let validation of validationMessages.first_name">
-                          <small class="form-text text-danger d-block" *ngIf="registerForm.get('first_name').hasError(validation.type) &&
-                              (registerForm.get('first_name').dirty || registerForm.get('first_name').touched) ">
-                            {{validation.message}}
-                          </small>
-                        </ng-container>
-                    </div>
-                  </div>
-
-                  <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
-                      <label for="last_names">Apellidos</label>
-                      <input type="text" class="form-control" formControlName="last_name" id="last_names"
-                        placeholder="Ingrese sus apellidos">
-                        <ng-container *ngFor="let validation of validationMessages.last_name">
-                          <small class="form-text text-danger d-block" *ngIf="registerForm.get('last_name').hasError(validation.type) &&
-                          (registerForm.get('last_name').dirty || registerForm.get('last_name').touched) ">
-                            {{validation.message}}
-                          </small>
-                        </ng-container>
-                    </div>
-                  </div>
-
-                </div>
-
+            <div class="card-body">
+              <form
+                class="form"
+                [formGroup]="form"
+                (ngSubmit)="registerUser(form.value)"
+                role="form"
+              >
                 <div class="row">
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
-                      <label for="email">Email</label>
-                      <input type="email" class="form-control" formControlName="email" id="email" id="email"
-                        placeholder="Escriba su email">
-                      <ng-container *ngFor="let validation of validationMessages.email">
-                        <small class="form-text text-danger" *ngIf="registerForm.get('email').hasError(validation.type) &&
-                              (registerForm.get('email').dirty || registerForm.get('email').touched) ">
-                          {{validation.message}}
-                        </small>
-                      </ng-container>
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
-                      <label for="identity_card">DNI / C.C / PASAPORTE</label>
-                      <input type="text" class="form-control" formControlName="identity_card" id="identity_card"
-                        id="identity_card" placeholder="Escriba su documento de identidad">
-                      <ng-container *ngFor="let validation of validationMessages.identity_card">
-                        <small class="form-text text-danger" *ngIf="registerForm.get('identity_card').hasError(validation.type) &&
-                              (registerForm.get('identity_card').dirty || registerForm.get('identity_card').touched) ">
-                          {{validation.message}}
+                      <label for="names"
+                        >Nombre: {{ firstNameField?.value | titlecase }}</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="first_name"
+                        id="names"
+                        placeholder="María"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .first_name
+                        "
+                      >
+                        <small
+                          class="form-text text-danger d-block"
+                          *ngIf="
+                            firstNameField?.hasError(validation.type) &&
+                            firstNameFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
                         </small>
                       </ng-container>
                     </div>
                   </div>
 
-                </div>
-
-                <div class="row">
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
-                      <label for="birth_date">Fecha de nacimiento</label>
-                      <input type="date" class="form-control" formControlName="birth_date" id="birth_date"
-                        id="birth_date">
-                      <ng-container *ngFor="let validation of validationMessages.birth_date">
-                        <small class="form-text text-danger" *ngIf="registerForm.get('birth_date').hasError(validation.type) &&
-                              (registerForm.get('birth_date').dirty || registerForm.get('birth_date').touched) ">
-                          {{validation.message}}
-                        </small>
-                      </ng-container>
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
-                      <label for="phone_number">Télefono (incluye el código del país)</label>
-                      <input type="tel" class="form-control" formControlName="phone_number" id="phone_number"
-                        id="phone_number" placeholder="573212976573">
-                      <ng-container *ngFor="let validation of validationMessages.phone">
-                        <small class="form-text text-danger" *ngIf="registerForm.get('phone_number').hasError(validation.type) &&
-                              (registerForm.get('phone_number').dirty || registerForm.get('phone_number').touched) ">
-                          {{validation.message}}
+                      <label for="last_names"
+                        >Apellidos:
+                        {{ lastNameField?.value | titlecase }}</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="last_name"
+                        id="last_names"
+                        placeholder="Ximenes"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .last_name
+                        "
+                      >
+                        <small
+                          class="form-text text-danger d-block"
+                          *ngIf="
+                            lastNameField?.hasError(validation.type) &&
+                            lastNameFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
                         </small>
                       </ng-container>
                     </div>
@@ -166,27 +159,61 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
-                      <label for="deferred_name">Nombre de referido</label>
-                      <input type="text" class="form-control" placeholder="Escriba el nombre del referido"
-                        formControlName="deferred_name" id="deferred_name">
-                      <ng-container *ngFor="let validation of validationMessages.deferred_name">
-                        <small class="form-text text-danger" *ngIf="registerForm.get('deferred_name').hasError(validation.type) &&
-                              (registerForm.get('deferred_name').dirty || registerForm.get('deferred_name').touched) ">
-                          {{validation.message}}
+                      <label for="email"
+                        >Email: {{ emailField?.value | lowercase }}</label
+                      >
+                      <input
+                        type="email"
+                        class="form-control"
+                        formControlName="email"
+                        id="email"
+                        placeholder="m.ximenes@gmail.com"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .email
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            emailField?.hasError(validation.type) &&
+                            emailFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
                         </small>
                       </ng-container>
                     </div>
                   </div>
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
-                      <label for="deferred_document_number">DNI / C.C / PASAPORTE - Referido</label>
-                      <input type="text" class="form-control" formControlName="deferred_document_number"
-                        id="deferred_document_number" placeholder="Escriba el documento del referido">
-                      <ng-container *ngFor="let validation of validationMessages.identity_card">
-                        <small class="form-text text-danger"
-                          *ngIf="registerForm.get('deferred_document_number').hasError(validation.type) &&
-                              (registerForm.get('deferred_document_number').dirty || registerForm.get('deferred_document_number').touched) ">
-                          {{validation.message}}
+                      <label for="identity_card"
+                        >DNI / C.C / PASAPORTE:
+                        {{ identityCardField?.value | uppercase }}
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="identity_card"
+                        id="identity_card"
+                        placeholder="14537768"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .identity_card
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            identityCardField?.hasError(validation.type) &&
+                            identityCardFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
                         </small>
                       </ng-container>
                     </div>
@@ -194,37 +221,381 @@
                 </div>
 
                 <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="birth_date"
+                        >Indicativo país: {{ countryCodeField?.value }}
+                      </label>
+                      <select
+                        class="form-control"
+                        formControlName="country_code"
+                      >
+                        <option
+                          *ngFor="let c of utilsService.countries"
+                          [value]="c.dial_code"
+                        >
+                          {{ c.dial_code + " " + c.name + " " + c.flag }}
+                        </option>
+                      </select>
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .country_code
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            countryCodeField?.hasError(validation.type) &&
+                            countryCodeFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="phone_number"
+                        >Télefono: {{ phoneField?.value }}</label
+                      >
+                      <input
+                        type="tel"
+                        class="form-control"
+                        formControlName="phone_number"
+                        id="phone_number"
+                        placeholder="4212976573"
+                      />
 
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .phone
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            phoneField?.hasError(validation.type) &&
+                            phoneFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="address"
+                        >Dirección: {{ addressField?.value }}
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="address"
+                        id="address"
+                        placeholder="AV. Rivadavia 695"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .address
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            addressField?.hasError(validation.type) &&
+                            addressFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="city"
+                        >Ciudad: {{ cityField?.value | titlecase }}</label
+                      >
+                      <input
+                        type="tel"
+                        class="form-control"
+                        formControlName="city"
+                        id="city"
+                        placeholder="Buenos Aires"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages.city
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            cityField?.hasError(validation.type) &&
+                            cityFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="stateField"
+                        >Estado: {{ stateField?.value | titlecase }}
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="state"
+                        id="stateField"
+                        placeholder="Gran Buenos Aires"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .state
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            stateField?.hasError(validation.type) &&
+                            stateFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="countryField"
+                        >País: {{ countryField?.value | uppercase }}</label
+                      >
+                      <select class="form-control" formControlName="country">
+                        <option
+                          *ngFor="let c of utilsService.countries"
+                          [value]="c.code"
+                        >
+                          {{ c.name + " " + c.flag }}
+                        </option>
+                      </select>
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .country
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            countryField?.hasError(validation.type) &&
+                            countryFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="birth_date"
+                        >Fecha de nacimiento:
+                        {{ birthDateField?.value | date }}</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        formControlName="birth_date"
+                        id="birth_date"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .birth_date
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            birthDateField?.hasError(validation.type) &&
+                            birthDateFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
                       <label for="pass">Contraseña</label>
-                      <input type="password" class="form-control" formControlName="password" id="pass"
-                        placeholder="Ingrese su contraseña">
-                      <ng-container *ngFor="let validation of validationMessages.password">
-                        <small class="form-text text-danger" *ngIf="registerForm.get('password').hasError(validation.type) &&
-                        (registerForm.get('password').dirty || registerForm.get('password').touched) ">
-                          {{validation.message}}
+                      <input
+                        type="password"
+                        class="form-control"
+                        formControlName="password"
+                        id="pass"
+                        placeholder="Ingrese su contraseña"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .password
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            passwordField?.hasError(validation.type) &&
+                            passwordFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
                         </small>
                       </ng-container>
                     </div>
                   </div>
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label for="pass">Confirmar contraseña</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        formControlName="confirm_password"
+                        id="pass2"
+                        placeholder="Ingrese su contraseña"
+                      />
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .confirm_password
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            confirmPasswordField?.hasError(validation.type) &&
+                            confirmPasswordFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
 
-                  <div class=" form-check text-left">
-                    Al suscribirse aceptas los
-                    <a href="javascript:void(0)"> términos y condiciones </a> .
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            form.hasError('match_password') &&
+                            confirmPasswordFieldDirty
+                          "
+                        >
+                          {{ validation.type === 'match_password' ? validation.message : '' }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row d-block">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        formControlName="terms_conditions"
+                        value="0"
+                      />
+                      Al suscribirse aceptas los términos y condiciones .
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages
+                          .terms_conditions
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          termsConditionsField?.hasError(validation.type) &&
+                          termsConditionsFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        formControlName="data_politics"
+                        value="0"
+                      />
+                      Acepto las políticas de datos.
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages
+                          .data_politics
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          datapoliticsField?.hasError(validation.type) &&
+                          datapoliticsFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
                   </div>
 
                   <ng-container *ngIf="errorMessage">
-                    <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                    <small
+                      class="text-danger"
+                      *ngFor="let e of errorMessage | keyvalue"
+                      >{{ e.value }}</small
+                    >
+                    <br />
                   </ng-container>
-
                 </div>
-                <div class=" card-footer">
-                  <button class=" btn btn-secondary btn-lg" [disabled]="registerForm.invalid" type="submit">
+                <div class="card-footer">
+                  <button
+                    class="btn btn-secondary btn-lg"
+                    [disabled]="form.invalid"
+                    type="submit"
+                  >
                     Registrarse
                   </button>
                 </div>
-
               </form>
             </div>
           </div>
