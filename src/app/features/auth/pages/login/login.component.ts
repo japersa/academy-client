@@ -37,18 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.buildForm();
   }
 
-  private buildForm() {
-    this.form = this.formBuilder.group({
-      email: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])],
-      password: ['', Validators.compose([
-        Validators.required, Validators.minLength(8)
-      ])],
-      rememberPassword:[false]
-    });
-  }
+  
  
   //declare getters for ech field
 
@@ -72,6 +61,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.passwordField?.dirty || this.passwordField?.touched;
   }
   
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      email: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      rememberPassword:[false]
+    });
+  }
+
   loginUser(data: any) {
 
     const CREDENTIALS = {

@@ -1,24 +1,27 @@
 <div class="full-page login-page ">
-  <div class=" content">
-    <div class=" container">
-      <div class=" row" >
-        <div class=" col-lg-4 col-md-6 ml-auto mr-auto">
-          <form class=" form" [formGroup]="form" (ngSubmit)="loginUser(form.value)" role="form">
-            <div class=" card card-login card-white">
-              <div class=" card-header ">
-                <h1 class=" card-title "> Iniciar <br/>  sesión</h1> 
-                <p style="color:white" class="ml-2">
-                  Ingera al dashboard y enterate de todo lo que podrias llegar hacer.
-                </p>
-              </div>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 ml-auto mr-auto container-form" >
+          <form 
+            class="form" 
+            [formGroup]="form" 
+            (ngSubmit)="loginUser(form.value)" 
+            role="form"
+          >
+              <div class="card card-login card-white shadow-none">
+                <div class="card-header card-header-bottom pb-1 mt-2">
+                  <h1 class="card-title">Login</h1> 
+                  <p class="card-text ml-3 mb-5 ">Ingresa al dashboard y entérate de todo lo que podrías hacer.</p>
+                </div>
               <div class=" card-body">
-                <div class="form-group">
+                <div class="form-group mt-5">
                   <label for="exampleInputEmail1"
                    >Email: {{emailField?.value | lowercase}} </label
                   >
                   <input 
                     type="email" 
-                    class="form-control" 
+                    class="form-control rounded-pill" 
                     formControlName="email" 
                     aria-describedby="emailHelp"
                     placeholder="Escriba su email"
@@ -43,11 +46,11 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1"
-                    >Contraseña</label
+                    >Password</label
                   >
                   <input 
                     type="email" 
-                    class="form-control" 
+                    class="form-control rounded-pill" 
                     formControlName="password" 
                     placeholder="Contraseña"
                     type="password" 
@@ -108,6 +111,7 @@
                 <button 
                   class=" 
                     btn btn-secondary btn-lg btn-block mb-3
+                    rounded-pill
                   " 
                   [disabled]="form.invalid" 
                   type="submit"
@@ -117,7 +121,10 @@
                 <div class=" pull-left">
                   <h6>
                     <a class=" link footer-link" routerLink="/sign-up">
-                      ¿No tienes una cuenta? <strong>Crear una cuenta Aquí</strong>
+                      ¿No tienes una cuenta? 
+                      <strong>
+                        Crear una cuenta Aquí
+                      </strong>
                     </a>
                   </h6>
                 </div>  
@@ -125,10 +132,10 @@
             </div>
           </form>
         </div>
-        <div class="col-lg-8 col-md-6 img" >
-          <!-- <img src="" alt=""> --> 
+        <div class="col-lg-6 col-md-6 img" >
+           
         </div>
       </div>
     </div>
   </div>
-</div> 
+</div>
