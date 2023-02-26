@@ -372,12 +372,6 @@
       border-bottom-color: $warning;
     }
   }
-  &[data="white"] {
-    @include linear-gradient($gray-600, $gray-600);
-    &:before {
-      border-bottom-color: $gray-600;
-    }
-  }
   &[data="red"] {
     @include linear-gradient($danger-states, $danger);
     &:before {

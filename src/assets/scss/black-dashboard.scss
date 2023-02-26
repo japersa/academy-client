@@ -1,7 +1,7 @@
 /*!
 
  =========================================================
- * Black Dashboard Pro Angular - v1.2.0
+ * Black Dashboard Pro Angular - v1.3.0
  =========================================================
 
  * Product Page: http://creative-tim.com/product/black-dashboard-pro-angular
@@ -142,24 +142,3 @@
 
 // Angular Differences
 @import "black-dashboard/angular-differences/angular-differences";
-.full-page {
-    background: #0E1E2F !important;
-}
-
-// Utils
-
-select {
-    // A reset of styles, including removing the default dropdown arrow
-    appearance: none;
-    // Additional resets for further consistency
-    background-color: transparent;
-    border: none;
-    color: var(--primary);
-    padding: 0 1em 0 0;
-    margin: 0;
-    width: 100%;
-    font-family: inherit;
-    font-size: inherit;
-    cursor: inherit;
-    line-height: inherit;
-}
