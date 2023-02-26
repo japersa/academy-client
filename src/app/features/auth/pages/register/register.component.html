@@ -2,87 +2,17 @@
   <div class="content">
     <div class="container">
       <div class="row">
-        <div class="col-md-5 ml-auto">
-          <img
-            src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598120/assets/logo-icex-header_nxutwk.png"
-            class="mt-4 logo"
-            alt=""
-          />
-          <div class="info-area info-horizontal mt-5">
-            <div class="icon icon-warning">
-              <img
-                class="mini-icon"
-                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559108/assets/icons/autogestion_ymjbvv.png"
-                alt=""
-              />
-            </div>
-            <div class="description">
-              <h3 class="info-title text-secondary">AUTOGESTIÓN DE FONDOS</h3>
-              <p class="description">
-                Multiplicar tú capital ahora es mucho más seguro y efectivo!
-              </p>
-            </div>
-          </div>
-          <div class="info-area info-horizontal">
-            <div class="icon icon-warning">
-              <img
-                class="mini-icon"
-                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655659998/assets/icons/educacion-personalizada_bdtfex.png"
-                alt=""
-              />
-            </div>
-            <div class="description">
-              <h3 class="info-title text-secondary">EDUCACIÓN PERSONALIZADA</h3>
-              <p class="description">
-                Te ayudaremos a iniciar en el mundo del trading guiandote en tu
-                proceso.
-              </p>
-            </div>
-          </div>
-          <div class="info-area info-horizontal">
-            <div class="icon icon-primary">
-              <img
-                class="mini-icon"
-                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660652/assets/icons/contenido-de-calidad_moxull.png"
-                alt=""
-              />
-            </div>
-            <div class="description">
-              <h3 class="info-title text-secondary">CONTENIDO DE CALIDAD</h3>
-              <p class="description">
-                Nuestros Traders estarán disponibles para ayudarte en todo
-                momento.
-              </p>
-            </div>
-          </div>
-          <div class="info-area info-horizontal">
-            <div class="icon icon-info">
-              <img
-                class="mini-icon"
-                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660681/assets/icons/compromiso-en-tu-proceso_fmjbxy.png"
-                alt=""
-              />
-            </div>
-            <div class="description">
-              <h3 class="info-title text-secondary">
-                COMPROMISO EN TU PROCESO
-              </h3>
-              <p class="description">
-                Nuestros equipo analiza el mercado buscando las mejores
-                oportunidades de inversión.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-7 mr-auto">
-          <div class="card card-register card-white">
-            <div class="card-header">
+        <div class="col-md-6 mr-auto container-form">
+          <div class="card card-register card-white shadow-none">
+            <div class="card-header card-header-bottom pb-1 mt-2">
               <h1
                 class="card-title"
-                style="text-align: right; color: hsl(0, 0%, 50%)"
               >
                 Registro
               </h1>
+              <p class="card-text ml-3 mb-5 ">
+                Registrate e ingresa al dashboard, entérate de todo lo que podrías hacer.
+              </p>
             </div>
             <div class="card-body">
               <form
@@ -92,14 +22,14 @@
                 role="form"
               >
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="names"
                         >Nombre: {{ firstNameField?.value | titlecase }}</label
                       >
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="first_name"
                         id="names"
                         placeholder="María"
@@ -123,7 +53,7 @@
                     </div>
                   </div>
 
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="last_names"
                         >Apellidos:
@@ -131,7 +61,7 @@
                       >
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="last_name"
                         id="last_names"
                         placeholder="Ximenes"
@@ -157,14 +87,14 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="email"
                         >Email: {{ emailField?.value | lowercase }}</label
                       >
                       <input
                         type="email"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="email"
                         id="email"
                         placeholder="m.ximenes@gmail.com"
@@ -187,7 +117,7 @@
                       </ng-container>
                     </div>
                   </div>
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="identity_card"
                         >DNI / C.C / PASAPORTE:
@@ -195,7 +125,7 @@
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="identity_card"
                         id="identity_card"
                         placeholder="14537768"
@@ -221,13 +151,13 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="birth_date"
                         >Indicativo país: {{ countryCodeField?.value }}
                       </label>
                       <select
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="country_code"
                       >
                         <option
@@ -255,14 +185,14 @@
                       </ng-container>
                     </div>
                   </div>
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="phone_number"
                         >Télefono: {{ phoneField?.value }}</label
                       >
                       <input
                         type="tel"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="phone_number"
                         id="phone_number"
                         placeholder="4212976573"
@@ -289,14 +219,14 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="address"
                         >Dirección: {{ addressField?.value }}
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="address"
                         id="address"
                         placeholder="AV. Rivadavia 695"
@@ -319,14 +249,14 @@
                       </ng-container>
                     </div>
                   </div>
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="city"
                         >Ciudad: {{ cityField?.value | titlecase }}</label
                       >
                       <input
                         type="tel"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="city"
                         id="city"
                         placeholder="Buenos Aires"
@@ -351,14 +281,14 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="stateField"
                         >Estado: {{ stateField?.value | titlecase }}
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="state"
                         id="stateField"
                         placeholder="Gran Buenos Aires"
@@ -381,12 +311,15 @@
                       </ng-container>
                     </div>
                   </div>
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="countryField"
                         >País: {{ countryField?.value | uppercase }}</label
                       >
-                      <select class="form-control" formControlName="country">
+                      <select 
+                        class="form-control rounded-pill" 
+                        formControlName="country"
+                      >
                         <option
                           *ngFor="let c of utilsService.countries"
                           [value]="c.code"
@@ -415,7 +348,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="birth_date"
                         >Fecha de nacimiento:
@@ -423,7 +356,7 @@
                       >
                       <input
                         type="date"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="birth_date"
                         id="birth_date"
                       />
@@ -448,12 +381,12 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="pass">Contraseña</label>
                       <input
                         type="password"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="password"
                         id="pass"
                         placeholder="Ingrese su contraseña"
@@ -476,12 +409,12 @@
                       </ng-container>
                     </div>
                   </div>
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-12">
                     <div class="form-group">
                       <label for="pass">Confirmar contraseña</label>
                       <input
                         type="password"
-                        class="form-control"
+                        class="form-control rounded-pill"
                         formControlName="confirm_password"
                         id="pass2"
                         placeholder="Ingrese su contraseña"
@@ -520,7 +453,7 @@
                   <div class="form-check">
                     <label class="form-check-label">
                       <input
-                        class="form-check-input"
+                        class="form-check-input rounded-pill"
                         type="checkbox"
                         formControlName="terms_conditions"
                         value="0"
@@ -587,9 +520,9 @@
                     <br />
                   </ng-container>
                 </div>
-                <div class="card-footer">
+                <div class=" card-footer">
                   <button
-                    class="btn btn-secondary btn-lg"
+                    class="btn btn-secondary btn-lg rounded-pill w-100"
                     [disabled]="form.invalid"
                     type="submit"
                   >
@@ -600,6 +533,80 @@
             </div>
           </div>
         </div>
+        <div class="col-md-6 ml-auto img">
+          <!-- 
+          <img
+            src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598120/assets/logo-icex-header_nxutwk.png"
+            class="mt-4 logo"
+            alt=""
+          />
+          <div class="info-area info-horizontal mt-5">
+            <div class="icon icon-warning">
+              <img
+                class="mini-icon"
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559108/assets/icons/autogestion_ymjbvv.png"
+                alt=""
+              />
+            </div>
+            <div class="description">
+              <h3 class="info-title text-secondary">AUTOGESTIÓN DE FONDOS</h3>
+              <p class="description">
+                Multiplicar tú capital ahora es mucho más seguro y efectivo!
+              </p>
+            </div>
+          </div> 
+          <div class="info-area info-horizontal">
+            <div class="icon icon-warning">
+              <img
+                class="mini-icon"
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655659998/assets/icons/educacion-personalizada_bdtfex.png"
+                alt=""
+              />
+            </div>
+            <div class="description">
+              <h3 class="info-title text-secondary">EDUCACIÓN PERSONALIZADA</h3>
+              <p class="description">
+                Te ayudaremos a iniciar en el mundo del trading guiandote en tu
+                proceso.
+              </p>
+            </div>
+          </div>
+          <div class="info-area info-horizontal">
+            <div class="icon icon-primary">
+              <img
+                class="mini-icon"
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660652/assets/icons/contenido-de-calidad_moxull.png"
+                alt=""
+              />
+            </div>
+            <div class="description">
+              <h3 class="info-title text-secondary">CONTENIDO DE CALIDAD</h3>
+              <p class="description">
+                Nuestros Traders estarán disponibles para ayudarte en todo
+                momento.
+              </p>
+            </div>
+          </div>
+          <div class="info-area info-horizontal">
+            <div class="icon icon-info">
+              <img
+                class="mini-icon"
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660681/assets/icons/compromiso-en-tu-proceso_fmjbxy.png"
+                alt=""
+              />
+            </div>
+            <div class="description">
+              <h3 class="info-title text-secondary">
+                COMPROMISO EN TU PROCESO
+              </h3>
+              <p class="description">
+                Nuestros equipo analiza el mercado buscando las mejores
+                oportunidades de inversión.
+              </p>
+            </div>
+          </div>
+          -->
+        </div> 
       </div>
     </div>
   </div>

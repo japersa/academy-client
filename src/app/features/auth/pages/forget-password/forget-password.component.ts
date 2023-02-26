@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { UtilsService } from '../../../../core/services/utils.service';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
-  form!: UntypedFormGroup;
+  form!: FormGroup;
   validationMessages: any;
   errorMessage: string | null;
 
@@ -22,7 +22,7 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
   focus;
 
-  constructor(private formBuilder: UntypedFormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
     private router: Router,
@@ -32,16 +32,18 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
     this.buildForm();  
   }
 
+  //declare getters for ech field
+  get emailField() {
+    return this.form?.get('email');
+  }
+  get emailFieldDirty() {
+    return this.emailField?.dirty || this.emailField?.touched;
+  }
+
   private buildForm() {
     this.form = this.formBuilder.group({
-      email: new UntypedFormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]))
+      email: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]]
     });
-  }
- 
-  get email() {
-    return this.form.get('email');
   }
 
   recoverUser(dataFrom: any) {
@@ -63,7 +65,6 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
       });
 
   }
-
 
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
