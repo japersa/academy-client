@@ -7,51 +7,111 @@
             <div class=" card card-login card-white">
               <div class=" card-header ">
                 <h1 class=" card-title "> Iniciar <br/>  sesión</h1> 
+                <p style="color:white" class="ml-2">
+                  Ingera al dashboard y enterate de todo lo que podrias llegar hacer.
+                </p>
               </div>
               <div class=" card-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email</label>
-                  <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp"
-                    placeholder="Escriba su email">
-                  <ng-container *ngFor="let validation of validationMessages.email">
-                    <small class="form-text text-danger" *ngIf="email.hasError(validation.type) &&
-                            (email.dirty || email.touched) ">
+                  <label for="exampleInputEmail1"
+                   >Email: {{emailField?.value | lowercase}} </label
+                  >
+                  <input 
+                    type="email" 
+                    class="form-control" 
+                    formControlName="email" 
+                    aria-describedby="emailHelp"
+                    placeholder="Escriba su email"
+                    id="exampleInputEmail1"
+                  >
+                  <ng-container 
+                    *ngFor="
+                      let validation of validationMessages
+                        .email
+                    "
+                  >
+                    <small 
+                      class="form-text text-danger" 
+                      *ngIf="
+                        emailField?.hasError(validation.type) &&
+                        emailFieldDirty
+                      "
+                    >
                       {{validation.message}}
                     </small>
                   </ng-container>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Contraseña</label>
-                  <input type="email" class="form-control" formControlName="password" placeholder="Contraseña"
-                    type="password" aria-describedby="password">
-                  <ng-container *ngFor="let validation of validationMessages.password">
-                    <small class="form-text text-danger" *ngIf=" password.hasError(validation.type) &&
-                        (password.dirty ||
-                        password.touched) ">
+                  <label for="exampleInputEmail1"
+                    >Contraseña</label
+                  >
+                  <input 
+                    type="email" 
+                    class="form-control" 
+                    formControlName="password" 
+                    placeholder="Contraseña"
+                    type="password" 
+                    aria-describedby="password"
+                  >
+                  <ng-container 
+                    *ngFor="
+                      let validation of validationMessages
+                        .password
+                    "
+                  >
+                    <small 
+                      class="form-text text-danger" 
+                      *ngIf=" 
+                        passwordField?.hasError(validation.type) &&
+                        passwordFieldDirty 
+                      "
+                    >
                       {{validation.message}}
                     </small>
                   </ng-container>
                 </div>
   
-                <ng-container *ngIf="errorMessage">
-                  <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small> <br>
+                <ng-container 
+                  *ngIf="errorMessage"
+                >
+                  <small 
+                    class="text-danger" 
+                    *ngFor="
+                      let e of errorMessage | keyvalue
+                    "
+                  >{{e.value}}
+                  </small> 
                 </ng-container>
               </div>
               <div class=" card-footer">
-                <div class=" form-group pull-left">
-                  <p class=" link footer-link" >
-                    <input  type="checkbox" formControlName="rememberPassword" >
-                    <label class="  ml-1 " for="">Recordar contraseña</label>
-                  </p>
+                <div class="mb-2 form-check pull-left">
+                  <label class="form-check-label">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="remember_password"
+                      value="0"
+                    />
+                    Recordar contraseña.
+                    <span class="form-check-sign">
+                      <span class="check"></span>
+                    </span>
+                  </label>
                 </div>
                 <div class=" pull-right">
-                  <h6>
+                  <h6 class="mt-1" >
                     <a class=" link footer-link" routerLink="/forget-password">
                       ¿Restablecer contraseña?
                     </a>
                   </h6>
                 </div>
-                <button class=" btn btn-secondary btn-lg btn-block mb-3" [disabled]="form.invalid" type="submit">
+                <button 
+                  class=" 
+                    btn btn-secondary btn-lg btn-block mb-3
+                  " 
+                  [disabled]="form.invalid" 
+                  type="submit"
+                >
                   Iniciar sesión
                 </button>
                 <div class=" pull-left">
@@ -66,7 +126,7 @@
           </form>
         </div>
         <div class="col-lg-8 col-md-6 img" >
-          <!-- <img src="" alt=""> -->
+          <!-- <img src="" alt=""> --> 
         </div>
       </div>
     </div>
