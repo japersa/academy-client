@@ -151,7 +151,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12">
+                  <div class="col-4">
                     <div class="form-group">
                       <label for="birth_date"
                         >Indicativo país: {{ countryCodeField?.value }}
@@ -164,7 +164,7 @@
                           *ngFor="let c of utilsService.countries"
                           [value]="c.dial_code"
                         >
-                          {{ c.dial_code + " " + c.name + " " + c.flag }}
+                          {{ c.dial_code + " " + c.flag }}
                         </option>
                       </select>
                       <ng-container
@@ -185,7 +185,7 @@
                       </ng-container>
                     </div>
                   </div>
-                  <div class="col-12">
+                  <div class="col-8">
                     <div class="form-group">
                       <label for="phone_number"
                         >Télefono: {{ phoneField?.value }}</label
@@ -534,7 +534,7 @@
           </div>
         </div>
         <div class="col-md-6 ml-auto img">
-          <!-- 
+          <!--  
           <img
             src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598120/assets/logo-icex-header_nxutwk.png"
             class="mt-4 logo"

@@ -25,7 +25,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public last_name = this.userDataService.userData$.value.last_name;
   public username = this.userDataService.userData$.value.username;
 
-  showPasswordField = false;
+  showPasswordField = false; 
   showButtonPassword = true;
 
   updateForm: UntypedFormGroup;

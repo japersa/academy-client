@@ -16,7 +16,7 @@ import { AlertsService } from '../../../../core/services/alerts.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-
+ 
   form!: FormGroup;
   validationMessages: any;
   errorMessage: string | null;
@@ -324,23 +324,23 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 
   registerUser(dataForm: any) {
-
+ 
     dataForm.username = dataForm.email;
-    console.log(dataForm);
+    /* console.log(dataForm); */
 
     this.alertsService.showSwal(3, '', '');
 
 
-    // this.registerService.register(dataFrom).subscribe(res => {
-    //   this.notificationService.showNotification('bottom', 'center', 'Te has registrado correctamente', 2);
-    //   this.form.reset();
-    //   this.router.navigate(['/sign-in'])
-    // },
-    //   error => {
-    //     this.errorMessage = error.error;
-    //     console.log(error.error);
-    //     this.notificationService.showNotification('bottom', 'center', 'Error al registrarse', 4);
-    //   });
+    this.registerService.register(dataForm).subscribe(res => {
+      this.notificationService.showNotification('bottom', 'center', 'Te has registrado correctamente', 2);
+      this.form.reset();
+      this.router.navigate(['/sign-in'])
+    },
+      error => {
+        this.errorMessage = error.error;
+        console.log(error.error);
+        this.notificationService.showNotification('bottom', 'center', 'Error al registrarse', 4);
+      });
 
   }
 
