@@ -34,7 +34,33 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   showSwal(type) {
-    if (type == "basic") {
+    if (type == "User already exists") {
+      swal.fire({
+        title: "El usuario que ingresaste ya existe",
+        text: "¿Deseas restablecer la contraseña?",
+        buttonsStyling: false,
+        customClass: {
+          cancelButton: "btn btn-danger",
+          confirmButton: "btn btn-info mr-1",
+        },
+        confirmButtonText: "Restablecer Contraseña",
+        showCancelButton: true,
+        cancelButtonText: "Quedarme Aquí",
+        icon: 'warning'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.router.navigate(['/forget-password']);
+            }
+        });
+    } else if (type == "wait") {
+      swal.fire({
+        title: "Procesando tu solicitud, Espera...",
+        timer: 1000,
+        timerProgressBar: true,
+        buttonsStyling: false,
+        showConfirmButton: false,
+      })
+    } else if (type == "basic") {
       swal.fire({
         title: "Here's a message!",
         buttonsStyling: false,
@@ -53,8 +79,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       })
     } else if (type == "success-message") {
       swal.fire({
-        title: "Good job!",
-        text: "You clicked the button!",
+        title: "Excelente!",
+        text: "Revisa tu correo, ya puedes iniciar sesión!",
         buttonsStyling: false,
         customClass: {
           confirmButton: "btn btn-success",
@@ -98,7 +124,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           confirmButtonText: "Yes, delete it!",
           cancelButtonText: "No, keep it",
           customClass: {
-            confirmButton: "btn btn-success mr-1",
+            confirmButton: "btn btn-success mr-1", 
             cancelButton: "btn btn-danger",
           },
           buttonsStyling: false
@@ -324,23 +350,28 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 
   registerUser(dataForm: any) {
- 
+
     dataForm.username = dataForm.email;
-    /* console.log(dataForm); */
 
-    this.alertsService.showSwal(3, '', '');
-
-
+    this.showSwal('wait');
+  
     this.registerService.register(dataForm).subscribe(res => {
       this.notificationService.showNotification('bottom', 'center', 'Te has registrado correctamente', 2);
+      this.showSwal('success-message')
       this.form.reset();
-      this.router.navigate(['/sign-in'])
+      this.router.navigate(['/sign-in']);
     },
-      error => {
-        this.errorMessage = error.error;
-        console.log(error.error);
-        this.notificationService.showNotification('bottom', 'center', 'Error al registrarse', 4);
-      });
+    error => {
+      if (error && error.error && error.error.username && error.error.username[0] === 'This field must be unique.') {
+        this.errorMessage = 'El correo ya existe. Por favor, utilice otro correo electrónico.';
+        this.showSwal('User already exists');
+      } else {
+        this.errorMessage = 'Error al registrarse.';
+      }
+  
+      console.log(error.error);
+      this.notificationService.showNotification('bottom', 'center', this.errorMessage, 4);
+    });
 
   }
 
