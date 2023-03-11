@@ -18,7 +18,7 @@ export class RegisterService {
     const route = '/signup/';
     this.headers = this.headers.set('skip-auth', 'true');
     return this.http.post<any>(`${apiURL}${route}`, data, { headers: this.headers });
-  }
+  } 
 
   registerByRole(data: any): Observable<any> {
     const route = '/create/user/';

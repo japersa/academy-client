@@ -1,6 +1,7 @@
+
 .card-title {
     font-weight: 600 !important;
-    color: white !important;
+    color: #000 !important;
     margin-top: 20px !important;
     margin-left: 20px !important;
     font-size: 50px !important;
@@ -8,16 +9,32 @@
 }
 
 .card-header {
-    background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655649955/assets/fondo-registro_pkd8k8.png') !important;
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    padding-bottom: 0px !important;
+    border-bottom: #979797 solid 1px;
+    padding-bottom: 0;
 }
 
+.card-header-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-end;
+    min-height: 286px; 
+}
+  
+  
 .full-page {
     background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important;
 }
 
+.container-form {
+    background-color: #ffff;
+}
+
+.form {
+   padding: 5%;
+}
+
 .img {
-    background-image: url('https://intcapex.com/wp-content/uploads/2021/08/banner-principal1.jpg') !important;
+    background-color: #d8d8d8;
+    /* background-image: url('https://intcapex.com/wp-content/uploads/2021/08/banner-principal1.jpg') !important; */
 }

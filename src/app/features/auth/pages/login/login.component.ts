@@ -1,7 +1,7 @@
 
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../../../core/services/storage.service';
@@ -15,8 +15,7 @@ import { UserDataService } from '../../../../core/services/user-data.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  form!: UntypedFormGroup; 
- /*  loginForm: FormGroup; */
+  form!: FormGroup; 
   validationMessages: any;
  
   focus;
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   errorMessage: string | null;
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     private authenticationService: AuthService,
     private storageService: StorageService,
@@ -38,27 +37,38 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.buildForm();
   }
 
+  
+ 
+  //declare getters for ech field
+
+  get emailField() {
+    return this.form?.get('email');
+  }
+
+  get emailFieldDirty() {
+    return this.emailField?.dirty || this.emailField?.touched;
+  }
+
+  get passwordField() {
+    return this.form?.get('password');
+  }
+
+  get rememberPasswordField() {
+    return this.form?.get('rememberPassword');
+  }
+
+  get passwordFieldDirty() {
+    return this.passwordField?.dirty || this.passwordField?.touched;
+  }
+  
   private buildForm() {
     this.form = this.formBuilder.group({
-      email: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])],
-      password: ['', Validators.compose([
-        Validators.required, Validators.minLength(8)
-      ])],
+      email: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       rememberPassword:[false]
     });
   }
 
-  get email() {
-    return this.form.get('email');
-  }
-
-  get password() {
-    return this.form.get('password');
-  }
-  
   loginUser(data: any) {
 
     const CREDENTIALS = {
