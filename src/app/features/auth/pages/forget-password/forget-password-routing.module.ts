@@ -10,3 +10,4 @@ const routes: Routes = [{ path: '', component: ForgetPasswordComponent }];
   exports: [RouterModule]
 })
 export class ForgetPasswordRoutingModule { }
+ 

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
-  registerForm: UntypedFormGroup;
+  form!: UntypedFormGroup;
   validationMessages: any;
   errorMessage: string | null;
 
@@ -29,17 +29,20 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
     private forgetPasswordService: ForgetPasswordService) {
 
     this.validationMessages = utilsService.getValidationMessages();
+    this.buildForm();  
+  }
 
-    this.registerForm = this.formBuilder.group({
+  private buildForm() {
+    this.form = this.formBuilder.group({
       email: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]))
-    }
-    );
-
+    });
   }
-
-
+ 
+  get email() {
+    return this.form.get('email');
+  }
 
   recoverUser(dataFrom: any) {
 
@@ -49,7 +52,7 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
     this.subscription$ = this.forgetPasswordService.register(data).pipe(take(1)).subscribe(res => {
       this.notificationService.showNotification('bottom', 'center', 'Se ha enviado la solicitud de cambio de clave correctamente', 2);
-      this.registerForm.reset();
+      this.form.reset();
       this.router.navigate(['/sign-in'])
 
     },
