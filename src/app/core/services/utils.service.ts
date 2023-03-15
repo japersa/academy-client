@@ -190,7 +190,7 @@ export class UtilsService {
       "code": "",
       "dial_code": "",
     },
-    { "name": "Afghanistan", "flag": "af", "code": "af", "dial_code": "+93" },
+    { "name": "Afghanistan", "flag": "AF", "code": "AF", "dial_code": "+93" },
     { "name": "Åland Islands", "flag": "🇦🇽", "code": "AX", "dial_code": "+358" }, 
     { "name": "Albania", "flag": "🇦🇱", "code": "AL", "dial_code": "+355" }, 
     { "name": "Algeria", "flag": "🇩🇿", "code": "DZ", "dial_code": "+213" }, 
