@@ -1,62 +1,53 @@
+.full-page {
+    height: 100vh;
+    background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 286px; 
+    border-bottom: #979797 solid 1px;
+    padding-bottom: 0;
+    color: #000;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 .card-title {
     font-weight: 400 !important;
     color: #000 !important;
     margin-top: 50px !important;
     margin-left: 20px !important;
     margin-right: 20px !important;
-    font-size: 50px !important;
+    font-size: 1.7rem !important;
     text-transform: uppercase !important;
 }
 
-.card-header {
-    border-bottom: #979797 solid 1px;
-    padding-bottom: 0;
-    height: 200px !important;
-    color: black;
-}
-
-.card-header-bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: flex-end;
-    min-height: 286px; 
-}
-
 .container-form {
+    height: 100vh;
     background-color: #ffff;
+    overflow: auto;
 }
 
 .form {
-   padding: 10%;
-}
-
-.full-page {
-    background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important;
+   padding: 15%;
 }
 
 .img {
-    background-color: #d8d8d8;
-    /* background-image: url('https://intcapex.com/wp-content/uploads/2021/08/banner-principal1.jpg') !important; */
-}
-
-/* .mini-icon{
-    height: 45px !important;
-    width: 50px !important;
-}
-
-.description {
-    color: gray !important;
-}
-
-.info-title {
-    margin-bottom: 7px !important;
-    font-weight: 700 !important;
+    background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important;
 }
 
 .logo {
     width: 80% !important;
-} */
+}
+.rounded-pill {
+    border-radius: 10px !important;
+}
 
 @media only screen and (max-width: 600px) {
     .card-title {
