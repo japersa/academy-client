@@ -1,17 +1,17 @@
 <div class="full-page register-page">
-  <div class="content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mr-auto container-form">
+        <div class="col-sm-5 mr-auto container-form">
           <div class="card card-register card-white shadow-none">
-            <div class="card-header card-header-bottom pb-1 mt-2">
+            <div class="card-header pb-1 mt-5 pl-5 pr-5 text-center">
+              <div class="mx-auto  my-auto logo">
+                <img src="https://intcapex.com/wp-content/uploads/2021/07/logo-icex.png" alt="Logo" class="mt-3">
+              </div>
               <h1
-                class="card-title"
+                class="card-title "
               >
                 Registro
               </h1>
               <p class="card-text ml-3 mb-5 ">
-                Registrate e ingresa al dashboard, entérate de todo lo que podrías hacer.
+                Registrate e ingresa al dashboard y entérate de todo lo que podrías hacer.
               </p>
             </div>
             <div class="card-body">
@@ -29,7 +29,7 @@
                       >
                       <input
                         type="text"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="first_name"
                         id="names"
                         placeholder="María"
@@ -52,7 +52,6 @@
                       </ng-container>
                     </div>
                   </div>
-
                   <div class="col-12">
                     <div class="form-group">
                       <label for="last_names"
@@ -61,7 +60,7 @@
                       >
                       <input
                         type="text"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="last_name"
                         id="last_names"
                         placeholder="Ximenes"
@@ -85,7 +84,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
@@ -94,7 +92,7 @@
                       >
                       <input
                         type="email"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="email"
                         id="email"
                         placeholder="m.ximenes@gmail.com"
@@ -125,7 +123,7 @@
                       </label>
                       <input
                         type="text"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="identity_card"
                         id="identity_card"
                         placeholder="14537768"
@@ -149,15 +147,14 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-4">
                     <div class="form-group">
                       <label for="birth_date"
-                        >Indicativo país: {{ countryCodeField?.value }}
+                        >Indicativo: {{ countryCodeField?.value }}
                       </label>
                       <select
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="country_code"
                       >
                         <option
@@ -192,12 +189,11 @@
                       >
                       <input
                         type="tel"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="phone_number"
                         id="phone_number"
                         placeholder="4212976573"
                       />
-
                       <ng-container
                         *ngFor="
                           let validation of utilsService.validationMessages
@@ -217,7 +213,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
@@ -226,7 +221,7 @@
                       </label>
                       <input
                         type="text"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="address"
                         id="address"
                         placeholder="AV. Rivadavia 695"
@@ -256,7 +251,7 @@
                       >
                       <input
                         type="tel"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="city"
                         id="city"
                         placeholder="Buenos Aires"
@@ -279,7 +274,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
@@ -288,7 +282,7 @@
                       </label>
                       <input
                         type="text"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="state"
                         id="stateField"
                         placeholder="Gran Buenos Aires"
@@ -317,7 +311,7 @@
                         >País: {{ countryField?.value | uppercase }}</label
                       >
                       <select 
-                        class="form-control rounded-pill" 
+                        class="form-control rounded-pill shadow" 
                         formControlName="country"
                       >
                         <option
@@ -346,7 +340,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
@@ -356,7 +349,7 @@
                       >
                       <input
                         type="date"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="birth_date"
                         id="birth_date"
                       />
@@ -379,14 +372,13 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
                       <label for="pass">Contraseña</label>
                       <input
                         type="password"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="password"
                         id="pass"
                         placeholder="Ingrese su contraseña"
@@ -414,7 +406,7 @@
                       <label for="pass">Confirmar contraseña</label>
                       <input
                         type="password"
-                        class="form-control rounded-pill"
+                        class="form-control rounded-pill shadow"
                         formControlName="confirm_password"
                         id="pass2"
                         placeholder="Ingrese su contraseña"
@@ -434,7 +426,6 @@
                         >
                           {{ validation.message }}
                         </small>
-
                         <small
                           class="form-text text-danger"
                           *ngIf="
@@ -448,12 +439,11 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row d-block">
                   <div class="form-check">
                     <label class="form-check-label">
                       <input
-                        class="form-check-input rounded-pill"
+                        class="form-check-input rounded-pill shadow"
                         type="checkbox"
                         formControlName="terms_conditions"
                         value="0"
@@ -483,7 +473,7 @@
                   <div class="form-check">
                     <label class="form-check-label">
                       <input
-                        class="form-check-input"
+                        class="form-check-input shadow"
                         type="checkbox"
                         formControlName="data_politics"
                         value="0"
@@ -510,7 +500,6 @@
                       </small>
                     </ng-container>
                   </div>
-
                   <ng-container *ngIf="errorMessage">
                     <small
                       class="text-danger"
@@ -520,7 +509,8 @@
                     <br />
                   </ng-container>
                 </div>
-                <div class=" card-footer">
+                <div class="text-center card-footer">
+                  <a routerLink="/sing-in" >Volver a iniciar sesión</a>
                   <button
                     class="btn btn-secondary btn-lg rounded-pill w-100"
                     [disabled]="form.invalid"
@@ -533,81 +523,6 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 ml-auto img">
-          <!--  
-          <img
-            src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598120/assets/logo-icex-header_nxutwk.png"
-            class="mt-4 logo"
-            alt=""
-          />
-          <div class="info-area info-horizontal mt-5">
-            <div class="icon icon-warning">
-              <img
-                class="mini-icon"
-                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559108/assets/icons/autogestion_ymjbvv.png"
-                alt=""
-              />
-            </div>
-            <div class="description">
-              <h3 class="info-title text-secondary">AUTOGESTIÓN DE FONDOS</h3>
-              <p class="description">
-                Multiplicar tú capital ahora es mucho más seguro y efectivo!
-              </p>
-            </div>
-          </div> 
-          <div class="info-area info-horizontal">
-            <div class="icon icon-warning">
-              <img
-                class="mini-icon"
-                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655659998/assets/icons/educacion-personalizada_bdtfex.png"
-                alt=""
-              />
-            </div>
-            <div class="description">
-              <h3 class="info-title text-secondary">EDUCACIÓN PERSONALIZADA</h3>
-              <p class="description">
-                Te ayudaremos a iniciar en el mundo del trading guiandote en tu
-                proceso.
-              </p>
-            </div>
-          </div>
-          <div class="info-area info-horizontal">
-            <div class="icon icon-primary">
-              <img
-                class="mini-icon"
-                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660652/assets/icons/contenido-de-calidad_moxull.png"
-                alt=""
-              />
-            </div>
-            <div class="description">
-              <h3 class="info-title text-secondary">CONTENIDO DE CALIDAD</h3>
-              <p class="description">
-                Nuestros Traders estarán disponibles para ayudarte en todo
-                momento.
-              </p>
-            </div>
-          </div>
-          <div class="info-area info-horizontal">
-            <div class="icon icon-info">
-              <img
-                class="mini-icon"
-                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655660681/assets/icons/compromiso-en-tu-proceso_fmjbxy.png"
-                alt=""
-              />
-            </div>
-            <div class="description">
-              <h3 class="info-title text-secondary">
-                COMPROMISO EN TU PROCESO
-              </h3>
-              <p class="description">
-                Nuestros equipo analiza el mercado buscando las mejores
-                oportunidades de inversión.
-              </p>
-            </div>
-          </div>
-          -->
+        <div class="col-sm-7 ml-auto img">
         </div> 
-      </div>
-    </div>
-  </div>
 </div>
