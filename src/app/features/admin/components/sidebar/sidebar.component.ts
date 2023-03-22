@@ -70,6 +70,62 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
+    path: '',
+    title: 'area trader',
+    type: 'sub',
+    icontype: 'tim-icons icon-trophy',
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'trading-area',
+        title: 'trading',
+        type: 'link',
+        smallTitle: 'TG'
+      },
+      {
+        path: 'ranking',
+        title: 'ranking',
+        type: 'link',
+        smallTitle: 'RK'
+      },
+    ]
+  },
+  {
+    path: '',
+    title: 'autogestión',
+    type: 'sub',
+    icontype: 'tim-icons icon-trophy',
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'funds',
+        title: 'fondos',
+        type: 'link',
+        smallTitle: 'FO'
+      },
+      {
+        path: 'withdrawals',
+        title: 'retiros y comiciones',
+        type: 'link',
+        smallTitle: 'WT'
+      },
+    ]
+  },
+  {
+    path: '/downloads',
+    title: 'descargas',
+    type: 'link',
+    icontype: 'tim-icons icon-single-02',
+  },
+  {
+    path: '/billing',
+    title: 'Facturacion',
+    type: 'link',
+    icontype: 'tim-icons icon-single-02',
+  },
+  {
     path: '/home',
     title: 'cursos',
     type: 'link',
@@ -84,6 +140,26 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  profileMenuItems: any = [
+    {
+      path: '/profile',
+      title: 'perfil',
+      type: 'link',
+      icontype: 'tim-icons icon-chart-pie-36',
+    },
+    {
+      path: 'https://intcapex.com/',
+      title: 'Pagina Web',
+      type: 'link',
+      icontype: 'tim-icons icon-chart-pie-36',
+    },
+    {
+      path: '/customer-service',
+      title: 'Servicio al Cliente',
+      type: 'link',
+      icontype: 'tim-icons icon-chart-pie-36',
+    },
+  ]
 
   constructor(private userDataService: UserDataService) { }
 
