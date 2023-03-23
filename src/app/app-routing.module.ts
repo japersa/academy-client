@@ -103,6 +103,11 @@ const routes: Routes = [
           .then(m => m.HomeModule)
       },
       {
+        path: 'academy',
+        loadChildren: () => import('./features/student/pages/academy/academy.module')
+          .then(m => m.AcademyModule)
+      },
+      {
         path: 'test/:id',
         loadChildren: () => import('./features/student/pages/test/test.module')
           .then(m => m.TestModule)
