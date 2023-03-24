@@ -1,14 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { CoursesService } from '../../services/courses.service';
 import { UserDataService } from '../../../core/services/user-data.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
-
-import SwiperCore, { Keyboard, Pagination, Navigation, Virtual } from 'swiper';
-import { NotificationsService } from '../../../core/services/notifications.service';
-import { RegisterService } from '../../../features/auth/services/register.service';
-import { StorageService } from '../../../core/services/storage.service';
-SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
 
 
 @Component({
@@ -18,8 +9,18 @@ SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
+
+  referalCode = '0000000';
+
+  constructor(public userDataService: UserDataService,
+  ) { }
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.userDataService.userData$.subscribe(
+     {
+      next: (r) => this.referalCode = r?.referral_code
+     } 
+    );
   }
 
 }
