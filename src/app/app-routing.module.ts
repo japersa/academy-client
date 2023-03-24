@@ -122,6 +122,11 @@ const routes: Routes = [
         loadChildren: () => import('./shared/pages/notifications/notifications.module')
           .then(m => m.NotificationsModule)
       },
+      {
+        path: 'trading-area',
+        loadChildren: () => import('./features/trading-area/pages/trading-area/trading-area.module')
+          .then(m => m.TradingAreaModule)
+      },
     ]
   },
   {

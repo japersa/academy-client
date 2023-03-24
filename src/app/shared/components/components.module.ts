@@ -16,7 +16,6 @@ import { AuthNavbarComponent } from './auth-navbar/auth-navbar.component';
 import { FixedPluginComponent } from './fixed-plugin/fixed-plugin.component';
 
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
-import { CurrentRouteComponent } from './current-route/current-route.component';
 
 
 @NgModule({
@@ -38,7 +37,6 @@ import { CurrentRouteComponent } from './current-route/current-route.component';
     PictureUploadComponent,
     AuthNavbarComponent,
     FixedPluginComponent,
-    CurrentRouteComponent,
   ],
   exports: [
     FooterComponent,
@@ -46,7 +44,7 @@ import { CurrentRouteComponent } from './current-route/current-route.component';
     PictureUploadComponent,
     ProgressbarModule,
     AuthNavbarComponent,
-    FixedPluginComponent
+    FixedPluginComponent,
   ]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }
