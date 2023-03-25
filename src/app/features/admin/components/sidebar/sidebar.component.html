@@ -4,9 +4,19 @@
       class="
         btn btn-secondary btn-block 
         custom-btn my-auto d-inline"
+      *ngIf="rol === 'admin'" 
+      (click)="adminButtonAction()"  
         >Solicitudes de Paquetes
     </button>
-  </div>
+    <button 
+      class="
+        btn btn-secondary btn-block 
+        custom-btn my-auto d-inline"
+      *ngIf="rol === 'client'" 
+      (click)="clientButtonAction()"  
+        >Nuevo Paquete
+    </button>
+  </div> 
   <ul class="nav pb-5">
     <li *ngFor="let menuitem of menuItems" routerLinkActive="active">
       <!--If is a single link-->
