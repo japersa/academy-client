@@ -1,5 +1,10 @@
 .content {
-    background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important;
+   /*  background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important; */
+   background-color: #ffffff;
+}
+
+.shadow {
+    border-radius: 10px;
 }
 
 .card {
@@ -7,7 +12,7 @@
     border-radius: 10px !important;
 }
 
-.card-title {
+.card-title { 
     font-size: 3em !important;
     font-weight: 600 !important;
     color: var(--secondary) !important;

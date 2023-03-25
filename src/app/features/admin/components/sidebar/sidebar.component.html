@@ -1,15 +1,23 @@
 <div class="sidebar-wrapper">
   <div class="logo">
-    <a href="https://intcapex.com/" class="simple-text logo-mini">
-      <div class="logo-img">
-        <img
-          src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655663375/assets/icono-menu_efd28m.png"
-        />
-      </div>
-    </a>
-    <a href="https://intcapex.com/" class="simple-text logo-normal"> ICEX </a>
-  </div>
-  <ul class="nav">
+    <button 
+      class="
+        btn btn-secondary btn-block 
+        custom-btn my-auto d-inline"
+      *ngIf="rol === 'admin'" 
+      (click)="adminButtonAction()"  
+        >Solicitudes de Paquetes
+    </button>
+    <button 
+      class="
+        btn btn-secondary btn-block 
+        custom-btn my-auto d-inline"
+      *ngIf="rol === 'client'" 
+      (click)="clientButtonAction()"  
+        >Nuevo Paquete
+    </button>
+  </div> 
+  <ul class="nav pb-5">
     <li *ngFor="let menuitem of menuItems" routerLinkActive="active">
       <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">

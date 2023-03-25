@@ -160,10 +160,25 @@ export class SidebarComponent implements OnInit {
       icontype: 'tim-icons icon-chart-pie-36',
     },
   ]
-
+ 
   constructor(private userDataService: UserDataService) { }
 
+  public rol: string;
+  
+  private adminButtonAction() {
+    console.log('Soy admin');
+  }
+    
+  private clientButtonAction() {
+    console.log('Soy cliente');
+  }
+
   ngOnInit() {
+    this.userDataService.userData$.subscribe(userData => {
+      this.rol = userData.rol;
+    });
+    console.log(this.rol);
+    
     this.menuItems = ROUTES.filter(menuItem => {
       if (this.userDataService?.userData$?.value?.rol === 'teacher' && (menuItem.path === '/roles' || menuItem.path === '/dashboard')) {
         return
