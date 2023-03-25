@@ -282,6 +282,9 @@
 .show > .btn-secondary.dropdown-toggle {
   color: $white;
 }
+.btn-secondary {
+  color: $tertiary !important;  
+}
 
 @include media-breakpoint-down(md) {
   .btn-group .btn {

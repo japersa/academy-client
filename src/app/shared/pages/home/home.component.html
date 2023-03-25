@@ -1,84 +1,111 @@
-<div class="content" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
-  <div class=" row">
-    <ol class=" breadcrumb bg-transparent ml-3">
-      <li class=" breadcrumb-item text-primary">
-        <a routerLink="/home">
-          Inicio
-        </a>
-      </li>
-    </ol>
-    <div class="col-12">
-      <h3 class="m-0">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
-      <ng-container
-        *ngIf="userDataService?.userData$?.value?.subscription != 'none';else elseTemplate">
-        <p>Continúa aprendiendo mediante su subscripción
-          <strong>Icex AG</strong> 
-          </p>
-      </ng-container>
-      <ng-template #elseTemplate>
-        <p>Hemos detectado que aún no tienes una subscripción activa, te animamos a conseguir una
-          <a routerLink="/subscription">aquí</a>.</p>
-      </ng-template>
-
-
-      <div class="row d-flex justify-content-center mt-4">
-        <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6  ">
-          <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/MWHr8Ndpmas"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6  ">
-          <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/iNuf_fqlOuo"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
+<div class="content">
+  <div class="row">
+    <div class="col-10">
+      <h3>
+        Funding Program <br />
+        Empieza a operar.
+      </h3>
+    </div>
+    <div class="col-2 text-right">
+      <div class="card card-stats text-center">
+        <p>Código de Referido</p>
+        <p class="ref">{{ referalCode }}</p>
+        <button
+          class="btn btn-secondary btn-sm mb-3 rounded-pill"
+          [cdkCopyToClipboard]="referalCode"
+        >
+          Copiar
+        </button>
       </div>
     </div>
+  </div>
 
-    <ng-container *ngIf="continueLearningCourses.length > 0">
-      <div class="row" style="width: 100% !important;">
-        <div class="col-12">
-          <h2 class="mt-4">Continuar viendo</h2>
-          <hr style="width: 100% !important;" color="green">
-        </div>
-        <div *ngFor="let c of continueLearningCourses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-          <div class="card">
-            <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title text-center">
-                {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
-              </h5>
-              <button class="btn btn-simple btn-secondary btn-block" type="button"
-                [routerLink]="['/class', c.id]">CONTINUAR
-                VIENDO</button>
+  <div class="row">
+    <div class="col-lg-3 col-md-6">
+      <div class="card card-stats text-center">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h3 class="card-title">Challenge Royal ICEX</h3>
             </div>
           </div>
         </div>
-      </div>
-    </ng-container>
-
-    <div class="row" style="width: 100% !important;">
-      <div class="col-12">
-        <h2 class="mt-4">Cursos</h2>
-        <hr style="width: 100% !important;" color="cyan">
-      </div>
-
-      <div *ngFor="let c of courses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card">
-          <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title text-center">
-              {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
-            </h5>
-            <button class="btn btn-secondary btn-block" type="button" [routerLink]="['/course', c.id]">IR AL
-              CURSO</button>
-          </div>
+        <div class="card-footer">
+          <hr />
+          <p class="stats">Opere hasta $200,000 en la EURO Account</p>
+          <br />
+          <p class="stats">
+            Demuestre sus habilidades de trading completando nuestras fases.
+          </p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-secondary btn-lg mb-3 rounded-pill">
+            Comprar
+          </button>
         </div>
       </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="card card-stats text-center">
+        <div class="card-footer">
+          <p class="stats">Objetivos del challenge</p>
+          <hr />
+          <p class="stats">5% drowdown diario</p>
+          <hr />
+          <p class="stats">10% drowdown total</p>
+          <hr />
+          <p class="stats">Profit fase 1 a lograr en 30 dias</p>
+          <hr />
+          <p class="stats">Profit fase 2 a lograr en 30 dias</p>
+          <hr />
+          <p class="stats">Minimo de dias de trading 1</p>
+          <hr />
+          <p class="stats">Reparto beneficio 75%</p>
+          <hr />
+          <p class="stats">Sin restricciones de trading</p>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Autogestion de fondos</h3>
+
+  <div class="row">
+    <div class="col-lg-7 col-md-8">
+      <div class="card card-stats text-left">
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-6">
+              <p class="stats">Autogestion de fondos.</p>
+              <p class="stats">Seguro de Capital.</p>
+              <p class="stats">Contrato digital Monitoreo 24/7.</p>
+            </div>
+            <div class="col-6">
+              <p class="stats">Soporte 24/5.</p>
+              <p class="stats">Alianzas Comerciales.</p>
+              <p class="stats">Curso Básico Forex.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-secondary btn-block btn-lg mb-3 rounded-pill">
+            Comprar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-7 col-md-8">
+      <h3>Provident velit adipisci illum</h3>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia est
+        soluta aliquid quod provident velit adipisci illum voluptate numquam a
+        maxime error necessitatibus eligendi ducimus, expedita ab in aspernatur
+        unde!
+      </p>
     </div>
   </div>
 </div>

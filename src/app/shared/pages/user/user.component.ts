@@ -100,7 +100,7 @@ export class UserComponent implements OnInit, OnDestroy {
       this.rol = 'Profesor';
     } else if (rolLocal == 'admin') {
       this.rol = 'Administrador'
-    } else { this.rol = 'Que putas pasa con el rol' }
+    } else { this.rol = 'None' }
     return this.rol;
   }
 
