@@ -181,6 +181,12 @@ export class UtilsService {
     data_politics: [
       { type: 'required', message: 'Es obligatorio aceptar la política de datos' },
     ],
+    cancellation_politics: [
+      { type: 'required', message: 'Es obligatorio aceptar las políticas de cancelación y desembolso' },
+    ],
+    postal_code: [
+      { type: 'required', message: 'El código postal es obligatorio' },
+    ],
   };
 
   public countries = [

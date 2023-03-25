@@ -1,0 +1,443 @@
+<div class="content">
+  <h3 class="title">Registro nuevo paquete</h3>
+  <p>Configura tu paquete a la medida.</p>
+  <div class="row">
+    <div class="col-lg-8 col-md-8">
+      <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
+        <div class="card card-stats text-left">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <p class="title">Elige la moneda a operar</p>
+                <p>
+                  <label>
+                    <input
+                      name="currencies"
+                      value="usd"
+                      type="radio"
+                      formControlName="currencies"
+                    />
+                    USD
+                  </label>
+                  <label>
+                    <input
+                      name="currencies"
+                      value="eur"
+                      type="radio"
+                      formControlName="currencies"
+                    />
+                    EUR
+                  </label>
+                </p>
+                <hr />
+              </div>
+              <div class="col-12">
+                <p class="title">Elige el balance de la cuenta</p>
+                <p>
+                  <label>
+                    <input
+                      name="balance"
+                      value="fifty_thousand"
+                      type="radio"
+                      formControlName="balance"
+                    />
+                    50.000 USD
+                  </label>
+                  <label>
+                    <input
+                      name="balance"
+                      value="one_hundred_thousand"
+                      type="radio"
+                      formControlName="balance"
+                    />
+                    100.000 USD
+                  </label>
+                  <label>
+                    <input
+                      name="balance"
+                      value="two_hundred_thousand"
+                      type="radio"
+                      formControlName="balance"
+                    />
+                    200.000 USD
+                  </label>
+                  <label>
+                    <input
+                      name="balance"
+                      value="five_hundred_thousand"
+                      type="radio"
+                      formControlName="balance"
+                    />
+                    500.000 USD
+                  </label>
+                </p>
+                <hr />
+              </div>
+              <div class="col-12">
+                <p class="title">Elige el balance de la cuenta</p>
+                <p>
+                  <label>
+                    <input
+                      name="account_type"
+                      value="euro_street_basic"
+                      type="radio"
+                      formControlName="account_type"
+                    />
+                    EuroStreet Basic
+                  </label>
+                  <label>
+                    <input
+                      name="account_type"
+                      value="euro_street_full"
+                      type="radio"
+                      formControlName="account_type"
+                    />
+                    EuroStreet Full
+                  </label>
+                </p>
+                <hr />
+                <p class="title">Plataforma: MetaTrader5</p>
+                <hr />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="title">Información de facturación</h3>
+
+        <div class="card card-stats text-left">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="names"
+                    >Nombre: {{ firstNameField?.value | titlecase }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control rounded-pill shadow"
+                    formControlName="first_name"
+                    id="names"
+                    placeholder="María"
+                  />
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages
+                        .first_name
+                    "
+                  >
+                    <small
+                      class="form-text text-danger d-block"
+                      *ngIf="
+                        firstNameField?.hasError(validation.type) &&
+                        firstNameFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="last_names"
+                    >Apellidos: {{ lastNameField?.value | titlecase }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control rounded-pill shadow"
+                    formControlName="last_name"
+                    id="last_names"
+                    placeholder="Ximenes"
+                  />
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages
+                        .last_name
+                    "
+                  >
+                    <small
+                      class="form-text text-danger d-block"
+                      *ngIf="
+                        lastNameField?.hasError(validation.type) &&
+                        lastNameFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="email"
+                    >Email: {{ emailField?.value | lowercase }}</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control rounded-pill shadow"
+                    formControlName="email"
+                    id="email"
+                    placeholder="m.ximenes@gmail.com"
+                  />
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages.email
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="
+                        emailField?.hasError(validation.type) && emailFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="phone_number"
+                    >Télefono: {{ phoneField?.value }}</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control rounded-pill shadow"
+                    formControlName="phone_number"
+                    id="phone_number"
+                    placeholder="4212976573"
+                  />
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages.phone
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="
+                        phoneField?.hasError(validation.type) && phoneFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="city"
+                    >Ciudad: {{ cityField?.value | titlecase }}</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control rounded-pill shadow"
+                    formControlName="city"
+                    id="city"
+                    placeholder="Buenos Aires"
+                  />
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages.city
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="
+                        cityField?.hasError(validation.type) && cityFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="address"
+                    >Dirección: {{ addressField?.value }}
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control rounded-pill shadow"
+                    formControlName="address"
+                    id="address"
+                    placeholder="AV. Rivadavia 695"
+                  />
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages.address
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="
+                        addressField?.hasError(validation.type) &&
+                        addressFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="countryField"
+                    >País: {{ countryField?.value | uppercase }}</label
+                  >
+                  <select
+                    class="form-control rounded-pill shadow"
+                    formControlName="country"
+                  >
+                    <option
+                      *ngFor="let c of utilsService.countries"
+                      [value]="c.code"
+                    >
+                      {{ c.name + " " + c.flag }}
+                    </option>
+                  </select>
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages.country
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="
+                        countryField?.hasError(validation.type) &&
+                        countryFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="postalCodeField"
+                    >Código postal: {{ postalCodeField?.value | titlecase }}
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control rounded-pill shadow"
+                    formControlName="postal_code"
+                    id="postalCodeField"
+                    placeholder="2000"
+                  />
+
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages
+                        .postal_code
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="
+                        postalCodeField?.hasError(validation.type) &&
+                        postalCodeFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      class="form-check-input shadow"
+                      type="checkbox"
+                      formControlName="tos"
+                      value="0"
+                    />
+                    Acepto las políticas de datos.
+                    <span class="form-check-sign">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages
+                        .data_politics
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="
+                        datapoliticsField?.hasError(validation.type) &&
+                        datapoliticsFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      class="form-check-input shadow"
+                      type="checkbox"
+                      formControlName="cancellation_policies"
+                      value="0"
+                    />
+                    Acepto las políticas de cancelación y reembolso.
+                    <span class="form-check-sign">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                  <ng-container
+                    *ngFor="
+                      let validation of utilsService.validationMessages
+                        .cancellation_politics
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="
+                        cancellationPoliticsField?.hasError(validation.type) &&
+                        cancellationPoliticsFieldDirty
+                      "
+                    >
+                      {{ validation.message }}
+                    </small>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <ng-container *ngIf="errorMessage">
+              <small
+                class="text-danger"
+                *ngFor="let e of errorMessage | keyvalue"
+                >{{ e.value }}</small
+              >
+              <br />
+            </ng-container>
+          </div>
+        </div>
+
+        <button
+          [disabled]="form.invalid"
+          class="btn btn-secondary btn-block btn-lg mb-3 rounded-pill"
+        >
+          Comprar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

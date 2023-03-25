@@ -3,15 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { TradingAreaRoutingModule } from './trading-area-routing.module';
 import { TradingAreaComponent } from './trading-area.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreatePackComponent } from '../../components/create-pack/create-pack.component';
 
 @NgModule({
   declarations: [
-    TradingAreaComponent
+    TradingAreaComponent,
+    CreatePackComponent
   ],
   imports: [
     CommonModule,
     TradingAreaRoutingModule,
-
+    ReactiveFormsModule
   ]
 })
 export class TradingAreaModule { }

@@ -6,7 +6,8 @@ import { CreateCourseByStepsModule } from './teacher/pages/create-course-by-step
 import { TradingAreaModule } from './trading-area/pages/trading-area/trading-area.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     AdminLayoutModule,
