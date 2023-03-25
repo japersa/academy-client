@@ -160,7 +160,7 @@ export class SidebarComponent implements OnInit {
       icontype: 'tim-icons icon-chart-pie-36',
     },
   ]
-
+ 
   constructor(private userDataService: UserDataService) { }
 
   ngOnInit() {
