@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserDataService } from '../../../../core/services/user-data.service';
 
 export interface RouteInfo {
@@ -160,17 +161,18 @@ export class SidebarComponent implements OnInit {
       icontype: 'tim-icons icon-chart-pie-36',
     },
   ]
- 
-  constructor(private userDataService: UserDataService) { }
+
+  constructor(private router: Router,
+    private userDataService: UserDataService) { }
 
   public rol: string;
-  
+
   private adminButtonAction() {
-    console.log('Soy admin');
+    this.router.navigate(['/trading-area/create-pack'])
   }
-    
+
   private clientButtonAction() {
-    console.log('Soy cliente');
+    this.router.navigate(['/trading-area/create-pack'])
   }
 
   ngOnInit() {
@@ -178,7 +180,7 @@ export class SidebarComponent implements OnInit {
       this.rol = userData.rol;
     });
     console.log(this.rol);
-    
+
     this.menuItems = ROUTES.filter(menuItem => {
       if (this.userDataService?.userData$?.value?.rol === 'teacher' && (menuItem.path === '/roles' || menuItem.path === '/dashboard')) {
         return
