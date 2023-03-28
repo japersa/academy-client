@@ -44,7 +44,7 @@ import { ProgressbarModule } from "ngx-bootstrap/progressbar";
     PictureUploadComponent,
     ProgressbarModule,
     AuthNavbarComponent,
-    FixedPluginComponent
+    FixedPluginComponent,
   ]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

@@ -12,7 +12,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/trading-area/create-pack',
     pathMatch: 'full'
   },
   {
@@ -121,6 +121,11 @@ const routes: Routes = [
         path: 'notifications',
         loadChildren: () => import('./shared/pages/notifications/notifications.module')
           .then(m => m.NotificationsModule)
+      },
+      {
+        path: 'trading-area',
+        loadChildren: () => import('./features/trading-area/pages/trading-area/trading-area.module')
+          .then(m => m.TradingAreaModule)
       },
     ]
   },
