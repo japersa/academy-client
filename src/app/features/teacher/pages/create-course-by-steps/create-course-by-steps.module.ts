@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { CreateCourseByStepsRoutingModule } from './create-course-by-steps-routing.module';
 import { CreateCourseByStepsComponent } from './create-course-by-steps.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +22,7 @@ import { AdminCoursesModule } from '../admin-courses/admin-courses.module';
     ProgressbarModule,
     AngularMultiSelectModule,
     CreateCourseByStepsRoutingModule,
+    QuicklinkModule
   ]
 })
 export class CreateCourseByStepsModule { }

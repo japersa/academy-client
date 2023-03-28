@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { CancelRoutingModule } from './cancel-routing.module';
 import { CancelComponent } from './cancel.component';
 
@@ -9,7 +11,8 @@ import { CancelComponent } from './cancel.component';
   declarations: [CancelComponent],
   imports: [
     CommonModule,
-    CancelRoutingModule
+    CancelRoutingModule,
+    QuicklinkModule
   ]
 })
 export class CancelModule { }

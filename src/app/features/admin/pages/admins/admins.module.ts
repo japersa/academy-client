@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { AdminsRoutingModule } from './admins-routing.module';
 import { AdminsComponent } from './admins.component';
 
@@ -26,7 +28,8 @@ import { EditUserComponent } from '../../components/edit-user/edit-user.componen
     NgxDatatableModule,
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    QuicklinkModule
   ],
   exports: [
     CreateUserComponent,

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { NotificationsComponent } from './notifications.component';
 
@@ -9,7 +11,8 @@ import { NotificationsComponent } from './notifications.component';
   declarations: [NotificationsComponent],
   imports: [
     CommonModule,
-    NotificationsRoutingModule
+    NotificationsRoutingModule,
+    QuicklinkModule
   ]
 })
 export class NotificationsModule { }

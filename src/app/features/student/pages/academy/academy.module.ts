@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { AcademyRoutingModule } from './academy-routing.module';
 import { AcademyComponent } from './academy.component';
 
@@ -11,7 +13,8 @@ import { AcademyComponent } from './academy.component';
   ],
   imports: [
     CommonModule,
-    AcademyRoutingModule
+    AcademyRoutingModule,
+    QuicklinkModule
   ]
 })
 export class AcademyModule { }

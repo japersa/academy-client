@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { AdminCoursesRoutingModule } from './admin-courses-routing.module';
 import { AdminCoursesComponent } from './admin-courses.component';
 import { CreateCourseComponent } from '../../components/create-course/create-course.component';
@@ -36,7 +38,8 @@ import { EditQuizComponent } from '../../components/edit-quiz/edit-quiz.componen
     ProgressbarModule,
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
-    AdminCoursesRoutingModule
+    AdminCoursesRoutingModule,
+    QuicklinkModule
   ], exports: [
     CreateCourseComponent,
     CreateTopicsComponent,

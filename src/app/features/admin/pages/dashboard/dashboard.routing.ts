@@ -9,7 +9,7 @@ export const DashboardRoutes: Routes = [
       {
         path: "dashboard",
         component: DashboardComponent
-      }
+      } 
     ]
   }
 ];

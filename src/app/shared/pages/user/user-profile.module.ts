@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { UserComponent } from './user.component';
 import { UserRoutes } from './user-profile.routing';
 import { ComponentsModule } from '../../components/components.module';
@@ -14,7 +16,9 @@ import { ComponentsModule } from '../../components/components.module';
     RouterModule.forChild(UserRoutes),
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    QuicklinkModule
+  ],
   declarations: [UserComponent],
   exports: [UserComponent]
 })

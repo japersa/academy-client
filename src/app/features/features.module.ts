@@ -5,6 +5,8 @@ import { AdminCoursesModule } from './teacher/pages/admin-courses/admin-courses.
 import { CreateCourseByStepsModule } from './teacher/pages/create-course-by-steps/create-course-by-steps.module';
 import { TradingAreaModule } from './trading-area/pages/trading-area/trading-area.module';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 @NgModule({
   declarations: [
   ],
@@ -13,7 +15,8 @@ import { TradingAreaModule } from './trading-area/pages/trading-area/trading-are
     AdminLayoutModule,
     AdminCoursesModule,
     CreateCourseByStepsModule,
-    TradingAreaModule
+    TradingAreaModule,
+    QuicklinkModule
   ],
   exports: [
     AdminLayoutModule,

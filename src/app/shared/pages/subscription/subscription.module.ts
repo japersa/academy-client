@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { SubscriptionRoutingModule } from './subscription-routing.module';
 import { SubscriptionComponent } from './subscription.component';
 
@@ -9,7 +11,8 @@ import { SubscriptionComponent } from './subscription.component';
   declarations: [SubscriptionComponent],
   imports: [
     CommonModule,
-    SubscriptionRoutingModule
+    SubscriptionRoutingModule,
+    QuicklinkModule
   ]
 })
 export class SubscriptionModule { }

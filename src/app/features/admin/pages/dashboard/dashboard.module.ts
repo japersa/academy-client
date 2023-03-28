@@ -8,6 +8,8 @@ import { ProgressbarModule } from "ngx-bootstrap/progressbar";
 import { TooltipModule } from "ngx-bootstrap/tooltip";
 import { DashboardRoutes } from "./dashboard.routing";
 
+import { QuicklinkModule} from 'ngx-quicklink';
+
 import { DashboardComponent } from "./dashboard.component";
 
 @NgModule({
@@ -17,7 +19,8 @@ import { DashboardComponent } from "./dashboard.component";
     BsDropdownModule.forRoot(),
     ComponentsModule,
     ProgressbarModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    QuicklinkModule
   ],
   declarations: [DashboardComponent],
   exports: [DashboardComponent]
