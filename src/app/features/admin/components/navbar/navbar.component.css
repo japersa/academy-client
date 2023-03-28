@@ -1,3 +1,8 @@
+.navbar {
+    border-top: 5px solid #007094 !important;
+    margin-top: -5px;
+}
+
 .notification {
     background: #0AC116 !important;
     color: #ffffff;
@@ -11,7 +16,7 @@
     top: 10px;
     right: 10px;
     border: 1px solid #0AC116 !important;
-}
+} 
 
 .noti-icon {
     height: 30px !important;
