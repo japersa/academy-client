@@ -143,6 +143,18 @@ export class SidebarComponent implements OnInit {
   menuItems: any[];
   profileMenuItems: any = [
     {
+      path: '/packages',
+      title: 'solicitud de paquetes',
+      type: 'link',
+      icontype: 'tim-icons icon-chart-pie-36',
+    },
+    {
+      path: '/profile',
+      title: 'clientes',
+      type: 'link',
+      icontype: 'tim-icons icon-chart-pie-36',
+    },
+    {
       path: '/profile',
       title: 'perfil',
       type: 'link',
