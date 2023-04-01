@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { PackagesService } from '../../services/packages.service';
-import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Validators, FormGroup, FormBuilder, } from '@angular/forms';
+import { UtilsService } from 'src/app/core/services/utils.service';
 
 @Component({
   selector: 'app-packages',
@@ -11,8 +13,50 @@ import { map } from 'rxjs/operators';
 export class PackagesComponent implements OnInit {
 
   packages: any[] = [];
+  modalRef?: BsModalRef;
 
-  constructor(private packagesService: PackagesService) { }
+  form!: FormGroup;
+  validationMessages: any;
+  errorMessage: string | null;
+
+  constructor(private modalService: BsModalService,
+    private formBuilder: FormBuilder,
+    public utilsService: UtilsService,
+    private packagesService: PackagesService) {
+    this.buildForm();
+  }
+
+  get loginField() {
+    return this.form?.get('login');
+  }
+
+  get loginFieldDirty() {
+    return this.loginField?.dirty || this.loginField?.touched;
+  }
+
+  get passwordField() {
+    return this.form?.get('password');
+  }
+
+  get passwordFieldDirty() {
+    return this.passwordField?.dirty || this.passwordField?.touched;
+  }
+
+  get passwordInvestorField() {
+    return this.form?.get('password_investor');
+  }
+
+  get passwordInvestorFieldDirty() {
+    return this.passwordInvestorField?.dirty || this.passwordInvestorField?.touched;
+  }
+
+  get serverField() {
+    return this.form?.get('server');
+  }
+
+  get serverFieldDirty() {
+    return this.serverField?.dirty || this.serverField?.touched;
+  }
 
   getPackakes(status?: any) {
     this.packagesService.getPackages().pipe(
@@ -43,6 +87,23 @@ export class PackagesComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      login: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      password_investor: ['', [Validators.required]],
+      server: ['', [Validators.required]],
+    });
+  }
+
+  saveCredentials(event: any) {
+    console.log(this.form.value);
   }
 
   ngOnInit(): void {

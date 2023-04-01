@@ -187,6 +187,12 @@ export class UtilsService {
     postal_code: [
       { type: 'required', message: 'El código postal es obligatorio' },
     ],
+    login: [
+      { type: 'required', message: 'El login es obligatorio' },
+    ],
+    server: [
+      { type: 'required', message: 'El server es obligatorio' },
+    ],
   };
 
   public countries = [

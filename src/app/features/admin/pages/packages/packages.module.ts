@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PackagesRoutingModule } from './packages-routing.module';
 import { QuicklinkModule } from 'ngx-quicklink';
 import { PackagesComponent } from './packages.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { PackagesComponent } from './packages.component';
   imports: [
     CommonModule,
     PackagesRoutingModule,
+    ReactiveFormsModule,
     QuicklinkModule
   ]
 })
