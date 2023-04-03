@@ -6,9 +6,12 @@ import { CreateCourseByStepsModule } from './teacher/pages/create-course-by-step
 import { TradingAreaModule } from './trading-area/pages/trading-area/trading-area.module';
 
 import { QuicklinkModule} from 'ngx-quicklink';
+import { MyPackagesComponent } from './trading-area/pages/my-packages/my-packages.component';
 
 @NgModule({
   declarations: [
+  
+    MyPackagesComponent
   ],
   imports: [
     CommonModule,
