@@ -1,0 +1,40 @@
+<div class="content">
+    <ol class="breadcrumb bg-transparent ml-3">
+        <li class="breadcrumb-item text-primary">
+            <a routerLink="/my-packages">Area Trading</a>
+        </li>
+        <li class="breadcrumb-item">Mis Paquetes</li>
+    </ol>
+    
+    <h3 class="title">Mis Paquetes</h3>
+    
+    <div class="row">
+        <div class="col-lg-6 " *ngFor="let pack of myPackages; let i = index">
+            <div class="card p-3 mb-4  shadow">
+                <h3 class="card-title">Paquete {{i+1}}</h3>
+                <div class="card-header">
+                    <p class="card-text  mr-auto">Nombre de login: {{pack.mt_login}}</p>
+                </div>
+                <div class="card-body d-flex">
+                    <p class="card-text  mr-auto">Balance: {{pack.balance}}</p>
+                    <p class="card-text  mr-auto">Fin: {{pack.end_date | date:'dd/MM/yyyy'}}</p>
+                    <p class="card-text">Estado: 
+                        <span [ngClass]="
+                            {'text-success': pack.status === 'active', 'text-danger': pack.status === 'closed', 
+                            'text-warning': pack.status === 'pending'}"
+                        >{{pack.status}}</span></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <button class="btn btn-secondary custom-btn my-auto">Credenciales</button>
+                        <button class="btn btn-secondary custom-btn my-auto">Metricas</button>
+                    </div>
+                    <div class="ml-auto">
+                        <button class="btn btn-secondary custom-btn my-auto">Retiros</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

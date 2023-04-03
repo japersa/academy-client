@@ -89,7 +89,7 @@ export const ROUTES: RouteInfo[] = [
         title: 'ranking',
         type: 'link',
         smallTitle: 'RK'
-      },
+      }
     ]
   },
   {
@@ -150,7 +150,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       path: '/profile',
-      title: 'clientes',
+      title: 'clientes', 
       type: 'link',
       icontype: 'tim-icons icon-chart-pie-36',
     },
