@@ -1,0 +1,212 @@
+<div class="content">
+  <div class="row">
+    <div class="col-6">
+      <ol class="breadcrumb bg-transparent ml-3">
+        <li class="breadcrumb-item text-primary">
+          <a routerLink="/dashboard"> Dashboard </a>
+        </li>
+        <li class="breadcrumb-item">Solicitud de paquetes</li>
+      </ol>
+    </div>
+    <div class="col-6">
+      <label for="selectStatus">Status</label>
+      <select class="form-control" id="selectStatus">
+        <option>Cualquiera</option>
+        <option>Completo</option>
+        <option>Pendiente</option>
+        <option>Cancelado</option>
+      </select>
+    </div>
+  </div>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">
+        Ingresa las credenciales del cliente.
+      </h4>
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form" (ngSubmit)="saveUser($event)">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="login"
+                >Login: {{ loginField?.value | titlecase }}</label
+              >
+              <input
+                type="text"
+                class="form-control rounded-pill shadow"
+                formControlName="login"
+                id="login"
+                placeholder="3423hhdk4"
+              />
+              <ng-container
+                *ngFor="let validation of utilsService.validationMessages.login"
+              >
+                <small
+                  class="form-text text-danger d-block"
+                  *ngIf="
+                    loginField?.hasError(validation.type) && loginFieldDirty
+                  "
+                >
+                  {{ validation.message }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input
+                type="password"
+                class="form-control rounded-pill shadow"
+                formControlName="password"
+                id="password"
+                placeholder="***********"
+              />
+              <ng-container
+                *ngFor="
+                  let validation of utilsService.validationMessages.password
+                "
+              >
+                <small
+                  class="form-text text-danger d-block"
+                  *ngIf="
+                    passwordField?.hasError(validation.type) &&
+                    passwordFieldDirty
+                  "
+                >
+                  {{ validation.message }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="passwordInvestorField">Contraseña inversor</label>
+              <input
+                type="password"
+                class="form-control rounded-pill shadow"
+                formControlName="password_investor"
+                id="passwordInvestorField"
+                placeholder="***********"
+              />
+              <ng-container
+                *ngFor="
+                  let validation of utilsService.validationMessages.password
+                "
+              >
+                <small
+                  class="form-text text-danger d-block"
+                  *ngIf="
+                    passwordInvestorField?.hasError(validation.type) &&
+                    passwordInvestorFieldDirty
+                  "
+                >
+                  {{ validation.message }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="server"
+                >Server: {{ serverField?.value | titlecase }}</label
+              >
+              <input
+                type="text"
+                class="form-control rounded-pill shadow"
+                formControlName="server"
+                id="server"
+                placeholder="------"
+              />
+              <ng-container
+                *ngFor="
+                  let validation of utilsService.validationMessages.server
+                "
+              >
+                <small
+                  class="form-text text-danger d-block"
+                  *ngIf="
+                    serverField?.hasError(validation.type) && serverFieldDirty
+                  "
+                >
+                  {{ validation.message }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <p><strong>Plataforma:</strong> MT5</p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="btn btn-secondary btn-lg btn-block mb-3 rounded-pill"
+          [disabled]="form.invalid"
+          type="submit"
+        >
+          Enviar credenciales
+        </button>
+      </form>
+    </div>
+  </ng-template>
+
+  <div *ngFor="let i of packages" class="row">
+    <div class="col-md-8">
+      <div class="col-lg-12 col-md-12">
+        <div class="card card-stats">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4">
+                <p>
+                  <strong>Nombre:</strong>
+                  {{ i.first_name + " " + i.last_name | titlecase }}
+                </p>
+                <p>
+                  <strong>Moneda:</strong>
+                  {{ i.currencies | uppercase }}
+                </p>
+                <p>
+                  <strong>Balance:</strong>
+                  {{ i.balance }}
+                </p>
+                <p>
+                  <strong>Plataforma:</strong>
+                  MT5
+                </p>
+              </div>
+              <div class="col-4">
+                <p>
+                  <strong>Status:</strong>
+                  {{ i.status }}
+                </p>
+                <p>
+                  <strong>Fecha de solicitud:</strong>
+                  {{ i.end_date | date }}
+                </p>
+              </div>
+              <div class="col-4">
+                <button
+                  (click)="openModal(template)"
+                  class="btn btn-secondary btn-lg mb-3"
+                >
+                  Activar credenciales
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

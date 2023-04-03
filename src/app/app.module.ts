@@ -29,7 +29,6 @@ import { ComponentsModule } from './shared/components/components.module';
 
 import { environment } from 'src/environments/environment';
 
-
 @NgModule({
   declarations: [
     AppComponent,
