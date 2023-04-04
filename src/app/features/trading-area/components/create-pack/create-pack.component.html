@@ -1,31 +1,38 @@
 <div class="content">
-  <h3 class="title">Registro nuevo paquete</h3>
-  <p>Configura tu paquete a la medida.</p>
   <div class="row">
-    <div class="col-lg-8 col-md-8">
+    <div class="col-lg-8 mr-auto ml-auto">
+      <h3 class="title ">Registro nuevo paquete</h3>
+      <p>Configura tu paquete a la medida.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 col-md-8 mr-auto ml-auto ">
       <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
-        <div class="card card-stats text-left">
+        <div class="card card-stats text-left box-shadow">
           <div class="card-body">
             <div class="row">
-              <div class="col-12">
+              <div class="col-12"> 
                 <p class="title">Elige la moneda a operar</p>
                 <p>
-                  <label>
-                    <input
+                  <input 
                       name="currencies"
                       value="usd"
                       type="radio"
                       formControlName="currencies"
-                    />
+                      id="usd"
+                      checked
+                  />
+                  <label class="radio-button mr-2" for="usd" >
                     USD
                   </label>
-                  <label>
-                    <input
+                  <input
                       name="currencies"
                       value="eur"
                       type="radio"
                       formControlName="currencies"
+                      id="eur"
                     />
+                  <label class="radio-button mr-2" for="eur">
                     EUR
                   </label>
                 </p>
@@ -34,64 +41,72 @@
               <div class="col-12">
                 <p class="title">Elige el balance de la cuenta</p>
                 <p>
-                  <label>
-                    <input
+                  <input
                       name="balance"
                       value="fifty_thousand"
                       type="radio"
                       formControlName="balance"
-                    />
+                      id="50k"
+                  />
+                  <label class="radio-button mr-2" for="50k">
                     50.000 USD
                   </label>
-                  <label>
-                    <input
+                  <input
                       name="balance"
                       value="one_hundred_thousand"
                       type="radio"
                       formControlName="balance"
-                    />
+                      id="100k"
+                      checked
+                  />
+                  <label class="radio-button mr-2" for="100k">
                     100.000 USD
                   </label>
-                  <label>
-                    <input
-                      name="balance"
-                      value="two_hundred_thousand"
-                      type="radio"
-                      formControlName="balance"
-                    />
+                  <input
+                    name="balance"
+                    value="two_hundred_thousand"
+                    type="radio"
+                    formControlName="balance"
+                    id="200k"
+                  />
+                  <label class="radio-button mr-2" for="200k">
                     200.000 USD
                   </label>
-                  <label>
-                    <input
+                  <input
                       name="balance"
                       value="five_hundred_thousand"
                       type="radio"
                       formControlName="balance"
-                    />
+                      id="500k"
+                  />
+                  <label class="radio-button mr-2" for="500k">
                     500.000 USD
                   </label>
                 </p>
                 <hr />
               </div>
               <div class="col-12">
-                <p class="title">Elige el balance de la cuenta</p>
+                <p class="title">Elige el tipo de la cuenta</p>
                 <p>
-                  <label>
-                    <input
+                  <input
                       name="account_type"
                       value="euro_street_basic"
                       type="radio"
                       formControlName="account_type"
-                    />
+                      id="basic"
+                      checked
+                  />
+                  <label class="radio-button mr-2" for="basic">
                     EuroStreet Basic
                   </label>
-                  <label>
-                    <input
+                  <input
                       name="account_type"
                       value="euro_street_full"
                       type="radio"
                       formControlName="account_type"
-                    />
+                      id="full"
+                  />
+                  <label class="radio-button mr-2" for="full">
                     EuroStreet Full
                   </label>
                 </p>
@@ -105,7 +120,7 @@
 
         <h3 class="title">Información de facturación</h3>
 
-        <div class="card card-stats text-left">
+        <div class="card card-stats text-left box-shadow">
           <div class="card-body">
             <div class="row">
               <div class="col-6">
@@ -115,7 +130,7 @@
                   >
                   <input
                     type="text"
-                    class="form-control rounded-pill shadow"
+                    class="form-control  shadow"
                     formControlName="first_name"
                     id="names"
                     placeholder="María"
@@ -145,7 +160,7 @@
                   >
                   <input
                     type="text"
-                    class="form-control rounded-pill shadow"
+                    class="form-control  shadow"
                     formControlName="last_name"
                     id="last_names"
                     placeholder="Ximenes"
@@ -177,7 +192,7 @@
                   >
                   <input
                     type="email"
-                    class="form-control rounded-pill shadow"
+                    class="form-control shadow"
                     formControlName="email"
                     id="email"
                     placeholder="m.ximenes@gmail.com"
@@ -205,7 +220,7 @@
                   >
                   <input
                     type="tel"
-                    class="form-control rounded-pill shadow"
+                    class="form-control  shadow"
                     formControlName="phone_number"
                     id="phone_number"
                     placeholder="4212976573"
@@ -236,7 +251,7 @@
                   >
                   <input
                     type="tel"
-                    class="form-control rounded-pill shadow"
+                    class="form-control shadow"
                     formControlName="city"
                     id="city"
                     placeholder="Buenos Aires"
@@ -264,7 +279,7 @@
                   </label>
                   <input
                     type="text"
-                    class="form-control rounded-pill shadow"
+                    class="form-control  shadow"
                     formControlName="address"
                     id="address"
                     placeholder="AV. Rivadavia 695"
@@ -294,7 +309,7 @@
                     >País: {{ countryField?.value | uppercase }}</label
                   >
                   <select
-                    class="form-control rounded-pill shadow"
+                    class="form-control  shadow"
                     formControlName="country"
                   >
                     <option
@@ -328,7 +343,7 @@
                   </label>
                   <input
                     type="text"
-                    class="form-control rounded-pill shadow"
+                    class="form-control shadow"
                     formControlName="postal_code"
                     id="postalCodeField"
                     placeholder="2000"
@@ -430,13 +445,16 @@
             </ng-container>
           </div>
         </div>
-
-        <button
+        <div class="row">
+          <div class="col-3 ml-auto mr-auto ">
+            <button
           [disabled]="form.invalid"
-          class="btn btn-secondary btn-block btn-lg mb-3 rounded-pill"
+          class="btn btn-secondary  btn-lg mb-3  "
         >
           Comprar
         </button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
