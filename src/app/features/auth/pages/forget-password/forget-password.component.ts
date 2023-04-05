@@ -14,6 +14,28 @@ import { Router } from '@angular/router';
 })
 export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
+  itemsPerSlide = 3;
+  slides = [
+    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/fondeo-icon_imbdsw.svg', 
+      message: 'Fondeo con un broker 100% Real!' 
+    },
+    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/capital-icon_pihmxz.svg', 
+      message: 'Obten capital prestado para operar en el mercado' 
+    },
+    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/retiro-beneficios-icon_uobwhd.svg', 
+      message: 'Retiros de Beneficios' 
+    },
+    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/iniciar-mundo-trading_nmbcgy.svg',
+      message: 'Te ayudaremos a iniciar en el mundo del trading'
+    },
+    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/multiplicar-capital_rgiv62.svg',
+      message: 'Multiplicar tu capital ahora es mucho más seguro y efectivo!'
+    },
+    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/invita-amigos-icon_rsljpm.svg',
+      message: 'Comiciona invitando a tus amigos'
+    }
+  ];
+
   form!: FormGroup;
   validationMessages: any;
   errorMessage: string | null;
