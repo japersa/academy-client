@@ -1,12 +1,17 @@
 <div class="content">
+  <ol class="breadcrumb bg-transparent ml-3">
+    <li class="breadcrumb-item text-primary">
+        <a routerLink="/trading-area/create-pack">Inicio / Area trader / Nuevo Paquete</a>
+    </li>
+</ol>
   <div class="row">
-    <div class="col-lg-8 mr-auto ml-auto">
-      <h3 class="title ">Registro nuevo paquete</h3>
+    <div class="col-lg-8 ">
+      <h3 class="title mb-1">Registro del paquete</h3>
       <p>Configura tu paquete a la medida.</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-8 col-md-8 mr-auto ml-auto ">
+    <div class="col-lg-10 col-md-12  ">
       <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
         <div class="card card-stats text-left box-shadow">
           <div class="card-body">
@@ -112,6 +117,7 @@
                 </p>
                 <hr />
                 <p class="title">Plataforma: MetaTrader5</p>
+                <label class="radio-button checked"for="">MT5</label>
                 <hr />
               </div>
             </div>
@@ -123,7 +129,7 @@
         <div class="card card-stats text-left box-shadow">
           <div class="card-body">
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="names"
                     >Nombre: {{ firstNameField?.value | titlecase }}</label
@@ -153,7 +159,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="last_names"
                     >Apellidos: {{ lastNameField?.value | titlecase }}</label
@@ -185,7 +191,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="email"
                     >Email: {{ emailField?.value | lowercase }}</label
@@ -213,7 +219,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="phone_number"
                     >Télefono: {{ phoneField?.value }}</label
@@ -244,7 +250,7 @@
             </div>
 
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="city"
                     >Ciudad: {{ cityField?.value | titlecase }}</label
@@ -272,7 +278,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="address"
                     >Dirección: {{ addressField?.value }}
@@ -303,7 +309,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="countryField"
                     >País: {{ countryField?.value | uppercase }}</label
@@ -336,7 +342,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="postalCodeField"
                     >Código postal: {{ postalCodeField?.value | titlecase }}
@@ -369,7 +375,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-check">
                   <label class="form-check-label">
                     <input
@@ -401,7 +407,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-5 mr-auto ml-auto">
                 <div class="form-check">
                   <label class="form-check-label">
                     <input
