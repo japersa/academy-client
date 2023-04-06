@@ -39,6 +39,7 @@
     "jw-bootstrap-switch-ng2": "2.0.5",
     "ngx-bootstrap": "10.3.0",
     "ngx-chips": "3.0.0",
+    "ngx-permissions": "^15.0.1",
     "ngx-quicklink": "^0.4.0",
     "ngx-toastr": "16.0.2",
     "nouislider": "14.6.3",
