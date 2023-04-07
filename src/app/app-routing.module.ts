@@ -12,7 +12,8 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/packages',
+    // redirectTo: '/trading-area/my-packages',
+    redirectTo: '/users/teachers',
     pathMatch: 'full'
   },
   {
@@ -68,9 +69,9 @@ const routes: Routes = [
           .then(m => m.UserModule)
       },
       {
-        path: 'roles',
-        loadChildren: () => import('./features/admin/pages/admins/admins.module')
-          .then(m => m.AdminsModule)
+        path: 'users/:role',
+        loadChildren: () => import('./features/admin/pages/admins/users.module')
+          .then(m => m.UsersModule)
       },
       {
         path: 'course-by-steps',

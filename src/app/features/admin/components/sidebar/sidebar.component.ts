@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserDataService } from '../../../../core/services/user-data.service';
+import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 
 export interface RouteInfo {
   path: string;
   title: string;
   type: string;
   icontype: string;
+  role: ROLES_ENUM[];
   collapse?: string;
   isCollapsed?: boolean;
   isCollapsing?: any;
@@ -22,6 +24,7 @@ export interface ChildrenItems {
   children?: ChildrenItems2[];
   isCollapsed?: boolean;
 }
+
 export interface ChildrenItems2 {
   path?: string;
   smallTitle?: string;
@@ -35,18 +38,49 @@ export const ROUTES: RouteInfo[] = [
     title: 'Dashboard',
     type: 'link',
     icontype: 'tim-icons icon-chart-pie-36',
+    role: [ROLES_ENUM.ADMIN]
   },
   {
-    path: '/roles',
-    title: 'roles',
-    type: 'link',
+    path: '/users',
+    title: 'users',
+    type: 'sub',
     icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ADMIN],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'all',
+        title: 'todos',
+        type: 'link',
+        smallTitle: 'AL'
+      },
+      {
+        path: 'users',
+        title: 'Usuarios',
+        type: 'link',
+        smallTitle: 'US'
+      },
+      {
+        path: 'teachers',
+        title: 'profesores',
+        type: 'link',
+        smallTitle: 'TE'
+      },
+      {
+        path: 'admins',
+        title: 'administradores',
+        type: 'link',
+        smallTitle: 'AD'
+      },
+    ]
   },
   {
     path: '',
     title: 'Profesores',
     type: 'sub',
     icontype: 'tim-icons icon-single-copy-04',
+    role: [ROLES_ENUM.ADMIN, ROLES_ENUM.TEACHER],
     collapse: 'pages',
     isCollapsed: true,
     children: [
@@ -75,6 +109,7 @@ export const ROUTES: RouteInfo[] = [
     title: 'area trader',
     type: 'sub',
     icontype: 'tim-icons icon-trophy',
+    role: [ROLES_ENUM.ALL],
     collapse: 'pages',
     isCollapsed: true,
     children: [
@@ -97,6 +132,7 @@ export const ROUTES: RouteInfo[] = [
     title: 'autogestión',
     type: 'sub',
     icontype: 'tim-icons icon-trophy',
+    role: [ROLES_ENUM.ALL],
     collapse: 'pages',
     isCollapsed: true,
     children: [
@@ -119,18 +155,21 @@ export const ROUTES: RouteInfo[] = [
     title: 'descargas',
     type: 'link',
     icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ALL],
   },
   {
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
     icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ALL],
   },
   {
     path: '/home',
     title: 'cursos',
     type: 'link',
-    icontype: 'tim-icons icon-trophy'
+    icontype: 'tim-icons icon-trophy',
+    role: [ROLES_ENUM.ALL],
   }
 ];
 
@@ -150,7 +189,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       path: '/profile',
-      title: 'clientes', 
+      title: 'clientes',
       type: 'link',
       icontype: 'tim-icons icon-chart-pie-36',
     },

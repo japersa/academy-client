@@ -31,7 +31,7 @@ export class EditUserComponent implements OnInit {
     },
     {
       name: 'estudiante',
-      role: ROLES.STUDENT
+      role: ROLES.USER
     }
   ];
 

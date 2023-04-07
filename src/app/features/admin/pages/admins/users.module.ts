@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { QuicklinkModule} from 'ngx-quicklink';
+import { QuicklinkModule } from 'ngx-quicklink';
 
-import { AdminsRoutingModule } from './admins-routing.module';
-import { AdminsComponent } from './admins.component';
+import { AdminsRoutingModule } from './users-routing.module';
+import { UsersComponent } from './users.component';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
@@ -16,7 +16,7 @@ import { EditUserComponent } from '../../components/edit-user/edit-user.componen
 
 @NgModule({
   declarations: [
-    AdminsComponent,
+    UsersComponent,
     CreateUserComponent,
     EditUserComponent
   ],
@@ -36,4 +36,4 @@ import { EditUserComponent } from '../../components/edit-user/edit-user.componen
     EditUserComponent
   ]
 })
-export class AdminsModule { }
+export class UsersModule { }

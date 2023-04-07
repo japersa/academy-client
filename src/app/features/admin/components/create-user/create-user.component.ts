@@ -31,7 +31,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     },
     {
       name: 'estudiante',
-      role: ROLES.STUDENT
+      role: ROLES.USER
     }
   ];
 

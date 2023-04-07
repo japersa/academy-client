@@ -28,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
 import { ComponentsModule } from './shared/components/components.module';
 
 import { environment } from 'src/environments/environment';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { environment } from 'src/environments/environment';
     RouterModule,
     AppRoutingModule,
     QuicklinkModule,
+    NgxPermissionsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     ToastrModule.forRoot(),
@@ -50,6 +52,7 @@ import { environment } from 'src/environments/environment';
     SharedModule,
     FeaturesModule
   ],
+  exports: [NgxPermissionsModule],
   providers: [
   ],
   bootstrap: [AppComponent]
