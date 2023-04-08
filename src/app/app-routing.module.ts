@@ -70,7 +70,7 @@ const routes: Routes = [
       },
       {
         path: 'users/:role',
-        loadChildren: () => import('./features/admin/pages/admins/users.module')
+        loadChildren: () => import('./features/admin/pages/users/users.module')
           .then(m => m.UsersModule)
       },
       {

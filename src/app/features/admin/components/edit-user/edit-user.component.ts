@@ -1,24 +1,18 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
-import { Subscription } from 'rxjs';
 import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { RegisterService } from '../../../auth/services/register.service';
-import { take } from 'rxjs/operators';
-import { SUBS_ENUM } from '../../../../shared/enum/subcriptions.enum';
-import { CoursesService } from '../../../../shared/services/courses.service';
 
 const ROLES = ROLES_ENUM;
-const SUBS = SUBS_ENUM;
-
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
-export class EditUserComponent implements OnInit {
+export class EditUserComponent {
 
   roles = [
     {
@@ -28,27 +22,9 @@ export class EditUserComponent implements OnInit {
     {
       name: 'PROFESOR',
       role: ROLES.TEACHER
-    },
-    {
-      name: 'estudiante',
-      role: ROLES.USER
     }
   ];
 
-  subscriptions = [
-    {
-      name: 'Ninguna',
-      sub: SUBS.NONE
-    },
-    {
-      name: 'Básica',
-      sub: SUBS.BASIC
-    },
-    {
-      name: 'Icex AG',
-      sub: SUBS.FULL
-    }
-  ]
 
   courses = [];
 
@@ -62,7 +38,6 @@ export class EditUserComponent implements OnInit {
 
   constructor(private formBuilder: UntypedFormBuilder,
     private utilsService: UtilsService,
-    private coursesService: CoursesService,
     public notificationService: NotificationsService,
     private registerService: RegisterService) {
     this.validationMessages = utilsService.getValidationMessages();
@@ -80,10 +55,6 @@ export class EditUserComponent implements OnInit {
       role: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      courses_ids: new UntypedFormControl('', Validators.compose([
-      ])),
-      subscription: new UntypedFormControl('', Validators.compose([
-      ])),
     }
     );
 
@@ -92,30 +63,16 @@ export class EditUserComponent implements OnInit {
 
   editUser(dataFrom: any) {
 
-    let data = {}
+    let data = {
+      username: dataFrom.email,
+      first_name: dataFrom.first_name,
+      last_name: dataFrom.last_name,
+      rol: dataFrom.role,
+      subscription: dataFrom.subscription,
+      email: dataFrom.email
+    };
 
-    if (dataFrom.subscription === 'basic') {
-      data = {
-        username: dataFrom.email,
-        first_name: dataFrom.first_name,
-        last_name: dataFrom.last_name,
-        rol: dataFrom.role,
-        subscription: dataFrom.subscription,
-        courses_ids: dataFrom.courses_ids,
-        email: dataFrom.email
-      }
-    } else {
-      data = {
-        username: dataFrom.email,
-        first_name: dataFrom.first_name,
-        last_name: dataFrom.last_name,
-        rol: dataFrom.role,
-        subscription: dataFrom.subscription,
-        email: dataFrom.email
-      }
-    }
-    
-    this.registerService.editUser(data, this.user.id).pipe(take(1)).subscribe(res => {
+    this.registerService.editUser(data, this.user.id).subscribe(res => {
       this.showEvent.emit(false);
       this.notificationService.showNotification('bottom', 'center', 'Usuario editado correctamente', 2);
       this.createUserForm.reset();
@@ -130,16 +87,6 @@ export class EditUserComponent implements OnInit {
 
   cancelCreate() {
     this.showEvent.emit(false);
-  }
-
-  ngOnInit(): void {
-
-    this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
-      this.courses = res.my_courses_created;
-    },
-      error => {
-        console.log(error.error);
-      });
   }
 
 }

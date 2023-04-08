@@ -25,26 +25,6 @@
               >
                 CREAR
               </button>
-
-              <div class="dropdown d-inline" dropdown>
-                <button
-                  class="btn btn-default dropdown-toggle btn-link btn-icon dropdown-toggle"
-                  data-toggle="dropdown"
-                  dropdownToggle
-                  type="button"
-                >
-                  <i class="tim-icons icon-settings-gear-63"> </i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-                  <a class="dropdown-item" (click)="getAdmins()">
-                    Administradores
-                  </a>
-                  <a class="dropdown-item" (click)="getTeachers()">
-                    Profesores
-                  </a>
-                  <a class="dropdown-item" (click)="getStudents()"> Alumnos </a>
-                </div>
-              </div>
             </div>
             <h4 class="card-title title-table">{{ role | uppercase }}</h4>
           </div>
@@ -190,19 +170,20 @@
         </div>
       </div>
     </ng-container>
+    <ng-container *ngIf="showFormCreateUser">
+      <div class="col-md-12">
+        <app-create-user (showEvent)="changeStateShow($event)"></app-create-user>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="showFormEditUser">
+      <div class="col-md-12">
+        <app-edit-user
+          (showEvent)="changeStateShow($event)"
+          [user]="userEdit"
+        ></app-edit-user>
+      </div>
+    </ng-container>
   </div>
 </div>
 
-<ng-container *ngIf="showFormCreateUser">
-  <div class="col-md-12">
-    <app-create-user (showEvent)="changeStateShow($event)"></app-create-user>
-  </div>
-</ng-container>
-<ng-container *ngIf="showFormEditUser">
-  <div class="col-md-12">
-    <app-edit-user
-      (showEvent)="changeStateShow($event)"
-      [user]="userEdit"
-    ></app-edit-user>
-  </div>
-</ng-container>
+

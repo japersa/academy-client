@@ -1,24 +1,21 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
-import { Subscription } from 'rxjs';
 import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
 import { RegisterService } from '../../../auth/services/register.service';
-import { take } from 'rxjs/operators';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { SUBS_ENUM } from '../../../../shared/enum/subcriptions.enum';
 import { UserDataService } from '../../../../core/services/user-data.service';
 
 const ROLES = ROLES_ENUM;
-const SUBS = SUBS_ENUM;
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
-export class CreateUserComponent implements OnInit, OnDestroy {
+export class CreateUserComponent {
 
   roles = [
     {
@@ -29,26 +26,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       name: 'PROFESOR',
       role: ROLES.TEACHER
     },
-    {
-      name: 'estudiante',
-      role: ROLES.USER
-    }
   ];
-
-  subscriptions = [
-    {
-      name: 'Ninguna',
-      sub: SUBS.NONE
-    },
-    {
-      name: 'Básica',
-      sub: SUBS.BASIC
-    },
-    {
-      name: 'Icex AG',
-      sub: SUBS.FULL
-    }
-  ]
 
   courses = [];
 
@@ -61,8 +39,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: UntypedFormBuilder,
     private utilsService: UtilsService,
     public notificationService: NotificationsService,
-    private userDataService: UserDataService,
-    private coursesService: CoursesService,
     private registerService: RegisterService) {
     this.validationMessages = utilsService.getValidationMessages();
 
@@ -78,11 +54,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
       role: new UntypedFormControl('', Validators.compose([
         Validators.required,
-      ])),
-      courses_ids: new UntypedFormControl('', Validators.compose([
-      ])),
-      subscription: new UntypedFormControl('', Validators.compose([
-      ])),
+      ]))
     }
     );
 
@@ -90,30 +62,15 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   createUser(dataFrom: any) {
 
-    let data = {}
+    let data = {
+      username: dataFrom.email,
+      first_name: dataFrom.first_name,
+      last_name: dataFrom.last_name,
+      rol: dataFrom.role,
+      email: dataFrom.email
+    };
 
-    if (dataFrom.subscription === SUBS.BASIC) {
-      data = {
-        username: dataFrom.email,
-        first_name: dataFrom.first_name,
-        last_name: dataFrom.last_name,
-        rol: dataFrom.role,
-        subscription: dataFrom.subscription,
-        courses_ids: dataFrom.courses_ids,
-        email: dataFrom.email
-      }
-    } else {
-      data = {
-        username: dataFrom.email,
-        first_name: dataFrom.first_name,
-        last_name: dataFrom.last_name,
-        rol: dataFrom.role,
-        subscription: dataFrom.subscription,
-        email: dataFrom.email
-      }
-    }
-
-    this.registerService.registerByRole(data).pipe(take(1)).subscribe(res => {
+    this.registerService.registerByRole(data).subscribe(res => {
       this.showEvent.emit(false);
       this.notificationService.showNotification('bottom', 'center', 'Usuario registrado correctamente', 2);
       this.createUserForm.reset();
@@ -129,28 +86,5 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   cancelCreate() {
     this.showEvent.emit(false);
   }
-
-
-  ngOnInit(): void {
-
-    this.coursesService.getCourses().pipe(take(1)).subscribe(res => {
-      if (this.userDataService.userData$.value.rol === 'admin') {
-        this.courses = res.all;
-      }
-      if (this.userDataService.userData$.value.rol === 'teacher') {
-        this.courses = res.my_courses_created;
-      }
-    },
-      error => {
-        console.log(error.error);
-      });
-
-
-  }
-
-  ngOnDestroy(): void {
-
-  }
-
 
 }
