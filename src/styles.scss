@@ -1,2 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "~flag-icon-css/css/flag-icon.min.css"; */
+
+// Tables styles
+// https://swimlane.gitbook.io/ngx-datatable/readme/themes
+.ngx-datatable {
+    color: var(--secondary) !important; 
+    .card {
+        background-color: #f4f4f4 !important;
+    }
+}
+
+.datatable-body-cell-label {
+    color: var(--secondary) !important; 
+}
+
+.page-count {
+    color: var(--secondary) !important; 
+}
+
+.datatable-row-odd {
+    background-color: #f8f9fa !important;
+}

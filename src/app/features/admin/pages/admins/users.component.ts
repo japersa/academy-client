@@ -35,12 +35,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   activeRow: any;
   SelectionType = SelectionType;
 
-
   constructor(private dashboardService: DashboardService,
     private _Activatedroute: ActivatedRoute
-  ) {
-
-  }
+  ) { }
 
   createUser() {
     this.showFormCreateUser = !this.showFormCreateUser;
@@ -61,55 +58,16 @@ export class UsersComponent implements OnInit, OnDestroy {
   getUsers() {
     this.users.length = 0;
 
-    this.dashboardService.getUsersByRole(this.role).subscribe(
+    this.dashboardService.getUsersByRole({ rol: this.role }).subscribe(
       {
         next: r => {
-          this.rows = r;
+          this.rows = r?.results;
           console.log(this.rows);
-
         },
         error: e => console.log('error ' + e.error)
       }
     );
   }
-  // getAdmins() {
-  //   this.users.length = 0;
-  //   this.role = 'administradores'
-  //   this.dashboardService.getUsersByRole(ROLES_ENUM.ADMIN).subscribe(res => {
-  //     Object.assign(this.users, res)
-  //   },
-  //     error => {
-  //       console.log('error ' + error.error);
-  //     });
-  // }
-
-  // getStudents() {
-  //   this.users.length = 0;
-  //   this.role = 'estudiantes'
-  //   this.dashboardService.getUsersByRole(ROLES_ENUM.USER).subscribe(res => {
-  //     Object.assign(this.users, res)
-  //   },
-  //     error => {
-  //       console.log('error ' + error.error);
-  //     });
-  // }
-
-  // getTeachers() {
-  //   this.users.length = 0;
-  //   this.role = 'profesores'
-  //   this.dashboardService.getUsersByRole(ROLES_ENUM.TEACHER).subscribe(res => {
-  //     Object.assign(this.users, res);
-  //   },
-  //     error => {
-  //       console.log('error ' + error.error);
-  //     });
-  // }
-
-  // getAll() {
-  //   this.getStudents();
-  //   this.getTeachers();
-  //   this.getAdmins();
-  // }
 
   deleteUser(userId: string) {
 
@@ -166,6 +124,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   entriesChange($event) {
     this.entries = $event.target.value;
   }
+
   filterTable($event) {
     let val = $event.target.value;
     this.temp = this.rows.filter(function (d) {
@@ -177,10 +136,12 @@ export class UsersComponent implements OnInit, OnDestroy {
       return false;
     });
   }
+
   onSelect({ selected }) {
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
   }
+
   onActivate(event) {
     this.activeRow = event.row;
   }

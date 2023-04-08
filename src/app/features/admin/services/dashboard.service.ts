@@ -6,6 +6,23 @@ import { ROLES_ENUM } from '../../../shared/enum/roles.enum';
 
 const apiURL = environment.apiURL;
 
+interface IUsersParams {
+  id?: number;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  rol?: ROLES_ENUM;
+  subscription?: string;
+  identity_card?: string;
+  phone_number?: string,
+  username?: string;
+  deferred_name?: string;
+  deferred_document_number?: string;
+  referral_code?: string;
+  page?: number;
+  entries?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,14 +30,14 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getUsersByRole(userRole: ROLES_ENUM): Observable<any> {
+  getUsersByRole(options?: Partial<IUsersParams>): Observable<any> {
 
-    const params = new HttpParams()
-      .set('page', PageNo)
-      .set('sort', SortOn);
+    // const params = new HttpParams()
+    console.log(options);
+    
 
     const route = `/list/users/`;
-    return this.http.get<any>(`${apiURL}${route}`);
+    return this.http.get<any>(`${apiURL}${route}`, { params: options });
   }
 
   deleteUser(userId: string): Observable<any> {

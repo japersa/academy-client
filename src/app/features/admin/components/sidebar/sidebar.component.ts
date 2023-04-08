@@ -56,19 +56,19 @@ export const ROUTES: RouteInfo[] = [
         smallTitle: 'AL'
       },
       {
-        path: 'users',
+        path: 'user',
         title: 'Usuarios',
         type: 'link',
         smallTitle: 'US'
       },
       {
-        path: 'teachers',
+        path: 'teacher',
         title: 'profesores',
         type: 'link',
         smallTitle: 'TE'
       },
       {
-        path: 'admins',
+        path: 'admin',
         title: 'administradores',
         type: 'link',
         smallTitle: 'AD'
