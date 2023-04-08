@@ -3,7 +3,7 @@
     <div class="col-lg-5  mr-auto container-form" >
       <div class="card card-login card-white shadow-none">
         <div class="card-header pb-1 mt-5 pl-5 pr-5 text-center">
-          <div class="mx-auto  my-auto logo">
+          <div class="mx-auto  my-auto logo ">
             <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg" alt="Logo" >
           </div>
           <h1 class="card-title">
@@ -151,10 +151,10 @@
                           [interval]="3000"
                           [showIndicators]="false"
                           [indicatorsByChunk]="false">
-                    <slide *ngFor="let slide of slides; let index=index">
-                      <img [src]="slide.image" alt="image slide" style="display: inline-block; width: 40%; text-align: center;">
+                    <slide style="margin-left: 10px;" *ngFor="let slide of slides; let index=index">
+                      <img [src]="slide.image" alt="image slide" style=" margin-bottom: 5px; display: inline-block; width: 25%; text-align: center;">
                       <div >
-                        <h4>{{ slide.message }}</h4>
+                        <h4 style="font-size: .9rem;" >{{ slide.message }}</h4>
                       </div>
                     </slide>
                   </carousel>

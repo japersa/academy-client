@@ -9,21 +9,28 @@ import { Router } from '@angular/router';
 })
 export class TradingAreaComponent implements OnInit {
 
+  myPackages: any[] = [];
+
   constructor(
     private packsService: PacksService,
     private router: Router
   ) { }
 
+  getMypackages() {
+    this.packsService.getMyPacks().subscribe(
+      response => {
+        console.log(response);
+        this.myPackages = response;
+        console.log(this.myPackages);
+        
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   ngOnInit(): void {
-      this.packsService.getMyPacks().subscribe(
-        response => {
-          if (response.length > 0) {
-            this.router.navigate(['trading-area/my-packages']);
-          }
-        },
-        error => {
-          console.log(error);
-        }
-      )
+    this.getMypackages(); 
   }
 }
