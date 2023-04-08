@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
-import { take } from 'rxjs/operators';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import swal from 'sweetalert2';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { debounceTime, distinctUntilChanged, filter, fromEvent, tap } from 'rxjs';
 
 export enum SelectionType {
   single = "single",
@@ -19,24 +18,28 @@ export enum SelectionType {
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit, OnDestroy {
+export class UsersComponent implements OnInit, AfterViewInit {
+
+
+  @ViewChild('search') input!: ElementRef;
 
   userEdit = {};
   showFormCreateUser = false;
   showFormEditUser = false;
-  role: ROLES_ENUM = ROLES_ENUM.ALL;
-  users = [];
+  role: ROLES_ENUM = undefined;
 
   rows: any = [];
-
-  entries: number = 10;
-  selected: any[] = [];
   temp = [];
+  entries: number = 10;
+  filter: string = '';
+  selected: any[] = [];
   activeRow: any;
   SelectionType = SelectionType;
 
+  options = { page_size: this.entries };
+
   constructor(private dashboardService: DashboardService,
-    private _Activatedroute: ActivatedRoute
+    private route: ActivatedRoute
   ) { }
 
   createUser() {
@@ -54,19 +57,29 @@ export class UsersComponent implements OnInit, OnDestroy {
     // this.getAll();
   }
 
-
   getUsers() {
-    this.users.length = 0;
 
-    this.dashboardService.getUsersByRole({ rol: this.role }).subscribe(
+    this.dashboardService.getUsersByRole(this.options).subscribe(
       {
         next: r => {
           this.rows = r?.results;
+          this.temp = r?.results;
           console.log(this.rows);
         },
         error: e => console.log('error ' + e.error)
       }
     );
+  }
+
+  resetFilters() {
+    this.entries = 10;
+    this.options['rol'] = this.role;
+    if (this.options.hasOwnProperty(this.filter)) {
+      delete this.options[this.filter];
+    }
+    this.input.nativeElement.value = null;
+    this.filter = '';
+    this.getUsers();
   }
 
   deleteUser(userId: string) {
@@ -89,7 +102,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         if (result.value) {
 
           this.dashboardService.deleteUser(userId).subscribe(res => {
-
+            this.getUsers();
             swal.fire({
               title: 'Eliminado!',
               text: 'La orden ha sido ejecutada',
@@ -123,18 +136,12 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   entriesChange($event) {
     this.entries = $event.target.value;
+    this.getUsers();
   }
 
-  filterTable($event) {
-    let val = $event.target.value;
-    this.temp = this.rows.filter(function (d) {
-      for (var key in d) {
-        if (d[key].toLowerCase().indexOf(val) !== -1) {
-          return true;
-        }
-      }
-      return false;
-    });
+  filterChange($event) {
+    this.filter = $event.target.value;
+    console.log($event.target.value);
   }
 
   onSelect({ selected }) {
@@ -147,13 +154,26 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._Activatedroute.params.subscribe(params => {
-      this.role = params['role'];
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.role = params.get('role') as ROLES_ENUM;
+      this.options['rol'] = params.get('role');
       this.getUsers();
     });
   }
 
-  ngOnDestroy(): void {
+  ngAfterViewInit() {
+    // server-side search
+    fromEvent(this.input.nativeElement, 'keyup')
+      .pipe(
+        filter(Boolean),
+        debounceTime(600),
+        distinctUntilChanged(),
+        tap((text) => {
+          this.options[this.filter] = this.input.nativeElement.value;
+          this.getUsers();
+        })
+      )
+      .subscribe();
   }
 
 }

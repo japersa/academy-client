@@ -50,12 +50,6 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'all',
-        title: 'todos',
-        type: 'link',
-        smallTitle: 'AL'
-      },
-      {
         path: 'user',
         title: 'Usuarios',
         type: 'link',

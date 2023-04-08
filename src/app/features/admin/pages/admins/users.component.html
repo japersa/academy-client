@@ -62,7 +62,7 @@
                 <div class="col-sm-12 col-md-6">
                   <div class="dataTables_length" id="datatable_length">
                     <label>
-                      Show
+                      Filas
                       <select
                         name="datatable_length"
                         aria-controls="datatable"
@@ -78,25 +78,55 @@
                         <option value="50" [selected]="entries == 50">
                           50
                         </option>
-                        <option value="-1" [selected]="entries == -1">
-                          All
+                        <option value="-1" [selected]="entries == 100">
+                          100
                         </option>
                       </select>
-                      entries
                     </label>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
                   <div id="datatable_filter" class="dataTables_filter">
                     <label>
+                      Filtros
+                      <select
+                        name="datatable_filters"
+                        aria-controls="datatable"
+                        class="form-control form-control-sm"
+                        (change)="filterChange($event)"
+                      >
+                        <option selected="true" disabled="disabled">
+                          Seleccionar filtro
+                        </option>
+                        <option value="id">id</option>
+                        <option value="first_name">nombre</option>
+                        <option value="last_name">apellido</option>
+                        <option value="username">email</option>
+                        <option value="subscription">subscripción</option>
+                        <option value="identity_card">documento</option>
+                        <option value="phone_number">teléfono</option>
+                        <option value="deferred_name">nombre referido</option>
+                        <option value="deferred_document_number">
+                          docu. referido
+                        </option>
+                        <option value="referral_code">código referido</option>
+                      </select>
+                    </label>
+                    <label>
                       <input
                         type="search"
                         class="form-control form-control-sm"
                         placeholder="Search records"
                         aria-controls="datatable"
-                        (keyup)="filterTable($event)"
+                        #search
                       />
                     </label>
+                    <button
+                      class="btn btn-primary btn-fab btn-icon btn-round"
+                      (click)="resetFilters()"
+                    >
+                      <i class="tim-icons icon-refresh-01"></i>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -109,7 +139,7 @@
                 [footerHeight]="50"
                 [rowHeight]="'auto'"
                 [limit]="entries != -1 ? entries : undefined"
-                [rows]="rows"
+                [rows]="temp"
                 [selected]="selected"
                 [selectionType]="'multiClick'"
                 (activate)="onActivate($event)"
@@ -119,12 +149,12 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Nombre" prop="first_name">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                   {{ row?.first_name | titlecase }}
+                    {{ row?.first_name | titlecase }}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Apellido" prop="last_name">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                   {{ row?.last_name | titlecase }}
+                    {{ row?.last_name | titlecase }}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Email" prop="username">

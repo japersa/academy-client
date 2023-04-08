@@ -20,7 +20,7 @@ interface IUsersParams {
   deferred_document_number?: string;
   referral_code?: string;
   page?: number;
-  entries?: number;
+  page_size?: number;
 }
 
 @Injectable({
