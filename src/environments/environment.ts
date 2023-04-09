@@ -15,9 +15,7 @@ export const environment = {
     messagingSenderId: '696835517028',
     appId: '1:696835517028:web:43eaf41b67891349d50d71'
   },
-  recaptcha: {
-    siteKey: '6LdJGV4fAAAAAMXk2Faeso4ZvN8LbiXElUhwU2pB',
-  }
+  stripePK: 'pk_test_51Mok6LKim0A5yCrrD5U0SiKGYgFpMcVtUc1eDJUE0r7vB0VXXQ3xJGgywdhEdxHU73sIGV3Jahg2CXZkf0NzKLBw00LDYJVWv5'
 };
 
 
