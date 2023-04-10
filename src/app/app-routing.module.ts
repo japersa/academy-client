@@ -125,13 +125,18 @@ const routes: Routes = [
       },
       {
         path: 'trading-area',
-        loadChildren: () => import('./features/trading-area/pages/trading-area/trading-area.module')
+        loadChildren: () => import('./features/trading-area/trading-area.module')
           .then(m => m.TradingAreaModule)
       },
       {
         path: 'packages',
         loadChildren: () => import('./features/admin/pages/packages/packages.module')
           .then(m => m.PackagesModule)
+      },
+      {
+        path: 'self-management',
+        loadChildren: () => import('./features/self-management/self-management.module')
+          .then(m => m.SelfManagementModule)
       },
     ]
   },

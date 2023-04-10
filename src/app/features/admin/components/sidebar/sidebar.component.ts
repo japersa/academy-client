@@ -99,7 +99,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '',
+    path: '/trading-area',
     title: 'area trader',
     type: 'sub',
     icontype: 'tim-icons icon-trophy',
@@ -108,21 +108,27 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'trading-area',
-        title: 'trading',
+        path: 'home',
+        title: 'inicio',
         type: 'link',
-        smallTitle: 'TG'
+        smallTitle: 'IN'
       },
+      // {
+      //   path: 'ranking',
+      //   title: 'ranking',
+      //   type: 'link',
+      //   smallTitle: 'RK'
+      // },
       {
-        path: 'ranking',
-        title: 'ranking',
+        path: 'orders',
+        title: 'ordenes',
         type: 'link',
         smallTitle: 'RK'
       }
     ]
   },
   {
-    path: '',
+    path: '/self-management',
     title: 'autogestión',
     type: 'sub',
     icontype: 'tim-icons icon-trophy',
@@ -131,17 +137,23 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'funds',
-        title: 'fondos',
+        path: 'home',
+        title: 'inicio',
         type: 'link',
-        smallTitle: 'FO'
+        smallTitle: 'IN'
       },
-      {
-        path: 'withdrawals',
-        title: 'retiros y comiciones',
-        type: 'link',
-        smallTitle: 'WT'
-      },
+      // {
+      //   path: 'funds',
+      //   title: 'fondos',
+      //   type: 'link',
+      //   smallTitle: 'FO'
+      // },
+      // {
+      //   path: 'withdrawals',
+      //   title: 'retiros y comiciones',
+      //   type: 'link',
+      //   smallTitle: 'WT'
+      // },
     ]
   },
   {

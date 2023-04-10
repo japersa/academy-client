@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PacksService } from '../../services/packs.service';
+import { PacksService } from './services/packs.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,7 +22,7 @@ export class TradingAreaComponent implements OnInit {
         console.log(response);
         this.myPackages = response;
         console.log(this.myPackages);
-        
+
       },
       error => {
         console.log(error);
@@ -31,6 +31,6 @@ export class TradingAreaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMypackages(); 
+    this.getMypackages();
   }
 }
