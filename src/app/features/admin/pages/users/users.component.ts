@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   activeRow: any;
   SelectionType = SelectionType;
 
-  options = { page_size: this.entries };
+  options = {};
 
   constructor(private dashboardService: DashboardService,
     private route: ActivatedRoute
@@ -58,7 +58,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   getUsers() {
-
     this.dashboardService.getUsersByRole(this.options).subscribe(
       {
         next: r => {
@@ -73,6 +72,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   resetFilters() {
     this.entries = 10;
+    this.options['page_size'] = 10;
     this.options['rol'] = this.role;
     if (this.options.hasOwnProperty(this.filter)) {
       delete this.options[this.filter];
@@ -136,12 +136,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   entriesChange($event) {
     this.entries = $event.target.value;
+    this.options['page_size'] = this.entries;
     this.getUsers();
   }
 
   filterChange($event) {
     this.filter = $event.target.value;
-    console.log($event.target.value);
   }
 
   onSelect({ selected }) {
