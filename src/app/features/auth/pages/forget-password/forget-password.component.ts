@@ -75,14 +75,14 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
     }
 
     this.subscription$ = this.forgetPasswordService.register(data).pipe(take(1)).subscribe(res => {
-      this.notificationService.showNotification('bottom', 'center', 'Se ha enviado la solicitud de cambio de clave correctamente', 2);
+      this.notificationService.showNotification('top', 'right', 'Se ha enviado la solicitud de cambio de clave correctamente', 2);
       this.form.reset();
       this.router.navigate(['/sign-in'])
 
     },
       error => {
         this.errorMessage = error.error;
-        this.notificationService.showNotification('bottom', 'center', 'Ha surgido un error', 4);
+        this.notificationService.showNotification('top', 'right', 'Ha surgido un error', 4);
         console.log(error.error);
       });
 

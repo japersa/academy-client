@@ -62,16 +62,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
         text: "¿Deseas restablecer la contraseña?",
         buttonsStyling: false,
         customClass: {
-          cancelButton: "btn btn-danger",
-          confirmButton: "btn btn-info mr-1",
+          cancelButton: "btn btn-secondary ", 
+          confirmButton: "btn btn-secondary  mr-1",
         },
         confirmButtonText: "Restablecer Contraseña",
         showCancelButton: true,
-        cancelButtonText: "Quedarme Aquí",
+        cancelButtonText: "Iniciar Sesión",
         icon: 'warning'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.router.navigate(['/forget-password']);
+            } else if (result.isDismissed){
+              this.router.navigate(['/sign-in']);
             }
         });
     } else if (type == "wait") {
@@ -105,7 +107,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         text: "Revisa tu correo, ya puedes iniciar sesión!",
         buttonsStyling: false,
         customClass: {
-          confirmButton: "btn btn-success",
+          confirmButton: "btn btn-secondary",
         },
         icon: "success"
       })
@@ -378,7 +380,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.showSwal('wait');
   
     this.registerService.register(dataForm).subscribe(res => {
-      this.notificationService.showNotification('bottom', 'center', 'Te has registrado correctamente', 2);
+      this.notificationService.showNotification('top', 'right', 'Te has registrado correctamente', 2);
       this.showSwal('success-message')
       this.form.reset();
       this.router.navigate(['/sign-in']);
@@ -392,7 +394,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       }
   
       console.log(error.error);
-      this.notificationService.showNotification('bottom', 'center', this.errorMessage, 4);
+      this.notificationService.showNotification('top', 'right', this.errorMessage, 4);
     });
 
   }

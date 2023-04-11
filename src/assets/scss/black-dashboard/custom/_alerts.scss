@@ -2,21 +2,32 @@
   border: 0;
   color: $white;
 
+
   .alert-link {
     color: $white;
   }
 
   &.alert-success {
-    background-color: darken($success, 10%);
+    background-color:  #f0f0f0;
+    color: black;
   }
+
+  
 
   i.fa,
   i.tim-icons {
     font-size: $font-paragraph;
   }
 
+  .tim-icons-color {
+    color: green;
+  }
+  .tim-icons-error {
+    color: red;
+  }
+
   .close {
-    color: $white;
+    color: black;
     opacity: 0.9;
     text-shadow: none;
     line-height: 0;
