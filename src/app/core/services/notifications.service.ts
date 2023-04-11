@@ -35,14 +35,14 @@ export class NotificationsService {
         break;
       case 2:
         this.toastr.success(
-          `<span class=" tim-icons icon-bell-55"></span>  ${text}`,
+          `<span class=" tim-icons tim-icons-color icon-bell-55"></span>  ${text}`,
           "",
           {
             timeOut: 8000,
             closeButton: true,
             enableHtml: true,
-            toastClass: "alert alert-success alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
+            toastClass: "alert alert-success alert-with-icon ",
+            positionClass: "toast-" + from + "-" + align,
           }
         );
         break;
@@ -61,7 +61,7 @@ export class NotificationsService {
         break;
       case 4:
         this.toastr.error(
-          `<span class=" tim-icons icon-bell-55"></span> ${text} `,
+          `<span class=" tim-icons-error tim-icons icon-bell-55"></span> ${text} `,
           "",
           {
             timeOut: 8000,
