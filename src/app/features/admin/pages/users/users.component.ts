@@ -63,7 +63,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         next: r => {
           this.rows = r?.results;
           this.temp = r?.results;
-          console.log(this.rows);
+          console.log(r);
         },
         error: e => console.log('error ' + e.error)
       }
@@ -136,8 +136,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   entriesChange($event) {
     this.entries = $event.target.value;
-    this.options['page_size'] = this.entries;
-    this.getUsers();
+    // this.options['page_size'] = this.entries;
+    // this.getUsers();
   }
 
   filterChange($event) {
@@ -157,6 +157,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.role = params.get('role') as ROLES_ENUM;
       this.options['rol'] = params.get('role');
+      // this.options['page_size'] = 11;
       this.getUsers();
     });
   }
