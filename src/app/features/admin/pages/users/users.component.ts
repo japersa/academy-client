@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   activeRow: any;
   SelectionType = SelectionType;
 
-  options = { page_size: this.entries };
+  options = {};
 
   constructor(private dashboardService: DashboardService,
     private route: ActivatedRoute
@@ -58,13 +58,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   getUsers() {
-
     this.dashboardService.getUsersByRole(this.options).subscribe(
       {
         next: r => {
           this.rows = r?.results;
           this.temp = r?.results;
-          console.log(this.rows);
+          console.log(r);
         },
         error: e => console.log('error ' + e.error)
       }
@@ -73,6 +72,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   resetFilters() {
     this.entries = 10;
+    this.options['page_size'] = 10;
     this.options['rol'] = this.role;
     if (this.options.hasOwnProperty(this.filter)) {
       delete this.options[this.filter];
@@ -136,12 +136,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   entriesChange($event) {
     this.entries = $event.target.value;
-    this.getUsers();
+    // this.options['page_size'] = this.entries;
+    // this.getUsers();
   }
 
   filterChange($event) {
     this.filter = $event.target.value;
-    console.log($event.target.value);
   }
 
   onSelect({ selected }) {
@@ -157,6 +157,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.role = params.get('role') as ROLES_ENUM;
       this.options['rol'] = params.get('role');
+      // this.options['page_size'] = 11;
       this.getUsers();
     });
   }

@@ -22,3 +22,12 @@
     background-color: #f8f9fa !important;
 }
 
+.ngx-datatable.ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled).active a {
+        color: #fff !important;
+        background-color: var(--primary) !important;
+}
+
+.ngx-datatable.ngx-datatable.bootstrap .datatable-footer .pager li a {
+    color:  #4be8e6 !important;
+    background-color: var(--secondary) !important; 
+}
