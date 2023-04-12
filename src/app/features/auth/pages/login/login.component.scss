@@ -62,12 +62,19 @@
     background-size: cover;
 }
 
+.slide-title {
+    margin-bottom: -30px;
+    & h3 {
+        color: #fff;
+    }
+}
 .carousel {
     border: 2px solid #fff;
     border-radius: 10px;
     text-align: center;
-/*     display: flex;
-    justify-content: center; */
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
 }
 
 .carousel h3 {
@@ -81,6 +88,10 @@
 
 .carousel h4 {
     color: #fff;
+}
+
+.carousel carousel {
+    width: 100% !important;
 }
 
 

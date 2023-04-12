@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
+  slidesTitle = '';
   itemsPerSlide = 3;
   slides = [
     { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/fondeo-icon_imbdsw.svg', 
@@ -88,9 +89,21 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
   }
 
+  onSlideRangeChange(indexes: number[]|void): void {
+    if (indexes && indexes.length > 0) {
+      // Verificar si los índices incluyen 0, 1 y 2
+      if (indexes.includes(0) && indexes.includes(1) && indexes.includes(2)) {
+        this.slidesTitle = 'Funding Program';
+      } else {
+        this.slidesTitle = 'Autogestión de Fondos';
+      }
+    }
+  }
+
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("lock-page");
+    this.onSlideRangeChange();
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
