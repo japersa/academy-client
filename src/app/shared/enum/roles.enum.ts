@@ -3,4 +3,4 @@ export enum ROLES_ENUM {
     TEACHER = 'teacher',
     USER = 'user',
     ALL = 'all'
-}
+} 
