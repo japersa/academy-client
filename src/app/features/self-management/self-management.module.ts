@@ -3,14 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { SelfManagementRoutingModule } from './self-management-routing.module';
 import { SelfManagementComponent } from './self-management.component';
+import { StripeModule } from 'stripe-angular';
+import { environment } from 'src/environments/environment';
+import { OrdersComponent } from './components/orders/orders.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 @NgModule({
   declarations: [
-    SelfManagementComponent
+    SelfManagementComponent,
+    OrdersComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
+    StripeModule.forRoot(environment.stripePK),
     SelfManagementRoutingModule
   ]
 })

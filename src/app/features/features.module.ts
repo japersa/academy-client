@@ -6,6 +6,7 @@ import { CreateCourseByStepsModule } from './teacher/pages/create-course-by-step
 import { TradingAreaModule } from './trading-area/trading-area.module';
 
 import { QuicklinkModule } from 'ngx-quicklink';
+import { SelfManagementModule } from './self-management/self-management.module';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,15 @@ import { QuicklinkModule } from 'ngx-quicklink';
     AdminCoursesModule,
     CreateCourseByStepsModule,
     TradingAreaModule,
-    QuicklinkModule
+    QuicklinkModule,
+    SelfManagementModule
   ],
   exports: [
     AdminLayoutModule,
     AdminCoursesModule,
     CreateCourseByStepsModule,
-    TradingAreaModule
+    TradingAreaModule,
+    SelfManagementModule
   ]
 })
 export class FeaturesModule { }
