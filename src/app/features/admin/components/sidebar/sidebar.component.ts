@@ -90,7 +90,7 @@ export const ROUTES: RouteInfo[] = [
         type: 'link',
         smallTitle: 'AC'
       },
-      {
+      { 
         path: 'ama',
         title: 'dudas',
         type: 'link',
@@ -179,45 +179,394 @@ export const ROUTES: RouteInfo[] = [
   }
 ];
 
+// Routes to ADMIN
+export const ROUTES_ADMIN: RouteInfo[] = [
+  {
+    path: '/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+    role: [ROLES_ENUM.ALL]
+  },
+  {
+    path: '/users',
+    title: 'Roles',
+    type: 'sub',
+    icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ADMIN],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'user',
+        title: 'Usuarios',
+        type: 'link',
+        smallTitle: 'US'
+      },
+      {
+        path: 'admin',
+        title: 'administradores',
+        type: 'link',
+        smallTitle: 'AD'
+      },
+      {
+        path: 'teacher',
+        title: 'profesores',
+        type: 'link',
+        smallTitle: 'TE'
+      }
+    ]
+  },
+  {
+    path: '',
+    title: 'Profesores',
+    type: 'sub',
+    icontype: 'tim-icons icon-single-copy-04',
+    role: [ROLES_ENUM.ADMIN, ROLES_ENUM.TEACHER],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'course-by-steps',
+        title: 'Crear curso',
+        type: 'link',
+        smallTitle: 'CP'
+      },
+      {
+        path: 'admin-courses',
+        title: 'Admin cursos',
+        type: 'link',
+        smallTitle: 'AC'
+      },
+      { 
+        path: 'ama',
+        title: 'dudas',
+        type: 'link',
+        smallTitle: 'D&C'
+      },
+    ]
+  },
+  {
+    path: '/funding-program',
+    title: 'Funding program',
+    type: 'sub',
+    icontype: 'tim-icons icon-coins',
+    role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: '/trading-area-packages',
+        title: 'Area Trading Paquetes',
+        type: 'link',
+        smallTitle: 'TP'
+      },
+      {
+        path: '/withdrawals',
+        title: 'retiros y beneficios',
+        type: 'link',
+        smallTitle: 'WT'
+      },
+      {
+        path: '/ranking',
+        title: 'ranking',
+        type: 'link',
+        smallTitle: 'RK'
+      },
+    ]
+  },
+  {
+    path: '/self-management',
+    title: 'autogestión de fondos',
+    type: 'sub',
+    icontype: 'tim-icons icon-trophy',
+    role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: '/academy',
+        title: 'academia',
+        type: 'link',
+        smallTitle: 'AC'
+      },
+       {
+         path: '/global-withdrawals',
+         title: 'retiros y comiciones globales',
+         type: 'link',
+         smallTitle: 'G&W'
+       },
+       {
+         path: 'withdrawals',
+         title: 'retiros y comiciones',
+         type: 'link',
+         smallTitle: 'WT'
+       },
+    ]
+  },
+  {
+    path: '/billing',
+    title: 'Facturación',
+    type: 'link',
+    icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ALL],
+  },
+];
+
+/* export const ROUTES_PROFILE_MENU_ITEMS_ADMIN = [
+  {
+    path: '/profile',
+    title: 'perfil',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  },
+  {
+    path: 'https://intcapex.com/',
+    title: 'Pagina Web',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  },
+  {
+    path: '/customer-service',
+    title: 'Servicio al Cliente',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  }
+] */
+
+// Routes to TEACHER
+export const ROUTES_TEACHER: RouteInfo[] = [
+  {
+    path: '/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+    role: [ROLES_ENUM.ALL]
+  },
+  {
+    path: '',
+    title: 'Profesores',
+    type: 'sub',
+    icontype: 'tim-icons icon-single-copy-04',
+    role: [ROLES_ENUM.ADMIN, ROLES_ENUM.TEACHER],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'course-by-steps',
+        title: 'Crear curso',
+        type: 'link',
+        smallTitle: 'CP'
+      },
+      {
+        path: 'admin-courses',
+        title: 'Admin cursos',
+        type: 'link',
+        smallTitle: 'AC'
+      },
+      { 
+        path: 'ama',
+        title: 'dudas',
+        type: 'link',
+        smallTitle: 'D&C'
+      },
+    ]
+  },
+  {
+    path: '/funding-program',
+    title: 'Funding program',
+    type: 'sub',
+    icontype: 'tim-icons icon-coins',
+    role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: '/trading-area',
+        title: 'Area Trading',
+        type: 'link',
+        smallTitle: 'AT'
+      },
+      {
+        path: '/withdrawals',
+        title: 'retiros de beneficios',
+        type: 'link',
+        smallTitle: 'WT'
+      },
+      {
+        path: '/ranking',
+        title: 'ranking',
+        type: 'link',
+        smallTitle: 'RK'
+      },
+    ]
+  },
+  {
+    path: '/self-management',
+    title: 'autogestión de fondos',
+    type: 'sub',
+    icontype: 'tim-icons icon-trophy',
+    role: [ROLES_ENUM.ALL, ROLES_ENUM.TEACHER],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: '/academy',
+        title: 'academia',
+        type: 'link',
+        smallTitle: 'AC'
+      },
+       {
+         path: 'withdrawals',
+         title: 'retiros y comisiones',
+         type: 'link',
+         smallTitle: 'WT'
+       },
+    ]
+  },
+  {
+    path: '/billing',
+    title: 'Facturacion',
+    type: 'link',
+    icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
+    path: '/downloads',
+    title: 'descargas',
+    type: 'link',
+    icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ALL],
+  }
+];
+
+/* export const ROUTES_PROFILE_MENU_ITEMS_TEACHER = [
+  {
+    path: '/profile',
+    title: 'perfil',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  },
+  {
+    path: 'https://intcapex.com/',
+    title: 'Pagina Web',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  },
+  {
+    path: '/customer-service',
+    title: 'Servicio al Cliente',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  }
+] */
+
+// Routes to USER
+export const ROUTES_USER: RouteInfo[] = [
+  {
+    path: '/dashboard',
+    title: 'Dashboard',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+    role: [ROLES_ENUM.ALL]
+  },
+  {
+    path: '/funding-program',
+    title: 'Funding program',
+    type: 'sub',
+    icontype: 'tim-icons icon-coins',
+    role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: '/trading-area',
+        title: 'Area Trading',
+        type: 'link',
+        smallTitle: 'AT'
+      },
+      {
+        path: '/withdrawals',
+        title: 'retiros de beneficios',
+        type: 'link',
+        smallTitle: 'WT'
+      },
+      {
+        path: '/ranking',
+        title: 'ranking',
+        type: 'link',
+        smallTitle: 'RK'
+      },
+    ]
+  },
+  {
+    path: '/self-management',
+    title: 'autogestión de fondos',
+    type: 'sub',
+    icontype: 'tim-icons icon-trophy',
+    role: [ROLES_ENUM.ALL, ROLES_ENUM.TEACHER],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: '/academy',
+        title: 'academia',
+        type: 'link',
+        smallTitle: 'AC'
+      },
+       {
+         path: 'withdrawals',
+         title: 'retiros y comisiones',
+         type: 'link',
+         smallTitle: 'WT'
+       },
+    ]
+  },
+  {
+    path: '/billing',
+    title: 'Facturacion',
+    type: 'link',
+    icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
+    path: '/downloads',
+    title: 'descargas',
+    type: 'link',
+    icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ALL],
+  }
+];
+
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+
   menuItems: any[];
   profileMenuItems: any = [
-    {
-      path: '/packages',
-      title: 'solicitud de paquetes',
-      type: 'link',
-      icontype: 'tim-icons icon-chart-pie-36',
-    },
-    {
-      path: '/profile',
-      title: 'clientes',
-      type: 'link',
-      icontype: 'tim-icons icon-chart-pie-36',
-    },
-    {
-      path: '/profile',
-      title: 'perfil',
-      type: 'link',
-      icontype: 'tim-icons icon-chart-pie-36',
-    },
-    {
-      path: 'https://intcapex.com/',
-      title: 'Pagina Web',
-      type: 'link',
-      icontype: 'tim-icons icon-chart-pie-36',
-    },
-    {
-      path: '/customer-service',
-      title: 'Servicio al Cliente',
-      type: 'link',
-      icontype: 'tim-icons icon-chart-pie-36',
-    },
-  ]
+  {
+    path: '/profile',
+    title: 'perfil',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  },
+  {
+    path: 'https://intcapex.com/',
+    title: 'Pagina Web',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  },
+  {
+    path: '/customer-service',
+    title: 'Servicio al Cliente',
+    type: 'link',
+    icontype: 'tim-icons icon-chart-pie-36',
+  },
+];
 
   constructor(private router: Router,
     private userDataService: UserDataService) { }
@@ -238,12 +587,20 @@ export class SidebarComponent implements OnInit {
     });
     console.log(this.rol);
 
-    this.menuItems = ROUTES.filter(menuItem => {
+    if (this.rol === 'admin') {
+      this.menuItems = ROUTES_ADMIN;
+    } else if (this.rol === 'teacher') {
+      this.menuItems = ROUTES_TEACHER;
+    } else if (this.rol === 'user') {
+      this.menuItems = ROUTES_USER;
+    }
+
+    /* this.menuItems = ROUTES.filter(menuItem => {
       if (this.userDataService?.userData$?.value?.rol === 'teacher' && (menuItem.path === '/roles' || menuItem.path === '/dashboard')) {
         return
       } else {
         return menuItem
       }
-    });
+    }); */
   }
 }

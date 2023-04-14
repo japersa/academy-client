@@ -6,13 +6,13 @@
         custom-btn my-auto d-inline"
       *ngIf="rol === 'admin'" 
       (click)="adminButtonAction()"  
-        >Solicitudes de Paquetes
+        >Solicitud de Paquetes
     </button>
     <button 
       class="
         btn btn-secondary btn-block 
         custom-btn my-auto d-inline"
-      *ngIf="rol === 'client'" 
+      *ngIf="rol === 'user'"  
       (click)="clientButtonAction()"  
         >Nuevo Paquete
     </button>
@@ -103,7 +103,7 @@
     <li *ngFor="let menuitem of profileMenuItems" routerLinkActive="active">
       <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
-        <i class="{{ menuitem.icontype }}"></i>
+        <i class="{{ menuitem.icontype }} "></i>
         <p>{{ menuitem.title }}</p>
       </a>
     </li>

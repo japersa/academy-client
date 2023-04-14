@@ -15,10 +15,14 @@ import { UserDataService } from '../../../../core/services/user-data.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+  noWrap = false;
+ 
+  slidesTitle = '';
+
   itemsPerSlide = 3;
   slides = [
     { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/fondeo-icon_imbdsw.svg', 
-      message: 'Fondeo con un broker            100% Real!' 
+      message: 'Fondeo con un broker 100% Real!' 
     },
     { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/capital-icon_pihmxz.svg', 
       message: 'Obten capital prestado para operar en el mercado' 
@@ -117,9 +121,21 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   }
 
+  onSlideRangeChange(indexes: number[]|void): void {
+    if (indexes && indexes.length > 0) {
+      // Verificar si los índices incluyen 0, 1 y 2
+      if (indexes.includes(0) && indexes.includes(1) && indexes.includes(2)) {
+        this.slidesTitle = 'Funding Program';
+      } else {
+        this.slidesTitle = 'Autogestión de Fondos';
+      }
+    }
+  }
+
   ngOnInit() {
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('login-page');
+    this.onSlideRangeChange();
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];
