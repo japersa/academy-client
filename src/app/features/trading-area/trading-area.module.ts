@@ -9,6 +9,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreatePackComponent } from './components/create-pack/create-pack.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { MyPackagesComponent } from './components/my-packages/my-packages.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { StripeModule } from 'stripe-angular';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -16,12 +19,14 @@ import { MyPackagesComponent } from './components/my-packages/my-packages.compon
     TradingAreaComponent,
     CreatePackComponent,
     MyPackagesComponent,
-    OrdersComponent
+    OrdersComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
     TradingAreaRoutingModule,
     ReactiveFormsModule,
+    StripeModule.forRoot(environment.stripePK),
     QuicklinkModule
   ]
 })

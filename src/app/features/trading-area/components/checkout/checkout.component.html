@@ -1,0 +1,48 @@
+<div class="content">
+    <ol class="breadcrumb bg-transparent ml-3">
+      <li class="breadcrumb-item">Autogestión</li>
+      <li class="breadcrumb-item text-primary">
+        <a routerLink="/self-management/home"> Inicio </a>
+      </li>
+      <li class="breadcrumb-item text-primary">
+        <a routerLink="/self-management/orders"> Ordenes </a>
+      </li>
+      <li class="breadcrumb-item">Pago</li>
+    </ol>
+    <div class="col-lg-5 col-md-5">
+      <div class="card card-stats shadow text-center">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h3 class="card-title">Pagar ordén 123456 ICEX AG</h3>
+              <div *ngIf="invalidError" style="color: red">
+                {{ invalidError.message }}
+              </div>
+  
+              <stripe-card
+                #stripeCard
+                (catch)="onStripeError($event)"
+                [(invalid)]="invalidError"
+                (cardMounted)="cardCaptureReady = true"
+                (paymentMethodChange)="setPaymentMethod($event)"
+                (tokenChange)="setStripeToken($event)"
+                (sourceChange)="setStripeSource($event)"
+                [options]="cardOptions"
+              ></stripe-card>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-footer">
+            <button
+              class="btn btn-secondary btn-lg mb-3"
+              (click)="stripeCard.createToken($event)"
+            >
+              Pagar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
