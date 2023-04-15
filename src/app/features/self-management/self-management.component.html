@@ -1,10 +1,108 @@
 <div class="content">
-  <ol class="breadcrumb bg-transparent ml-3">
-    <li class="breadcrumb-item">Autogestión</li>
-    <li class="breadcrumb-item">Inicio</li>
-  </ol>
+  <div class="row">
+    <div class="col-4">
+      <ol class="breadcrumb bg-transparent ml-3">
+        <li class="breadcrumb-item">Inicio</li>
+        <li class="breadcrumb-item">Autogestión</li>
+      </ol>
+    </div>
+    <div class="col-4 mt-2 text-center ">
+      <div class="card  card-stats text-center referido shadow-custom">
+        <h3 class="">Wallet Autogestión</h3> 
+        <div class="row">
+          <div class="col-12">
+            <p class="ref" > $ 0 USD</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 mx-auto">
+            <button class="btn btn-secondary  btn-lg  ">
+              Solicitar Retiro
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4  text-right p-2">
+      <div class="card  card-stats text-center referido p-2 shadow-custom">
+        <h3 class="pb-0">ID único para Referido</h3> 
+        <div class="row">
+          <div class="col-8 pr-1">
+            <p class="ref"> {{referalCode}} </p>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-secondary  btn-md  " [cdkCopyToClipboard]="referalCode">
+              Copiar
+            </button>
+            <br> <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6" style="height: 500px; background-color: antiquewhite;">
+      <h3 class="text-center" > Víveo 1</h3>
+    </div>
+    <div class="col-6">
+      <h3 class="text-center " style="height: 500px; background-color: antiquewhite;" > Víveo 2</h3>
+    </div>
+  </div>
+  <h3 class="mb-1">Autogestion de fondos</h3>
+  <p>
+    comienza a generar rentabilidad sobre tu inversión sólo debes realizar un 
+    único pago para acceder a nuestros beneficios
+  </p>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 ">
+      <div class="card card-stats  shadow-custom">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <p class="stats"><i class="fas fa-check-circle"></i>Autogestion de fondos.</p>
+              <p class="stats"><i class="fas fa-check-circle"></i>Seguro de Capital.</p>
+              <p class="stats"><i class="fas fa-check-circle"></i>Contrato digital Monitoreo 24/7.</p>
+            </div>
+            <div class="col-6">
+              <p class="stats"><i class="fas fa-check-circle"></i>Soporte 24/5.</p>
+              <p class="stats"><i class="fas fa-check-circle"></i>Alianzas Comerciales.</p>
+              <p class="stats"><i class="fas fa-check-circle"></i>Curso Básico Forex.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-secondary  btn-lg mb-3 ">
+            Comprar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 card card-stats shadow-custom">
+      <h3>
+        Comisiona con International Capital Exchange
+      </h3>
+      <p>
+        Invita a tus amigos y empieza a generar ingresos extras. 
+        recibe el 25% del valor del paquete por el primer referido, 
+        un 25% por el segundo referido y un 100% por tu tercer referido 
+      </p>
+      <p>
+        Compártelo y empieza a comisionar con los paquetes de Autogestión
+      </p>
+      <div class="row referido">
+        <div class="col-8 pr-1 pl-5">
+          <p class="ref text-center">{{ referalCode }}</p>
+        </div>
+        <div class="col-4">
+          <button class="btn btn-secondary  btn-md  " [cdkCopyToClipboard]="referalCode">
+            Copiar
+          </button>
+        </div>
+    </div>
+  </div>
+  <!-- 
   <div class="col-lg-5 col-md-5">
-    <div class="card card-stats shadow text-center">
+    <div class="card card-stats shadow text-center"> 
       <div class="card-body">
         <div class="row">
           <div class="col-12">
@@ -58,5 +156,5 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
