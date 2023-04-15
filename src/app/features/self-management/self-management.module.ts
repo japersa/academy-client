@@ -9,6 +9,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ReactiveFormsModule,
     StripeModule.forRoot(environment.stripePK),
-    SelfManagementRoutingModule
+    SelfManagementRoutingModule,
+    ClipboardModule
   ]
 })
 export class SelfManagementModule { }

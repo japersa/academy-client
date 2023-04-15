@@ -1,0 +1,29 @@
+.shadow-custom {
+    box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
+    border-radius: 10px;
+}
+
+h3, h2, p {
+    color: var(--secondary) !important; 
+} 
+
+.referido {
+    color: #21201F !important;
+    border-radius: 10px;
+}
+
+.referido h3{
+    padding: 0px !important;
+    border-bottom: 1px solid #21201F;
+}
+
+.referido button {
+    margin-left: -30px;
+    margin-top: -4px;
+}
+
+.ref {
+    background-color: lightgray !important;
+    color: var(--secondary) !important;
+    padding: 5px !important;
+}
