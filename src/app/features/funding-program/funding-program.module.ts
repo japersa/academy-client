@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { QuicklinkModule } from 'ngx-quicklink';
 
-import { TradingAreaRoutingModule } from './trading-area-routing.module';
-import { TradingAreaComponent } from './trading-area.component';
+import { TradingAreaRoutingModule } from './funding-program-routing.module';
+import { FundingProgramComponent } from './funding-program.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { OrdersComponent } from './components/orders/orders.component';
@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
-    TradingAreaComponent,
+    FundingProgramComponent,
     CreateOrderComponent,
     MyPackagesComponent,
     OrdersComponent,
@@ -30,4 +30,4 @@ import { environment } from 'src/environments/environment';
     QuicklinkModule
   ]
 })
-export class TradingAreaModule { }
+export class FundingProgramModule { }
