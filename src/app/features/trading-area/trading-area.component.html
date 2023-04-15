@@ -1,89 +1,104 @@
 <div class="content">
-  <ol class=" breadcrumb bg-transparent ml-3">
-    <li class=" breadcrumb-item text-primary">
-        <a routerLink="/home">
-          Inicio
-        </a> 
-    </li>
-    <li class=" breadcrumb-item">
-        Area Trader
-    </li> 
+  <ol class="breadcrumb bg-transparent ml-3">
+    <li class="breadcrumb-item">Area Trader</li>
+    <li class="breadcrumb-item">Inicio</li>
   </ol>
   <h3>Empieza a operar</h3>
   <div class="row">
-    <div class="col-lg-10 " *ngFor="let pack of myPackages; let i = index">
-        <div class="card p-3 mb-4  shadow">
-            <h3 class="card-title">Paquete {{i+1}}</h3>
-            <div class="card-header">
-                <p class="card-text  mr-auto">Nombre de login: {{pack.mt_login}}</p>
-            </div>
-            <div class="card-body d-flex">
-                <p class="card-text  mr-auto">Balance: {{pack.balance}}</p>
-                <p class="card-text  mr-auto">Fin: {{pack.end_date | date:'dd/MM/yyyy'}}</p>
-                <p class="card-text">Estado: 
-                    <span [ngClass]="
-                        {'text-success': pack.status === 'active', 'text-danger': pack.status === 'closed', 
-                        'text-warning': pack.status === 'pending'}"
-                    >{{pack.status}}</span></p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <button class="btn btn-secondary custom-btn my-auto">Credenciales</button>
-                    <button class="btn btn-secondary custom-btn my-auto">Metricas</button>
-                </div>
-                <div class="ml-auto">
-                    <button class="btn btn-secondary custom-btn my-auto">Retiros</button>
-                </div>
-            </div>
+    <div class="col-lg-10" *ngFor="let pack of myPackages; let i = index">
+      <div class="card p-3 mb-4 shadow">
+        <h3 class="card-title">Paquete {{ i + 1 }}</h3>
+        <div class="card-header">
+          <p class="card-text mr-auto">Nombre de login: {{ pack.mt_login }}</p>
         </div>
+        <div class="card-body d-flex">
+          <p class="card-text mr-auto">Balance: {{ pack.balance }}</p>
+          <p class="card-text mr-auto">
+            Fin: {{ pack.end_date | date : "dd/MM/yyyy" }}
+          </p>
+          <p class="card-text">
+            Estado:
+            <span
+              [ngClass]="{
+                'text-success': pack.status === 'active',
+                'text-danger': pack.status === 'closed',
+                'text-warning': pack.status === 'pending'
+              }"
+              >{{ pack.status }}</span
+            >
+          </p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <button class="btn btn-secondary custom-btn my-auto">
+              Credenciales
+            </button>
+            <button class="btn btn-secondary custom-btn my-auto">
+              Metricas
+            </button>
+          </div>
+          <div class="ml-auto">
+            <button class="btn btn-secondary custom-btn my-auto">
+              Retiros
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-10">
       <h3 class="mb-1">Funding Program</h3>
       <p>
-        El primer fondeo con un broker 100% Real! Aprovecha la enorme 
-        liquidez del Broker, tradea y retira los beneficios que te mereces.
+        El primer fondeo con un broker 100% Real! Aprovecha la enorme liquidez
+        del Broker, tradea y retira los beneficios que te mereces.
       </p>
     </div>
-    <div class="col-lg-5 col-md-5 ">
+    <div class="col-lg-5 col-md-5">
       <div class="card card-stats shadow text-center">
         <div class="card-body">
           <div class="row">
             <div class="col-12">
               <h3 class="card-title">Icex Funding Challenge DEMO</h3>
             </div>
-          </div> 
+          </div>
         </div>
         <div class="card-footer">
           <hr />
-          <br>
+          <br />
           <p class="stats">Controla, fortalece y potencia tus habilidades</p>
-          <br>
-          <p class="stats">Experimenta el trading sin poner en riesgo tu inversión</p>
-          <br>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <br />
+          <p class="stats">
+            Experimenta el trading sin poner en riesgo tu inversión
+          </p>
+          <br />
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Escoge el balance con el que quieras empezar a operar
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Análisis de la cuenta
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             15 días de prueba
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Practica gratis
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Contenido de respaldo
           </p>
-          <br>
+          <br />
         </div>
         <div class="card-footer">
           <p class="stats">
             Demuestra tus habilidades completando nuestras fases
           </p>
-          <button class="btn btn-secondary btn-lg mb-3 ">
+          <button class="btn btn-secondary btn-lg mb-3">
             Comienza ahora gratis
           </button>
         </div>
@@ -100,31 +115,38 @@
         </div>
         <div class="card-footer">
           <hr />
-          <br>
+          <br />
           <p class="stats">
             Opere hasta 500.000 usd con nuestro broker Euro street capital llc
           </p>
           <br />
           <p class="stats">
-            Demuestra tus destrezas de trading y empieza a retirar tu beneficio diario.
+            Demuestra tus destrezas de trading y empieza a retirar tu beneficio
+            diario.
           </p>
-          
-          <p class="stats"><i class="fas fa-check-circle"></i>
+
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Escoge el balance con el que quieras empezar a operar
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Análisis de la cuenta
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Beneficio del 75%
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Retiros de beneficios diarios
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Contenido de respaldo
           </p>
-          <p class="stats"><i class="fas fa-check-circle"></i>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
             Extensión gratuita de 15 días
           </p>
         </div>
@@ -132,7 +154,7 @@
           <p class="stats">
             Demuestra tus habilidades completando nuestras fases
           </p>
-          <button class="btn btn-secondary btn-lg mb-3 ">
+          <button class="btn btn-secondary btn-lg mb-3">
             Comienza ahora Nuestro Icex Challenge
           </button>
         </div>
@@ -145,43 +167,43 @@
             <h3>Objetivos del challenge</h3>
             <hr />
           </div>
-          <div class="col-6 ">
-            <h3 class="mb-1">
-              Fase 1
-            </h3>
-            <p>
-              Días de trading 1 día mínimo
-            </p>
-            <p class="stats"><i class="fas fa-check-circle"></i>
+          <div class="col-6">
+            <h3 class="mb-1">Fase 1</h3>
+            <p>Días de trading 1 día mínimo</p>
+            <p class="stats">
+              <i class="fas fa-check-circle"></i>
               Restricciones no
             </p>
-            <p class="stats"><i class="fas fa-check-circle"></i>
+            <p class="stats">
+              <i class="fas fa-check-circle"></i>
               Drawdown diario 5%
             </p>
-            <p class="stats"><i class="fas fa-check-circle"></i>
+            <p class="stats">
+              <i class="fas fa-check-circle"></i>
               Drawdown total 10%
             </p>
-            <p class="stats"><i class="fas fa-check-circle"></i>
+            <p class="stats">
+              <i class="fas fa-check-circle"></i>
               Profit del 8% a lograr en 30 días.
             </p>
           </div>
-          <div class="col-6  ">
-            <h3 class="mb-1">
-              Fase 2
-            </h3>
-            <p>
-              Días de trading 1 día mínimo
-            </p>
-            <p class="stats"><i class="fas fa-check-circle"></i>
+          <div class="col-6">
+            <h3 class="mb-1">Fase 2</h3>
+            <p>Días de trading 1 día mínimo</p>
+            <p class="stats">
+              <i class="fas fa-check-circle"></i>
               Restricciones no
             </p>
-            <p class="stats"><i class="fas fa-check-circle"></i>
+            <p class="stats">
+              <i class="fas fa-check-circle"></i>
               Drawdown diario 5%
             </p>
-            <p class="stats"><i class="fas fa-check-circle"></i>
+            <p class="stats">
+              <i class="fas fa-check-circle"></i>
               Drawdown toral 10%
             </p>
-            <p class="stats"><i class="fas fa-check-circle"></i>
+            <p class="stats">
+              <i class="fas fa-check-circle"></i>
               Profit del 5% a lograr en 60 días.
             </p>
           </div>
@@ -189,5 +211,4 @@
       </div>
     </div>
   </div>
-  
 </div>

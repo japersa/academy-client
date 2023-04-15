@@ -337,27 +337,6 @@ export const ROUTES_ADMIN: RouteInfo[] = [
   },
 ];
 
-/* export const ROUTES_PROFILE_MENU_ITEMS_ADMIN = [
-  {
-    path: '/profile',
-    title: 'perfil',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  },
-  {
-    path: 'https://intcapex.com/',
-    title: 'Pagina Web',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  },
-  {
-    path: '/customer-service',
-    title: 'Servicio al Cliente',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  }
-] */
-
 // Routes to TEACHER
 export const ROUTES_TEACHER: RouteInfo[] = [
   {
@@ -463,27 +442,6 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
   }
 ];
-
-/* export const ROUTES_PROFILE_MENU_ITEMS_TEACHER = [
-  {
-    path: '/profile',
-    title: 'perfil',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  },
-  {
-    path: 'https://intcapex.com/',
-    title: 'Pagina Web',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  },
-  {
-    path: '/customer-service',
-    title: 'Servicio al Cliente',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  }
-] */
 
 // Routes to USER
 export const ROUTES_USER: RouteInfo[] = [
@@ -609,7 +567,6 @@ export class SidebarComponent implements OnInit {
     this.userDataService.userData$.subscribe(userData => {
       this.rol = userData.rol;
     });
-    console.log(this.rol);
 
     if (this.rol === 'admin') {
       this.menuItems = ROUTES_ADMIN;
@@ -619,12 +576,5 @@ export class SidebarComponent implements OnInit {
       this.menuItems = ROUTES_USER;
     }
 
-    /* this.menuItems = ROUTES.filter(menuItem => {
-      if (this.userDataService?.userData$?.value?.rol === 'teacher' && (menuItem.path === '/roles' || menuItem.path === '/dashboard')) {
-        return
-      } else {
-        return menuItem
-      }
-    }); */
   }
 }

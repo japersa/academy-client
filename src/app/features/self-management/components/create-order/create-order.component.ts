@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UtilsService } from '../../../../core/services/utils.service';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UtilsService } from 'src/app/core/services/utils.service';
 import { PacksService } from '../../services/packs.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-pack',
-  templateUrl: './create-pack.component.html',
-  styleUrls: ['./create-pack.component.scss']
+  selector: 'app-create-order',
+  templateUrl: './create-order.component.html',
+  styleUrls: ['./create-order.component.scss']
 })
-export class CreatePackComponent implements OnInit {
-
+export class CreateOrderComponent {
   price = '';
   form!: FormGroup;
   errorMessage: string | null;
@@ -18,7 +18,8 @@ export class CreatePackComponent implements OnInit {
     // import the form builder
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
-    private packsService: PacksService
+    private packsService: PacksService,
+    private router: Router
   ) {
     // Build the form
     this.buildForm();
@@ -97,6 +98,14 @@ export class CreatePackComponent implements OnInit {
     return this.countryField?.dirty || this.countryField?.touched;
   }
 
+  get referralCodeField() {
+    return this.form?.get('referral_code');
+  }
+
+  get referralCodeFieldDirty() {
+    return this.referralCodeField?.dirty || this.referralCodeField?.touched;
+  }
+
   get termsConditionsField() {
     return this.form?.get('tos');
   }
@@ -116,9 +125,6 @@ export class CreatePackComponent implements OnInit {
   // create the form
   private buildForm() {
     this.form = this.formBuilder.group({
-      currencies: ['', [Validators.required]],
-      balance: ['', [Validators.required]],
-      account_type: ['', [Validators.required]],
 
       first_name: ['', [Validators.required, Validators.minLength(3)]],
       last_name: ['', [Validators.required, Validators.minLength(3)]],
@@ -128,6 +134,7 @@ export class CreatePackComponent implements OnInit {
       country: ['', [Validators.required]],
       postal_code: ['', [Validators.required]],
       address: ['', [Validators.required]],
+      referral_code: ['', [Validators.required]],
 
       tos: ['', [Validators.requiredTrue]],
       cancellation_policies: ['', [Validators.requiredTrue]]
@@ -137,16 +144,8 @@ export class CreatePackComponent implements OnInit {
   createPack(formData: any) {
     this.packsService.createPack(formData).subscribe(
       {
-        next: r => console.log(r)
-
+        next: r => this.router.navigate(['/self-management/orders'])
       }
-    );
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe(x => {
-      console.log(x)
-    }
     );
   }
 
