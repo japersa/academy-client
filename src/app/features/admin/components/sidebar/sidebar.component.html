@@ -18,7 +18,7 @@
     </button>
   </div> 
   <ul class="nav pb-5">
-    <li *ngFor="let menuitem of menuItems" routerLinkActive="active">
+    <li *ngFor="let menuitem of menuItems" routerLinkActive="active" class="mb-4">
       <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
         <i class="{{ menuitem.icontype }}"></i>
@@ -59,14 +59,14 @@
               <span class="sidebar-normal">{{ childitems.title }}</span>
             </a>
             <!--If it have a submenu-->
-            <a
+            <a 
               data-toggle="collapse"
               (click)="childitems.isCollapsed = !childitems.isCollapsed"
               [attr.aria-expanded]="!childitems.isCollapsed"
               [attr.aria-controls]="childitems.collapse"
               *ngIf="childitems.type === 'sub'"
             >
-              <span class="sidebar-mini-icon">{{ childitems.smallTitle }}</span>
+              <span class="sidebar-mini-icon ">{{ childitems.smallTitle }}</span>
               <span class="sidebar-normal"
                 >{{ childitems.title }}<b class="caret"></b
               ></span>

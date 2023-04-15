@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import Stepper from 'bs-stepper';
-import { UntypedFormBuilder, UntypedFormGroup, Validators, UntypedFormControl, UntypedFormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
@@ -21,17 +21,17 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   eventFiles = null;
 
   // COURSE
-  courseForm: UntypedFormGroup;
+  courseForm: FormGroup;
 
   // MODULES
-  moduleForm: UntypedFormGroup;
+  moduleForm: FormGroup;
   modules = [];
 
   // TOPICS
-  topicForm: UntypedFormGroup;
+  topicForm: FormGroup;
 
   // QUIZZES
-  quizForm: UntypedFormGroup;
+  quizForm: FormGroup;
 
   // STEPPER
 
@@ -43,12 +43,12 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   checked2 = false;
   checked3 = false;
 
-  public formWizard: UntypedFormGroup;
+  public formWizard: FormGroup;
   wizard = false;
   step = 1;
 
   constructor(private utilsService: UtilsService,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     public firebaseStorageService: FirebaseStorageService,
     private coursesService: CoursesService,
     private notificationsService: NotificationsService) {
@@ -57,29 +57,29 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
 
     // COURSE FORM
     this.courseForm = this.formBuilder.group({
-      title: new UntypedFormControl('', Validators.compose([
+      title: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(100)
       ])),
-      description: new UntypedFormControl('', Validators.compose([
+      description: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(2000)
       ])),
-      price: new UntypedFormControl('0', Validators.compose([
+      price: new FormControl('0', Validators.compose([
         Validators.required,
         Validators.minLength(1),
         Validators.pattern('^\\d+\\.?\\d{0,2}$')]
       )),
-      path_preview_image: new UntypedFormControl('', Validators.compose([
+      path_preview_image: new FormControl('', Validators.compose([
       ])
       )
     });
 
     // MODULE FORM
     this.moduleForm = this.formBuilder.group({
-      name: new UntypedFormControl('', Validators.compose([
+      name: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
     });
@@ -87,27 +87,27 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
     // TOPIC FORM
 
     this.topicForm = this.formBuilder.group({
-      module: new UntypedFormControl('', Validators.compose([
+      module: new FormControl('', Validators.compose([
         Validators.required,
       ])),
-      title: new UntypedFormControl('', Validators.compose([
+      title: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(8), Validators.maxLength(100)
       ])),
-      description: new UntypedFormControl('', Validators.compose([
+      description: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(500)
       ])),
-      video: new UntypedFormControl('', Validators.compose([
+      video: new FormControl('', Validators.compose([
         Validators.required,
       ])),
-      files: new UntypedFormControl('', Validators.compose([
+      files: new FormControl('', Validators.compose([
       ])),
-      links: new UntypedFormArray([
+      links: new FormArray([
         this.formBuilder.group({
-          title: new UntypedFormControl('', Validators.compose([
+          title: new FormControl('', Validators.compose([
           ])),
-          link: new UntypedFormControl('', Validators.compose([
+          link: new FormControl('', Validators.compose([
           ])),
         })
       ], []),
@@ -116,23 +116,23 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
     // QUIZ FORM
     this.quizForm = this.formBuilder.group({
 
-      questions: new UntypedFormArray([
+      questions: new FormArray([
         this.formBuilder.group({
-          question: new UntypedFormControl('', Validators.compose([
+          question: new FormControl('', Validators.compose([
             Validators.required, Validators.minLength(10), Validators.maxLength(100)
           ])),
-          optionOne: new UntypedFormControl('', Validators.compose([
+          optionOne: new FormControl('', Validators.compose([
             Validators.required, Validators.required, Validators.minLength(2)
           ])),
-          optionTwo: new UntypedFormControl('', Validators.compose([
+          optionTwo: new FormControl('', Validators.compose([
             Validators.required, Validators.minLength(2)
           ])),
-          optionThree: new UntypedFormControl('', Validators.compose([
+          optionThree: new FormControl('', Validators.compose([
           ])),
-          optionFour: new UntypedFormControl('', Validators.compose([
+          optionFour: new FormControl('', Validators.compose([
           ])),
 
-          answer: new UntypedFormControl('', Validators.compose([
+          answer: new FormControl('', Validators.compose([
             Validators.required
           ])),
         })
@@ -203,12 +203,12 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   }
 
   addNewLink() {
-    const itemsArr = this.topicForm.get('links') as UntypedFormArray;
+    const itemsArr = this.topicForm.get('links') as FormArray;
     const newItem = this.formBuilder.group({
-      title: new UntypedFormControl('', Validators.compose([
+      title: new FormControl('', Validators.compose([
         Validators.required,
       ])),
-      link: new UntypedFormControl('', Validators.compose([
+      link: new FormControl('', Validators.compose([
         Validators.required,
       ])),
     })
@@ -216,7 +216,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   }
 
   removeItem(i) {
-    const arr = this.topicForm.get('links') as UntypedFormArray;
+    const arr = this.topicForm.get('links') as FormArray;
     arr.removeAt(i);
   }
 
@@ -251,23 +251,23 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   }
 
   addNewQ() {
-    const itemsArr = this.quizForm.get('questions') as UntypedFormArray;
+    const itemsArr = this.quizForm.get('questions') as FormArray;
     const newItem = this.formBuilder.group({
-      question: new UntypedFormControl('', Validators.compose([
+      question: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ])),
-      optionOne: new UntypedFormControl('', Validators.compose([
+      optionOne: new FormControl('', Validators.compose([
         Validators.required, Validators.required, Validators.minLength(2)
       ])),
-      optionTwo: new UntypedFormControl('', Validators.compose([
+      optionTwo: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(2)
       ])),
-      optionThree: new UntypedFormControl('', Validators.compose([
+      optionThree: new FormControl('', Validators.compose([
       ])),
-      optionFour: new UntypedFormControl('', Validators.compose([
+      optionFour: new FormControl('', Validators.compose([
       ])),
 
-      answer: new UntypedFormControl('', Validators.compose([
+      answer: new FormControl('', Validators.compose([
         Validators.required
       ])),
     })
@@ -275,7 +275,7 @@ export class CreateCourseByStepsComponent implements OnInit, OnDestroy {
   }
 
   removeQ(i) {
-    const arr = this.quizForm.get('questions') as UntypedFormArray;
+    const arr = this.quizForm.get('questions') as FormArray;
     arr.removeAt(i);
   }
 
