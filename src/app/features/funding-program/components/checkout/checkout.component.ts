@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StripeScriptTag } from 'stripe-angular';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { PacksService } from '../../services/packs.service';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit{
+  productID = '';
   cardCaptureReady = false
   invalidError: any = null;
   stripeCard = null;
@@ -29,7 +32,9 @@ export class CheckoutComponent {
     }
   };
 
-  constructor(private stripeScriptTag: StripeScriptTag) {
+  constructor(private stripeScriptTag: StripeScriptTag,
+    private packsService: PacksService,
+    private route: ActivatedRoute) {
     if (!this.stripeScriptTag.StripeInstance) {
       this.stripeScriptTag.setPublishableKey(environment.stripePK);
     }
@@ -51,12 +56,27 @@ export class CheckoutComponent {
     console.log('Stripe Payment Method', token)
   }
 
-  setStripeToken(token: stripe.Token) {
-    console.log('Stripe Token', token)
+
+  setStripeToken(event: stripe.Token) {
+    console.log('Stripe Token', event);
+    const data = {
+      package_self_management_id: this.productID,
+      token_id: event.id
+    };
+    this.packsService.payPackStripe(data).subscribe({
+      next: (r) => console.log(r),
+      error: (e) => console.log(e)
+    });
   }
 
   setStripeSource(source: stripe.Source) {
     console.log('Stripe Source', source)
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.productID = params.get('id');
+    });
   }
 
 }
