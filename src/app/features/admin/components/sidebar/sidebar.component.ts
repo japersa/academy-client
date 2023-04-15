@@ -256,6 +256,18 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
+        path: '/home',
+        title: 'Inicio',
+        type: 'link',
+        smallTitle: 'TP'
+      },
+      {
+        path: '/order',
+        title: 'Ordenes',
+        type: 'link',
+        smallTitle: 'TP'
+      },
+      {
         path: '/trading-area-packages',
         title: 'Area Trading Paquetes',
         type: 'link',
@@ -263,7 +275,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
       },
       {
         path: '/withdrawals',
-        title: 'retiros y beneficios',
+        title: 'retiros de beneficios',
         type: 'link',
         smallTitle: 'WT'
       },
@@ -284,6 +296,18 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
+      {
+        path: '/home',
+        title: 'Inicio',
+        type: 'link',
+        smallTitle: 'TP'
+      },
+      {
+        path: '/order',
+        title: 'Ordenes',
+        type: 'link',
+        smallTitle: 'TP'
+      },
       {
         path: '/academy',
         title: 'academia',
