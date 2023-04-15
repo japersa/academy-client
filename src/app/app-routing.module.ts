@@ -124,9 +124,9 @@ const routes: Routes = [
           .then(m => m.NotificationsModule)
       },
       {
-        path: 'trading-area',
-        loadChildren: () => import('./features/trading-area/trading-area.module')
-          .then(m => m.TradingAreaModule)
+        path: 'funding-program',
+        loadChildren: () => import('./features/funding-program/funding-program.module')
+          .then(m => m.FundingProgramModule)
       },
       {
         path: 'packages',

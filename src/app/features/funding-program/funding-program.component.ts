@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trading-area',
-  templateUrl: './trading-area.component.html',
-  styleUrls: ['./trading-area.component.scss']
+  templateUrl: './funding-program.component.html',
+  styleUrls: ['./funding-program.component.scss']
 })
-export class TradingAreaComponent implements OnInit {
+export class FundingProgramComponent implements OnInit {
 
   myPackages: any[] = [];
 
