@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { PacksService } from '../../services/packs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-order',
@@ -17,7 +18,8 @@ export class CreateOrderComponent {
     // import the form builder
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
-    private packsService: PacksService
+    private packsService: PacksService,
+    private router: Router
   ) {
     // Build the form
     this.buildForm();
@@ -140,18 +142,10 @@ export class CreateOrderComponent {
   }
 
   createPack(formData: any) {
-    // this.packsService.createPack(formData).subscribe(
-    //   {
-    //     next: r => console.log(r)
-
-    //   }
-    // );
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe(x => {
-      console.log(x)
-    }
+    this.packsService.createPack(formData).subscribe(
+      {
+        next: r => this.router.navigate(['/self-management/orders'])
+      }
     );
   }
 

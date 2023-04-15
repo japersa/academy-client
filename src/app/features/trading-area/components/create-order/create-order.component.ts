@@ -8,7 +8,7 @@ import { PacksService } from '../../services/packs.service';
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.scss']
 })
-export class CreateOrderComponent implements OnInit {
+export class CreateOrderComponent {
 
   price = '';
   form!: FormGroup;
@@ -138,15 +138,7 @@ export class CreateOrderComponent implements OnInit {
     this.packsService.createPack(formData).subscribe(
       {
         next: r => console.log(r)
-
       }
-    );
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe(x => {
-      console.log(x)
-    }
     );
   }
 

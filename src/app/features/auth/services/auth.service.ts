@@ -31,6 +31,8 @@ export class AuthService {
       // load data at memory
       this.userDataService.loadStorageUserData();
       this.userDataService.isUserLoggedIn$.next(true);
+
+      this.router.navigate(['/home']);
     })
 
     )

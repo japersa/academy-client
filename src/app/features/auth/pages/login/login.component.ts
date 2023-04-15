@@ -16,34 +16,40 @@ import { UserDataService } from '../../../../core/services/user-data.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   noWrap = false;
- 
+
   slidesTitle = '';
 
   itemsPerSlide = 3;
   slides = [
-    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/fondeo-icon_imbdsw.svg', 
-      message: 'Fondeo con un broker 100% Real!' 
+    {
+      image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/fondeo-icon_imbdsw.svg',
+      message: 'Fondeo con un broker 100% Real!'
     },
-    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/capital-icon_pihmxz.svg', 
-      message: 'Obten capital prestado para operar en el mercado' 
+    {
+      image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/capital-icon_pihmxz.svg',
+      message: 'Obten capital prestado para operar en el mercado'
     },
-    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/retiro-beneficios-icon_uobwhd.svg', 
-      message: 'Retiros de Beneficios' 
+    {
+      image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/retiro-beneficios-icon_uobwhd.svg',
+      message: 'Retiros de Beneficios'
     },
-    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/iniciar-mundo-trading_nmbcgy.svg',
+    {
+      image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/iniciar-mundo-trading_nmbcgy.svg',
       message: 'Te ayudaremos a iniciar en el mundo del trading'
     },
-    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/multiplicar-capital_rgiv62.svg',
+    {
+      image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/multiplicar-capital_rgiv62.svg',
       message: 'Multiplicar tu capital ahora es mucho más seguro y efectivo!'
     },
-    { image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/invita-amigos-icon_rsljpm.svg',
+    {
+      image: 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689896/invita-amigos-icon_rsljpm.svg',
       message: 'Comiciona invitando a tus amigos'
     }
   ];
 
-  form!: FormGroup; 
+  form!: FormGroup;
   validationMessages: any;
- 
+
   focus;
   focus1;
 
@@ -63,8 +69,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.buildForm();
   }
 
-  
- 
   //declare getters for ech field
 
   get emailField() {
@@ -86,12 +90,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   get passwordFieldDirty() {
     return this.passwordField?.dirty || this.passwordField?.touched;
   }
-  
+
   private buildForm() {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      rememberPassword:[false]
+      rememberPassword: [false]
     });
   }
 
@@ -102,26 +106,23 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: data.password
     }
 
-    this.authenticationService.doLogin(CREDENTIALS).subscribe(res => {
+    this.authenticationService.doLogin(CREDENTIALS).subscribe(
+      {
+        next: (r) => {
+          this.notificationService.showNotification('top', 'right', 'Has iniciado sesión correctamente', 2);
+          this.errorMessage = '';
+          this.form.reset();
+        },
+        error: (e) => {
+          this.errorMessage = e.error;
+          this.notificationService.showNotification('top', 'right', 'Error al iniciar sesión', 4);
+        }
+      }
+    );
 
-      this.notificationService.showNotification('top', 'right', 'Has iniciado sesión correctamente', 2);
-      this.errorMessage = '';
+  };
 
-      this.form.reset();
-
-      setTimeout(() => {
-        this.router.navigate(['/home'])
-      }, 300);
-
-    },
-      error => {
-        this.errorMessage = error.error;
-        this.notificationService.showNotification('top', 'right', 'Error al iniciar sesión', 4);
-      });
-
-  }
-
-  onSlideRangeChange(indexes: number[]|void): void {
+  onSlideRangeChange(indexes: number[] | void): void {
     if (indexes && indexes.length > 0) {
       // Verificar si los índices incluyen 0, 1 y 2
       if (indexes.includes(0) && indexes.includes(1) && indexes.includes(2)) {
