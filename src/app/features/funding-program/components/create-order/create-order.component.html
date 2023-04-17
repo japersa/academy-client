@@ -1,45 +1,46 @@
 <div class="content">
   <ol class="breadcrumb bg-transparent ml-3">
+    <li class="breadcrumb-item">Area trading</li>
     <li class="breadcrumb-item text-primary">
-        <a routerLink="/trading-area/create-pack">Inicio / Area trader / Nuevo Paquete</a>
+      <a routerLink="/funding-program/home"> Inicio </a>
     </li>
-</ol>
+    <li class="breadcrumb-item text-primary">
+      <a routerLink="/funding-program/orders"> Ordenes </a>
+    </li>
+    <li class="breadcrumb-item">Nuevo Paquete</li>
+  </ol>
   <div class="row">
-    <div class="col-lg-8 ">
+    <div class="col-lg-8">
       <h3 class="title mb-1">Registro del paquete</h3>
       <p>Configura tu paquete a la medida.</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-10 col-md-12  ">
+    <div class="col-lg-10 col-md-12">
       <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
         <div class="card card-stats text-left box-shadow">
           <div class="card-body">
             <div class="row">
-              <div class="col-12"> 
+              <div class="col-12">
                 <p class="title">Elige la moneda a operar</p>
                 <p>
-                  <input 
-                      name="currencies"
-                      value="usd"
-                      type="radio"
-                      formControlName="currencies"
-                      id="usd"
-                      checked
-                  />
-                  <label class="radio-button mr-2" for="usd" >
-                    USD
-                  </label>
                   <input
-                      name="currencies"
-                      value="eur"
-                      type="radio"
-                      formControlName="currencies"
-                      id="eur"
-                    />
-                  <label class="radio-button mr-2" for="eur">
-                    EUR
-                  </label>
+                    name="currencies"
+                    value="usd"
+                    type="radio"
+                    formControlName="currencies"
+                    id="usd"
+                    checked
+                  />
+                  <label class="radio-button mr-2" for="usd"> USD </label>
+                  <input
+                    name="currencies"
+                    value="eur"
+                    type="radio"
+                    formControlName="currencies"
+                    id="eur"
+                  />
+                  <label class="radio-button mr-2" for="eur"> EUR </label>
                 </p>
                 <hr />
               </div>
@@ -47,22 +48,22 @@
                 <p class="title">Elige el balance de la cuenta</p>
                 <p>
                   <input
-                      name="balance"
-                      value="fifty_thousand"
-                      type="radio"
-                      formControlName="balance"
-                      id="50k"
+                    name="balance"
+                    value="fifty_thousand"
+                    type="radio"
+                    formControlName="balance"
+                    id="50k"
                   />
                   <label class="radio-button mr-2" for="50k">
                     50.000 USD
                   </label>
                   <input
-                      name="balance"
-                      value="one_hundred_thousand"
-                      type="radio"
-                      formControlName="balance"
-                      id="100k"
-                      checked
+                    name="balance"
+                    value="one_hundred_thousand"
+                    type="radio"
+                    formControlName="balance"
+                    id="100k"
+                    checked
                   />
                   <label class="radio-button mr-2" for="100k">
                     100.000 USD
@@ -78,11 +79,11 @@
                     200.000 USD
                   </label>
                   <input
-                      name="balance"
-                      value="five_hundred_thousand"
-                      type="radio"
-                      formControlName="balance"
-                      id="500k"
+                    name="balance"
+                    value="five_hundred_thousand"
+                    type="radio"
+                    formControlName="balance"
+                    id="500k"
                   />
                   <label class="radio-button mr-2" for="500k">
                     500.000 USD
@@ -94,22 +95,22 @@
                 <p class="title">Elige el tipo de la cuenta</p>
                 <p>
                   <input
-                      name="account_type"
-                      value="euro_street_basic"
-                      type="radio"
-                      formControlName="account_type"
-                      id="basic"
-                      checked
+                    name="account_type"
+                    value="euro_street_basic"
+                    type="radio"
+                    formControlName="account_type"
+                    id="basic"
+                    checked
                   />
                   <label class="radio-button mr-2" for="basic">
                     EuroStreet Basic
                   </label>
                   <input
-                      name="account_type"
-                      value="euro_street_full"
-                      type="radio"
-                      formControlName="account_type"
-                      id="full"
+                    name="account_type"
+                    value="euro_street_full"
+                    type="radio"
+                    formControlName="account_type"
+                    id="full"
                   />
                   <label class="radio-button mr-2" for="full">
                     EuroStreet Full
@@ -117,7 +118,7 @@
                 </p>
                 <hr />
                 <p class="title">Plataforma: MetaTrader5</p>
-                <label class="radio-button checked"for="">MT5</label>
+                <label class="radio-button checked" for="">MT5</label>
                 <hr />
               </div>
             </div>
@@ -136,7 +137,7 @@
                   >
                   <input
                     type="text"
-                    class="form-control  shadow"
+                    class="form-control shadow"
                     formControlName="first_name"
                     id="names"
                     placeholder="María"
@@ -166,7 +167,7 @@
                   >
                   <input
                     type="text"
-                    class="form-control  shadow"
+                    class="form-control shadow"
                     formControlName="last_name"
                     id="last_names"
                     placeholder="Ximenes"
@@ -226,7 +227,7 @@
                   >
                   <input
                     type="tel"
-                    class="form-control  shadow"
+                    class="form-control shadow"
                     formControlName="phone_number"
                     id="phone_number"
                     placeholder="4212976573"
@@ -285,7 +286,7 @@
                   </label>
                   <input
                     type="text"
-                    class="form-control  shadow"
+                    class="form-control shadow"
                     formControlName="address"
                     id="address"
                     placeholder="AV. Rivadavia 695"
@@ -314,10 +315,7 @@
                   <label for="countryField"
                     >País: {{ countryField?.value | uppercase }}</label
                   >
-                  <select
-                    class="form-control  shadow"
-                    formControlName="country"
-                  >
+                  <select class="form-control shadow" formControlName="country">
                     <option
                       *ngFor="let c of utilsService.countries"
                       [value]="c.code"
@@ -452,13 +450,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-3 ml-auto mr-auto ">
+          <div class="col-3 ml-auto mr-auto">
             <button
-          [disabled]="form.invalid"
-          class="btn btn-secondary  btn-lg mb-3  "
-        >
-          Comprar
-        </button>
+              [disabled]="form.invalid"
+              class="btn btn-secondary btn-lg mb-3"
+            >
+              Comprar
+            </button>
           </div>
         </div>
       </form>

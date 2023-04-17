@@ -23,6 +23,11 @@ export class PacksService {
     return this.http.get<any>(`${apiURL}${route}`);
   }
 
+  getMyOrders() {
+    const route = `/list/my/packages/`;
+    return this.http.get<any>(`${apiURL}${route}`);
+  }
+
   payPackStripe(data) {
     const route = `/payment/package/stripe`;
     return this.http.post<any>(`${apiURL}${route}`, data);
