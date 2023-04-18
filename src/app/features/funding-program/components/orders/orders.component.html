@@ -2,67 +2,61 @@
   <ol class="breadcrumb bg-transparent ml-3">
     <li class="breadcrumb-item">Area trading</li>
     <li class="breadcrumb-item text-primary">
-      <a routerLink="/trading-area/home"> Inicio </a>
+      <a routerLink="/funding-program/home"> Inicio </a>
     </li>
     <li class="breadcrumb-item">Ordenes</li>
   </ol>
-  <div class="col-lg-5 col-md-5">
-    <div class="card card-stats shadow text-center">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-12">
-            <h3 class="card-title">Ordén 123456</h3>
+
+  <ng-container *ngIf="orders.length > 0; else elseTemplate">
+    <div *ngFor="let i of orders" class="col-lg-5 col-md-5">
+      <div class="card card-stats shadow text-center">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h3 class="card-title">Ordén 123456 {{ i?.status }}</h3>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card-footer">
-        <hr />
-        <br />
-        <p class="stats">
-          Opere hasta 500.000 usd con nuestro broker Euro street capital llc
-        </p>
-        <br />
-        <p class="stats">
-          Demuestra tus destrezas de trading y empieza a retirar tu beneficio
-          diario.
-        </p>
+        <div class="card-footer">
+          <hr />
+          <br />
+          <p class="stats">
+            Opere hasta 500.000 usd con nuestro broker Euro street capital llc
+          </p>
+          <br />
+          <p class="stats">
+            Demuestra tus destrezas de trading y empieza a retirar tu beneficio
+            diario.
+          </p>
 
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Escoge el balance con el que quieras empezar a operar
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Análisis de la cuenta
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Beneficio del 75%
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Retiros de beneficios diarios
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Contenido de respaldo
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Extensión gratuita de 15 días
-        </p>
-      </div>
-      <div class="card-footer">
-        <p class="stats">
-          Demuestra tus habilidades completando nuestras fases
-        </p>
-        <button
-          routerLink="../checkout/123456"
-          class="btn btn-secondary btn-lg mb-3"
-        >
-          Pagar
-        </button>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
+            Escoge el balance con el que quieras empezar a operar
+          </p>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
+            Contenido de respaldo
+          </p>
+          <p class="stats">
+            <i class="fas fa-check-circle"></i>
+            Extensión gratuita de 15 días
+          </p>
+        </div>
+        <div class="card-footer">
+          <p class="stats">
+            Demuestra tus habilidades completando nuestras fases
+          </p>
+          <button
+            routerLink="../checkout/123456"
+            class="btn btn-secondary btn-lg mb-3"
+          >
+            Pagar
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <p>No tienes ordenes generadas en este momento</p>
+  </ng-template>
 </div>

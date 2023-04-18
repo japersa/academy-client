@@ -90,7 +90,7 @@ export const ROUTES: RouteInfo[] = [
         type: 'link',
         smallTitle: 'AC'
       },
-      { 
+      {
         path: 'ama',
         title: 'dudas',
         type: 'link',
@@ -238,7 +238,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         type: 'link',
         smallTitle: 'AC'
       },
-      { 
+      {
         path: 'ama',
         title: 'dudas',
         type: 'link',
@@ -256,13 +256,13 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: '/home',
+        path: 'home',
         title: 'Inicio',
         type: 'link',
         smallTitle: 'TP'
       },
       {
-        path: '/order',
+        path: 'orders',
         title: 'Ordenes',
         type: 'link',
         smallTitle: 'TP'
@@ -297,35 +297,35 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: '/home',
+        path: 'home',
         title: 'Inicio',
         type: 'link',
         smallTitle: 'TP'
       },
       {
-        path: '/order',
+        path: 'orders',
         title: 'Ordenes',
         type: 'link',
         smallTitle: 'TP'
       },
       {
-        path: '/academy',
+        path: 'academy',
         title: 'academia',
         type: 'link',
         smallTitle: 'AC'
       },
-       {
-         path: '/global-withdrawals',
-         title: 'retiros y comiciones globales',
-         type: 'link',
-         smallTitle: 'G&W'
-       },
-       {
-         path: 'withdrawals',
-         title: 'retiros y comiciones',
-         type: 'link',
-         smallTitle: 'WT'
-       },
+      {
+        path: 'global-withdrawals',
+        title: 'retiros y comiciones globales',
+        type: 'link',
+        smallTitle: 'G&W'
+      },
+      {
+        path: 'withdrawals',
+        title: 'retiros y comiciones',
+        type: 'link',
+        smallTitle: 'WT'
+      },
     ]
   },
   {
@@ -367,7 +367,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'AC'
       },
-      { 
+      {
         path: 'ama',
         title: 'dudas',
         type: 'link',
@@ -419,12 +419,12 @@ export const ROUTES_TEACHER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'AC'
       },
-       {
-         path: 'withdrawals',
-         title: 'retiros y comisiones',
-         type: 'link',
-         smallTitle: 'WT'
-       },
+      {
+        path: 'withdrawals',
+        title: 'retiros y comisiones',
+        type: 'link',
+        smallTitle: 'WT'
+      },
     ]
   },
   {
@@ -496,12 +496,12 @@ export const ROUTES_USER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'AC'
       },
-       {
-         path: 'withdrawals',
-         title: 'retiros y comisiones',
-         type: 'link',
-         smallTitle: 'WT'
-       },
+      {
+        path: 'withdrawals',
+        title: 'retiros y comisiones',
+        type: 'link',
+        smallTitle: 'WT'
+      },
     ]
   },
   {
@@ -530,25 +530,25 @@ export class SidebarComponent implements OnInit {
 
   menuItems: any[];
   profileMenuItems: any = [
-  {
-    path: '/profile',
-    title: 'perfil',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  },
-  {
-    path: 'https://intcapex.com/',
-    title: 'Pagina Web',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  },
-  {
-    path: '/customer-service',
-    title: 'Servicio al Cliente',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-  },
-];
+    {
+      path: '/profile',
+      title: 'perfil',
+      type: 'link',
+      icontype: 'tim-icons icon-chart-pie-36',
+    },
+    {
+      path: 'https://intcapex.com/',
+      title: 'Pagina Web',
+      type: 'link',
+      icontype: 'tim-icons icon-chart-pie-36',
+    },
+    {
+      path: '/customer-service',
+      title: 'Servicio al Cliente',
+      type: 'link',
+      icontype: 'tim-icons icon-chart-pie-36',
+    },
+  ];
 
   constructor(private router: Router,
     private userDataService: UserDataService) { }
@@ -556,11 +556,11 @@ export class SidebarComponent implements OnInit {
   public rol: string;
 
   private adminButtonAction() {
-    this.router.navigate(['/trading-area/create-pack'])
+    this.router.navigate(['/funding-program/create-order'])
   }
 
   private clientButtonAction() {
-    this.router.navigate(['/trading-area/create-pack'])
+    this.router.navigate(['/funding-program/create-order'])
   }
 
   ngOnInit() {
