@@ -10,6 +10,10 @@ import { PacksService } from '../../services/packs.service';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit{
+
+  orders: any[] = null;
+  selectedOrder: any = null;
+
   productID = '';
   cardCaptureReady = false
   invalidError: any = null;
@@ -57,7 +61,7 @@ export class CheckoutComponent implements OnInit{
   }
 
 
-  setStripeToken(event: stripe.Token) {
+  setStripeToken(event: stripe.Token) { 
     console.log('Stripe Token', event);
     const data = {
       package_self_management_id: this.productID,
@@ -77,6 +81,13 @@ export class CheckoutComponent implements OnInit{
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.productID = params.get('id');
     });
+    this.packsService.getMyOrders().subscribe(
+      {
+        next: r => {this.orders = r
+        this.selectedOrder = this.orders.find((order) => order.id == this.productID); 
+        }
+      }
+    );
   }
 
 }

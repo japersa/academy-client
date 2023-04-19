@@ -9,17 +9,31 @@
       </li>
       <li class="breadcrumb-item">Pago</li>
     </ol>
-    <div class="col-lg-5 col-md-5">
+    <div class="col-lg-5 col-md-5"> 
       <div class="card card-stats shadow text-center">
         <div class="card-body">
           <div class="row">
             <div class="col-12">
-              <h3 class="card-title">Pagar ordén 123456 ICEX AG</h3>
+              <h3 class="card-title">Pagar ordén <strong>#</strong> {{productID}} ICEX AG</h3>
+              <div class="row">
+                <div class="col-6">
+                  <p>Nombre</p>
+                </div>
+                <div class="col-6">
+                  <p>{{selectedOrder.first_name + ' ' + selectedOrder.last_name }}</p>
+                </div>
+                <div class="col-6">
+                  <p>Email</p>
+                </div>
+                <div class="col-6">
+                  <p>{{selectedOrder.email}}</p>
+                </div>
+              </div>
               <div *ngIf="invalidError" style="color: red">
                 {{ invalidError.message }}
               </div>
   
-              <stripe-card
+              <stripe-card 
                 #stripeCard
                 (catch)="onStripeError($event)"
                 [(invalid)]="invalidError"
