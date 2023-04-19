@@ -8,51 +8,69 @@
   </ol>
 
   <ng-container *ngIf="orders.length > 0; else elseTemplate">
-    <div *ngFor="let i of orders" class="col-lg-5 col-md-5">
-      <div class="card card-stats shadow text-center">
+    <div *ngFor="let i of orders" class="col-lg-8 col-md-5">
+      <div class="card card-stats shadow text-center ">
         <div class="card-body">
           <div class="row">
             <div class="col-12">
-              <h3 class="card-title">Ordén 123456 {{ i?.status }}</h3>
+              <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg" alt="" width="150px">
+              <h3 class="card-title mt-2 mb-1">La ordén a sido recibida</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p class="text-left" >Número de órden</p>
+            </div>
+            <div class="col-6">
+              <p class="text-right" >123456</p>
+            </div>
+            <div class="col-6">
+              <p class="text-left" >Tamaño de la cuenta</p>
+            </div>
+            <div class="col-6">
+              <p class="text-right" >{{ '$ ' + i?.balance }} <strong> {{ i?.currencies | uppercase }}</strong></p>
+            </div>
+            <div class="col-6">
+              <p class="text-left" >Típo de cuenta</p>
+            </div>
+            <div class="col-6">
+              <p class="text-right" > {{ i?.currencies | uppercase }}</p>
+            </div>
+            <div class="col-6">
+              <p class="text-left" >Plataforma</p>
+            </div>
+            <div class="col-6">
+              <p class="text-right" >MetaTrader 5</p>
+            </div>
+            <div class="col-6">
+              <p class="text-left" >Nombre</p>
+            </div>
+            <div class="col-6">
+              <p class="text-right" > {{ i?.first_name + ' ' + i?.last_name  }}</p>
+            </div>
+            <br> <br>
+            <div class="col-6">
+              <p class="text-left" >Correo</p>
+            </div>
+            <div class="col-6">
+              <p class="text-right" > {{ i?.email }}</p>
+            </div>
+            <div class="col-6">
+              <p class="text-left" >Valor del Challenge</p>
+            </div>
+            <div class="col-6">
+              <p class="text-right" > ¿Cúal es el valor? </p>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-secondary text-center"> Pagar Crypto</button>
+              <button class=" btn btn-secondary text-center"> Pagar Stripe</button>
+            </div>
+            <div class="col-6">
+              
             </div>
           </div>
         </div>
-        <div class="card-footer">
-          <hr />
-          <br />
-          <p class="stats">
-            Opere hasta 500.000 usd con nuestro broker Euro street capital llc
-          </p>
-          <br />
-          <p class="stats">
-            Demuestra tus destrezas de trading y empieza a retirar tu beneficio
-            diario.
-          </p>
-
-          <p class="stats">
-            <i class="fas fa-check-circle"></i>
-            Escoge el balance con el que quieras empezar a operar
-          </p>
-          <p class="stats">
-            <i class="fas fa-check-circle"></i>
-            Contenido de respaldo
-          </p>
-          <p class="stats">
-            <i class="fas fa-check-circle"></i>
-            Extensión gratuita de 15 días
-          </p>
-        </div>
-        <div class="card-footer">
-          <p class="stats">
-            Demuestra tus habilidades completando nuestras fases
-          </p>
-          <button
-            routerLink="../checkout/123456"
-            class="btn btn-secondary btn-lg mb-3"
-          >
-            Pagar
-          </button>
-        </div>
+        
       </div>
     </div>
   </ng-container>

@@ -446,10 +446,10 @@ export const ROUTES_TEACHER: RouteInfo[] = [
 // Routes to USER
 export const ROUTES_USER: RouteInfo[] = [
   {
-    path: '/dashboard',
-    title: 'Dashboard',
+    path: '/home',
+    title: 'Inicio',
     type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
+    icontype: 'tim-icons icon-bank',
     role: [ROLES_ENUM.ALL]
   },
   {
@@ -461,6 +461,18 @@ export const ROUTES_USER: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
+      {
+        path: 'home',
+        title: 'Inicio',
+        type: 'link',
+        smallTitle: 'TP'
+      },
+      {
+        path: 'orders',
+        title: 'Ordenes',
+        type: 'link',
+        smallTitle: 'TP'
+      },
       {
         path: '/trading-area',
         title: 'Area Trading',
@@ -490,6 +502,18 @@ export const ROUTES_USER: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
+      {
+        path: 'home',
+        title: 'Inicio',
+        type: 'link',
+        smallTitle: 'TP'
+      },
+      {
+        path: 'orders',
+        title: 'Ordenes',
+        type: 'link',
+        smallTitle: 'TP'
+      },
       {
         path: '/academy',
         title: 'academia',
