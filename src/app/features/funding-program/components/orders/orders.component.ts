@@ -15,8 +15,8 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.packsService.getMyOrders().subscribe(
       {
-        next: r => {this.orders = r?.trader
-        console.log(r?.trader);
+        next: r => {this.orders = r
+        console.log(r);
         }
       }
     );
