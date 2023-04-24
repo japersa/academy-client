@@ -8,6 +8,7 @@ import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admi
 import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { QuicklinkStrategy } from 'ngx-quicklink';
+import { CustomerServiceModule } from './features/customer-service/customer-service.module';
 
 const routes: Routes = [
   {
@@ -137,6 +138,16 @@ const routes: Routes = [
         path: 'self-management',
         loadChildren: () => import('./features/self-management/self-management.module')
           .then(m => m.SelfManagementModule)
+      },
+      {
+        path: 'billing',
+        loadChildren: () => import('./features/billing/billing.module')
+          .then(m => m.BillingModule)
+      },
+      {
+        path: 'customer-service',
+        loadChildren: () => import('./features/customer-service/customer-service.module')
+          .then(m => m.CustomerServiceModule)
       },
     ]
   },

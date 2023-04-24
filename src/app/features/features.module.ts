@@ -7,6 +7,7 @@ import { FundingProgramModule } from './funding-program/funding-program.module';
 
 import { QuicklinkModule } from 'ngx-quicklink';
 import { SelfManagementModule } from './self-management/self-management.module';
+import { BillingModule } from './billing/billing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SelfManagementModule } from './self-management/self-management.module';
     CreateCourseByStepsModule,
     FundingProgramModule,
     QuicklinkModule,
-    SelfManagementModule
+    SelfManagementModule,
+    BillingModule
   ],
   exports: [
     AdminLayoutModule,

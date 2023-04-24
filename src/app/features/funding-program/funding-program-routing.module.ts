@@ -5,6 +5,8 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
 import { MyPackagesComponent } from './components/my-packages/my-packages.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
+import { RankingComponent } from './components/ranking/ranking.component';
 
 const routes: Routes = [
   { path: 'home', component: FundingProgramComponent },
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'my-packages', component: MyPackagesComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'checkout/:id', component: CheckoutComponent },
+  { path: 'withdrawals', component: WithdrawalsComponent },
+  { path: 'ranking', component: RankingComponent },
 ];
 
 

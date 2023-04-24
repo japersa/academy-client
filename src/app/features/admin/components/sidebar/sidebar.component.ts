@@ -274,13 +274,13 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         smallTitle: 'TP'
       },
       {
-        path: '/withdrawals',
+        path: 'withdrawals',
         title: 'retiros de beneficios',
         type: 'link',
         smallTitle: 'WT'
       },
       {
-        path: '/ranking',
+        path: 'ranking',
         title: 'ranking',
         type: 'link',
         smallTitle: 'RK'
@@ -309,12 +309,6 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         smallTitle: 'TP'
       },
       {
-        path: 'academy',
-        title: 'academia',
-        type: 'link',
-        smallTitle: 'AC'
-      },
-      {
         path: 'global-withdrawals',
         title: 'retiros y comiciones globales',
         type: 'link',
@@ -327,6 +321,13 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         smallTitle: 'WT'
       },
     ]
+  },
+  {
+    path: '/academy',
+    title: 'Academia',
+    type: 'link',
+    icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ALL],
   },
   {
     path: '/billing',
@@ -557,12 +558,6 @@ export class SidebarComponent implements OnInit {
     {
       path: '/profile',
       title: 'perfil',
-      type: 'link',
-      icontype: 'tim-icons icon-chart-pie-36',
-    },
-    {
-      path: 'https://intcapex.com/',
-      title: 'Pagina Web',
       type: 'link',
       icontype: 'tim-icons icon-chart-pie-36',
     },

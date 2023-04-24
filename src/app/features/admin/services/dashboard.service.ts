@@ -32,10 +32,8 @@ export class DashboardService {
 
   getUsersByRole(options?: Partial<IUsersParams>): Observable<any> {
 
-    // const params = new HttpParams()
     console.log(options);
     
-
     const route = `/list/users/`;
     return this.http.get<any>(`${apiURL}${route}`, { params: options });
   }

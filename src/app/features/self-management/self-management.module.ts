@@ -10,6 +10,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import { GlobalWithdrawalsComponent } from './components/global-withdrawals/global-withdrawals.component';
+import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     SelfManagementComponent,
     OrdersComponent,
     CheckoutComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    GlobalWithdrawalsComponent,
+    WithdrawalsComponent
   ],
   imports: [
     CommonModule,

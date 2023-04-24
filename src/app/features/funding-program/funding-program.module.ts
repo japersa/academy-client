@@ -12,6 +12,8 @@ import { MyPackagesComponent } from './components/my-packages/my-packages.compon
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { StripeModule } from 'stripe-angular';
 import { environment } from 'src/environments/environment';
+import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
+import { RankingComponent } from './components/ranking/ranking.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { environment } from 'src/environments/environment';
     CreateOrderComponent,
     MyPackagesComponent,
     OrdersComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    WithdrawalsComponent,
+    RankingComponent
   ],
   imports: [
     CommonModule,

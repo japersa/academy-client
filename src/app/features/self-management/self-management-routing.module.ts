@@ -4,12 +4,16 @@ import { SelfManagementComponent } from './self-management.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { GlobalWithdrawalsComponent } from './components/global-withdrawals/global-withdrawals.component';
+import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 
 const routes: Routes = [
   { path: 'home', component: SelfManagementComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'checkout/:id', component: CheckoutComponent },
-  { path: 'create-order', component: CreateOrderComponent }
+  { path: 'create-order', component: CreateOrderComponent },
+  { path: 'global-withdrawals', component: GlobalWithdrawalsComponent },
+  { path: 'withdrawals', component: WithdrawalsComponent },
 ];
 
 @NgModule({
