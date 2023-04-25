@@ -93,8 +93,6 @@
   display: flex; // 1. allow flex styles
   align-items: center; // 2. vertically center contents
   justify-content: center; // 3. horizontally center contents
-  border: 2px solid white;
-  border-radius: 50px;
   height: 26%;
   width: 4%;
   /* width: $carousel-control-width; */
@@ -153,7 +151,7 @@
 .carousel-indicators {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: -30px;
   left: 0;
   z-index: 15;
   display: flex;

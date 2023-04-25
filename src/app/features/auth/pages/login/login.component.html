@@ -151,8 +151,8 @@
                           [itemsPerSlide]="itemsPerSlide"
                           [singleSlideOffset]="false"
                           [interval]="3000"
-                          [showIndicators]="false"
-                          [indicatorsByChunk]="false"
+                          [showIndicators]="true"
+                          [indicatorsByChunk]="true"
                           (slideRangeChange)="onSlideRangeChange($event)">
                     <slide style="margin-left: 10px; " *ngFor="let slide of slides; let index=index">
                       <img [src]="slide.image" alt="image slide" style=" margin-bottom: 5px; display: inline-block; width: 70px; height: 50px; text-align: center;">
