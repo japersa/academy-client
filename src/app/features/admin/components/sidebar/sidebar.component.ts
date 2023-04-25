@@ -70,6 +70,13 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
+    path: '/packages',
+    title: 'packages',
+    type: 'link',
+    icontype: 'tim-icons icon-trophy',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
     path: '',
     title: 'Profesores',
     type: 'sub',
@@ -216,6 +223,13 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         smallTitle: 'TE'
       }
     ]
+  },
+  {
+    path: '/packages',
+    title: 'packages',
+    type: 'link',
+    icontype: 'tim-icons icon-trophy',
+    role: [ROLES_ENUM.ALL],
   },
   {
     path: '',

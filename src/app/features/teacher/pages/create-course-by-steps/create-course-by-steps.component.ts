@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import Stepper from 'bs-stepper';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-course-by-steps',
