@@ -63,7 +63,7 @@
 }
 
 .slide-title {
-    margin-bottom: -30px;
+    margin-bottom: -20px;
     & h3 {
         color: #fff;
     }
@@ -73,6 +73,7 @@
     border-radius: 10px;
     text-align: center;
     width: 100% !important;
+/*     padding: 30px 5px !important; */
     display: flex;
     justify-content: center;
 }
@@ -86,13 +87,22 @@
 
 }
 
-.carousel h4 {
+.carousel h4 { 
     color: #fff;
 }
 
 .carousel carousel {
     width: 100% !important;
 }
+
+.carousel-control-prev {
+    left: -80px !important;
+}
+
+.carousel-control-next {
+    right: -80px !important;
+}
+
 
 
 
