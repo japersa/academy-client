@@ -76,12 +76,13 @@
     border-radius: 15px !important;
 }
 
-h3, h2, p {
+h3, h2 {
      color: var(--secondary) !important; 
 } 
 
 .card {
     background-color: #f4f4f4 !important;
+    border-bottom: 3px solid var(--secondary);
 }
 
 .ref {
@@ -95,6 +96,49 @@ h3, h2, p {
 .card-title {
     font-weight: 600 !important;
     font-size: 1.4rem;
+    border-bottom: 2px solid #4be8e6;
+}
+
+.card-subtitle {
+    color: #4be8e6 !important;
+}
+
+.container-body {
+    color: #cccccc !important;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+.icon img {
+    height: 26px !important;
+    position: absolute;
+    top: 8px;
+    right:-15px;
+}
+
+.phase {
+    border-radius: 10px;
+    background-color: var(--secondary);
+}
+
+.phase h3 {
+    color: #4be8e6 !important;
+}
+
+.goals {
+    border-radius: 10px;
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 3px solid #4be8e6;
+    border-bottom: 1px solid #cccccc;
+}
+
+.goals p {
+    color: #808080;
+}
+
+.commissions {
+    background-color: var(--secondary) !important;
 }
 
 // .btn:hover {
