@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PacksService } from './services/packs.service';
 import { Router } from '@angular/router';
-
+import { UserDataService } from 'src/app/core/services/user-data.service';
+ 
 @Component({
   selector: 'app-trading-area',
   templateUrl: './funding-program.component.html',
@@ -9,11 +10,13 @@ import { Router } from '@angular/router';
 })
 export class FundingProgramComponent implements OnInit {
 
+  referalCode = '0000000';
   myPackages: any[] = [];
 
   constructor(
     private packsService: PacksService,
-    private router: Router
+    private router: Router,
+    public userDataService: UserDataService
   ) { }
 
   getMypackages() {
@@ -32,5 +35,10 @@ export class FundingProgramComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMypackages();
+    this.userDataService.userData$.subscribe(
+      {
+       next: (r) => this.referalCode = r?.referral_code
+      } 
+     );
   }
 }

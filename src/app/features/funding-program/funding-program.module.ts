@@ -15,6 +15,8 @@ import { environment } from 'src/environments/environment';
 import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 
+import {ClipboardModule} from '@angular/cdk/clipboard';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { RankingComponent } from './components/ranking/ranking.component';
     TradingAreaRoutingModule,
     ReactiveFormsModule,
     StripeModule.forRoot(environment.stripePK),
-    QuicklinkModule
+    QuicklinkModule,
+    ClipboardModule
   ]
 })
 export class FundingProgramModule { }
