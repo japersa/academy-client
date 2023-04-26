@@ -7,10 +7,41 @@
 }
 
 .banner {
-    height: 350px;
-    background-color: #f4f4f4;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     border-radius: 10px;
     box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.6);
+}
+
+.banner .button-container-one {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.banner .button-container-two {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.banner .button-container-one .btn-banner {
+    background-image: linear-gradient(to bottom left, #00c573, #00c573, #00c573) !important;
+    background-color: #00c573 !important;
+    color: var(--secondary);
+}
+
+.banner .button-container-two a:hover img {
+    transform: scale(1.1);
+}
+
+.banner .carousel-control-next {
+    display: none !important;
+}
+
+.banner .carousel-control-prev {
+    display: none !important;
 }
 
 .referido {
