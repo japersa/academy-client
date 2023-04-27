@@ -9,15 +9,21 @@
     </li>
     <li class="breadcrumb-item">Nuevo Paquete</li>
   </ol>
-  <div class="row">
+ <!--  <div class="row">
     <div class="col-5">
       <div class="row">
         <div class="col-lg-8">
           <h3 class="title mb-1">Registro del paquete</h3>
         </div>
-      </div>
-
-      <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
+      </div>  
+    </div>
+  </div> -->
+  <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
+    <div class="row">
+      <div class="col-5">
+        <div class="col-lg-8">
+          <h3 class="title mb-1">Registro del paquete</h3>
+        </div>
         <div class="card card-stats text-left box-shadow">
           <div class="card-body">
             <div class="row">
@@ -131,285 +137,37 @@
             </div>
           </div>
         </div>
+        
+      </div>
 
-      </form>
-
-    </div>
-
-    <div class="col-7 ">
-      <h3 class="title">Información de facturación</h3>
-        <div class="card mt-2 pt-4 card-stats text-left box-shadow">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-6 ">
-                <div class="form-group">
-                  <label for="names"
-                    >Nombre: {{ firstNameField?.value | titlecase }}</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control shadow"
-                    formControlName="first_name"
-                    id="names"
-                    placeholder="María"
-                  />
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages
-                        .first_name
-                    "
-                  >
-                    <small
-                      class="form-text text-danger d-block"
-                      *ngIf="
-                        firstNameField?.hasError(validation.type) &&
-                        firstNameFieldDirty
-                      "
+      <div class="col-7 ">
+        <h3 class="title">Información de facturación</h3>
+          <div class="card mt-2 pt-4 card-stats text-left box-shadow">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6 ">
+                  <div class="form-group">
+                    <label for="names"
+                      >Nombre: {{ firstNameField?.value | titlecase }}</label
                     >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
-                </div>
-              </div>
-              <div class="col-6 mr-auto ml-auto">
-                <div class="form-group">
-                  <label for="last_names"
-                    >Apellidos: {{ lastNameField?.value | titlecase }}</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control shadow"
-                    formControlName="last_name"
-                    id="last_names"
-                    placeholder="Ximenes"
-                  />
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages
-                        .last_name
-                    "
-                  >
-                    <small
-                      class="form-text text-danger d-block"
-                      *ngIf="
-                        lastNameField?.hasError(validation.type) &&
-                        lastNameFieldDirty
-                      "
-                    >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 mr-auto ml-auto">
-                <div class="form-group">
-                  <label for="email"
-                    >Email: {{ emailField?.value | lowercase }}</label
-                  >
-                  <input
-                    type="email"
-                    class="form-control shadow"
-                    formControlName="email"
-                    id="email"
-                    placeholder="m.ximenes@gmail.com"
-                  />
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages.email
-                    "
-                  >
-                    <small
-                      class="form-text text-danger"
-                      *ngIf="
-                        emailField?.hasError(validation.type) && emailFieldDirty
-                      "
-                    >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
-                </div>
-              </div>
-              <div class="col-6 mr-auto ml-auto">
-                <div class="form-group">
-                  <label for="phone_number"
-                    >Télefono: {{ phoneField?.value }}</label
-                  >
-                  <input
-                    type="tel"
-                    class="form-control shadow"
-                    formControlName="phone_number"
-                    id="phone_number"
-                    placeholder="4212976573"
-                  />
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages.phone
-                    "
-                  >
-                    <small
-                      class="form-text text-danger"
-                      *ngIf="
-                        phoneField?.hasError(validation.type) && phoneFieldDirty
-                      "
-                    >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-6 mr-auto ml-auto">
-                <div class="form-group">
-                  <label for="city"
-                    >Ciudad: {{ cityField?.value | titlecase }}</label
-                  >
-                  <input
-                    type="tel"
-                    class="form-control shadow"
-                    formControlName="city"
-                    id="city"
-                    placeholder="Buenos Aires"
-                  />
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages.city
-                    "
-                  >
-                    <small
-                      class="form-text text-danger"
-                      *ngIf="
-                        cityField?.hasError(validation.type) && cityFieldDirty
-                      "
-                    >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
-                </div>
-              </div>
-              <div class="col-6 mr-auto ml-auto">
-                <div class="form-group">
-                  <label for="address"
-                    >Dirección: {{ addressField?.value }}
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control shadow"
-                    formControlName="address"
-                    id="address"
-                    placeholder="AV. Rivadavia 695"
-                  />
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages.address
-                    "
-                  >
-                    <small
-                      class="form-text text-danger"
-                      *ngIf="
-                        addressField?.hasError(validation.type) &&
-                        addressFieldDirty
-                      "
-                    >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 mr-auto ml-auto">
-                <div class="form-group">
-                  <label for="countryField"
-                    >País: {{ countryField?.value | uppercase }}</label
-                  >
-                  <select class="form-control shadow" formControlName="country">
-                    <option
-                      *ngFor="let c of utilsService.countries"
-                      [value]="c.code"
-                    >
-                      {{ c.name + " " + c.flag }}
-                    </option>
-                  </select>
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages.country
-                    "
-                  >
-                    <small
-                      class="form-text text-danger"
-                      *ngIf="
-                        countryField?.hasError(validation.type) &&
-                        countryFieldDirty
-                      "
-                    >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
-                </div>
-              </div>
-              <div class="col-6 mr-auto ml-auto">
-                <div class="form-group">
-                  <label for="postalCodeField"
-                    >Código postal: {{ postalCodeField?.value | titlecase }}
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control shadow"
-                    formControlName="postal_code"
-                    id="postalCodeField"
-                    placeholder="2000"
-                  />
-
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages
-                        .postal_code
-                    "
-                  >
-                    <small
-                      class="form-text text-danger"
-                      *ngIf="
-                        postalCodeField?.hasError(validation.type) &&
-                        postalCodeFieldDirty
-                      "
-                    >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
-                </div>
-              </div>
-            </div>
-            <div class="row d-flex ">
-              <div class="col-6">
-                <div class="col-12 mr-auto ml-auto">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input
-                        class="form-check-input shadow"
-                        type="checkbox"
-                        formControlName="tos"
-                        value="0"
-                      />
-                      Acepto las políticas de datos.
-                      <span class="form-check-sign">
-                        <span class="check"></span>
-                      </span>
-                    </label>
+                    <input
+                      type="text"
+                      class="form-control "
+                      formControlName="first_name"
+                      id="names"
+                      placeholder="María"
+                    />
                     <ng-container
                       *ngFor="
                         let validation of utilsService.validationMessages
-                          .data_politics
+                          .first_name
                       "
                     >
                       <small
-                        class="form-text text-danger"
+                        class="form-text text-danger d-block"
                         *ngIf="
-                          datapoliticsField?.hasError(validation.type) &&
-                          datapoliticsFieldDirty
+                          firstNameField?.hasError(validation.type) &&
+                          firstNameFieldDirty
                         "
                       >
                         {{ validation.message }}
@@ -417,31 +175,29 @@
                     </ng-container>
                   </div>
                 </div>
-                <div class="col-12 mr-auto ml-auto">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input
-                        class="form-check-input shadow"
-                        type="checkbox"
-                        formControlName="cancellation_policies"
-                        value="0"
-                      />
-                      Acepto las políticas de cancelación y reembolso.
-                      <span class="form-check-sign">
-                        <span class="check"></span>
-                      </span>
-                    </label>
+                <div class="col-6 mr-auto ml-auto">
+                  <div class="form-group">
+                    <label for="last_names"
+                      >Apellidos: {{ lastNameField?.value | titlecase }}</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="last_name"
+                      id="last_names"
+                      placeholder="Ximenes"
+                    />
                     <ng-container
                       *ngFor="
                         let validation of utilsService.validationMessages
-                          .cancellation_politics
+                          .last_name
                       "
                     >
                       <small
-                        class="form-text text-danger"
+                        class="form-text text-danger d-block"
                         *ngIf="
-                          cancellationPoliticsField?.hasError(validation.type) &&
-                          cancellationPoliticsFieldDirty
+                          lastNameField?.hasError(validation.type) &&
+                          lastNameFieldDirty
                         "
                       >
                         {{ validation.message }}
@@ -450,26 +206,274 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6 text-right pb-3">
-                <button
-                  class="btn btn-secondary btn-lg mb-3 justify-content-end"
-                >
-                  Comprar
-                </button>
+              <div class="row">
+                <div class="col-6 mr-auto ml-auto">
+                  <div class="form-group">
+                    <label for="email"
+                      >Email: {{ emailField?.value | lowercase }}</label
+                    >
+                    <input
+                      type="email"
+                      class="form-control "
+                      formControlName="email"
+                      id="email"
+                      placeholder="m.ximenes@gmail.com"
+                    />
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages.email
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          emailField?.hasError(validation.type) && emailFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="col-6 mr-auto ml-auto">
+                  <div class="form-group">
+                    <label for="phone_number"
+                      >Télefono: {{ phoneField?.value }}</label
+                    >
+                    <input
+                      type="tel"
+                      class="form-control "
+                      formControlName="phone_number"
+                      id="phone_number"
+                      placeholder="4212976573"
+                    />
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages.phone
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          phoneField?.hasError(validation.type) && phoneFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
               </div>
-              <ng-container *ngIf="errorMessage">
-                <small
-                  class="text-danger"
-                  *ngFor="let e of errorMessage | keyvalue"
-                >{{ e.value }}
-                </small>
-                <br />
-              </ng-container>
-            
+  
+              <div class="row">
+                <div class="col-6 mr-auto ml-auto">
+                  <div class="form-group">
+                    <label for="city"
+                      >Ciudad: {{ cityField?.value | titlecase }}</label
+                    >
+                    <input
+                      type="tel"
+                      class="form-control "
+                      formControlName="city"
+                      id="city"
+                      placeholder="Buenos Aires"
+                    />
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages.city
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          cityField?.hasError(validation.type) && cityFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="col-6 mr-auto ml-auto">
+                  <div class="form-group">
+                    <label for="address"
+                      >Dirección: {{ addressField?.value }}
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control "
+                      formControlName="address"
+                      id="address"
+                      placeholder="AV. Rivadavia 695"
+                    />
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages.address
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          addressField?.hasError(validation.type) &&
+                          addressFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 mr-auto ml-auto">
+                  <div class="form-group">
+                    <label for="countryField"
+                      >País: {{ countryField?.value | uppercase }}</label
+                    >
+                    <select class="form-control " formControlName="country">
+                      <option
+                        *ngFor="let c of utilsService.countries"
+                        [value]="c.code"
+                      >
+                        {{ c.name + " " + c.flag }}
+                      </option>
+                    </select>
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages.country
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          countryField?.hasError(validation.type) &&
+                          countryFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="col-6 mr-auto ml-auto">
+                  <div class="form-group">
+                    <label for="postalCodeField"
+                      >Código postal: {{ postalCodeField?.value | titlecase }}
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control "
+                      formControlName="postal_code"
+                      id="postalCodeField"
+                      placeholder="2000"
+                    />
+  
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages
+                          .postal_code
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          postalCodeField?.hasError(validation.type) &&
+                          postalCodeFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="row d-flex ">
+                <div class="col-6">
+                  <div class="col-12 mr-auto ml-auto">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input
+                          class="form-check-input "
+                          type="checkbox"
+                          formControlName="tos"
+                          value="0"
+                        />
+                        Acepto las políticas de datos.
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .data_politics
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            datapoliticsField?.hasError(validation.type) &&
+                            datapoliticsFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-12 mr-auto ml-auto">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input
+                          class="form-check-input "
+                          type="checkbox"
+                          formControlName="cancellation_policies"
+                          value="0"
+                        />
+                        Acepto las políticas de cancelación y reembolso.
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                      <ng-container
+                        *ngFor="
+                          let validation of utilsService.validationMessages
+                            .cancellation_politics
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="
+                            cancellationPoliticsField?.hasError(validation.type) &&
+                            cancellationPoliticsFieldDirty
+                          "
+                        >
+                          {{ validation.message }}
+                        </small>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <ng-container *ngIf="errorMessage">
+                  <small
+                    class="text-danger"
+                    *ngFor="let e of errorMessage | keyvalue"
+                  >{{ e.value }}
+                  </small>
+                  <br />
+                </ng-container>
+                <div class="col-6 text-right pb-3">
+                  <button
+                    [disabled]="form.invalid"
+                    class="btn btn-secondary btn-lg mb-3 justify-content-end"
+                  >
+                    Comprar
+                  </button>
+                </div>  
+              </div>
             </div>
-            
           </div>
         </div>
-    </div>
-  </div>
+      </div>
+  </form>
 </div>

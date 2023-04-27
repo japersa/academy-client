@@ -23,6 +23,11 @@ input[type="radio"] {
   color: #4be8e6 !important;
 }
 
+input[type="radio"] + label {
+/*   background-color: var(--secondary) !important; */
+  color: #808080 !important;
+}
+
 input[type="radio"]:hover + label {
   background-color: var(--secondary) !important;
   color: #4be8e6 !important;
