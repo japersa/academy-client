@@ -32,4 +32,9 @@ export class PacksService {
     const route = `/payment/package/stripe`;
     return this.http.post<any>(`${apiURL}${route}`, data);
   }
+
+  payPackCoinpayents(data) {
+    const route = `/payment/package-self-management/coinpayments`;
+    return this.http.post<any>(`${apiURL}${route}`, data);
+  }
 }

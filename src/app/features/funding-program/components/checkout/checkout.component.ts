@@ -1,18 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { StripeScriptTag } from 'stripe-angular';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PacksService } from '../../services/packs.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UtilsService } from 'src/app/core/services/utils.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
+interface CPResponsePayment {
+  amount: string;
+  txn_id: string;
+  address: string;
+  confirms_needed: string;
+  timeout: number;
+  checkout_url: string;
+  status_url: string;
+  qrcode_url: string;
+}
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit{
+export class CheckoutComponent implements OnInit {
 
   orders: any[] = null;
   selectedOrder: any = null;
+
+  coinpaymentResponse: CPResponsePayment = null;
 
   productID = '';
   cardCaptureReady = false
@@ -36,12 +52,39 @@ export class CheckoutComponent implements OnInit{
     }
   };
 
+  currencies: any[] = [
+    {
+      name: 'Bitcoin',
+      logo: '',
+      symbol: 'btc'
+    },
+    {
+      name: 'Bitcoin Cash',
+      logo: '',
+      symbol: 'BCH'
+    },
+    {
+      name: 'Ripple',
+      logo: '',
+      symbol: 'xrp'
+    },
+  ];
+
+  modalRef?: BsModalRef;
+
+
+  criptoform!: FormGroup;
+
   constructor(private stripeScriptTag: StripeScriptTag,
     private packsService: PacksService,
+    public utilsService: UtilsService,
+    private modalService: BsModalService,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute) {
     if (!this.stripeScriptTag.StripeInstance) {
       this.stripeScriptTag.setPublishableKey(environment.stripePK);
     }
+    this.buildForm();
   }
 
   createPaymentMethod(extraData) {
@@ -61,7 +104,7 @@ export class CheckoutComponent implements OnInit{
   }
 
 
-  setStripeToken(event: stripe.Token) { 
+  setStripeToken(event: stripe.Token) {
     console.log('Stripe Token', event);
     const data = {
       package_self_management_id: this.productID,
@@ -77,14 +120,44 @@ export class CheckoutComponent implements OnInit{
     console.log('Stripe Source', source)
   }
 
+  payWithCripto(template: TemplateRef<any>) {
+
+    const data = {
+      package_self_management_id: this.productID,
+      currency2: this.criptoform.value.currency2
+    };
+    this.packsService.payPackCoinpayents(data).subscribe({
+      next: (r) => {
+        this.coinpaymentResponse = r;
+        this.modalRef = this.modalService.show(template);
+      },
+      error: (e) => console.log(e)
+    });
+  }
+
+  get currencyField() {
+    return this.criptoform?.get('currency2');
+  }
+
+  get currencyDirty() {
+    return this.currencyField?.dirty || this.currencyField?.touched;
+  }
+
+  private buildForm() {
+    this.criptoform = this.formBuilder.group({
+      currency2: ['', Validators.required]
+    });
+  }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.productID = params.get('id');
     });
     this.packsService.getMyOrders().subscribe(
       {
-        next: r => {this.orders = r
-        this.selectedOrder = this.orders.find((order) => order.id == this.productID); 
+        next: r => {
+          this.orders = r
+          this.selectedOrder = this.orders.find((order) => order.id == this.productID);
         }
       }
     );

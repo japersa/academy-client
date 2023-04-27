@@ -9,70 +9,77 @@
 
   <ng-container *ngIf="orders.length > 0; else elseTemplate">
     <div *ngFor="let i of orders" class="col-lg-8 col-md-5">
-      <div class="card card-stats shadow text-center ">
+      <div class="card card-stats shadow text-center">
         <div class="card-body">
           <div class="row">
             <div class="col-12">
-              <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg" alt="" width="150px">
+              <img
+                src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg"
+                alt=""
+                width="150px"
+              />
               <h3 class="card-title mt-2 mb-1">La ordén a sido recibida</h3>
             </div>
           </div>
           <div class="row">
             <div class="col-6">
-              <p class="text-left" >Número de órden</p>
+              <p class="text-left">Número de órden</p>
             </div>
             <div class="col-6">
-              <p class="text-right" >123456</p>
+              <p class="text-right">123456</p>
             </div>
             <div class="col-6">
-              <p class="text-left" >Tamaño de la cuenta</p>
+              <p class="text-left">Tamaño de la cuenta</p>
             </div>
             <div class="col-6">
-              <p class="text-right" >{{ '$ ' + i?.balance }} <strong> {{ i?.currencies | uppercase }}</strong></p>
+              <p class="text-right">
+                {{ "$ " + i?.balance }}
+                <strong> {{ i?.currencies | uppercase }}</strong>
+              </p>
             </div>
             <div class="col-6">
-              <p class="text-left" >Típo de cuenta</p>
+              <p class="text-left">Típo de cuenta</p>
             </div>
             <div class="col-6">
-              <p class="text-right" > {{ i?.currencies | uppercase }}</p>
+              <p class="text-right">{{ i?.currencies | uppercase }}</p>
             </div>
             <div class="col-6">
-              <p class="text-left" >Plataforma</p>
+              <p class="text-left">Plataforma</p>
             </div>
             <div class="col-6">
-              <p class="text-right" >MetaTrader 5</p>
+              <p class="text-right">MetaTrader 5</p>
             </div>
             <div class="col-6">
-              <p class="text-left" >Nombre</p>
+              <p class="text-left">Nombre</p>
             </div>
             <div class="col-6">
-              <p class="text-right" > {{ i?.first_name + ' ' + i?.last_name  }}</p>
+              <p class="text-right">{{ i?.first_name + " " + i?.last_name }}</p>
             </div>
-            <br> <br>
+            <br />
+            <br />
             <div class="col-6">
-              <p class="text-left" >Correo</p>
-            </div>
-            <div class="col-6">
-              <p class="text-right" > {{ i?.email }}</p>
+              <p class="text-left">Correo</p>
             </div>
             <div class="col-6">
-              <p class="text-left" >Valor del Challenge</p>
+              <p class="text-right">{{ i?.email }}</p>
             </div>
             <div class="col-6">
-              <p class="text-right" > ¿Cúal es el valor? </p>
+              <p class="text-left">Valor del Challenge</p>
             </div>
             <div class="col-6">
-              <button class="btn btn-secondary text-center"> Pagar Crypto</button>
-              <button class=" btn btn-secondary text-center"
+              <p class="text-right">¿Cúal es el valor?</p>
+            </div>
+            <div class="col-6">
+              <button
+                class="btn btn-secondary text-center"
                 routerLink="../checkout/{{ i?.id }}"
-              > Pagar Stripe</button>
+              >
+                Pagar
+              </button>
             </div>
-            <div class="col-6">
-              
-            </div>
+            <div class="col-6"></div>
           </div>
         </div>
-        
       </div>
     </div>
   </ng-container>
