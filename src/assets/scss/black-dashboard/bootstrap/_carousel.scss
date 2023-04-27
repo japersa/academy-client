@@ -13,6 +13,7 @@
 
 .carousel {
   position: relative;
+
 }
 
 .carousel.pointer-event {
@@ -55,7 +56,7 @@
 //
 // Alternate transitions
 //
-
+ 
 .carousel-fade {
   .carousel-item {
     opacity: 0;
@@ -85,18 +86,20 @@
 .carousel-control-prev,
 .carousel-control-next {
   position: absolute;
-  top: 0;
+  top: 45%;
   bottom: 0;
-  z-index: 1;
+  z-index: 99;
   // Use flex for alignment (1-3)
-  display: none; // 1. allow flex styles
+  display: flex; // 1. allow flex styles
   align-items: center; // 2. vertically center contents
   justify-content: center; // 3. horizontally center contents
-  width: $carousel-control-width;
+  height: 26%;
+  width: 4%;
+  /* width: $carousel-control-width; */
   color: $carousel-control-color;
   text-align: center;
-  opacity: $carousel-control-opacity;
-  @include transition($carousel-control-transition);
+/*   opacity: $carousel-control-opacity; */
+  @include transition($carousel-control-opacity);
 
   // Hover/focus state
   @include hover-focus {
@@ -107,13 +110,15 @@
   }
 }
 .carousel-control-prev {
-  left: 0;
+  left: -38px;
+  padding-right: 2px;
   @if $enable-gradients {
     background: linear-gradient(90deg, rgba($black, 0.25), rgba($black, 0.001));
   }
 }
 .carousel-control-next {
-  right: 0;
+  right: -35px;
+  padding-left: 2px;
   @if $enable-gradients {
     background: linear-gradient(
       270deg,
@@ -146,7 +151,7 @@
 .carousel-indicators {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: -30px;
   left: 0;
   z-index: 15;
   display: flex;

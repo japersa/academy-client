@@ -1,13 +1,96 @@
 h1, h2, h3, h4, h5, h6 {
     color: #0a090b !important; 
 }
-p {
+/* p {
     color: #041117 !important;
-}
+} */
 
 .shadow {
     box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
     border-radius: 10px;
+}
+
+.ref {
+    background-color: lightgray !important;
+    color: var(--secondary) !important;
+    padding: 5px !important;
+}
+
+.btn-custom {
+    color: var(--secondary);
+    background: #ffffff !important;
+    background-image: #ffff !important;
+    background-color: #ffffff !important;
+    border-radius: 10px;
+    border: 1px solid var(--secondary);
+}
+
+.btn-ref {
+    color: var(--secondary);
+    background: #4be8e6 !important;
+    background-image: #4be8e6 !important;
+    background-color: #4be8e6 !important;
+}
+
+.card {
+    border-bottom: 3px solid var(--secondary);
+}
+
+.card-title {
+    border-bottom: 2px solid #4be8e6 !important;
+}
+
+.card-body {
+    border-bottom: 1px solid #cccccc;
+}
+
+ 
+.card-title {
+    font-weight: 600 !important;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #4be8e6;
+}
+
+.card-subtitle {
+    color: #4be8e6 !important;
+}
+
+.container-body {
+    color: #cccccc !important;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+.icon img {
+    height: 26px !important;
+    position: absolute;
+    top: 8px;
+    right:-15px;
+}
+
+.phase {
+    border-radius: 10px;
+    background-color: var(--secondary);
+}
+
+.phase h3 {
+    color: #4be8e6 !important;
+}
+
+.goals {
+    border-radius: 10px;
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 3px solid #4be8e6;
+    border-bottom: 1px solid #cccccc;
+}
+
+.goals p {
+    color: #808080;
+}
+
+.commissions {
+    background-color: var(--secondary) !important;
 }
 
 /* h1, h2, h3, h4, h5, h6 {

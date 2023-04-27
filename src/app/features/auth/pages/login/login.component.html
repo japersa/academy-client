@@ -141,18 +141,18 @@
       <div class="row  ">
         <div class="col-12  text-center">
           <div class="row text-center">
-            <div class=" slide-title col-4 ml-auto mr-auto ">
+            <div class=" slide-title col-6 ml-auto mr-auto  ">
               <h3>{{slidesTitle}}</h3>
             </div>
             <div class="col-11  mr-auto ml-auto text-center mb-3 ">
-              <div class="carousel text-center p-2" style="width: 100%;">
+              <div class="carousel text-center pt-4 pb-3" style="width: 100%;">
                 <div style="width: 100%;">
                   <carousel 
                           [itemsPerSlide]="itemsPerSlide"
                           [singleSlideOffset]="false"
                           [interval]="3000"
-                          [showIndicators]="false"
-                          [indicatorsByChunk]="false"
+                          [showIndicators]="true"
+                          [indicatorsByChunk]="true"
                           (slideRangeChange)="onSlideRangeChange($event)">
                     <slide style="margin-left: 10px; " *ngFor="let slide of slides; let index=index">
                       <img [src]="slide.image" alt="image slide" style=" margin-bottom: 5px; display: inline-block; width: 70px; height: 50px; text-align: center;">
@@ -160,7 +160,7 @@
                         <p style="font-size: .9rem; color: white;" >{{ slide.message }}</p>
                       </div>
                     </slide>
-                  </carousel>
+                  </carousel> 
                 </div>
               </div>
             </div>

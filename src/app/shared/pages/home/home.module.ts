@@ -7,6 +7,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 
 @NgModule({
   declarations: [HomeComponent],
@@ -14,7 +16,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     CommonModule,
     HomeRoutingModule,
     ClipboardModule,
-    QuicklinkModule
+    QuicklinkModule,
+    CarouselModule
   ]
 })
 export class HomeModule { }

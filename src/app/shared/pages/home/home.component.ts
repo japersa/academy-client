@@ -10,7 +10,7 @@ import { UserDataService } from '../../../core/services/user-data.service';
 })
 export class HomeComponent implements OnInit {
 
-  referalCode = '0000000';
+  referalCode = '0000000'; 
 
   constructor(public userDataService: UserDataService,
   ) { }

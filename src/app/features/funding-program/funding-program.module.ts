@@ -16,6 +16,8 @@ import { WithdrawalsComponent } from './components/withdrawals/withdrawals.compo
 import { RankingComponent } from './components/ranking/ranking.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+import {ClipboardModule} from '@angular/cdk/clipboard';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ReactiveFormsModule,
     StripeModule.forRoot(environment.stripePK),
     QuicklinkModule,
-    ModalModule
+    ClipboardModule
   ]
 })
 export class FundingProgramModule { }

@@ -7,10 +7,41 @@
 }
 
 .banner {
-    height: 350px;
-    background-color: #f4f4f4;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     border-radius: 10px;
     box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.6);
+}
+
+.banner .button-container-one {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.banner .button-container-two {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.banner .button-container-one .btn-banner {
+    background-image: linear-gradient(to bottom left, #00c573, #00c573, #00c573) !important;
+    background-color: #00c573 !important;
+    color: var(--secondary);
+}
+
+.banner .button-container-two a:hover img {
+    transform: scale(1.1);
+}
+
+.banner .carousel-control-next {
+    display: none !important;
+}
+
+.banner .carousel-control-prev {
+    display: none !important;
 }
 
 .referido {
@@ -45,12 +76,13 @@
     border-radius: 15px !important;
 }
 
-h3, h2, p {
+h3, h2 {
      color: var(--secondary) !important; 
 } 
 
 .card {
     background-color: #f4f4f4 !important;
+    border-bottom: 3px solid var(--secondary);
 }
 
 .ref {
@@ -64,6 +96,56 @@ h3, h2, p {
 .card-title {
     font-weight: 600 !important;
     font-size: 1.4rem;
+    border-bottom: 2px solid #4be8e6;
+}
+
+.card-subtitle {
+    color: #4be8e6 !important;
+}
+
+.container-body {
+    color: #cccccc !important;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+.icon img {
+    height: 26px !important;
+    position: absolute;
+    top: 8px;
+    right:-15px;
+}
+
+.phase {
+    border-radius: 10px;
+    background-color: var(--secondary);
+}
+
+.phase h3 {
+    color: #4be8e6 !important;
+}
+
+.goals {
+    border-radius: 10px;
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 3px solid #4be8e6;
+    border-bottom: 1px solid #cccccc;
+}
+
+.goals p {
+    color: #808080;
+}
+
+.commissions {
+    background-color: var(--secondary) !important;
+}
+
+.btn-ref {
+    color: var(--secondary);
+    background: #4be8e6 !important;
+    background-image: #4be8e6 !important;
+    background-color: #4be8e6 !important;
 }
 
 // .btn:hover {
