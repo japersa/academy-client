@@ -10,18 +10,19 @@
     <li class="breadcrumb-item">Nuevo Paquete</li>
   </ol>
   <div class="row">
-    <div class="col-lg-8">
-      <h3 class="title mb-1">Registro del paquete</h3>
-      <p>Configura tu paquete a la medida.</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-10 col-md-12">
+    <div class="col-5">
+      <div class="row">
+        <div class="col-lg-8">
+          <h3 class="title mb-1">Registro del paquete</h3>
+        </div>
+      </div>
+
       <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
         <div class="card card-stats text-left box-shadow">
           <div class="card-body">
             <div class="row">
               <div class="col-12">
+                <p>Configura tu paquete a la medida.</p>
                 <p class="title">Elige la moneda a operar</p>
                 <p>
                   <input
@@ -32,7 +33,7 @@
                     id="usd"
                     checked
                   />
-                  <label class="radio-button mr-2" for="usd"> USD </label>
+                  <label class="radio-button mr-2" for="usd"> USD ($) </label>
                   <input
                     name="currencies"
                     value="eur"
@@ -40,55 +41,61 @@
                     formControlName="currencies"
                     id="eur"
                   />
-                  <label class="radio-button mr-2" for="eur"> EUR </label>
+                  <label class="radio-button mr-2" for="eur"> EUR (€) </label>
                 </p>
                 <hr />
               </div>
               <div class="col-12">
                 <p class="title">Elige el balance de la cuenta</p>
-                <p>
-                  <input
-                    name="balance"
-                    value="fifty_thousand"
-                    type="radio"
-                    formControlName="balance"
-                    id="50k"
-                  />
-                  <label class="radio-button mr-2" for="50k">
-                    50.000 USD
-                  </label>
-                  <input
-                    name="balance"
-                    value="one_hundred_thousand"
-                    type="radio"
-                    formControlName="balance"
-                    id="100k"
-                    checked
-                  />
-                  <label class="radio-button mr-2" for="100k">
-                    100.000 USD
-                  </label>
-                  <input
-                    name="balance"
-                    value="two_hundred_thousand"
-                    type="radio"
-                    formControlName="balance"
-                    id="200k"
-                  />
-                  <label class="radio-button mr-2" for="200k">
-                    200.000 USD
-                  </label>
-                  <input
-                    name="balance"
-                    value="five_hundred_thousand"
-                    type="radio"
-                    formControlName="balance"
-                    id="500k"
-                  />
-                  <label class="radio-button mr-2" for="500k">
-                    500.000 USD
-                  </label>
-                </p>
+                <div class="row">
+                  <div class="col-12">
+                    <input
+                      name="balance"
+                      value="fifty_thousand"
+                      type="radio"
+                      formControlName="balance"
+                      id="50k"
+                    />
+                    <label class="radio-button mr-2" for="50k">
+                      50.000 USD
+                    </label>
+                    <input
+                      name="balance"
+                      value="one_hundred_thousand"
+                      type="radio"
+                      formControlName="balance"
+                      id="100k"
+                      checked
+                    />
+                    <label class="radio-button mr-2" for="100k">
+                      100.000 USD
+                    </label>
+                  </div>
+                  <div class="col-12">
+                    <p>
+                      <input
+                        name="balance"
+                        value="two_hundred_thousand"
+                        type="radio"
+                        formControlName="balance"
+                        id="200k"
+                      />
+                      <label class="radio-button mr-2" for="200k">
+                        200.000 USD
+                      </label>
+                      <input
+                        name="balance"
+                        value="five_hundred_thousand"
+                        type="radio"
+                        formControlName="balance"
+                        id="500k"
+                      />
+                      <label class="radio-button mr-2" for="500k">
+                        500.000 USD
+                      </label>
+                    </p>
+                  </div>
+                </div>
                 <hr />
               </div>
               <div class="col-12">
@@ -125,12 +132,16 @@
           </div>
         </div>
 
-        <h3 class="title">Información de facturación</h3>
+      </form>
 
-        <div class="card card-stats text-left box-shadow">
+    </div>
+
+    <div class="col-7 ">
+      <h3 class="title">Información de facturación</h3>
+        <div class="card mt-2 pt-4 card-stats text-left box-shadow">
           <div class="card-body">
             <div class="row">
-              <div class="col-5 mr-auto ml-auto">
+              <div class="col-6 ">
                 <div class="form-group">
                   <label for="names"
                     >Nombre: {{ firstNameField?.value | titlecase }}</label
@@ -160,7 +171,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-5 mr-auto ml-auto">
+              <div class="col-6 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="last_names"
                     >Apellidos: {{ lastNameField?.value | titlecase }}</label
@@ -192,7 +203,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-5 mr-auto ml-auto">
+              <div class="col-6 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="email"
                     >Email: {{ emailField?.value | lowercase }}</label
@@ -220,7 +231,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-5 mr-auto ml-auto">
+              <div class="col-6 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="phone_number"
                     >Télefono: {{ phoneField?.value }}</label
@@ -251,7 +262,7 @@
             </div>
 
             <div class="row">
-              <div class="col-5 mr-auto ml-auto">
+              <div class="col-6 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="city"
                     >Ciudad: {{ cityField?.value | titlecase }}</label
@@ -279,7 +290,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-5 mr-auto ml-auto">
+              <div class="col-6 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="address"
                     >Dirección: {{ addressField?.value }}
@@ -310,7 +321,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-5 mr-auto ml-auto">
+              <div class="col-6 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="countryField"
                     >País: {{ countryField?.value | uppercase }}</label
@@ -340,7 +351,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-5 mr-auto ml-auto">
+              <div class="col-6 mr-auto ml-auto">
                 <div class="form-group">
                   <label for="postalCodeField"
                     >Código postal: {{ postalCodeField?.value | titlecase }}
@@ -372,94 +383,93 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-5 mr-auto ml-auto">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input
-                      class="form-check-input shadow"
-                      type="checkbox"
-                      formControlName="tos"
-                      value="0"
-                    />
-                    Acepto las políticas de datos.
-                    <span class="form-check-sign">
-                      <span class="check"></span>
-                    </span>
-                  </label>
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages
-                        .data_politics
-                    "
-                  >
-                    <small
-                      class="form-text text-danger"
-                      *ngIf="
-                        datapoliticsField?.hasError(validation.type) &&
-                        datapoliticsFieldDirty
+            <div class="row d-flex ">
+              <div class="col-6">
+                <div class="col-12 mr-auto ml-auto">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input shadow"
+                        type="checkbox"
+                        formControlName="tos"
+                        value="0"
+                      />
+                      Acepto las políticas de datos.
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages
+                          .data_politics
                       "
                     >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          datapoliticsField?.hasError(validation.type) &&
+                          datapoliticsFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
                 </div>
-              </div>
-              <div class="col-5 mr-auto ml-auto">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input
-                      class="form-check-input shadow"
-                      type="checkbox"
-                      formControlName="cancellation_policies"
-                      value="0"
-                    />
-                    Acepto las políticas de cancelación y reembolso.
-                    <span class="form-check-sign">
-                      <span class="check"></span>
-                    </span>
-                  </label>
-                  <ng-container
-                    *ngFor="
-                      let validation of utilsService.validationMessages
-                        .cancellation_politics
-                    "
-                  >
-                    <small
-                      class="form-text text-danger"
-                      *ngIf="
-                        cancellationPoliticsField?.hasError(validation.type) &&
-                        cancellationPoliticsFieldDirty
+                <div class="col-12 mr-auto ml-auto">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input shadow"
+                        type="checkbox"
+                        formControlName="cancellation_policies"
+                        value="0"
+                      />
+                      Acepto las políticas de cancelación y reembolso.
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                    <ng-container
+                      *ngFor="
+                        let validation of utilsService.validationMessages
+                          .cancellation_politics
                       "
                     >
-                      {{ validation.message }}
-                    </small>
-                  </ng-container>
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="
+                          cancellationPoliticsField?.hasError(validation.type) &&
+                          cancellationPoliticsFieldDirty
+                        "
+                      >
+                        {{ validation.message }}
+                      </small>
+                    </ng-container>
+                  </div>
                 </div>
               </div>
+              <div class="col-6 text-right pb-3">
+                <button
+                  class="btn btn-secondary btn-lg mb-3 justify-content-end"
+                >
+                  Comprar
+                </button>
+              </div>
+              <ng-container *ngIf="errorMessage">
+                <small
+                  class="text-danger"
+                  *ngFor="let e of errorMessage | keyvalue"
+                >{{ e.value }}
+                </small>
+                <br />
+              </ng-container>
+            
             </div>
-
-            <ng-container *ngIf="errorMessage">
-              <small
-                class="text-danger"
-                *ngFor="let e of errorMessage | keyvalue"
-                >{{ e.value }}</small
-              >
-              <br />
-            </ng-container>
+            
           </div>
         </div>
-        <div class="row">
-          <div class="col-3 ml-auto mr-auto">
-            <button
-              [disabled]="form.invalid"
-              class="btn btn-secondary btn-lg mb-3"
-            >
-              Comprar
-            </button>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 </div>
