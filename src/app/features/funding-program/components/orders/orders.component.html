@@ -8,67 +8,96 @@
   </ol>
 
   <ng-container *ngIf="orders.length > 0; else elseTemplate">
-    <div *ngFor="let i of orders" class="col-lg-8 col-md-5">
+    <div *ngFor="let i of orders" class="col-lg-7 col-md-5">
       <div class="card card-stats shadow text-center ">
         <div class="card-body">
-          <div class="row">
-            <div class="col-12">
+          <div class="row container-title ">
+            <div class="col-8">
+              <h2 class="card-title mt-2 mb-1 text-left">Ordén Recibida</h2>
+            </div>
+            <div class="col-4">
               <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg" alt="" width="150px">
-              <h3 class="card-title mt-2 mb-1">La ordén a sido recibida</h3>
+            </div>
+          </div>
+          <div class="row mt-3 mb-3 pb-3 container-info">
+            <div class="col-6 ">
+              <div class="row">
+                <div class="col-12">
+                  <p class="text-left" > <strong> Número de órden: </strong> 
+                    <span> {{ i?.id }} </span>
+                  </p> 
+                </div> 
+                <div class="col-12">
+                  <p class="text-left" > <strong> Tamaño de la cuenta: </strong> 
+                    <span> {{ '$ ' + i?.balance }} {{ i?.currencies | uppercase }}</span> 
+                  </p> 
+                </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Típo de cuenta: </strong> 
+                    <span> {{ i?.currencies | uppercase }}</span> 
+                  </p> 
+                </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Plataforma: </strong> 
+                    <span> MetaTrader 5 </span> 
+                  </p> 
+                </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Nombre: </strong> 
+                    <span> {{ i?.first_name + ' ' + i?.last_name  }}</span> 
+                  </p> 
+                </div>
+        
+              </div>
+              
+            </div>
+            <div class="col-6">
+              <div class="row bg-label mt-3 mb-2 mr-2  ">
+                <div class="col-3 my-auto">
+                  <img 
+                  src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/email_b0aiqe.svg" >
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <p class="text-left" > <strong> Correo: </strong> </p>
+                  </div>
+                  <div class="row">
+                    <span class="text-right" > {{ i?.email }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row bg-label mt-2 mr-2">
+                <div class="col-3 my-auto">
+                  <img 
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg" 
+                    alt="">
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <p class="text-left" > <strong>Valor del Challenge:</strong> </p>
+                  </div>
+                  <div class="row">
+                    <span class="text-right" > ¿Cúal es el valor?</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
-              <p class="text-left" >Número de órden</p>
+            <div class="col-3">
+
             </div>
-            <div class="col-6">
-              <p class="text-right" >123456</p>
-            </div>
-            <div class="col-6">
-              <p class="text-left" >Tamaño de la cuenta</p>
-            </div>
-            <div class="col-6">
-              <p class="text-right" >{{ '$ ' + i?.balance }} <strong> {{ i?.currencies | uppercase }}</strong></p>
-            </div>
-            <div class="col-6">
-              <p class="text-left" >Típo de cuenta</p>
-            </div>
-            <div class="col-6">
-              <p class="text-right" > {{ i?.currencies | uppercase }}</p>
-            </div>
-            <div class="col-6">
-              <p class="text-left" >Plataforma</p>
-            </div>
-            <div class="col-6">
-              <p class="text-right" >MetaTrader 5</p>
-            </div>
-            <div class="col-6">
-              <p class="text-left" >Nombre</p>
-            </div>
-            <div class="col-6">
-              <p class="text-right" > {{ i?.first_name + ' ' + i?.last_name  }}</p>
-            </div>
-            <br> <br>
-            <div class="col-6">
-              <p class="text-left" >Correo</p>
-            </div>
-            <div class="col-6">
-              <p class="text-right" > {{ i?.email }}</p>
-            </div>
-            <div class="col-6">
-              <p class="text-left" >Valor del Challenge</p>
-            </div>
-            <div class="col-6">
-              <p class="text-right" > ¿Cúal es el valor? </p>
-            </div>
-            <div class="col-6">
-              <button class="btn btn-secondary text-center"> Pagar Crypto</button>
-              <button class=" btn btn-secondary text-center"
+            <div class="col-9">
+              <div class="row">
+                <div class="col-6">
+                  <button class="btn btn-secondary btn-block "> Pagar Crypto</button>
+                </div>
+                <div class="col-6">
+                  <button class=" btn btn-secondary btn-md"
                 routerLink="../checkout/{{ i?.id }}"
               > Pagar Stripe</button>
-            </div>
-            <div class="col-6">
-              
+                </div>
+              </div>
             </div>
           </div>
         </div>
