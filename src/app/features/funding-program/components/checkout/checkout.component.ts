@@ -31,6 +31,14 @@ export class CheckoutComponent implements OnInit{
         // fontSize: '18px',
         '::placeholder': {
           color: '#706f6f'
+        },'::stripe-card-row': {
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginBottom: '10px'
+        },
+        '::stripe-card-row .stripe-card-field': {
+          width: '48%',
         }
       }
     }

@@ -2,3 +2,26 @@
     box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
     border-radius: 10px;
 }
+
+.card-title {
+    color: var(--secondary) !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #4be8e6;
+   
+}
+
+.container-credit-card {
+    border: 2px solid #4be8e6;
+    border-radius: 2px;
+}
+
+/* .stripe-card {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.stripe-card .CardNumberElement,
+.stripe-card .CardExpiryElement,
+.stripe-card .CardCvcElement {
+  margin-bottom: 10px !important;
+} */
