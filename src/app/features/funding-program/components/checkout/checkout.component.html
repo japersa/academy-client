@@ -130,6 +130,32 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-4">
+          <p class="title">QR:</p>
+        </div>
+        <div class="col-8">
+          <img [src]="coinpaymentResponse?.qrcode_url" alt="" srcset="" />
+        </div>
+      </div>
+      <div class="row">
+        <a
+          [href]="coinpaymentResponse?.checkout_url"
+          class="btn btn-secondary btn-lg mb-3"
+          type="submit"
+          target="_blank"
+        >
+          Pagar
+        </a>
+        <a
+          [href]="coinpaymentResponse?.status_url"
+          class="btn btn-primary btn-lg mb-3"
+          type="submit"
+          target="_blank"
+        >
+          Estado
+        </a>
+      </div>
     </div>
   </div>
 </div>
