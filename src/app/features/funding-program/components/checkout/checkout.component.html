@@ -10,47 +10,87 @@
     <li class="breadcrumb-item">Pago</li>
   </ol>
   <div class="row">
-    <div class="col-lg-6 col-md-6">
-      <div class="row">
-        <div class="card card-stats shadow text-center">
+    <div class="col-lg-6 col-md-5"> 
+      <div class="card card-stats shadow text-center">
+        <div class="card-body">
+          <div class="row container-title">
+            <div class="col-11 text-left">
+              <h2 class="card-title pb-2">Pagar ordén <strong>#</strong> {{productID}} ICEX AG</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5 ml-3 container-credit-card">
+              <stripe-card 
+                #stripeCard
+                (catch)="onStripeError($event)"
+                [(invalid)]="invalidError"
+                (cardMounted)="cardCaptureReady = true"
+                (paymentMethodChange)="setPaymentMethod($event)"
+                (tokenChange)="setStripeToken($event)"
+                (sourceChange)="setStripeSource($event)"
+                [options]="cardOptions"
+                class="stripe-card"
+              ></stripe-card>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-12">
+                  <p class="text-left" >Nombre: <span> {{selectedOrder.first_name + ' ' + selectedOrder.last_name }} </span> </p>
+                </div>
+                <div class="col-12">
+                  <p class="text-left" >Email: <span> {{selectedOrder.email}} </span> </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 mx-auto pt-3">
+                  <button
+                    class="btn btn-secondary btn-block mb-3"
+                    (click)="stripeCard.createToken($event)"
+                  >
+                    Pagar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer mb-3 mt-2">
+          <div *ngIf="invalidError" style="color: red">
+            {{ invalidError.message }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class=" card card-stats shadow text-center">
+        <form
+          [formGroup]="criptoform"
+          (ngSubmit)="payWithCripto(cryptoModaltemplate)"
+        >
           <div class="card-body">
             <div class="row">
               <div class="col-12">
-                <h3 class="card-title">
-                  Pagar con <strong>Tarjeta de crédito</strong>
-                </h3>
-                <div class="row">
-                  <div class="col-6">
-                    <p>Nombre</p>
-                  </div>
-                  <div class="col-6">
-                    <p>
+                <h3 class="card-title">Pagar con <strong>Cripto</strong></h3>
+                <div class="form-group">
+                  <label for="currency2">
+                    Moneda: {{ currencyField?.value }}
+                  </label>
+                  <select
+                    formControlName="currency2"
+                    class="form-control"
+                    id="currency2"
+                  >
+                    <option value="" selected disabled>Choose Tagging</option>
+                    <option *ngFor="let c of currencies" [value]="c?.symbol">
                       {{
-                        selectedOrder.first_name + " " + selectedOrder.last_name
+                        (c?.name | titlecase) +
+                          " - " +
+                          (c?.symbol | uppercase)
                       }}
-                    </p>
-                  </div>
-                  <div class="col-6">
-                    <p>Email</p>
-                  </div>
-                  <div class="col-6">
-                    <p>{{ selectedOrder.email }}</p>
-                  </div>
+                    </option>
+                  </select>
                 </div>
-                <div *ngIf="invalidError" style="color: red">
-                  {{ invalidError.message }}
-                </div>
-
-                <stripe-card
-                  #stripeCard
-                  (catch)="onStripeError($event)"
-                  [(invalid)]="invalidError"
-                  (cardMounted)="cardCaptureReady = true"
-                  (paymentMethodChange)="setPaymentMethod($event)"
-                  (tokenChange)="setStripeToken($event)"
-                  (sourceChange)="setStripeSource($event)"
-                  [options]="cardOptions"
-                ></stripe-card>
               </div>
             </div>
           </div>
@@ -58,61 +98,17 @@
             <div class="card-footer">
               <button
                 class="btn btn-secondary btn-lg mb-3"
-                (click)="stripeCard.createToken($event)"
+                type="submit"
+                [disabled]="criptoform.invalid"
               >
-                Pagar con TC
+                Pagar con cripto
               </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
-      <div class="row">
-        <div class="card card-stats shadow text-center">
-          <form
-            [formGroup]="criptoform"
-            (ngSubmit)="payWithCripto(cryptoModaltemplate)"
-          >
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <h3 class="card-title">Pagar con <strong>Cripto</strong></h3>
-                  <div class="form-group">
-                    <label for="currency2">
-                      Moneda: {{ currencyField?.value }}
-                    </label>
-                    <select
-                      formControlName="currency2"
-                      class="form-control"
-                      id="currency2"
-                    >
-                      <option value="" selected disabled>Choose Tagging</option>
-                      <option *ngFor="let c of currencies" [value]="c?.symbol">
-                        {{
-                          (c?.name | titlecase) +
-                            " - " +
-                            (c?.symbol | uppercase)
-                        }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <div class="card-footer">
-                <button
-                  class="btn btn-secondary btn-lg mb-3"
-                  type="submit"
-                  [disabled]="criptoform.invalid"
-                >
-                  Pagar con cripto
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+  </div>
+
     <div class="col-lg-6 col-md-6">
       <div class="card card-stats shadow text-center">
         <div class="card-body">
@@ -158,6 +154,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- MODAL -->
 <ng-template #cryptoModaltemplate>
