@@ -14,6 +14,7 @@ import { StripeModule } from 'stripe-angular';
 import { environment } from 'src/environments/environment';
 import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 import { RankingComponent } from './components/ranking/ranking.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import {ClipboardModule} from '@angular/cdk/clipboard';
 

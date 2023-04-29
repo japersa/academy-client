@@ -4,6 +4,7 @@ import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import swal from 'sweetalert2';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { debounceTime, distinctUntilChanged, filter, fromEvent, tap } from 'rxjs';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 export enum SelectionType {
   single = "single",
@@ -20,6 +21,13 @@ export enum SelectionType {
 })
 export class UsersComponent implements OnInit, AfterViewInit {
 
+  bsRangeValue: Date[];
+
+  bsConfig?: Partial<BsDatepickerConfig> = {
+    containerClass: 'theme-dark-blue',
+    dateInputFormat: 'YYYY-MM-DD',
+    useUtc: true
+  }
 
   @ViewChild('search') input!: ElementRef;
 
@@ -58,12 +66,16 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   getUsers() {
+    if (this.bsRangeValue) {
+      const date = this.bsRangeValue.map(item => item.toISOString());
+      this.options['since'] = date[0];
+      this.options['until'] = date[1];
+    }
     this.dashboardService.getUsersByRole(this.options).subscribe(
       {
         next: r => {
           this.rows = r?.results;
           this.temp = r?.results;
-          console.log(r);
         },
         error: e => console.log('error ' + e.error)
       }
@@ -74,6 +86,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.entries = 10;
     this.options['page_size'] = 10;
     this.options['rol'] = this.role;
+    this.bsRangeValue = null;
     if (this.options.hasOwnProperty(this.filter)) {
       delete this.options[this.filter];
     }
@@ -157,7 +170,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.role = params.get('role') as ROLES_ENUM;
       this.options['rol'] = params.get('role');
-      // this.options['page_size'] = 11;
       this.getUsers();
     });
   }

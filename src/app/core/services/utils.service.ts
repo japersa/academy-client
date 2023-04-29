@@ -196,6 +196,9 @@ export class UtilsService {
     referral_code: [
       { type: 'required', message: 'El código de referido es obligatorio' },
     ],
+    currency: [
+      { type: 'required', message: 'Es obligatorio elegir una criptomoneda' },
+    ],
   };
 
   public countries = [

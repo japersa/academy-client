@@ -1,15 +1,119 @@
 <div class="content">
-    <ol class="breadcrumb bg-transparent ml-3">
-      <li class="breadcrumb-item">Area trading</li>
-      <li class="breadcrumb-item text-primary">
-        <a routerLink="/funding-program/home"> Inicio </a>
-      </li>
-      <li class="breadcrumb-item text-primary">
-        <a routerLink="/funding-program/orders"> Ordenes </a>
-      </li>
-      <li class="breadcrumb-item">Pago</li>
-    </ol>
-    <div class="col-lg-7 col-md-5"> 
+  <ol class="breadcrumb bg-transparent ml-3">
+    <li class="breadcrumb-item">Area trading</li>
+    <li class="breadcrumb-item text-primary">
+      <a routerLink="/funding-program/home"> Inicio </a>
+    </li>
+    <li class="breadcrumb-item text-primary">
+      <a routerLink="/funding-program/orders"> Ordenes </a>
+    </li>
+    <li class="breadcrumb-item">Pago</li>
+  </ol>
+  <div class="row">
+    <div class="col-lg-6 col-md-6">
+      <div class="row">
+        <div class="card card-stats shadow text-center">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <h3 class="card-title">
+                  Pagar con <strong>Tarjeta de crédito</strong>
+                </h3>
+                <div class="row">
+                  <div class="col-6">
+                    <p>Nombre</p>
+                  </div>
+                  <div class="col-6">
+                    <p>
+                      {{
+                        selectedOrder.first_name + " " + selectedOrder.last_name
+                      }}
+                    </p>
+                  </div>
+                  <div class="col-6">
+                    <p>Email</p>
+                  </div>
+                  <div class="col-6">
+                    <p>{{ selectedOrder.email }}</p>
+                  </div>
+                </div>
+                <div *ngIf="invalidError" style="color: red">
+                  {{ invalidError.message }}
+                </div>
+
+                <stripe-card
+                  #stripeCard
+                  (catch)="onStripeError($event)"
+                  [(invalid)]="invalidError"
+                  (cardMounted)="cardCaptureReady = true"
+                  (paymentMethodChange)="setPaymentMethod($event)"
+                  (tokenChange)="setStripeToken($event)"
+                  (sourceChange)="setStripeSource($event)"
+                  [options]="cardOptions"
+                ></stripe-card>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-footer">
+              <button
+                class="btn btn-secondary btn-lg mb-3"
+                (click)="stripeCard.createToken($event)"
+              >
+                Pagar con TC
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card card-stats shadow text-center">
+          <form
+            [formGroup]="criptoform"
+            (ngSubmit)="payWithCripto(cryptoModaltemplate)"
+          >
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="card-title">Pagar con <strong>Cripto</strong></h3>
+                  <div class="form-group">
+                    <label for="currency2">
+                      Moneda: {{ currencyField?.value }}
+                    </label>
+                    <select
+                      formControlName="currency2"
+                      class="form-control"
+                      id="currency2"
+                    >
+                      <option value="" selected disabled>Choose Tagging</option>
+                      <option *ngFor="let c of currencies" [value]="c?.symbol">
+                        {{
+                          (c?.name | titlecase) +
+                            " - " +
+                            (c?.symbol | uppercase)
+                        }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="card-footer">
+                <button
+                  class="btn btn-secondary btn-lg mb-3"
+                  type="submit"
+                  [disabled]="criptoform.invalid"
+                >
+                  Pagar con cripto
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
       <div class="card card-stats shadow text-center">
         <div class="card-body">
           <div class="row container-title">
@@ -18,18 +122,15 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-5 ml-3 container-credit-card">
-              <stripe-card 
-                #stripeCard
-                (catch)="onStripeError($event)"
-                [(invalid)]="invalidError"
-                (cardMounted)="cardCaptureReady = true"
-                (paymentMethodChange)="setPaymentMethod($event)"
-                (tokenChange)="setStripeToken($event)"
-                (sourceChange)="setStripeSource($event)"
-                [options]="cardOptions"
-                class="stripe-card"
-              ></stripe-card>
+            <div class="col-12">
+              <h3 class="card-title">
+                Pagar ordén <strong>#</strong> {{ productID }} ICEX AG
+              </h3>
+              <div class="row">
+                <div class="col-6">
+                  <p>Nombre</p>
+                </div>
+              </div>
             </div>
             <div class="col-6">
               <div class="row">
@@ -53,12 +154,64 @@
             </div>
           </div>
         </div>
-        <div class="card-footer mb-3 mt-2">
-          <div *ngIf="invalidError" style="color: red">
-            {{ invalidError.message }}
-          </div>
-        </div>
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- MODAL -->
+<ng-template #cryptoModaltemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Coinpayments</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-4">
+        <p class="title">Precio:</p>
+        <p class="title">TXN id:</p>
+        <p class="title">Bloques:</p>
+        <p class="title">Wallet:</p>
+      </div>
+      <div class="col-8">
+        {{ coinpaymentResponse?.amount }} <br />
+        {{ coinpaymentResponse?.txn_id }} <br />
+        {{ coinpaymentResponse?.confirms_needed }} <br />
+        {{ coinpaymentResponse?.address }} <br />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <p class="title">QR:</p>
+      </div>
+      <div class="col-8">
+        <img [src]="coinpaymentResponse?.qrcode_url" alt="" srcset="" />
+      </div>
+    </div>
+    <div class="row">
+      <a
+        [href]="coinpaymentResponse?.checkout_url"
+        class="btn btn-secondary btn-lg mb-3"
+        type="submit"
+        target="_blank"
+      >
+        Pagar
+      </a>
+      <a
+        [href]="coinpaymentResponse?.status_url"
+        class="btn btn-primary btn-lg mb-3"
+        type="submit"
+        target="_blank"
+      >
+        Estado
+      </a>
+    </div>
+  </div>
+</ng-template>

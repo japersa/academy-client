@@ -13,6 +13,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CreateUserComponent } from '../../components/create-user/create-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from '../../components/edit-user/edit-user.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EditUserComponent } from '../../components/edit-user/edit-user.componen
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
+    BsDatepickerModule,
     QuicklinkModule
   ],
   exports: [
