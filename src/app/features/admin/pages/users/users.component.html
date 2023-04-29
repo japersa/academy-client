@@ -68,6 +68,19 @@
                 <div class="col-sm-12 col-md-6">
                   <div id="datatable_filter" class="dataTables_filter">
                     <label>
+                      Fechas
+                      <div class="col-xs-12 col-12 col-md-4 form-group mb-3">
+                        <input
+                          type="text"
+                          placeholder="Daterangepicker"
+                          class="form-control form-control-sm"
+                          [bsConfig]="bsConfig"
+                          [(ngModel)]="bsRangeValue"
+                          bsDaterangepicker
+                        />
+                      </div>
+                    </label>
+                    <label>
                       Filtros
                       <select
                         name="datatable_filters"
@@ -144,6 +157,11 @@
                     {{ row?.phone_number | titlecase }}
                   </ng-template>
                 </ngx-datatable-column>
+                <ngx-datatable-column name="Fecha de registro" prop="date_joined">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row?.date_joined | date }}
+                  </ng-template>
+                </ngx-datatable-column>
                 <ngx-datatable-column name="Actions">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <button
@@ -164,8 +182,6 @@
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
-
-                
               </ngx-datatable>
             </div>
           </div>
@@ -174,7 +190,9 @@
     </ng-container>
     <ng-container *ngIf="showFormCreateUser">
       <div class="col-md-12">
-        <app-create-user (showEvent)="changeStateShow($event)"></app-create-user>
+        <app-create-user
+          (showEvent)="changeStateShow($event)"
+        ></app-create-user>
       </div>
     </ng-container>
     <ng-container *ngIf="showFormEditUser">
@@ -187,5 +205,3 @@
     </ng-container>
   </div>
 </div>
-
-
