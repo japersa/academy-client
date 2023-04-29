@@ -31,12 +31,14 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getUsersByRole(options?: Partial<IUsersParams>): Observable<any> {
-
-    console.log(options);
-    
     const route = `/list/users/`;
     return this.http.get<any>(`${apiURL}${route}`, { params: options });
   }
+
+  getUsersById(id: string): Observable<any> {
+    const route = `/retrieve/user/${id}`;
+    return this.http.get<any>(`${apiURL}${route}`);
+  };
 
   deleteUser(userId: string): Observable<any> {
     const route = `/delete/user/${userId}/`;

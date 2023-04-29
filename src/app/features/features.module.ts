@@ -10,8 +10,7 @@ import { SelfManagementModule } from './self-management/self-management.module';
 import { BillingModule } from './billing/billing.module';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [  ],
   imports: [
     CommonModule,
     AdminLayoutModule,

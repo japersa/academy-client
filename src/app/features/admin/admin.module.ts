@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { QuicklinkModule } from 'ngx-quicklink';
 
 @NgModule({
-  declarations: [],
+  declarations: [  ],
   imports: [
     CommonModule,
     QuicklinkModule

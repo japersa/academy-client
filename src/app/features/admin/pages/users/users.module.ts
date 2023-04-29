@@ -14,12 +14,14 @@ import { CreateUserComponent } from '../../components/create-user/create-user.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from '../../components/edit-user/edit-user.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { UserDetailComponent } from '../../components/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
     CreateUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    UserDetailComponent
   ],
   imports: [
     CommonModule,

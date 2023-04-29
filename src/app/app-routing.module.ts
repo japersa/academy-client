@@ -8,13 +8,12 @@ import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admi
 import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { QuicklinkStrategy } from 'ngx-quicklink';
-import { CustomerServiceModule } from './features/customer-service/customer-service.module';
 
 const routes: Routes = [
   {
     path: '',
     // redirectTo: '/trading-area/my-packages',
-    redirectTo: '/users/teachers',
+    redirectTo: '/users/user',
     pathMatch: 'full'
   },
   {

@@ -1,0 +1,17 @@
+<div class="content">
+  <ol class="breadcrumb bg-transparent ml-3">
+    <li class="breadcrumb-item text-primary">
+      <a routerLink="/dashboard"> Dashboard </a>
+    </li>
+    <li class="breadcrumb-item">User</li>
+    <li class="breadcrumb-item">Detail</li>
+    <li class="breadcrumb-item">Roles</li>
+  </ol>
+  <div class="row">
+    <pre *ngIf="user">
+        <code>
+            {{ user | json}}
+        </code>
+    </pre>
+  </div>
+</div>

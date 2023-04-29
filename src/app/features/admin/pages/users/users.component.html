@@ -157,13 +157,24 @@
                     {{ row?.phone_number | titlecase }}
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Fecha de registro" prop="date_joined">
+                <ngx-datatable-column
+                  name="Fecha de registro"
+                  prop="date_joined"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     {{ row?.date_joined | date }}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Actions">
                   <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a
+                      class="btn btn-primary btn-link btn-sm btn-icon"
+                      [routerLink]="['./details/', row?.id]"
+                      tooltip="Detalles"
+                      type="button"
+                    >
+                      <i class="tim-icons icon-zoom-split"> </i>
+                    </a>
                     <button
                       class="btn btn-success btn-link btn-sm btn-icon"
                       (click)="editUser(row)"
