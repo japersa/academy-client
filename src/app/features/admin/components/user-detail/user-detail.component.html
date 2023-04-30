@@ -8,10 +8,219 @@
     <li class="breadcrumb-item">Roles</li>
   </ol>
   <div class="row">
-    <pre *ngIf="user">
-        <code>
-            {{ user | json}}
-        </code>
-    </pre>
+    <div class="col-lg-10 col-md-12">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-5 col-md-12">
+              <p>Nombre: <span>{{user.first_name + ' ' + user.last_name }} </span> </p>
+              <p>ID: <span> {{user.id }} </span>  </p>
+              <p>Télefono: <span>{{user.phone_number }}</span> </p>
+              <p>País: <span> {{user.country }} </span> </p>
+              <p>Dirección: <span> {{user.address }} </span> </p>
+            </div>
+            <div class="col-lg-5 col-md-12">
+              <p>Codigo postal: <span> {{user.packages.postal_code }} </span> </p>
+              <p>Correo: <span> {{user.username }} </span> </p>
+              <p>Fecha de ceración de cuenta: <span> {{user.date_joined | date: 'dd/mm/yyyy' }} </span> </p>
+              <p>Paquetes Activos: <span> {{packagesActive.length }} </span> </p>
+              <p>Paquetes Adquiridos: <span> {{user.packages.length }} </span> </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  
+  <ng-container *ngIf="user.packages.length > 0;" >
+    <div class="row">
+      <div *ngFor="let i of packages" class="col-lg-10">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-5 col-md-12">
+                <p>Login: <span>{{i?.mt_login }} </span> </p>
+                <p>Inicio del Challenge: <span>{{i?.end_date }} </span> </p>
+                <p>Inicio del Challenge: <span>{{i?.end_date }} </span> </p>
+                <p>Tamaño de la cuenta: <span>{{i?.balance }} </span> </p>
+              </div>
+              <div class="col-lg-5 col-md-12">
+                <p>Balance: <span>{{i?.balance }} </span> </p>
+                <p>Servidor: <span>{{i?.account_type }} </span> </p>
+                <p>Estado: <span [ngClass]="{
+                  'bg-success': i.status === 'active',
+                  'bg-danger': i.status === 'closed',
+                  'bg-warning': i.status === 'pending'
+                  }" 
+                  class="rounded-pill p-2">{{i?.status }} </span> </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <h3 class="text-left mt-3" > Credenciales</h3>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3 my-auto">
+                    <p>Login:  </p>
+                  </div>
+                  <div class="col-3 my-auto">
+                    <p class="text-right">{{i?.mt_login }} </p>
+                  </div>
+                  <div class="col-4">
+                    <div class="row">
+                      <div class="col-6 text-right">
+
+                      </div>
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg "
+                        > Copiar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3 my-auto">
+                    <p >Contraseña:  </p>
+                  </div>
+                  <div class="col-3 my-auto">
+                    <p class="text-right">{{i?.mt_password }} </p>
+                  </div>
+                  <div class="col-4">
+                    <div class="row">
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg"
+                        > Copiar</button>
+                      </div>
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg"
+                        > Cambiar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3 my-auto">
+                    <p>Contraseña del Inversor:  </p>
+                  </div>
+                  <div class="col-3 my-auto">
+                    <p class="text-right">{{i?.mt_password_investor }} </p>
+                  </div>
+                  <div class="col-4">
+                    <div class="row">
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg"
+                        > Copiar</button>
+                      </div>
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg"
+                        > Cambiar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3 my-auto">
+                    <p >Servidor:  </p>
+                  </div>
+                  <div class="col-3 my-auto">
+                    <p class="text-right">{{i?.mt_server }} </p>
+                  </div>
+                  <div class="col-4">
+                    <div class="row">
+                      <div class="col-6 text-right">
+
+                      </div>
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg "
+                        > Copiar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3 my-auto">
+                    <p >Plataforma Windows:  </p>
+                  </div>
+                  <div class="col-3 my-auto">
+                    <p class="text-right">{{i?.mt_windows }} </p>
+                  </div>
+                  <div class="col-4">
+                    <div class="row">
+                      <div class="col-6 text-right">
+
+                      </div>
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg "
+                        > Descargar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3 my-auto">
+                    <p >Plataforma IOS:  </p>
+                  </div>
+                  <div class="col-3 my-auto">
+                    <p class="text-right">{{i?.mt_ios }} </p>
+                  </div>
+                  <div class="col-4">
+                    <div class="row">
+                      <div class="col-6 text-right">
+
+                      </div>
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg "
+                        > Descargar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3 my-auto">
+                    <p >Plataforma Web:  </p>
+                  </div>
+                  <div class="col-3 my-auto">
+                    <p class="text-right">{{i?.mt_web }} </p>
+                  </div>
+                  <div class="col-4">
+                    <div class="row">
+                      <div class="col-6 text-right">
+
+                      </div>
+                      <div class="col-6 text-right">
+                        <button class=" text-right btn btn-secondary btn-lg "
+                        > Descargar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>

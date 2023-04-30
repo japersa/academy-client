@@ -11,6 +11,8 @@ export class UserDetailComponent implements OnInit {
 
   userId: string = null;
   user = null;
+  packages: any [] = null;
+  packagesActive: any [] = null;
 
   constructor(private dashboardService: DashboardService,
     private route: ActivatedRoute
@@ -23,6 +25,13 @@ export class UserDetailComponent implements OnInit {
         {
           next: r => {
             this.user = r;
+            this.packagesActive = this.user.packages.filter(pkg => pkg.status === 'active');
+            this.packages =  this.user.packages; 
+            console.log(this.user);
+            console.log(this.packagesActive.length);
+            console.log(this.user.packages);
+            
+            
           },
           error: e => console.log('error ' + e.error)
         }
