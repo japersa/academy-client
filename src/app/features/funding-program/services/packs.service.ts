@@ -28,6 +28,11 @@ export class PacksService {
     return this.http.get<any>(`${apiURL}${route}`);
   }
 
+  getPackById(id) {
+    const route = `/retrive/packages/`;
+    return this.http.get<any>(`${apiURL}${route}${id}`);
+  }
+
   payPackStripe(data) {
     const route = `/payment/package/stripe`;
     return this.http.post<any>(`${apiURL}${route}`, data);

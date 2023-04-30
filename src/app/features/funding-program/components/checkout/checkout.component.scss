@@ -7,7 +7,7 @@
     color: var(--secondary) !important;
     font-weight: 600 !important;
     border-bottom: 2px solid #4be8e6;
-   
+    
 }
 
 .container-credit-card {
@@ -15,13 +15,27 @@
     border-radius: 2px;
 }
 
-/* .stripe-card {
-    display: flex !important;
-    flex-direction: column !important;
+.card {
+    border-bottom: 3px solid var(--secondary);
 }
 
-.stripe-card .CardNumberElement,
-.stripe-card .CardExpiryElement,
-.stripe-card .CardCvcElement {
-  margin-bottom: 10px !important;
-} */
+.card-title {
+    color: var(--secondary) !important;
+    font-weight: 600 !important;
+}
+
+.container-info {
+    border-bottom: 1px solid #ccc;
+}
+
+.bg-label {
+    border-radius: 5px;
+    background-color: #cccc;
+}
+
+.btn-md {
+    color: var(--secondary);
+    background: #4be8e6 !important;
+    background-image: #4be8e6 !important;
+    background-color: #4be8e6 !important;
+}

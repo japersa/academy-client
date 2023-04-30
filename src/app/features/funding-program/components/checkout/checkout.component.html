@@ -15,7 +15,7 @@
         <div class="card-body">
           <div class="row container-title">
             <div class="col-11 text-left">
-              <h2 class="card-title pb-2">Pagar ordén <strong>#</strong> {{productID}} ICEX AG</h2>
+              <h2 class="card-title pb-2">Pagar con Stripe</h2>
             </div>
           </div>
           <div class="row">
@@ -59,7 +59,7 @@
             {{ invalidError.message }}
           </div>
         </div>
-      </div>
+      </div> 
     </div>
 
     <div class="col-6">
@@ -108,43 +108,77 @@
         </form>
       </div>
   </div>
-
-    <div class="col-lg-6 col-md-6">
-      <div class="card card-stats shadow text-center">
+    <div class="col-lg-7 col-md-6">
+      <div class="card card-stats shadow text-center ">
         <div class="card-body">
-          <div class="row container-title">
-            <div class="col-11 text-left">
-              <h2 class="card-title pb-2">Pagar ordén <strong>#</strong> {{productID}} ICEX AG</h2>
+          <div class="row container-title ">
+            <div class="col-8">
+              <h2 class="card-title mt-2 mb-1 text-left">Ordén Recibida</h2>
+            </div>
+            <div class="col-4">
+              <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg" alt="" width="150px">
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <h3 class="card-title">
-                Pagar ordén <strong>#</strong> {{ productID }} ICEX AG
-              </h3>
+          <div class="row mt-3 mb-3 pb-3 container-info">
+            <div class="col-6 ">
               <div class="row">
-                <div class="col-6">
-                  <p>Nombre</p>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Número de órden: </strong> 
+                    <span> {{ selectedOrder.id }} </span>
+                  </p> 
+                </div> 
+                <div class="col-12">
+                  <p class="text-left" > <strong> Tamaño de la cuenta: </strong> 
+                    <span> {{ '$ ' + selectedOrder.balance }} {{ selectedOrder.currencies | uppercase }}</span> 
+                  </p> 
                 </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Típo de cuenta: </strong> 
+                    <span> {{ selectedOrder.currencies | uppercase }}</span> 
+                  </p> 
+                </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Plataforma: </strong> 
+                    <span> MetaTrader 5 </span> 
+                  </p> 
+                </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Nombre: </strong> 
+                    <span> {{ selectedOrder.first_name + ' ' + selectedOrder.last_name  }}</span> 
+                  </p> 
+                </div>
+        
               </div>
+              
             </div>
             <div class="col-6">
-              <div class="row">
-                <div class="col-12">
-                  <p class="text-left" >Nombre: <span> {{selectedOrder.first_name + ' ' + selectedOrder.last_name }} </span> </p>
+              <div class="row bg-label mt-3 mb-2 mr-2  ">
+                <div class="col-3 my-auto">
+                  <img 
+                  src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/email_b0aiqe.svg" >
                 </div>
-                <div class="col-12">
-                  <p class="text-left" >Email: <span> {{selectedOrder.email}} </span> </p>
+                <div class="col-8">
+                  <div class="row">
+                    <p class="text-left" > <strong> Correo: </strong> </p>
+                  </div>
+                  <div class="row">
+                    <span class="text-right" > {{ selectedOrder.email }}</span>
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-10 mx-auto pt-3">
-                  <button
-                    class="btn btn-secondary btn-block mb-3"
-                    (click)="stripeCard.createToken($event)"
-                  >
-                    Pagar
-                  </button>
+              <div class="row bg-label mt-2 mr-2">
+                <div class="col-3 my-auto">
+                  <img 
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg" 
+                    alt="">
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <p class="text-left" > <strong>Valor del Challenge:</strong> </p>
+                  </div>
+                  <div class="row">
+                    <span class="text-right" > ¿Cúal es el valor?</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -177,11 +211,11 @@
         <p class="title">Bloques:</p>
         <p class="title">Wallet:</p>
       </div>
-      <div class="col-8">
-        {{ coinpaymentResponse?.amount }} <br />
-        {{ coinpaymentResponse?.txn_id }} <br />
-        {{ coinpaymentResponse?.confirms_needed }} <br />
-        {{ coinpaymentResponse?.address }} <br />
+      <div class="col-7">
+        <p> {{ coinpaymentResponse?.amount }}</p>   
+        <p> {{ coinpaymentResponse?.txn_id }} </p>  
+        <p> {{ coinpaymentResponse?.confirms_needed }}  </p>
+        <p> {{ coinpaymentResponse?.address }} </p>   
       </div>
     </div>
     <div class="row">
@@ -193,7 +227,8 @@
       </div>
     </div>
     <div class="row">
-      <a
+      <div class="col-8 mx-auto">
+        <a
         [href]="coinpaymentResponse?.checkout_url"
         class="btn btn-secondary btn-lg mb-3"
         type="submit"
@@ -203,12 +238,13 @@
       </a>
       <a
         [href]="coinpaymentResponse?.status_url"
-        class="btn btn-primary btn-lg mb-3"
+        class="btn btn-md btn-lg mb-3"
         type="submit"
         target="_blank"
       >
         Estado
       </a>
+      </div>
     </div>
   </div>
 </ng-template>

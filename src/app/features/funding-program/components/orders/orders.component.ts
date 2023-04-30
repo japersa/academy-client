@@ -27,7 +27,7 @@ export class OrdersComponent implements OnInit {
   convertBalanceToNumber(balance: string): string {
     switch(balance) {
       case 'one_hundred_thousand':
-        return '100.000';
+        return '100.000'; 
       case 'fifty_thousand':
         return '50.000';
       case 'two_hundred_thousand':
@@ -35,7 +35,7 @@ export class OrdersComponent implements OnInit {
       case 'five_hundred_thousand':
         return '500.000';
       default:
-        throw new Error('Balance string not recognized');
+        throw new Error('Balance string not recognized'); 
     }
   }
 

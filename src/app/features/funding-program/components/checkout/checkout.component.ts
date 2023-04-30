@@ -28,6 +28,8 @@ export class CheckoutComponent implements OnInit {
   orders: any[] = null;
   selectedOrder: any = null;
 
+
+
   coinpaymentResponse: CPResponsePayment = null;
 
   productID = '';
@@ -125,7 +127,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   setStripeSource(source: stripe.Source) {
-    console.log('Stripe Source', source)
+    console.log('Stripe Source', source) 
   }
 
   payWithCripto(template: TemplateRef<any>) {
@@ -157,18 +159,46 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  convertBalanceToNumber(balance: string): string {
+    switch(balance) {
+      case 'one_hundred_thousand':
+        return '100.000'; 
+      case 'fifty_thousand':
+        return '50.000';
+      case 'two_hundred_thousand':
+        return '200.000';
+      case 'five_hundred_thousand':
+        return '500.000';
+      default:
+        throw new Error('Balance string not recognized'); 
+    }
+  }
+
+  convertBalancesToNumbers(): void {
+    for (const order of this.orders) {
+      order.balance = this.convertBalanceToNumber(order.balance);
+    }
+  }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.productID = params.get('id');
+      console.log(this.productID)
     });
     this.packsService.getMyOrders().subscribe(
       {
         next: r => {
           this.orders = r
-          this.selectedOrder = this.orders.find((order) => order.id == this.productID);
+          this.selectedOrder = this.orders.find(order => order.id == this.productID);
+          this.convertBalancesToNumbers();
         }
       }
     );
+/*     this.packsService.getPackById(this.productID).subscribe( r => {
+      this.pack = r;
+      console.log(this.pack);
+    }) */
+    
   }
 
 }
