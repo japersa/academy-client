@@ -1,23 +1,10 @@
 <div class="content">
   <ol class="breadcrumb bg-transparent ml-3">
-    <li class="breadcrumb-item">Area trading</li>
     <li class="breadcrumb-item text-primary">
-      <a routerLink="/funding-program/home"> Inicio </a>
-    </li>
-    <li class="breadcrumb-item text-primary">
-      <a routerLink="/funding-program/orders"> Ordenes </a>
+      <a routerLink="/funding-program/home"> Area trading </a>
     </li>
     <li class="breadcrumb-item">Nuevo Paquete</li>
   </ol>
- <!--  <div class="row">
-    <div class="col-5">
-      <div class="row">
-        <div class="col-lg-8">
-          <h3 class="title mb-1">Registro del paquete</h3>
-        </div>
-      </div>  
-    </div>
-  </div> -->
   <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
     <div class="row">
       <div class="col-5">

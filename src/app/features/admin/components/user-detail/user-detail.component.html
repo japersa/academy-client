@@ -3,9 +3,11 @@
     <li class="breadcrumb-item text-primary">
       <a routerLink="/dashboard"> Dashboard </a>
     </li>
-    <li class="breadcrumb-item">User</li>
+    <li class="breadcrumb-item">
+      <a routerLink="/users/user"> Roles </a>
+    </li>
     <li class="breadcrumb-item">Detail</li>
-    <li class="breadcrumb-item">Roles</li>
+    
   </ol>
   <div class="row">
     <div class="col-lg-10 col-md-12">
@@ -52,7 +54,7 @@
                   'bg-danger': i.status === 'closed',
                   'bg-warning': i.status === 'pending'
                   }" 
-                  class="rounded-pill p-2">{{i?.status }} </span> </p>
+                  class="rounded-pill p-2 pl-3 pr-3">{{i?.status }} </span> </p>
               </div>
             </div>
             <div class="row">
@@ -149,7 +151,7 @@
                 </div>
               </div>
 
-              <div class="col-12">
+              <!-- <div class="col-12">
                 <div class="row">
                   <div class="col-3 my-auto">
                     <p >Plataforma Windows:  </p>
@@ -213,7 +215,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               
 

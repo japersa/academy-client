@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { PacksService } from '../../services/packs.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-create-pack',
@@ -13,12 +15,14 @@ export class CreateOrderComponent {
   price = '';
   form!: FormGroup;
   errorMessage: string | null;
+/*   newPack: any [] = null; */
 
   constructor(
     // import the form builder
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
-    private packsService: PacksService
+    private packsService: PacksService,
+    private router: Router
   ) {
     // Build the form
     this.buildForm();
@@ -135,10 +139,15 @@ export class CreateOrderComponent {
   }
 
   createPack(formData: any) {
-    this.packsService.createPack(formData).subscribe(
-      {
-        next: r => console.log(r)
-      }
+    this.packsService.createPack(formData).subscribe( () => {
+      this.packsService.getMyPacks().subscribe( pkg => {
+        const newPack = pkg.reduce((prev, current) => {
+          return (prev.id > current.id) ? prev : current;
+        });
+        console.log(newPack);
+        this.router.navigate([`/funding-program/checkout/${newPack.id}`]);
+      });
+    }
     );
   }
 

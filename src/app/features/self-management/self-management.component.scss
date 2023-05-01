@@ -3,7 +3,7 @@
     border-radius: 10px;
 }
 
-h3, h2, p {
+h3, h2 {
     color: var(--secondary) !important; 
 } 
 
@@ -26,4 +26,32 @@ h3, h2, p {
     background-color: lightgray !important;
     color: var(--secondary) !important;
     padding: 5px !important;
+}
+
+
+.goals {
+    border-radius: 10px;
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 3px solid #4be8e6;
+    border-bottom: 1px solid #cccccc;
+}
+
+.goals p {
+    color: #808080;
+}
+
+.commissions {
+    background-color: var(--secondary) !important;
+}
+
+.btn-ref {
+    color: var(--secondary);
+    background: #4be8e6 !important;
+    background-image: #4be8e6 !important;
+    background-color: #4be8e6 !important;
+}
+
+.card-subtitle {
+    color: #4be8e6 !important;
 }
