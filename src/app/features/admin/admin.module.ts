@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { QuicklinkModule } from 'ngx-quicklink';
 
@@ -7,7 +8,8 @@ import { QuicklinkModule } from 'ngx-quicklink';
   declarations: [  ],
   imports: [
     CommonModule,
-    QuicklinkModule
+    QuicklinkModule,
+    HttpClientModule
   ],
   exports: [
   ]

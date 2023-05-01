@@ -13,6 +13,8 @@ import { UtilsService } from 'src/app/core/services/utils.service';
 export class PackagesComponent implements OnInit {
 
   packages: any[] = [];
+
+  selectedStatus: string = '';
   modalRef?: BsModalRef;
 
   form!: FormGroup;
@@ -34,7 +36,7 @@ export class PackagesComponent implements OnInit {
     return this.loginField?.dirty || this.loginField?.touched;
   }
 
-  get passwordField() {
+  get passwordField() { 
     return this.form?.get('password');
   }
 
@@ -58,37 +60,40 @@ export class PackagesComponent implements OnInit {
     return this.serverField?.dirty || this.serverField?.touched;
   }
 
-  getPackakes(status?: any) {
-    this.packagesService.getPackages().pipe(
-      map(packs => packs.map(item => {
-        return {
-          ...item,
-          balance: this.balanceToNumber(item.balance)
-        }
-      }))
-    ).subscribe(
-      {
-        next: (r) => this.packages = r,
-        error: (e) => console.log(e)
-      }
-    );
+  statusChange(selectedStatus: string) {
+    this.getPackagesByStatus(selectedStatus);
   }
 
-  balanceToNumber(balance: string) {
-    switch (balance) {
-      case 'fifty_thousand':
-        return '$ 50.000';
+  getPackagesByStatus(status: string) {
+    this.packagesService.getPackages(status).subscribe(
+      {
+        next: r => {this.packages = r.results
+          this.convertBalancesToNumbers();
+          console.log(this.packages);
+          } 
+      })
+  }
+
+  convertBalanceToNumber(balance: string): string {
+    switch(balance) {
       case 'one_hundred_thousand':
-        return '$ 100.000';
+        return '100.000'; 
+      case 'fifty_thousand':
+        return '50.000';
       case 'two_hundred_thousand':
-        return '$ 200.000';
+        return '200.000';
       case 'five_hundred_thousand':
-        return '$ 500.000';
+        return '500.000';
       default:
-        return '';
+        throw new Error('Balance string not recognized'); 
     }
   }
 
+  convertBalancesToNumbers(): void {
+    for (const order of this.packages) {
+      order.balance = this.convertBalanceToNumber(order.balance);
+    }
+  }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
@@ -107,7 +112,7 @@ export class PackagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPackakes();
+    this.statusChange(this.selectedStatus)
   }
 
 }

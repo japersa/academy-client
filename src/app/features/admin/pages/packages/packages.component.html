@@ -1,5 +1,5 @@
 <div class="content">
-  <div class="row">
+  <div class="row d-flex justify-content-space-between">
     <div class="col-6">
       <ol class="breadcrumb bg-transparent ml-3">
         <li class="breadcrumb-item text-primary">
@@ -8,21 +8,98 @@
         <li class="breadcrumb-item">Solicitud de paquetes</li>
       </ol>
     </div>
-    <div class="col-6">
-      <label for="selectStatus">Status</label>
-      <select class="form-control" id="selectStatus">
-        <option>Cualquiera</option>
-        <option>Completo</option>
-        <option>Pendiente</option>
-        <option>Cancelado</option>
-      </select>
+    <div class="col-4 ">
+      <label>
+        Estado:
+        <select
+          name="selectionStatus"
+          class="form-control "
+          (change)="statusChange($event.target.value)"
+        >
+          <option selected="true" disabled="disabled">
+            Seleccionar estado
+          </option>
+          <option value="active">Ativo</option>
+          <option value="pending">Pendiente</option>
+          <option value="closed">Cancelado</option>
+        </select>
+      </label>
     </div>
   </div>
+
+    <div *ngFor="let i of packages" class="row">
+      <div class="col-md-8">
+        <div class="col-lg-12 col-md-12">
+          <div class="card card-stats shadow">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4">
+                  <p>
+                    <strong>Nombre:</strong>
+                    {{ i.first_name + " " + i.last_name | titlecase }}
+                  </p>
+                  <p>
+                    <strong>Nombre del Paquete:</strong>
+                    No hay dato
+                  </p>
+                  <p>
+                    <strong>Moneda:</strong>
+                    {{ i.currencies | uppercase }}
+                  </p>
+                  <p>
+                    <strong>Tipo de Riesgo:</strong>
+                    No hay dato
+                  </p>
+                  <p>
+                    <strong>Balance:</strong>
+                    {{ i.balance + i.currencies | uppercase }}
+                  </p>
+                  <p>
+                    <strong>Balance:</strong>
+                    {{ i.account_type }}
+                  </p>
+                  <p>
+                    <strong>Plataforma:</strong>
+                    MT5
+                  </p>
+                </div>
+                <div class="col-4">
+                  <p
+                    class="rounded-pill p-1"
+                    [ngClass]="{
+                      'bg-success': i?.status === 'active',
+                      'bg-danger': i?.status === 'closed',
+                      'bg-warning': i?.status === 'pending'
+                    }"
+                  >
+                    <strong>Estado:</strong>
+                    {{ i.status }}
+                  </p>
+                  <p>
+                    <strong>Fecha de solicitud:</strong>
+                    {{ i.end_date | date: 'dd/mm/yyyy' }}
+                  </p>
+                </div>
+                <div class="col-4">
+                  <button
+                    (click)="openModal(template)"
+                    class="btn btn-secondary btn-lg mb-3"
+                  >
+                    Activar credenciales
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
 
   <ng-template #template>
     <div class="modal-header">
       <h4 class="modal-title pull-left">
-        Ingresa las credenciales del cliente.
+        Ingresa las credenciales del cliente. 
       </h4>
       <button
         type="button"
@@ -161,52 +238,4 @@
     </div>
   </ng-template>
 
-  <div *ngFor="let i of packages" class="row">
-    <div class="col-md-8">
-      <div class="col-lg-12 col-md-12">
-        <div class="card card-stats">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-4">
-                <p>
-                  <strong>Nombre:</strong>
-                  {{ i.first_name + " " + i.last_name | titlecase }}
-                </p>
-                <p>
-                  <strong>Moneda:</strong>
-                  {{ i.currencies | uppercase }}
-                </p>
-                <p>
-                  <strong>Balance:</strong>
-                  {{ i.balance }}
-                </p>
-                <p>
-                  <strong>Plataforma:</strong>
-                  MT5
-                </p>
-              </div>
-              <div class="col-4">
-                <p>
-                  <strong>Status:</strong>
-                  {{ i.status }}
-                </p>
-                <p>
-                  <strong>Fecha de solicitud:</strong>
-                  {{ i.end_date | date }}
-                </p>
-              </div>
-              <div class="col-4">
-                <button
-                  (click)="openModal(template)"
-                  class="btn btn-secondary btn-lg mb-3"
-                >
-                  Activar credenciales
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

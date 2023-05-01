@@ -172,6 +172,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
       this.options['rol'] = params.get('role');
       this.getUsers();
     });
+    console.log(this.filter);
+    
   }
 
   ngAfterViewInit() {
