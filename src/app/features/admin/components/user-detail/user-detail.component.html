@@ -34,7 +34,7 @@
     </div>
   </div>
   
-  <ng-container *ngIf="user.packages.length > 0;" >
+  <ng-container *ngIf="user.packages.length > 0; else elseTemplate" >
     <div class="row">
       <div *ngFor="let i of packages" class="col-lg-10">
         <div class="card shadow">
@@ -225,4 +225,15 @@
       </div>
     </div>
   </ng-container>
+  <ng-template #elseTemplate >
+    <div class="row">
+      <div class="col-10">
+        <div class="card shadow">
+          <div class="card-body">
+            <p>El usuario no tiene paquetes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
