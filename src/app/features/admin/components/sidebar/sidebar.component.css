@@ -17,4 +17,9 @@ a, p, i, div, ul, li, span {
     overflow: hidden;
     border-top: 1px solid #23003d;
 }
+
+.sidebar .nav li > a, .off-canvas-sidebar .nav li > a {  
+    font-size: 0.6rem !important ;
+    padding: 2px 2px !important  ;
+}
  

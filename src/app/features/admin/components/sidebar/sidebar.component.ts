@@ -451,7 +451,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
   },
   {
     path: '/downloads',
-    title: 'descargas',
+    title: 'descargas', 
     type: 'link',
     icontype: 'tim-icons icon-single-02',
     role: [ROLES_ENUM.ALL],
@@ -478,7 +478,7 @@ export const ROUTES_USER: RouteInfo[] = [
     children: [
       {
         path: 'home',
-        title: 'Inicio',
+        title: 'Area Trading',
         type: 'link',
         smallTitle: 'TP'
       },
@@ -488,12 +488,12 @@ export const ROUTES_USER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'TP'
       },
-      {
+      /* {
         path: '/trading-area',
         title: 'Area Trading',
         type: 'link',
         smallTitle: 'AT'
-      },
+      }, */
       {
         path: '/withdrawals',
         title: 'retiros de beneficios',

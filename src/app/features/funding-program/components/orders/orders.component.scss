@@ -25,3 +25,10 @@
     border-radius: 5px;
     background-color: #cccc;
 }
+
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: var(--secondary) !important ;
+    content: "/";
+}
