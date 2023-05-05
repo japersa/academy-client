@@ -1,1 +1,148 @@
-<p>create-demo works!</p>
+<div class="content">
+    <ol class="breadcrumb bg-transparent ml-3">
+      <li class="breadcrumb-item text-primary">
+        <a routerLink="/funding-program/home"> Funding Program </a>
+      </li>
+      <li class="breadcrumb-item">Paquete Demo</li>
+    </ol>
+    <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
+        <div class="row pl-3">
+          <div class="col-5">
+            <div class="col-lg-8">
+              <h3 class="title mb-1">Registro del paquete</h3>
+            </div>
+            <div class="card card-stats text-left box-shadow">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <p>Configura tu paquete a la medida.</p>
+                    <p class="title">Elige la moneda a operar</p>
+                    <p>
+                      <input
+                        name="currencies"
+                        value="usd"
+                        type="radio"
+                        formControlName="currencies"
+                        id="usd"
+                        checked
+                      />
+                      <label class="radio-button mr-2" for="usd"> USD ($) </label>
+                      <input
+                        name="currencies"
+                        value="eur"
+                        type="radio"
+                        formControlName="currencies"
+                        id="eur"
+                      />
+                      <label class="radio-button mr-2" for="eur"> EUR (€) </label>
+                    </p>
+                    <hr />
+                  </div>
+                  <div class="col-12">
+                    <p class="title">Elige el balance de la cuenta</p>
+                    <div class="row">
+                      <div class="col-12">
+                        <input
+                          name="balance"
+                          value="fifty_thousand"
+                          type="radio"
+                          formControlName="balance"
+                          id="50k"
+                        />
+                        <label class="radio-button mr-2" for="50k">
+                          50.000 USD
+                        </label>
+                        <input
+                          name="balance"
+                          value="one_hundred_thousand"
+                          type="radio"
+                          formControlName="balance"
+                          id="100k"
+                          checked
+                        />
+                        <label class="radio-button mr-2" for="100k">
+                          100.000 USD
+                        </label>
+                      </div>
+                      <div class="col-12">
+                        <p>
+                          <input
+                            name="balance"
+                            value="two_hundred_thousand"
+                            type="radio"
+                            formControlName="balance"
+                            id="200k"
+                          />
+                          <label class="radio-button mr-2" for="200k">
+                            200.000 USD
+                          </label>
+                          <input
+                            name="balance"
+                            value="five_hundred_thousand"
+                            type="radio"
+                            formControlName="balance"
+                            id="500k"
+                          />
+                          <label class="radio-button mr-2" for="500k">
+                            500.000 USD
+                          </label>
+                        </p>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                  <div class="col-12">
+                    <p class="title">Elige el tipo de la cuenta</p>
+                    <p>
+                      <input
+                        name="account_type"
+                        value="euro_street_basic"
+                        type="radio"
+                        formControlName="account_type"
+                        id="basic"
+                        checked
+                      />
+                      <label class="radio-button mr-2" for="basic">
+                        EuroStreet Basic
+                      </label>
+                      <input
+                        name="account_type"
+                        value="euro_street_full"
+                        type="radio"
+                        formControlName="account_type"
+                        id="full"
+                      />
+                      <label class="radio-button mr-2" for="full">
+                        EuroStreet Full
+                      </label>
+                    </p>
+                    <hr />
+                    <p class="title">Plataforma: MetaTrader5</p>
+                    <label class="radio-button checked" for="">MT5</label>
+                    <hr />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 mx-auto">
+                  <button
+                    [disabled]="form.invalid"
+                    class="btn btn-secondary btn-lg mb-3"
+                  >
+                    Iniciar
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          
+        </div>
+      </form>
+  </div>
+  
+
+  
+      
+             
