@@ -17,6 +17,7 @@ import { RankingComponent } from './components/ranking/ranking.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import { CreateDemoComponent } from './components/create-demo/create-demo.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     OrdersComponent,
     CheckoutComponent,
     WithdrawalsComponent,
-    RankingComponent
+    RankingComponent,
+    CreateDemoComponent
   ],
   imports: [
     CommonModule,

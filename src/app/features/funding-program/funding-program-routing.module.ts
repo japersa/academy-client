@@ -7,10 +7,12 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 import { RankingComponent } from './components/ranking/ranking.component';
+import { CreateDemoComponent } from './components/create-demo/create-demo.component';
 
 const routes: Routes = [
   { path: 'home', component: FundingProgramComponent },
   { path: 'create-order', component: CreateOrderComponent },
+  { path: 'create-demo', component: CreateDemoComponent },
   { path: 'my-packages', component: MyPackagesComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'checkout/:id', component: CheckoutComponent },
