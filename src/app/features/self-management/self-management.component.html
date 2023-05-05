@@ -1,5 +1,5 @@
 <div class="content">
-  <div class="row">
+  <div class="row ">
     <div class="col-lg-4 col-sm-12">
       <ol class="breadcrumb bg-transparent ml-3">
         <li class="breadcrumb-item">Inicio</li>
@@ -40,17 +40,20 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-6 col-sm-12">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/MWHr8Ndpmas" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-    <div class="col-lg-6 col-sm-12">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/iNuf_fqlOuo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <div class="col-12 p-5">
+    <div class="row ">
+      <div class="col-lg-6 col-sm-12 ">
+        <iframe width="460" height="295" src="https://www.youtube.com/embed/MWHr8Ndpmas" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="col-lg-6 col-sm-12 ">
+        <iframe width="460" height="295" src="https://www.youtube.com/embed/iNuf_fqlOuo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="row">
-      <div class="col-12">
+  
+  <div class="row ">
+    <div class="row ">
+      <div class="col-12 pl-5 pr-5">
         <div class="card shadow-custom p-3">
           <div class="card-body">
             <div class="row">
@@ -164,7 +167,9 @@
             </div>
             <div class="row justify-content-end">
               <div class=" col-4 ">
-                <button class="btn btn-secondary  btn-block mt-4">
+                <button class="btn btn-secondary  btn-block mt-4"
+                 routerLink="/self-management/create-order"
+                >
                   Comprar
                 </button>
               </div>
@@ -174,33 +179,35 @@
       </div>
     </div>
 
-    <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
-      <div class="row">
-        <div class="col-7">
-          <h3 class=" card-subtitle mt-3 mb-2">
-            Comisiona con International Capital Exchange
-          </h3>
-          <p class="text-light">
-            Invita a tus amigos y empieza a generar ingresos extras. 
-            recibe el 25% del valor del paquete por el primer referido, 
-            un 25% por el segundo referido y un 100% por tu tercer referido 
-          </p>
-          <p class="mb-3 text-light" >
-            Compártelo y empieza a comisionar con los paquetes de Autogestión
-          </p>
-        </div>
-        <div class="col-5 my-auto mx-auto">
-          <div class="">
-            <p class="ref text-center">{{ referalCode }}</p>
+    <div class="row pl-5 pr-5">
+      <div class="col-lg-12 col-md-12 shadow-custom commissions ">
+        <div class="row ">
+          <div class="col-7">
+            <h3 class=" card-subtitle mt-3 mb-2">
+              Comisiona con International Capital Exchange
+            </h3>
+            <p class="text-light">
+              Invita a tus amigos y empieza a generar ingresos extras. 
+              recibe el 25% del valor del paquete por el primer referido, 
+              un 25% por el segundo referido y un 100% por tu tercer referido 
+            </p>
+            <p class="mb-3 text-light" >
+              Compártelo y empieza a comisionar con los paquetes de Autogestión
+            </p>
           </div>
-          <div class="">
-            <button class="btn btn-ref  btn-block  " [cdkCopyToClipboard]="referalCode">
-              Copiar
-            </button>
+          <div class="col-5 my-auto mx-auto">
+            <div class="">
+              <p class="ref text-center">{{ referalCode }}</p>
+            </div>
+            <div class="">
+              <button class="btn btn-ref  btn-block  " [cdkCopyToClipboard]="referalCode">
+                Copiar
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
+    
   </div>
 </div>

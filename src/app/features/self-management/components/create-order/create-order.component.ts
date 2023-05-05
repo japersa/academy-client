@@ -14,7 +14,7 @@ export class CreateOrderComponent {
   form!: FormGroup;
   errorMessage: string | null;
 
-  constructor(
+  constructor( 
     // import the form builder
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
@@ -142,11 +142,24 @@ export class CreateOrderComponent {
   }
 
   createPack(formData: any) {
-    this.packsService.createPack(formData).subscribe(
-      {
-        next: r => this.router.navigate(['/self-management/orders'])
-      }
+
+    this.packsService.createPack(formData).subscribe( () => {
+      this.packsService.getMyPacks().subscribe( pkg => {
+        const newPack = pkg.reduce((prev, current) => {
+          return (prev.id > current.id) ? prev : current; 
+        });
+        console.log(newPack);
+        this.router.navigate([`/self-management/checkout/${newPack.id}`]);
+      });
+    }
     );
+    
+    
+  /*   this.packsService.createPack(formData).subscribe(
+      {
+        next: r => console.log(r)
+      }
+    ); */
   }
 
 }

@@ -423,7 +423,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     path: '/self-management',
     title: 'autogestión de fondos',
     type: 'sub',
-    icontype: 'tim-icons icon-trophy',
+    icontype: 'fa fa-chart-line',
     role: [ROLES_ENUM.ALL, ROLES_ENUM.TEACHER],
     collapse: 'pages',
     isCollapsed: true,
@@ -446,14 +446,14 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
-    icontype: 'tim-icons icon-single-02',
+    icontype: 'fa fa-file-invoice',
     role: [ROLES_ENUM.ALL],
   },
   {
     path: '/downloads',
     title: 'descargas', 
     type: 'link',
-    icontype: 'tim-icons icon-single-02',
+    icontype: 'fa fa-cloud-download-alt',
     role: [ROLES_ENUM.ALL],
   }
 ];
@@ -512,7 +512,7 @@ export const ROUTES_USER: RouteInfo[] = [
     path: '/self-management',
     title: 'autogestión de fondos',
     type: 'sub',
-    icontype: 'tim-icons icon-trophy',
+    icontype: 'fa fa-chart-line',
     role: [ROLES_ENUM.ALL, ROLES_ENUM.TEACHER],
     collapse: 'pages',
     isCollapsed: true,
@@ -547,14 +547,14 @@ export const ROUTES_USER: RouteInfo[] = [
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
-    icontype: 'fa fa-ticket',
+    icontype: 'fa fa-file-invoice',
     role: [ROLES_ENUM.ALL],
   },
   {
     path: '/downloads',
     title: 'descargas',
     type: 'link',
-    icontype: 'tim-icons icon-single-02',
+    icontype: 'fa fa-cloud-download-alt',
     role: [ROLES_ENUM.ALL],
   }
 ];

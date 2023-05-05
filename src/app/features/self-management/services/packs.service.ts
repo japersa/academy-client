@@ -17,9 +17,20 @@ export class PacksService {
     return this.http.post<any>(`${apiURL}${route}`, data);
   }
 
+  getMyPacks(): Observable<any> {
+    const route = `/list/my/package-self-management/`;
+    return this.http.get<any>(`${apiURL}${route}`);
+  }
+
+  getPackById(id) {
+    const route = `/retrive/package-self-management/`;
+    return this.http.get<any>(`${apiURL}${route}${id}`);
+  }
+
+
   payPackStripe(data: any): Observable<any> {
     const route = `/payment/package-self-management/stripe`;
     return this.http.post<any>(`${apiURL}${route}`, data);
   }
 
-}
+} 
