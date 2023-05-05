@@ -1,5 +1,272 @@
 <div class="content">
   <ol class="breadcrumb bg-transparent ml-3">
+    <li class="breadcrumb-item">Autogestión de Fondos</li>
+    <li class="breadcrumb-item text-primary">
+      <a routerLink="self-management/home"> Inicio </a>
+    </li>
+    <li class="breadcrumb-item text-primary">
+      <a routerLink="/funding-program/create-order"> Nuevo Paquete </a>
+    </li>
+    <li class="breadcrumb-item">Pago</li>
+  </ol>
+  <div class="row">
+    <div class="col-lg-9 col-md-6">
+      <div class="card card-stats shadow text-center ">
+        <div class="card-body">
+          <div class="row container-title ">
+            <div class="col-8">
+              <h2 class="card-title mt-2 mb-1 text-left">Datos de Facturación | Ordén Recibida</h2>
+            </div>
+            <div class="col-4">
+              <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg" alt="" width="150px">
+            </div>
+          </div>
+          <div class="row mt-3 mb-3 pb-3 container-info">
+            <div class="col-8 ">
+              <div class="row">
+                <div class="col-5">
+                  <p class="text-left" > <strong> Número de órden: </strong> 
+                    <span> {{ selectedOrder.id }} </span>
+                  </p> 
+                </div> 
+                <div class="col-7">
+                  <p class="text-left" > <strong> Tamaño de la cuenta: </strong> 
+                    <span> {{ '$ ' + selectedOrder.balance }} {{ selectedOrder.currencies | uppercase }}</span> 
+                  </p> 
+                </div>
+                <div class="col-5">
+                  <p class="text-left" > <strong> Típo de cuenta: </strong> 
+                    <span> {{ selectedOrder.package_type | uppercase }}</span> 
+                  </p> 
+                </div>
+                <div class="col-7">
+                  <p class="text-left" > <strong> Plataforma: </strong> 
+                    <span> MetaTrader 5 </span> 
+                  </p> 
+                </div>
+                <div class="col-5">
+                  <p class="text-left" > <strong> Nombre: </strong> 
+                    <span> {{ selectedOrder.first_name + ' ' + selectedOrder.last_name  }}</span> 
+                  </p> 
+                </div>
+                <div class="col-7">
+                  <p class="text-left" > <strong> Dirección: </strong> 
+                    <span> av 100pre viva 123 </span> 
+                  </p> 
+                </div>
+                <div class="col-5">
+                  <p class="text-left" > <strong> País:  </strong> 
+                    <span> {{ selectedOrder.country  }}</span> 
+                  </p> 
+                </div>
+                <div class="col-7">
+                  <p class="text-left" > <strong> Ciudad:</strong> 
+                    <span> {{  selectedOrder.city }} </span> 
+                  </p> 
+                </div>
+                <div class="col-5">
+                  <p class="text-left" > <strong> Código Postal:  </strong> 
+                    <span> {{ selectedOrder.postal_code }} </span> 
+                  </p> 
+                </div>
+                <div class="col-7">
+                  <p class="text-left" > <strong> Telefono:</strong> 
+                    <span> {{  selectedOrder.phone_number }} </span> 
+                  </p> 
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="col-4">
+              <div class="row bg-label mt-3 mb-2 mr-2  ">
+                <div class="col-3 my-auto">
+                  <img 
+                  src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/email_b0aiqe.svg" >
+                </div>
+                <div class="col-9">
+                  <div class="row">
+                    <p class="text-left" > <strong> Correo: </strong> </p>
+                  </div>
+                  <div class="row">
+                    <span class="text-left" > {{ selectedOrder.email }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row bg-label mt-2 mr-2">
+                <div class="col-3 my-auto">
+                  <img 
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg" 
+                    alt="">
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <p class="text-left" > <strong>Valor del Challenge:</strong> </p>
+                  </div>
+                  <div class="row">
+                    <span class="text-right" > {{ '$' + selectedOrder?.value  + ' USD' }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-5"> 
+      <div class="card card-stats shadow text-center">
+        <div class="card-body">
+          <div class="row container-title">
+            <div class="col-11 text-left mx-auto">
+              <h2 class="card-title pb-2">Pagar con Stripe</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-10 mx-auto p-2 container-credit-card">
+              <stripe-card 
+                #stripeCard
+                (catch)="onStripeError($event)"
+                [(invalid)]="invalidError"
+                (cardMounted)="cardCaptureReady = true"
+                (paymentMethodChange)="setPaymentMethod($event)"
+                (tokenChange)="setStripeToken($event)"
+                (sourceChange)="setStripeSource($event)"
+                [options]="cardOptions"
+                class="stripe-card"
+              ></stripe-card>
+            </div>         
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 mx-auto pt-3">
+            <button
+              class="btn btn-secondary btn-block mb-3"
+              (click)="stripeCard.createToken($event)"
+            >
+              Pagar
+            </button>
+          </div>
+        </div>
+        <div class="card-footer mb-3 mt-2">
+          <div *ngIf="invalidError" style="color: red">
+            {{ invalidError.message }}
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <div class="col-6">
+      <div class=" card card-stats shadow text-center">
+        <form
+          [formGroup]="criptoform"
+          (ngSubmit)="payWithCripto(cryptoModaltemplate)"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <h3 class="card-title">Pagar con <strong>Cripto</strong></h3>
+                <div class="form-group">
+                  <label for="currency2">
+                    Moneda: {{ currencyField?.value }}
+                  </label>
+                  <select
+                    formControlName="currency2"
+                    class="form-control"
+                    id="currency2"
+                  >
+                    <option value="" selected disabled>Choose Tagging</option>
+                    <option *ngFor="let c of currencies" [value]="c?.symbol">
+                      {{
+                        (c?.name | titlecase) +
+                          " - " +
+                          (c?.symbol | uppercase)
+                      }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-footer">
+              <button
+                class="btn btn-secondary btn-lg mb-3"
+                type="submit"
+                [disabled]="criptoform.invalid"
+              >
+                Pagar con cripto
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+   </div>
+    
+  </div>
+</div>
+
+
+<!-- MODAL -->
+<ng-template #cryptoModaltemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Coinpayments</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-4">
+        <p class="title">Precio:</p>
+        <p class="title">TXN id:</p>
+        <p class="title">Bloques:</p>
+        <p class="title">Wallet:</p>
+      </div>
+      <div class="col-7">
+        <p> {{ coinpaymentResponse?.amount }}</p>   
+        <p> {{ coinpaymentResponse?.txn_id }} </p>  
+        <p> {{ coinpaymentResponse?.confirms_needed }}  </p>
+        <p> {{ coinpaymentResponse?.address }} </p>   
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <p class="title">QR:</p>
+      </div>
+      <div class="col-8">
+        <img [src]="coinpaymentResponse?.qrcode_url" alt="" srcset="" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 mx-auto">
+        <a
+        [href]="coinpaymentResponse?.checkout_url"
+        class="btn btn-secondary btn-lg mb-3"
+        type="submit"
+        target="_blank"
+      >
+        Pagar
+      </a>
+      <a
+        [href]="coinpaymentResponse?.status_url"
+        class="btn btn-md btn-lg mb-3"
+        type="submit"
+        target="_blank"
+      >
+        Estado
+      </a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- <div class="content">
+  <ol class="breadcrumb bg-transparent ml-3">
     <li class="breadcrumb-item">Autogestión</li>
     <li class="breadcrumb-item text-primary">
       <a routerLink="/self-management/home"> Inicio </a>
@@ -8,7 +275,7 @@
       <a routerLink="/self-management/orders"> Ordenes </a>
     </li>
     <li class="breadcrumb-item">Pago</li>
-  </ol>
+  </ol> 
   <div class="col-lg-5 col-md-5">
     <div class="card card-stats shadow text-center">
       <div class="card-body">
@@ -45,3 +312,4 @@
     </div>
   </div>
 </div>
+ -->

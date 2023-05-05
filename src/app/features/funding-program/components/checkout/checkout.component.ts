@@ -28,8 +28,6 @@ export class CheckoutComponent implements OnInit {
   orders: any[] = null;
   selectedOrder: any = null;
 
-
-
   coinpaymentResponse: CPResponsePayment = null;
 
   productID = '';
@@ -191,6 +189,8 @@ export class CheckoutComponent implements OnInit {
           this.orders = r
           this.selectedOrder = this.orders.find(order => order.id == this.productID);
           this.convertBalancesToNumbers();
+          console.log(this.selectedOrder);
+          
         }
       }
     );

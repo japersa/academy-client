@@ -22,7 +22,7 @@ export class PacksService {
     return this.http.get<any>(`${apiURL}${route}`);
   }
 
-  getPackById(id) {
+  getPackById(id) { 
     const route = `/retrive/package-self-management/`;
     return this.http.get<any>(`${apiURL}${route}${id}`);
   }
@@ -30,6 +30,10 @@ export class PacksService {
 
   payPackStripe(data: any): Observable<any> {
     const route = `/payment/package-self-management/stripe`;
+    return this.http.post<any>(`${apiURL}${route}`, data);
+  }
+  payPackCoinpayents(data) {
+    const route = `/payment/package-self-management/coinpayments`;
     return this.http.post<any>(`${apiURL}${route}`, data);
   }
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PacksService } from '../../services/packs.service';
 
 @Component({
   selector: 'app-orders',
@@ -7,4 +8,44 @@ import { Component } from '@angular/core';
 })
 export class OrdersComponent {
 
+  
+  orders: any[] = null;
+
+  constructor(private packsService: PacksService) { }
+
+  
+  convertBalanceToNumber(balance: string): string {
+    switch(balance) {
+      case 'one_hundred_thousand':
+        return '100.000'; 
+      case 'fifty_thousand':
+        return '50.000';
+      case 'two_hundred_thousand':
+        return '200.000';
+      case 'five_hundred_thousand':
+        return '500.000';
+      default:
+        throw new Error('Balance string not recognized'); 
+    }
+  }
+
+  convertBalancesToNumbers(): void {
+    for (const order of this.orders) {
+      order.balance = this.convertBalanceToNumber(order.balance);
+    }
+  }
+   
+  ngOnInit(): void {
+    this.packsService.getMyPacks().subscribe(
+      {
+        next: r => {this.orders = r
+        console.log(r); 
+        this.convertBalancesToNumbers();
+        }
+      }
+    );
+  }
+
+
 }
+ 

@@ -1,68 +1,114 @@
 <div class="content">
   <ol class="breadcrumb bg-transparent ml-3">
-    <li class="breadcrumb-item">Autogestión</li>
-    <li class="breadcrumb-item text-primary">
-      <a routerLink="/self-management/home"> Inicio </a>
-    </li>
+    <li class="breadcrumb-item text-primary"> <a routerLink="/self-management/home">Autogestión de Fondos</a> </li>
+   <!--  <li class="breadcrumb-item text-primary">
+      <a routerLink="/funding-program/home"> Inicio </a>
+    </li> -->
     <li class="breadcrumb-item">Ordenes</li>
-  </ol>
-  <div class="col-lg-5 col-md-5">
-    <div class="card card-stats shadow text-center">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-12">
-            <h3 class="card-title">Ordén 123456</h3>
+  </ol> 
+
+  <ng-container *ngIf="orders.length > 0; else elseTemplate">
+    <div *ngFor="let i of orders" class="col-lg-7 col-md-5">
+      <div class="card card-stats shadow text-center ">
+        <div class="card-body">
+          <div class="row container-title ">
+            <div class="col-5">
+              <h2 class="card-title mt-2 mb-1 text-left">Ordén Recibida</h2>
+            </div>
+            <div class="col-3 my-auto">
+              <p class="rounded-pill p-1"
+                [ngClass]="{
+                  'bg-success': i?.status === 'active',
+                  'bg-danger': i?.status === 'closed',
+                  'bg-warning': i?.status === 'pending'
+                }"
+              >Estado: <span> {{i?.status}} </span> </p>
+            </div>
+            <div class="col-4">
+              <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg" alt="" width="150px">
+            </div>
+          </div>
+          <div class="row mt-3 mb-3 pb-3 container-info">
+            <div class="col-6 ">
+              <div class="row">
+                <div class="col-12">
+                  <p class="text-left" > <strong> Número de órden: </strong> 
+                    <span> {{ i?.id }} </span>
+                  </p> 
+                </div> 
+                <div class="col-12">
+                  <p class="text-left" > <strong> Tamaño de la cuenta: </strong> 
+                    <span> {{ '$ ' + i?.balance }} {{ i?.currencies | uppercase }}</span> 
+                  </p> 
+                </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Típo de cuenta: </strong> 
+                    <span> {{ i?.package_type| uppercase }}</span> 
+                  </p> 
+                </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Plataforma: </strong> 
+                    <span> MetaTrader 5 </span> 
+                  </p> 
+                </div>
+                <div class="col-12">
+                  <p class="text-left" > <strong> Nombre: </strong> 
+                    <span> {{ i?.first_name + ' ' + i?.last_name  }}</span> 
+                  </p> 
+                </div>
+        
+              </div>
+              
+            </div>
+            <div class="col-6">
+              <div class="row bg-label mt-3 mb-2 mr-2  ">
+                <div class="col-3 my-auto">
+                  <img 
+                  src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/email_b0aiqe.svg" >
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <p class="text-left" > <strong> Correo: </strong> </p>
+                  </div>
+                  <div class="row">
+                    <span class="text-right" > {{ i?.email }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row bg-label mt-2 mr-2">
+                <div class="col-3 my-auto">
+                  <img 
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg" 
+                    alt="">
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <p class="text-left" > <strong>Valor del Challenge:</strong> </p>
+                  </div>
+                  <div class="row">
+                    <span class="text-right" > {{ '$' + i?.value + ' USD' }} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-6 mx-auto">
+                  <button *ngIf=" i?.status == 'closed' " 
+                    class=" btn btn-secondary btn-lg"
+                    routerLink="../checkout/{{ i?.id }}"
+                  > Pagar</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="card-footer">
-        <hr />
-        <br />
-        <p class="stats">
-          Opere hasta 500.000 usd con nuestro broker Euro street capital llc
-        </p>
-        <br />
-        <p class="stats">
-          Demuestra tus destrezas de trading y empieza a retirar tu beneficio
-          diario.
-        </p>
-
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Escoge el balance con el que quieras empezar a operar
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Análisis de la cuenta
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Beneficio del 75%
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Retiros de beneficios diarios
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Contenido de respaldo
-        </p>
-        <p class="stats">
-          <i class="fas fa-check-circle"></i>
-          Extensión gratuita de 15 días
-        </p>
-      </div>
-      <div class="card-footer">
-        <p class="stats">
-          Demuestra tus habilidades completando nuestras fases
-        </p>
-        <button
-          routerLink="../checkout/123456"
-          class="btn btn-secondary btn-lg mb-3"
-        >
-          Pagar
-        </button>
-      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <p>No tienes ordenes generadas en este momento</p>
+  </ng-template>
 </div>

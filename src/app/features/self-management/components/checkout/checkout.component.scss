@@ -1,0 +1,41 @@
+.shadow {
+    box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
+    border-radius: 10px;
+}
+
+.card-title {
+    color: var(--secondary) !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #4be8e6;
+    
+}
+
+.container-credit-card {
+    border: 2px solid #4be8e6;
+    border-radius: 2px;
+}
+
+.card {
+    border-bottom: 3px solid var(--secondary);
+}
+
+.card-title {
+    color: var(--secondary) !important;
+    font-weight: 600 !important;
+}
+
+.container-info {
+    border-bottom: 1px solid #ccc;
+}
+
+.bg-label {
+    border-radius: 5px;
+    background-color: #cccc;
+}
+
+.btn-md {
+    color: var(--secondary);
+    background: #4be8e6 !important;
+    background-image: #4be8e6 !important;
+    background-color: #4be8e6 !important;
+}
