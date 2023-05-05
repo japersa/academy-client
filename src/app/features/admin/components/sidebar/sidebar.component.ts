@@ -228,7 +228,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     path: '/packages',
     title: 'packages',
     type: 'link',
-    icontype: 'tim-icons icon-trophy',
+    icontype: 'fa fa-box',
     role: [ROLES_ENUM.ALL],
   },
   {
@@ -305,7 +305,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     path: '/self-management',
     title: 'autogestión de fondos',
     type: 'sub',
-    icontype: 'tim-icons icon-trophy',
+    icontype: 'fa fa-chart-line',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
     isCollapsed: true,
@@ -340,14 +340,14 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     path: '/academy',
     title: 'Academia',
     type: 'link',
-    icontype: 'tim-icons icon-single-02',
+    icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
   },
   {
     path: '/billing',
     title: 'Facturación',
     type: 'link',
-    icontype: 'tim-icons icon-single-02',
+    icontype: 'fa fa-file-invoice',
     role: [ROLES_ENUM.ALL],
   },
 ];
@@ -547,7 +547,7 @@ export const ROUTES_USER: RouteInfo[] = [
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
-    icontype: 'tim-icons icon-single-02',
+    icontype: 'fa fa-ticket',
     role: [ROLES_ENUM.ALL],
   },
   {
@@ -573,13 +573,13 @@ export class SidebarComponent implements OnInit {
       path: '/profile',
       title: 'perfil',
       type: 'link',
-      icontype: 'tim-icons icon-chart-pie-36',
+      icontype: 'tim-icons icon-single-02',
     },
     {
       path: '/customer-service',
       title: 'Servicio al Cliente',
       type: 'link',
-      icontype: 'tim-icons icon-chart-pie-36',
+      icontype: 'fa fa-headset',
     },
   ];
 
