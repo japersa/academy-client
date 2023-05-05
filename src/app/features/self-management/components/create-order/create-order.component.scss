@@ -1,3 +1,8 @@
+.shadow-custom {
+  box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
+  border-radius: 10px;
+}
+
 input[type="radio"] {
     display: none;
   /*   position: absolute;
@@ -46,3 +51,9 @@ input[type="radio"] {
   .card {
     border-bottom: 3px solid var(--secondary) !important;
   }
+
+  .container-body {
+    color: #cccccc !important;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
