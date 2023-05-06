@@ -14,7 +14,7 @@
       <div class="card shadow">
         <div class="card-body">
           <div class="row">
-            <div class="col-lg-5 col-md-12">
+            <div class="col-lg-5 col-md-12"> 
               <p>Nombre: <span>{{user.first_name + ' ' + user.last_name }} </span> </p>
               <p>ID: <span> {{user.id }} </span>  </p>
               <p>Télefono: <span>{{user.phone_number }}</span> </p>
@@ -27,7 +27,8 @@
               <p>Fecha de ceración de cuenta: <span> {{user.date_joined | date: 'dd/mm/yyyy' }} </span> </p>
               <p>Paquetes Activos: <span> {{packagesActive.length }} </span> </p>
               <p>Paquetes Adquiridos: <span> {{user.packages.length }} </span> </p>
-            </div>
+              <p>Paquete Autogestión: <span  > {{ packAgActive }} </span>   </p>
+            </div> 
           </div>
         </div>
       </div>

@@ -13,6 +13,14 @@ export class UserDetailComponent implements OnInit {
   user = null;
   packages: any [] = null;
   packagesActive: any [] = null;
+  packAgActived: any [] = null;
+  packAgActive: boolean = false;
+
+  agActivete() {
+    if(this.packAgActived.length > 0){
+      this.packAgActive = true;
+    }
+  }
 
   constructor(private dashboardService: DashboardService,
     private route: ActivatedRoute
@@ -26,12 +34,10 @@ export class UserDetailComponent implements OnInit {
           next: r => {
             this.user = r;
             this.packagesActive = this.user.packages.filter(pkg => pkg.status === 'active');
+            this.packAgActived = this.user.packages_self_management.filter(pkg => pkg.status === 'active');
             this.packages =  this.user.packages; 
-            console.log(this.user);
-            console.log(this.packagesActive.length);
-            console.log(this.user.packages);
-            
-            
+            console.log(this.packAgActived);
+            this.agActivete();
           },
           error: e => console.log('error ' + e.error)
         }
