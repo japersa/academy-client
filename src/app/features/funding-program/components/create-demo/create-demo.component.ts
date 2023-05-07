@@ -31,13 +31,15 @@ export class CreateDemoComponent {
   private buildForm() {
     this.form = this.formBuilder.group({
       balance: ['', [Validators.required]],
-      currencies: ['', [Validators.required]],
-      account_type: ['', [Validators.required]],
+      currencies: [{value:'usd', disabled: true}],
+      account_type: [{value:'euro_street_full', disabled: true}],
     });
   }
 
   createPack(formData: any) {
-    this.packsService.createPackDemo(formData).subscribe( pkg => {
+    console.log(formData.balance);
+    
+    this.packsService.createPackDemo(formData.balance).subscribe( pkg => {
       console.log(pkg);
     } );
   }

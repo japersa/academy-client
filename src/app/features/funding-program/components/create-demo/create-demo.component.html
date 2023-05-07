@@ -7,15 +7,14 @@
     </ol>
     <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
         <div class="row pl-3">
-          <div class="col-5">
+          <div class="col-8">
             <div class="col-lg-8">
-              <h3 class="title mb-1">Registro del paquete</h3>
+              <h3 class="title mb-1">Registro del paquete Demo</h3> 
             </div>
             <div class="card card-stats text-left box-shadow">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-12">
-                    <p>Configura tu paquete a la medida.</p>
+                  <div class="col-6">
                     <p class="title">Elige la moneda a operar</p>
                     <p>
                       <input
@@ -26,7 +25,7 @@
                         id="usd"
                         checked
                       />
-                      <label class="radio-button mr-2" for="usd"> USD ($) </label>
+                      <label class="radio-button mr-2 " for="usd"> USD ($) </label>
                       <input
                         name="currencies"
                         value="eur"
@@ -36,9 +35,9 @@
                       />
                       <label class="radio-button mr-2" for="eur"> EUR (€) </label>
                     </p>
-                    <hr />
+                 
                   </div>
-                  <div class="col-12">
+                  <div class="col-6">
                     <p class="title">Elige el balance de la cuenta</p>
                     <div class="row">
                       <div class="col-12">
@@ -89,9 +88,9 @@
                         </p>
                       </div>
                     </div>
-                    <hr />
+                    
                   </div>
-                  <div class="col-12">
+                  <div class="col-6">
                     <p class="title">Elige el tipo de la cuenta</p>
                     <p>
                       <input
@@ -116,18 +115,19 @@
                         EuroStreet Full
                       </label>
                     </p>
-                    <hr />
+                           
+                  </div>
+                  <div class="col-6">
                     <p class="title">Plataforma: MetaTrader5</p>
                     <label class="radio-button checked" for="">MT5</label>
-                    <hr />
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-6 mx-auto">
+              <div class="row mx-auto">
+                <div class="col-12 ">
                   <button
                     [disabled]="form.invalid"
-                    class="btn btn-secondary btn-lg mb-3"
+                    class="btn btn-secondary btn-lg mb-3 "
                   >
                     Iniciar
                   </button>
