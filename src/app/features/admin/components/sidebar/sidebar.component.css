@@ -1,5 +1,5 @@
 .sidebar-wrapper {
-    min-width: 255px !important;
+    width: 255px !important;
 }
 
 a, p, i, div, ul, li, span {

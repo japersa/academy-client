@@ -269,12 +269,12 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
-      {
+/*       {
         path: 'home',
         title: 'Inicio',
         type: 'link',
         smallTitle: 'TP'
-      },
+      }, */
       {
         path: 'orders',
         title: 'Ordenes',
@@ -282,7 +282,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         smallTitle: 'TP'
       },
       {
-        path: '/trading-area-packages',
+        path: 'home',
         title: 'Area Trading Paquetes',
         type: 'link',
         smallTitle: 'TP'
@@ -310,12 +310,12 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
-      {
+/*       {
         path: 'home',
         title: 'Inicio',
         type: 'link',
         smallTitle: 'TP'
-      },
+      }, */
       {
         path: 'orders',
         title: 'Ordenes',
@@ -443,6 +443,13 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     ]
   },
   {
+    path: '/academy',
+    title: 'Academia',
+    type: 'link',
+    icontype: 'fa fa-graduation-cap',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
@@ -542,6 +549,13 @@ export const ROUTES_USER: RouteInfo[] = [
         smallTitle: 'WT'
       },
     ]
+  },
+  {
+    path: '/academy',
+    title: 'Academia',
+    type: 'link',
+    icontype: 'fa fa-graduation-cap',
+    role: [ROLES_ENUM.ALL],
   },
   {
     path: '/billing',
