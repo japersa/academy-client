@@ -7,21 +7,25 @@
           </a>
         </li>
       </ol>
-      <div class="col-12">
-        <h3 class="m-0">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
+      <div class="col-12 px-4">
+        <h3 class="m-0 ">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
         <ng-container
-          *ngIf="userDataService?.userData$?.value?.subscription != 'none';else elseTemplate">
-          <p>Continúa aprendiendo mediante su subscripción
-            <strong>Icex AG</strong> 
-            </p>
+          *ngIf="packAgActive == 'Activo';else elseTemplate">
+          <div class="row">
+            <div class="col-10">
+              <p>Continúa aprendiendo mediante su membresia
+                <strong>Icex Autogestión</strong> 
+              </p>
+            </div>
+          </div>
         </ng-container>
         <ng-template #elseTemplate>
-          <p>Hemos detectado que aún no tienes una subscripción activa, te animamos a conseguir una
-            <a routerLink="/subscription">aquí</a>.</p>
+          <p>Hemos detectado que aún no tienes un paquete <strong>Autogestión</strong> activo , te animamos a conseguir uno
+            <a routerLink="/self-management/create-order">aquí</a>.</p>
         </ng-template>
   
   
-        <div class="row d-flex justify-content-center mt-4">
+        <!-- <div class="row d-flex justify-content-center mt-4 px-4">
           <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6  ">
             <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/MWHr8Ndpmas"
               title="YouTube video player" frameborder="0"
@@ -35,12 +39,12 @@
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen>
             </iframe>
-          </div>
-        </div>
+          </div> 
+        </div>-->
       </div>
   
       <ng-container *ngIf="continueLearningCourses.length > 0">
-        <div class="row" style="width: 100% !important;">
+        <div class="row px-4" style="width: 100% !important;">
           <div class="col-12">
             <h2 class="mt-4">Continuar viendo</h2>
             <hr style="width: 100% !important;" color="green">
@@ -61,7 +65,7 @@
         </div>
       </ng-container>
   
-      <div class="row" style="width: 100% !important;">
+      <div class="row px-4" style="width: 100% !important;">
         <div class="col-12">
           <h2 class="mt-4">Cursos</h2>
           <hr style="width: 100% !important;" color="cyan">

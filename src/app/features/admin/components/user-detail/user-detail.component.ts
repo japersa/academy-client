@@ -14,11 +14,11 @@ export class UserDetailComponent implements OnInit {
   packages: any [] = null;
   packagesActive: any [] = null;
   packAgActived: any [] = null;
-  packAgActive: boolean = false;
+  packAgActive: string = 'Inactivo';
 
   agActivete() {
     if(this.packAgActived.length > 0){
-      this.packAgActive = true;
+      this.packAgActive = 'Activo';
     }
   }
 
@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit {
       this.userId = params.get('id');
       this.dashboardService.getUsersById(this.userId).subscribe(
         {
-          next: r => {
+          next: r => { 
             this.user = r;
             this.packagesActive = this.user.packages.filter(pkg => pkg.status === 'active');
             this.packAgActived = this.user.packages_self_management.filter(pkg => pkg.status === 'active');

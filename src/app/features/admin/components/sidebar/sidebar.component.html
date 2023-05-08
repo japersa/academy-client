@@ -1,13 +1,14 @@
 <div class="sidebar-wrapper">
   <div class="logo">
-    <!-- <button 
+    <!-- <a *ngIf="rol === 'admin'" routerLink="/packages">Packages</a> -->
+    <button 
       class="
         btn btn-secondary btn-block 
         custom-btn my-auto d-inline"
       *ngIf="rol === 'admin'" 
-      (click)="adminButtonAction()"  
-        >Solicitud de Paquetes
-    </button> -->
+      routerLink="/packages"  
+        >Paquetes
+    </button>
     <button 
       class="
         btn btn-secondary btn-block 
@@ -25,7 +26,7 @@
         <p>{{ menuitem.title }}</p>
       </a>
       <!--If it have a submenu-->
-      <a
+      <a 
         data-toggle="collapse"
         routerLinkActive="active"
         *ngIf="menuitem.type === 'sub'"

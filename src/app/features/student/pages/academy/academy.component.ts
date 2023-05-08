@@ -13,13 +13,16 @@ SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
 @Component({
   selector: 'app-academy',
   templateUrl: './academy.component.html',
-  styleUrls: ['./academy.component.scss'],
+  styleUrls: ['./academy.component.scss'], 
   encapsulation: ViewEncapsulation.None,
 })
 export class AcademyComponent {
 
   courses = [];
   continueLearningCourses = [];
+
+  packAgActived: any [] = null;
+  packAgActive: string = 'Inactivo';
 
   public dashboardColor: boolean = false;
 
@@ -33,6 +36,13 @@ export class AcademyComponent {
     private notificationsService: NotificationsService
   ) { }
 
+
+  agActivete() {
+    if(this.packAgActived.length > 0){
+      this.packAgActive = 'Acivo';
+    }
+  }
+
   fillCourses() {
     this.coursesService.getCourses().subscribe(res => {
 
@@ -42,7 +52,7 @@ export class AcademyComponent {
       if (this.userDataService.userData$.value.rol === 'teacher') {
         this.courses = res.my_courses_created;
       }
-      if (this.userDataService.userData$.value.rol === 'student') {
+      if (this.userDataService.userData$.value.rol === 'user') {
         this.courses = res.my_enrolled_courses;
       }
     },
@@ -56,6 +66,8 @@ export class AcademyComponent {
       this.registerService.getUser().subscribe(
         {
           next: (r) => {
+            this.packAgActived = r.packages_self_management.filter(pkg => pkg.status === 'active');
+            this.agActivete();
             this.userDataService.userData$.next(r);
             this.storageService.set('userData', r);
           },

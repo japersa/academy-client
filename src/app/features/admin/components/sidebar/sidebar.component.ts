@@ -224,13 +224,13 @@ export const ROUTES_ADMIN: RouteInfo[] = [
       }
     ]
   },
-  {
+  /* {
     path: '/packages',
     title: 'packages',
     type: 'link',
     icontype: 'fa fa-box',
     role: [ROLES_ENUM.ALL],
-  },
+  }, */
   {
     path: '',
     title: 'Profesores',
