@@ -581,6 +581,15 @@ export const ROUTES_USER: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
 
+  packs: any = [
+    {
+      path: '/packages',
+      title: 'paquetes',
+      type: 'link',
+      icontype: 'fa fa-box',
+    }
+  ];
+
   menuItems: any[];
   profileMenuItems: any = [
     {
@@ -622,6 +631,11 @@ export class SidebarComponent implements OnInit {
     } else if (this.rol === 'user') {
       this.menuItems = ROUTES_USER;
     }
+
+
+    console.log(this.packs);
+    console.log(this.packs[0].link);
+    
 
   }
 }

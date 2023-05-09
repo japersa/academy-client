@@ -1,14 +1,24 @@
 <div class="sidebar-wrapper">
   <div class="logo">
-    <!-- <a *ngIf="rol === 'admin'" routerLink="/packages">Packages</a> -->
-    <button 
+    <ul class="nav"
+    *ngIf="rol === 'admin'"
+    >
+      <li *ngFor="let packs of packs" routerLinkActive="active" class="">
+        <!--If is a single link-->
+        <a [routerLink]="[packs.path]" *ngIf="packs.type === 'link'" class="mb-4">
+          <i class="{{ packs.icontype }}  "></i>
+          <p class="  " style="margin-left: 50px; margin-top: -20px;" >{{ packs.title }}</p>
+        </a>
+      </li>
+    </ul>
+    <!-- <button 
       class="
         btn btn-secondary btn-block 
         custom-btn my-auto d-inline"
       *ngIf="rol === 'admin'" 
       routerLink="/packages"  
         >Paquetes
-    </button>
+    </button> -->
     <button 
       class="
         btn btn-secondary btn-block 
