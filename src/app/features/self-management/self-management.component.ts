@@ -9,6 +9,11 @@ import { UserDataService } from 'src/app/core/services/user-data.service';
 export class SelfManagementComponent implements OnInit {
 
   referalCode = '0000000'; 
+  buttonText = 'Copiar';
+
+  copied() {
+    this.buttonText = 'Copiado';
+  }
 
   constructor(public userDataService: UserDataService,
   ) { }

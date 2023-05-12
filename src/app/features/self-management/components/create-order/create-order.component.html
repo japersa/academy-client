@@ -5,129 +5,98 @@
     </li>
     <li class="breadcrumb-item">Nuevo Paquete</li>
   </ol>
+  <div class="row ">
+    
+  </div>
   <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
     <div class="row pl-2 pr-2">
-      <div class="col-5">
-        <div class="col-lg-8">
-          <h3 class="title mb-4">Registro del paquete</h3>
-        </div>
-        <div class="card card-stats text-left box-shadow">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                <p>Configura tu paquete a la medida.</p>
-                <p class="title">Elige la moneda a operar</p>
-                <p>
-                  <input
-                    name="currencies"
-                    value="usd"
-                    type="radio"
-                    formControlName="currencies"
-                    id="usd"
-                    checked
-                  />
-                  <label class="radio-button mr-2" for="usd"> USD ($) </label>
-                  <input
-                    name="currencies"
-                    value="eur"
-                    type="radio"
-                    formControlName="currencies"
-                    id="eur"
-                  />
-                  <label class="radio-button mr-2" for="eur"> EUR (€) </label>
-                </p>
-                <hr />
-              </div>
-              <div class="col-12">
-                <p class="title">Elige el balance de la cuenta</p>
-                <div class="row">
-                  <div class="col-12">
-                    <input
-                      name="balance"
-                      value="fifty_thousand"
-                      type="radio"
-                      formControlName="balance"
-                      id="50k"
-                    />
-                    <label class="radio-button mr-2" for="50k">
-                      50.000 USD
-                    </label>
-                    <input
-                      name="balance"
-                      value="one_hundred_thousand"
-                      type="radio"
-                      formControlName="balance"
-                      id="100k"
-                      checked
-                    />
-                    <label class="radio-button mr-2" for="100k">
-                      100.000 USD
-                    </label>
-                  </div>
-                  <div class="col-12">
-                    <p>
-                      <input
-                        name="balance"
-                        value="two_hundred_thousand"
-                        type="radio"
-                        formControlName="balance"
-                        id="200k"
-                      />
-                      <label class="radio-button mr-2" for="200k">
-                        200.000 USD
-                      </label>
-                      <input
-                        name="balance"
-                        value="five_hundred_thousand"
-                        type="radio"
-                        formControlName="balance"
-                        id="500k"
-                      />
-                      <label class="radio-button mr-2" for="500k">
-                        500.000 USD
-                      </label>
-                    </p>
-                  </div>
+      <div class="col-lg-5 col-md-12">
+        <h3 class="title">Membresia Autogestión</h3>
+          <div class="card shadow-custom p-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <p>
+                    comienza a generar rentabilidad sobre tu inversión sólo debes realizar un
+                    único pago para acceder a nuestros beneficios
+                  </p>
                 </div>
-                <hr />
               </div>
-              <div class="col-12">
-                <p class="title">Elige el tipo de la cuenta</p>
-                <p>
-                  <input
-                    name="account_type"
-                    value="euro_street_basic"
-                    type="radio"
-                    formControlName="account_type"
-                    id="basic"
-                    checked
-                  />
-                  <label class="radio-button mr-2" for="basic">
-                    EuroStreet Basic
-                  </label>
-                  <input
-                    name="account_type"
-                    value="euro_street_full"
-                    type="radio"
-                    formControlName="account_type"
-                    id="full"
-                  />
-                  <label class="radio-button mr-2" for="full">
-                    EuroStreet Full
-                  </label>
-                </p>
-                <hr />
-                <p class="title">Plataforma: MetaTrader5</p>
-                <label class="radio-button checked" for="">MT5</label>
-                <hr />
-              </div>
+              <div class="row container-body pt-2 pb-2">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-6">
+                      <p>
+                        <img
+                          class=""
+                          width="24px"
+                          src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                          alt=""
+                        >
+                        {{ 'Contrato digital &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monitoreo 24/7' }} 
+                      </p>
+                      <p>
+                        <img
+                        class=""
+                        width="24px"
+                        src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                        alt="">
+                        Seguro de Capital
+                      </p>
+                    </div>
+                    <div class="col-6">
+                      <p >
+                        <img
+                          class=""
+                          width="24px"
+                          src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                          alt=""
+                        >
+                        {{ 'Alianzas ' +  ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comerciales' }} 
+                         
+                      </p>
+                      <p>
+                        <img
+                        class=""
+                        width="24px"
+                        src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                        alt="">
+                        Curso Básico Forex
+                      </p>
+                    </div> 
+                    <div class="col-6">
+                      <p >
+                        <img
+                          class=""
+                          width="24px"
+                          src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                          alt=""
+                        >
+                        Soporte 24/5
+                      </p>
+                    </div> 
+                    <div class="col-6">
+                      <p >
+                        <img
+                          class=""
+                          width="24px"
+                          src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                          alt=""
+                        >
+                        {{'Autogestion de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fondos'}}
+                      </p>
+                    </div> 
+                  </div> 
+                </div>
+              </div> 
+                  
+              
             </div>
           </div>
-        </div>
         
       </div>
 
-      <div class="col-7 ">
+      <div class="col-lg-7 col-md-12 ">
         <h3 class="title">Información de facturación</h3>
           <div class="card mt-2 pt-4 card-stats text-left box-shadow">
             <div class="card-body">

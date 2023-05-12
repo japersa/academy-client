@@ -40,7 +40,23 @@
       </div>
     </div>
   </div>
-  <div class="col-12 p-5">
+  <div class="row d-flex justify-content-center mt-4 px-4">
+    <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6  ">
+      <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/MWHr8Ndpmas"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6  ">
+      <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/iNuf_fqlOuo"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+  <!-- <div class="col-12 p-5">
     <div class="row ">
       <div class="col-lg-6 col-sm-12 ">
         <iframe width="460" height="295" src="https://www.youtube.com/embed/MWHr8Ndpmas" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -49,7 +65,7 @@
         <iframe width="460" height="295" src="https://www.youtube.com/embed/iNuf_fqlOuo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </div>
-  </div>
+  </div> -->
   
   <div class="row ">
     <div class="row ">
@@ -200,8 +216,11 @@
               <p class="ref text-center">{{ referalCode }}</p>
             </div>
             <div class="">
-              <button class="btn btn-ref  btn-block  " [cdkCopyToClipboard]="referalCode">
-                Copiar
+              <button class="btn btn-ref  btn-block  " 
+                [cdkCopyToClipboard]="referalCode"
+                (click)="copied()"
+              >
+              {{ buttonText }}
               </button>
             </div>
           </div>

@@ -224,13 +224,13 @@ export const ROUTES_ADMIN: RouteInfo[] = [
       }
     ]
   },
-  {
+  /* {
     path: '/packages',
     title: 'packages',
     type: 'link',
     icontype: 'fa fa-box',
     role: [ROLES_ENUM.ALL],
-  },
+  }, */
   {
     path: '',
     title: 'Profesores',
@@ -269,12 +269,12 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
-      {
+/*       {
         path: 'home',
         title: 'Inicio',
         type: 'link',
         smallTitle: 'TP'
-      },
+      }, */
       {
         path: 'orders',
         title: 'Ordenes',
@@ -282,7 +282,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         smallTitle: 'TP'
       },
       {
-        path: '/trading-area-packages',
+        path: 'home',
         title: 'Area Trading Paquetes',
         type: 'link',
         smallTitle: 'TP'
@@ -310,12 +310,12 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
-      {
+/*       {
         path: 'home',
         title: 'Inicio',
         type: 'link',
         smallTitle: 'TP'
-      },
+      }, */
       {
         path: 'orders',
         title: 'Ordenes',
@@ -443,6 +443,13 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     ]
   },
   {
+    path: '/academy',
+    title: 'Academia',
+    type: 'link',
+    icontype: 'fa fa-graduation-cap',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
@@ -544,6 +551,13 @@ export const ROUTES_USER: RouteInfo[] = [
     ]
   },
   {
+    path: '/academy',
+    title: 'Academia',
+    type: 'link',
+    icontype: 'fa fa-graduation-cap',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
@@ -566,6 +580,15 @@ export const ROUTES_USER: RouteInfo[] = [
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+
+  packs: any = [
+    {
+      path: '/packages',
+      title: 'paquetes',
+      type: 'link',
+      icontype: 'fa fa-box',
+    }
+  ];
 
   menuItems: any[];
   profileMenuItems: any = [
@@ -608,6 +631,11 @@ export class SidebarComponent implements OnInit {
     } else if (this.rol === 'user') {
       this.menuItems = ROUTES_USER;
     }
+
+
+    console.log(this.packs);
+    console.log(this.packs[0].link);
+    
 
   }
 }

@@ -18,6 +18,11 @@ export class PacksService {
     return this.http.post<any>(`${apiURL}${route}`, data);
   }
 
+  createPackDemo(data: any): Observable<any> {
+    const route = `/create/demo/package/`;
+    return this.http.post<any>(`${apiURL}${route}`, data);
+  }
+
   getMyPacks(): Observable<any> {
     const route = `/list/my/packages/`;
     return this.http.get<any>(`${apiURL}${route}`);
