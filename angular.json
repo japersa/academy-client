@@ -37,7 +37,8 @@
               "node_modules/@swimlane/ngx-datatable/assets/icons.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/@videogular/ngx-videogular/fonts/videogular.css",
-              "node_modules/survey-angular/modern.min.css"
+              "node_modules/survey-angular/modern.min.css",
+              "node_modules/ngx-spinner/animations/ball-newton-cradle.css"
             ],
             "scripts": [],
             "aot": false,

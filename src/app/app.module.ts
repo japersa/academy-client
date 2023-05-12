@@ -16,7 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
-
 // Core Modules
 import { CoreModule } from './core/core.module';
 
@@ -28,7 +27,7 @@ import { SharedModule } from './shared/shared.module';
 import { ComponentsModule } from './shared/components/components.module';
 
 import { environment } from 'src/environments/environment';
-import { NgxPermissionsModule } from 'ngx-permissions';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -44,15 +43,15 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     RouterModule,
     AppRoutingModule,
     QuicklinkModule,
-    NgxPermissionsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     ToastrModule.forRoot(),
+    NgxSpinnerModule.forRoot({ type: 'ball-newton-cradle.css' }),
     CoreModule,
     SharedModule,
     FeaturesModule
   ],
-  exports: [NgxPermissionsModule],
+  exports: [],
   providers: [
   ],
   bootstrap: [AppComponent]
