@@ -1,16 +1,27 @@
 <div class="wrapper">
-  <div class=" navbar-minimize-fixed d-inline">
-    <button class=" minimize-sidebar btn btn-link btn-just-icon" placement="right">
-      <i class=" tim-icons icon-align-center visible-on-sidebar-regular"> </i>
-      <i class=" tim-icons icon-bullet-list-67 visible-on-sidebar-mini"> </i>
+  <div class="navbar-minimize-fixed d-inline">
+    <button
+      class="minimize-sidebar btn btn-link btn-just-icon"
+      placement="right"
+    >
+      <i class="tim-icons icon-align-center visible-on-sidebar-regular"> </i>
+      <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini"> </i>
     </button>
   </div>
   <ng-container *ngIf="userDataService?.userData$?.value?.rol !== 'student'">
-    <div class="sidebar " data='white'>
+    <div class="sidebar" data="white">
       <app-sidebar></app-sidebar>
     </div>
   </ng-container>
-  <div class="main-panel "   data='cyan'>
+  <div class="main-panel" data="cyan">
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-newton-cradle"
+      [fullScreen]="true"
+      ><p style="color: white">Cargando...</p></ngx-spinner
+    >
     <app-navbar></app-navbar>
     <router-outlet></router-outlet>
     <app-footer *ngIf="router.url != '/maps/full-screen'"></app-footer>

@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule, Optional, SkipSelf } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Core
@@ -8,11 +8,14 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RollbarService, rollbarFactory, RollbarErrorHandler } from './utils/rollbar';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { UserDataService } from './services/user-data.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-newton-cradle.css' }),
   ],
   providers: [
     StorageService,
@@ -20,10 +23,14 @@ import { UserDataService } from './services/user-data.service';
     // Core interceptors
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     // Rollbar
     { provide: ErrorHandler, useClass: RollbarErrorHandler },
     { provide: RollbarService, useFactory: rollbarFactory }
   ],
+  exports: [NgxSpinnerModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 })
 export class CoreModule {
 

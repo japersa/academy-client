@@ -27,7 +27,6 @@ import { SharedModule } from './shared/shared.module';
 import { ComponentsModule } from './shared/components/components.module';
 
 import { environment } from 'src/environments/environment';
-import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule.forRoot({ type: 'ball-newton-cradle.css' }),
     CoreModule,
     SharedModule,
     FeaturesModule

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class HttpErrorInterceptor {
-  constructor(private injector: Injector, private router: Router) { }
+  constructor(private injector: Injector, private router: Router,) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
