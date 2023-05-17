@@ -12,10 +12,10 @@
     padding: 10px !important;
     border-radius: 15px !important;
 }
-
+ 
 
 .card {
-    background-color: rgb(0, 0, 0, 0.1) !important;
+    background-color: #ffff !important;
 }
 
 .card-title {
@@ -64,4 +64,9 @@ small, label {
 
 hr {
     border: var(--cyan) 1.5px solid;
+}
+
+.shadow {
+    box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
+    border-radius: 10px;
 }

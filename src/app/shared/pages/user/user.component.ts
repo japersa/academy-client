@@ -9,6 +9,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EditUserService } from '../../services/edit-user.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { CoursesService } from '../../services/courses.service';
+import { UserService } from '../../services/user.service';
+import { log } from 'console';
 
 
 @Component({
@@ -18,6 +20,7 @@ import { CoursesService } from '../../services/courses.service';
 })
 export class UserComponent implements OnInit, OnDestroy {
 
+  user = [];
   approvedCourses = [];
 
   public rol = '';
@@ -46,7 +49,8 @@ export class UserComponent implements OnInit, OnDestroy {
     private editUserService: EditUserService,
     public userDataService: UserDataService,
     public updatePasswordService: UpdatePasswordService,
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
+    private userService: UserService
   ) {
     this.validationMessages = utilsService.getValidationMessages();
 
@@ -174,7 +178,17 @@ export class UserComponent implements OnInit, OnDestroy {
     );
   }
 
+  getUser(){
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+      console.log(this.user);
+      
+    })
+  }
+
   ngOnInit() {
+
+    this.getUser();
 
     this.getApprovedCourses();
 
