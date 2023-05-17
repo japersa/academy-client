@@ -355,13 +355,6 @@ export const ROUTES_ADMIN: RouteInfo[] = [
 // Routes to TEACHER
 export const ROUTES_TEACHER: RouteInfo[] = [
   {
-    path: '/dashboard',
-    title: 'Dashboard',
-    type: 'link',
-    icontype: 'tim-icons icon-chart-pie-36',
-    role: [ROLES_ENUM.ALL]
-  },
-  {
     path: '',
     title: 'Profesores',
     type: 'sub',
@@ -400,11 +393,23 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
+        path: 'home',
+        title: 'Area Trading',
+        type: 'link',
+        smallTitle: 'TP'
+      },
+      {
+        path: 'orders',
+        title: 'Ordenes',
+        type: 'link',
+        smallTitle: 'TP'
+      },
+      /* {
         path: '/trading-area',
         title: 'Area Trading',
         type: 'link',
         smallTitle: 'AT'
-      },
+      }, */
       {
         path: '/withdrawals',
         title: 'retiros de beneficios',
@@ -429,10 +434,16 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: '/academy',
-        title: 'academia',
+        path: 'home',
+        title: 'Inicio',
         type: 'link',
-        smallTitle: 'AC'
+        smallTitle: 'TP'
+      },
+      {
+        path: 'orders',
+        title: 'Ordenes',
+        type: 'link',
+        smallTitle: 'TP'
       },
       {
         path: 'withdrawals',
