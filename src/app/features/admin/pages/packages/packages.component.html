@@ -19,7 +19,8 @@
           <option selected="true" disabled="disabled">
             Seleccionar estado
           </option>
-          <option value="active">Ativo</option>
+          <option value="">Todos</option>
+          <option value="active">Activo</option>
           <option value="pending">Pendiente</option>
           <option value="closed">Cancelado</option>
         </select>
@@ -77,10 +78,13 @@
                   </p>
                   <p>
                     <strong>Fecha de solicitud:</strong>
-                    {{ i.end_date | date: 'dd/mm/yyyy' }}
+                    {{ i.end_date | date: 'dd/MM/yyyy' }}
                   </p>
                 </div>
-                <div class="col-4">
+                <div 
+                  class="col-4"
+                  *ngIf="i?.status === 'active'"
+                >
                   <button
                     (click)="openModal(template)"
                     class="btn btn-secondary btn-lg mb-3"
