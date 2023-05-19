@@ -6,14 +6,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { debounceTime, distinctUntilChanged, filter, fromEvent, tap } from 'rxjs';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
-export enum SelectionType {
-  single = "single",
-  multi = "multi",
-  multiClick = "multiClick",
-  cell = "cell",
-  checkbox = "checkbox"
-}
-
 @Component({
   selector: 'app-admins',
   templateUrl: './users.component.html',
@@ -37,12 +29,11 @@ export class UsersComponent implements OnInit, AfterViewInit {
   role: ROLES_ENUM = undefined;
 
   rows: any = [];
-  temp = [];
-  entries: number = 10;
   filter: string = '';
-  selected: any[] = [];
   activeRow: any;
-  SelectionType = SelectionType;
+  entries: number = 10;
+  selected: any[] = [];
+  temp = [];
 
   options = {};
 
@@ -65,6 +56,21 @@ export class UsersComponent implements OnInit, AfterViewInit {
     // this.getAll();
   }
 
+
+  filterTable($event: any) {
+    let val = $event.target.value;
+    console.log(val);
+    this.temp = this.rows.filter(function (d: any) {
+      for (var key in d) {
+        console.log(key, d);
+        if (d[key].toString().toLowerCase().indexOf(val) !== -1) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
   getUsers() {
     if (this.bsRangeValue) {
       const date = this.bsRangeValue.map(item => item.toISOString());
@@ -75,7 +81,18 @@ export class UsersComponent implements OnInit, AfterViewInit {
       {
         next: r => {
           this.rows = r?.results;
+          this.rows.forEach((e: any) => (e['demo_package'] = 'null'));
+
           this.temp = r?.results;
+          console.log(r?.results);
+
+          this.temp = this.rows.map((prop: any, key: any) => {
+            return {
+              ...prop,
+              idx: key,
+            };
+          });
+
         },
         error: e => console.log('error ' + e.error)
       }
@@ -173,7 +190,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       this.getUsers();
     });
     console.log(this.filter);
-    
+
   }
 
   ngAfterViewInit() {
