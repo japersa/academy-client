@@ -37,9 +37,9 @@ export class CreateDemoComponent {
   }
 
   createPack(formData: any) {
-    console.log(formData.balance);
+    console.log(formData);
     
-    this.packsService.createPackDemo(formData.balance).subscribe( pkg => {
+    this.packsService.createPackDemo(formData).subscribe( pkg => {
       console.log(pkg);
     } );
   }
