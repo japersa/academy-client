@@ -32,8 +32,10 @@
           <div class="card-header">
             <h3 class="mb-0">Selecting Rows</h3>
             <p class="text-sm mb-0">
-              This is an exmaple of datatable using the well known ngx-datatable
-              plugin. This is a minimal setup in order to get started fast.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
+              accusamus voluptas perspiciatis odit fuga optio nemo. Libero
+              labore, at quia assumenda amet sint, suscipit non reprehenderit
+              cumque praesentium aut id!
             </p>
           </div>
           <div class="card-body">
@@ -156,166 +158,6 @@
               </ngx-datatable>
             </div>
           </div>
-          <!-- <div class="card-body">
-            <div class="dataTables_wrapper py-4">
-              <div class="row">
-                <div class="col-sm-12 col-md-6">
-                  <div class="dataTables_length" id="datatable_length">
-                    <label>
-                      Filas
-                      <select
-                        name="datatable_length"
-                        aria-controls="datatable"
-                        class="form-control form-control-sm"
-                        (change)="entriesChange($event)"
-                      >
-                        <option value="10" [selected]="entries == 10">
-                          10
-                        </option>
-                        <option value="25" [selected]="entries == 25">
-                          25
-                        </option>
-                        <option value="50" [selected]="entries == 50">
-                          50
-                        </option>
-                        <option value="-1" [selected]="entries == 100">
-                          100
-                        </option>
-                      </select>
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                  <div id="datatable_filter" class="dataTables_filter">
-                    <label>
-                      Fechas
-                      <div class="col-xs-12 col-12 col-md-4 form-group mb-3">
-                        <input
-                          type="text"
-                          placeholder="Daterangepicker"
-                          class="form-control form-control-sm"
-                          [bsConfig]="bsConfig"
-                          [(ngModel)]="bsRangeValue"
-                          bsDaterangepicker
-                        />
-                      </div>
-                    </label>
-                    <label>
-                      Filtros
-                      <select
-                        name="datatable_filters"
-                        aria-controls="datatable"
-                        class="form-control form-control-sm"
-                        (change)="filterChange($event)"
-                      >
-                        <option selected="true" disabled="disabled">
-                          Seleccionar filtro
-                        </option>
-                        <option value="id">id</option>
-                        <option value="first_name">nombre</option>
-                        <option value="last_name">apellido</option>
-                        <option value="username">email</option>
-                        <option value="subscription">subscripción</option>
-                        <option value="identity_card">documento</option>
-                        <option value="phone_number">teléfono</option>
-                        <option value="deferred_name">nombre referido</option>
-                        <option value="deferred_document_number">
-                          docu. referido
-                        </option>
-                        <option value="referral_code">código referido</option>
-                      </select>
-                    </label>
-                    <label>
-                      <input
-                        type="search"
-                        class="form-control form-control-sm"
-                        placeholder="Search records"
-                        aria-controls="datatable"
-                        #search
-                      />
-                    </label>
-                    <button
-                      class="btn btn-primary btn-fab btn-icon btn-round"
-                      (click)="resetFilters()"
-                    >
-                      <i class="tim-icons icon-refresh-01"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <ngx-datatable
-                id="print-section"
-                class="bootstrap selection-cell"
-                [columnMode]="'force'"
-                [headerHeight]="50"
-                [footerHeight]="50"
-                [rowHeight]="'auto'"
-                [limit]="entries != -1 ? entries : undefined"
-                [rows]="temp"
-                [selected]="selected"
-                [selectionType]="'multiClick'"
-                (activate)="onActivate($event)"
-                (select)="onSelect($event)"
-              >
-                <ngx-datatable-column name="ID" prop="id">
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Nombre" prop="first_name">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.first_name | titlecase }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Apellido" prop="last_name">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.last_name | titlecase }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Email" prop="username">
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Teléfono" prop="phone_number">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.phone_number | titlecase }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column
-                  name="Fecha de registro"
-                  prop="date_joined"
-                >
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.date_joined | date }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Actions">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a
-                      class="btn btn-primary btn-link btn-sm btn-icon"
-                      [routerLink]="['./details/', row?.id]"
-                      tooltip="Detalles"
-                      type="button"
-                    >
-                      <i class="tim-icons icon-zoom-split"> </i>
-                    </a>
-                    <button
-                      class="btn btn-success btn-link btn-sm btn-icon"
-                      (click)="editUser(row)"
-                      tooltip="Editar"
-                      type="button"
-                    >
-                      <i class="tim-icons icon-pencil"> </i>
-                    </button>
-                    <button
-                      class="btn btn-danger btn-link btn-sm"
-                      (click)="deleteUser(row?.id)"
-                      tooltip="Eliminar"
-                      type="button"
-                    >
-                      <i class="tim-icons icon-simple-remove"> </i>
-                    </button>
-                  </ng-template>
-                </ngx-datatable-column>
-              </ngx-datatable>
-            </div>
-          </div> -->
         </div>
       </div>
     </ng-container>
