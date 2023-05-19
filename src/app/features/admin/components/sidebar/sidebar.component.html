@@ -1,32 +1,54 @@
 <div class="sidebar-wrapper">
   <div class="logo">
-    <ul class="nav"
-    *ngIf="rol === 'admin'"
+    <div 
+      class="d-inline-flex align-items-center"
+      *ngIf="rol === 'teacher'"
     >
-      <li *ngFor="let packs of packs" routerLinkActive="active" class="">
-        <!--If is a single link-->
-        <a [routerLink]="[packs.path]" *ngIf="packs.type === 'link'" class="mb-4">
-          <i class="{{ packs.icontype }}  "></i>
-          <p class="  " style="margin-left: 50px; margin-top: -20px;" >{{ packs.title }}</p>
-        </a>
-      </li>
-    </ul>
-    <!-- <button 
-      class="
-        btn btn-secondary btn-block 
-        custom-btn my-auto d-inline"
-      *ngIf="rol === 'admin'" 
-      routerLink="/packages"  
-        >Paquetes
-    </button> -->
+      <i class="fa fa-box mx-4" style="font-size: 24px;"  ></i>
+      <button 
+        class="
+          btn btn-secondary btn-block 
+          custom-btn my-auto d-inline" 
+        routerLink="/course-by-steps"  
+      > 
+        
+        Crear Curso
+      </button>
+    </div>
+    
+    <div 
+      class="d-inline-flex align-items-center"
+      *ngIf="rol === 'admin'"
+    >
+    <i class="fa fa-box mx-4" style="font-size: 24px;"  ></i>
     <button 
       class="
         btn btn-secondary btn-block 
         custom-btn my-auto d-inline"
-      *ngIf="rol === 'user'"  
-      (click)="clientButtonAction()"  
-        >Nuevo Paquete
+       
+      routerLink="/packages"  
+    > 
+      
+      Paquetes
     </button>
+    </div>
+
+    <div 
+      class="d-inline-flex align-items-center"
+      *ngIf="rol === 'user'"
+    >
+      <i class="fa fa-box mx-4" style="font-size: 24px;"  ></i>
+      <button 
+        class="
+          btn btn-secondary btn-block 
+          custom-btn my-auto d-inline"
+        (click)="clientButtonAction()"  
+      >Nuevo Paquete
+      </button>
+    </div>
+    
+
+    
   </div> 
   <ul class="nav pb-5">
     <li *ngFor="let menuitem of menuItems" routerLinkActive="active" class="mb-4">

@@ -8,7 +8,7 @@
   </ol> 
 
   <ng-container *ngIf="orders.length > 0; else elseTemplate">
-    <div *ngFor="let i of orders" class="col-lg-7 col-md-5">
+    <div *ngFor="let i of orders" class="col-lg-10 col-sm-12">
       <div class="card card-stats shadow text-center ">
         <div class="card-body">
           <div class="row container-title ">
@@ -62,11 +62,11 @@
             </div>
             <div class="col-6">
               <div class="row bg-label mt-3 mb-2 mr-2  ">
-                <div class="col-3 my-auto">
+                <div class="col-2 my-auto">
                   <img 
                   src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/email_b0aiqe.svg" >
                 </div>
-                <div class="col-8">
+                <div class="col-10">
                   <div class="row">
                     <p class="text-left" > <strong> Correo: </strong> </p>
                   </div>
@@ -76,12 +76,12 @@
                 </div>
               </div>
               <div class="row bg-label mt-2 mr-2">
-                <div class="col-3 my-auto">
+                <div class="col-2 my-auto">
                   <img 
                     src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg" 
                     alt="">
                 </div>
-                <div class="col-8">
+                <div class="col-10">
                   <div class="row">
                     <p class="text-left" > <strong>Valor del Challenge:</strong> </p>
                   </div>

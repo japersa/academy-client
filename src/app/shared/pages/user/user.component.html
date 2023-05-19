@@ -15,7 +15,7 @@
   </div>
   <div class="row">
     <div class="offset-md-1 col-md-7">
-      <div class="card">
+      <div class="card shadow">
         <div class="card-header">
           <h4 class="title">Editar perfil</h4>
         </div>
@@ -130,7 +130,7 @@
           </form>
         </div>
       </div>
-      <div class="card" *ngIf="showPasswordField">
+      <div class="card shadow " *ngIf="showPasswordField">
         <div class="card-header">
           <h4 class="title">CAMBIAR CONTRASEÑA</h4>
         </div>
@@ -173,7 +173,7 @@
 
     </div>
     <div class="col-md-3">
-      <div class="card card-user">
+      <div class="card card-user shadow">
         <div class="card-body p-0 pt-3 pb-3">
           <p class="card-text"></p>
           <div class="author">
@@ -207,6 +207,18 @@
     </div>
 
     <div class=" row">
+
+      <ng-container *ngIf="approvedCourses.length < 1" >
+        <div class="col-lg-6 col-md-3 col-sm-12 col-sm-12">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title text-center">
+                Aún no tienes aprovado ningún curso
+              </h5>
+            </div>
+          </div>
+        </div>
+      </ng-container>
 
       <ng-container *ngFor="let c of approvedCourses">
         <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
