@@ -71,6 +71,20 @@
                 <div class="col-sm-12 col-md-6">
                   <div id="datatable_filter" class="dataTables_filter">
                     <label>
+                      Fechas
+                      <div class="col-xs-12 col-12 col-md-4 form-group mb-3">
+                        <input
+                          type="text"
+                          placeholder="Daterangepicker"
+                          class="form-control form-control-sm"
+                          [bsConfig]="bsConfig"
+                          [(ngModel)]="bsRangeValue"
+                          (bsValueChange)="onValueChange($event)"
+                          bsDaterangepicker
+                        />
+                      </div>
+                    </label>
+                    <label>
                       <input
                         type="search"
                         class="form-control form-control-sm"
@@ -79,6 +93,12 @@
                         (keyup)="filterTable($event)"
                       />
                     </label>
+                    <button
+                      class="btn btn-primary btn-fab btn-icon btn-round"
+                      (click)="resetFilters()"
+                    >
+                      <i class="tim-icons icon-refresh-01"></i>
+                    </button>
                   </div>
                 </div>
               </div>

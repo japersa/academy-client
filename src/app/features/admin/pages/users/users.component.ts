@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import swal from 'sweetalert2';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { debounceTime, distinctUntilChanged, filter, fromEvent, tap } from 'rxjs';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
@@ -11,14 +10,15 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit, AfterViewInit {
+export class UsersComponent implements OnInit {
 
-  bsRangeValue: Date[];
+  bsRangeValue: Date[] = null;
 
   bsConfig?: Partial<BsDatepickerConfig> = {
     containerClass: 'theme-dark-blue',
     dateInputFormat: 'YYYY-MM-DD',
-    useUtc: true
+    useUtc: true,
+    showClearButton: true
   }
 
   @ViewChild('search') input!: ElementRef;
@@ -29,7 +29,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   role: ROLES_ENUM = undefined;
 
   rows: any = [];
-  filter: string = '';
   activeRow: any;
   entries: number = 10;
   selected: any[] = [];
@@ -53,16 +52,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
   changeStateShow(value: boolean) {
     this.showFormCreateUser = value;
     this.showFormEditUser = value;
-    // this.getAll();
   }
-
 
   filterTable($event: any) {
     let val = $event.target.value;
-    console.log(val);
     this.temp = this.rows.filter(function (d: any) {
       for (var key in d) {
-        console.log(key, d);
         if (d[key].toString().toLowerCase().indexOf(val) !== -1) {
           return true;
         }
@@ -72,19 +67,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   getUsers() {
-    if (this.bsRangeValue) {
-      const date = this.bsRangeValue.map(item => item.toISOString());
-      this.options['since'] = date[0];
-      this.options['until'] = date[1];
-    }
+
     this.dashboardService.getUsersByRole(this.options).subscribe(
       {
         next: r => {
           this.rows = r?.results;
           this.rows.forEach((e: any) => (e['demo_package'] = 'null'));
-
           this.temp = r?.results;
-          console.log(r?.results);
 
           this.temp = this.rows.map((prop: any, key: any) => {
             return {
@@ -101,14 +90,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   resetFilters() {
     this.entries = 10;
-    this.options['page_size'] = 10;
     this.options['rol'] = this.role;
     this.bsRangeValue = null;
-    if (this.options.hasOwnProperty(this.filter)) {
-      delete this.options[this.filter];
-    }
-    this.input.nativeElement.value = null;
-    this.filter = '';
+
+    delete this.options['since'];
+    delete this.options['until'];
+
     this.getUsers();
   }
 
@@ -164,24 +151,16 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   }
 
-  entriesChange($event) {
-    this.entries = $event.target.value;
-    // this.options['page_size'] = this.entries;
-    // this.getUsers();
-  }
+  onValueChange(value: Date[]): void {
+    if (value) {
+      const date = value.map(item => item.toISOString());
+      this.options['since'] = date[0];
+      this.options['until'] = date[1];
+      this.getUsers();
+    }
+  };
 
-  filterChange($event) {
-    this.filter = $event.target.value;
-  }
 
-  onSelect({ selected }) {
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
-  }
-
-  onActivate(event) {
-    this.activeRow = event.row;
-  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -189,23 +168,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
       this.options['rol'] = params.get('role');
       this.getUsers();
     });
-    console.log(this.filter);
-
-  }
-
-  ngAfterViewInit() {
-    // server-side search
-    fromEvent(this.input.nativeElement, 'keyup')
-      .pipe(
-        filter(Boolean),
-        debounceTime(600),
-        distinctUntilChanged(),
-        tap((text) => {
-          this.options[this.filter] = this.input.nativeElement.value;
-          this.getUsers();
-        })
-      )
-      .subscribe();
   }
 
 }
