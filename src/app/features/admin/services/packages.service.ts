@@ -19,4 +19,11 @@ export class PackagesService {
     let params = new HttpParams().set('status', status );
     return this.http.get<any>(`${apiURL}${route}`, { params: params });
   }
+
+  getPackagesById(id: string): Observable<any> {
+    const route = `/retrieve/package/`;
+    return this.http.get<any>(`${apiURL}${route}${id}`);
+  }
+
+
 }
