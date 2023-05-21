@@ -41,6 +41,7 @@ export class CreateDemoComponent {
     
     this.packsService.createPackDemo(formData).subscribe( pkg => {
       console.log(pkg);
+      this.router.navigate(['/funding-program/home']);
     } );
   }
 }
