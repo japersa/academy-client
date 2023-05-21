@@ -10,10 +10,12 @@ import { log } from 'console';
 export class OrdersComponent implements OnInit {
 
   orders: any[] = null;
+  ordersDemo: any[] = null;
 
   constructor(private packsService: PacksService) { }
- 
+  
   ngOnInit(): void {
+    
     this.packsService.getMyOrders().subscribe(
       {
         next: r => {this.orders = r

@@ -5,6 +5,71 @@
   </ol>
   <h3>Empieza a operar</h3>
   <div class="row ">
+    <ng-container *ngIf="packDemo">
+      <div class="col-lg-10" >
+        <div class="card p-3 mb-4 shadow">
+          <div class="row ">
+            <div class="col-10">
+              <h3 class="card-title pb-3">Icex Funding Challenge DEMO</h3>
+            </div>
+            <div class="col-2">
+              <p class="card-text mr-auto"> 
+                Fin: {{ packDemo.created_at | date : "dd/MM/yyyy" }}
+              </p> 
+            </div>
+          </div>
+          <div class="row d-flex justify-content-between align-items-center  ">
+            <div class="col-6 my-auto card-body">
+              <div class="row mt-2">
+                <div class="col-10">
+                  <p class="card-text mr-auto">Login: {{ packDemo.mt_account_info.login }}</p>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-10">
+                  <p class="card-text mr-auto">Balance: {{ packDemo.mt_account_info.balance }} <strong> {{packDemo.mt_account_info.currency}} </strong> </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6  card-body">
+              <div class="row d-flex justify-content-between align-items-center ">
+                <div class="col-5 ">
+                  <button 
+                    class="btn  btn-lg btn-custom  "
+                    (click)="show(template)"
+                  >
+                    Credenciales
+                  </button>
+                </div>
+                <div class="col-5  ">
+                  <button class="btn  btn-lg btn-custom  ">
+                    Metricas
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-between align-items-center card-footer">
+            <div class="col-4">
+              <p class="card-text text-center rounded-pill p-2"
+              >
+                Estado:
+                <span
+                  
+                  >Por definir</span
+                >
+              </p>
+            </div>
+            <div class="col-6">
+              <!-- <button class="btn btn-secondary btn-block my-auto">
+                Retiros
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
     <div class="col-lg-10" *ngFor="let pack of myPackages; let i = index">
       <div class="card p-3 mb-4 shadow">
         <div class="row ">
@@ -14,7 +79,7 @@
           <div class="col-2">
             <p class="card-text mr-auto"> 
               Fin: {{ pack.end_date | date : "dd/MM/yyyy" }}
-            </p>
+            </p> 
           </div>
         </div>
         <div class="row d-flex justify-content-between align-items-center  ">
@@ -466,3 +531,74 @@
   </div> -->
   
 </div>
+
+
+<!-- MODAL -->
+<ng-template #template>
+  
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Credenciales</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="row">
+        <div class="col-4 my-auto">
+          <p>Login:  </p>
+        </div>
+        <div class="col-4 my-auto">
+          <p> <strong> {{packDemo.mt_login }}  </strong> </p>
+        </div>
+        <div class="col-4">
+          <button 
+            class="btn btn-secondary  btn-md  " 
+            [cdkCopyToClipboard]="loginDemo"
+            (click)="copied('login')"
+            >
+            {{buttonTextLogin}}
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-4 my-auto">
+          <p>Contraseña:  </p>
+        </div>
+        <div class="col-4 my-auto">
+          <p> <strong> {{packDemo.mt_password }}  </strong> </p>
+        </div>
+        <div class="col-4">
+          <button 
+            class="btn btn-secondary  btn-md  " 
+            [cdkCopyToClipboard]="passDemo"
+            (click)="copied('pass')"
+            >
+            {{buttonTextPass}}
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-4 my-auto">
+          <p>Contraseña del Inversor:  </p>
+        </div>
+        <div class="col-4 my-auto">
+          <p> <strong> {{packDemo.mt_password_investor }}  </strong> </p>
+        </div>
+        <div class="col-4">
+          <button 
+            class="btn btn-secondary  btn-md  " 
+            [cdkCopyToClipboard]="invesPassDemo"
+            (click)="copied('passInves')"
+            >
+            {{buttonTextPassInves}}
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  
+</ng-template>

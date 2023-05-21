@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DashboardService } from '../../services/dashboard.service';
+import { PackagesService } from '../../services/packages.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -23,10 +24,22 @@ export class UserDetailComponent implements OnInit {
   }
 
   constructor(private dashboardService: DashboardService,
-    private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private packsServices: PackagesService
   ) { }
 
   ngOnInit(): void {
+
+    this.packsServices.getPackagesById('4').subscribe(
+      {
+        next: pack => {
+          console.log(pack);
+          
+      },
+        error: e => console.log(e)
+      }
+    );
+
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userId = params.get('id');
       this.dashboardService.getUsersById(this.userId).subscribe(
