@@ -1,63 +1,66 @@
 <div class="content">
   <ol class="breadcrumb bg-transparent ml-3">
-    <li class="breadcrumb-item">Funding Program </li>
+    <li class="breadcrumb-item">Funding Program</li>
     <li class="breadcrumb-item">Area Trading</li>
   </ol>
   <h3>Empieza a operar</h3>
-  <div class="row ">
+  <div class="row">
     <ng-container *ngIf="packDemo">
-      <div class="col-lg-10" >
+      <div class="col-lg-10">
         <div class="card p-3 mb-4 shadow">
-          <div class="row ">
+          <div class="row">
             <div class="col-10">
               <h3 class="card-title pb-3">Icex Funding Challenge DEMO</h3>
             </div>
             <div class="col-2">
-              <p class="card-text mr-auto"> 
-                Fin: {{ packDemo.created_at | date : "dd/MM/yyyy" }}
-              </p> 
+              <p class="card-text mr-auto">
+                Fin: {{ packDemo?.created_at | date : "dd/MM/yyyy" }}
+              </p>
             </div>
           </div>
-          <div class="row d-flex justify-content-between align-items-center  ">
+          <div class="row d-flex justify-content-between align-items-center">
             <div class="col-6 my-auto card-body">
               <div class="row mt-2">
                 <div class="col-10">
-                  <p class="card-text mr-auto">Login: {{ packDemo.mt_account_info.login }}</p>
+                  <p class="card-text mr-auto">
+                    Login: {{ packDemo?.name }}
+                  </p>
                 </div>
               </div>
               <div class="row mt-2">
                 <div class="col-10">
-                  <p class="card-text mr-auto">Balance: {{ packDemo.mt_account_info.balance }} <strong> {{packDemo.mt_account_info.currency}} </strong> </p>
+                  <p class="card-text mr-auto">
+                    Balance: {{ packDemo?.mt_balance }}
+                    <strong> {{ packDemo?.mt_account_info?.currency }} </strong>
+                  </p>
                 </div>
               </div>
             </div>
-            <div class="col-6  card-body">
-              <div class="row d-flex justify-content-between align-items-center ">
-                <div class="col-5 ">
-                  <button 
-                    class="btn  btn-lg btn-custom  "
+            <div class="col-6 card-body">
+              <div
+                class="row d-flex justify-content-between align-items-center"
+              >
+                <div class="col-5">
+                  <button
+                    class="btn btn-lg btn-custom"
                     (click)="show(template)"
                   >
                     Credenciales
                   </button>
                 </div>
-                <div class="col-5  ">
-                  <button class="btn  btn-lg btn-custom  ">
-                    Metricas
-                  </button>
+                <div class="col-5">
+                  <button class="btn btn-lg btn-custom">Metricas</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row d-flex justify-content-between align-items-center card-footer">
+          <div
+            class="row d-flex justify-content-between align-items-center card-footer"
+          >
             <div class="col-4">
-              <p class="card-text text-center rounded-pill p-2"
-              >
+              <p class="card-text text-center rounded-pill p-2">
                 Estado:
-                <span
-                  
-                  >Por definir</span
-                >
+                <span>Por definir</span>
               </p>
             </div>
             <div class="col-6">
@@ -72,21 +75,23 @@
 
     <div class="col-lg-10" *ngFor="let pack of myPackages; let i = index">
       <div class="card p-3 mb-4 shadow">
-        <div class="row ">
+        <div class="row">
           <div class="col-10">
             <h3 class="card-title pb-3">Paquete {{ i + 1 }}</h3>
           </div>
           <div class="col-2">
-            <p class="card-text mr-auto"> 
+            <p class="card-text mr-auto">
               Fin: {{ pack.end_date | date : "dd/MM/yyyy" }}
-            </p> 
+            </p>
           </div>
         </div>
-        <div class="row d-flex justify-content-between align-items-center  ">
+        <div class="row d-flex justify-content-between align-items-center">
           <div class="col-6 my-auto card-body">
             <div class="row mt-2">
               <div class="col-10">
-                <p class="card-text mr-auto">Nombre de login: {{ pack.mt_login }}</p>
+                <p class="card-text mr-auto">
+                  Nombre de login: {{ pack.mt_login }}
+                </p>
               </div>
             </div>
             <div class="row mt-2">
@@ -95,47 +100,41 @@
               </div>
             </div>
           </div>
-          <div class="col-6  card-body">
-            <div class="row d-flex justify-content-between align-items-center ">
-              <div class="col-5 ">
-                <button class="btn  btn-lg btn-custom  ">
-                  Credenciales
-                </button>
+          <div class="col-6 card-body">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="col-5">
+                <button class="btn btn-lg btn-custom">Credenciales</button>
               </div>
-              <div class="col-5  ">
-                <button class="btn  btn-lg btn-custom  ">
-                  Metricas
-                </button>
+              <div class="col-5">
+                <button class="btn btn-lg btn-custom">Metricas</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="row d-flex justify-content-between align-items-center card-footer">
+        <div
+          class="row d-flex justify-content-between align-items-center card-footer"
+        >
           <div class="col-4">
-            <p class="card-text text-center rounded-pill p-2"
-            [ngClass]="{
-              'bg-success': pack.status === 'active',
-              'bg-danger': pack.status === 'closed',
-              'bg-warning': pack.status === 'pending'
-            }"
+            <p
+              class="card-text text-center rounded-pill p-2"
+              [ngClass]="{
+                'bg-success': pack.status === 'active',
+                'bg-danger': pack.status === 'closed',
+                'bg-warning': pack.status === 'pending'
+              }"
             >
               Estado:
-              <span
-                
-                >{{ pack.status }}</span
-              >
+              <span>{{ pack.status }}</span>
             </p>
           </div>
           <div class="col-6">
-            <button class="btn btn-secondary btn-block my-auto">
-              Retiros
-            </button>
+            <button class="btn btn-secondary btn-block my-auto">Retiros</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row mt-4 ">
+  <div class="row mt-4">
     <div class="col-6 mx-auto">
       <h2 class="mb-1 text-center">Funding Program</h2>
     </div>
@@ -143,8 +142,8 @@
   <div class="row mb-3">
     <div class="col-6 mx-auto">
       <p class="text-center text-dark">
-        El primer fondeo con un broker 100% Real! Aprovecha la enorme 
-        liquidez del Broker, tradea y retira los beneficios que te mereces.
+        El primer fondeo con un broker 100% Real! Aprovecha la enorme liquidez
+        del Broker, tradea y retira los beneficios que te mereces.
       </p>
     </div>
   </div>
@@ -154,23 +153,26 @@
         <div class="card-body">
           <div class="row">
             <div class="col-8 mt-4 mb-2 mx-auto">
-              <h3 class="card-subtitle ">Icex Funding</h3>
+              <h3 class="card-subtitle">Icex Funding</h3>
             </div>
             <div class="col-8 container-card-title mx-auto">
               <h2 class="card-title pb-4">Challenge DEMO</h2>
             </div>
             <div class="col-8 card-text mx-auto mb-1">
-              <p>
-                Controla, fortalece y potencia tus habilidades
-              </p>
+              <p>Controla, fortalece y potencia tus habilidades</p>
             </div>
           </div>
           <div class="row">
             <div class="col-11 container-body mx-auto text-left">
-              <p class="stats mt-4">Experimenta el trading sin poner en riesgo tu inversión</p>
+              <p class="stats mt-4">
+                Experimenta el trading sin poner en riesgo tu inversión
+              </p>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
                   <p class="stats">
@@ -180,49 +182,54 @@
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
-                  <p class="stats">
-                    Análisis de la cuenta
-                  </p>
+                  <p class="stats">Análisis de la cuenta</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
-                  <p class="stats">
-                    15 Días de prueba
-                  </p>
+                  <p class="stats">15 Días de prueba</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
-                  <p class="stats">
-                    Practica gratis
-                  </p>
+                  <p class="stats">Practica gratis</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
                   <p class="stats">
                     Contenido de respaldo
-                    <br><br>
+                    <br /><br />
                   </p>
                 </div>
-                <br>
-                    <br>
-                    <br>
-                    <br>
-                    
+                <br />
+                <br />
+                <br />
+                <br />
               </div>
             </div>
           </div>
@@ -233,7 +240,8 @@
               </p>
             </div>
             <div class="col-10 mx-auto">
-              <button class="btn btn-secondary btn-lg mb-3 "
+              <button
+                class="btn btn-secondary btn-lg mb-3"
                 routerLink="/funding-program/create-demo"
               >
                 Comenzar DEMO gratis
@@ -248,25 +256,30 @@
         <div class="card-body">
           <div class="row">
             <div class="col-8 mt-4 mb-2 mx-auto">
-              <h3 class="card-subtitle ">Icex Funding</h3>
+              <h3 class="card-subtitle">Icex Funding</h3>
             </div>
             <div class="col-8 container-card-title mx-auto">
               <h2 class="card-title pb-4">Challenge</h2>
             </div>
             <div class="col-8 card-text mx-auto">
               <p>
-                Opere hasta 500.000 usd con nuestro broker Euro street capital llc
+                Opere hasta 500.000 usd con nuestro broker Euro street capital
+                llc
               </p>
             </div>
           </div>
           <div class="row">
             <div class="col-11 container-body mx-auto text-left">
               <p class="stats mt-4">
-                Demuestra tus destrezas de trading y empieza a retirar tu beneficio diario.
+                Demuestra tus destrezas de trading y empieza a retirar tu
+                beneficio diario.
               </p>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
                   <p class="stats">
@@ -276,52 +289,57 @@
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
-                  <p class="stats">
-                    Análisis de la cuenta
-                  </p>
+                  <p class="stats">Análisis de la cuenta</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
-                  <p class="stats">
-                    Beneficio del 75%
-                  </p>
+                  <p class="stats">Beneficio del 75%</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
-                  <p class="stats">
-                    Retiros de beneficios diarios
-                  </p>
+                  <p class="stats">Retiros de beneficios diarios</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
-                  <p class="stats">
-                    Contenido de respaldo
-                  </p>
+                  <p class="stats">Contenido de respaldo</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-1 icon">
-                  <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg" alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10 text-next-icon">
-                  <p class="stats">
-                    Extensión gratuita de 15 días
-                  </p>
+                  <p class="stats">Extensión gratuita de 15 días</p>
                 </div>
               </div>
             </div>
@@ -333,7 +351,8 @@
               </p>
             </div>
             <div class="col-10 mx-auto">
-              <button class="btn btn-secondary btn-lg mb-3 "
+              <button
+                class="btn btn-secondary btn-lg mb-3"
                 routerLink="/funding-program/create-order"
               >
                 Comenzar ICEX Challenge
@@ -347,125 +366,54 @@
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <div class="card card-stats text-center shadow-custom">
-        <div class="row ">
+        <div class="row">
           <div class="col-8 text-left ml-3 mt-2">
             <h3 class="card-title pb-3 pt-3">Objetivos del challenge</h3>
           </div>
         </div>
-        <div class="row  mb-3 mt-2 ">
-              <div class="col-2  phase ml-4 my-auto p-2">
-                <h3 class="mt-4">
-                  Fase 1
-                </h3>
-              </div>
-              <div class="col-9 goals ml-2 p-2">
-                <div class="row ">
-                  <div class="col-4">
-                    <div class="row">
-                      <div class="col-3">
-                        <img class="" src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/dias-trading_epogji.svg" alt="">
-                      </div>
-                      <div class="col-9">
-                        <p class="text-left">
-                          Días de trading 1 día mínimo
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="row">
-                      <div class="col-3">
-                        <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/restricciones_v7y2ag.svg" alt="">
-                      </div>
-                      <div class="col-9">
-                        <p class="text-left mt-2">
-                          Restricciones no
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="row">
-                      <div class="col-3">
-                        <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/drawdown-diario_w3dvpm.svg" alt="">
-                      </div>
-                      <div class="col-9">
-                        <p class="text-left mt-2" >
-                          Drawdown diario 5%
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <div class="row">
-                      <div class="col-3">
-                        <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/drawdown-diario_w3dvpm.svg" alt="">
-                      </div>
-                      <div class="col-9">
-                        <p class="mt-3 text-left">
-                          Drawdown total 10%
-                        </p>
-                      </div>
-                    </div>
-                  </div> 
-                  <div class="col-6">
-                    <div class="row">
-                      <div class="col-2">
-                        <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg" alt="">
-                      </div>
-                      <div class="col-9">
-                        <p class="mt-3 text-left" >
-                          Profit del 8% a lograr en 30 días.
-                        </p>
-                      </div>
-                    </div>
-                  </div>  
-                </div>
-              </div>
-        </div>
-        <div class="row mt-4 mb-3 ">
-          <div class="col-2  phase ml-4 my-auto p-2 ">
-            <h3 class=" mt-4">
-              Fase 2
-            </h3>
+        <div class="row mb-3 mt-2">
+          <div class="col-2 phase ml-4 my-auto p-2">
+            <h3 class="mt-4">Fase 1</h3>
           </div>
           <div class="col-9 goals ml-2 p-2">
-            <div class="row ">
+            <div class="row">
               <div class="col-4">
                 <div class="row">
                   <div class="col-3">
-                    <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/dias-trading_epogji.svg" alt="">
+                    <img
+                      class=""
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/dias-trading_epogji.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-9">
-                    <p class="text-left">
-                      Días de trading 1 día mínimo
-                    </p>
+                    <p class="text-left">Días de trading 1 día mínimo</p>
                   </div>
                 </div>
               </div>
               <div class="col-4">
                 <div class="row">
                   <div class="col-3">
-                    <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/restricciones_v7y2ag.svg" alt="">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/restricciones_v7y2ag.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-9">
-                    <p class="text-left mt-2" >
-                      Restricciones no
-                    </p>
+                    <p class="text-left mt-2">Restricciones no</p>
                   </div>
                 </div>
               </div>
               <div class="col-4">
                 <div class="row">
                   <div class="col-3">
-                    <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/drawdown-diario_w3dvpm.svg" alt="">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/drawdown-diario_w3dvpm.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-9">
-                    <p class="text-left mt-2" >
-                      Drawdown diario 5%
-                    </p>
+                    <p class="text-left mt-2">Drawdown diario 5%</p>
                   </div>
                 </div>
               </div>
@@ -474,27 +422,109 @@
               <div class="col-4">
                 <div class="row">
                   <div class="col-3">
-                    <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/drawdown-diario_w3dvpm.svg" alt="">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/drawdown-diario_w3dvpm.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-9">
-                    <p class=" text-left mt-3" >
-                      Drawdown total 10%
-                    </p>
+                    <p class="mt-3 text-left">Drawdown total 10%</p>
                   </div>
                 </div>
-              </div> 
+              </div>
               <div class="col-6">
                 <div class="row">
                   <div class="col-2">
-                    <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg" alt="">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-9">
-                    <p class="mt-3 text-left " >
+                    <p class="mt-3 text-left">
+                      Profit del 8% a lograr en 30 días.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4 mb-3">
+          <div class="col-2 phase ml-4 my-auto p-2">
+            <h3 class="mt-4">Fase 2</h3>
+          </div>
+          <div class="col-9 goals ml-2 p-2">
+            <div class="row">
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-3">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/dias-trading_epogji.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-9">
+                    <p class="text-left">Días de trading 1 día mínimo</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-3">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/restricciones_v7y2ag.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-9">
+                    <p class="text-left mt-2">Restricciones no</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-3">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/drawdown-diario_w3dvpm.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-9">
+                    <p class="text-left mt-2">Drawdown diario 5%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-3">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/drawdown-diario_w3dvpm.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-9">
+                    <p class="text-left mt-3">Drawdown total 10%</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-2">
+                    <img
+                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-9">
+                    <p class="mt-3 text-left">
                       Profit del 5% a lograr en 60 días.
                     </p>
                   </div>
                 </div>
-              </div>  
+              </div>
             </div>
           </div>
         </div>
@@ -502,7 +532,7 @@
     </div>
   </div>
 
- <!--  <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
+  <!--  <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
     <div class="row">
       <div class="col-7">
         <h3 class=" card-subtitle mt-3 mb-2">
@@ -529,76 +559,80 @@
       </div>
     </div>
   </div> -->
-  
 </div>
-
 
 <!-- MODAL -->
 <ng-template #template>
-  
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Credenciales</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-
-      <div class="row">
-        <div class="col-4 my-auto">
-          <p>Login:  </p>
-        </div>
-        <div class="col-4 my-auto">
-          <p> <strong> {{packDemo.mt_login }}  </strong> </p>
-        </div>
-        <div class="col-4">
-          <button 
-            class="btn btn-secondary  btn-md  " 
-            [cdkCopyToClipboard]="loginDemo"
-            (click)="copied('login')"
-            >
-            {{buttonTextLogin}}
-          </button>
-        </div>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Credenciales</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-4 my-auto">
+        <p>Login:</p>
       </div>
-
-      <div class="row">
-        <div class="col-4 my-auto">
-          <p>Contraseña:  </p>
-        </div>
-        <div class="col-4 my-auto">
-          <p> <strong> {{packDemo.mt_password }}  </strong> </p>
-        </div>
-        <div class="col-4">
-          <button 
-            class="btn btn-secondary  btn-md  " 
-            [cdkCopyToClipboard]="passDemo"
-            (click)="copied('pass')"
-            >
-            {{buttonTextPass}}
-          </button>
-        </div>
+      <div class="col-4 my-auto">
+        <p>
+          <strong> {{ packDemo?.mt_login }} </strong>
+        </p>
       </div>
-
-      <div class="row">
-        <div class="col-4 my-auto">
-          <p>Contraseña del Inversor:  </p>
-        </div>
-        <div class="col-4 my-auto">
-          <p> <strong> {{packDemo.mt_password_investor }}  </strong> </p>
-        </div>
-        <div class="col-4">
-          <button 
-            class="btn btn-secondary  btn-md  " 
-            [cdkCopyToClipboard]="invesPassDemo"
-            (click)="copied('passInves')"
-            >
-            {{buttonTextPassInves}}
-          </button>
-        </div>
+      <div class="col-4">
+        <button
+          class="btn btn-secondary btn-md"
+          [cdkCopyToClipboard]="loginDemo"
+          (click)="copied('login')"
+        >
+          {{ buttonTextLogin }}
+        </button>
       </div>
-
     </div>
 
-  
+    <div class="row">
+      <div class="col-4 my-auto">
+        <p>Contraseña:</p>
+      </div>
+      <div class="col-4 my-auto">
+        <p>
+          <strong> {{ packDemo?.mt_password }} </strong>
+        </p>
+      </div>
+      <div class="col-4">
+        <button
+          class="btn btn-secondary btn-md"
+          [cdkCopyToClipboard]="passDemo"
+          (click)="copied('pass')"
+        >
+          {{ buttonTextPass }}
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 my-auto">
+        <p>Contraseña del Inversor:</p>
+      </div>
+      <div class="col-4 my-auto">
+        <p>
+          <strong> {{ packDemo?.mt_password_investor }} </strong>
+        </p>
+      </div>
+      <div class="col-4">
+        <button
+          class="btn btn-secondary btn-md"
+          [cdkCopyToClipboard]="invesPassDemo"
+          (click)="copied('passInves')"
+        >
+          {{ buttonTextPassInves }}
+        </button>
+      </div>
+    </div>
+  </div>
 </ng-template>
