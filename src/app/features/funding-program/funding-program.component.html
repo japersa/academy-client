@@ -103,7 +103,10 @@
           <div class="col-6 card-body">
             <div class="row d-flex justify-content-between align-items-center">
               <div class="col-5">
-                <button class="btn btn-lg btn-custom">Credenciales</button>
+                <button 
+                  class="btn btn-lg btn-custom"
+                  (click)="showPack(template2, i)"
+                  >Credenciales</button>
               </div>
               <div class="col-5">
                 <button class="btn btn-lg btn-custom">Metricas</button>
@@ -628,6 +631,83 @@
         <button
           class="btn btn-secondary btn-md"
           [cdkCopyToClipboard]="invesPassDemo"
+          (click)="copied('passInves')"
+        >
+          {{ buttonTextPassInves }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- -------------Modal 2----------------- -->
+
+<ng-template #template2>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Credenciales</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-4 my-auto">
+        <p>Login:</p>
+      </div>
+      <div class="col-4 my-auto">
+        <p>
+          <strong> {{ packSeleted?.mt_login }} </strong>
+        </p>
+      </div>
+      <div class="col-4">
+        <button
+          class="btn btn-secondary btn-md"
+          [cdkCopyToClipboard]="loginPack"
+          (click)="copied('login')"
+        >
+          {{ buttonTextLogin }}
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 my-auto">
+        <p>Contraseña:</p>
+      </div>
+      <div class="col-4 my-auto">
+        <p>
+          <strong> {{ packSeleted?.mt_password }} </strong>
+        </p>
+      </div>
+      <div class="col-4">
+        <button
+          class="btn btn-secondary btn-md"
+          [cdkCopyToClipboard]="passPack"
+          (click)="copied('pass')"
+        >
+          {{ buttonTextPass }}
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 my-auto">
+        <p>Contraseña del Inversor:</p>
+      </div>
+      <div class="col-4 my-auto">
+        <p>
+          <strong> {{ packSeleted?.mt_password_investor }} </strong>
+        </p>
+      </div>
+      <div class="col-4">
+        <button
+          class="btn btn-secondary btn-md"
+          [cdkCopyToClipboard]="invesPassPack"
           (click)="copied('passInves')"
         >
           {{ buttonTextPassInves }}

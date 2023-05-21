@@ -15,12 +15,16 @@ export class FundingProgramComponent implements OnInit {
   loginDemo = '0000000';
   passDemo = '0000000';
   invesPassDemo = '0000000';
+  loginPack = '0000000';
+  passPack = '0000000';
+  invesPassPack = '0000000';
   buttonTextLogin = 'Copiar';
   buttonTextPass = 'Copiar';
   buttonTextPassInves = 'Copiar';
 
 
   myPackages: any[] = [];
+  packSeleted: any;
   packDemo: any;
 
   modalRef?: BsModalRef;
@@ -48,6 +52,8 @@ export class FundingProgramComponent implements OnInit {
     this.packsService.getMyPacks().subscribe(
       response => {
         this.myPackages = response;
+        console.log(this.myPackages);
+        
       },
       error => {
         console.log(error);
@@ -71,12 +77,22 @@ export class FundingProgramComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  showPack(template: TemplateRef<any>, index: number) {
+    
+    this.modalRef = this.modalService.show(template);
+    this.packSeleted = this.myPackages[index];
+    this.loginPack = this.packSeleted?.mt_login;
+    this.passPack = this.packSeleted?.mt_password;
+    this.invesPassPack = this.packSeleted?.mt_password_investor;
+
+  }
+
   ngOnInit(): void {
 
     this.packsService.getPacksDemo().subscribe(
       pkgDemo => {
         let demo = pkgDemo[0];
-        console.log(demo);
+        console.log(demo); 
         this.packDemo = demo;
         this.loginDemo = demo?.mt_login;
         this.passDemo = demo?.mt_password;
@@ -86,10 +102,6 @@ export class FundingProgramComponent implements OnInit {
         console.log(error);
       }
     )
-
-
-
-
 
     this.getMypackages();
     this.userDataService.userData$.subscribe(
