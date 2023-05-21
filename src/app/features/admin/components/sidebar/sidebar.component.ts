@@ -643,10 +643,5 @@ export class SidebarComponent implements OnInit {
       this.menuItems = ROUTES_USER;
     }
 
-
-    console.log(this.packs);
-    console.log(this.packs[0].link);
-    
-
   }
 }

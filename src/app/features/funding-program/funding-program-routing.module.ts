@@ -8,6 +8,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 import { CreateDemoComponent } from './components/create-demo/create-demo.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 const routes: Routes = [
   { path: 'home', component: FundingProgramComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'create-demo', component: CreateDemoComponent },
   { path: 'my-packages', component: MyPackagesComponent },
   { path: 'orders', component: OrdersComponent },
+  { path: 'order/:id', component: OrderDetailComponent },
   { path: 'checkout/:id', component: CheckoutComponent },
   { path: 'withdrawals', component: WithdrawalsComponent },
   { path: 'ranking', component: RankingComponent },

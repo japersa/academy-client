@@ -5,7 +5,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PacksService } from '../../services/packs.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/core/services/utils.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { SuccessPaymentComponent } from '../../../../shared/components/success-payment/success-payment.component';
 
 interface CPResponsePayment {
   amount: string;
@@ -47,7 +48,7 @@ export class CheckoutComponent implements OnInit {
         // fontSize: '18px',
         '::placeholder': {
           color: '#706f6f'
-        },'::stripe-card-row': {
+        }, '::stripe-card-row': {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -79,7 +80,7 @@ export class CheckoutComponent implements OnInit {
   ];
 
   modalRef?: BsModalRef;
-
+  bsModalRef?: BsModalRef;
 
   criptoform!: FormGroup;
 
@@ -112,6 +113,15 @@ export class CheckoutComponent implements OnInit {
   }
 
 
+  openModalWithComponent() {
+    const initialState: ModalOptions = {
+      initialState: {
+        title: 'Pago recibido'
+      }
+    };
+    this.bsModalRef = this.modalService.show(SuccessPaymentComponent, initialState);
+  };
+
   setStripeToken(event: stripe.Token) {
     console.log('Stripe Token', event);
     const data = {
@@ -119,13 +129,16 @@ export class CheckoutComponent implements OnInit {
       token_id: event.id
     };
     this.packsService.payPackStripe(data).subscribe({
-      next: (r) => console.log(r),
+      next: (r) => {
+        console.log(r)
+        this.openModalWithComponent();
+      },
       error: (e) => console.log(e)
     });
   }
 
   setStripeSource(source: stripe.Source) {
-    console.log('Stripe Source', source) 
+    console.log('Stripe Source', source)
   }
 
   payWithCripto(template: TemplateRef<any>) {
@@ -158,9 +171,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   convertBalanceToNumber(balance: string): string {
-    switch(balance) {
+    switch (balance) {
       case 'one_hundred_thousand':
-        return '100.000'; 
+        return '100.000';
       case 'fifty_thousand':
         return '50.000';
       case 'two_hundred_thousand':
@@ -168,7 +181,7 @@ export class CheckoutComponent implements OnInit {
       case 'five_hundred_thousand':
         return '500.000';
       default:
-        throw new Error('Balance string not recognized'); 
+        throw new Error('Balance string not recognized');
     }
   }
 
@@ -190,15 +203,15 @@ export class CheckoutComponent implements OnInit {
           this.selectedOrder = this.orders.find(order => order.id == this.productID);
           this.convertBalancesToNumbers();
           console.log(this.selectedOrder);
-          
+
         }
       }
     );
-/*     this.packsService.getPackById(this.productID).subscribe( r => {
-      this.pack = r;
-      console.log(this.pack);
-    }) */
-    
+    /*     this.packsService.getPackById(this.productID).subscribe( r => {
+          this.pack = r;
+          console.log(this.pack);
+        }) */
+
   }
 
 }
