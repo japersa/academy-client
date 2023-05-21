@@ -15,7 +15,7 @@ export class CreateOrderComponent {
   price = '';
   form!: FormGroup;
   errorMessage: string | null;
-/*   newPack: any [] = null; */
+  /*   newPack: any [] = null; */
 
   constructor(
     // import the form builder
@@ -139,13 +139,13 @@ export class CreateOrderComponent {
   }
 
   createPack(formData: any) {
-    this.packsService.createPack(formData).subscribe( () => {
-      this.packsService.getMyPacks().subscribe( pkg => {
+    this.packsService.createPack(formData).subscribe(() => {
+      this.packsService.getMyPacks().subscribe(pkg => {
         const newPack = pkg.reduce((prev, current) => {
           return (prev.id > current.id) ? prev : current;
         });
         console.log(newPack);
-        this.router.navigate([`/funding-program/checkout/${newPack.id}`]);
+        this.router.navigate([`/funding-program/order/${newPack.id}`]);
       });
     }
     );

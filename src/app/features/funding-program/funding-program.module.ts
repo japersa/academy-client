@@ -19,6 +19,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CreateDemoComponent } from './components/create-demo/create-demo.component';
 import { SuccessPaymentComponent } from '../../shared/components/success-payment/success-payment.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { SuccessPaymentComponent } from '../../shared/components/success-payment
     WithdrawalsComponent,
     RankingComponent,
     CreateDemoComponent,
-    SuccessPaymentComponent
+    SuccessPaymentComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,
