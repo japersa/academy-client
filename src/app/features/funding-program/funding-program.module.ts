@@ -37,7 +37,8 @@ import { CreateDemoComponent } from './components/create-demo/create-demo.compon
     ReactiveFormsModule,
     StripeModule.forRoot(environment.stripePK),
     QuicklinkModule,
-    ClipboardModule
+    ClipboardModule,
+    ModalModule
   ]
 })
 export class FundingProgramModule { }

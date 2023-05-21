@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 const apiURL = environment.apiURL;
 
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class PacksService {
@@ -47,4 +47,15 @@ export class PacksService {
     const route = `/payment/package-self-management/coinpayments`;
     return this.http.post<any>(`${apiURL}${route}`, data);
   }
+
+  getPacksDemo() {
+    const route = `/list/my/packages-demo/`;
+    return this.http.get<any>(`${apiURL}${route}`);
+  }
+
+  getPackageDemoById(id: string): Observable<any> {
+    const route = `/retrieve/package-demo/`;
+    return this.http.get<any>(`${apiURL}${route}${id}`);
+  }
+
 }
