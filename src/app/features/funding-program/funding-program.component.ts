@@ -80,7 +80,7 @@ export class FundingProgramComponent implements OnInit {
        error  => {
          console.log(error);
        }
-   )
+    )
   
     this.packsService.getPackageDemoById('3').subscribe(
       {

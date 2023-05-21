@@ -13,6 +13,7 @@ import { UtilsService } from 'src/app/core/services/utils.service';
 export class PackagesComponent implements OnInit {
 
   packages: any[] = [];
+  pack: any;
 
   selectedStatus: string = '';
   modalRef?: BsModalRef;
@@ -68,7 +69,7 @@ export class PackagesComponent implements OnInit {
     this.packagesService.getPackages(status).subscribe(
       {
         next: r => {this.packages = r.results
-          this.convertBalancesToNumbers();
+          this.convertBalancesToNumbers(); 
           console.log(this.packages);
           } 
       })
@@ -100,15 +101,34 @@ export class PackagesComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      login: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      password_investor: ['', [Validators.required]],
-      server: ['', [Validators.required]],
+      mt_login: ['', [Validators.required]],
+      mt_password: ['', [Validators.required]],
+      mt_password_investor: ['', [Validators.required]],
+      mt_server: ['', [Validators.required]],
     });
   }
 
-  saveCredentials(event: any) {
-    console.log(this.form.value);
+  saveCredentials(data: any) {
+    this.packagesService.updatePackage(data).subscribe( res => {
+        res => console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  savePackUpdate(form){
+    console.log(form);
+    this.pack = Object.assign({}, this.pack, form);
+    console.log(this.pack);
+    this.saveCredentials(form);
+  }
+
+  loadPackInModal(idPack: number, template: TemplateRef<any>){
+    this.pack = this.packages.find(pack => pack.id == idPack);
+    console.log(this.pack);
+    this.openModal(template);
   }
 
   ngOnInit(): void {

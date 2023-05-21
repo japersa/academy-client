@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,7 @@ const apiURL = environment.apiURL;
 })
 export class PackagesService {
 
+  headers = new HttpHeaders();  
 
   constructor(private http: HttpClient) { }
  
@@ -25,5 +26,8 @@ export class PackagesService {
     return this.http.get<any>(`${apiURL}${route}${id}`);
   }
 
-
+  updatePackage(data: any): Observable<any> {    
+    const route = `/update/package/`;
+    return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
+  }
 }
