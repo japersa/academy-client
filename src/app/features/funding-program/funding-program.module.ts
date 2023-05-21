@@ -16,8 +16,9 @@ import { WithdrawalsComponent } from './components/withdrawals/withdrawals.compo
 import { RankingComponent } from './components/ranking/ranking.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
-import {ClipboardModule} from '@angular/cdk/clipboard';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CreateDemoComponent } from './components/create-demo/create-demo.component';
+import { SuccessPaymentComponent } from '../../shared/components/success-payment/success-payment.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CreateDemoComponent } from './components/create-demo/create-demo.compon
     CheckoutComponent,
     WithdrawalsComponent,
     RankingComponent,
-    CreateDemoComponent
+    CreateDemoComponent,
+    SuccessPaymentComponent
   ],
   imports: [
     CommonModule,

@@ -4,8 +4,9 @@ import { environment } from 'src/environments/environment';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PacksService } from '../../services/packs.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UtilsService } from 'src/app/core/services/utils.service';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { SuccessPaymentComponent } from 'src/app/shared/components/success-payment/success-payment.component';
 
 
 interface CPResponsePayment {
@@ -36,7 +37,7 @@ export class CheckoutComponent implements OnInit {
   invalidError: any = null;
   stripeCard = null;
 
-  cardOptions = { 
+  cardOptions = {
     iconStyle: 'solid',
     hidePostalCode: true,
     style: {
@@ -72,19 +73,19 @@ export class CheckoutComponent implements OnInit {
   ];
 
   modalRef?: BsModalRef;
-
+  bsModalRef?: BsModalRef;
 
   criptoform!: FormGroup;
 
-/*   constructor(private stripeScriptTag: StripeScriptTag,
-    private packsService: PacksService,
-    public utilsService: UtilsService,
-    private route: ActivatedRoute) {
-    if (!this.stripeScriptTag.StripeInstance) {
-      this.stripeScriptTag.setPublishableKey(environment.stripePK);
-    }
-    this.buildForm();
-  } */
+  /*   constructor(private stripeScriptTag: StripeScriptTag,
+      private packsService: PacksService,
+      public utilsService: UtilsService,
+      private route: ActivatedRoute) {
+      if (!this.stripeScriptTag.StripeInstance) {
+        this.stripeScriptTag.setPublishableKey(environment.stripePK);
+      }
+      this.buildForm();
+    } */
 
   constructor(private stripeScriptTag: StripeScriptTag,
     private packsService: PacksService,
@@ -111,6 +112,15 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  openModalWithComponent() {
+    const initialState: ModalOptions = {
+      initialState: {
+        title: 'Pago recibido'
+      }
+    };
+    this.bsModalRef = this.modalService.show(SuccessPaymentComponent, initialState);
+  };
+
   onStripeInvalid(error: Error) {
     console.log('Validation Error', error)
   }
@@ -130,7 +140,10 @@ export class CheckoutComponent implements OnInit {
       token_id: event.id
     };
     this.packsService.payPackStripe(data).subscribe({
-      next: (r) => console.log(r),
+      next: (r) => {
+        console.log(r);
+        this.openModalWithComponent();
+      },
       error: (e) => console.log(e)
     });
   }
@@ -139,7 +152,7 @@ export class CheckoutComponent implements OnInit {
     console.log('Stripe Source', source)
   }
 
-  
+
   payWithCripto(template: TemplateRef<any>) {
 
     const data = {
@@ -170,9 +183,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   convertBalanceToNumber(balance: string): string {
-    switch(balance) {
+    switch (balance) {
       case 'one_hundred_thousand':
-        return '100.000'; 
+        return '100.000';
       case 'fifty_thousand':
         return '50.000';
       case 'two_hundred_thousand':
@@ -180,7 +193,7 @@ export class CheckoutComponent implements OnInit {
       case 'five_hundred_thousand':
         return '500.000';
       default:
-        throw new Error('Balance string not recognized'); 
+        throw new Error('Balance string not recognized');
     }
   }
 
