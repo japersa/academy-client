@@ -48,6 +48,14 @@ export class FundingProgramComponent implements OnInit {
 
   }
 
+/*   restoreButtonText() {
+    this.modalRef.onHidden.subscribe(() => {
+      this.buttonTextLogin = 'Copiar';
+      this.buttonTextPass = 'Copiar';
+      this.buttonTextPassInves = 'Copiar';
+    });
+  } */
+
   getMypackages() {
     this.packsService.getMyPacks().subscribe(
       response => {
@@ -74,11 +82,20 @@ export class FundingProgramComponent implements OnInit {
   }
 
   show(template: TemplateRef<any>) {
+
+    this.buttonTextLogin = 'Copiar';
+    this.buttonTextPass = 'Copiar';
+    this.buttonTextPassInves = 'Copiar';
+
     this.modalRef = this.modalService.show(template);
   }
 
   showPack(template: TemplateRef<any>, index: number) {
     
+    this.buttonTextLogin = 'Copiar';
+    this.buttonTextPass = 'Copiar';
+    this.buttonTextPassInves = 'Copiar';
+
     this.modalRef = this.modalService.show(template);
     this.packSeleted = this.myPackages[index];
     this.loginPack = this.packSeleted?.mt_login;
@@ -86,6 +103,8 @@ export class FundingProgramComponent implements OnInit {
     this.invesPassPack = this.packSeleted?.mt_password_investor;
 
   }
+
+ 
 
   ngOnInit(): void {
 
@@ -109,5 +128,8 @@ export class FundingProgramComponent implements OnInit {
         next: (r) => this.referalCode = r?.referral_code
       }
     );
+
+
+
   }
 }
