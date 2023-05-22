@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PacksService } from '../../services/packs.service';
 
 @Component({
   selector: 'app-order-detail',
   templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.scss'],
+  styleUrls: ['./order-detail.component.scss']
 })
-export class OrderDetailComponent implements OnInit {
+export class OrderDetailComponent {
 
   packageId = null;
   package: any;
@@ -18,7 +18,7 @@ export class OrderDetailComponent implements OnInit {
 
   ///retrieve/package/2/
   getPackageById() {
-    this.packsService.getPackageById(this.packageId).subscribe(
+    this.packsService.getPackById(this.packageId).subscribe(
       {
         next: r => {
           this.package = r;
@@ -61,3 +61,5 @@ export class OrderDetailComponent implements OnInit {
   }
 
 }
+
+

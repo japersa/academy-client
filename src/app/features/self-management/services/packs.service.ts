@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 
-const apiURL = environment.apiURL;
+const apiURL = environment.apiURL; 
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class PacksService {
   }
 
   getPackById(id) { 
-    const route = `/retrive/package-self-management/`;
+    const route = `/retrieve/package-self-management/`;
     return this.http.get<any>(`${apiURL}${route}${id}`);
   }
 

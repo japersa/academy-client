@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import { GlobalWithdrawalsComponent } from './components/global-withdrawals/global-withdrawals.component';
 import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { WithdrawalsComponent } from './components/withdrawals/withdrawals.compo
     CheckoutComponent,
     CreateOrderComponent,
     GlobalWithdrawalsComponent,
-    WithdrawalsComponent
+    WithdrawalsComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,
