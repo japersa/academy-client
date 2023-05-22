@@ -26,8 +26,8 @@ export class PackagesService {
     return this.http.get<any>(`${apiURL}${route}${id}`);
   }
 
-  updatePackage(data: any): Observable<any> {    
+  updatePackage(data: any, id: any): Observable<any> {    
     const route = `/update/package/`;
-    return this.http.patch<any>(`${apiURL}${route}`, data, { headers: this.headers });
+    return this.http.patch<any>(`${apiURL}${route}${id}/`, data, { headers: this.headers });
   }
 }

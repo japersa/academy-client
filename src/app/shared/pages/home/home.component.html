@@ -29,10 +29,10 @@
     </div> -->
   </div>
 
-  <div class="row p-3 ">
+  <div class="row p-3 mx-3 ">
     <div class="col-12  banner mx-auto">
       <carousel
-        [showIndicators]="false"
+        [showIndicators]="true"
         [interval]="3000"
       >
         <slide>
@@ -72,7 +72,7 @@
       </p>
     </div>
   </div>
-  <div class="row">
+  <div class="row mx-4">
     <div class="col-lg-6">
       <div class="card card-stats shadow-custom text-center">
         <div class="card-body">
@@ -268,7 +268,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mx-4">
     <div class="col-lg-12 col-md-12">
       <div class="card card-stats text-center shadow-custom">
         <div class="row ">
@@ -425,7 +425,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mx-4">
     <div class="col-12">
       <div class="card shadow-custom p-3">
         <div class="card-body">
@@ -549,29 +549,31 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
-    <div class="row">
-      <div class="col-7">
-        <h3 class=" card-subtitle mt-3 mb-2">
-          Comisiona con International Capital Exchange
-        </h3>
-        <p class="text-light">
-          Invita a tus amigos y empieza a generar ingresos extras. 
-          recibe el 25% del valor del paquete por el primer referido, 
-          un 25% por el segundo referido y un 100% por tu tercer referido 
-        </p>
-        <p class="mb-3 text-light" >
-          Compártelo y empieza a comisionar con los paquetes de Autogestión
-        </p>
-      </div>
-      <div class="col-5 my-auto mx-auto">
-        <div class="">
-          <p class="ref text-center">{{ referalCode }}</p>
+  <div class="row mx-4">
+    <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions ">
+      <div class="row ">
+        <div class="col-7">
+          <h3 class=" card-subtitle mt-3 mb-2">
+            Comisiona con International Capital Exchange
+          </h3>
+          <p class="text-light">
+            Invita a tus amigos y empieza a generar ingresos extras. 
+            recibe el 25% del valor del paquete por el primer referido, 
+            un 25% por el segundo referido y un 100% por tu tercer referido 
+          </p>
+          <p class="mb-3 text-light" >
+            Compártelo y empieza a comisionar con los paquetes de Autogestión
+          </p>
         </div>
-        <div class="">
-          <button class="btn btn-ref  btn-block  " [cdkCopyToClipboard]="referalCode">
-            Copiar
-          </button>
+        <div class="col-5 my-auto mx-auto">
+          <div class="">
+            <p class="ref text-center">{{ referalCode }}</p>
+          </div>
+          <div class="">
+            <button class="btn btn-ref  btn-block  " [cdkCopyToClipboard]="referalCode">
+              Copiar
+            </button>
+          </div>
         </div>
       </div>
     </div>

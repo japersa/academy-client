@@ -60,6 +60,7 @@ export class FundingProgramComponent implements OnInit {
     this.packsService.getMyPacks().subscribe(
       response => {
         this.myPackages = response;
+        this.convertBalancesToNumbers()
         console.log(this.myPackages);
         
       },
@@ -104,7 +105,29 @@ export class FundingProgramComponent implements OnInit {
 
   }
 
- 
+  convertBalanceToNumber(balance: string): string {
+    switch (balance) {
+      case 'one_hundred_thousand':
+        return '100.000';
+      case 'fifty_thousand':
+        return '50.000';
+      case 'two_hundred_thousand':
+        return '200.000';
+      case 'five_hundred_thousand':
+        return '500.000';
+      default:
+        throw new Error('Balance string not recognized');
+    }
+  }
+
+  convertBalancesToNumbers(): void {
+    this.myPackages.forEach((item) => {
+      item.balance = this.convertBalanceToNumber(item.balance);
+    });
+
+  }
+
+  
 
   ngOnInit(): void {
 
@@ -116,6 +139,7 @@ export class FundingProgramComponent implements OnInit {
         this.loginDemo = demo?.mt_login;
         this.passDemo = demo?.mt_password;
         this.invesPassDemo = demo?.mt_password_investor;
+        this.packDemo.mt_balance = this.convertBalanceToNumber(this.packDemo.mt_balance);
       },
       error => {
         console.log(error);
@@ -129,7 +153,7 @@ export class FundingProgramComponent implements OnInit {
       }
     );
 
-
+    
 
   }
 }

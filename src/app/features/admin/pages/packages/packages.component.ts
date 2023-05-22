@@ -108,21 +108,25 @@ export class PackagesComponent implements OnInit {
     });
   }
 
-  saveCredentials(data: any) {
-    this.packagesService.updatePackage(data).subscribe( res => {
+  saveCredentials(data: any, id: any) {
+    this.packagesService.updatePackage(data, id).subscribe( res => {
         res => console.log(res);
       },
       error => {
         console.log(error);
+        console.log(data.id);
+        
       }
     )
-  }
+  } 
 
   savePackUpdate(form){
     console.log(form);
     this.pack = Object.assign({}, this.pack, form);
     console.log(this.pack);
-    this.saveCredentials(form);
+    console.log(this.pack.id);
+    
+    this.saveCredentials(form, this.pack.id);
   }
 
   loadPackInModal(idPack: number, template: TemplateRef<any>){

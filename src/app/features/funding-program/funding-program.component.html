@@ -3,8 +3,8 @@
     <li class="breadcrumb-item">Funding Program</li>
     <li class="breadcrumb-item">Area Trading</li>
   </ol>
-  <h3>Empieza a operar</h3>
-  <div class="row">
+  <h3 class="ml-5" >Empieza a operar</h3>
+  <div class="row ml-4">
     <ng-container *ngIf="packDemo">
       <div class="col-lg-10">
         <div class="card p-3 mb-4 shadow">
@@ -30,8 +30,8 @@
               <div class="row mt-2">
                 <div class="col-10">
                   <p class="card-text mr-auto">
-                    Balance: {{ packDemo?.mt_balance }}
-                    <strong> {{ packDemo?.mt_account_info?.currency }} </strong>
+                    Balance: 
+                    <strong>{{ '$ ' + packDemo?.mt_balance + ' USD' }} </strong>
                   </p>
                 </div>
               </div>
@@ -42,6 +42,7 @@
               >
                 <div class="col-5">
                   <button
+                    
                     class="btn btn-lg btn-custom"
                     (click)="show(template)"
                   >
@@ -96,7 +97,7 @@
             </div>
             <div class="row mt-2">
               <div class="col-10">
-                <p class="card-text mr-auto">Balance: {{ pack.balance }}</p>
+                <p class="card-text mr-auto">Balance: {{ '$' + pack.balance + ' ' + pack.currencies | uppercase }} </p>
               </div>
             </div>
           </div>
@@ -104,12 +105,16 @@
             <div class="row d-flex justify-content-between align-items-center">
               <div class="col-5">
                 <button 
+                  *ngIf="pack.status == 'active'"
                   class="btn btn-lg btn-custom"
                   (click)="showPack(template2, i)"
                   >Credenciales</button>
               </div>
               <div class="col-5">
-                <button class="btn btn-lg btn-custom">Metricas</button>
+                <button  
+                  *ngIf="pack.status == 'active'" 
+                  class="btn btn-lg btn-custom"
+                >Metricas</button>
               </div>
             </div>
           </div>
@@ -131,7 +136,10 @@
             </p>
           </div>
           <div class="col-6">
-            <button class="btn btn-secondary btn-block my-auto">Retiros</button>
+            <button  
+              *ngIf="pack.status == 'active'" 
+              class="btn btn-secondary btn-block my-auto"
+            >Retiros</button>
           </div>
         </div>
       </div>
@@ -150,7 +158,7 @@
       </p>
     </div>
   </div>
-  <div class="row">
+  <div class="row ml-4">
     <div class="col-lg-6">
       <div class="card card-stats shadow-custom text-center">
         <div class="card-body">
@@ -366,7 +374,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row ml-4">
     <div class="col-lg-12 col-md-12">
       <div class="card card-stats text-center shadow-custom">
         <div class="row">
