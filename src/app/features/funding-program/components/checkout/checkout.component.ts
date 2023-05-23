@@ -116,10 +116,12 @@ export class CheckoutComponent implements OnInit {
   openModalWithComponent() {
     const initialState: ModalOptions = {
       initialState: {
-        title: 'Pago recibido'
+        title: 'Pago recibido',
+        datos: this.selectedOrder
       }
     };
     this.bsModalRef = this.modalService.show(SuccessPaymentComponent, initialState);
+
   };
 
   setStripeToken(event: stripe.Token) {
@@ -207,10 +209,6 @@ export class CheckoutComponent implements OnInit {
         }
       }
     );
-    /*     this.packsService.getPackById(this.productID).subscribe( r => {
-          this.pack = r;
-          console.log(this.pack);
-        }) */
 
   }
 

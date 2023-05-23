@@ -31,7 +31,7 @@ export class PacksService {
   getMyOrders() {
     const route = `/list/my/packages/`;
     return this.http.get<any>(`${apiURL}${route}`);
-  }
+  } 
 
   payPackStripe(data) {
     const route = `/payment/package/stripe`;
