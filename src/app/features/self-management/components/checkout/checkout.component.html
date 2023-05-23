@@ -113,25 +113,26 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-8 col-md-5"> 
+    <div class="col-lg-6 col-md-12"> 
       <div class="card card-stats shadow text-center">
         <div class="card-body">
           <div class="row container-title">
-            <div class="col-11 text-left mx-auto">
+            <div class="col-10 text-left ">
               <h2 class="card-title pb-2">Pagar con Stripe</h2>
+            </div>
+            <div class="col-2">
+              <img src="https://1000marcas.net/wp-content/uploads/2019/12/VISA-Logo.png" width="100px" >
             </div>
           </div>
           <div class="row ">
-            <div class="col-10 mx-auto p-2 mt-3 ">
+            <div class="col-12 p-3 mt-2 ">
               <div class="row">
-                <div class="col-10">
+                <div class="col-12">
                   <p class="text-left" >
                     Realiza tu pago hoy con tu tarjeta de crédito o debito y disfruta de nuestros servicios sin complicaciones.
                   </p>
                 </div>
-                <div class="col-2">
-                  <img src="https://1000marcas.net/wp-content/uploads/2019/12/VISA-Logo.png" width="100px" >
-                </div>
+                
               </div>
             </div>
           </div>
@@ -151,7 +152,7 @@
             </div>         
           </div>
           <div class="row ">
-            <div class="col-10 mx-auto p-2 mt-3 ">
+            <div class="col-12 mx-auto p-3 mt-2 ">
               <div class="row">
                 <div class="col-12">
                   <p class="text-left" >
@@ -164,10 +165,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-10 mx-auto p-2  container ">
+          <div class="col-12 mx-auto p-3  container ">
             <div class="row  justify-content-between ">
-              <div class="col-4">
-                <div class="row">
+              <div class="col-5">
+                <div class="row ml-2">
                   <div class="col-6">
                     <img src="https://img.freepik.com/free-photo/standard-quality-control-collage_23-2149631017.jpg?w=740&t=st=1684466694~exp=1684467294~hmac=182086d06ad985ce2b76129c415b34165a1ee82edd124cc3353d1db5d02cf7d2" alt="">
                   </div>
@@ -176,9 +177,9 @@
                   </div>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-5">
                 <button
-                  class="btn btn-secondary btn-block mb-3"
+                  class="btn btn-secondary btn-lg "
                   (click)="stripeCard.createToken($event)"
                 >
                   Pagar
@@ -196,7 +197,7 @@
       </div> 
     </div>
 
-    <div class="col-lg-8 col-sm-12">
+    <div class="col-lg-6 col-sm-12">
       <div class=" card card-stats shadow text-center">
         <form
           [formGroup]="criptoform"
