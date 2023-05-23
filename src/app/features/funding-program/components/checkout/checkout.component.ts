@@ -125,7 +125,7 @@ export class CheckoutComponent implements OnInit {
   setStripeToken(event: stripe.Token) {
     console.log('Stripe Token', event);
     const data = {
-      package_self_management_id: this.productID,
+      package_id: this.productID,
       token_id: event.id
     };
     this.packsService.payPackStripe(data).subscribe({
@@ -144,7 +144,7 @@ export class CheckoutComponent implements OnInit {
   payWithCripto(template: TemplateRef<any>) {
 
     const data = {
-      package_self_management_id: this.productID,
+      package_id: this.productID,
       currency2: this.criptoform.value.currency2
     };
     this.packsService.payPackCoinpayents(data).subscribe({
