@@ -31,7 +31,7 @@ import { UserDataService } from 'src/app/core/services/user-data.service';
   </p>
   </div>
   <div class="modal-footer">
-    <button type="button" routerLink="/funding-program/home" (click)="bsModalRef.hide()" class="btn btn-default"> {{ button }} </button>
+    <button type="button" [routerLink]="route" (click)="bsModalRef.hide()" class="btn btn-default"> {{ button }} </button>
   </div>
 ` ,
   styleUrls: ['./success-payment.component.scss'],
@@ -42,6 +42,7 @@ export class SuccessPaymentComponent {
   @Input() datos: any;
   title?: string;
   button?: string;
+  route?: string;
 
   constructor(public bsModalRef: BsModalRef,
     public userDataService: UserDataService) { }

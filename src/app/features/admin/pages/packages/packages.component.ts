@@ -30,11 +30,7 @@ export class PackagesComponent implements OnInit {
     this.buildForm();
   }
 
-  onChangesBotton(){
-    if(this.pack?.mt_login != "") {
-      this.textButton = "Cambiar Credenciales"
-    }
-  }
+
   get loginField() {
     return this.form?.get('login');
   }
@@ -76,6 +72,7 @@ export class PackagesComponent implements OnInit {
       {
         next: r => {this.packages = r.results
           this.convertBalancesToNumbers(); 
+
           console.log(this.packages);
           } 
       })
@@ -110,7 +107,7 @@ export class PackagesComponent implements OnInit {
       mt_login: ['', [Validators.required]],
       mt_password: ['', [Validators.required]],
       mt_password_investor: ['', [Validators.required]],
-      mt_server: ['', [Validators.required]],
+      mt_server: [this.pack?.mt_server],
     });
   }
 
@@ -143,7 +140,7 @@ export class PackagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.statusChange(this.selectedStatus)
-    this.onChangesBotton();
+    
   }
 
 }

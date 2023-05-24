@@ -149,7 +149,7 @@ export class CreateOrderComponent {
           return (prev.id > current.id) ? prev : current; 
         });
         console.log(newPack);
-        this.router.navigate([`/self-management/order/${newPack.id}`]);
+        this.router.navigate([`/self-management/checkout/${newPack.id}`]);
       });
     }
     );

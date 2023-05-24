@@ -115,7 +115,10 @@ export class CheckoutComponent implements OnInit {
   openModalWithComponent() {
     const initialState: ModalOptions = {
       initialState: {
-        title: 'Pago recibido'
+        title: 'Autogestión',
+        button: 'Autogestión',
+        route: '/self-management/home',
+        datos: this.selectedOrder
       }
     };
     this.bsModalRef = this.modalService.show(SuccessPaymentComponent, initialState);

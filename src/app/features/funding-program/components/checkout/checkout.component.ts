@@ -118,6 +118,7 @@ export class CheckoutComponent implements OnInit {
       initialState: {
         title: 'Funding Program',
         button: 'Area Trading',
+        route: '/funding-program/home',
         datos: this.selectedOrder
       }
     };
