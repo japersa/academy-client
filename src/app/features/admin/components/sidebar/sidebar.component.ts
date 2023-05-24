@@ -547,12 +547,12 @@ export const ROUTES_USER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'TP'
       },
-      {
+/*       {
         path: '/academy',
         title: 'academia',
         type: 'link',
         smallTitle: 'AC'
-      },
+      }, */
       {
         path: 'withdrawals',
         title: 'retiros y comisiones',

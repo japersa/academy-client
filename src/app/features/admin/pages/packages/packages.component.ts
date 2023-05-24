@@ -14,6 +14,7 @@ export class PackagesComponent implements OnInit {
 
   packages: any[] = [];
   pack: any;
+  textButton: string = 'Activar Credenciales'
 
   selectedStatus: string = '';
   modalRef?: BsModalRef;
@@ -29,6 +30,11 @@ export class PackagesComponent implements OnInit {
     this.buildForm();
   }
 
+  onChangesBotton(){
+    if(this.pack?.mt_login != "") {
+      this.textButton = "Cambiar Credenciales"
+    }
+  }
   get loginField() {
     return this.form?.get('login');
   }
@@ -137,6 +143,7 @@ export class PackagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.statusChange(this.selectedStatus)
+    this.onChangesBotton();
   }
 
 }

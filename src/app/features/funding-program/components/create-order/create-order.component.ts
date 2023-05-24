@@ -145,7 +145,7 @@ export class CreateOrderComponent {
           return (prev.id > current.id) ? prev : current;
         });
         console.log(newPack);
-        this.router.navigate([`/funding-program/order/${newPack.id}`]);
+        this.router.navigate([`/funding-program/checkout/${newPack.id}`]);
       });
     }
     );

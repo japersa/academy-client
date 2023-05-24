@@ -19,10 +19,10 @@ import { UserDataService } from 'src/app/core/services/user-data.service';
     </div>
   <p>
   Estimado/a {{ userDataService.userData$.value.first_name }}, <br>  <br>
-  Nos complace informarte que hemos recibido tu pago correctamente por el servicio de autogestion de fondos que has adquirido.<br><br>
+  Nos complace informarte que hemos recibido tu pago correctamente por el servicio de {{ title }} que has adquirido.<br><br>
   Detalle de la orden: <br>
   Número de orden: {{datos?.id}} <br>
-  Servicio: ICEX FUNDING PROGRAM <br>
+  Servicio: {{  title }} <br>
   Monto: {{datos?.value}} USD <br>
   Método de pago: Tarjeta de crédito  <br> <br>
   Agradecemos tu compra y esperamos que disfrutes de tu servicio. Si tienes alguna pregunta, no dudes en contactarnos. <br>
@@ -31,7 +31,7 @@ import { UserDataService } from 'src/app/core/services/user-data.service';
   </p>
   </div>
   <div class="modal-footer">
-    <button type="button" routerLink="/funding-program/home" (click)="bsModalRef.hide()" class="btn btn-default">Ir a autogestión</button>
+    <button type="button" routerLink="/funding-program/home" (click)="bsModalRef.hide()" class="btn btn-default"> {{ button }} </button>
   </div>
 ` ,
   styleUrls: ['./success-payment.component.scss'],
@@ -41,6 +41,7 @@ export class SuccessPaymentComponent {
 
   @Input() datos: any;
   title?: string;
+  button?: string;
 
   constructor(public bsModalRef: BsModalRef,
     public userDataService: UserDataService) { }

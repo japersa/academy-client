@@ -116,7 +116,8 @@ export class CheckoutComponent implements OnInit {
   openModalWithComponent() {
     const initialState: ModalOptions = {
       initialState: {
-        title: 'Pago recibido',
+        title: 'Funding Program',
+        button: 'Area Trading',
         datos: this.selectedOrder
       }
     };
