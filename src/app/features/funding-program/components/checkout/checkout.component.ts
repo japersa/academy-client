@@ -77,7 +77,56 @@ export class CheckoutComponent implements OnInit {
       logo: '',
       symbol: 'xrp'
     },
-  ];
+    {
+      name: 'Litecoin Testnet',
+      logo: '',
+      symbol: 'ltct'
+    },
+    {
+      name: 'Tether USD (Omni Layer)',
+      logo: '',
+      symbol: 'USDT'
+    },
+    {
+      name: 'Tether USD (ERC20)',
+      logo: '',
+      symbol: 'USDT'
+    },
+    {
+      name: 'Tether USD (TRON/TRC20)',
+      logo: '',
+      symbol: 'USDT'
+    },
+    {
+      name: 'Litecoin',
+      logo: '',
+      symbol: 'LTC'
+    }
+   ];
+   
+
+  /* currencies: any[] = [
+    {
+      name: 'Bitcoin',
+      logo: '',
+      symbol: 'btc'
+    },
+    {
+      name: 'Bitcoin Cash',
+      logo: '',
+      symbol: 'BCH'
+    },
+    {
+      name: 'Ripple',
+      logo: '',
+      symbol: 'xrp'
+    },
+    {
+      name: 'Litecoin Testnet',
+      logo: '',
+      symbol: 'ltct'
+    },
+  ]; */
 
   modalRef?: BsModalRef;
   bsModalRef?: BsModalRef;
@@ -112,7 +161,7 @@ export class CheckoutComponent implements OnInit {
     console.log('Stripe Payment Method', token)
   }
 
-
+ 
   openModalWithComponent() {
     const initialState: ModalOptions = {
       initialState: {
