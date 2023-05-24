@@ -84,12 +84,12 @@ export class CheckoutComponent implements OnInit {
     {
       name: 'Tether USD (ERC20)',
       logo: '',
-      symbol: 'USDT'
+      symbol: 'USDT.ERC20'
     },
     {
       name: 'Tether USD (TRON/TRC20)',
       logo: '',
-      symbol: 'USDT'
+      symbol: 'USDT.TRC20'
     },
     {
       name: 'Litecoin',
