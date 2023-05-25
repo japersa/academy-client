@@ -9,14 +9,14 @@
     <li class="breadcrumb-item">Detail</li>
     
   </ol>
-  <div class="row">
+  <div class="row ml-3">
     <div class="col-lg-10 col-md-12">
       <div class="card shadow">
         <div class="card-body">
           <div class="row">
             <div class="col-lg-5 col-md-12"> 
               <p>Nombre: <span>{{user.first_name + ' ' + user.last_name }} </span> </p>
-              <p>ID: <span> {{user.id }} </span>  </p>
+              <p>ID Usuario: <span> {{user.id }} </span>  </p>
               <p>Télefono: <span>{{user.phone_number }}</span> </p>
               <p>País: <span> {{user.country }} </span> </p>
               <p>Dirección: <span> {{user.address }} </span> </p>
@@ -43,19 +43,19 @@
   </div>
   
   <ng-container *ngIf="user.packages.length > 0; else elseTemplate" >
-    <div class="row">
+    <div class="row ml-3">
       <div *ngFor="let i of packages" class="col-lg-10">
         <div class="card shadow">
           <div class="card-body">
             <div class="row">
               <div class="col-lg-5 col-md-12">
-                <p>Login: <span>{{i?.mt_login }} </span> </p>
-                <p>Inicio del Challenge: <span>{{i?.end_date }} </span> </p>
-                <p>Inicio del Challenge: <span>{{i?.end_date }} </span> </p>
-                <p>Tamaño de la cuenta: <span>{{i?.balance }} </span> </p>
+                <p>ID Paquete: <span>{{i?.id }} </span> </p>
+                <p>Inicio del Challenge: <span>{{i?.end_date | date: 'dd/mm/yyyy' }} </span> </p>
+                <p>Fin del Challenge: <span>{{i?.end_date | date: 'dd/mm/yyyy' }} </span> </p>
+                <p>Tamaño de la cuenta: <span>{{i?.balance + ' ' + i?.currencies | uppercase }} </span> </p>
               </div>
               <div class="col-lg-5 col-md-12">
-                <p>Balance: <span>{{i?.balance }} </span> </p>
+                <p>Balance: <span>{{i?.balance + ' ' + i?.currencies | uppercase }} </span> </p>
                 <p>Servidor: <span>{{i?.account_type }} </span> </p>
                 <p>Estado: <span [ngClass]="{
                   'bg-success': i.status === 'active',
@@ -114,7 +114,7 @@
                 </div>
               </div>
 
-              <div class="col-12">
+              <div class="col-12"> 
                 <div class="row">
                   <div class="col-3 my-auto">
                     <p>Contraseña del Inversor:  </p>
@@ -234,7 +234,7 @@
     </div>
   </ng-container>
   <ng-template #elseTemplate >
-    <div class="row">
+    <div class="row ml-3">
       <div class="col-10">
         <div class="card shadow">
           <div class="card-body">

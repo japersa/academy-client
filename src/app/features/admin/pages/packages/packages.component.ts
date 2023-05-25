@@ -98,6 +98,7 @@ export class PackagesComponent implements OnInit {
       order.balance = this.convertBalanceToNumber(order.balance);
     }
   }
+  
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
@@ -106,21 +107,23 @@ export class PackagesComponent implements OnInit {
     this.form = this.formBuilder.group({
       mt_login: ['', [Validators.required]],
       mt_password: ['', [Validators.required]],
-      mt_password_investor: ['', [Validators.required]],
-      mt_server: [this.pack?.mt_server],
+      mt_password_investor: ['', [Validators.required]]
     });
   }
 
   saveCredentials(data: any, id: any) {
     this.packagesService.updatePackage(data, id).subscribe( res => {
         res => console.log(res);
+        
+        this.statusChange(this.selectedStatus);
+        this.modalRef?.hide()
       },
       error => {
         console.log(error);
         console.log(data.id);
         
       }
-    )
+    ) 
   } 
 
   savePackUpdate(form){

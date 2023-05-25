@@ -28,6 +28,27 @@ export class UserDetailComponent implements OnInit {
               private packsServices: PackagesService
   ) { }
 
+  convertBalanceToNumber(balance: string): string {
+    switch(balance) {
+      case 'one_hundred_thousand':
+        return '100.000'; 
+      case 'fifty_thousand':
+        return '50.000';
+      case 'two_hundred_thousand':
+        return '200.000';
+      case 'five_hundred_thousand':
+        return '500.000';
+      default:
+        throw new Error('Balance string not recognized'); 
+    }
+  }
+
+  convertBalancesToNumbers(): void {
+    for (const order of this.packages) {
+      order.balance = this.convertBalanceToNumber(order.balance);
+    }
+  }
+
   ngOnInit(): void {
 
     this.packsServices.getPackagesById('4').subscribe(
@@ -39,7 +60,7 @@ export class UserDetailComponent implements OnInit {
         error: e => console.log(e)
       }
     );
-
+ 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userId = params.get('id');
       this.dashboardService.getUsersById(this.userId).subscribe(
@@ -48,7 +69,8 @@ export class UserDetailComponent implements OnInit {
             this.user = r;
             this.packagesActive = this.user.packages.filter(pkg => pkg.status === 'active');
             this.packAgActived = this.user.packages_self_management.filter(pkg => pkg.status === 'active');
-            this.packages =  this.user.packages; 
+            this.packages =  this.user.packages;
+            this.convertBalancesToNumbers(); 
             console.log(this.packAgActived);
             this.agActivete();
           },
