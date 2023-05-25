@@ -10,7 +10,7 @@ const apiURL = environment.apiURL;
   providedIn: 'root'
 })
 export class PacksService {
-
+ 
   constructor(private http: HttpClient) { }
 
   createPack(data: any): Observable<any> {
@@ -30,7 +30,7 @@ export class PacksService {
 
   getMyOrders() {
     const route = `/list/my/packages/`;
-    return this.http.get<any>(`${apiURL}${route}`);
+    return this.http.get<any>(`${apiURL}${route}`); 
   } 
 
   payPackStripe(data) {
@@ -39,7 +39,7 @@ export class PacksService {
   }
 
   payPackCoinpayents(data) {
-    const route = `/payment/package-self-management/coinpayments`;
+    const route = `/payment/package/coinpayments`;
     return this.http.post<any>(`${apiURL}${route}`, data);
   }
 
