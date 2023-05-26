@@ -16,6 +16,8 @@ import { EditUserComponent } from '../../components/edit-user/edit-user.componen
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UserDetailComponent } from '../../components/user-detail/user-detail.component';
 
+import { ClipboardModule } from '@angular/cdk/clipboard';
+
 @NgModule({
   declarations: [
     UsersComponent,
@@ -33,7 +35,8 @@ import { UserDetailComponent } from '../../components/user-detail/user-detail.co
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     BsDatepickerModule,
-    QuicklinkModule
+    QuicklinkModule,
+    ClipboardModule
   ],
   exports: [
     CreateUserComponent,

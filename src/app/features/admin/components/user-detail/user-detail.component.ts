@@ -10,6 +10,9 @@ import { PackagesService } from '../../services/packages.service';
 })
 export class UserDetailComponent implements OnInit {
 
+
+  buttonText = 'Copiar';
+
   userId: string = null;
   user = null;
   packages: any [] = null;
@@ -27,6 +30,11 @@ export class UserDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private packsServices: PackagesService
   ) { }
+
+  copied() {
+    this.buttonText = 'Copiado';
+  } 
+
 
   convertBalanceToNumber(balance: string): string {
     switch(balance) {
@@ -48,6 +56,9 @@ export class UserDetailComponent implements OnInit {
       order.balance = this.convertBalanceToNumber(order.balance);
     }
   }
+
+
+
 
   ngOnInit(): void {
 
@@ -71,12 +82,16 @@ export class UserDetailComponent implements OnInit {
             this.packAgActived = this.user.packages_self_management.filter(pkg => pkg.status === 'active');
             this.packages =  this.user.packages;
             this.convertBalancesToNumbers(); 
-            console.log(this.packAgActived);
+            console.log(this.packages);
             this.agActivete();
+            
           },
           error: e => console.log('error ' + e.error)
         }
       );
     });
+
+
+
   }
 }

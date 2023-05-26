@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 import { QuicklinkModule } from 'ngx-quicklink';
 
@@ -9,7 +10,8 @@ import { QuicklinkModule } from 'ngx-quicklink';
   imports: [
     CommonModule,
     QuicklinkModule,
-    HttpClientModule
+    HttpClientModule,
+    ClipboardModule
   ],
   exports: [
   ]

@@ -77,7 +77,10 @@
     </div>
   </ng-container>
 
-  <div class=" ml-3 row" style="width: 100% !important;">
+  <div class=" ml-3 row" 
+    style="width: 100% !important;" 
+    *ngIf="userDataService?.userData$?.value?.subscription != 'none'" 
+  >
     <div class="col-12">
       <h2 class="mt-4">Cursos</h2>
       <hr style="width: 100% !important;" color="cyan">

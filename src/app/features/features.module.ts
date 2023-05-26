@@ -5,6 +5,8 @@ import { AdminCoursesModule } from './teacher/pages/admin-courses/admin-courses.
 import { CreateCourseByStepsModule } from './teacher/pages/create-course-by-steps/create-course-by-steps.module';
 import { FundingProgramModule } from './funding-program/funding-program.module';
 
+import { ClipboardModule } from '@angular/cdk/clipboard';
+
 import { QuicklinkModule } from 'ngx-quicklink';
 import { SelfManagementModule } from './self-management/self-management.module';
 import { BillingModule } from './billing/billing.module';
@@ -19,7 +21,8 @@ import { BillingModule } from './billing/billing.module';
     FundingProgramModule,
     QuicklinkModule,
     SelfManagementModule,
-    BillingModule
+    BillingModule,
+    ClipboardModule
   ],
   exports: [
     AdminLayoutModule,
