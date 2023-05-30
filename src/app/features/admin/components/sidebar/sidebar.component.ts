@@ -347,7 +347,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     path: '/billing',
     title: 'Facturación',
     type: 'link',
-    icontype: 'fa fa-file-invoice',
+    icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
   },
 ];
@@ -464,7 +464,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
-    icontype: 'fa fa-file-invoice',
+    icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
   },
 /*   {
@@ -572,7 +572,7 @@ export const ROUTES_USER: RouteInfo[] = [
     path: '/billing',
     title: 'Facturacion',
     type: 'link',
-    icontype: 'fa fa-file-invoice',
+    icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
   },
 /*   {
