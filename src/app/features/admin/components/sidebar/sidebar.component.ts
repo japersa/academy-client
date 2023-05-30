@@ -409,7 +409,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
         title: 'Area Trading',
         type: 'link',
         smallTitle: 'AT'
-      }, */
+      }, 
       {
         path: '/withdrawals',
         title: 'retiros de beneficios',
@@ -421,7 +421,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
         title: 'ranking',
         type: 'link',
         smallTitle: 'RK'
-      },
+      },*/
     ]
   },
   {
@@ -445,12 +445,12 @@ export const ROUTES_TEACHER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'TP'
       },
-      {
+/*       {
         path: 'withdrawals',
         title: 'retiros y comisiones',
         type: 'link',
         smallTitle: 'WT'
-      },
+      }, */
     ]
   },
   {
@@ -467,13 +467,13 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     icontype: 'fa fa-file-invoice',
     role: [ROLES_ENUM.ALL],
   },
-  {
+/*   {
     path: '/downloads',
     title: 'descargas', 
     type: 'link',
     icontype: 'fa fa-cloud-download-alt',
     role: [ROLES_ENUM.ALL],
-  }
+  } */
 ];
 
 // Routes to USER
@@ -511,7 +511,7 @@ export const ROUTES_USER: RouteInfo[] = [
         title: 'Area Trading',
         type: 'link',
         smallTitle: 'AT'
-      }, */
+      }, 
       {
         path: '/withdrawals',
         title: 'retiros de beneficios',
@@ -523,7 +523,7 @@ export const ROUTES_USER: RouteInfo[] = [
         title: 'ranking',
         type: 'link',
         smallTitle: 'RK'
-      },
+      },*/
     ]
   },
   {
@@ -552,13 +552,13 @@ export const ROUTES_USER: RouteInfo[] = [
         title: 'academia',
         type: 'link',
         smallTitle: 'AC'
-      }, */
+      }, 
       {
         path: 'withdrawals',
         title: 'retiros y comisiones',
         type: 'link',
         smallTitle: 'WT'
-      },
+      }, */
     ]
   },
   {
@@ -575,13 +575,13 @@ export const ROUTES_USER: RouteInfo[] = [
     icontype: 'fa fa-file-invoice',
     role: [ROLES_ENUM.ALL],
   },
-  {
+/*   {
     path: '/downloads',
     title: 'descargas',
     type: 'link',
     icontype: 'fa fa-cloud-download-alt',
     role: [ROLES_ENUM.ALL],
-  }
+  } */
 ];
 
 

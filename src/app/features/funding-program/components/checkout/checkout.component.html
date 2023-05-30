@@ -215,7 +215,7 @@
                 </div>
                 <div class="form-group">
                   <label for="currency2">
-                    Moneda: {{ currencyField?.value }}
+                    Moneda: {{ currencyField?.value }} 
                   </label>
                   <select
                     formControlName="currency2"
@@ -256,7 +256,17 @@
 <!-- MODAL -->
 <ng-template #cryptoModaltemplate>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Coinpayments</h4>
+    <h4>El pago con crypto tarda algo de tiempo en validarce, 
+      se te notificara por correo cuando se valide.
+    </h4>
+    <a
+      routerLink="/home"
+      class="btn btn-md btn-lg mt-3"
+      type="submit"
+    >
+    Inicio
+    </a>
+   
     <button
       type="button"
       class="btn-close close pull-right"
@@ -267,6 +277,7 @@
     </button>
   </div>
   <div class="modal-body">
+    <h4 class="modal-title pull-left">Coinpayments</h4>
     <div class="row">
       <div class="col-4">
         <p class="title">Precio:</p>
@@ -292,21 +303,22 @@
     <div class="row">
       <div class="col-8 mx-auto">
         <a
-        [href]="coinpaymentResponse?.checkout_url"
-        class="btn btn-secondary btn-lg mb-3"
-        type="submit"
-        target="_blank"
-      >
-        Pagar
-      </a>
-      <a
-        [href]="coinpaymentResponse?.status_url"
-        class="btn btn-md btn-lg mb-3"
-        type="submit"
-        target="_blank"
-      >
-        Estado
-      </a>
+          [href]="coinpaymentResponse?.checkout_url"
+          class="btn btn-secondary btn-lg mb-3"
+          type="submit"
+          target="_blank"
+        >
+          Pagar
+        </a>
+        <a
+          [href]="coinpaymentResponse?.status_url"
+          class="btn btn-md btn-lg mb-3"
+          type="submit"
+          target="_blank"
+        >
+          Estado
+        </a>
+      
       </div>
     </div>
   </div>
