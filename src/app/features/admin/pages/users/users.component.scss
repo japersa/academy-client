@@ -7,3 +7,32 @@
 .content {
     background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important;
 }
+
+.filters {
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+}
+
+select { 
+    height: 40px;
+}
+
+input {
+    height: 40px;
+    width: 250px!important;
+}
+
+
+  .search-icon {
+    position: absolute;
+    right: 70px; 
+    top: 15px;
+    pointer-events: none; 
+    font-size: x-large;
+    color: #aaa;
+  }
+ 
+  
+  
+  
+  

@@ -20,6 +20,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CreateDemoComponent } from './components/create-demo/create-demo.component';
 import { SuccessPaymentComponent } from '../../shared/components/success-payment/success-payment.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { ProximamenteComponent } from './components/proximamente/proximamente.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
     RankingComponent,
     CreateDemoComponent,
     SuccessPaymentComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    ProximamenteComponent
   ],
   imports: [
     CommonModule,

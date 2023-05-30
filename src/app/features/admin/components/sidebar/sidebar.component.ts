@@ -205,7 +205,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'user',
+        path: 'user', 
         title: 'Usuarios',
         type: 'link',
         smallTitle: 'US'
@@ -269,13 +269,13 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
-/*       {
-        path: 'home',
-        title: 'Inicio',
+      {
+        path: 'prox',
+        title: 'Proximamente',
         type: 'link',
         smallTitle: 'TP'
-      }, */
-      {
+      },
+      /* {
         path: 'orders',
         title: 'Ordenes',
         type: 'link',
@@ -298,7 +298,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         title: 'ranking',
         type: 'link',
         smallTitle: 'RK'
-      },
+      }, */
     ]
   },
   {
@@ -310,13 +310,13 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     collapse: 'pages',
     isCollapsed: true,
     children: [
-/*       {
-        path: 'home',
-        title: 'Inicio',
+      {
+        path: 'prox',
+        title: 'Proximamente',
         type: 'link',
         smallTitle: 'TP'
-      }, */
-      {
+      },
+      /* {
         path: 'orders',
         title: 'Ordenes',
         type: 'link',
@@ -333,7 +333,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
         title: 'retiros y comiciones',
         type: 'link',
         smallTitle: 'WT'
-      },
+      }, */
     ]
   },
   {

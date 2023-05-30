@@ -7,6 +7,7 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
 import { GlobalWithdrawalsComponent } from './components/global-withdrawals/global-withdrawals.component';
 import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { ProximamenteComponent } from '../funding-program/components/proximamente/proximamente.component';
 
 const routes: Routes = [
   { path: 'home', component: SelfManagementComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'order/:id', component: OrderDetailComponent },
   { path: 'global-withdrawals', component: GlobalWithdrawalsComponent },
   { path: 'withdrawals', component: WithdrawalsComponent },
+  { path: 'prox', component: ProximamenteComponent }
 ];
 
 @NgModule({
