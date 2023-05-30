@@ -609,12 +609,12 @@ export class SidebarComponent implements OnInit {
       type: 'link',
       icontype: 'tim-icons icon-single-02',
     },
-    {
+/*     {
       path: '/customer-service',
       title: 'Servicio al Cliente',
       type: 'link',
       icontype: 'fa fa-headset',
-    },
+    }, */
   ];
 
   constructor(private router: Router,
