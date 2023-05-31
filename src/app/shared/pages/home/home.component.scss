@@ -37,13 +37,17 @@
 }
 
 .banner .carousel-control-next {
-    display: none !important;
+    right: 10px !important;
 }
 
 .banner .carousel-control-prev {
-    display: none !important;
+   
+    left: 10px !important;
 }
 
+ .carousel-indicators li {
+    margin-top: -50px;
+}
 .referido {
     color: #21201F !important;
     border-radius: 10px;

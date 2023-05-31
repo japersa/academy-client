@@ -33,13 +33,17 @@
     <div class="col-12  banner mx-auto">
       <carousel
         [showIndicators]="true"
-        [interval]="3000"
+        [interval]="30000"
+        [indicatorsByChunk]="true"
       >
         <slide>
           <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476126/banner-eurostreet_cyeyxd.jpg"
             alt="first slide" style="display: block; width: 100%; height: 100%;">
           <div class="button-container-one col-4">
-            <button class="btn btn-banner btn-block  ">
+            <button 
+              class="btn btn-banner btn-block  "
+              (click)="openEuroStreet()"
+            >
               Comenzar ICEX Challenge
             </button>
           </div>  
@@ -48,11 +52,14 @@
           <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476126/banner-mt5_e6bihy.jpg" 
             alt="second slide" style="display: block; width: 100%;">
             <div class="button-container-two row justify-content-center">
-              <a href="#" class="col-5 text-left ">
+              <a href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5&hl=es&gl=US&pli=1" target="_blank" class="col-4 text-left ">
                 <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/boton-googleplay_tykmtd.png" alt="">
               </a>
-              <a href="#" class="col-5 text-right ">
+              <a href="#" class="col-4 text-right ">
                 <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/boton-appstore_mzyam9.png" alt="">
+              </a>
+              <a href="https://www.metatrader5.com/es/download" target="_blank" class="col-4 text-right ">
+                <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1685558013/boton-windows-1_w7solk.png" alt="">
               </a>
             </div>   
         </slide>

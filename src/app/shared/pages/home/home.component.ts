@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UserDataService } from '../../../core/services/user-data.service';
+import { Router } from '@angular/router';
+import { link } from 'fs';
 
 
 @Component({
@@ -13,7 +15,13 @@ export class HomeComponent implements OnInit {
   referalCode = '0000000'; 
 
   constructor(public userDataService: UserDataService,
+              private route: Router
   ) { }
+
+  openEuroStreet(){
+    const url = 'https://eurostreetcapital.com/';
+    window.open(url, '_blank');
+  }
 
   ngOnInit(): void {
     this.userDataService.userData$.subscribe(
