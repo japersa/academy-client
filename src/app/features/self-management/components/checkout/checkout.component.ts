@@ -72,11 +72,6 @@ export class CheckoutComponent implements OnInit {
       symbol: 'xrp'
     },
     {
-      name: 'Litecoin Testnet',
-      logo: '',
-      symbol: 'ltct'
-    },
-    {
       name: 'Tether USD (Omni Layer)',
       logo: '',
       symbol: 'USDT'
