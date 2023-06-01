@@ -17,5 +17,6 @@ export const environment = {
   },
   recaptcha: {
     siteKey: '6LdJGV4fAAAAAMXk2Faeso4ZvN8LbiXElUhwU2pB',
-  }
+  },
+  stripePK: 'pk_live_51Mok6LKim0A5yCrrqPttq7ccd8x9chqLWb2Kft2CUUWSUt3CWhpAOAR6vruVw0cf2OShadhQs1AMCRplMbAyofHx00f4E36Hg0'
 };
