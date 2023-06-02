@@ -20,9 +20,10 @@
               <p>Télefono: <span>{{user.phone_number }}</span> </p>
               <p>País: <span> {{user.country }} </span> </p>
               <p>Dirección: <span> {{user.address }} </span> </p>
+              <p>C.C: <span> {{user.identity_card }} </span> </p>
             </div>
             <div class="col-lg-5 col-md-12">
-              <p>Codigo postal: <span> {{user.packages.postal_code }} </span> </p>
+              <p>C.C Refrido: <span> {{user.deferred_document_number }} </span> </p>
               <p>Correo: <span> {{user.username }} </span> </p>
               <p>Fecha de ceración de cuenta: <span> {{user.date_joined | date: 'dd/MM/yyyy' }} </span> </p>
               <p>Paquetes Activos: <span> {{packagesActive.length }} </span> </p>
@@ -145,7 +146,7 @@
               </div>
 
               <div class="col-12">
-                <div class="row">
+                <div class="row"> 
                   <div class="col-3 my-auto">
                     <p >Servidor:  </p>
                   </div>

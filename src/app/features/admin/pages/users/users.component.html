@@ -89,7 +89,7 @@
                         type="search"
                         class="form-control form-control-sm mr-2 search-input"
                         placeholder="Buscar"
-                        aria-controls="datatable"
+                        aria-controls="datatable" 
                         (keyup)="filterTable($event)"
                       />
                       <i class="fas fa-search search-icon"  ></i>
@@ -117,8 +117,8 @@
                 (activate)="onActivate($event)"
                 (select)="onSelect($event)"
               >
-                <ngx-datatable-column name="#" prop="idx">
-                </ngx-datatable-column>
+                <!-- <ngx-datatable-column name="#" prop="idx">
+                </ngx-datatable-column> -->
                 <ngx-datatable-column
                   name="ID"
                   prop="id"
@@ -135,9 +135,9 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Email" prop="username">
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Teléfono" prop="phone_number">
+                <ngx-datatable-column name="C.C Referido" prop="deferred_document_number">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.phone_number | titlecase }}
+                    {{ row?.deferred_document_number | titlecase }}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column

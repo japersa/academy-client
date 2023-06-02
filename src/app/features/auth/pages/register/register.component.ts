@@ -261,6 +261,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
     return this.identityCardField?.dirty || this.identityCardField?.touched;
   }
 
+  get deferredDocumentNumberField() {
+    return this.form?.get('deferred_document_number');
+  }
+
+  get eferredDocumentNumberFieldDirty() {
+    return this.deferredDocumentNumberField?.dirty || this.deferredDocumentNumberField?.touched;
+  }
+
   get countryCodeField() {
     return this.form?.get('country_code');
   }
@@ -355,6 +363,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       last_name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       identity_card: ['', [Validators.required]],
+      deferred_document_number: ['',],
       country_code: ['', [Validators.required]],
       phone_number: ['', [Validators.required]],
       address: ['', [Validators.required]],
@@ -385,7 +394,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.showSwal('success-message')
       this.form.reset();
       this.router.navigate(['/sign-in']);
-    },
+    }, 
     error => {
       if (error && error.error && error.error.username && error.error.username[0] === 'This field must be unique.') {
         this.errorMessage = 'El correo ya existe. Por favor, utilice otro correo electrónico.';
