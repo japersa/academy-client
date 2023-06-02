@@ -88,6 +88,10 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  entriesChange($event) {
+    this.entries = $event.target.value;
+  }
+
   resetFilters() {
     this.entries = 10;
     this.options['rol'] = this.role;
