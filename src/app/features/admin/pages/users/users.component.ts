@@ -71,9 +71,9 @@ export class UsersComponent implements OnInit {
     this.dashboardService.getUsersByRole(this.options).subscribe(
       {
         next: r => {
-          this.rows = r?.results;
+          this.rows = r;
           this.rows.forEach((e: any) => (e['demo_package'] = 'null'));
-          this.temp = r?.results;
+          this.temp = r;
 
           this.temp = this.rows.map((prop: any, key: any) => {
             return {
