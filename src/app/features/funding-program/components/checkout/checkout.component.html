@@ -256,17 +256,7 @@
 <!-- MODAL -->
 <ng-template #cryptoModaltemplate>
   <div class="modal-header">
-    <h4>El pago con crypto tarda algo de tiempo en validarce, 
-      se te notificara por correo cuando se valide.
-    </h4>
-    <a
-      routerLink="/home"
-      class="btn btn-md btn-lg mt-3"
-      type="submit"
-    >
-    Inicio
-    </a>
-   
+    <h4 class="modal-title pull-left">Coinpayments</h4>
     <button
       type="button"
       class="btn-close close pull-right"
@@ -277,7 +267,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <h4 class="modal-title pull-left">Coinpayments</h4>
     <div class="row">
       <div class="col-4">
         <p class="title">Precio:</p>
@@ -319,6 +308,20 @@
           Estado
         </a>
       
+      </div>
+    </div>
+    <div class="row ">
+      <h4>El pago con crypto tarda algo de tiempo en validarce, 
+        se te notificara por correo cuando se valide.
+      </h4>
+      <div class="col-6 mx-auto">
+        <a
+          routerLink="/funding-program/home"
+          class="btn btn-md btn-lg mt-3"
+          type="submit"
+        >
+        Volver al Inicio
+        </a>
       </div>
     </div>
   </div>
