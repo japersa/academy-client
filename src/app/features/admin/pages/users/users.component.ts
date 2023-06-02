@@ -4,6 +4,7 @@ import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import swal from 'sweetalert2';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { log } from 'console';
 
 @Component({
   selector: 'app-admins',
@@ -71,7 +72,8 @@ export class UsersComponent implements OnInit {
     this.dashboardService.getUsersByRole(this.options).subscribe(
       {
         next: r => {
-          this.rows = r;
+          this.rows = r?.results;
+          console.log(r);
           this.rows.forEach((e: any) => (e['demo_package'] = 'null'));
           this.temp = r;
 
