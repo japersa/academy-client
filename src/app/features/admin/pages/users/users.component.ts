@@ -75,7 +75,7 @@ export class UsersComponent implements OnInit {
           this.rows = r?.results;
           console.log(r);
           this.rows.forEach((e: any) => (e['demo_package'] = 'null'));
-          this.temp = r?.results;
+          this.temp = r;
 
           this.temp = this.rows.map((prop: any, key: any) => {
             return {
