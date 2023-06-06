@@ -137,12 +137,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Email" prop="username">
                 </ngx-datatable-column>
-                <ngx-datatable-column name="C.C Referido" prop="deferred_document_number">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.deferred_document_number | titlecase }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="C.C Usuario" prop="identity_card">
+                <ngx-datatable-column name="Cedula" prop="identity_card">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     {{ row?.identity_card | titlecase }}
                   </ng-template>
@@ -153,6 +148,11 @@
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     {{ row?.date_joined | date }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="C.C Referido" prop="deferred_document_number">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row?.deferred_document_number | titlecase }}
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Actions">
