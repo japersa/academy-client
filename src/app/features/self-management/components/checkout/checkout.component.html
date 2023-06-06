@@ -30,9 +30,12 @@
                   </p> 
                 </div> 
                 <div class="col-7">
-                  <p class="text-left" > <strong> Código de Referido: </strong> 
-                    <span>  {{ selectedOrder.referral_code | uppercase }}</span> 
+                  <p class="text-left" > <strong> Telefono:</strong> 
+                    <span> {{  selectedOrder.phone_number }} </span> 
                   </p> 
+                  <!-- <p class="text-left" > <strong> Código de Referido: </strong> 
+                    <span>  {{ selectedOrder.referral_code | uppercase }}</span> 
+                  </p>  -->
                 </div>
                 <div class="col-5">
                   <p class="text-left" > <strong> Típo de cuenta: </strong> 
@@ -50,6 +53,9 @@
                   </p> 
                 </div>
                 <div class="col-7">
+                  <p class="text-left" > <strong> Ciudad:</strong> 
+                    <span> {{  selectedOrder.city }} </span> 
+                  </p> 
                  <!--  <p class="text-left" > <strong> Dirección: </strong> 
                     <span> av 100pre viva 123 </span> 
                   </p>  -->
@@ -60,9 +66,7 @@
                   </p> 
                 </div>
                 <div class="col-7">
-                  <p class="text-left" > <strong> Ciudad:</strong> 
-                    <span> {{  selectedOrder.city }} </span> 
-                  </p> 
+                  
                 </div>
                 <div class="col-5">
                   <p class="text-left" > <strong> Código Postal:  </strong> 
@@ -70,9 +74,7 @@
                   </p> 
                 </div>
                 <div class="col-7">
-                  <p class="text-left" > <strong> Telefono:</strong> 
-                    <span> {{  selectedOrder.phone_number }} </span> 
-                  </p> 
+                  
                 </div>
               </div>
               
