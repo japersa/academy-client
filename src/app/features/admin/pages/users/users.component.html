@@ -122,6 +122,8 @@
                 <ngx-datatable-column
                   name="ID"
                   prop="id"
+                  class="id"
+                  width="50"
                 ></ngx-datatable-column>
                 <ngx-datatable-column name="Nombre" prop="first_name">
                   <ng-template let-row="row" ngx-datatable-cell-template>
@@ -140,8 +142,13 @@
                     {{ row?.deferred_document_number | titlecase }}
                   </ng-template>
                 </ngx-datatable-column>
+                <ngx-datatable-column name="C.C Usuario" prop="identity_card">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row?.identity_card | titlecase }}
+                  </ng-template>
+                </ngx-datatable-column>
                 <ngx-datatable-column
-                  name="Fecha de registro"
+                  name="Fecha de registro" 
                   prop="date_joined"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>

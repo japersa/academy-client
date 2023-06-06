@@ -57,7 +57,14 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
-
+/*   add(fechaCreacion: Date) {
+    const fechaFinalizacion = new Date(fechaCreacion.getTime() + 15 * 24 * 60 * 60 * 1000);
+    const paquete: Paquete = {
+      fechaCreacion: fechaCreacion,
+      fechaFinalizacion: fechaFinalizacion
+    };
+    this.paquetes.push(paquete);
+  } */
 
 
   ngOnInit(): void {
@@ -82,7 +89,8 @@ export class UserDetailComponent implements OnInit {
             this.packAgActived = this.user.packages_self_management.filter(pkg => pkg.status === 'active');
             this.packages =  this.user.packages;
             this.convertBalancesToNumbers(); 
-            console.log(this.packages);
+            console.log(this.packages); 
+            console.log(this.packAgActived); 
             this.agActivete();
             
           },

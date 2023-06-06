@@ -13,6 +13,7 @@
     <div class="col-lg-10 col-md-12">
       <div class="card shadow">
         <div class="card-body">
+          <h3> Datos Del Cliente </h3>
           <div class="row">
             <div class="col-lg-5 col-md-12"> 
               <p>Nombre: <span>{{user.first_name + ' ' + user.last_name }} </span> </p>
@@ -23,35 +24,86 @@
               <p>C.C: <span> {{user.identity_card }} </span> </p>
             </div>
             <div class="col-lg-5 col-md-12">
-              <p>C.C Refrido: <span> {{user.deferred_document_number }} </span> </p>
+             <!--  <p>C.C Refrido: <span> {{user.deferred_document_number }} </span> </p> -->
               <p>Correo: <span> {{user.username }} </span> </p>
               <p>Fecha de ceración de cuenta: <span> {{user.date_joined | date: 'dd/MM/yyyy' }} </span> </p>
               <p>Paquetes Activos: <span> {{packagesActive.length }} </span> </p>
               <p>Paquetes Adquiridos: <span> {{user.packages.length }} </span> </p>
-              <p>Paquete Autogestión: 
+              <!-- <p>Paquete Autogestión: 
                 <span 
                   [ngClass]="{
-                    'text-success': packAgActive === 'Activo',
+                    'text-success': packAgActive === 'Activo', 
                     'text-danger': packAgActive === 'Inactivo',
                   }"  
                 > {{ packAgActive }} </span>   
-              </p>
+              </p> -->
             </div> 
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <ng-container *ngIf="packAgActived.length > 0 ; else elseTemplate2" >
+
+    <div class="row ml-3">
+      <div *ngFor="let i of packAgActived "  class="col-10">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3> Autogestión </h3>
+            <div class="row">
+              <div class="col-lg-10 col-md-12">
+                <p>Referido por: <span>{{ i?.referral_code_owner_name }} </span> </p>
+                <p>Codigo de Referido: <span>{{ i?.referral_code }} </span> </p>
+                <p>Cedula de Referido: <span> {{ i?.referral_code_owner_identity_card }} </span> </p>
+                <p>Paquete Autogestión: 
+                  <span 
+                    [ngClass]="{
+                      'text-success': packAgActive === 'Activo', 
+                      'text-danger': packAgActive === 'Inactivo',
+                    }"  
+                  > {{ packAgActive }} </span>   
+                </p>
+              </div>
+            </div> 
+          </div>    
+        </div>     
+      </div>
+    </div>
+     
+  </ng-container>
+
+  <ng-template #elseTemplate2 >
+    <div class="row ml-3">
+      <div class="col-10">
+        <div class="card shadow">
+          
+          <div class="card-body">
+            <h3> Autogestión</h3>
+            <p>Paquete Autogestión: 
+              <span 
+                [ngClass]="{
+                  'text-success': packAgActive === 'Activo', 
+                  'text-danger': packAgActive === 'Inactivo',
+                }"  
+              > {{ packAgActive }} </span>   
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
   
   <ng-container *ngIf="user.packages.length > 0; else elseTemplate" >
     <div class="row ml-3">
       <div *ngFor="let i of packages" class="col-lg-10">
         <div class="card shadow">
           <div class="card-body">
+            <h3> Funding Program </h3>
             <div class="row">
               <div class="col-lg-5 col-md-12">
                 <p>ID Paquete: <span>{{i?.id }} </span> </p>
-                <p>Inicio del Challenge: <span>{{i?.end_date | date: 'dd/MM/yyyy' }} </span> </p>
+               <!--  <p>Inicio del Challenge: <span>{{i?.end_date | date: 'dd/MM/yyyy' }} </span> </p> -->
                 <p>Fin del Challenge: <span>{{i?.end_date | date: 'dd/MM/yyyy' }} </span> </p>
                 <p>Tamaño de la cuenta: <span>{{i?.balance + ' ' + i?.currencies | uppercase }} </span> </p>
               </div>
@@ -248,7 +300,9 @@
     <div class="row ml-3">
       <div class="col-10">
         <div class="card shadow">
+          
           <div class="card-body">
+            <h3> Funding Program </h3>
             <p>El usuario no tiene paquetes</p>
           </div>
         </div>

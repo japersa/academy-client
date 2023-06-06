@@ -23,15 +23,17 @@ input {
 }
 
 
-  .search-icon {
+.search-icon {
     position: absolute;
-    right: 70px; 
+    right: 70px;
     top: 15px;
-    pointer-events: none; 
+    pointer-events: none;
     font-size: x-large;
     color: #aaa;
-  }
- 
+}
+ .id {
+    max-width: 50px !important;
+ }
   
   
   
