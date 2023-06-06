@@ -70,7 +70,7 @@ export class PackagesComponent implements OnInit {
   getPackagesByStatus(status: string) {
     this.packagesService.getPackages(status).subscribe(
       {
-        next: r => {this.packages = r.results
+        next: r => {this.packages = r
           this.convertBalancesToNumbers(); 
 
           console.log(this.packages);
@@ -115,7 +115,7 @@ export class PackagesComponent implements OnInit {
     this.packagesService.updatePackage(data, id).subscribe( res => {
         res => console.log(res);
         
-        this.statusChange(this.selectedStatus);
+        this.statusChange(this.selectedStatus); 
         this.modalRef?.hide()
       },
       error => {
@@ -143,7 +143,6 @@ export class PackagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.statusChange(this.selectedStatus)
-    
   }
 
 }
