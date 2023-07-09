@@ -1,28 +1,37 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { PacksService } from '../../services/packs.service';
 import { Router } from '@angular/router';
+import { RegisterService } from 'src/app/features/auth/services/register.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.scss']
 })
-export class CreateOrderComponent {
+export class CreateOrderComponent implements OnInit {
   price = '';
   form!: FormGroup;
   errorMessage: string | null;
+  referalCode = '0000000';
 
   constructor( 
     // import the form builder
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
     private packsService: PacksService,
-    private router: Router
+    private router: Router,
+    private registerService: RegisterService,
+    private storageService: StorageService,
   ) {
     // Build the form
     this.buildForm();
+  }
+  ngOnInit(): void {
+    this.getUser();
+
   }
 
   // declare getters for each field
@@ -134,8 +143,7 @@ export class CreateOrderComponent {
       country: ['', [Validators.required]],
       postal_code: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      referral_code: ['', [Validators.required]],
-
+      referral_code: ['', [Validators.required, this.validarReferralCode.bind(this)]],
       tos: ['', [Validators.requiredTrue]],
       cancellation_policies: ['', [Validators.requiredTrue]]
     });
@@ -160,6 +168,33 @@ export class CreateOrderComponent {
         next: r => console.log(r)
       }
     ); */
+  }
+
+  getUser() {
+    setTimeout(() => {
+      this.registerService.getUser().subscribe(
+        {
+          next: (r) => {
+            this.referalCode = r?.referral_code;
+            console.log(this.referalCode);
+    
+          },
+          error: (e) => {
+            console.log(e.error);
+          }
+        }
+      )
+    }, 200);
+  }
+
+  validarReferralCode(control: FormControl): { [key: string]: boolean } | null {
+    const codigoReferencia = this.referalCode; // Reemplaza 'tu_variable' por el valor de tu variable específica
+  
+    if (control.value === codigoReferencia) {
+      return { 'referralCodeInvalido': true };
+    }
+  
+    return null;
   }
 
 }

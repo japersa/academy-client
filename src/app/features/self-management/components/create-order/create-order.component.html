@@ -228,7 +228,7 @@
                       >Ciudad: {{ cityField?.value | titlecase }}</label
                     >
                     <input
-                      type="tel"
+                      type="text"
                       class="form-control "
                       formControlName="city"
                       id="city"
@@ -357,7 +357,7 @@
                       id="referralCodeField"
                       placeholder="57865"
                     />
-  
+
                     <ng-container
                       *ngFor="
                         let validation of utilsService.validationMessages
@@ -374,6 +374,9 @@
                         {{ validation.message }}
                       </small>
                     </ng-container>
+                    <small class="form-text text-danger" *ngIf="referralCodeFieldDirty && referralCodeField?.value === referalCode">
+                      El código de referido debe ser diferente al tuyo.
+                    </small>
                   </div>
                 </div>
               </div>
