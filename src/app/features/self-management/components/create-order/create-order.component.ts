@@ -143,7 +143,7 @@ export class CreateOrderComponent implements OnInit {
       country: ['', [Validators.required]],
       postal_code: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      referral_code: ['', [Validators.required, this.validarReferralCode.bind(this)]],
+      referral_code: ['', [Validators.required, Validators.maxLength(6) , this.validarReferralCode.bind(this)]],
       tos: ['', [Validators.requiredTrue]],
       cancellation_policies: ['', [Validators.requiredTrue]]
     });

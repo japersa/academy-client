@@ -195,6 +195,7 @@ export class UtilsService {
     ],
     referral_code: [
       { type: 'required', message: 'El código de referido es obligatorio' },
+      { type: 'maxlength', message: 'El código de referido no puede tener más de 6 caracteres ' }
     ],
     currency: [
       { type: 'required', message: 'Es obligatorio elegir una criptomoneda' },
