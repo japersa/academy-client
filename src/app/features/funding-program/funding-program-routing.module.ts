@@ -10,6 +10,7 @@ import { RankingComponent } from './components/ranking/ranking.component';
 import { CreateDemoComponent } from './components/create-demo/create-demo.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { ProximamenteComponent } from './components/proximamente/proximamente.component';
+import { MetricsComponent } from './components/metrics/metrics.component';
 
 const routes: Routes = [
   { path: 'home', component: FundingProgramComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'checkout/:id', component: CheckoutComponent },
   { path: 'withdrawals', component: WithdrawalsComponent },
   { path: 'ranking', component: RankingComponent },
-  { path: 'prox', component: ProximamenteComponent }
+  { path: 'prox', component: ProximamenteComponent },
+  { path: 'metrics', component: MetricsComponent }
 ];
 
 

@@ -311,29 +311,17 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'prox',
-        title: 'Proximamente',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-      /* {
-        path: 'orders',
-        title: 'Ordenes',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-      {
         path: 'global-withdrawals',
         title: 'retiros y comiciones globales',
         type: 'link',
         smallTitle: 'G&W'
       },
       {
-        path: 'withdrawals',
-        title: 'retiros y comiciones',
+        path: 'runners',
+        title: 'Corredores',
         type: 'link',
-        smallTitle: 'WT'
-      }, */
+        smallTitle: 'SB'
+      }
     ]
   },
   {
@@ -398,30 +386,30 @@ export const ROUTES_TEACHER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'TP'
       },
-      {
+/*       {
         path: 'orders',
         title: 'Ordenes',
         type: 'link',
         smallTitle: 'TP'
-      },
-      /* {
-        path: '/trading-area',
-        title: 'Area Trading',
-        type: 'link',
-        smallTitle: 'AT'
-      }, 
+      }, */
       {
-        path: '/withdrawals',
-        title: 'retiros de beneficios',
+        path: 'withdrawals',
+        title: 'Retiros',
         type: 'link',
         smallTitle: 'WT'
       },
       {
-        path: '/ranking',
+        path: 'ranking',
         title: 'ranking',
         type: 'link',
         smallTitle: 'RK'
-      },*/
+      },
+      {
+        path: 'metrics',
+        title: 'Metricas',
+        type: 'link',
+        smallTitle: 'M'
+      },
     ]
   },
   {
@@ -439,18 +427,25 @@ export const ROUTES_TEACHER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'TP'
       },
-      {
+/*       {
         path: 'orders',
         title: 'Ordenes',
         type: 'link',
         smallTitle: 'TP'
-      },
-/*       {
+      }, */
+
+      {
         path: 'withdrawals',
         title: 'retiros y comisiones',
         type: 'link',
-        smallTitle: 'WT'
-      }, */
+        smallTitle: 'RC'
+      },
+      {
+        path: 'wallet',
+        title: 'Wallet',
+        type: 'link',
+        smallTitle: 'W'
+      }, 
     ]
   },
   {
@@ -500,30 +495,30 @@ export const ROUTES_USER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'TP'
       },
-      {
+/*       {
         path: 'orders',
         title: 'Ordenes',
         type: 'link',
         smallTitle: 'TP'
-      },
-      /* {
-        path: '/trading-area',
-        title: 'Area Trading',
-        type: 'link',
-        smallTitle: 'AT'
-      }, 
+      }, */
       {
-        path: '/withdrawals',
-        title: 'retiros de beneficios',
+        path: 'withdrawals',
+        title: 'Retiros',
         type: 'link',
         smallTitle: 'WT'
       },
       {
-        path: '/ranking',
+        path: 'ranking',
         title: 'ranking',
         type: 'link',
         smallTitle: 'RK'
-      },*/
+      },
+      {
+        path: 'metrics',
+        title: 'Metricas',
+        type: 'link',
+        smallTitle: 'M'
+      },
     ]
   },
   {
@@ -541,24 +536,25 @@ export const ROUTES_USER: RouteInfo[] = [
         type: 'link',
         smallTitle: 'TP'
       },
-      {
+/*       {
         path: 'orders',
         title: 'Ordenes',
         type: 'link',
         smallTitle: 'TP'
-      },
-/*       {
-        path: '/academy',
-        title: 'academia',
-        type: 'link',
-        smallTitle: 'AC'
-      }, 
+      }, */
+
       {
         path: 'withdrawals',
         title: 'retiros y comisiones',
         type: 'link',
-        smallTitle: 'WT'
-      }, */
+        smallTitle: 'RC'
+      },
+      {
+        path: 'wallet',
+        title: 'Wallet',
+        type: 'link',
+        smallTitle: 'W'
+      }, 
     ]
   },
   {

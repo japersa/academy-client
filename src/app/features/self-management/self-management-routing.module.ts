@@ -8,16 +8,18 @@ import { GlobalWithdrawalsComponent } from './components/global-withdrawals/glob
 import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { ProximamenteComponent } from '../funding-program/components/proximamente/proximamente.component';
+import { WalletComponent } from './components/wallet/wallet.component';
 
 const routes: Routes = [
   { path: 'home', component: SelfManagementComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'checkout/:id', component: CheckoutComponent },
-  { path: 'create-order', component: CreateOrderComponent },
+  { path: 'create-order', component: CreateOrderComponent }, 
   { path: 'order/:id', component: OrderDetailComponent },
   { path: 'global-withdrawals', component: GlobalWithdrawalsComponent },
   { path: 'withdrawals', component: WithdrawalsComponent },
-  { path: 'prox', component: ProximamenteComponent }
+  { path: 'prox', component: ProximamenteComponent },
+  { path: 'wallet', component: WalletComponent }
 ];
 
 @NgModule({

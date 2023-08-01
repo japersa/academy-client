@@ -13,6 +13,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 import { GlobalWithdrawalsComponent } from './components/global-withdrawals/global-withdrawals.component';
 import { WithdrawalsComponent } from './components/withdrawals/withdrawals.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { WalletComponent } from './components/wallet/wallet.component';
+import { RunnersComponent } from './components/runners/runners.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
     CreateOrderComponent,
     GlobalWithdrawalsComponent,
     WithdrawalsComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    WalletComponent,
+    RunnersComponent
   ],
   imports: [
     CommonModule,

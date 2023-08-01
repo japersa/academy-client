@@ -21,6 +21,7 @@ import { CreateDemoComponent } from './components/create-demo/create-demo.compon
 import { SuccessPaymentComponent } from '../../shared/components/success-payment/success-payment.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { ProximamenteComponent } from './components/proximamente/proximamente.component';
+import { MetricsComponent } from './components/metrics/metrics.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ProximamenteComponent } from './components/proximamente/proximamente.co
     CreateDemoComponent,
     SuccessPaymentComponent,
     OrderDetailComponent,
-    ProximamenteComponent
+    ProximamenteComponent,
+    MetricsComponent
   ],
   imports: [
     CommonModule,
