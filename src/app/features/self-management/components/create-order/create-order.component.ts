@@ -5,6 +5,7 @@ import { PacksService } from '../../services/packs.service';
 import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/features/auth/services/register.service';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { UserDataService } from 'src/app/core/services/user-data.service';
 
 @Component({
   selector: 'app-create-order',
@@ -17,22 +18,20 @@ export class CreateOrderComponent implements OnInit {
   errorMessage: string | null;
   referalCode = '0000000';
 
-  constructor( 
+  constructor(
     // import the form builder
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
     private packsService: PacksService,
     private router: Router,
     private registerService: RegisterService,
+    public userDataService: UserDataService,
     private storageService: StorageService,
   ) {
     // Build the form
     this.buildForm();
   }
-  ngOnInit(): void {
-    this.getUser();
 
-  }
 
   // declare getters for each field
   get firstNameField() {
@@ -143,7 +142,7 @@ export class CreateOrderComponent implements OnInit {
       country: ['', [Validators.required]],
       postal_code: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      referral_code: ['', [Validators.required, Validators.maxLength(6) , this.validarReferralCode.bind(this)]],
+      referral_code: ['', [Validators.required, Validators.maxLength(6), this.validarReferralCode.bind(this)]],
       tos: ['', [Validators.requiredTrue]],
       cancellation_policies: ['', [Validators.requiredTrue]]
     });
@@ -151,50 +150,33 @@ export class CreateOrderComponent implements OnInit {
 
   createPack(formData: any) {
 
-    this.packsService.createPack(formData).subscribe( () => {
-      this.packsService.getMyPacks().subscribe( pkg => {
+    this.packsService.createPack(formData).subscribe(() => {
+      this.packsService.getMyPacks().subscribe(pkg => {
         const newPack = pkg.reduce((prev, current) => {
-          return (prev.id > current.id) ? prev : current; 
+          return (prev.id > current.id) ? prev : current;
         });
         console.log(newPack);
         this.router.navigate([`/self-management/checkout/${newPack.id}`]);
       });
     }
     );
-    
-    
-  /*   this.packsService.createPack(formData).subscribe(
-      {
-        next: r => console.log(r)
-      }
-    ); */
-  }
 
-  getUser() {
-    setTimeout(() => {
-      this.registerService.getUser().subscribe(
-        {
-          next: (r) => {
-            this.referalCode = r?.referral_code;
-            console.log(this.referalCode);
-    
-          },
-          error: (e) => {
-            console.log(e.error);
-          }
-        }
-      )
-    }, 200);
   }
 
   validarReferralCode(control: FormControl): { [key: string]: boolean } | null {
     const codigoReferencia = this.referalCode; // Reemplaza 'tu_variable' por el valor de tu variable específica
-  
+
     if (control.value === codigoReferencia) {
       return { 'referralCodeInvalido': true };
     }
-  
+
     return null;
+  }
+
+  ngOnInit(): void {
+    this.userDataService.userData$.subscribe(data => {
+      this.referalCode = data?.referral_code;
+    });
   }
 
 }
