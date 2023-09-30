@@ -16,9 +16,9 @@ $gray-200: #e9ecef !default;
 $gray-300: #e3e3e3 !default;
 $gray-400: #ced4da !default;
 $gray-500: #adb5bd !default;
-$gray-600: #6c757d !default; // Line footer color
-$gray-700: #525f7f !default; // Line p color
-$gray-800: #32325d !default; // Line heading color
+$gray-600: #333333 !default; // Line footer color
+$gray-700: #333333 !default; // Line p color
+$gray-800: #333333 !default; // Line heading color
 $gray-900: #212529 !default;
 $link-disabled: #666666 !default;
 $transparent-bg: transparent !default;
@@ -94,9 +94,9 @@ $colors: map-merge(
 $default-color-opacity: rgba(182, 182, 182, 0.6) !default;
 $orange-color: #f96332 !default;
 
-$default: #23003D !default;
-$primary: #007094 !default;
-$secondary: #23003D !default;
+$default: #000 !default;
+$primary: #AB8E3A !default;
+$secondary: #AB8E3A !default;
 $tertiary: #4be8e6 !default;
 $success: #00f2c3 !default;
 $info: #4be8e6 !default;
@@ -105,15 +105,15 @@ $danger: #fd5d93 !default;
 $black: #222a42 !default;
 
 // gradient
-$default-states: #23003D !default;
-$primary-states: #079aca !default;
+$default-states: #AB8E3A !default;
+$primary-states: #f2c84a !default;
 $success-states: #0098f0 !default;
 $info-states: #4dfffc !default;
 $warning-states: #ff6491 !default;
 $danger-states: #ec250d !default;
 $black-states: #1d253b !default;
 
-$background-black: #1e1e2f !default;
+$background-black: #000000 !default;
 $background-states-black: #1e1e24 !default;
 
 // opacity

@@ -1,12 +1,12 @@
 <div class="content">
-  <div class="row ">
+  <div class="row">
     <div class="col-lg-4 col-sm-12">
       <ol class="breadcrumb bg-transparent ml-3">
         <li class="breadcrumb-item">Inicio</li>
         <li class="breadcrumb-item">Autogestión</li>
       </ol>
     </div>
-    <div class="col-lg-4 col-sm-12 mt-2 text-center ">
+    <div class="col-lg-4 col-sm-12 mt-2 text-center">
       <!-- <div class="card  card-stats text-center referido shadow-custom">
         <h3 class="">Wallet Autogestión</h3> 
         <div class="row">
@@ -23,106 +23,159 @@
         </div>
       </div> -->
     </div>
-    <div class="col-lg-4 col-sm-12  text-right p-2">
-      <div class="card  card-stats text-center referido p-2 shadow-custom">
-        <h3 class="pb-0">ID único para Referido</h3> 
+    <div class="col-lg-4 col-sm-12 text-right p-2">
+      <div class="card card-stats text-center referido p-2 shadow-custom">
+        <h3 class="pb-0">ID único para Referido</h3>
         <div class="row">
           <div class="col-8 pr-1">
-            <p class="ref"> {{referalCode}} </p>
+            <p class="ref">{{ referalCode }}</p>
           </div>
           <div class="col-lg-4 col-sm-12">
-            <button class="btn btn-secondary  btn-md  " [cdkCopyToClipboard]="referalCode">
+            <button
+              class="btn btn-secondary btn-md"
+              [cdkCopyToClipboard]="referalCode"
+            >
               Copiar
             </button>
-            <br> <br>
+            <br />
+            <br />
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="col-12 ml-3 ">
-    <h3 class="m-0">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
+  <div class="col-12 ml-3">
+    <h3 class="m-0">
+      Hola, {{ userDataService?.userData$?.value?.first_name | titlecase }}
+    </h3>
     <ng-container
-      *ngIf="userDataService?.userData$?.value?.subscription != 'none';else elseTemplate">
-      <p>Continúa aprendiendo mediante su subscripción
-        <strong>Icex AG</strong> 
-        </p>
+      *ngIf="
+        userDataService?.userData$?.value?.subscription != 'none';
+        else elseTemplate
+      "
+    >
+      <p>
+        Continúa aprendiendo mediante su subscripción
+        <strong>Icex AG</strong>
+      </p>
     </ng-container>
     <ng-template #elseTemplate>
-      <p>Hemos detectado que aún no tienes una subscripción activa, te animamos a conseguir una
-        <a routerLink="/self-management/create-order">aquí</a>.</p>
+      <p>
+        Hemos detectado que aún no tienes una subscripción activa, te animamos a
+        conseguir una <a routerLink="/self-management/create-order">aquí</a>.
+      </p>
     </ng-template>
   </div>
 
   <div class="row d-flex justify-content-center mt-4 mx-3 mb-3">
-    <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6  ">
-      <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/MWHr8Ndpmas"
-        title="YouTube video player" frameborder="0"
+    <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6">
+      <iframe
+        width="100%"
+        height="400"
+        style="border-radius: 20px"
+        src="https://www.youtube.com/embed/MWHr8Ndpmas"
+        title="YouTube video player"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
+        allowfullscreen
+      >
       </iframe>
     </div>
-    <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6  ">
-      <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/iNuf_fqlOuo"
-        title="YouTube video player" frameborder="0"
+    <div class="col-xs-12 col-sm-9 col-md-6 col-lg-6">
+      <iframe
+        width="100%"
+        height="400"
+        style="border-radius: 20px"
+        src="https://www.youtube.com/embed/iNuf_fqlOuo"
+        title="YouTube video player"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
+        allowfullscreen
+      >
       </iframe>
     </div>
   </div>
 
   <ng-container *ngIf="continueLearningCourses.length > 0">
-    <div class=" ml-3 row" style="width: 100% !important;">
+    <div class="ml-3 row" style="width: 100% !important">
       <div class="col-12">
         <h2 class="mt-4">Continuar viendo</h2>
-        <hr style="width: 100% !important;" color="green">
+        <hr style="width: 100% !important" color="green" />
       </div>
-      <div *ngFor="let c of continueLearningCourses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
+      <div
+        *ngFor="let c of continueLearningCourses"
+        class="col-lg-3 col-md-3 col-sm-12 col-sm-12"
+      >
         <div class="card">
-          <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
+          <img
+            class="card-img-top"
+            [src]="c?.path_preview_image"
+            alt="Card image cap"
+          />
           <div class="card-body">
             <h5 class="card-title text-center">
-              {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
+              {{
+                (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
+                  | uppercase
+              }}
             </h5>
-            <button class="btn btn-simple btn-secondary btn-block" type="button"
-              [routerLink]="['/class', c.id]">CONTINUAR
-              VIENDO</button>
+            <button
+              class="btn btn-simple btn-secondary btn-block"
+              type="button"
+              [routerLink]="['/class', c.id]"
+            >
+              CONTINUAR VIENDO
+            </button>
           </div>
         </div>
       </div>
     </div>
   </ng-container>
 
-  <div class=" ml-3 row" 
-    style="width: 100% !important;" 
-    *ngIf="userDataService?.userData$?.value?.subscription != 'none'" 
+  <div
+    class="ml-3 row"
+    style="width: 100% !important"
+    *ngIf="userDataService?.userData$?.value?.subscription != 'none'"
   >
     <div class="col-12">
       <h2 class="mt-4">Cursos</h2>
-      <hr style="width: 100% !important;" color="cyan">
+      <hr style="width: 100% !important" color="cyan" />
     </div>
 
-    <div *ngFor="let c of courses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
+    <div
+      *ngFor="let c of courses"
+      class="col-lg-3 col-md-3 col-sm-12 col-sm-12"
+    >
       <div class="card">
-        <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap">
+        <img
+          class="card-img-top"
+          [src]="c?.path_preview_image"
+          alt="Card image cap"
+        />
         <div class="card-body">
           <h5 class="card-title text-center">
-            {{ (c.title.length > 20 ? c.title.slice(0,18)  + '...' : c.title) | uppercase }}
+            {{
+              (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
+                | uppercase
+            }}
           </h5>
-          <button class="btn btn-secondary btn-block" type="button" [routerLink]="['/course', c.id]">IR AL
-            CURSO</button>
+          <button
+            class="btn btn-secondary btn-block"
+            type="button"
+            [routerLink]="['/course', c.id]"
+          >
+            IR AL CURSO
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  
-
-  <div class="row  ">
-    <div 
-    *ngIf="userDataService?.userData$?.value?.subscription == 'none'"
-      class="row "
+  <div class="row">
+    <div
+      *ngIf="userDataService?.userData$?.value?.subscription == 'none'"
+      class="row"
     >
       <div class="col-12 pl-5 pr-5">
         <div class="card shadow-custom p-3">
@@ -133,8 +186,8 @@
               </div>
               <div class="col-8">
                 <p>
-                  comienza a generar rentabilidad sobre tu inversión sólo debes realizar un
-                  único pago para acceder a nuestros beneficios
+                  comienza a generar rentabilidad sobre tu inversión sólo debes
+                  realizar un único pago para acceder a nuestros beneficios
                 </p>
               </div>
             </div>
@@ -145,13 +198,12 @@
                     <img
                       class="ml-3"
                       width="24px"
-                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
-                      alt="">
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-10">
-                    <p class=" text-left mt-2" >
-                      Autogestion de fondos
-                    </p>
+                    <p class="text-left mt-2">Autogestion de fondos</p>
                   </div>
                 </div>
               </div>
@@ -161,13 +213,12 @@
                     <img
                       class="ml-3"
                       width="24px"
-                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
-                      alt="">
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-10">
-                    <p class=" text-left mt-2" >
-                      Seguro de Capital
-                    </p>
+                    <p class="text-left mt-2">Seguro de Capital</p>
                   </div>
                 </div>
               </div>
@@ -177,11 +228,12 @@
                     <img
                       class="ml-3"
                       width="24px"
-                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
-                      alt="">
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-10">
-                    <p class=" text-left mt-2" >
+                    <p class="text-left mt-2">
                       Contrato digital Monitoreo 24/7
                     </p>
                   </div>
@@ -193,29 +245,12 @@
                     <img
                       class="ml-3"
                       width="24px"
-                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
-                      alt="">
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-10">
-                    <p class=" text-left mt-2" >
-                      Soporte 24/5
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img 
-                      class="ml-3"
-                      width="24px"
-                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
-                      alt="">
-                  </div>
-                  <div class="col-10">
-                    <p class=" text-left mt-2" >
-                      Alianzas Comerciales.
-                    </p>
+                    <p class="text-left mt-2">Soporte 24/5</p>
                   </div>
                 </div>
               </div>
@@ -225,21 +260,36 @@
                     <img
                       class="ml-3"
                       width="24px"
-                      src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/check-icon_a7hplc.svg"
-                      alt="">
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
                   </div>
                   <div class="col-10">
-                    <p class=" text-left mt-2" >
-                      Curso Básico Forex
-                    </p>
+                    <p class="text-left mt-2">Alianzas Comerciales.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-2 my-auto mx-auto">
+                    <img
+                      class="ml-3"
+                      width="24px"
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-10">
+                    <p class="text-left mt-2">Curso Básico Forex</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row justify-content-end">
-              <div class=" col-4 ">
-                <button class="btn btn-secondary  btn-block mt-4"
-                 routerLink="/self-management/create-order"
+              <div class="col-4">
+                <button
+                  class="btn btn-secondary btn-block mt-4"
+                  routerLink="/self-management/create-order"
                 >
                   Comprar
                 </button>
@@ -251,18 +301,18 @@
     </div>
 
     <div class="row pl-5 pr-5">
-      <div class="col-lg-12 col-md-12 shadow-custom commissions ">
-        <div class="row ">
+      <div class="col-lg-12 col-md-12 shadow-custom commissions">
+        <div class="row">
           <div class="col-7">
-            <h3 class=" card-subtitle mt-3 mb-2">
+            <h3 class="card-subtitle mt-3 mb-2">
               Comisiona con International Capital Exchange
             </h3>
             <p class="text-light">
-              Invita a tus amigos y empieza a generar ingresos extras. 
-              recibe el 25% del valor del paquete por el primer referido, 
-              un 25% por el segundo referido y un 100% por tu tercer referido 
+              Invita a tus amigos y empieza a generar ingresos extras. recibe el
+              25% del valor del paquete por el primer referido, un 25% por el
+              segundo referido y un 100% por tu tercer referido
             </p>
-            <p class="mb-3 text-light" >
+            <p class="mb-3 text-light">
               Compártelo y empieza a comisionar con los paquetes de Autogestión
             </p>
           </div>
@@ -271,17 +321,17 @@
               <p class="ref text-center">{{ referalCode }}</p>
             </div>
             <div class="">
-              <button class="btn btn-ref  btn-block  " 
+              <button
+                class="btn btn-ref btn-block"
                 [cdkCopyToClipboard]="referalCode"
                 (click)="copied()"
               >
-              {{ buttonText }}
+                {{ buttonText }}
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </div>

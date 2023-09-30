@@ -3,7 +3,7 @@
 }
 
 a, p, i, div, ul, li, span {
-    color: #23003d !important;
+    color: #000 !important;
     font-weight: 600 !important;
 }
 
@@ -12,14 +12,14 @@ a, p, i, div, ul, li, span {
 }
 
 .logo {
-    border-bottom: 1px solid #23003d  !important;
+    border-bottom: 1px solid #000  !important;
 }
 
 .separator {
     height: 0;
     margin: 0.5rem 0;
     overflow: hidden;
-    border-top: 1px solid #23003d;
+    border-top: 1px solid #000;
 }
 
 .sidebar .nav li > a, .off-canvas-sidebar .nav li > a {  

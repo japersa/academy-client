@@ -15,7 +15,7 @@ nav-link {
     /* display: flex !important;
     justify-content: end !important; */
     border-radius: 20px !important;
-    color: #333333 !important;
+    color: var(--primary) !important;
     margin-right: 5px !important;
 }
 
@@ -23,4 +23,8 @@ nav-link {
     .nones {
         display: none !important;
     }
+}
+
+.bg-gray {
+    
 }

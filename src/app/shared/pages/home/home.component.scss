@@ -1,5 +1,5 @@
 .content {
-    background-image: url('https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598112/assets/fondo_fyiehj.jpg') !important;
+    background-image: url('https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042471/webapp/FONDO_zftidw.jpg') !important;
 }
 
 .class-user {
@@ -29,7 +29,7 @@
 .banner .button-container-one .btn-banner {
     background-image: linear-gradient(to bottom left, #00c573, #00c573, #00c573) !important;
     background-color: #00c573 !important;
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 .banner .button-container-two a:hover img {
@@ -49,13 +49,13 @@
     margin-top: -50px;
 }
 .referido {
-    color: #21201F !important;
+    color: var(--primary) !important;
     border-radius: 10px;
 }
 
 .referido h3{
     padding: 0px !important;
-    border-bottom: 1px solid #21201F;
+    border-bottom: 1px solid var(--primary);
 }
 
 .referido button {
@@ -81,17 +81,17 @@
 }
 
 h3, h2 {
-     color: var(--secondary) !important; 
+     color: var(--primary) !important; 
 } 
 
 .card {
     background-color: #f4f4f4 !important;
-    border-bottom: 3px solid var(--secondary);
+    border-bottom: 3px solid var(--primary);
 }
 
 .ref {
     background-color: lightgray !important;
-    color: var(--secondary) !important;
+    color: var(--primary) !important;
     padding: 5px !important;
 }
 
@@ -100,11 +100,11 @@ h3, h2 {
 .card-title {
     font-weight: 600 !important;
     font-size: 1.4rem;
-    border-bottom: 2px solid #4be8e6;
+    border-bottom: 2px solid #000;
 }
 
 .card-subtitle {
-    color: #4be8e6 !important;
+    color: #000 !important;
 }
 
 .container-body {
@@ -122,34 +122,34 @@ h3, h2 {
 
 .phase {
     border-radius: 10px;
-    background-color: var(--secondary);
+    background-color: var(--primary);
 }
 
 .phase h3 {
-    color: #4be8e6 !important;
+    color: #000 !important;
 }
 
 .goals {
     border-radius: 10px;
     border-top: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
-    border-right: 3px solid #4be8e6;
+    border-right: 3px solid #000;
     border-bottom: 1px solid #cccccc;
 }
 
 .goals p {
-    color: #808080;
+    color: #000;
 }
 
 .commissions {
-    background-color: var(--secondary) !important;
+    background-color: var(--primary) !important;
 }
 
 .btn-ref {
-    color: var(--secondary);
-    background: #4be8e6 !important;
-    background-image: #4be8e6 !important;
-    background-color: #4be8e6 !important;
+    color: var(--primary);
+    background: #000 !important;
+    background-image: #000 !important;
+    background-color: #000 !important;
 }
 
 // .btn:hover {
