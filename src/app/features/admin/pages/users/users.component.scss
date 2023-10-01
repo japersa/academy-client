@@ -9,7 +9,7 @@
 }
 
 .filters {
-    border: 1px solid #c4c4c4;
+    border: 1px solid black;
     border-radius: 10px;
 }
 
@@ -29,7 +29,7 @@ input {
     top: 15px;
     pointer-events: none;
     font-size: x-large;
-    color: #aaa;
+    color: var(--primary);
 }
  .id {
     max-width: 50px !important;

@@ -8,7 +8,7 @@
       </li>
     </ol>
     <div class="col-12 ml-3 ">
-      <h3 class="m-0">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
+      <h3 class="m-0 text-primary">Hola, {{userDataService?.userData$?.value?.first_name | titlecase}} </h3>
       <ng-container
         *ngIf="userDataService?.userData$?.value?.subscription != 'none';else elseTemplate">
         <p>Continúa aprendiendo mediante su subscripción

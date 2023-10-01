@@ -126,7 +126,8 @@ h3, h2 {
 }
 
 .phase h3 {
-    color: #000 !important;
+    color: white !important;
+    text-transform: uppercase;
 }
 
 .goals {
@@ -142,19 +143,8 @@ h3, h2 {
 }
 
 .commissions {
-    background-color: var(--primary) !important;
+    background-color: black !important;
 }
-
-.btn-ref {
-    color: var(--primary);
-    background: #000 !important;
-    background-image: #000 !important;
-    background-color: #000 !important;
-}
-
-// .btn:hover {
-//     background-color: #0AC116 !important;
-// }
 
 
 

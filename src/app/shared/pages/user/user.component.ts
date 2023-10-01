@@ -1,16 +1,13 @@
 import { UpdatePasswordService } from './../../services/update-password.service';
 import { UserDataService } from './../../../core/services/user-data.service';
-import { take } from 'rxjs/operators';
 import { NotificationsService } from './../../../core/services/notifications.service';
 import { UtilsService } from './../../../core/services/utils.service';
-import { Subscription } from 'rxjs';
 import { UntypedFormControl, UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EditUserService } from '../../services/edit-user.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { CoursesService } from '../../services/courses.service';
 import { UserService } from '../../services/user.service';
-import { log } from 'console';
 
 
 @Component({
@@ -20,7 +17,7 @@ import { log } from 'console';
 })
 export class UserComponent implements OnInit, OnDestroy {
 
-  user = [];
+  user = {};
   approvedCourses = [];
 
   public rol = '';
@@ -28,7 +25,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public last_name = this.userDataService.userData$.value.last_name;
   public username = this.userDataService.userData$.value.username;
 
-  showPasswordField = false; 
+  showPasswordField = false;
   showButtonPassword = true;
 
   updateForm: UntypedFormGroup;
@@ -178,11 +175,9 @@ export class UserComponent implements OnInit, OnDestroy {
     );
   }
 
-  getUser(){
+  getUser() {
     this.userService.getUser().subscribe(user => {
       this.user = user;
-      console.log(this.user);
-      
     })
   }
 

@@ -4,19 +4,19 @@
 
 @mixin form-control-placeholder($color, $opacity) {
   .form-control::-moz-placeholder {
-    color: $color;
+    color: $dark-gray;
     @include opacity(1);
   }
   .form-control:-moz-placeholder {
-    color: $color;
+    color: $dark-gray;
     @include opacity(1);
   }
   .form-control::-webkit-input-placeholder {
-    color: $color;
+    color: $dark-gray;
     @include opacity(1);
   }
   .form-control:-ms-input-placeholder {
-    color: $color;
+    color: $dark-gray;
     @include opacity(1);
   }
 }

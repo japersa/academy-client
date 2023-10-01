@@ -50,7 +50,7 @@
             (click)="$event.preventDefault()">
             <div class=" photo">
               <img alt="Profile Photo"
-                [src]=" userDataService.userData$.value.image_profile !== '' ? userDataService.userData$.value.image_profile : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'" />
+                [src]=" userDataService.userData$.value?.image_profile  ? userDataService.userData$.value.image_profile : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
             <p (click)="doLogout()" class=" d-lg-none">Cerrar sesión</p>
