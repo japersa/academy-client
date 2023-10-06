@@ -40,7 +40,7 @@
           </div> -->
           <div class="card-body">
             <div class="dataTables_wrapper py-4">
-              <div class="row filters mb-5 mx-2 py-2 ">
+              <div class="row filters mb-5 mx-2 py-2">
                 <div class="col-sm-12 col-md-4 my-auto">
                   <div class="dataTables_length" id="datatable_length">
                     <label>
@@ -64,7 +64,6 @@
                           All
                         </option>
                       </select>
-
                     </label>
                   </div>
                 </div>
@@ -73,15 +72,15 @@
                     <label>
                       Filtros
                       <!-- <div class="col-xs-12 col-12 col-md-4 form-group mb-3"> -->
-                        <input
-                          type="text"
-                          placeholder="Selecciona el rango de fecha"
-                          class="form-control form-control-sm"
-                          [bsConfig]="bsConfig"
-                          [(ngModel)]="bsRangeValue"
-                          (bsValueChange)="onValueChange($event)"
-                          bsDaterangepicker
-                        />
+                      <input
+                        type="text"
+                        placeholder="Selecciona el rango de fecha"
+                        class="form-control form-control-sm"
+                        [bsConfig]="bsConfig"
+                        [(ngModel)]="bsRangeValue"
+                        (bsValueChange)="onValueChange($event)"
+                        bsDaterangepicker
+                      />
                       <!-- </div> -->
                     </label>
                     <label class="search-label">
@@ -89,10 +88,10 @@
                         type="search"
                         class="form-control form-control-sm mr-2 search-input"
                         placeholder="Buscar"
-                        aria-controls="datatable" 
+                        aria-controls="datatable"
                         (keyup)="filterTable($event)"
                       />
-                      <i class="fas fa-search search-icon"  ></i>
+                      <i class="fas fa-search search-icon"></i>
                     </label>
                     <button
                       class="btn btn-secondary btn-fab btn-icon btn-round"
@@ -143,14 +142,17 @@
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column
-                  name="Fecha de registro" 
+                  name="Fecha de registro"
                   prop="date_joined"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     {{ row?.date_joined | date }}
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="C.C Referido" prop="deferred_document_number">
+                <ngx-datatable-column
+                  name="C.C Referido"
+                  prop="deferred_document_number"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     {{ row?.deferred_document_number | titlecase }}
                   </ng-template>
@@ -166,7 +168,7 @@
                       <i class="tim-icons icon-zoom-split"> </i>
                     </a>
                     <button
-                      class="btn btn-success btn-link btn-sm btn-icon"
+                      class="btn btn-green btn-link btn-sm btn-icon"
                       (click)="editUser(row)"
                       tooltip="Editar"
                       type="button"

@@ -93,43 +93,10 @@ export class CheckoutComponent implements OnInit {
     }
   ];
 
-/*   currencies: any[] = [
-    {
-      name: 'Bitcoin',
-      logo: '',
-      symbol: 'btc'
-    },
-    {
-      name: 'Bitcoin Cash',
-      logo: '',
-      symbol: 'BCH'
-    },
-    {
-      name: 'Ripple',
-      logo: '',
-      symbol: 'xrp'
-    },
-    {
-      name: 'Litecoin',
-      logo: '',
-      symbol: 'ltc'
-    },
-  ]; */
-
   modalRef?: BsModalRef;
   bsModalRef?: BsModalRef;
 
   criptoform!: FormGroup;
-
-  /*   constructor(private stripeScriptTag: StripeScriptTag,
-      private packsService: PacksService,
-      public utilsService: UtilsService,
-      private route: ActivatedRoute) {
-      if (!this.stripeScriptTag.StripeInstance) {
-        this.stripeScriptTag.setPublishableKey(environment.stripePK);
-      }
-      this.buildForm();
-    } */
 
   constructor(private stripeScriptTag: StripeScriptTag,
     private packsService: PacksService,

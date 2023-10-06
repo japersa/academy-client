@@ -1,87 +1,84 @@
 <div class="d-none d-sm-block bg-gray">
-  <footer class="footer" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
-    <div class=" container-fluid">
+  <footer
+    class="footer"
+    [ngClass]="{
+      'class-user': userDataService?.userData$?.value?.rol === 'student'
+    }"
+  >
+    <div class="container-fluid">
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-6">
-          <ul class=" nav">
-            <li class=" nav-item">
-              <img class="logo" src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/LOGO-MENU_zlgeeq.png"
-                alt="">
-            </li>
-            <li class=" nav-item">
-              <a class=" nav-link" href="https://intcapex.com/">
-                ICEX
-              </a>
-            </li>
-            <li class=" nav-item">
-              <a class=" nav-link" href="https://intcapex.com/quienes-somos/">
-                NOSOTROS
-              </a>
-            </li>
-            <li class=" nav-item">
-              <a class=" nav-link" href="https://intcapex.com/contacto/">
-                CONTACTO
+          <ul class="nav">
+            <li class="nav-item">
+              <a
+                href="http://ultramarkets.pro/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  class="logo"
+                  src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/LOGO-MENU_zlgeeq.png"
+                  alt=""
+                />
               </a>
             </li>
           </ul>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-6 d-flex align-items-center justify-content-end">
+        <div
+          class="col-xs-12 col-sm-4 col-md-3 col-lg-6 d-flex align-items-center justify-content-end"
+        >
           <div class="">
-            <a href="https://www.youtube.com/channel/UC8hsKsNMTTkR3LLcwoIL4og" target="_blank">
+            <a href="#" target="_blank">
               <i class="fa-brands fa-youtube fa-3x align-middle"></i>
             </a>
-            <a href="https://www.facebook.com/International-Capital-Exchange-ICEX-101513835666077" target="_blank">
+            <a href="#" target="_blank">
               <i class="fa-brands fa-facebook fa-3x align-middle"></i>
             </a>
-            <a href="https://www.instagram.com/invierte_icex/?r=nametag" target="_blank">
-              <i class="fa-brands fa-instagram fa-3x align-middle "></i>
+            <a href="#" target="_blank">
+              <i class="fa-brands fa-instagram fa-3x align-middle"></i>
             </a>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-12 d-flex align-items-center justify-content-center">
-          <div class=" copyright">
-            &copy; {{ test | date: "yyyy" }} Hecho con
-            <i class=" tim-icons icon-heart-2"> </i> para
-            <a href="https://intcapex.com/" target="_blank">
-              ULTRA VIP
-            </a>
+          <div class="copyright">
+            &copy; {{ test | date : "yyyy" }} Hecho con
+            <i class="tim-icons icon-heart-2"> </i> para
+            <a href="http://ultramarkets.pro/" target="_blank"> ULTRA VIP </a>
           </div>
         </div>
       </div>
     </div>
   </footer>
- </div>
+</div>
 
 <div class="d-block d-sm-none">
-  <footer class="footer p-3" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
-    <div class=" container-fluid">
+  <footer
+    class="footer p-3"
+    [ngClass]="{
+      'class-user': userDataService?.userData$?.value?.rol === 'student'
+    }"
+  >
+    <div class="container-fluid">
       <div class="row">
         <div class="col-12 d-flex align-items-center justify-content-center">
           <ul class="nav">
-            <li class=" nav-item">
-              <img class="logo" src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1655598577/assets/logo-icex-footer_ovkxec.png"
-                alt="">
-            </li>
-            <li class=" nav-item">
-              <a class=" nav-link" href="https://intcapex.com/">
-                ICEX
+            <li class="nav-item">
+              <a
+                href="http://ultramarkets.pro/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  class="logo"
+                  src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/LOGO-MENU_zlgeeq.png"
+                  alt=""
+                />
               </a>
             </li>
-            <li class=" nav-item">
-              <a class=" nav-link" href="https://intcapex.com/quienes-somos/">
-                NOSOTROS
-              </a>
-            </li>
-            <li class=" nav-item">
-              <a class=" nav-link" href="https://intcapex.com/contacto/">
-                CONTACTO
-              </a>
-            </li>
-                    </ul>
+          </ul>
         </div>
-        
       </div>
       <div class="row">
         <div class="col-12 d-flex align-items-center justify-content-center">
@@ -100,12 +97,10 @@
       </div>
       <div class="row">
         <div class="col-12 d-flex align-items-center justify-content-center">
-          <div class=" copyright">
-            &copy; {{ test | date: "yyyy" }} Hecho con
-            <i class=" tim-icons icon-heart-2"> </i> por
-            <a href="#" target="_blank">
-              Leviatan
-            </a>
+          <div class="copyright">
+            &copy; {{ test | date : "yyyy" }} Hecho con
+            <i class="tim-icons icon-heart-2"> </i> por
+            <a href="#" target="_blank"> ULTRA VIP </a>
           </div>
         </div>
       </div>

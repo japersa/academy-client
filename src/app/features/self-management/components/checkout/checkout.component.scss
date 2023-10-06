@@ -1,3 +1,7 @@
+.content {
+    background-image: url('https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042471/webapp/FONDO_zftidw.jpg') !important;
+  }
+
 .shadow {
     box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
     border-radius: 10px;
@@ -6,12 +10,12 @@
 .card-title {
     color: var(--secondary) !important;
     font-weight: 600 !important;
-    border-bottom: 2px solid #4be8e6;
+    border-bottom: 2px solid black;
     
 }
 
 .container-credit-card {
-    border: 2px solid #4be8e6;
+    border: 2px solid black;
     border-radius: 2px;
 }
 
@@ -35,9 +39,9 @@
 
 .btn-md {
     color: var(--secondary);
-    background: #4be8e6 !important;
-    background-image: #4be8e6 !important;
-    background-color: #4be8e6 !important;
+    background: black !important;
+    background-image: black !important;
+    background-color: black !important;
 }
 
 .modal-body {

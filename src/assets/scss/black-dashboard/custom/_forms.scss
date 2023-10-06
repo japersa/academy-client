@@ -2,11 +2,12 @@
 @include form-control-placeholder($primary, 1);
 
 .form-control {
+  color: black !important;
   border-color: lighten($primary, 5%);
   border-radius: $border-radius-lg;
   font-size: $font-size-sm;
   @include transition-input-focus-color();
-
+  
   &:focus {
     border-color: $primary;
     background-color: $input-bg;
@@ -56,6 +57,8 @@
     background-color: $white;
   }
 }
+
+
 
 .has-success .input-group-append .input-group-text,
 .has-success .input-group-prepend .input-group-text,

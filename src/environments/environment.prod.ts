@@ -8,15 +8,14 @@ export const environment = {
     captureUnhandledRejections: true,
   },
   firebaseConfig: {
-    apiKey: 'AIzaSyCJFz1-2eop1L6R4mIyUS9KHbP4tOFLQi0',
-    authDomain: 'icex-prd.firebaseapp.com',
-    projectId: 'icex-prd',
-    storageBucket: 'icex-prd.appspot.com',
-    messagingSenderId: '783879619764',
-    appId: '1:783879619764:web:e77be40c1689dd8a8883e1'
+ apiKey: "AIzaSyCAzX6h9JQEXwfUAJgUPYHFNGOTE_QvXpg",
+  authDomain: "ultramarkets-dev.firebaseapp.com",
+  projectId: "ultramarkets-dev",
+  storageBucket: "ultramarkets-dev.appspot.com",
+  messagingSenderId: "819614109600",
+  appId: "1:819614109600:web:d5823c273ea75dcae49ec5",
+  measurementId: "G-HCYCE7Q5Z8"
   },
-  recaptcha: {
-    siteKey: '6LdJGV4fAAAAAMXk2Faeso4ZvN8LbiXElUhwU2pB',
-  },
+
   stripePK: 'pk_live_51Mok6LKim0A5yCrrqPttq7ccd8x9chqLWb2Kft2CUUWSUt3CWhpAOAR6vruVw0cf2OShadhQs1AMCRplMbAyofHx00f4E36Hg0'
 };

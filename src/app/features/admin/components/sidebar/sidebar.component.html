@@ -1,64 +1,17 @@
 <div class="sidebar-wrapper">
-  <div class="logo">
-    <div 
-      class="d-inline-flex align-items-center"
-      *ngIf="rol === 'teacher'"
-    >
-      <i class="fa fa-box mx-4" style="font-size: 24px;"  ></i>
-      <button 
-        class="
-          btn btn-secondary btn-block 
-          custom-btn my-auto d-inline" 
-        routerLink="/course-by-steps"  
-      > 
-        
-        Crear Curso
-      </button>
-    </div>
-    
-    <div 
-      class="d-inline-flex align-items-center"
-      *ngIf="rol === 'admin'"
-    >
-    <i class="fa fa-box mx-4" style="font-size: 24px;"  ></i>
-    <button 
-      class="
-        btn btn-secondary btn-block 
-        custom-btn my-auto d-inline"
-       
-      routerLink="/packages"  
-    > 
-      
-      Paquetes
-    </button>
-    </div>
-
-    <div 
-      class="d-inline-flex align-items-center"
-      *ngIf="rol === 'user'"
-    >
-      <i class="fa fa-box mx-4" style="font-size: 24px;"  ></i>
-      <button 
-        class="
-          btn btn-secondary btn-block 
-          custom-btn my-auto d-inline"
-        (click)="clientButtonAction()"  
-      >Nuevo Paquete
-      </button>
-    </div>
-    
-
-    
-  </div> 
   <ul class="nav pb-5">
-    <li *ngFor="let menuitem of menuItems" routerLinkActive="active" class="mb-4">
+    <li
+      *ngFor="let menuitem of menuItems"
+      routerLinkActive="active"
+      class="mb-4"
+    >
       <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
         <i class="{{ menuitem.icontype }}"></i>
         <p>{{ menuitem.title }}</p>
       </a>
       <!--If it have a submenu-->
-      <a 
+      <a
         data-toggle="collapse"
         routerLinkActive="active"
         *ngIf="menuitem.type === 'sub'"
@@ -92,14 +45,14 @@
               <span class="sidebar-normal">{{ childitems.title }}</span>
             </a>
             <!--If it have a submenu-->
-            <a 
+            <a
               data-toggle="collapse"
               (click)="childitems.isCollapsed = !childitems.isCollapsed"
               [attr.aria-expanded]="!childitems.isCollapsed"
               [attr.aria-controls]="childitems.collapse"
               *ngIf="childitems.type === 'sub'"
             >
-              <span class="sidebar-mini-icon ">{{ childitems.smallTitle }}</span>
+              <span class="sidebar-mini-icon">{{ childitems.smallTitle }}</span>
               <span class="sidebar-normal"
                 >{{ childitems.title }}<b class="caret"></b
               ></span>
@@ -141,7 +94,7 @@
       </a>
     </li>
     <li>
-      <a href="https://intcapex.com/" target="_blank">
+      <a href="https://ultramarkets.pro/" target="_blank">
         <i class="tim-icons icon-chart-pie-36"></i>
         <p>Página web</p>
       </a>

@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   bsRangeValue: Date[] = null;
 
   bsConfig?: Partial<BsDatepickerConfig> = {
-    containerClass: 'theme-dark-blue',
+    containerClass: 'theme-default',
     dateInputFormat: 'YYYY-MM-DD',
     useUtc: true,
     showClearButton: true

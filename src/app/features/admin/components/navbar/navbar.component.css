@@ -3,9 +3,13 @@
     margin-top: -5px;
 }
 
+.nav-item {
+    color: black;
+}
+
 .notification {
     background: #0AC116 !important;
-    color: #ffffff;
+    color: black;
     border-radius: 0.875rem;
     height: 6px;
     width: 6px;

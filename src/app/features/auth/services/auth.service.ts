@@ -32,7 +32,7 @@ export class AuthService {
       this.userDataService.loadStorageUserData();
       this.userDataService.isUserLoggedIn$.next(true);
 
-      this.router.navigate(['/home']);
+      this.router.navigate(['/self-management/home']);
     })
 
     )

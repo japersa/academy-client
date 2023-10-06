@@ -120,12 +120,6 @@ export const ROUTES: RouteInfo[] = [
         type: 'link',
         smallTitle: 'IN'
       },
-      // {
-      //   path: 'ranking',
-      //   title: 'ranking',
-      //   type: 'link',
-      //   smallTitle: 'RK'
-      // },
       {
         path: 'orders',
         title: 'ordenes',
@@ -135,44 +129,16 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/self-management',
-    title: 'autogestión',
-    type: 'sub',
-    icontype: 'tim-icons icon-trophy',
+    path: '/self-management/home',
+    title: 'autogestión de fondos',
+    type: 'link',
+    icontype: 'fa fa-chart-line',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: 'home',
-        title: 'inicio',
-        type: 'link',
-        smallTitle: 'IN'
-      },
-      // {
-      //   path: 'funds',
-      //   title: 'fondos',
-      //   type: 'link',
-      //   smallTitle: 'FO'
-      // },
-      // {
-      //   path: 'withdrawals',
-      //   title: 'retiros y comiciones',
-      //   type: 'link',
-      //   smallTitle: 'WT'
-      // },
-    ]
   },
   {
     path: '/downloads',
     title: 'descargas',
-    type: 'link',
-    icontype: 'tim-icons icon-single-02',
-    role: [ROLES_ENUM.ALL],
-  },
-  {
-    path: '/billing',
-    title: 'Facturacion',
     type: 'link',
     icontype: 'tim-icons icon-single-02',
     role: [ROLES_ENUM.ALL],
@@ -205,7 +171,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'user', 
+        path: 'user',
         title: 'Usuarios',
         type: 'link',
         smallTitle: 'US'
@@ -261,68 +227,12 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     ]
   },
   {
-    path: '/funding-program',
-    title: 'Funding program',
-    type: 'sub',
-    icontype: 'tim-icons icon-coins',
-    role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: 'prox',
-        title: 'Proximamente',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-      /* {
-        path: 'orders',
-        title: 'Ordenes',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-      {
-        path: 'home',
-        title: 'Area Trading Paquetes',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-      {
-        path: 'withdrawals',
-        title: 'retiros de beneficios',
-        type: 'link',
-        smallTitle: 'WT'
-      },
-      {
-        path: 'ranking',
-        title: 'ranking',
-        type: 'link',
-        smallTitle: 'RK'
-      }, */
-    ]
-  },
-  {
-    path: '/self-management',
+    path: '/self-management/home',
     title: 'autogestión de fondos',
-    type: 'sub',
+    type: 'link',
     icontype: 'fa fa-chart-line',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: 'global-withdrawals',
-        title: 'retiros y comiciones globales',
-        type: 'link',
-        smallTitle: 'G&W'
-      },
-      {
-        path: 'runners',
-        title: 'Corredores',
-        type: 'link',
-        smallTitle: 'SB'
-      }
-    ]
   },
   {
     path: '/academy',
@@ -331,13 +241,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
   },
-  {
-    path: '/billing',
-    title: 'Facturación',
-    type: 'link',
-    icontype: 'fa-sharp fa-solid fa-ticket',
-    role: [ROLES_ENUM.ALL],
-  },
+
 ];
 
 // Routes to TEACHER
@@ -372,81 +276,12 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     ]
   },
   {
-    path: '/funding-program',
-    title: 'Funding program',
-    type: 'sub',
-    icontype: 'tim-icons icon-coins',
+    path: '/self-management/home',
+    title: 'autogestión de fondos',
+    type: 'link',
+    icontype: 'fa fa-chart-line',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: 'home',
-        title: 'Area Trading',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-/*       {
-        path: 'orders',
-        title: 'Ordenes',
-        type: 'link',
-        smallTitle: 'TP'
-      }, */
-      {
-        path: 'withdrawals',
-        title: 'Retiros',
-        type: 'link',
-        smallTitle: 'WT'
-      },
-      {
-        path: 'ranking',
-        title: 'ranking',
-        type: 'link',
-        smallTitle: 'RK'
-      },
-      {
-        path: 'metrics',
-        title: 'Metricas',
-        type: 'link',
-        smallTitle: 'M'
-      },
-    ]
-  },
-  {
-    path: '/self-management',
-    title: 'autogestión de fondos',
-    type: 'sub',
-    icontype: 'fa fa-chart-line',
-    role: [ROLES_ENUM.ALL, ROLES_ENUM.TEACHER],
-    collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: 'home',
-        title: 'Inicio',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-/*       {
-        path: 'orders',
-        title: 'Ordenes',
-        type: 'link',
-        smallTitle: 'TP'
-      }, */
-
-      {
-        path: 'withdrawals',
-        title: 'retiros y comisiones',
-        type: 'link',
-        smallTitle: 'RC'
-      },
-      {
-        path: 'wallet',
-        title: 'Wallet',
-        type: 'link',
-        smallTitle: 'W'
-      }, 
-    ]
   },
   {
     path: '/academy',
@@ -455,20 +290,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
   },
-  {
-    path: '/billing',
-    title: 'Facturacion',
-    type: 'link',
-    icontype: 'fa-sharp fa-solid fa-ticket',
-    role: [ROLES_ENUM.ALL],
-  },
-/*   {
-    path: '/downloads',
-    title: 'descargas', 
-    type: 'link',
-    icontype: 'fa fa-cloud-download-alt',
-    role: [ROLES_ENUM.ALL],
-  } */
+
 ];
 
 // Routes to USER
@@ -481,81 +303,12 @@ export const ROUTES_USER: RouteInfo[] = [
     role: [ROLES_ENUM.ALL]
   },
   {
-    path: '/funding-program',
-    title: 'Funding program',
-    type: 'sub',
-    icontype: 'tim-icons icon-coins',
+    path: '/self-management/home',
+    title: 'autogestión de fondos',
+    type: 'link',
+    icontype: 'fa fa-chart-line',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: 'home',
-        title: 'Area Trading',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-/*       {
-        path: 'orders',
-        title: 'Ordenes',
-        type: 'link',
-        smallTitle: 'TP'
-      }, */
-      {
-        path: 'withdrawals',
-        title: 'Retiros',
-        type: 'link',
-        smallTitle: 'WT'
-      },
-      {
-        path: 'ranking',
-        title: 'ranking',
-        type: 'link',
-        smallTitle: 'RK'
-      },
-      {
-        path: 'metrics',
-        title: 'Metricas',
-        type: 'link',
-        smallTitle: 'M'
-      },
-    ]
-  },
-  {
-    path: '/self-management',
-    title: 'autogestión de fondos',
-    type: 'sub',
-    icontype: 'fa fa-chart-line',
-    role: [ROLES_ENUM.ALL, ROLES_ENUM.TEACHER],
-    collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: 'home',
-        title: 'Inicio',
-        type: 'link',
-        smallTitle: 'TP'
-      },
-/*       {
-        path: 'orders',
-        title: 'Ordenes',
-        type: 'link',
-        smallTitle: 'TP'
-      }, */
-
-      {
-        path: 'withdrawals',
-        title: 'retiros y comisiones',
-        type: 'link',
-        smallTitle: 'RC'
-      },
-      {
-        path: 'wallet',
-        title: 'Wallet',
-        type: 'link',
-        smallTitle: 'W'
-      }, 
-    ]
   },
   {
     path: '/academy',
@@ -571,13 +324,13 @@ export const ROUTES_USER: RouteInfo[] = [
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
   },
-/*   {
-    path: '/downloads',
-    title: 'descargas',
-    type: 'link',
-    icontype: 'fa fa-cloud-download-alt',
-    role: [ROLES_ENUM.ALL],
-  } */
+  /*   {
+      path: '/downloads',
+      title: 'descargas',
+      type: 'link',
+      icontype: 'fa fa-cloud-download-alt',
+      role: [ROLES_ENUM.ALL],
+    } */
 ];
 
 
@@ -605,26 +358,18 @@ export class SidebarComponent implements OnInit {
       type: 'link',
       icontype: 'tim-icons icon-single-02',
     },
-/*     {
-      path: '/customer-service',
-      title: 'Servicio al Cliente',
-      type: 'link',
-      icontype: 'fa fa-headset',
-    }, */
+    /*     {
+          path: '/customer-service',
+          title: 'Servicio al Cliente',
+          type: 'link',
+          icontype: 'fa fa-headset',
+        }, */
   ];
 
   constructor(private router: Router,
     private userDataService: UserDataService) { }
 
   public rol: string;
-
-  private adminButtonAction() {
-    this.router.navigate(['/funding-program/create-order'])
-  }
-
-  private clientButtonAction() {
-    this.router.navigate(['/funding-program/create-order'])
-  }
 
   ngOnInit() {
     this.userDataService.userData$.subscribe(userData => {

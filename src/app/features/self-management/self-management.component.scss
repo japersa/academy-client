@@ -1,3 +1,7 @@
+.content {
+    background-image: url('https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042471/webapp/FONDO_zftidw.jpg') !important;
+}
+
 .shadow-custom {
     box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
     border-radius: 10px;
@@ -32,6 +36,11 @@ h3, h2 {
     color: var(--secondary) !important;
     padding: 5px !important;
 }
+.ref2 {
+    background-color: #fff !important;
+    color: var(--secondary) !important;
+    padding: 5px !important;
+}
 
 .card-body {
     border-bottom: 1px solid #cccccc;
@@ -45,7 +54,7 @@ h3, h2 {
 }
 
 .container-body p {
-    color: #808080;
+    color: black;
 }
 
 .commissions {
@@ -54,11 +63,11 @@ h3, h2 {
 
 .btn-ref {
     color: var(--secondary);
-    background: #4be8e6 !important;
-    background-image: #4be8e6 !important;
-    background-color: #4be8e6 !important;
+    background: black !important;
+    background-image: black !important;
+    background-color: black !important;
 }
 
 .card-subtitle {
-    color: #4be8e6 !important;
+    color: black !important;
 }

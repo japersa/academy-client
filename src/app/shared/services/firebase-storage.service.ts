@@ -30,7 +30,7 @@ export class FirebaseStorageService {
   uploadAvatar(event) {
 
     const file = event.target.files[0];
-    const filePath = `/icex/uploads/avatares/${this.userDataService.getUsername()}`;
+    const filePath = `/ultra/uploads/avatares/${this.userDataService.getUsername()}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -65,7 +65,7 @@ export class FirebaseStorageService {
 
     const file = event.target.files[0];
 
-    const filePath = `/icex/uploads/courses/covers/${randomId}`;
+    const filePath = `/ultra/uploads/courses/covers/${randomId}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -110,7 +110,7 @@ export class FirebaseStorageService {
 
     const file = event.target.files[0];
 
-    const filePath = `/icex/uploads/courses/covers/${randomId}`;
+    const filePath = `/ultra/uploads/courses/covers/${randomId}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -165,7 +165,7 @@ export class FirebaseStorageService {
 
     const file = event.target.files[0];
 
-    const filePath = `/icex/uploads/courses/videos/${randomId}`;
+    const filePath = `/ultra/uploads/courses/videos/${randomId}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -207,7 +207,7 @@ export class FirebaseStorageService {
     for (const file of files) {
       const randomId = Math.random().toString(36).substring(2);
 
-      const filePath = `/icex/uploads/courses/files/${randomId + '-' + Date.now()}`;
+      const filePath = `/ultra/uploads/courses/files/${randomId + '-' + Date.now()}`;
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, file);
 
@@ -240,7 +240,7 @@ export class FirebaseStorageService {
 
     const file = event.target.files[0];
 
-    const filePath = `/icex/uploads/courses/videos/${randomId}`;
+    const filePath = `/ultra/uploads/courses/videos/${randomId}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 

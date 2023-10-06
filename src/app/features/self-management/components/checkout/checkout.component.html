@@ -11,102 +11,119 @@
   </ol>
   <div class="row mx-3">
     <div class="col-lg-10 col-md-6">
-      <div class="card card-stats shadow text-center ">
+      <div class="card card-stats shadow text-center">
         <div class="card-body">
-          <div class="row container-title ">
+          <div class="row container-title">
             <div class="col-8">
-              <h2 class="card-title mt-2 mb-1 text-left">Datos de Facturación | Ordén Recibida</h2>
+              <h2 class="card-title mt-2 mb-1 text-left">
+                Datos de Facturación | Ordén Recibida
+              </h2>
             </div>
             <div class="col-4">
-              <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1680689760/LOGO_LOGIN-30_xmssxz.svg" alt="" width="150px">
+              <img
+                src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696626455/webapp/favicon_twjob3.png"
+                alt=""
+                width="70px"
+              />
             </div>
           </div>
           <div class="row mt-3 mb-3 pb-3 container-info">
-            <div class="col-7 ">
+            <div class="col-7">
               <div class="row">
                 <div class="col-5">
-                  <p class="text-left" > <strong> Número de órden: </strong> 
+                  <p class="text-left">
+                    <strong> Número de órden: </strong>
                     <span> {{ selectedOrder.id }} </span>
-                  </p> 
-                </div> 
+                  </p>
+                </div>
                 <div class="col-7">
-                  <p class="text-left" > <strong> Telefono:</strong> 
-                    <span> {{  selectedOrder.phone_number }} </span> 
-                  </p> 
+                  <p class="text-left">
+                    <strong> Telefono:</strong>
+                    <span> {{ selectedOrder.phone_number }} </span>
+                  </p>
                   <!-- <p class="text-left" > <strong> Código de Referido: </strong> 
                     <span>  {{ selectedOrder.referral_code | uppercase }}</span> 
                   </p>  -->
                 </div>
                 <div class="col-5">
-                  <p class="text-left" > <strong> Típo de cuenta: </strong> 
-                    <span> {{ selectedOrder.package_type | uppercase }}</span> 
-                  </p> 
+                  <p class="text-left">
+                    <strong> Típo de cuenta: </strong>
+                    <span> {{ selectedOrder.package_type | uppercase }}</span>
+                  </p>
                 </div>
                 <div class="col-7">
-                  <p class="text-left" > <strong> Plataforma: </strong> 
-                    <span> MetaTrader 5 </span> 
-                  </p> 
+                  <p class="text-left">
+                    <strong> Plataforma: </strong>
+                    <span> MetaTrader 5 </span>
+                  </p>
                 </div>
                 <div class="col-5">
-                  <p class="text-left" > <strong> Nombre: </strong> 
-                    <span> {{ selectedOrder.first_name + ' ' + selectedOrder.last_name  }}</span> 
-                  </p> 
+                  <p class="text-left">
+                    <strong> Nombre: </strong>
+                    <span>
+                      {{
+                        selectedOrder.first_name + " " + selectedOrder.last_name
+                      }}</span
+                    >
+                  </p>
                 </div>
                 <div class="col-7">
-                  <p class="text-left" > <strong> Ciudad:</strong> 
-                    <span> {{  selectedOrder.city }} </span> 
-                  </p> 
-                 <!--  <p class="text-left" > <strong> Dirección: </strong> 
+                  <p class="text-left">
+                    <strong> Ciudad:</strong>
+                    <span> {{ selectedOrder.city }} </span>
+                  </p>
+                  <!--  <p class="text-left" > <strong> Dirección: </strong> 
                     <span> av 100pre viva 123 </span> 
                   </p>  -->
                 </div>
                 <div class="col-5">
-                  <p class="text-left" > <strong> País:  </strong> 
-                    <span> {{ selectedOrder.country  }}</span> 
-                  </p> 
+                  <p class="text-left">
+                    <strong> País: </strong>
+                    <span> {{ selectedOrder.country }}</span>
+                  </p>
                 </div>
-                <div class="col-7">
-                  
-                </div>
+                <div class="col-7"></div>
                 <div class="col-5">
-                  <p class="text-left" > <strong> Código Postal:  </strong> 
-                    <span> {{ selectedOrder.postal_code }} </span> 
-                  </p> 
+                  <p class="text-left">
+                    <strong> Código Postal: </strong>
+                    <span> {{ selectedOrder.postal_code }} </span>
+                  </p>
                 </div>
-                <div class="col-7">
-                  
-                </div>
+                <div class="col-7"></div>
               </div>
-              
             </div>
 
             <div class="col-5">
-              <div class="row bg-label mt-3 mb-2 mr-2  ">
+              <div class="row bg-label mt-3 mb-2 mr-2">
                 <div class="col-2 my-auto">
-                  <img 
-                  src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/email_b0aiqe.svg" >
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476124/email_b0aiqe.svg"
+                  />
                 </div>
                 <div class="col-10">
                   <div class="row">
-                    <p class="text-left" > <strong> Correo: </strong> </p>
+                    <p class="text-left"><strong> Correo: </strong></p>
                   </div>
                   <div class="row">
-                    <span class="text-left" > {{ selectedOrder.email }}</span>
+                    <span class="text-left"> {{ selectedOrder.email }}</span>
                   </div>
                 </div>
               </div>
               <div class="row bg-label mt-2 mr-2">
                 <div class="col-2 my-auto">
-                  <img 
-                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg" 
-                    alt="">
+                  <img
+                    src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg"
+                    alt=""
+                  />
                 </div>
                 <div class="col-10">
                   <div class="row">
-                    <p class="text-left" > <strong>Valor del Challenge:</strong> </p>
+                    <p class="text-left"><strong>Valor paquete:</strong></p>
                   </div>
                   <div class="row">
-                    <span class="text-right" > {{ '$' + selectedOrder?.value  + ' USD' }}</span>
+                    <span class="text-right">
+                      {{ "$" + selectedOrder?.value + " USD" }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -115,92 +132,9 @@
         </div>
       </div>
     </div>
-    <!-- <div class="col-lg-6 col-md-12"> 
-      <div class="card card-stats shadow text-center">
-        <div class="card-body">
-          <div class="row container-title">
-            <div class="col-10 text-left ">
-              <h2 class="card-title pb-2">Pagar con Stripe</h2>
-            </div>
-            <div class="col-2">
-              <img src="https://1000marcas.net/wp-content/uploads/2019/12/VISA-Logo.png" width="100px" >
-            </div>
-          </div>
-          <div class="row ">
-            <div class="col-12 p-3 mt-2 ">
-              <div class="row">
-                <div class="col-12">
-                  <p class="text-left" >
-                    Realiza tu pago hoy con tu tarjeta de crédito o debito y disfruta de nuestros servicios sin complicaciones.
-                  </p>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-10 mx-auto p-2 mt-3 container-credit-card">
-              <stripe-card 
-                #stripeCard
-                (catch)="onStripeError($event)"
-                [(invalid)]="invalidError"
-                (cardMounted)="cardCaptureReady = true"
-                (paymentMethodChange)="setPaymentMethod($event)"
-                (tokenChange)="setStripeToken($event)"
-                (sourceChange)="setStripeSource($event)"
-                [options]="cardOptions"
-                class="stripe-card"
-              ></stripe-card>
-            </div>         
-          </div>
-          <div class="row ">
-            <div class="col-12 mx-auto p-3 mt-2 ">
-              <div class="row">
-                <div class="col-12">
-                  <p class="text-left" >
-                    Su tarjeta se almacena de forma segura en los servidores de nuestros proveedores de pago. 
-                    Su tarjeta será cargada una vez que complete su pedido.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 mx-auto p-3  container ">
-            <div class="row  justify-content-between ">
-              <div class="col-5">
-                <div class="row ml-2">
-                  <div class="col-6">
-                    <img src="https://img.freepik.com/free-photo/standard-quality-control-collage_23-2149631017.jpg?w=740&t=st=1684466694~exp=1684467294~hmac=182086d06ad985ce2b76129c415b34165a1ee82edd124cc3353d1db5d02cf7d2" alt="">
-                  </div>
-                  <div class="col-6">
-                    <img src="https://img.freepik.com/free-photo/standard-quality-control-collage_23-2149631017.jpg?w=740&t=st=1684466694~exp=1684467294~hmac=182086d06ad985ce2b76129c415b34165a1ee82edd124cc3353d1db5d02cf7d2" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="col-5">
-                <button
-                  class="btn btn-secondary btn-lg "
-                  (click)="stripeCard.createToken($event)"
-                >
-                  Pagar
-                </button>
-              </div>
-            </div>
-          </div> 
-          
-        </div>
-        <div class="card-footer mb-3 mt-2">
-          <div *ngIf="invalidError" style="color: red">
-            {{ invalidError.message }}
-          </div>
-        </div>
-      </div> 
-    </div> -->
 
     <div class="col-lg-8 col-sm-12">
-      <div class=" card card-stats shadow text-center">
+      <div class="card card-stats shadow text-center">
         <form
           [formGroup]="criptoform"
           (ngSubmit)="payWithCripto(cryptoModaltemplate)"
@@ -210,7 +144,9 @@
               <div class="col-12">
                 <div class="row container-title">
                   <div class="col-11 text-left mx-auto">
-                    <h2 class="card-title pb-2">Pagar con <strong>Cripto</strong></h2>
+                    <h2 class="card-title pb-2">
+                      Pagar con <strong>Cripto</strong>
+                    </h2>
                   </div>
                 </div>
                 <div class="form-group">
@@ -225,9 +161,7 @@
                     <option value="" selected disabled>Choose Tagging</option>
                     <option *ngFor="let c of currencies" [value]="c?.symbol">
                       {{
-                        (c?.name | titlecase) +
-                          " - " +
-                          (c?.symbol | uppercase)
+                        (c?.name | titlecase) + " - " + (c?.symbol | uppercase)
                       }}
                     </option>
                   </select>
@@ -248,11 +182,9 @@
           </div>
         </form>
       </div>
-   </div>
-    
+    </div>
   </div>
 </div>
-
 
 <!-- MODAL -->
 <ng-template #cryptoModaltemplate>
@@ -268,7 +200,6 @@
     </button>
   </div>
   <div class="modal-body">
-   
     <div class="row">
       <div class="col-4">
         <p class="title">Precio:</p>
@@ -276,11 +207,11 @@
         <p class="title">Bloques:</p>
         <p class="title">Wallet:</p>
       </div>
-      <div class="col-7 mr-2 " >
-        <p> {{ coinpaymentResponse?.amount }}</p>   
-        <p> {{ coinpaymentResponse?.txn_id }} </p>  
-        <p> {{ coinpaymentResponse?.confirms_needed }}  </p>
-        <p> {{ coinpaymentResponse?.address }} </p>   
+      <div class="col-7 mr-2">
+        <p>{{ coinpaymentResponse?.amount }}</p>
+        <p>{{ coinpaymentResponse?.txn_id }}</p>
+        <p>{{ coinpaymentResponse?.confirms_needed }}</p>
+        <p>{{ coinpaymentResponse?.address }}</p>
       </div>
     </div>
     <div class="row">
@@ -294,34 +225,35 @@
     <div class="row">
       <div class="col-8 mx-auto">
         <a
-        [href]="coinpaymentResponse?.checkout_url"
-        class="btn btn-secondary btn-lg mb-3"
-        type="submit"
-        target="_blank"
-      >
-        Pagar
-      </a>
-      <a
-        [href]="coinpaymentResponse?.status_url"
-        class="btn btn-md btn-lg mb-3"
-        type="submit"
-        target="_blank"
-      >
-        Estado
-      </a>
+          [href]="coinpaymentResponse?.checkout_url"
+          class="btn btn-secondary btn-lg mb-3"
+          type="submit"
+          target="_blank"
+        >
+          Pagar
+        </a>
+        <a
+          [href]="coinpaymentResponse?.status_url"
+          class="btn btn-md btn-lg mb-3"
+          type="submit"
+          target="_blank"
+        >
+          Estado
+        </a>
       </div>
     </div>
     <div class="row">
-      <h4>El pago con crypto tarda algo de tiempo en validarce, 
-        se te notificara por correo cuando se valide.
+      <h4>
+        El pago con crypto tarda algo de tiempo en validarce, se te notificara
+        por correo cuando se valide.
       </h4>
-      <div class="row mx-auto ">
+      <div class="row mx-auto">
         <a
           routerLink="/self-management/home"
           class="btn btn-md btn-lg mt-3"
           type="submit"
         >
-        Volver al Inicio
+          Volver al Inicio
         </a>
       </div>
     </div>
