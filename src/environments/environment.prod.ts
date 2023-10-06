@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   environmentName: 'Development',
-  apiURL: 'https://icex-prd.herokuapp.com',
+  apiURL: 'https://ultra-backend-c8f5a527241c.herokuapp.com',
   rollbarConfig: {
     accessToken: '748115ffc5b04e71ba4d73da8ca51159',
     captureUncaught: true,

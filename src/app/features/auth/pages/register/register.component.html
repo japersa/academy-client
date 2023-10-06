@@ -3,19 +3,18 @@
     <div class="col-lg-5 mr-auto container-form">
       <div class="card card-register card-white shadow-none">
         <div class="card-header pb-1 mt-5 pl-5 pr-5 text-center">
-          <div class="mx-auto  my-auto logo">
-            <img src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042641/webapp/LOGO-ULTRA-REGISTRO_mjbslb.png" alt="Logo" >
+          <div class="mx-auto my-auto logo">
+            <img
+              src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042641/webapp/LOGO-ULTRA-REGISTRO_mjbslb.png"
+              alt="Logo"
+            />
           </div>
-          <h1
-            class="card-title "
-          > 
-            Registro
-          </h1>
-          
+          <h1 class="card-title">Registro</h1>
         </div>
         <div class="card-body">
-          <p class="card-text text-center ">
-            Registrate e ingresa al dashboard y entérate de todo lo que podrías hacer.
+          <p class="card-text text-center">
+            Registrate e ingresa al dashboard y entérate de todo lo que podrías
+            hacer.
           </p>
           <form
             class="form"
@@ -57,8 +56,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="last_names"
-                    >Apellidos:
-                    {{ lastNameField?.value | titlecase }}</label
+                    >Apellidos: {{ lastNameField?.value | titlecase }}</label
                   >
                   <input
                     type="text"
@@ -101,15 +99,13 @@
                   />
                   <ng-container
                     *ngFor="
-                      let validation of utilsService.validationMessages
-                        .email
+                      let validation of utilsService.validationMessages.email
                     "
                   >
                     <small
                       class="form-text text-danger"
                       *ngIf="
-                        emailField?.hasError(validation.type) &&
-                        emailFieldDirty
+                        emailField?.hasError(validation.type) && emailFieldDirty
                       "
                     >
                       {{ validation.message }}
@@ -229,15 +225,13 @@
                   />
                   <ng-container
                     *ngFor="
-                      let validation of utilsService.validationMessages
-                        .phone
+                      let validation of utilsService.validationMessages.phone
                     "
                   >
                     <small
                       class="form-text text-danger"
                       *ngIf="
-                        phoneField?.hasError(validation.type) &&
-                        phoneFieldDirty
+                        phoneField?.hasError(validation.type) && phoneFieldDirty
                       "
                     >
                       {{ validation.message }}
@@ -261,8 +255,7 @@
                   />
                   <ng-container
                     *ngFor="
-                      let validation of utilsService.validationMessages
-                        .address
+                      let validation of utilsService.validationMessages.address
                     "
                   >
                     <small
@@ -297,8 +290,7 @@
                     <small
                       class="form-text text-danger"
                       *ngIf="
-                        cityField?.hasError(validation.type) &&
-                        cityFieldDirty
+                        cityField?.hasError(validation.type) && cityFieldDirty
                       "
                     >
                       {{ validation.message }}
@@ -322,15 +314,13 @@
                   />
                   <ng-container
                     *ngFor="
-                      let validation of utilsService.validationMessages
-                        .state
+                      let validation of utilsService.validationMessages.state
                     "
                   >
                     <small
                       class="form-text text-danger"
                       *ngIf="
-                        stateField?.hasError(validation.type) &&
-                        stateFieldDirty
+                        stateField?.hasError(validation.type) && stateFieldDirty
                       "
                     >
                       {{ validation.message }}
@@ -343,8 +333,8 @@
                   <label for="countryField"
                     >País: {{ countryField?.value | uppercase }}</label
                   >
-                  <select 
-                    class="form-control rounded-pill shadow" 
+                  <select
+                    class="form-control rounded-pill shadow"
                     formControlName="country"
                   >
                     <option
@@ -356,8 +346,7 @@
                   </select>
                   <ng-container
                     *ngFor="
-                      let validation of utilsService.validationMessages
-                        .country
+                      let validation of utilsService.validationMessages.country
                     "
                   >
                     <small
@@ -418,8 +407,7 @@
                   />
                   <ng-container
                     *ngFor="
-                      let validation of utilsService.validationMessages
-                        .password
+                      let validation of utilsService.validationMessages.password
                     "
                   >
                     <small
@@ -466,7 +454,11 @@
                         confirmPasswordFieldDirty
                       "
                     >
-                      {{ validation.type === 'match_password' ? validation.message : '' }}
+                      {{
+                        validation.type === "match_password"
+                          ? validation.message
+                          : ""
+                      }}
                     </small>
                   </ng-container>
                 </div>
@@ -543,7 +535,7 @@
               </ng-container>
             </div>
             <div class="text-center card-footer">
-              <a routerLink="/sing-in" >Volver a iniciar sesión</a>
+              <a class="link" routerLink="/sing-in">Volver a iniciar sesión</a>
               <button
                 class="btn btn-secondary btn-lg rounded-pill w-100"
                 [disabled]="form.invalid"
@@ -551,41 +543,16 @@
               >
                 Registrarse
               </button>
-            </div> 
+            </div>
           </form>
         </div>
       </div>
     </div>
-    <div class="col-lg-7 img d-flex align-items-end  " >
-      <div class="row  ">
-        <div class="col-12  text-center">
-          <div class="row text-center">
-            <div class=" slide-title col-6 ml-auto mr-auto ">
-              <h3>{{slidesTitle}}</h3>
-            </div>
-            <div class="col-11  mr-auto ml-auto text-center mb-3 ">
-              <div class="carousel text-center pt-4 pb-3" style="width: 100%;">
-                <div style="width: 100%;">
-                  <carousel 
-                          [itemsPerSlide]="itemsPerSlide"
-                          [singleSlideOffset]="false"
-                          [interval]="3000"
-                          [showIndicators]="true"
-                          [indicatorsByChunk]="true"
-                          (slideRangeChange)="onSlideRangeChange($event)">
-                    <slide style="margin-left: 10px; " *ngFor="let slide of slides; let index=index">
-                      <img [src]="slide.image" alt="image slide" style=" margin-bottom: 5px; display: inline-block; width: 70px; height: 50px; text-align: center;">
-                      <div >
-                        <p style="font-size: .9rem; color: white;" >{{ slide.message }}</p>
-                      </div>
-                    </slide>
-                  </carousel>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="col-lg-7 d-flex">
+      <img
+        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696624805/webapp/imagen-inicio_myuwik.png"
+        alt=""
+      />
     </div>
   </div>
 </div>
