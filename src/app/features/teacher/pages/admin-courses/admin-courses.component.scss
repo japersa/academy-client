@@ -15,6 +15,10 @@ th {
     color: var(--secondary) !important;   
 }
 
+.datatable-body-cell-label {
+    color: black !important; 
+}
+
 .card-title {
     font-size: 3em !important;
     font-weight: 600 !important;
@@ -25,4 +29,8 @@ th {
     font-size: 3em !important;
     font-weight: 600 !important;
     color: var(--secondary) !important;
+}
+
+.btn-green {
+    color: green !important;
 }
