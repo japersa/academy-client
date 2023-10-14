@@ -1,96 +1,29 @@
-<div class=" content" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
-    <div class=" row">
-        <ol class=" breadcrumb bg-transparent ml-3">
-            <li class=" breadcrumb-item text-primary">
-                <a routerLink="/home">
-                    Inicio
-                </a>
-            </li>
-            <li class=" breadcrumb-item">
-                Examen
-            </li>
-        </ol>
-        <div class="offset-1 col-md-10">
-            <h1 class="title m-0 p-0">EXAMEN</h1>
-            <div class="container mt-4 mb-5">
-                <div class="row">
-
-                    <div class="col-12 ">
-                        <ng-container *ngIf="courseId">
-                            <div class="custom">
-                                <app-survey [courseId]="courseId"></app-survey>
-                            </div>
-                        </ng-container>
-                    </div>
-
-                    <!-- <div class="survey-container contentcontainer codecontainer">
-                    </div> -->
-
-
-                    <!-- <div class="col-12">
-                        <p class="fw-bold sub-title">1. Which of the following sentences is correct</p>
-                        <div> <input type="radio" name="box" id="one"> 
-                            <input type="radio" name="box" id="two"> 
-                            <input
-                                type="radio" name="box" id="three"> 
-                                <input type="radio" name="box" id="four"> <label
-                                for="one" class="box first">
-                                <div class="course"> <span class="circle"></span> <span class="subject"> When its
-                                        raining ,people's umbrella are all you're going to see from above </span> </div>
-                            </label> 
-                            <label for="two" class="box second">
-                                <div class="course"> <span class="circle"></span> <span class="subject"> When its
-                                        raining,people's umbrella are all your going to see from above </span> </div>
-                            </label> <label for="three" class="box third">
-                                <div class="course"> <span class="circle"></span> <span class="subject"> When its
-                                        raining,peoples umbrella's are all you're going to see from above </span> </div>
-                            </label> <label for="four" class="box forth">
-                                <div class="course"> <span class="circle"></span> <span class="subject"> None of the
-                                        above </span> </div>
-                            </label> </div>
-                    </div> -->
-                    <!-- <div class="col-12">
-                        <p class="fw-bold mt-5 sub-title">2. Complete the following sentences:Alice couldn't _______ the
-                            humilation any longer and stormed out of the room red as a bed</p>
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6"> <input type="radio" name="box" id="five"> <label for="five"
-                                        class="box fifth w-100">
-                                        <div class="course"> <span class="circle"></span> <span
-                                                class="subject">is</span> </div>
-                                    </label> </div>
-                                <div class="col-md-6"> <input type="radio" name="box" id="six"> <label for="six"
-                                        class="box sixth w-100">
-                                        <div class="course"> <span class="circle"></span> <span class="subject"> was
-                                            </span> </div>
-                                    </label> </div>
-                                <div class="col-md-6"> <input type="radio" name="box" id="seven"> <label for="seven"
-                                        class="box seveth w-100">
-                                        <div class="course"> <span class="circle"></span> <span class="subject"> will
-                                            </span> </div>
-                                    </label> </div>
-                                <div class="col-md-6">
-                                    <input type="radio" name="box" id="eight">
-                                    <label for="eight" class="box eighth w-100">
-                                        <div class="course">
-                                            <span class="circle">
-                                            </span>
-                                            <span class="subject"> None of
-                                                the above </span>
-                                        </div>
-                                    </label> </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-12">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-primary ">
-                                continue</button>
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-
+<div
+  class="content"
+  [ngClass]="{
+    'class-user': userDataService?.userData$?.value?.rol === 'student'
+  }"
+>
+  <div class="row">
+    <ol class="breadcrumb bg-transparent ml-3">
+      <li class="breadcrumb-item text-primary">
+        <a routerLink="/home"> Inicio </a>
+      </li>
+      <li class="breadcrumb-item">Examen</li>
+    </ol>
+    <div class="offset-1 col-md-10">
+      <h1 class="title m-0 p-0">EXAMEN</h1>
+      <div class="container mt-4 mb-5">
+        <div class="row">
+          <div class="col-12">
+            <ng-container *ngIf="courseId">
+              <div class="custom">
+                <app-survey [courseId]="courseId"></app-survey>
+              </div>
+            </ng-container>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
