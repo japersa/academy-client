@@ -72,7 +72,7 @@
     <div class="ml-3 row" style="width: 100% !important">
       <div class="col-12">
         <h2 class="mt-4">Continuar viendo</h2>
-        <hr style="width: 100% !important" color="green" />
+        <hr/>
       </div>
       <div
         *ngFor="let c of continueLearningCourses"
@@ -92,7 +92,7 @@
               }}
             </h5>
             <button
-              class="btn btn-simple btn-secondary btn-block"
+              class="btn btn-simple btn-primary btn-block"
               type="button"
               [routerLink]="['/class', c.id]"
             >
@@ -111,7 +111,7 @@
   >
     <div class="col-12">
       <h2 class="mt-4">Cursos</h2>
-      <hr style="width: 100% !important" color="cyan" />
+      <hr style="width: 100% !important" />
     </div>
 
     <div

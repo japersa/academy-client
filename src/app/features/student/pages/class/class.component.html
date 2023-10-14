@@ -11,7 +11,7 @@
                     Curso
                 </a>
             </li>
-            <li class=" breadcrumb-item text-default">{{ topic?.course_name }}</li>
+            <li class=" breadcrumb-item text-white">{{ topic?.course_name }}</li>
         </ol>
         <div class="col-12 p-0 m-0">
 
@@ -78,8 +78,8 @@
                                         <ng-container *ngFor="let l of topic.links">
                                             <div class="mb-3">
                                                 <p class="h5 m-0 p-0 text-secondary">{{l.title | titlecase | slice:0:40}}:</p>
-                                                <a [href]="l.link" target="_blank">
-                                                    <small class="text-default">{{l.link | slice:0:40}}</small>
+                                                <a [href]="l.link" class="text-white" target="_blank">
+                                                    <small class="text-white">{{l.link | slice:0:40}}</small>
                                                 </a>
                                             </div>
                                         </ng-container>

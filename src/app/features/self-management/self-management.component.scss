@@ -7,6 +7,11 @@
     border-radius: 10px;
 }
 
+hr {
+    border-top: 1px solid var(--primary) !important;
+    width: 100% !important;
+    color: var(--primary) !important;
+}
 
 .card {
     border-bottom: 3px solid var(--secondary);
