@@ -24,7 +24,7 @@
     }
 
     &.icon-white {
-      @include diagonal-gradient($white, $black-states);
+      @include diagonal-gradient($white, $white);
     }
 
     &.icon-warning {
