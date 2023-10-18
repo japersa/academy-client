@@ -23,6 +23,10 @@
       @include diagonal-gradient($danger, $danger-states);
     }
 
+    &.icon-white {
+      @include diagonal-gradient($white, $black-states);
+    }
+
     &.icon-warning {
       @include diagonal-gradient($warning, $warning-states);
     }

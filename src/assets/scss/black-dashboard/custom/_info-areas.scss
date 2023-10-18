@@ -49,6 +49,9 @@
         &.icon-primary + .info-title {
           color: $primary;
         }
+        &.icon-white + .info-title {
+          color: $white;
+        }
 
         &.icon-success + .info-title {
           color: $success;
