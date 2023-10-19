@@ -5,14 +5,20 @@ import { Router } from '@angular/router';
 import { NotificationsService } from '../../../../../core/services/notifications.service';
 
 StylesManager.applyTheme('modern');
-
+// CSS references
+// https://github.com/surveyjs/survey-library/blob/master/src/defaultCss/cssmodern.ts
 const myCss = {
 
   title: 'text-primary',
   navigationButton: 'btn btn-primary btn-lg',
   timerRoot: 'text-white',
   completedPage: 'sv-completedpage bg-transparent',
-  
+  progressBar: "sv-progress__bar btn-primary",
+
+  question: {
+    titleOnAnswer: "sv-question__title--answer btn-primary",
+    itemChecked: "sv-radio--checked btn-primary",
+  },
 
   radiogroup: {
     root: 'sv-selectbase',
@@ -23,7 +29,7 @@ const myCss = {
     label: 'sd-selectbase__label text-white',
     labelChecked: '',
     itemDisabled: 'sv-item--disabled sv-radio--disabled',
-    itemChecked: 'sv-item--checked sv-radio--checked',
+    itemChecked: 'sv-item--checked sv-radio--checked ',
     itemHover: 'sv-item--allowhover sv-radio--allowhover',
     itemControl: 'sv-visuallyhidden sv-item__control sv-radio__control',
     itemDecorator: 'sv-item__svg sv-radio__svg ',
