@@ -20,7 +20,7 @@ export class SubscriptionComponent implements OnInit {
       icon: "tim-icons icon-check-2 icon-primary"
     },
     {
-      title: "Seguro de capital",
+      title: "Educación Básica",
       icon: "tim-icons icon-check-2 icon-primary"
     },
     {
@@ -51,7 +51,7 @@ export class SubscriptionComponent implements OnInit {
       icon: "tim-icons icon-check-2 icon-primary"
     },
     {
-      title: "Seguro de capital",
+      title: "Educación Básica",
       icon: "tim-icons icon-check-2 icon-primary"
     },
     {
@@ -71,7 +71,7 @@ export class SubscriptionComponent implements OnInit {
       icon: "tim-icons icon-check-2 icon-primary"
     },
     // {
-    //   title: "Alianzas comerciales",
+    //   title: "educación intermedia",
     //   icon: "tim-icons icon-simple-remove icon-primary"
     // },
   ]
