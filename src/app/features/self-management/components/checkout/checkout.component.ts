@@ -126,8 +126,8 @@ export class CheckoutComponent implements OnInit {
   openModalWithComponent() {
     const initialState: ModalOptions = {
       initialState: {
-        title: 'Autogestión',
-        button: 'Autogestión',
+        title: 'Academia',
+        button: 'Academia',
         route: '/self-management/home',
         datos: this.selectedOrder
       }
