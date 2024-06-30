@@ -130,9 +130,9 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/self-management/home',
-    title: 'autogestión de fondos',
+    title: 'Academia',
     type: 'link',
-    icontype: 'fa fa-chart-line',
+    icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
   },
@@ -228,20 +228,19 @@ export const ROUTES_ADMIN: RouteInfo[] = [
   },
   {
     path: '/self-management/home',
-    title: 'autogestión de fondos',
-    type: 'link',
-    icontype: 'fa fa-chart-line',
-    role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-  },
-  {
-    path: '/academy',
     title: 'Academia',
     type: 'link',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
   },
-
+  // {
+  //   path: '/academy',
+  //   title: 'Academia',
+  //   type: 'link',
+  //   icontype: 
+  //   role: [ROLES_ENUM.ALL],
+  // },
 ];
 
 // Routes to TEACHER
@@ -277,20 +276,19 @@ export const ROUTES_TEACHER: RouteInfo[] = [
   },
   {
     path: '/self-management/home',
-    title: 'autogestión de fondos',
-    type: 'link',
-    icontype: 'fa fa-chart-line',
-    role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-  },
-  {
-    path: '/academy',
     title: 'Academia',
     type: 'link',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
   },
-
+  // {
+  //   path: '/academy',
+  //   title: 'Academia',
+  //   type: 'link',
+  //   icontype: 'fa fa-graduation-cap',
+  //   role: [ROLES_ENUM.ALL],
+  // },
 ];
 
 // Routes to USER
@@ -304,9 +302,9 @@ export const ROUTES_USER: RouteInfo[] = [
   },
   {
     path: '/self-management/home',
-    title: 'autogestión de fondos',
+    title: 'Academia',
     type: 'link',
-    icontype: 'fa fa-chart-line',
+    icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
   },

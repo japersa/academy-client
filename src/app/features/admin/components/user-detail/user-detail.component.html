@@ -50,13 +50,13 @@
       <div *ngFor="let i of packAgActived "  class="col-10">
         <div class="card shadow">
           <div class="card-body">
-            <h3> Autogestión </h3>
+            <h3> Academia </h3>
             <div class="row">
               <div class="col-lg-10 col-md-12">
                 <p>Referido por: <span>{{ i?.referral_code_owner_name }} </span> </p>
                 <p>Codigo de Referido: <span>{{ i?.referral_code }} </span> </p>
                 <p>Cedula de Referido: <span> {{ i?.referral_code_owner_identity_card }} </span> </p>
-                <p>Paquete Autogestión: 
+                <p>Academia: 
                   <span 
                     [ngClass]="{
                       'text-success': packAgActive === 'Activo', 
@@ -79,8 +79,8 @@
         <div class="card shadow">
           
           <div class="card-body">
-            <h3> Autogestión</h3>
-            <p>Paquete Autogestión: 
+            <h3> Academia</h3>
+            <p>Paquete Academia: 
               <span 
                 [ngClass]="{
                   'text-success': packAgActive === 'Activo', 

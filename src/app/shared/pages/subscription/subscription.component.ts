@@ -16,7 +16,7 @@ export class SubscriptionComponent implements OnInit {
       icon: "tim-icons icon-check-2 icon-primary"
     },
     {
-      title: "Autogestión de Fondos",
+      title: "Academia",
       icon: "tim-icons icon-check-2 icon-primary"
     },
     {
@@ -47,7 +47,7 @@ export class SubscriptionComponent implements OnInit {
       icon: "tim-icons icon-check-2 icon-primary"
     },
     {
-      title: "Autogestión de Fondos",
+      title: "Academia",
       icon: "tim-icons icon-check-2 icon-primary"
     },
     {

@@ -415,7 +415,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       if (indexes.includes(0) && indexes.includes(1) && indexes.includes(2)) {
         this.slidesTitle = 'Funding Program';
       } else {
-        this.slidesTitle = 'Autogestión de Fondos';
+        this.slidesTitle = 'Academia';
       }
     }
   }
