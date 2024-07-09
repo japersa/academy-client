@@ -1,621 +1,318 @@
 <div class="content">
   <div class="row">
-    <div class="col-8">
+    <div class="col-lg-4 col-sm-12">
       <ol class="breadcrumb bg-transparent ml-3">
-        <li class="breadcrumb-item text-primary">
-          <a routerLink="/home"> Inicio </a>
-        </li>
+        <li class="breadcrumb-item">Inicio</li>
       </ol>
     </div>
-
-    <!-- <div class="col-4  text-right p-2">
-      <div class="card  card-stats text-center referido p-2">
-        <h3 class="pb-0">Código de Referido</h3> 
+    <div class="col-lg-4 col-sm-12 mt-2 text-center">
+      <!-- <div class="card  card-stats text-center referido shadow-custom">
+        <h3 class="">Wallet Academia</h3> 
+        <div class="row">
+          <div class="col-12">
+            <p class="ref" > $ 0 USD</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 mx-auto">
+            <button class="btn btn-secondary  btn-lg  ">
+              Solicitar Retiro
+            </button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="col-lg-4 col-sm-12 text-right p-2">
+      <div class="card card-stats text-center referido p-2 shadow-custom">
+        <h3 class="pb-0">ID único para Referido</h3>
         <div class="row">
           <div class="col-8 pr-1">
             <p class="ref">{{ referalCode }}</p>
           </div>
-          <div class="col-4">
-            <button class="btn btn-secondary  btn-md  " [cdkCopyToClipboard]="referalCode">
-              Copiar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div> -->
-  </div>
-
-  <!-- <div class="row p-3 mx-3">
-    <div class="col-12 banner mx-auto">
-      <carousel
-        [showIndicators]="true"
-        [interval]="30000"
-        [indicatorsByChunk]="true"
-      >
-        <slide>
-          <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476126/banner-eurostreet_cyeyxd.jpg"
-            alt="first slide" style="display: block; width: 100%; height: 100%;">
-          <div class="button-container-one col-4">
-            <button 
-              class="btn btn-banner btn-block  "
-              (click)="openEuroStreet()"
-            >
-              Conoce más
-            </button>
-          </div>  
-        </slide>
-        <slide>
-          <img
-            src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/BANNER-1_ld0hpm.png"
-            alt="second slide"
-            style="display: block; width: 100%"
-          />
-        </slide>
-      </carousel>
-    </div>
-  </div> -->
-  <!-- SELF MANAGEMENT -->
-  <!-- <div>
-    <div class="row mt-4">
-      <div class="col-6 mx-auto">
-        <h2 class="mb-1 text-center">Funding Program</h2>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-6 mx-auto">
-        <p class="text-center text-white">
-          El primer fondeo con un broker 100% Real! Aprovecha la enorme liquidez
-          del Broker, tradea y retira los beneficios que te mereces.
-        </p>
-      </div>
-    </div>
-    <div class="row mx-4">
-      <div class="col-lg-6">
-        <div class="card card-stats shadow-custom text-center">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-8 mt-4 mb-2 mx-auto">
-                <h3 class="card-subtitle">Icex Funding</h3>
-              </div>
-              <div class="col-8 container-card-title mx-auto">
-                <h2 class="card-title pb-4">Challenge DEMO</h2>
-              </div>
-              <div class="col-8 card-text mx-auto mb-1">
-                <p>Controla, fortalece y potencia tus habilidades</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-11 container-body mx-auto text-left">
-                <p class="stats mt-4">
-                  Experimenta el trading sin poner en riesgo tu inversión
-                </p>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">
-                      Escoge el balance con el que quieras empezar a operar
-                    </p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">Análisis de la cuenta</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">15 Días de prueba</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">Practica gratis</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">
-                      Contenido de respaldo
-                      <br /><br />
-                    </p>
-                  </div>
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                </div>
-              </div>
-            </div>
-            <div class="row card-footer mt-4 mb-3">
-              <div class="col-10 mx-auto">
-                <p class="stats">
-                  Demuestra tus habilidades completando nuestras fases
-                </p>
-              </div>
-              <div class="col-10 mx-auto">
-                <button
-                  class="btn btn-secondary btn-lg mb-3"
-                  routerLink="/funding-program/create-demo"
-                >
-                  Comenzar DEMO gratis
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="card card-stats shadow-custom text-center">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-8 mt-4 mb-2 mx-auto">
-                <h3 class="card-subtitle">Icex Funding</h3>
-              </div>
-              <div class="col-8 container-card-title mx-auto">
-                <h2 class="card-title pb-4">Challenge</h2>
-              </div>
-              <div class="col-8 card-text mx-auto">
-                <p>
-                  Opere hasta 500.000 usd con nuestro broker Euro street capital
-                  llc
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-11 container-body mx-auto text-left">
-                <p class="stats mt-4">
-                  Demuestra tus destrezas de trading y empieza a retirar tu
-                  beneficio diario.
-                </p>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">
-                      Escoge el balance con el que quieras empezar a operar
-                    </p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">Análisis de la cuenta</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">Beneficio del 75%</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">Retiros de beneficios diarios</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">Contenido de respaldo</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-1 icon">
-                    <img
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10 text-next-icon">
-                    <p class="stats">Extensión gratuita de 15 días</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row card-footer mt-3 mb-3">
-              <div class="col-10 mx-auto">
-                <p class="stats">
-                  Demuestra tus habilidades completando nuestras fases
-                </p>
-              </div>
-              <div class="col-10 mx-auto">
-                <button
-                  class="btn btn-secondary btn-lg mb-3"
-                  routerLink="/funding-program/create-order"
-                >
-                  Comenzar ICEX Challenge
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mx-4">
-      <div class="col-lg-12 col-md-12">
-        <div class="card card-stats text-center shadow-custom">
-          <div class="row">
-            <div class="col-8 text-left ml-3 mt-2">
-              <h3 class="card-title pb-3 pt-3">Objetivos del challenge</h3>
-            </div>
-          </div>
-          <div class="row mb-3 mt-2">
-            <div class="col-2 phase ml-4 my-auto p-2">
-              <h3 class="mt-4">Fase 1</h3>
-            </div>
-            <div class="col-9 goals ml-2 p-2">
-              <div class="row">
-                <div class="col-4">
-                  <div class="row">
-                    <div class="col-3">
-                      <img
-                        class=""
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/ICONO-CALENDARIO_bp2dpi.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="text-left">Días de trading 1 día mínimo</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <div class="col-3">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/ICONO-PROHIBIDO_gonumr.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="text-left mt-2">Restricciones no</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <div class="col-3">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042641/webapp/ICONO-CIFRA_l0qaww.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="text-left mt-2">Drawdown diario 5%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                  <div class="row">
-                    <div class="col-3">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042641/webapp/ICONO-CIFRA_l0qaww.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="mt-3 text-left">Drawdown total 10%</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="row">
-                    <div class="col-2">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-DINERO_dkwjro.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="mt-3 text-left">
-                        Profit del 8% a lograr en 30 días.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-4 mb-3">
-            <div class="col-2 phase ml-4 my-auto p-2">
-              <h3 class="mt-4">Fase 2</h3>
-            </div>
-            <div class="col-9 goals ml-2 p-2">
-              <div class="row">
-                <div class="col-4">
-                  <div class="row">
-                    <div class="col-3">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/ICONO-CALENDARIO_bp2dpi.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="text-left">Días de trading 1 día mínimo</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <div class="col-3">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/ICONO-PROHIBIDO_gonumr.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="text-left mt-2">Restricciones no</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row">
-                    <div class="col-3">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042641/webapp/ICONO-CIFRA_l0qaww.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="text-left mt-2">Drawdown diario 5%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                  <div class="row">
-                    <div class="col-3">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042641/webapp/ICONO-CIFRA_l0qaww.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="text-left mt-3">Drawdown total 10%</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="row">
-                    <div class="col-2">
-                      <img
-                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-DINERO_dkwjro.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="col-9">
-                      <p class="mt-3 text-left">
-                        Profit del 5% a lograr en 60 días.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <div class="row mx-4">
-    <div class="col-12">
-      <div class="card shadow-custom p-3">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-8">
-              <h3 class="mb-1">Desarrollo educativo y acompañamiento</h3>
-            </div>
-            <div class="col-8">
-              <p>
-                Estamos seguros de impulsar significativamente tu conocimiento y económica
-              </p>
-            </div>
-          </div>
-          <div class="row container-body">
-            <div class="col-4">
-              <div class="row">
-                <div class="col-2 my-auto mx-auto">
-                  <img
-                    class="ml-3"
-                    width="24px"
-                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="col-10">
-                  <p class="text-left mt-2">Educación Básica</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="row">
-                <div class="col-2 my-auto mx-auto">
-                  <img
-                    class="ml-3"
-                    width="24px"
-                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="col-10">
-                  <p class="text-left mt-2">Educación Intermedia</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="row">
-                <div class="col-2 my-auto mx-auto">
-                  <img
-                    class="ml-3"
-                    width="24px"
-                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="col-10">
-                  <p class="text-left mt-2">Educación Avanzada</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="row">
-                <div class="col-2 my-auto mx-auto">
-                  <img
-                    class="ml-3"
-                    width="24px"
-                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="col-10">
-                  <p class="text-left mt-2">Clases en vivo</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="row">
-                <div class="col-2 my-auto mx-auto">
-                  <img
-                    class="ml-3"
-                    width="24px"
-                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="col-10">
-                  <p class="text-left mt-2">Señales de inversión</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="row">
-                <div class="col-2 my-auto mx-auto">
-                  <img
-                    class="ml-3"
-                    width="24px"
-                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="col-10">
-                  <p class="text-left mt-2">Grupos de apoyo</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="row">
-                <div class="col-2 my-auto mx-auto">
-                  <img
-                    class="ml-3"
-                    width="24px"
-                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                    alt=""
-                  />
-                </div>
-                <div class="col-10">
-                  <p class="text-left mt-2">Educación Ecommerce</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row justify-content-end">
-            <div class="col-4">
-              <button
-                class="btn btn-secondary btn-block mt-4"
-                routerLink="/self-management/create-order"
-              >
-                Comprar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mx-4">
-    <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
-      <div class="row">
-        <div class="col-7">
-          <h3 class="card-subtitle text-white mt-3 mb-2">
-            <h3>Comisiona con Start Academy</h3>
-          </h3>
-          <p class="text-light">
-            Invita a tus amigos y empieza a generar ingresos extras. recibe el
-            20% del valor del paquete por el primer referido, un 20% por el
-            segundo referido y un 50% por tu tercer referido
-          </p>
-          <p class="mb-3 text-light">
-            Compártelo y empieza a comisionar con Start Academy
-          </p>
-        </div>
-        <div class="col-5 my-auto mx-auto">
-          <div class="">
-            <p class="ref text-center">{{ referalCode }}</p>
-          </div>
-          <div class="">
+          <div class="col-lg-4 col-sm-12">
             <button
-              class="btn btn-ref btn-block"
+              class="btn btn-secondary btn-md"
               [cdkCopyToClipboard]="referalCode"
             >
               Copiar
             </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 ml-3">
+    <h3 class="m-0">
+      Hola, {{ userDataService?.userData$?.value?.first_name | titlecase }}
+    </h3>
+    <ng-container
+      *ngIf="
+        userDataService?.userData$?.value?.subscription != 'none';
+        else elseTemplate
+      "
+    >
+      <p>
+        Continúa aprendiendo mediante su subscripción
+        <strong>Start Academy</strong>
+      </p>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <p>
+        Hemos detectado que aún no tienes una subscripción activa, te animamos a
+        conseguir una <a routerLink="/self-management/create-order">aquí</a>.
+      </p>
+    </ng-template>
+  </div>
+
+  <ng-container *ngIf="continueLearningCourses.length > 0">
+    <div class="ml-3 row" style="width: 100% !important">
+      <div class="col-12">
+        <h2 class="mt-4">Continuar viendo</h2>
+        <hr/>
+      </div>
+      <div
+        *ngFor="let c of continueLearningCourses"
+        class="col-lg-3 col-md-3 col-sm-12 col-sm-12"
+      >
+        <div class="card">
+          <img
+            class="card-img-top"
+            [src]="c?.path_preview_image"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title text-center">
+              {{
+                (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
+                  | uppercase
+              }}
+            </h5>
+            <button
+              class="btn btn-simple btn-primary btn-block"
+              type="button"
+              [routerLink]="['/class', c.id]"
+            >
+              CONTINUAR VIENDO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div
+    class="ml-3 row"
+    style="width: 100% !important"
+    *ngIf="userDataService?.userData$?.value?.subscription != 'none'"
+  >
+    <div class="col-12">
+      <h2 class="mt-4">Cursos</h2>
+      <hr style="width: 100% !important" />
+    </div>
+
+    <div
+      *ngFor="let c of courses"
+      class="col-lg-3 col-md-3 col-sm-12 col-sm-12"
+    >
+      <div class="card">
+        <img
+          class="card-img-top"
+          [src]="c?.path_preview_image"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title text-center">
+            {{
+              (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
+                | uppercase
+            }}
+          </h5>
+          <button
+            class="btn btn-secondary btn-block"
+            type="button"
+            [routerLink]="['/course', c.id]"
+          >
+            IR AL CURSO
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div
+      *ngIf="userDataService?.userData$?.value?.subscription == 'none'"
+      class="row"
+    >
+      <div class="col-12 pl-5 pr-5">
+        <div class="card shadow-custom p-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-8">
+                <h3 class="mb-1">Desarrollo educativo y acompañamiento</h3>
+              </div>
+              <div class="col-8">
+                <p>
+                 Estamos seguros de impulsar significativamente tu conocimiento y económica
+                </p>
+              </div>
+            </div>
+            <div class="row container-body pt-2 pb-2">
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-2 my-auto mx-auto">
+                    <img
+                      class="ml-3"
+                      width="24px"
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-10">
+                    <p class="text-left mt-2">Educación Básica</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-2 my-auto mx-auto">
+                    <img
+                      class="ml-3"
+                      width="24px"
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-10">
+                    <p class="text-left mt-2">Educación Intermedia</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-2 my-auto mx-auto">
+                    <img
+                      class="ml-3"
+                      width="24px"
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-10">
+                    <p class="text-left mt-2">Educación Avanzada</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-2 my-auto mx-auto">
+                    <img
+                      class="ml-3"
+                      width="24px"
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-10">
+                    <p class="text-left mt-2">
+                      Clases en vivo
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-2 my-auto mx-auto">
+                    <img
+                      class="ml-3"
+                      width="24px"
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-10">
+                    <p class="text-left mt-2">Señales de inversión</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-2 my-auto mx-auto">
+                    <img
+                      class="ml-3"
+                      width="24px"
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-10">
+                    <p class="text-left mt-2">Grupos de apoyo</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-2 my-auto mx-auto">
+                    <img
+                      class="ml-3"
+                      width="24px"
+                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-10">
+                    <p class="text-left mt-2">Educación Ecommerce</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-4">
+                <button
+                  class="btn btn-secondary btn-block mt-4"
+                  routerLink="/self-management/create-order"
+                >
+                  Comprar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row pl-5 pr-5">
+      <div class="col-lg-12 col-md-12 shadow-custom commissions">
+        <div class="row">
+          <div class="col-7">
+            <h3 class="card-subtitle mt-3 mb-2">
+              Comisiona con Start Academy
+            </h3>
+            <p class="text-white">
+              Invita a tus amigos y empieza a generar ingresos extras. recibe el
+            20% del valor del paquete por el primer referido, un 20% por el
+            segundo referido y un 50% por tu tercer referido
+            </p>
+            <p class="mb-3 text-white">
+              Compártelo y empieza a comisionar con Start Academy
+            </p>
+          </div>
+          <div class="col-5 my-auto mx-auto">
+            <div class="">
+              <p class="ref2 text-center">{{ referalCode }}</p>
+            </div>
+            <div class="">
+              <button
+                class="btn btn-ref btn-block"
+                [cdkCopyToClipboard]="referalCode"
+                (click)="copied()"
+              >
+                {{ buttonText }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
