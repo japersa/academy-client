@@ -1,7 +1,7 @@
 # [Black Dashboard PRO Angular](https://demos.creative-tim.com/black-dashboard-pro-angular/#/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fblack-dashboard-pro-angular%2F%23%2Fadmin%2Fdashboard&text=Black%20Dashboard%20PRO%20Angular%20-%20Premium%20Bootstrap%20Admin%20Template&original_referer=https%3A%2F%2Fdemos.creative-tim.com%2Fblack-dashboard-pro-angular%2F&via=creativetim&hashtags=angular%2Cbootstrap%2Ccreativetim%2Ccreativetimofficial)
 
   
-  
+   
 ![version](https://img.shields.io/badge/version-1.2.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/ct-black-dashboard-pro-angular.svg?maxAge=2592000)]() [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/ct-black-dashboard-pro-angular.svg?maxAge=2592000)]()  [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
 
 ![Product Gif](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/black-dashboard-pro-angular/bdp_angular.gif)
