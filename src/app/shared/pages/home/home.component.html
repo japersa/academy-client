@@ -8,9 +8,9 @@
       </ol>
     </div>
 
-    <!-- <div class="col-4  text-right p-2">
+    <div class="col-4  text-right p-2">
       <div class="card  card-stats text-center referido p-2">
-        <h3 class="pb-0">Código de Referido</h3> 
+        <h3 class="pb-0">Código de Referido</h3>
         <div class="row">
           <div class="col-8 pr-1">
             <p class="ref">{{ referalCode }}</p>
@@ -22,40 +22,40 @@
           </div>
         </div>
       </div>
-    </div> 
-  </div>-->
+    </div>
+  </div>
 
-    <!-- <div class="row p-3 mx-3">
+  <div class="row p-3 mx-3">
     <div class="col-12 banner mx-auto">
-      <carousel
-        [showIndicators]="true"
-        [interval]="30000"
-        [indicatorsByChunk]="true"
-      >
+      <carousel [showIndicators]="true" [interval]="30000" [indicatorsByChunk]="true">
         <slide>
           <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476126/banner-eurostreet_cyeyxd.jpg"
             alt="first slide" style="display: block; width: 100%; height: 100%;">
           <div class="button-container-one col-4">
-            <button 
-              class="btn btn-banner btn-block  "
-              (click)="openEuroStreet()"
-            >
+            <button class="btn btn-banner btn-block  " (click)="openAndroid()">
               Conoce más
             </button>
-          </div>  
+          </div>
+          <div class="button-container-one col-4">
+            <button class="btn btn-banner btn-block  " (click)="openAndroid()">
+              Conoce más
+            </button>
+          </div>
         </slide>
-        <slide>
-          <img
-            src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042642/webapp/BANNER-1_ld0hpm.png"
-            alt="second slide"
-            style="display: block; width: 100%"
-          />
-        </slide>
+        <!-- <slide>
+          <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476126/banner-eurostreet_cyeyxd.jpg"
+            alt="first slide" style="display: block; width: 100%; height: 100%;">
+          <div class="button-container-one col-4">
+            <button class="btn btn-banner btn-block  " (click)="openiOS()">
+              Conoce más
+            </button>
+          </div>
+        </slide> -->
       </carousel>
     </div>
-  </div> -->
-    <!-- SELF MANAGEMENT -->
-    <!-- <div>
+  </div>
+  <!-- SELF MANAGEMENT -->
+  <!-- <div>
     <div class="row mt-4">
       <div class="col-6 mx-auto">
         <h2 class="mb-1 text-center">Funding Program</h2>
@@ -454,142 +454,112 @@
       </div>
     </div>
   </div> -->
-    <div *ngIf="userDataService?.userData$?.value?.subscription == 'none'" class="row">
-      <div class="col-12 pl-5 pr-5">
-        <div class="card shadow-custom p-3">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-8">
-                <h3 class="mb-1">Desarrollo educativo y acompañamiento</h3>
-              </div>
-              <div class="col-8">
-                <p>
-                  Estamos seguros de impulsar significativamente tu conocimiento y económica
-                </p>
-              </div>
+  <div *ngIf="userDataService?.userData$?.value?.subscription == 'none'" class="row">
+    <div class="col-12 pl-5 pr-5">
+      <div class="card shadow-custom p-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8">
+              <h3 class="mb-1">Desarrollo educativo y acompañamiento</h3>
             </div>
-            <div class="row container-body pt-2 pb-2">
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img class="ml-3" width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt="" />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Educación Básica</p>
-                  </div>
+            <div class="col-8">
+              <p>
+                Estamos seguros de impulsar significativamente tu conocimiento y económica
+              </p>
+            </div>
+          </div>
+          <div class="row container-body pt-2 pb-2">
+            <div class="col-4">
+              <div class="row">
+                <div class="col-2 my-auto mx-auto">
+                  <img class="ml-3" width="24px"
+                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                    alt="" />
                 </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img class="ml-3" width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt="" />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Educación Intermedia</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img class="ml-3" width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt="" />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Educación Avanzada</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img class="ml-3" width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt="" />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">
-                      Clases en vivo
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img class="ml-3" width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt="" />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Señales de inversión</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img class="ml-3" width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt="" />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Grupos de apoyo</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img class="ml-3" width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt="" />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Educación Ecommerce</p>
-                  </div>
+                <div class="col-10">
+                  <p class="text-left mt-2">Educación Básica</p>
                 </div>
               </div>
             </div>
-            <div class="row justify-content-end">
-              <div class="col-4">
-                <button class="btn btn-secondary btn-block mt-4" routerLink="/self-management/create-order">
-                  Comprar
-                </button>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-2 my-auto mx-auto">
+                  <img class="ml-3" width="24px"
+                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                    alt="" />
+                </div>
+                <div class="col-10">
+                  <p class="text-left mt-2">Educación Intermedia</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-2 my-auto mx-auto">
+                  <img class="ml-3" width="24px"
+                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                    alt="" />
+                </div>
+                <div class="col-10">
+                  <p class="text-left mt-2">Educación Avanzada</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-2 my-auto mx-auto">
+                  <img class="ml-3" width="24px"
+                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                    alt="" />
+                </div>
+                <div class="col-10">
+                  <p class="text-left mt-2">
+                    Clases en vivo
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-2 my-auto mx-auto">
+                  <img class="ml-3" width="24px"
+                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                    alt="" />
+                </div>
+                <div class="col-10">
+                  <p class="text-left mt-2">Señales de inversión</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-2 my-auto mx-auto">
+                  <img class="ml-3" width="24px"
+                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                    alt="" />
+                </div>
+                <div class="col-10">
+                  <p class="text-left mt-2">Grupos de apoyo</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-2 my-auto mx-auto">
+                  <img class="ml-3" width="24px"
+                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                    alt="" />
+                </div>
+                <div class="col-10">
+                  <p class="text-left mt-2">Educación Ecommerce</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mx-4">
-      <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
-        <div class="row">
-          <div class="col-7">
-            <h3 class="card-subtitle text-white mt-3 mb-2">
-              <h3>Comisiona con Sniper Pro</h3>
-            </h3>
-            <p class="text-light">
-              Invita a tus amigos y empieza a generar ingresos extras. recibe el
-              20% del valor del paquete por el primer referido, un 20% por el
-              segundo referido y un 50% por tu tercer referido
-            </p>
-            <p class="mb-3 text-light">
-              Compártelo y empieza a comisionar con Sniper Pro
-            </p>
-          </div>
-          <div class="col-5 my-auto mx-auto">
-            <div class="">
-              <p class="ref text-center">{{ referalCode }}</p>
-            </div>
-            <div class="">
-              <button class="btn btn-ref btn-block" [cdkCopyToClipboard]="referalCode">
-                Copiar
+          <div class="row justify-content-end">
+            <div class="col-4">
+              <button class="btn btn-secondary btn-block mt-4" routerLink="/self-management/create-order">
+                Comprar
               </button>
             </div>
           </div>
@@ -597,3 +567,33 @@
       </div>
     </div>
   </div>
+  <div class="row mx-4">
+    <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
+      <div class="row">
+        <div class="col-7">
+          <h3 class="card-subtitle text-white mt-3 mb-2">
+            <h3>Comisiona con Sniper Pro</h3>
+          </h3>
+          <p class="text-light">
+            Invita a tus amigos y empieza a generar ingresos extras. recibe el
+            20% del valor del paquete por el primer referido, un 20% por el
+            segundo referido y un 50% por tu tercer referido
+          </p>
+          <p class="mb-3 text-light">
+            Compártelo y empieza a comisionar con Sniper Pro
+          </p>
+        </div>
+        <div class="col-5 my-auto mx-auto">
+          <div class="">
+            <p class="ref text-center">{{ referalCode }}</p>
+          </div>
+          <div class="">
+            <button class="btn btn-ref btn-block" [cdkCopyToClipboard]="referalCode">
+              Copiar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,22 +12,27 @@ import { link } from 'fs';
 })
 export class HomeComponent implements OnInit {
 
-  referalCode = '0000000'; 
+  referalCode = '0000000';
 
   constructor(public userDataService: UserDataService,
-              private route: Router
+    private route: Router
   ) { }
 
-  openEuroStreet(){
-    const url = 'https://eurostreetcapital.com/';
+  openAndroid() {
+    const url = 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro';
+    window.open(url, '_blank');
+  }
+
+  openiOS() {
+    const url = 'https://testflight.apple.com/join/6laFRCqS';
     window.open(url, '_blank');
   }
 
   ngOnInit(): void {
     this.userDataService.userData$.subscribe(
-     {
-      next: (r) => this.referalCode = r?.referral_code
-     } 
+      {
+        next: (r) => this.referalCode = r?.referral_code
+      }
     );
   }
 
