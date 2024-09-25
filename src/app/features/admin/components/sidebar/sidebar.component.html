@@ -55,21 +55,7 @@
             <div id="{{ childitems.collapse }}" class="collapse" *ngIf="childitems.type === 'sub'"
               [collapse]="childitems.isCollapsed" [isAnimated]="true">
               <ul class="nav">
-                <li *ngFor="let childitem of childitems.children" routerLinkActive="active">
-                  <a [routerLink]="[menuitem.path, childitem.path]">
-                    <span class="sidebar-mini-icon">{{
-                      childitem.smallTitle
-                      }}</span>
-                    <span class="sidebar-normal">{{ childitem.title }}</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </li>
-    <li class="mb-4">
+                <li class="mb-4">
       <a target="_blank" href="https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro">
         <i class="currency-exchange"></i>
         <p>Android</p>
@@ -81,6 +67,13 @@
         <p>iOS</p>
       </a>
     </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+    
 
     <li class="separator"></li>
 
