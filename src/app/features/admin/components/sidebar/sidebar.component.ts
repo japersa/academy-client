@@ -256,7 +256,29 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
-  },
+  }, {
+    path: '#',
+    title: 'Señales en Vivo',
+    type: 'sub',
+    icontype: 'currency-exchange',
+    role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
+        title: 'Androis',
+        type: 'link',
+        smallTitle: 'AD'
+      },
+      {
+        path: 'https://testflight.apple.com/join/6laFRCqS',
+        title: 'IOS',
+        type: 'link',
+        smallTitle: 'IOS'
+      }
+    ]
+  }
   // {
   //   path: '/academy',
   //   title: 'Academia',
@@ -304,7 +326,29 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
-  },
+  }, {
+    path: '#',
+    title: 'Señales en Vivo',
+    type: 'sub',
+    icontype: 'currency-exchange',
+    role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
+        title: 'Androis',
+        type: 'link',
+        smallTitle: 'AD'
+      },
+      {
+        path: 'https://testflight.apple.com/join/6laFRCqS',
+        title: 'IOS',
+        type: 'link',
+        smallTitle: 'IOS'
+      }
+    ]
+  }
   // {
   //   path: '/academy',
   //   title: 'Academia',
@@ -330,7 +374,29 @@ export const ROUTES_USER: RouteInfo[] = [
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
-  },
+  }, {
+    path: '#',
+    title: 'Señales en Vivo',
+    type: 'sub',
+    icontype: 'currency-exchange',
+    role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
+        title: 'Androis',
+        type: 'link',
+        smallTitle: 'AD'
+      },
+      {
+        path: 'https://testflight.apple.com/join/6laFRCqS',
+        title: 'IOS',
+        type: 'link',
+        smallTitle: 'IOS'
+      }
+    ]
+  }
   // {
   //   path: '/academy',
   //   title: 'Academia',
