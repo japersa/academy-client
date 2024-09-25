@@ -1,79 +1,45 @@
 <div class="sidebar-wrapper">
   <ul class="nav pb-5">
-    <li
-      *ngFor="let menuitem of menuItems"
-      routerLinkActive="active"
-      class="mb-4"
-    >
+    <li *ngFor="let menuitem of menuItems" routerLinkActive="active" class="mb-4">
       <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
         <i class="{{ menuitem.icontype }}"></i>
         <p>{{ menuitem.title }}</p>
       </a>
       <!--If it have a submenu-->
-      <a
-        data-toggle="collapse"
-        routerLinkActive="active"
-        *ngIf="menuitem.type === 'sub'"
-        (click)="menuitem.isCollapsed = !menuitem.isCollapsed"
-        [attr.aria-expanded]="!menuitem.isCollapsed"
-        [attr.aria-controls]="menuitem.collapse"
-      >
+      <a data-toggle="collapse" routerLinkActive="active" *ngIf="menuitem.type === 'sub'"
+        (click)="menuitem.isCollapsed = !menuitem.isCollapsed" [attr.aria-expanded]="!menuitem.isCollapsed"
+        [attr.aria-controls]="menuitem.collapse">
         <i class="{{ menuitem.icontype }}"></i>
         <p>{{ menuitem.title }}<b class="caret"></b></p>
       </a>
 
       <!--Display the submenu items-->
-      <div
-        id="{{ menuitem.collapse }}"
-        class="collapse"
-        *ngIf="menuitem.type === 'sub'"
-        [collapse]="menuitem.isCollapsed"
-        [isAnimated]="true"
-      >
+      <div id="{{ menuitem.collapse }}" class="collapse" *ngIf="menuitem.type === 'sub'"
+        [collapse]="menuitem.isCollapsed" [isAnimated]="true">
         <ul class="nav">
-          <li
-            *ngFor="let childitems of menuitem.children"
-            routerLinkActive="active"
-          >
+          <li *ngFor="let childitems of menuitem.children" routerLinkActive="active">
             <!--If is a single link-->
-            <a
-              [routerLink]="[menuitem.path, childitems.path]"
-              *ngIf="childitems.type === 'link'"
-            >
+            <a [routerLink]="[menuitem.path, childitems.path]" *ngIf="childitems.type === 'link'">
               <span class="sidebar-mini-icon">{{ childitems.smallTitle }}</span>
               <span class="sidebar-normal">{{ childitems.title }}</span>
             </a>
             <!--If it have a submenu-->
-            <a
-              data-toggle="collapse"
-              (click)="childitems.isCollapsed = !childitems.isCollapsed"
-              [attr.aria-expanded]="!childitems.isCollapsed"
-              [attr.aria-controls]="childitems.collapse"
-              *ngIf="childitems.type === 'sub'"
-            >
+            <a data-toggle="collapse" (click)="childitems.isCollapsed = !childitems.isCollapsed"
+              [attr.aria-expanded]="!childitems.isCollapsed" [attr.aria-controls]="childitems.collapse"
+              *ngIf="childitems.type === 'sub'">
               <span class="sidebar-mini-icon">{{ childitems.smallTitle }}</span>
-              <span class="sidebar-normal"
-                >{{ childitems.title }}<b class="caret"></b
-              ></span>
+              <span class="sidebar-normal">{{ childitems.title }}<b class="caret"></b></span>
             </a>
             <!--Display the submenu items-->
-            <div
-              id="{{ childitems.collapse }}"
-              class="collapse"
-              *ngIf="childitems.type === 'sub'"
-              [collapse]="childitems.isCollapsed"
-              [isAnimated]="true"
-            >
+            <div id="{{ childitems.collapse }}" class="collapse" *ngIf="childitems.type === 'sub'"
+              [collapse]="childitems.isCollapsed" [isAnimated]="true">
               <ul class="nav">
-                <li
-                  *ngFor="let childitem of childitems.children"
-                  routerLinkActive="active"
-                >
+                <li *ngFor="let childitem of childitems.children" routerLinkActive="active">
                   <a [routerLink]="[menuitem.path, childitem.path]">
                     <span class="sidebar-mini-icon">{{
                       childitem.smallTitle
-                    }}</span>
+                      }}</span>
                     <span class="sidebar-normal">{{ childitem.title }}</span>
                   </a>
                 </li>
@@ -82,6 +48,12 @@
           </li>
         </ul>
       </div>
+    </li>
+    <li class="mb-4">
+      <a href="https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro">
+        <i class="fa fa-graduation-cap"></i>
+        <p>Android</p>
+      </a>
     </li>
 
     <li class="separator"></li>

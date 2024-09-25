@@ -234,13 +234,6 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
   },
-  {
-    path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-    title: 'Andrpod',
-    type: 'link',
-    icontype: 'tim-icons icon-bank',
-    role: [ROLES_ENUM.ALL]
-  },
   // {
   //   path: '/academy',
   //   title: 'Academia',
@@ -314,13 +307,6 @@ export const ROUTES_USER: RouteInfo[] = [
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
     collapse: 'pages',
-  },
-  {
-    path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-    title: 'Andrpod',
-    type: 'link',
-    icontype: 'tim-icons icon-bank',
-    role: [ROLES_ENUM.ALL]
   },
   // {
   //   path: '/academy',
