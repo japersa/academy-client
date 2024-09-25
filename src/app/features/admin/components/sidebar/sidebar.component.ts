@@ -151,6 +151,29 @@ export const ROUTES: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
   }
 ];
+{
+    path: '/users',
+    title: 'Roles',
+    type: 'sub',
+    icontype: 'tim-icons icon-single-02',
+    role: [ROLES_ENUM.ADMIN],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: 'Android',
+        title: 'Androis',
+        type: 'link',
+        smallTitle: 'AD'
+      },
+      {
+        path: 'IOS',
+        title: 'IOS',
+        type: 'link',
+        smallTitle: 'IOS'
+      }
+    ]
+  }
 
 // Routes to ADMIN
 export const ROUTES_ADMIN: RouteInfo[] = [
