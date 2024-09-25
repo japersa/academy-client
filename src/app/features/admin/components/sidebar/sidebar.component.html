@@ -50,16 +50,21 @@
       </div>
     </li>
     <li class="mb-4">
-      <a href="https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro">
-        <i class="fa fa-graduation-cap"></i>
+      <a target="_blank" href="https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro">
+        <i class="currency-exchange"></i>
         <p>Android</p>
+      </a>
+    </li>
+    <li class="mb-4">
+      <a target="_blank" href="https://testflight.apple.com/join/6laFRCqS">
+        <i class="currency-exchange"></i>
+        <p>iOS</p>
       </a>
     </li>
 
     <li class="separator"></li>
 
     <li *ngFor="let menuitem of profileMenuItems" routerLinkActive="active">
-      <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
         <i class="{{ menuitem.icontype }} "></i>
         <p>{{ menuitem.title }}</p>
