@@ -25,20 +25,18 @@ $transparent-bg: transparent !default;
 $light-bg: #f5f6fa !default;
 $dark-background: #555555 !default;
 
-$grays: () !default;
-$grays: map-merge(
-  (
-    "100": $gray-100,
-    "200": $gray-200,
-    "300": $gray-300,
-    "400": $gray-400,
-    "500": $gray-500,
-    "600": $gray-600,
-    "700": $gray-700,
-    "800": $gray-800,
-    "900": $gray-900
-  ),
-  $grays
+$grays: (
+  ) !default;
+$grays: map-merge(("100": $gray-100,
+      "200": $gray-200,
+      "300": $gray-300,
+      "400": $gray-400,
+      "500": $gray-500,
+      "600": $gray-600,
+      "700": $gray-700,
+      "800": $gray-800,
+      "900": $gray-900 ),
+    $grays
 );
 
 $blue: #5e72e4 !default;
@@ -69,34 +67,32 @@ $opacity-2: rgba(255, 255, 255, 0.2) !default;
 
 // end beniamin
 
-$colors: () !default;
-$colors: map-merge(
-  (
-    "blue": $blue,
-    "indigo": $indigo,
-    "purple": $purple,
-    "pink": $pink,
-    "red": $red,
-    "orange": $orange,
-    "yellow": $yellow,
-    "green": $green,
-    "teal": $teal,
-    "cyan": $cyan,
-    "white": $white,
-    "gray": $gray-600,
-    "light": $gray-400,
-    "lighter": $gray-200,
-    "gray-dark": $gray-800
-  ),
-  $colors
+$colors: (
+  ) !default;
+$colors: map-merge(("blue": $blue,
+      "indigo": $indigo,
+      "purple": $purple,
+      "pink": $pink,
+      "red": $red,
+      "orange": $orange,
+      "yellow": $yellow,
+      "green": $green,
+      "teal": $teal,
+      "cyan": $cyan,
+      "white": $white,
+      "gray": $gray-600,
+      "light": $gray-400,
+      "lighter": $gray-200,
+      "gray-dark": $gray-800 ),
+    $colors
 );
 
 $default-color-opacity: rgba(182, 182, 182, 0.6) !default;
 $orange-color: #f96332 !default;
 
 $default: #000 !default;
-$primary: #AB8E3A !default;
-$secondary: #AB8E3A !default;
+$primary: #d0ad50 !default;
+$secondary: #d0ad50 !default;
 $tertiary: #4be8e6 !default;
 $success: #00f2c3 !default;
 $info: #4be8e6 !default;
@@ -105,7 +101,7 @@ $danger: #fd5d93 !default;
 $black: #222a42 !default;
 
 // gradient
-$default-states: #AB8E3A !default;
+$default-states: #d0ad50 !default;
 $primary-states: #f2c84a !default;
 $success-states: #0098f0 !default;
 $info-states: #4dfffc !default;
@@ -163,41 +159,37 @@ $tumblr-states: lighten($tumblr, 6%) !default;
 $behance: #1769ff !default;
 $behance-states: lighten($behance, 6%) !default;
 
-$theme-colors: () !default;
-$theme-colors: map-merge(
-  (
-    "default": $default,
-    "primary": $primary,
-    "secondary": $secondary,
-    "success": $success,
-    "info": $info,
-    "warning": $warning,
-    "danger": $danger,
-    "white": $white,
-    "neutral": $white,
-    "dark": $dark,
-    "darker": $darker
-  ),
-  $theme-colors
+$theme-colors: (
+  ) !default;
+$theme-colors: map-merge(("default": $default,
+      "primary": $primary,
+      "secondary": $secondary,
+      "success": $success,
+      "info": $info,
+      "warning": $warning,
+      "danger": $danger,
+      "white": $white,
+      "neutral": $white,
+      "dark": $dark,
+      "darker": $darker ),
+    $theme-colors
 );
 
-$brand-colors: () !default;
-$brand-colors: map-merge(
-  (
-    "facebook": $facebook,
-    "twitter": $twitter,
-    "google-plus": $google-plus,
-    "instagram": $instagram,
-    "pinterest": $pinterest,
-    "youtube": $youtube,
-    "dribbble": $dribbble,
-    "github": $github,
-    "reddit": $reddit,
-    "behance": $behance,
-    "tumblr": $tumblr,
-    "linkedin": $linkedin
-  ),
-  $brand-colors
+$brand-colors: (
+  ) !default;
+$brand-colors: map-merge(("facebook": $facebook,
+      "twitter": $twitter,
+      "google-plus": $google-plus,
+      "instagram": $instagram,
+      "pinterest": $pinterest,
+      "youtube": $youtube,
+      "dribbble": $dribbble,
+      "github": $github,
+      "reddit": $reddit,
+      "behance": $behance,
+      "tumblr": $tumblr,
+      "linkedin": $linkedin ),
+    $brand-colors
 );
 
 /*     brand Colors              */
@@ -239,16 +231,14 @@ $body-color: $gray-700 !default;
 
 // Sections
 
-$section-colors: () !default;
-$section-colors: map-merge(
-  (
-    "primary": $body-bg,
-    "secondary": $secondary,
-    "light": $gray-400,
-    "dark": $dark,
-    "darker": $darker
-  ),
-  $section-colors
+$section-colors: (
+  ) !default;
+$section-colors: map-merge(("primary": $body-bg,
+      "secondary": $secondary,
+      "light": $gray-400,
+      "dark": $dark,
+      "darker": $darker ),
+    $section-colors
 );
 
 // Links
@@ -278,37 +268,19 @@ $grid-breakpoints: (
 // Spacing
 
 $spacer: 1rem !default;
-$spacers: () !default;
-$spacers: map-merge(
-  (
-    0: 0,
-    1: (
-      $spacer * 0.25
-    ),
-    2: (
-      $spacer * 0.5
-    ),
-    3: $spacer,
-    4: (
-      $spacer * 1.5
-    ),
-    5: (
-      $spacer * 3
-    ),
-    "sm": (
-      $spacer * 2
-    ),
-    "md": (
-      $spacer * 4
-    ),
-    "lg": (
-      $spacer * 6
-    ),
-    "xl": (
-      $spacer * 8
-    )
-  ),
-  $spacers
+$spacers: (
+  ) !default;
+$spacers: map-merge((0: 0,
+      1: ($spacer * 0.25),
+      2: ($spacer * 0.5),
+      3: $spacer,
+      4: ($spacer * 1.5),
+      5: ($spacer * 3),
+      "sm": ($spacer * 2),
+      "md": ($spacer * 4),
+      "lg": ($spacer * 6),
+      "xl": ($spacer * 8)),
+    $spacers
 );
 
 $padding-base-vertical: 0.5rem !default;
@@ -329,15 +301,13 @@ $margin-base-vertical: 15px !default;
 
 // This variable affects the `.h-*` and `.w-*` classes.
 
-$sizes: () !default;
-$sizes: map-merge(
-  (
-    25: 25%,
-    50: 50%,
-    75: 75%,
-    100: 100%
-  ),
-  $sizes
+$sizes: (
+  ) !default;
+$sizes: map-merge((25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%),
+    $sizes
 );
 
 // Components
@@ -401,10 +371,18 @@ $font-family-alt: "Poppins", sans-serif !default;
 $font-size-dash: 0.875rem !default;
 
 $font-size-base: $font-size-dash !default; // Assumes the browser default, typically `16px`
-$font-size-xl: ($font-size-base * 1.428);
-$font-size-lg: ($font-size-base * 1.142);
-$font-size-sm: ($font-size-base * 0.85714286);
-$font-size-xs: ($font-size-base * 0.714);
+$font-size-xl: (
+  $font-size-base * 1.428
+);
+$font-size-lg: (
+  $font-size-base * 1.142
+);
+$font-size-sm: (
+  $font-size-base * 0.85714286
+);
+$font-size-xs: (
+  $font-size-base * 0.714
+);
 
 $h1-font-size: $font-size-base * 2.35714285 !default; //2.1875rem
 $h2-font-size: $font-size-base * 1.9285714 !default;
@@ -423,7 +401,9 @@ $font-paragraph: 1rem !default;
 $font-weight-base: $font-weight-normal !default;
 $shape-height-base: 1.428571 !default;
 
-$headings-margin-bottom: ($spacer * 0.5);
+$headings-margin-bottom: (
+  $spacer * 0.5
+);
 $headings-font-family: inherit !default;
 $headings-font-weight: $font-weight-normal !default;
 $headings-line-height: 1.2 !default;
@@ -459,7 +439,9 @@ $paragraph-font-size: 0.625rem !default;
 $paragraph-font-weight: 300 !default;
 $paragraph-line-height: 1.7 !default;
 
-$lead-font-size: ($paragraph-font-size * 1.25);
+$lead-font-size: (
+  $paragraph-font-size * 1.25
+);
 $lead-font-weight: 300 !default;
 
 $small-font-size: 80% !default;
@@ -467,7 +449,9 @@ $small-font-size: 80% !default;
 $text-muted: $gray-600 !default;
 
 $blockquote-small-color: $gray-600 !default;
-$blockquote-font-size: ($font-size-base * 1.1);
+$blockquote-font-size: (
+  $font-size-base * 1.1
+);
 
 $hr-border-color: rgba($black, 0.1);
 $hr-border-width: $border-width !default;
@@ -616,11 +600,12 @@ $input-placeholder-color: $gray-500 !default;
 $input-focus-placeholder-color: $gray-500 !default;
 
 $input-height-border: $input-border-width * 2 !default;
-$input-height-inner: ($font-size-base * $input-btn-line-height) +
-  ($input-btn-padding-y * 2) !default;
+$input-height-inner: (
+  $font-size-base * $input-btn-line-height) + ($input-btn-padding-y * 2) !default;
 $input-height: calc(#{$input-height-inner} + #{$input-height-border}) !default;
 
-$input-transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$input-transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55
+);
 
 // Input groups
 
@@ -658,10 +643,8 @@ $custom-control-indicator-checked-color: $component-active-color !default;
 $custom-control-indicator-checked-bg: $component-active-bg !default;
 $custom-control-indicator-checked-border-color: $component-active-border-color !default;
 $custom-control-indicator-checked-box-shadow: $custom-control-indicator-box-shadow !default;
-$custom-control-indicator-checked-disabled-bg: rgba(
-  theme-color("primary"),
-  0.5
-);
+$custom-control-indicator-checked-disabled-bg: rgba(theme-color("primary"),
+    0.5);
 
 $custom-control-indicator-disabled-bg: $gray-200 !default;
 $custom-control-label-disabled-color: $gray-600 !default;
@@ -981,10 +964,8 @@ $datepicker-active-background: theme-color("primary") !default;
 $datepicker-active-box-shadow: none !default;
 
 $datepicker-range-background: theme-color("primary") !default;
-$datepicker-range-cell-focused-background: darken(
-  $datepicker-range-background,
-  5%
-);
+$datepicker-range-cell-focused-background: darken($datepicker-range-background,
+    5%);
 $datepicker-range-color: $white !default;
 $datepicker-range-highlighted-bg: $gray-200 !default;
 

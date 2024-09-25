@@ -25,7 +25,7 @@
     </div> 
   </div>-->
 
-  <!-- <div class="row p-3 mx-3">
+    <!-- <div class="row p-3 mx-3">
     <div class="col-12 banner mx-auto">
       <carousel
         [showIndicators]="true"
@@ -54,8 +54,8 @@
       </carousel>
     </div>
   </div> -->
-  <!-- SELF MANAGEMENT -->
-  <!-- <div>
+    <!-- SELF MANAGEMENT -->
+    <!-- <div>
     <div class="row mt-4">
       <div class="col-6 mx-auto">
         <h2 class="mb-1 text-center">Funding Program</h2>
@@ -454,10 +454,7 @@
       </div>
     </div>
   </div> -->
-  <div
-      *ngIf="userDataService?.userData$?.value?.subscription == 'none'"
-      class="row"
-    >
+    <div *ngIf="userDataService?.userData$?.value?.subscription == 'none'" class="row">
       <div class="col-12 pl-5 pr-5">
         <div class="card shadow-custom p-3">
           <div class="card-body">
@@ -467,7 +464,7 @@
               </div>
               <div class="col-8">
                 <p>
-                 Estamos seguros de impulsar significativamente tu conocimiento y económica
+                  Estamos seguros de impulsar significativamente tu conocimiento y económica
                 </p>
               </div>
             </div>
@@ -475,12 +472,9 @@
               <div class="col-4">
                 <div class="row">
                   <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
+                    <img class="ml-3" width="24px"
                       src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <div class="col-10">
                     <p class="text-left mt-2">Educación Básica</p>
@@ -490,12 +484,9 @@
               <div class="col-4">
                 <div class="row">
                   <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
+                    <img class="ml-3" width="24px"
                       src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <div class="col-10">
                     <p class="text-left mt-2">Educación Intermedia</p>
@@ -505,12 +496,9 @@
               <div class="col-4">
                 <div class="row">
                   <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
+                    <img class="ml-3" width="24px"
                       src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <div class="col-10">
                     <p class="text-left mt-2">Educación Avanzada</p>
@@ -520,12 +508,9 @@
               <div class="col-4">
                 <div class="row">
                   <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
+                    <img class="ml-3" width="24px"
                       src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <div class="col-10">
                     <p class="text-left mt-2">
@@ -537,12 +522,9 @@
               <div class="col-4">
                 <div class="row">
                   <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
+                    <img class="ml-3" width="24px"
                       src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <div class="col-10">
                     <p class="text-left mt-2">Señales de inversión</p>
@@ -552,12 +534,9 @@
               <div class="col-4">
                 <div class="row">
                   <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
+                    <img class="ml-3" width="24px"
                       src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <div class="col-10">
                     <p class="text-left mt-2">Grupos de apoyo</p>
@@ -567,12 +546,9 @@
               <div class="col-4">
                 <div class="row">
                   <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
+                    <img class="ml-3" width="24px"
                       src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <div class="col-10">
                     <p class="text-left mt-2">Educación Ecommerce</p>
@@ -582,10 +558,7 @@
             </div>
             <div class="row justify-content-end">
               <div class="col-4">
-                <button
-                  class="btn btn-secondary btn-block mt-4"
-                  routerLink="/self-management/create-order"
-                >
+                <button class="btn btn-secondary btn-block mt-4" routerLink="/self-management/create-order">
                   Comprar
                 </button>
               </div>
@@ -594,36 +567,33 @@
         </div>
       </div>
     </div>
-  <div class="row mx-4">
-    <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
-      <div class="row">
-        <div class="col-7">
-          <h3 class="card-subtitle text-white mt-3 mb-2">
-            <h3>Comisiona con Start Academy</h3>
-          </h3>
-          <p class="text-light">
-            Invita a tus amigos y empieza a generar ingresos extras. recibe el
-            20% del valor del paquete por el primer referido, un 20% por el
-            segundo referido y un 50% por tu tercer referido
-          </p>
-          <p class="mb-3 text-light">
-            Compártelo y empieza a comisionar con Start Academy
-          </p>
-        </div>
-        <div class="col-5 my-auto mx-auto">
-          <div class="">
-            <p class="ref text-center">{{ referalCode }}</p>
+    <div class="row mx-4">
+      <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
+        <div class="row">
+          <div class="col-7">
+            <h3 class="card-subtitle text-white mt-3 mb-2">
+              <h3>Comisiona con Sniper Pro</h3>
+            </h3>
+            <p class="text-light">
+              Invita a tus amigos y empieza a generar ingresos extras. recibe el
+              20% del valor del paquete por el primer referido, un 20% por el
+              segundo referido y un 50% por tu tercer referido
+            </p>
+            <p class="mb-3 text-light">
+              Compártelo y empieza a comisionar con Sniper Pro
+            </p>
           </div>
-          <div class="">
-            <button
-              class="btn btn-ref btn-block"
-              [cdkCopyToClipboard]="referalCode"
-            >
-              Copiar
-            </button>
+          <div class="col-5 my-auto mx-auto">
+            <div class="">
+              <p class="ref text-center">{{ referalCode }}</p>
+            </div>
+            <div class="">
+              <button class="btn btn-ref btn-block" [cdkCopyToClipboard]="referalCode">
+                Copiar
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

@@ -71,11 +71,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
           {
             label: 'Nuevos usuarios',
             fill: true,
-            borderColor: '#AB8E3A',
+            borderColor: '#d0ad50',
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            pointBackgroundColor: '#AB8E3A',
+            pointBackgroundColor: '#d0ad50',
             pointBorderColor: 'rgba(255,255,255,0)',
             pointHoverBackgroundColor: '#DD0005',
             pointBorderWidth: 20,

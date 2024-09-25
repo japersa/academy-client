@@ -1,22 +1,13 @@
-<nav
-  class="navbar navbar-expand-lg navbar-absolute"
-  [ngClass]="{
+<nav class="navbar navbar-expand-lg navbar-absolute" [ngClass]="{
     'bg-white': isCollapsed === false,
     'navbar-transparent': isCollapsed === true
-  }"
->
+  }">
   <div class="container-fluid">
     <div class="navbar-wrapper">
-      <ng-container
-        *ngIf="userDataService?.userData$?.value?.rol !== 'student'"
-      >
+      <ng-container *ngIf="userDataService?.userData$?.value?.rol !== 'student'">
         <div class="navbar-minimize d-inline">
-          <button
-            class="minimize-sidebar btn btn-link btn-just-icon"
-            tooltil="Sidebar toggle"
-            placement="right"
-            (click)="minimizeSidebar()"
-          >
+          <button class="minimize-sidebar btn btn-link btn-just-icon" tooltil="Sidebar toggle" placement="right"
+            (click)="minimizeSidebar()">
             <i class="tim-icons icon-align-center visible-on-sidebar-regular">
             </i>
             <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini">
@@ -34,20 +25,12 @@
 
       <a class="navbar-brand" routerLink="/home">
         <img
-          src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1719765038/RC_11326_Logo_Final_Start_Academy_Alex_Logotipo_Positivo_detuei.png"
-          class="img-fluid logo"
-          alt="mistrades logo"
-        />
+          src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1727228272/Sin_ti%CC%81tulo_300_x_150_px_wor4ih.png"
+          class="img-fluid logo" alt="mistrades logo" />
       </a>
     </div>
-    <button
-      aria-label="Toggle navigation"
-      class="navbar-toggler"
-      [attr.aria-expanded]="!isCollapsed"
-      (click)="isCollapsed = !isCollapsed"
-      id="navigation"
-      type="button"
-    >
+    <button aria-label="Toggle navigation" class="navbar-toggler" [attr.aria-expanded]="!isCollapsed"
+      (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
       <span class="navbar-toggler-bar navbar-kebab"> </span>
       <span class="navbar-toggler-bar navbar-kebab"> </span>
       <span class="navbar-toggler-bar navbar-kebab"> </span>
@@ -55,51 +38,34 @@
     <div class="navbar-collapse" [collapse]="isCollapsed" id="navigation">
       <ul class="navbar-nav ml-auto">
         <li class="dropdown nav-item">
-          <a
-            class="dropdown-toggle nav-link dropdown-toggle"
-            [routerLink]="['/notifications']"
-            href="javascript:void(0)"
-          >
+          <a class="dropdown-toggle nav-link dropdown-toggle" [routerLink]="['/notifications']"
+            href="javascript:void(0)">
             <div class="notification d-none d-lg-block d-xl-block"></div>
-            <img
-              src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042641/webapp/ICONO-CAMPANA-16_ebkquw.svg"
-              class="noti-icon"
-              alt=""
-            />
+            <img src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042641/webapp/ICONO-CAMPANA-16_ebkquw.svg"
+              class="noti-icon" alt="" />
             <p class="d-lg-none">Notifications</p>
           </a>
         </li>
         <li class="dropdown nav-item" dropdown placement="bottom left">
-          <a
-            class="nav-link dropdown-toggle"
-            data-toggle="dropdown"
-            dropdownToggle
-            href="#"
-            (click)="$event.preventDefault()"
-          >
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" dropdownToggle href="#"
+            (click)="$event.preventDefault()">
             <div class="photo">
-              <img
-                alt="Profile Photo"
-                [src]="
+              <img alt="Profile Photo" [src]="
                   userDataService.userData$.value?.image_profile
                     ? userDataService.userData$.value.image_profile
                     : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'
-                "
-              />
+                " />
             </div>
             <b class="caret d-none d-lg-block d-xl-block"> </b>
             <p (click)="doLogout()" class="d-lg-none">Cerrar sesión</p>
           </a>
-          <ul
-            class="dropdown-menu dropdown-navbar dropdown-menu-right"
-            *dropdownMenu
-          >
+          <ul class="dropdown-menu dropdown-navbar dropdown-menu-right" *dropdownMenu>
             <li class="nav-link">
               <p class="nav-item dropdown-item">
                 {{
-                  userDataService?.userData$?.value?.first_name
-                    ? userDataService?.userData$?.value?.first_name
-                    : ("username" | titlecase)
+                userDataService?.userData$?.value?.first_name
+                ? userDataService?.userData$?.value?.first_name
+                : ("username" | titlecase)
                 }}
               </p>
             </li>
@@ -109,24 +75,14 @@
                 Ver mi perfil
               </a>
             </li>
-            <li
-              class="nav-link"
-              *ngIf="userDataService?.userData$?.value?.rol === 'student'"
-            >
-              <a
-                class="nav-item dropdown-item"
-                [routerLink]="['/subscription']"
-              >
+            <li class="nav-link" *ngIf="userDataService?.userData$?.value?.rol === 'student'">
+              <a class="nav-item dropdown-item" [routerLink]="['/subscription']">
                 Mi Subscripción
               </a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-link">
-              <a
-                class="nav-item dropdown-item"
-                [routerLink]="['/login']"
-                (click)="doLogout()"
-              >
+              <a class="nav-item dropdown-item" [routerLink]="['/login']" (click)="doLogout()">
                 Cerrar sesión
               </a>
             </li>
@@ -137,32 +93,13 @@
     </div>
   </div>
 </nav>
-<div
-  aria-hidden="true"
-  aria-labelledby="searchModal"
-  bsModal
-  class="modal modal-search fade"
-  #searchModal="bs-modal"
-  id="searchModal"
-  role="dialog"
-  tabindex="-1"
->
+<div aria-hidden="true" aria-labelledby="searchModal" bsModal class="modal modal-search fade" #searchModal="bs-modal"
+  id="searchModal" role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <input
-          class="form-control"
-          id="inlineFormInputGroup"
-          placeholder="SEARCH"
-          type="text"
-        />
-        <button
-          aria-label="Close"
-          class="close"
-          (click)="searchModal.hide()"
-          data-dismiss="modal"
-          type="button"
-        >
+        <input class="form-control" id="inlineFormInputGroup" placeholder="SEARCH" type="text" />
+        <button aria-label="Close" class="close" (click)="searchModal.hide()" data-dismiss="modal" type="button">
           <i class="tim-icons icon-simple-remove"> </i>
         </button>
       </div>

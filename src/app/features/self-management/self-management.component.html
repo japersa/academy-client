@@ -25,7 +25,7 @@
     </div> 
   </div>-->
 
-  <!-- <div class="row p-3 mx-3">
+    <!-- <div class="row p-3 mx-3">
     <div class="col-12 banner mx-auto">
       <carousel
         [showIndicators]="true"
@@ -54,8 +54,8 @@
       </carousel>
     </div>
   </div> -->
-  <!-- SELF MANAGEMENT -->
-  <!-- <div>
+    <!-- SELF MANAGEMENT -->
+    <!-- <div>
     <div class="row mt-4">
       <div class="col-6 mx-auto">
         <h2 class="mb-1 text-center">Funding Program</h2>
@@ -454,258 +454,232 @@
       </div>
     </div>
   </div> -->
-  <div class="col-lg-4 col-sm-12 text-right p-2">
-    <div class="card card-stats text-center referido p-2 shadow-custom">
-      <h3 class="pb-0">ID único para Referido</h3>
-      <div class="row">
-        <div class="col-8 pr-1">
-          <p class="ref">{{ referalCode }}</p>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <button
-            class="btn btn-secondary btn-md"
-            [cdkCopyToClipboard]="referalCode"
-          >
-            Copiar
-          </button>
-          <br />
-          <br />
+    <div class="col-lg-4 col-sm-12 text-right p-2">
+      <div class="card card-stats text-center referido p-2 shadow-custom">
+        <h3 class="pb-0">ID único para Referido</h3>
+        <div class="row">
+          <div class="col-8 pr-1">
+            <p class="ref">{{ referalCode }}</p>
+          </div>
+          <div class="col-lg-4 col-sm-12">
+            <button class="btn btn-secondary btn-md" [cdkCopyToClipboard]="referalCode">
+              Copiar
+            </button>
+            <br />
+            <br />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-12 ml-3">
-    <h3 class="m-0">
-      Hola, {{ userDataService?.userData$?.value?.first_name | titlecase }}
-    </h3>
-    <ng-container
-      *ngIf="
+    <div class="col-12 ml-3">
+      <h3 class="m-0">
+        Hola, {{ userDataService?.userData$?.value?.first_name | titlecase }}
+      </h3>
+      <ng-container *ngIf="
         userDataService?.userData$?.value?.subscription != 'none';
         else elseTemplate
-      "
-    >
-      <p>
-        Continúa aprendiendo mediante su subscripción
-        <strong>Start Academy</strong>
-      </p>
-    </ng-container>
-    <ng-template #elseTemplate>
-      <p>
-        Hemos detectado que aún no tienes una subscripción activa, te animamos a
-        conseguir una <a routerLink="/self-management/create-order">aquí</a>.
-      </p>
-    </ng-template>
-  </div>
+      ">
+        <p>
+          Continúa aprendiendo mediante su subscripción
+          <strong>Sniper Pro</strong>
+        </p>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <p>
+          Hemos detectado que aún no tienes una subscripción activa, te animamos a
+          conseguir una <a routerLink="/self-management/create-order">aquí</a>.
+        </p>
+      </ng-template>
+    </div>
 
-  <ng-container *ngIf="continueLearningCourses.length > 0">
-    <div class="ml-3 row" style="width: 100% !important">
-      <div class="col-12">
-        <h2 class="mt-4">Continuar viendo</h2>
-        <hr/>
+    <ng-container *ngIf="continueLearningCourses.length > 0">
+      <div class="ml-3 row" style="width: 100% !important">
+        <div class="col-12">
+          <h2 class="mt-4">Continuar viendo</h2>
+          <hr />
+        </div>
+        <div *ngFor="let c of continueLearningCourses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
+          <div class="card">
+            <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap" />
+            <div class="card-body">
+              <h5 class="card-title text-center">
+                {{
+                (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
+                | uppercase
+                }}
+              </h5>
+              <button class="btn btn-simple btn-primary btn-block" type="button" [routerLink]="['/class', c.id]">
+                CONTINUAR VIENDO
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div
-        *ngFor="let c of continueLearningCourses"
-        class="col-lg-3 col-md-3 col-sm-12 col-sm-12"
-      >
+    </ng-container>
+
+    <div class="ml-3 row" style="width: 100% !important"
+      *ngIf="userDataService?.userData$?.value?.subscription != 'none'">
+      <div class="col-12">
+        <h2 class="mt-4">Cursos</h2>
+        <hr style="width: 100% !important" />
+      </div>
+
+      <div *ngFor="let c of courses" class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
         <div class="card">
-          <img
-            class="card-img-top"
-            [src]="c?.path_preview_image"
-            alt="Card image cap"
-          />
+          <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap" />
           <div class="card-body">
             <h5 class="card-title text-center">
               {{
-                (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
-                  | uppercase
+              (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
+              | uppercase
               }}
             </h5>
-            <button
-              class="btn btn-simple btn-primary btn-block"
-              type="button"
-              [routerLink]="['/class', c.id]"
-            >
-              CONTINUAR VIENDO
+            <button class="btn btn-secondary btn-block" type="button" [routerLink]="['/course', c.id]">
+              IR AL CURSO
             </button>
           </div>
         </div>
       </div>
     </div>
-  </ng-container>
 
-  <div
-    class="ml-3 row"
-    style="width: 100% !important"
-    *ngIf="userDataService?.userData$?.value?.subscription != 'none'"
-  >
-    <div class="col-12">
-      <h2 class="mt-4">Cursos</h2>
-      <hr style="width: 100% !important" />
-    </div>
-
-    <div
-      *ngFor="let c of courses"
-      class="col-lg-3 col-md-3 col-sm-12 col-sm-12"
-    >
-      <div class="card">
-        <img
-          class="card-img-top"
-          [src]="c?.path_preview_image"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title text-center">
-            {{
-              (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
-                | uppercase
-            }}
-          </h5>
-          <button
-            class="btn btn-secondary btn-block"
-            type="button"
-            [routerLink]="['/course', c.id]"
-          >
-            IR AL CURSO
-          </button>
+    <div class="row">
+      <div *ngIf="userDataService?.userData$?.value?.subscription == 'none'" class="row">
+        <div class="col-12 pl-5 pr-5">
+          <div class="card shadow-custom p-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-8">
+                  <h3 class="mb-1">Desarrollo educativo y acompañamiento</h3>
+                </div>
+                <div class="col-8">
+                  <p>
+                    Estamos seguros de impulsar significativamente tu conocimiento y económica
+                  </p>
+                </div>
+              </div>
+              <div class="row container-body pt-2 pb-2">
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-2 my-auto mx-auto">
+                      <img class="ml-3" width="24px"
+                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                        alt="" />
+                    </div>
+                    <div class="col-10">
+                      <p class="text-left mt-2">Educación Básica</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-2 my-auto mx-auto">
+                      <img class="ml-3" width="24px"
+                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                        alt="" />
+                    </div>
+                    <div class="col-10">
+                      <p class="text-left mt-2">Educación Intermedia</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-2 my-auto mx-auto">
+                      <img class="ml-3" width="24px"
+                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                        alt="" />
+                    </div>
+                    <div class="col-10">
+                      <p class="text-left mt-2">Educación Avanzada</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-2 my-auto mx-auto">
+                      <img class="ml-3" width="24px"
+                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                        alt="" />
+                    </div>
+                    <div class="col-10">
+                      <p class="text-left mt-2">
+                        Clases en vivo
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-2 my-auto mx-auto">
+                      <img class="ml-3" width="24px"
+                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                        alt="" />
+                    </div>
+                    <div class="col-10">
+                      <p class="text-left mt-2">Señales de inversión</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-2 my-auto mx-auto">
+                      <img class="ml-3" width="24px"
+                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                        alt="" />
+                    </div>
+                    <div class="col-10">
+                      <p class="text-left mt-2">Grupos de apoyo</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-2 my-auto mx-auto">
+                      <img class="ml-3" width="24px"
+                        src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
+                        alt="" />
+                    </div>
+                    <div class="col-10">
+                      <p class="text-left mt-2">Educación Ecommerce</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-end">
+                <div class="col-4">
+                  <button class="btn btn-secondary btn-block mt-4" routerLink="/self-management/create-order">
+                    Comprar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div
-      *ngIf="userDataService?.userData$?.value?.subscription == 'none'"
-      class="row"
-    >
-      <div class="col-12 pl-5 pr-5">
-        <div class="card shadow-custom p-3">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-8">
-                <h3 class="mb-1">Desarrollo educativo y acompañamiento</h3>
-              </div>
-              <div class="col-8">
-                <p>
-                 Estamos seguros de impulsar significativamente tu conocimiento y económica
-                </p>
-              </div>
+      <div class="row pl-5 pr-5">
+        <div class="col-lg-12 col-md-12 shadow-custom commissions">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="card-subtitle mt-3 mb-2">
+                Comisiona con Sniper Pro
+              </h3>
+              <p class="text-white">
+                Invita a tus amigos y empieza a generar ingresos extras. recibe el
+                20% del valor del paquete por el primer referido, un 20% por el
+                segundo referido y un 50% por tu tercer referido
+              </p>
+              <p class="mb-3 text-white">
+                Compártelo y empieza a comisionar con Sniper Pro
+              </p>
             </div>
-            <div class="row container-body pt-2 pb-2">
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Educación Básica</p>
-                  </div>
-                </div>
+            <div class="col-5 my-auto mx-auto">
+              <div class="">
+                <p class="ref2 text-center">{{ referalCode }}</p>
               </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Educación Intermedia</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Educación Avanzada</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">
-                      Clases en vivo
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Señales de inversión</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Grupos de apoyo</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-2 my-auto mx-auto">
-                    <img
-                      class="ml-3"
-                      width="24px"
-                      src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042643/webapp/ICONO-CHECK-11_cqgedh.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-10">
-                    <p class="text-left mt-2">Educación Ecommerce</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row justify-content-end">
-              <div class="col-4">
-                <button
-                  class="btn btn-secondary btn-block mt-4"
-                  routerLink="/self-management/create-order"
-                >
-                  Comprar
+              <div class="">
+                <button class="btn btn-ref btn-block" [cdkCopyToClipboard]="referalCode" (click)="copied()">
+                  {{ buttonText }}
                 </button>
               </div>
             </div>
@@ -713,39 +687,4 @@
         </div>
       </div>
     </div>
-
-    <div class="row pl-5 pr-5">
-      <div class="col-lg-12 col-md-12 shadow-custom commissions">
-        <div class="row">
-          <div class="col-7">
-            <h3 class="card-subtitle mt-3 mb-2">
-              Comisiona con Start Academy
-            </h3>
-            <p class="text-white">
-              Invita a tus amigos y empieza a generar ingresos extras. recibe el
-            20% del valor del paquete por el primer referido, un 20% por el
-            segundo referido y un 50% por tu tercer referido
-            </p>
-            <p class="mb-3 text-white">
-              Compártelo y empieza a comisionar con Start Academy
-            </p>
-          </div>
-          <div class="col-5 my-auto mx-auto">
-            <div class="">
-              <p class="ref2 text-center">{{ referalCode }}</p>
-            </div>
-            <div class="">
-              <button
-                class="btn btn-ref btn-block"
-                [cdkCopyToClipboard]="referalCode"
-                (click)="copied()"
-              >
-                {{ buttonText }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-</div>

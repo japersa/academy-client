@@ -1,9 +1,6 @@
-<div
-  class="content"
-  [ngClass]="{
+<div class="content" [ngClass]="{
     'class-user': userDataService?.userData$?.value?.rol === 'student'
-  }"
->
+  }">
   <ol class="breadcrumb bg-transparent ml-3">
     <li class="breadcrumb-item text-primary">
       <a routerLink="/home"> Inicio </a>
@@ -23,35 +20,20 @@
           <h4 class="title">Editar perfil</h4>
         </div>
         <div class="card-body">
-          <form
-            class="form"
-            [formGroup]="updateForm"
-            (ngSubmit)="updateUser(updateForm.value)"
-            role="form"
-          >
+          <form class="form" [formGroup]="updateForm" (ngSubmit)="updateUser(updateForm.value)" role="form">
             <div class="row">
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Nombre </label>
-                  <input
-                    class="form-control text-uppercase"
-                    type="text"
-                    placeholder="Nombre"
-                    [(ngModel)]="userDataService?.userData$?.value.first_name"
-                    formControlName="first_name"
-                  />
+                  <input class="form-control text-uppercase" type="text" placeholder="Nombre"
+                    [(ngModel)]="userDataService?.userData$?.value.first_name" formControlName="first_name" />
                 </div>
-                <ng-container
-                  *ngFor="let validation of validationMessages.first_name"
-                >
-                  <small
-                    class="text-danger d-block"
-                    *ngIf="
+                <ng-container *ngFor="let validation of validationMessages.first_name">
+                  <small class="text-danger d-block" *ngIf="
                       updateForm.get('first_name').hasError(validation.type) &&
                       (updateForm.get('first_name').dirty ||
                         updateForm.get('first_name').touched)
-                    "
-                  >
+                    ">
                     {{ validation.message }}
                   </small>
                 </ng-container>
@@ -59,25 +41,16 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Apellido </label>
-                  <input
-                    class="form-control text-uppercase"
-                    type="text"
-                    [(ngModel)]="userDataService?.userData$?.value.last_name"
-                    placeholder="Apellido"
-                    formControlName="last_name"
-                  />
+                  <input class="form-control text-uppercase" type="text"
+                    [(ngModel)]="userDataService?.userData$?.value.last_name" placeholder="Apellido"
+                    formControlName="last_name" />
                 </div>
-                <ng-container
-                  *ngFor="let validation of validationMessages.last_name"
-                >
-                  <small
-                    class="text-danger d-block"
-                    *ngIf="
+                <ng-container *ngFor="let validation of validationMessages.last_name">
+                  <small class="text-danger d-block" *ngIf="
                       updateForm.get('last_name').hasError(validation.type) &&
                       (updateForm.get('last_name').dirty ||
                         updateForm.get('last_name').touched)
-                    "
-                  >
+                    ">
                     {{ validation.message }}
                   </small>
                 </ng-container>
@@ -87,27 +60,16 @@
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Dirección de Email </label>
-                  <input
-                    class="form-control text-uppercase"
-                    [(ngModel)]="userDataService?.userData$?.value.username"
-                    formControlName="email"
-                    placeholder="Email"
-                    type="email"
-                    (blur)="focus = false"
-                    (focus)="focus = true"
-                  />
+                  <input class="form-control text-uppercase" [(ngModel)]="userDataService?.userData$?.value.username"
+                    formControlName="email" placeholder="Email" type="email" (blur)="focus = false"
+                    (focus)="focus = true" />
                 </div>
-                <ng-container
-                  *ngFor="let validation of validationMessages.email"
-                >
-                  <small
-                    class="text-danger"
-                    *ngIf="
+                <ng-container *ngFor="let validation of validationMessages.email">
+                  <small class="text-danger" *ngIf="
                       updateForm.get('email').hasError(validation.type) &&
                       (updateForm.get('email').dirty ||
                         updateForm.get('email').touched)
-                    "
-                  >
+                    ">
                     {{ validation.message }}
                   </small>
                 </ng-container>
@@ -115,29 +77,16 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Fecha de nacimiento </label>
-                  <input
-                    class="form-control text-uppercase"
-                    [(ngModel)]="userDataService?.userData$?.value.birth_date"
-                    type="date"
-                    class="form-control"
-                    formControlName="birth_date"
-                    id="birth_date"
-                    id="birth_date"
-                    (blur)="focus = false"
-                    (focus)="focus = true"
-                  />
+                  <input class="form-control text-uppercase" [(ngModel)]="userDataService?.userData$?.value.birth_date"
+                    type="date" class="form-control" formControlName="birth_date" id="birth_date" id="birth_date"
+                    (blur)="focus = false" (focus)="focus = true" />
                 </div>
-                <ng-container
-                  *ngFor="let validation of validationMessages.birth_date"
-                >
-                  <small
-                    class="form-text text-danger"
-                    *ngIf="
+                <ng-container *ngFor="let validation of validationMessages.birth_date">
+                  <small class="form-text text-danger" *ngIf="
                       updateForm.get('birth_date').hasError(validation.type) &&
                       (updateForm.get('birth_date').dirty ||
                         updateForm.get('birth_date').touched)
-                    "
-                  >
+                    ">
                     {{ validation.message }}
                   </small>
                 </ng-container>
@@ -147,33 +96,20 @@
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> DNI / C.C / PASAPORTE </label>
-                  <input
-                    class="form-control text-uppercase"
-                    [(ngModel)]="
+                  <input class="form-control text-uppercase" [(ngModel)]="
                       userDataService?.userData$?.value.identity_card
-                    "
-                    formControlName="identity_card"
-                    id="identity_card"
-                    id="identity_card"
-                    placeholder="Escriba su documento de identidad"
-                    type="text"
-                    (blur)="focus = false"
-                    (focus)="focus = true"
-                  />
+                    " formControlName="identity_card" id="identity_card" id="identity_card"
+                    placeholder="Escriba su documento de identidad" type="text" (blur)="focus = false"
+                    (focus)="focus = true" />
                 </div>
-                <ng-container
-                  *ngFor="let validation of validationMessages.identity_card"
-                >
-                  <small
-                    class="form-text text-danger"
-                    *ngIf="
+                <ng-container *ngFor="let validation of validationMessages.identity_card">
+                  <small class="form-text text-danger" *ngIf="
                       updateForm
                         .get('identity_card')
                         .hasError(validation.type) &&
                       (updateForm.get('identity_card').dirty ||
                         updateForm.get('identity_card').touched)
-                    "
-                  >
+                    ">
                     {{ validation.message }}
                   </small>
                 </ng-container>
@@ -181,62 +117,36 @@
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Teléfono </label>
-                  <input
-                    class="form-control text-uppercase"
-                    placeholder="Teléfono"
-                    [(ngModel)]="userDataService?.userData$?.value.phone_number"
-                    formControlName="phone_number"
-                    type="tel"
-                    (blur)="focus = false"
-                    (focus)="focus = true"
-                  />
+                  <input class="form-control text-uppercase" placeholder="Teléfono"
+                    [(ngModel)]="userDataService?.userData$?.value.phone_number" formControlName="phone_number"
+                    type="tel" (blur)="focus = false" (focus)="focus = true" />
                 </div>
-                <ng-container
-                  *ngFor="let validation of validationMessages.phone"
-                >
-                  <small
-                    class="text-danger"
-                    *ngIf="
+                <ng-container *ngFor="let validation of validationMessages.phone">
+                  <small class="text-danger" *ngIf="
                       updateForm
                         .get('phone_number')
                         .hasError(validation.type) &&
                       (updateForm.get('phone_number').dirty ||
                         updateForm.get('phone_number').touched)
-                    "
-                  >
+                    ">
                     {{ validation.message }}
                   </small>
                 </ng-container>
               </div>
             </div>
             <ng-container *ngIf="errorMessage">
-              <small
-                class="text-danger"
-                *ngFor="let e of errorMessage | keyvalue"
-                >{{ e.value }}</small
-              >
+              <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{ e.value }}</small>
               <br />
             </ng-container>
             <div class="card-footer">
               <div class="row">
                 <div class="col-md-6 pr-md-1">
-                  <button
-                    class="btn btn-fill btn-primary"
-                    [disabled]="updateForm.invalid"
-                    type="submit"
-                  >
+                  <button class="btn btn-fill btn-primary" [disabled]="updateForm.invalid" type="submit">
                     GUARDAR
                   </button>
                 </div>
-                <div
-                  class="pull-right col-md-6 pl-md-1"
-                  *ngIf="showButtonPassword"
-                >
-                  <button
-                    type="button"
-                    class="btn btn-link text-primary text-uppercase"
-                    (click)="showUpdatePassword()"
-                  >
+                <div class="pull-right col-md-6 pl-md-1" *ngIf="showButtonPassword">
+                  <button type="button" class="btn btn-link text-primary text-uppercase" (click)="showUpdatePassword()">
                     CAMBIAR CONTRASEÑA
                   </button>
                 </div>
@@ -250,60 +160,37 @@
           <h4 class="title">CAMBIAR CONTRASEÑA</h4>
         </div>
         <div class="card-body">
-          <form
-            class="form"
-            [formGroup]="updatePasswordForm"
-            (ngSubmit)="updatePassword(updatePasswordForm.value)"
-            role="form"
-          >
+          <form class="form" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword(updatePasswordForm.value)"
+            role="form">
             <div class="row">
               <div class="col-md-6 pr-md-1">
                 <div class="form-group">
                   <label> Contraseña actual </label>
-                  <input
-                    class="form-control"
-                    type="password"
-                    placeholder="Contraseña actual"
-                    formControlName="old_password"
-                  />
+                  <input class="form-control" type="password" placeholder="Contraseña actual"
+                    formControlName="old_password" />
                 </div>
               </div>
               <div class="col-md-6 pl-md-1">
                 <div class="form-group">
                   <label> Nueva contraseña </label>
-                  <input
-                    class="form-control"
-                    type="password"
-                    placeholder="Nueva contraseña"
-                    formControlName="password"
-                  />
+                  <input class="form-control" type="password" placeholder="Nueva contraseña"
+                    formControlName="password" />
                 </div>
               </div>
               <ng-container *ngIf="errorMessage">
-                <small
-                  class="text-danger"
-                  *ngFor="let e of errorPassMessage | keyvalue"
-                  >{{ e.value }}</small
-                >
+                <small class="text-danger" *ngFor="let e of errorPassMessage | keyvalue">{{ e.value }}</small>
                 <br />
               </ng-container>
             </div>
             <div class="card-footer">
               <div class="row">
                 <div class="col-md-6 pr-md-1">
-                  <button
-                    class="btn btn-fill btn-primary"
-                    [disabled]="updatePasswordForm.invalid"
-                    type="submit"
-                  >
+                  <button class="btn btn-fill btn-primary" [disabled]="updatePasswordForm.invalid" type="submit">
                     Actualizar
                   </button>
                 </div>
                 <div class="col-md-6 pl-md-1">
-                  <button
-                    class="btn btn-fill btn-danger"
-                    (click)="showUpdatePassword()"
-                  >
+                  <button class="btn btn-fill btn-danger" (click)="showUpdatePassword()">
                     Cancelar
                   </button>
                 </div>
@@ -330,14 +217,11 @@
             <p class="description text-primary">{{ rol | titlecase }}</p>
             <p>{{ username }}</p>
             <!-- <p class="description">{{ userDataService?.userData$?.value.subscription | titlecase}}</p> -->
-            <p
-              class="description"
-              *ngIf="
+            <p class="description" *ngIf="
                 userDataService?.userData$?.value.subscription === 'full';
                 else elseTemplate
-              "
-            >
-              Start Academy
+              ">
+              Sniper Pro
             </p>
             <ng-template #elseTemplate>
               <p class="description">
@@ -372,23 +256,15 @@
       <ng-container *ngFor="let c of approvedCourses">
         <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
           <div class="card">
-            <img
-              class="card-img-top"
-              [src]="c?.path_preview_image"
-              alt="Card image cap"
-            />
+            <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap" />
             <div class="card-body">
               <h5 class="card-title text-center">
                 {{
-                  (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
-                    | uppercase
+                (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
+                | uppercase
                 }}
               </h5>
-              <button
-                class="btn btn-simple btn-secondary btn-block"
-                type="button"
-                (click)="generateCertificate(c.id)"
-              >
+              <button class="btn btn-simple btn-secondary btn-block" type="button" (click)="generateCertificate(c.id)">
                 DESCARGAR CERTIFICADO
               </button>
             </div>
