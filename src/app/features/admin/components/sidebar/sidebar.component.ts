@@ -152,22 +152,22 @@ export const ROUTES: RouteInfo[] = [
   }
 ];
 {
-    path: '/users',
-    title: 'Roles',
+    path: '#',
+    title: 'Señales en Vivo',
     type: 'sub',
-    icontype: 'tim-icons icon-single-02',
-    role: [ROLES_ENUM.ADMIN],
+    icontype: 'currency-exchange',
+    role: [ROLES_ENUM.ALL],
     collapse: 'pages',
     isCollapsed: true,
     children: [
       {
-        path: 'Android',
+        path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
         title: 'Androis',
         type: 'link',
         smallTitle: 'AD'
       },
       {
-        path: 'IOS',
+        path: 'https://testflight.apple.com/join/6laFRCqS',
         title: 'IOS',
         type: 'link',
         smallTitle: 'IOS'
