@@ -149,8 +149,7 @@ export const ROUTES: RouteInfo[] = [
     type: 'link',
     icontype: 'tim-icons icon-trophy',
     role: [ROLES_ENUM.ALL],
-  }
-];
+  },
 {
     path: '#',
     title: 'Señales en Vivo',
@@ -174,6 +173,7 @@ export const ROUTES: RouteInfo[] = [
       }
     ]
   }
+];
 
 // Routes to ADMIN
 export const ROUTES_ADMIN: RouteInfo[] = [
