@@ -161,7 +161,7 @@ export const ROUTES: RouteInfo[] = [
     children: [
       {
         path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-        title: 'Androis',
+        title: 'Android',
         type: 'link',
         smallTitle: 'AD'
       },
@@ -267,7 +267,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     children: [
       {
         path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-        title: 'Androis',
+        title: 'Android',
         type: 'link',
         smallTitle: 'AD'
       },
@@ -337,7 +337,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     children: [
       {
         path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-        title: 'Androis',
+        title: 'Android',
         type: 'link',
         smallTitle: 'AD'
       },
@@ -385,7 +385,7 @@ export const ROUTES_USER: RouteInfo[] = [
     children: [
       {
         path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-        title: 'Androis',
+        title: 'Android',
         type: 'link',
         smallTitle: 'AD'
       },
