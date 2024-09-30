@@ -152,7 +152,7 @@ export const ROUTES: RouteInfo[] = [
   },
 {
     path: '#',
-    title: 'Señales en Vivo',
+    title: 'Descarga la APP',
     type: 'sub',
     icontype: 'tim-icons currency-exchange',
     role: [ROLES_ENUM.ALL],
@@ -328,7 +328,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     collapse: 'pages',
   }, {
     path: '#',
-    title: 'Señales en Vivo',
+    title: 'Descarga la APP',
     type: 'sub',
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
@@ -376,7 +376,7 @@ export const ROUTES_USER: RouteInfo[] = [
     collapse: 'pages',
   }, {
     path: '#',
-    title: 'Señales en Vivo',
+    title: 'Descarga la APP',
     type: 'sub',
     icontype: ' fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
