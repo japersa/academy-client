@@ -152,7 +152,7 @@ export const ROUTES: RouteInfo[] = [
   },
 {
     path: '#',
-    title: 'Descarga la APP',
+    title: 'Señales en vivo',
     type: 'sub',
     icontype: 'tim-icons currency-exchange',
     role: [ROLES_ENUM.ALL],
@@ -260,17 +260,11 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-        title: 'Android',
+        path: '#',
+        title: 'Proximamente',
         type: 'link',
         smallTitle: 'AD'
       },
-      {
-        path: 'https://testflight.apple.com/join/6laFRCqS',
-        title: 'IOS',
-        type: 'link',
-        smallTitle: 'IOS'
-      }
     ]
   }
   // {
@@ -322,7 +316,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     collapse: 'pages',
   }, {
     path: '#',
-    title: 'Descarga la APP',
+    title: 'Señales en Vivo',
     type: 'sub',
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
@@ -330,17 +324,11 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-        title: 'Android',
+        path: '',
+        title: 'Proximamente',
         type: 'link',
         smallTitle: 'AD'
       },
-      {
-        path: 'https://testflight.apple.com/join/6laFRCqS',
-        title: 'IOS',
-        type: 'link',
-        smallTitle: 'IOS'
-      }
     ]
   }
   // {
