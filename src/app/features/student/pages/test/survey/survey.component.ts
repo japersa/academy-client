@@ -105,6 +105,8 @@ export class SurveyComponent implements OnInit {
             result['no_of_questions'] = sender.getQuizQuestionCount();
             const isApprove: boolean = result['correct_answers'] / result['no_of_questions'] >= 0.8 ? true : false;
 
+            console.log(result['correct_answers'], result['no_of_questions'], isApprove)
+
             if (isApprove) {
               this.coursesService.approveCourse(this.courseId).subscribe({
                 next: (r) => console.log(r),
