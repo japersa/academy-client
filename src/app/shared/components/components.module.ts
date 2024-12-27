@@ -7,10 +7,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DxVectorMapModule } from 'devextreme-angular';
-import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 
 import { FooterComponent } from './footer/footer.component';
-import { VectorMapComponent1 } from './vector-map/vector-map.component';
 import { PictureUploadComponent } from './picture-upload/picture-upload.component';
 import { AuthNavbarComponent } from './auth-navbar/auth-navbar.component';
 import { FixedPluginComponent } from './fixed-plugin/fixed-plugin.component';
@@ -24,7 +22,6 @@ import { ProgressbarModule } from "ngx-bootstrap/progressbar";
     RouterModule,
     HttpClientModule,
     FormsModule,
-    JwBootstrapSwitchNg2Module,
     DxVectorMapModule,
     ProgressbarModule,
     CollapseModule.forRoot(),
@@ -33,14 +30,12 @@ import { ProgressbarModule } from "ngx-bootstrap/progressbar";
   ],
   declarations: [
     FooterComponent,
-    VectorMapComponent1,
     PictureUploadComponent,
     AuthNavbarComponent,
     FixedPluginComponent,
   ],
   exports: [
     FooterComponent,
-    VectorMapComponent1,
     PictureUploadComponent,
     ProgressbarModule,
     AuthNavbarComponent,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PacksService } from '../../services/packs.service';
-import { log } from 'console';
 
 
 @Component({

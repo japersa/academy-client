@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { StorageService } from './services/storage.service';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { RollbarService, rollbarFactory, RollbarErrorHandler } from './utils/rollbar';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { UserDataService } from './services/user-data.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -24,9 +23,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    // Rollbar
-    { provide: ErrorHandler, useClass: RollbarErrorHandler },
-    { provide: RollbarService, useFactory: rollbarFactory }
+    
   ],
   exports: [NgxSpinnerModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

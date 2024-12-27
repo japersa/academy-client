@@ -2,7 +2,6 @@ import { Injectable, Injector } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
-import { RollbarService } from '../utils/rollbar';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -16,7 +15,6 @@ export class HttpErrorInterceptor {
       .pipe(
         retry(1),
         catchError((error: HttpErrorResponse) => {
-          const rollbar = this.injector.get(RollbarService);
           let errorMessage = '';
           if (error.error instanceof ErrorEvent) {
             // client-side error
@@ -34,7 +32,6 @@ export class HttpErrorInterceptor {
             }
           }
           console.log(errorMessage);
-          rollbar.error(error);
           return throwError(error);
         })
       );
