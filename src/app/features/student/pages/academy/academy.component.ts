@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
-import SwiperCore, { Keyboard, Pagination, Navigation, Virtual } from 'swiper';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { RegisterService } from '../../../auth/services/register.service';
 import { UserDataService } from '../../../../core/services/user-data.service';
 import { StorageService } from '../../../../core/services/storage.service';
 import { NotificationsService } from '../../../../core/services/notifications.service';
-SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
 
 @Component({
   selector: 'app-academy',
@@ -16,7 +13,7 @@ SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
   styleUrls: ['./academy.component.scss'], 
   encapsulation: ViewEncapsulation.None,
 })
-export class AcademyComponent {
+export class AcademyComponent implements OnInit{
 
   courses = [];
   continueLearningCourses = [];
