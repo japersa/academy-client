@@ -4,6 +4,22 @@ import { CoursesService } from '../../../../../shared/services/courses.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from '../../../../../core/services/notifications.service';
 
+
+// Add interface for quiz response
+interface QuizResponse {
+  course_name: string;
+  questions: QuizQuestion[];
+}
+
+interface QuizQuestion {
+  question: string;
+  optionOne: string;
+  optionTwo: string;
+  optionThree: string;
+  optionFour: string;
+  answer: string;
+}
+
 StylesManager.applyTheme('modern');
 // CSS references
 // https://github.com/surveyjs/survey-library/blob/master/src/defaultCss/cssmodern.ts
@@ -84,11 +100,17 @@ export class SurveyComponent implements OnInit {
   getTest(courseId: string) {
     this.coursesService.getQuizzesByCourseId(courseId).subscribe(
       {
-        next: (r) => {
+        next: (r: QuizResponse[]) => {
+          if (!r?.length) {
+            this.notificationsService.showNotification('bottom', 'center', 'Curso no encontrado', 4);
+            return;
+          }
           this.test = r[0];
         },
-        error: (e) => console.log(e.error),
-        complete: () => {
+        error: (e) => {
+          console.error('Failed to load quiz:', e);
+          this.notificationsService.showNotification('bottom', 'center', 'Error cargando el quiz', 4);
+        }, complete: () => {
           this.json.title = this.test.course_name;
           this.putQuestions();
           const survey = new Model(this.json);
@@ -104,7 +126,7 @@ export class SurveyComponent implements OnInit {
             result['correct_answers'] = sender.getCorrectedAnswerCount();
             result['no_of_questions'] = sender.getQuizQuestionCount();
             const isApprove: boolean = result['correct_answers'] / result['no_of_questions'] >= 0.8 ? true : false;
-
+            console.log(result)
             console.log(result['correct_answers'], result['no_of_questions'], isApprove)
 
             if (isApprove) {
