@@ -5,20 +5,24 @@ import { Router } from '@angular/router';
 import { NotificationsService } from '../../../../../core/services/notifications.service';
 
 
-// Add interface for quiz response
-interface QuizResponse {
-  course_name: string;
-  questions: QuizQuestion[];
-}
-
-interface QuizQuestion {
+interface Question {
+  answer: string;
   question: string;
   optionOne: string;
   optionTwo: string;
   optionThree: string;
   optionFour: string;
-  answer: string;
 }
+
+interface QuizResponse {
+  id: number;
+  course_id: number;
+  course_name: string;
+  questions: Question[];
+  created_at: string;
+  updated_at: string;
+}
+
 
 StylesManager.applyTheme('modern');
 // CSS references
@@ -65,11 +69,11 @@ const myCss = {
 })
 export class SurveyComponent implements OnInit {
 
-  @Input() courseId = null;
+  @Input() courseId: string | null = null;
 
-  test: any = {};
+  test: QuizResponse | null = null;
 
-  json: any = {
+  json = {
     title: '',
     showProgressBar: 'bottom',
     showTimerPanel: 'top',
@@ -88,7 +92,6 @@ export class SurveyComponent implements OnInit {
       }
     ],
     completedHtml: '<h4>Usted obtuvo <b>{correctedAnswers}</b> preguntas correctas de <b>{questionCount}</b>.</h4>'
-
   };
 
   constructor(
@@ -97,93 +100,140 @@ export class SurveyComponent implements OnInit {
     private notificationsService: NotificationsService,
   ) { }
 
-  getTest(courseId: string) {
-    this.coursesService.getQuizzesByCourseId(courseId).subscribe(
-      {
-        next: (r: QuizResponse[]) => {
-          if (!r?.length) {
-            this.notificationsService.showNotification('bottom', 'center', 'Curso no encontrado', 4);
-            return;
-          }
-          this.test = r[0];
-        },
-        error: (e) => {
-          console.error('Failed to load quiz:', e);
-          this.notificationsService.showNotification('bottom', 'center', 'Error cargando el quiz', 4);
-        }, complete: () => {
-          this.json.title = this.test.course_name;
-          this.putQuestions();
-          const survey = new Model(this.json);
-          survey.locale = 'es';
+  private transformQuestion(q: Question, index: number) {
+    // Filter out empty choices
+    const choices = [q.optionOne, q.optionTwo, q.optionThree, q.optionFour]
+      .filter(choice => choice !== '');
 
-          SurveyNG.render('surveyElement', {
-            model: survey,
-            css: myCss
-          });
+    // Store the correct answer value directly
+    const correctAnswer = q[q.answer as keyof Question] as string;
 
-          survey.onComplete.add((sender, options) => {
-            const result = sender.data;
-            result['correct_answers'] = sender.getCorrectedAnswerCount();
-            result['no_of_questions'] = sender.getQuizQuestionCount();
-            const isApprove: boolean = result['correct_answers'] / result['no_of_questions'] >= 0.8 ? true : false;
-            console.log(result)
-            console.log(result['correct_answers'], result['no_of_questions'], isApprove)
-
-            if (isApprove) {
-              this.coursesService.approveCourse(this.courseId).subscribe({
-                next: (r) => console.log(r),
-                error: (e) => console.log(e.error),
-                complete: () => {
-                  this.notificationsService.showNotification('bottom', 'center', 'Curso aprobado con éxito', 2);
-                  setTimeout(() => {
-                    this.router.navigate([`/profile`])
-                  }, 1000)
-                }
-              });
-            } else {
-              this.notificationsService.showNotification('bottom', 'center', 'Curso no aprobado con éxito', 4);
-              setTimeout(() => {
-                this.router.navigate([`/home`])
-              }, 1000)
-            }
-
-          });
+    return {
+      questions: [
+        {
+          type: 'radiogroup',
+          name: `question_${index}`, // More stable naming
+          title: q.question,
+          choicesOrder: 'random',
+          choices,
+          correctAnswer // This matches the actual value, not the property name
         }
-      }
-    )
+      ]
+    };
   }
 
+  private putQuestions(): void {
+    if (!this.test?.questions) return;
 
-  putQuestions() {
+    // Clear existing questions except the first intro page
+    this.json.pages = this.json.pages.slice(0, 1);
 
-    this.test.questions.forEach(q => {
+    // Transform and add each question
+    this.test.questions.forEach((question, index) => {
+      const transformedQuestion = this.transformQuestion(question, index);
+      this.json.pages.push((transformedQuestion as any));
+    });
+  }
 
-      let CHOICES = [q.optionOne, q.optionTwo, q.optionThree, q.optionFour]
-      CHOICES = CHOICES.filter(c => c !== '')
+  private handleQuizCompletion(survey: Model): void {
+    const result = survey.data;
+    const correctAnswers = survey.getCorrectedAnswerCount();
+    const totalQuestions = survey.getQuizQuestionCount();
+    const isApproved = correctAnswers / totalQuestions >= 0.8;
 
-      const question = {
-        questions: [
-          {
-            type: 'radiogroup',
-            name: 'id' + (new Date()).getTime(),
-            title: q.question,
-            choicesOrder: 'random',
-            choices: CHOICES,
-            correctAnswer: q[q.answer]
-          }
-        ]
-      }
-      this.json.pages.push(question);
-
+    console.log('Quiz Results:', {
+      answers: result,
+      correct: correctAnswers,
+      total: totalQuestions,
+      isApproved
     });
 
+    if (isApproved) {
+      this.handleApprovedCourse();
+    } else {
+      this.handleFailedCourse();
+    }
   }
 
+  private handleApprovedCourse(): void {
+    if (!this.courseId) return;
+
+    this.coursesService.approveCourse(this.courseId).subscribe({
+      next: () => {
+        this.notificationsService.showNotification(
+          'bottom',
+          'center',
+          'Curso aprobado con éxito',
+          2
+        );
+        setTimeout(() => this.router.navigate(['/profile']), 1000);
+      },
+      error: (error) => {
+        console.error('Error approving course:', error);
+        this.notificationsService.showNotification(
+          'bottom',
+          'center',
+          'Error al aprobar el curso',
+          4
+        );
+      }
+    });
+  }
+
+  private handleFailedCourse(): void {
+    this.notificationsService.showNotification(
+      'bottom',
+      'center',
+      'Curso no aprobado',
+      4
+    );
+    setTimeout(() => this.router.navigate(['/home']), 1000);
+  }
+
+  getTest(courseId: string): void {
+    this.coursesService.getQuizzesByCourseId(courseId).subscribe({
+      next: (response: QuizResponse[]) => {
+        if (!response?.length) {
+          this.notificationsService.showNotification(
+            'bottom',
+            'center',
+            'Curso no encontrado',
+            4
+          );
+          return;
+        }
+        this.test = response[0];
+        this.json.title = this.test.course_name;
+        this.putQuestions();
+        this.initializeSurvey();
+      },
+      error: (error) => {
+        console.error('Failed to load quiz:', error);
+        this.notificationsService.showNotification(
+          'bottom',
+          'center',
+          'Error cargando el quiz',
+          4
+        );
+      }
+    });
+  }
+
+  private initializeSurvey(): void {
+    const survey = new Model(this.json);
+    survey.locale = 'es';
+
+    SurveyNG.render('surveyElement', {
+      model: survey,
+      css: myCss
+    });
+
+    survey.onComplete.add((sender) => this.handleQuizCompletion((sender as any)));
+  }
 
   ngOnInit(): void {
-
-    this.getTest(this.courseId);
-
+    if (this.courseId) {
+      this.getTest(this.courseId);
+    }
   }
-
 }
