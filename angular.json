@@ -76,7 +76,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "black-dashboard-pro-angular:build"
+            "buildTarget": "black-dashboard-pro-angular:build",
+            "prebundle": {
+              "exclude": [
+                "@swimlane/ngx-datatable",
+                "ngx-toastr"
+              ]
+            }
           },
           "configurations": {
             "production": {
