@@ -6,6 +6,35 @@
   line-height: 1.55;
 }
 
+.withdrawals-page__type-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.withdrawals-page__type-tab {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  color: #344675;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.withdrawals-page__type-tab:hover {
+  border-color: rgba(41, 98, 255, 0.45);
+  color: #2962ff;
+}
+
+.withdrawals-page__type-tab.active {
+  background: #2962ff;
+  border-color: #2962ff;
+  color: #fff;
+}
+
 .withdrawals-page__request-list li:last-child {
   border-bottom: none !important;
 }

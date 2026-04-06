@@ -1,0 +1,82 @@
+.withdrawals-page {
+  padding-bottom: 2rem;
+}
+
+.withdrawals-page .card-header .card-category {
+  line-height: 1.55;
+}
+
+.withdrawals-page__type-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.withdrawals-page__type-tab {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  color: #344675;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.withdrawals-page__type-tab:hover {
+  border-color: rgba(41, 98, 255, 0.45);
+  color: #2962ff;
+}
+
+.withdrawals-page__type-tab.active {
+  background: #2962ff;
+  border-color: #2962ff;
+  color: #fff;
+}
+
+.withdrawals-page__request-list li:last-child {
+  border-bottom: none !important;
+}
+
+.withdrawals-page__request-item {
+  gap: 0.125rem 0;
+}
+
+.withdrawals-page__date {
+  font-size: 0.9375rem;
+}
+
+.withdrawals-page__sep {
+  color: rgba(0, 0, 0, 0.35);
+  user-select: none;
+}
+
+.withdrawals-page__amount {
+  font-variant-numeric: tabular-nums;
+}
+
+.withdrawals-page__request-item .badge-warning {
+  background-color: #ffc107;
+  color: #212529 !important;
+}
+
+.withdrawals-page__request-item .badge-success {
+  background-color: #28a745;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-danger {
+  background-color: #dc3545;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-info {
+  background-color: #17a2b8;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-secondary {
+  background-color: #6c757d;
+  color: #fff !important;
+}

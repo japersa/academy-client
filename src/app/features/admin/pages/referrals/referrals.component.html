@@ -39,6 +39,7 @@
               </div>
               <a
                 routerLink="/self-management/withdrawals"
+                [queryParams]="{ tab: 'commission' }"
                 class="btn btn-primary btn-sm mt-3 referrals-stat-sphere__withdraw-btn"
               >
                 Retirar
@@ -53,6 +54,13 @@
                   <p class="referrals-stat-sphere__value">{{ travelPoints }} pts</p>
                 </div>
               </div>
+              <a
+                routerLink="/self-management/withdrawals"
+                [queryParams]="{ tab: 'points' }"
+                class="btn btn-primary btn-sm mt-3 referrals-stat-sphere__withdraw-btn"
+              >
+                Retirar
+              </a>
               <p class="referrals-stat-sphere__hint-below mb-0">1 punto = 1 USD</p>
             </div>
 

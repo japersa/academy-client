@@ -17,74 +17,181 @@
   <div class="row">
     <div class="col-12">
       <div class="card card-stats shadow">
-        <div class="card-header">
-          <h4 class="card-title mb-0">Retiro de saldo de ganancias</h4>
-          <p class="card-category text-muted mb-0 mt-2">
-            Aquí se tramita el retiro del <strong class="text-dark">saldo de ganancias</strong> que ves en
+        <div class="card-header pb-2">
+          <h4 class="card-title mb-3">Retiros</h4>
+          <div class="withdrawals-page__type-tabs" role="tablist" aria-label="Tipo de retiro">
+            <button
+              type="button"
+              role="tab"
+              class="withdrawals-page__type-tab"
+              [class.active]="withdrawalType === 'commission'"
+              [attr.aria-selected]="withdrawalType === 'commission'"
+              (click)="setWithdrawalType('commission')"
+            >
+              Ganancias (USD)
+            </button>
+            <button
+              type="button"
+              role="tab"
+              class="withdrawals-page__type-tab"
+              [class.active]="withdrawalType === 'points'"
+              [attr.aria-selected]="withdrawalType === 'points'"
+              (click)="setWithdrawalType('points')"
+            >
+              Puntos de viaje
+            </button>
+          </div>
+          <p class="card-category text-muted mb-0 mt-3" *ngIf="withdrawalType === 'commission'">
+            Retiro del saldo de ganancias que ves en
             <a routerLink="/referrals" class="text-primary font-weight-bold">Back office</a>.
-            Indica el monto y los datos que te solicite el formulario; el equipo puede validar la operación
-            antes de la transferencia.
+            Indica el monto y la dirección de wallet TRC20; el equipo validará la operación antes del pago.
+          </p>
+          <p class="card-category text-muted mb-0 mt-3" *ngIf="withdrawalType === 'points'">
+            Retiro de puntos de viaje. <strong class="text-dark">Cada punto equivale a 1 USD.</strong> Indica la cantidad y la dirección de wallet TRC20; el equipo validará antes del pago.
           </p>
         </div>
         <div class="card-body">
-          <p class="mb-3" *ngIf="!loadingBalance">
-            <strong>Saldo disponible (ganancias):</strong>
-            {{ commissionBalance | number : '1.2-2' }} USD
-          </p>
-          <p class="text-muted mb-3" *ngIf="loadingBalance">Cargando saldo…</p>
+          <ng-container *ngIf="withdrawalType === 'commission'">
+            <p class="mb-3" *ngIf="!loadingBalance">
+              <strong>Saldo disponible (ganancias):</strong>
+              {{ commissionBalance | number : '1.2-2' }} USD
+            </p>
+            <p class="text-muted mb-3" *ngIf="loadingBalance">Cargando saldo…</p>
 
-          <form [formGroup]="form" (ngSubmit)="requestWithdrawal()">
-            <div class="form-group mb-3">
-              <label for="withdrawal-amount">Monto a retirar (USD)</label>
-              <input
-                id="withdrawal-amount"
-                type="number"
-                class="form-control"
-                formControlName="amount"
-                step="0.01"
-                min="0.01"
-                inputmode="decimal"
-                autocomplete="off"
-              />
-              <small class="text-danger" *ngIf="form.controls.amount.touched && form.controls.amount.invalid">
-                Indica un monto mayor que cero.
-              </small>
-            </div>
-            <div class="form-group mb-3">
-              <label for="withdrawal-note">Notas o datos para el pago (opcional)</label>
-              <textarea
-                id="withdrawal-note"
-                class="form-control"
-                formControlName="user_note"
-                rows="3"
-                placeholder="Ej. IBAN, titular, o cualquier indicación acordada con soporte."
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="submitting || loadingBalance"
-            >
-              {{ submitting ? 'Enviando…' : 'Solicitar retiro' }}
-            </button>
-          </form>
-
-          <div class="mt-4 pt-3 border-top" *ngIf="requests.length">
-            <h5 class="h6 mb-3">Tus solicitudes recientes</h5>
-            <ul class="list-unstyled mb-0 withdrawals-page__request-list">
-              <li
-                *ngFor="let r of requests"
-                class="withdrawals-page__request-item border-bottom py-2 d-flex flex-wrap align-items-center"
+            <form [formGroup]="commissionForm" (ngSubmit)="requestCommissionWithdrawal()">
+              <div class="form-group mb-3">
+                <label for="withdrawal-amount">Monto a retirar (USD)</label>
+                <input
+                  id="withdrawal-amount"
+                  type="number"
+                  class="form-control"
+                  formControlName="amount"
+                  step="0.01"
+                  min="0.01"
+                  inputmode="decimal"
+                  autocomplete="off"
+                />
+                <small class="text-danger" *ngIf="commissionForm.controls.amount.touched && commissionForm.controls.amount.invalid">
+                  Indica un monto mayor que cero.
+                </small>
+              </div>
+              <div class="form-group mb-3">
+                <label for="withdrawal-note">Detalles del retiro: dirección de wallet TRC20 <span class="text-danger">*</span></label>
+                <textarea
+                  id="withdrawal-note"
+                  class="form-control"
+                  formControlName="user_note"
+                  rows="3"
+                  placeholder="Pega aquí tu dirección TRC20 (red Tron). Ej. Txxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                ></textarea>
+                <small
+                  class="text-danger d-block"
+                  *ngIf="commissionForm.controls.user_note.touched && commissionForm.controls.user_note.invalid"
+                >
+                  Indica la dirección de wallet TRC20.
+                </small>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="submittingCommission || loadingBalance"
               >
-                <span class="withdrawals-page__date text-secondary">{{ r.created_at | date : 'short' }}</span>
-                <span class="withdrawals-page__sep mx-2" aria-hidden="true">—</span>
-                <span class="withdrawals-page__amount font-weight-bold text-dark">{{ r.amount }}</span>
-                <span class="text-dark ml-1">USD</span>
-                <span class="withdrawals-page__sep mx-2" aria-hidden="true">—</span>
-                <span [class]="statusBadgeClass(r.status)">{{ statusLabel(r.status) }}</span>
-              </li>
-            </ul>
-          </div>
+                {{ submittingCommission ? 'Enviando…' : 'Solicitar retiro' }}
+              </button>
+            </form>
+
+            <div class="mt-4 pt-3 border-top" *ngIf="commissionRequests.length">
+              <h5 class="h6 mb-3">Tus solicitudes recientes</h5>
+              <ul class="list-unstyled mb-0 withdrawals-page__request-list">
+                <li
+                  *ngFor="let r of commissionRequests"
+                  class="withdrawals-page__request-item border-bottom py-2 d-flex flex-wrap align-items-center"
+                >
+                  <span class="withdrawals-page__date text-secondary">{{ r.created_at | date : 'short' }}</span>
+                  <span class="withdrawals-page__sep mx-2" aria-hidden="true">—</span>
+                  <span class="withdrawals-page__amount font-weight-bold text-dark">{{ r.amount }}</span>
+                  <span class="text-dark ml-1">USD</span>
+                  <span class="withdrawals-page__sep mx-2" aria-hidden="true">—</span>
+                  <span [class]="statusBadgeClass(r.status)">{{ statusLabel(r.status) }}</span>
+                  <span class="w-100 small text-muted mt-1" *ngIf="r.user_note?.trim()">
+                    Detalles: dirección de wallet TRC20 — {{ r.user_note }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="withdrawalType === 'points'">
+            <p class="mb-1" *ngIf="!loadingBalance">
+              <strong>Puntos disponibles:</strong>
+              {{ travelPoints | number : '1.0-0' }} pts
+              <span class="text-muted">(≈ {{ travelPoints | number : '1.0-0' }} USD)</span>
+            </p>
+            <p class="small text-muted mb-3" *ngIf="!loadingBalance">Equivalencia: 1 punto = 1 USD.</p>
+            <p class="text-muted mb-3" *ngIf="loadingBalance">Cargando puntos…</p>
+
+            <form [formGroup]="pointsForm" (ngSubmit)="requestPointsWithdrawal()">
+              <div class="form-group mb-3">
+                <label for="points-withdrawal-amount">Cantidad de puntos a retirar (1 pt = 1 USD)</label>
+                <input
+                  id="points-withdrawal-amount"
+                  type="number"
+                  class="form-control"
+                  formControlName="amount"
+                  step="1"
+                  min="1"
+                  inputmode="numeric"
+                  autocomplete="off"
+                />
+                <small class="text-danger" *ngIf="pointsForm.controls.amount.touched && pointsForm.controls.amount.invalid">
+                  Indica una cantidad entera de al menos 1 punto.
+                </small>
+              </div>
+              <div class="form-group mb-3">
+                <label for="points-withdrawal-note">Detalles del retiro: dirección de wallet TRC20 <span class="text-danger">*</span></label>
+                <textarea
+                  id="points-withdrawal-note"
+                  class="form-control"
+                  formControlName="user_note"
+                  rows="3"
+                  placeholder="Pega aquí tu dirección TRC20 (red Tron). Ej. Txxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                ></textarea>
+                <small
+                  class="text-danger d-block"
+                  *ngIf="pointsForm.controls.user_note.touched && pointsForm.controls.user_note.invalid"
+                >
+                  Indica la dirección de wallet TRC20.
+                </small>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="submittingPoints || loadingBalance"
+              >
+                {{ submittingPoints ? 'Enviando…' : 'Solicitar retiro' }}
+              </button>
+            </form>
+
+            <div class="mt-4 pt-3 border-top" *ngIf="pointsRequests.length">
+              <h5 class="h6 mb-3">Tus solicitudes recientes</h5>
+              <ul class="list-unstyled mb-0 withdrawals-page__request-list">
+                <li
+                  *ngFor="let r of pointsRequests"
+                  class="withdrawals-page__request-item border-bottom py-2 d-flex flex-wrap align-items-center"
+                >
+                  <span class="withdrawals-page__date text-secondary">{{ r.created_at | date : 'short' }}</span>
+                  <span class="withdrawals-page__sep mx-2" aria-hidden="true">—</span>
+                  <span class="withdrawals-page__amount font-weight-bold text-dark">{{ r.amount }}</span>
+                  <span class="text-dark ml-1">pts</span>
+                  <span class="withdrawals-page__sep mx-2" aria-hidden="true">—</span>
+                  <span [class]="statusBadgeClass(r.status)">{{ statusLabel(r.status) }}</span>
+                  <span class="w-100 small text-muted mt-1" *ngIf="r.user_note?.trim()">
+                    Detalles: dirección de wallet TRC20 — {{ r.user_note }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
