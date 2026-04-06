@@ -2,17 +2,16 @@
     height: 100vh;
     width: 100%;
     overflow-y: hidden;
-    background-image: url('https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042471/webapp/FONDO_zftidw.jpg') !important;
 }
 
 .card-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    min-height: 286px; 
+    justify-content: flex-start;
+    min-height: auto;
     border-bottom: #979797 solid 1px;
-    padding-bottom: 0;
+    padding-bottom: 0.75rem;
     color: #000;
 }
 
@@ -23,7 +22,7 @@
 .card-title {
     font-weight: 400 !important;
     color: #000 !important;
-    margin-top: 50px !important;
+    margin-top: 0.75rem !important;
     font-size: 1.7rem !important;
     text-transform: uppercase !important;
 }
@@ -36,8 +35,8 @@
 
 .form {
     padding-top: 15px;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: var(--app-gutter-x, 15px);
+    padding-right: var(--app-gutter-x, 15px);
 }
 
 .logo {
@@ -50,6 +49,12 @@
 
 .logo img {
     width: 30%;
+    max-width: 200px;
+}
+
+/* Menos aire que el tema global .card-register .card-header (50px abajo) */
+:host ::ng-deep .card-register .card-header {
+    padding: 0.5rem 0 1rem !important;
 }
 
 .rounded-pill {
@@ -60,14 +65,56 @@
     color: #000 !important;
 }
 
+.register-side-panel {
+    min-height: 100vh;
+    align-items: stretch;
+    background: linear-gradient(155deg, #171a22 0%, #221e18 42%, #352e26 100%);
+    border-left: 1px solid rgba(208, 173, 80, 0.25);
+}
+
+.register-side-inner {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+}
+
+.register-side-content {
+    max-width: 22rem;
+    text-align: center;
+}
+
+.register-side-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(208, 173, 80, 0.85);
+}
+
+.register-side-title {
+    margin: 0 0 1rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #f5f0e6;
+    letter-spacing: 0.04em;
+}
+
+.register-side-copy {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.72);
+}
 
 @media only screen and (max-width: 600px) {
     .card-title {
-        margin-top: 20px !important;
-        font-size: 40px !important;
+        margin-top: 0.5rem !important;
+        font-size: 1.5rem !important;
     }
     .card-header {
-        height: 100px !important;
+        min-height: auto !important;
     }
     .logo {
         padding-left: 30px !important;

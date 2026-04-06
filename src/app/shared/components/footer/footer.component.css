@@ -1,26 +1,97 @@
-img {
-    width: 100px !important;
-    margin: 10px !important;
+.app-footer {
+  margin-top: auto;
+  padding: 1.25rem 0 1.5rem;
+  background: linear-gradient(180deg, rgba(30, 30, 36, 0.98) 0%, #1a1d24 100%);
+  border-top: 1px solid rgba(208, 173, 80, 0.22);
 }
 
-nav-link {
-    font-size: 3em !important;
+.app-footer--student {
+  padding: 1rem var(--app-gutter-x, 15px) 1.25rem;
 }
 
-.class-user {
-    padding: 20px 30px 30px 20px !important;
+.app-footer__inner {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--app-gutter-x, 15px);
+  padding-right: var(--app-gutter-x, 15px);
 }
 
-.fa-brands::before {
-    /* display: flex !important;
-    justify-content: end !important; */
-    border-radius: 20px !important;
-    color: var(--primary) !important;
-    margin-right: 5px !important;
+.app-footer__logo {
+  display: block;
+  width: 100px;
+  max-width: 100%;
+  height: auto;
 }
 
-@media screen and (min-width: 600px) and (max-width: 800px) {
-    .nones {
-        display: none !important;
-    }
+.app-footer__brand:focus-visible {
+  outline: 2px solid #d0ad50;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.app-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .app-footer__social {
+    justify-content: flex-end;
+  }
+}
+
+.app-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: #d0ad50;
+  background: rgba(208, 173, 80, 0.1);
+  font-size: 1.35rem;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.app-footer__social-link:hover {
+  color: #f2d78a;
+  background: rgba(208, 173, 80, 0.2);
+  transform: translateY(-1px);
+}
+
+.app-footer__copy {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.app-footer__sep {
+  margin: 0 0.25rem;
+  opacity: 0.5;
+}
+
+.app-footer__heart {
+  font-size: 0.75rem;
+  vertical-align: middle;
+  color: #d0ad50;
+}
+
+.app-footer__site-link {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.app-footer__site-link:hover {
+  color: #d0ad50;
+  border-bottom-color: rgba(208, 173, 80, 0.5);
 }

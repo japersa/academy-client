@@ -1,15 +1,25 @@
-<div class="content">
-  <ol class="breadcrumb bg-transparent ml-3">
-    <li class="breadcrumb-item">Academia</li>
-    <li class="breadcrumb-item text-primary">
-      <a routerLink="self-management/home"> Inicio </a>
-    </li>
-    <li class="breadcrumb-item text-primary">
-      <a routerLink="/funding-program/create-order"> Nuevo Paquete </a>
-    </li>
-    <li class="breadcrumb-item">Pago</li>
-  </ol>
-  <div class="row mx-3">
+<div class="content admin-area-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/home">Inicio</a>
+          </li>
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/self-management/home">Academia</a>
+          </li>
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/self-management/create-order">Nuevo paquete</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Pago</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="row mx-0">
     <div class="col-lg-10 col-md-6">
       <div class="card card-stats shadow text-center">
         <div class="card-body">
@@ -126,43 +136,67 @@
       </div>
     </div>
 
-    <div class="col-lg-8 col-sm-12">
-      <div class="card card-stats shadow text-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="card card-stats shadow text-center crypto-checkout-card">
         <form [formGroup]="criptoform" (ngSubmit)="payWithCripto(cryptoModaltemplate)">
           <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                <div class="row container-title">
-                  <div class="col-11 text-left mx-auto">
-                    <h2 class="card-title pb-2">
-                      Pagar con <strong>Cripto</strong>
-                    </h2>
-                  </div>
+            <div class="row container-title">
+              <div class="col-8">
+                <h2 class="card-title mt-2 mb-1 text-left">
+                  Pagar con <strong>Cripto</strong>
+                </h2>
+              </div>
+              <div class="col-4 d-flex align-items-center justify-content-end">
+                <div class="crypto-checkout-card__brand" aria-hidden="true">
+                  <span class="crypto-checkout-card__brand-icon">₿</span>
+                  <span class="crypto-checkout-card__brand-text">CoinPayments</span>
                 </div>
-                <div class="form-group">
-                  <label for="currency2">
-                    Moneda: {{ currencyField?.value }}
-                  </label>
-                  <select formControlName="currency2" class="form-control" id="currency2">
-                    <option value="" selected disabled>Choose Tagging</option>
-                    <option *ngFor="let c of currencies" [value]="c?.symbol">
-                      {{
-                      (c?.name | titlecase) + " - " + (c?.symbol | uppercase)
-                      }}
-                    </option>
-                  </select>
+              </div>
+            </div>
+            <div class="row mt-3 mb-2 pb-3 container-info crypto-checkout-card__body">
+              <div class="col-12">
+                <p class="text-left mb-3">
+                  Elige la criptomoneda y continúa el pago de forma segura. Procesamos el cobro a través de
+                  CoinPayments.
+                </p>
+                <div class="row bg-label align-items-center py-3 px-2 mx-0">
+                  <div class="col-md-2 col-3 text-center my-auto">
+                    <span class="crypto-checkout-card__icon" aria-hidden="true">₿</span>
+                  </div>
+                  <div class="col-md-10 col-9">
+                    <label class="text-left d-block mb-1 font-weight-bold" for="currency2">
+                      Moneda
+                      <span *ngIf="currencyField?.value" class="text-muted font-weight-normal">
+                        ({{ currencyField?.value | uppercase }})
+                      </span>
+                    </label>
+                    <select
+                      formControlName="currency2"
+                      class="form-control"
+                      id="currency2"
+                    >
+                      <option value="" selected disabled>Selecciona una moneda</option>
+                      <option *ngFor="let c of currencies" [value]="c?.symbol">
+                        {{ (c?.name | titlecase) + ' — ' + (c?.symbol | uppercase) }}
+                      </option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="card-footer">
-            <div class="card-footer">
-              <button class="btn btn-secondary btn-lg mb-3" type="submit" [disabled]="criptoform.invalid">
-                Pagar con cripto
-              </button>
-            </div>
+          <div class="card-footer border-0 pt-0 pb-4">
+            <button
+              class="btn btn-secondary btn-lg"
+              type="submit"
+              [disabled]="criptoform.invalid"
+            >
+              Pagar con cripto
+            </button>
           </div>
         </form>
+      </div>
+    </div>
       </div>
     </div>
   </div>
@@ -240,7 +274,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12">
-            <h3 class="card-title">Pagar ordén 123456 ICEX AG</h3>
+            <h3 class="card-title">Pagar ordén 123456 Academia</h3>
             <div *ngIf="invalidError" style="color: red">
               {{ invalidError.message }}
             </div>

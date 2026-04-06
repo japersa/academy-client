@@ -1,31 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  CatalogPricesService,
+  FundingBalancePriceRow,
+} from 'src/app/core/services/catalog-prices.service';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { PacksService } from '../../services/packs.service';
-import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-create-pack',
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.scss']
 })
-export class CreateOrderComponent {
+export class CreateOrderComponent implements OnInit {
 
   price = '';
   form!: FormGroup;
   errorMessage: string | null;
-  /*   newPack: any [] = null; */
+  fundingTiers: FundingBalancePriceRow[] = [];
+
+  private readonly fallbackFunding: FundingBalancePriceRow[] = [
+    { balance: 'fifty_thousand', amount: '299.00', currency: 'USD', label: '50.000 USD', sort_order: 1 },
+    { balance: 'one_hundred_thousand', amount: '499.00', currency: 'USD', label: '100.000 USD', sort_order: 2 },
+    { balance: 'two_hundred_thousand', amount: '979.00', currency: 'USD', label: '200.000 USD', sort_order: 3 },
+    { balance: 'five_hundred_thousand', amount: '2149.00', currency: 'USD', label: '500.000 USD', sort_order: 4 },
+  ];
 
   constructor(
-    // import the form builder
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
     private packsService: PacksService,
-    private router: Router
+    private router: Router,
+    private catalogPrices: CatalogPricesService,
   ) {
-    // Build the form
     this.buildForm();
+  }
+
+  ngOnInit(): void {
+    this.catalogPrices.getCatalog().subscribe({
+      next: (res) => {
+        this.fundingTiers =
+          res.funding_balances?.length > 0 ? res.funding_balances : this.fallbackFunding;
+      },
+      error: () => {
+        this.fundingTiers = this.fallbackFunding;
+      },
+    });
   }
 
   // declare getters for each field
@@ -121,7 +142,7 @@ export class CreateOrderComponent {
   private buildForm() {
     this.form = this.formBuilder.group({
       currencies: ['', [Validators.required]],
-      balance: ['', [Validators.required]],
+      balance: ['one_hundred_thousand', [Validators.required]],
       account_type: ['', [Validators.required]],
 
       first_name: ['', [Validators.required, Validators.minLength(3)]],

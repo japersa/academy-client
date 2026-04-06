@@ -28,19 +28,18 @@ export class AuthInterceptor {
 
       return next.handle(request);
 
-    } else {
-
-      if (token) {
-        request = request.clone({
-          setHeaders: {
-            'Content-Type': 'application/json',
-            authorization: `Token ${token.replace('"', '')}`,
-          }
-        });
-        return next.handle(request);
-      }
-
     }
+
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          'Content-Type': 'application/json',
+          authorization: `Token ${token.replace('"', '')}`,
+        },
+      });
+    }
+
+    return next.handle(request);
   }
 
 }

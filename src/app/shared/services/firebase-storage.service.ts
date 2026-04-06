@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, Subscription } from 'rxjs';
-import { finalize, take } from 'rxjs/operators';
+import { Observable, finalize } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { af$ } from '../utils/angularfire-rxjs';
 import { EditUserService } from './edit-user.service';
 import { UserDataService } from '../../core/services/user-data.service';
 import { StorageService } from '../../core/services/storage.service';
@@ -17,8 +18,8 @@ export class FirebaseStorageService {
 
   downloadURLsFiles = [];
 
-  uploadPercent: Observable<number>;
-  uploadPercentFiles: Observable<number>;
+  uploadPercent: Observable<number | undefined>;
+  uploadPercentFiles: Observable<number | undefined>;
 
   constructor(private storage: AngularFireStorage,
     private editUserService: EditUserService,
@@ -35,12 +36,12 @@ export class FirebaseStorageService {
     const task = this.storage.upload(filePath, file);
 
     // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
+    this.uploadPercent = af$(task.percentageChanges());
 
     // get notified when the download URL is available
-    task.snapshotChanges().pipe(
+    af$(task.snapshotChanges()).pipe(
       finalize(() => {
-        fileRef.getDownloadURL().pipe(take(1)).subscribe(imgUrl => {
+        af$(fileRef.getDownloadURL()).pipe(take(1)).subscribe(imgUrl => {
           this.editUserService.updateUser({ image_profile: imgUrl }).pipe(take(1))
             .subscribe(res => {
 
@@ -70,10 +71,10 @@ export class FirebaseStorageService {
     const task = this.storage.upload(filePath, file);
 
     // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
+    this.uploadPercent = af$(task.percentageChanges());
 
     // get notified when the download URL is available
-    task.snapshotChanges().pipe(
+    af$(task.snapshotChanges()).pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(imgUrl => {
 
@@ -115,12 +116,12 @@ export class FirebaseStorageService {
     const task = this.storage.upload(filePath, file);
 
     // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
+    this.uploadPercent = af$(task.percentageChanges());
 
     // get notified when the download URL is available
-    task.snapshotChanges().pipe(
+    af$(task.snapshotChanges()).pipe(
       finalize(() => {
-        fileRef.getDownloadURL().pipe(take(1)).subscribe(imgUrl => {
+        af$(fileRef.getDownloadURL()).pipe(take(1)).subscribe(imgUrl => {
 
           const data = {
             title: dataForm.title,
@@ -170,10 +171,10 @@ export class FirebaseStorageService {
     const task = this.storage.upload(filePath, file);
 
     // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
+    this.uploadPercent = af$(task.percentageChanges());
 
     // get notified when the download URL is available
-    task.snapshotChanges().pipe(
+    af$(task.snapshotChanges()).pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(videoUrl => {
 
@@ -214,10 +215,10 @@ export class FirebaseStorageService {
       this.downloadURLsFiles = [];
 
       // observe percentage changes
-      this.uploadPercentFiles = task.percentageChanges();
+      this.uploadPercentFiles = af$(task.percentageChanges());
 
       // get notified when the download URL is available
-      task.snapshotChanges().pipe(
+      af$(task.snapshotChanges()).pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             this.downloadURLsFiles.push({ name: file.name, path: filePath, url })
@@ -245,10 +246,10 @@ export class FirebaseStorageService {
     const task = this.storage.upload(filePath, file);
 
     // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
+    this.uploadPercent = af$(task.percentageChanges());
 
     // get notified when the download URL is available
-    task.snapshotChanges().pipe(
+    af$(task.snapshotChanges()).pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(videoUrl => {
 

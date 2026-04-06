@@ -9,12 +9,14 @@
 
 .container-title {
     padding-bottom: 1em;
-    border-bottom: 3px solid #4be8e6;
 }
 
 .card-title {
     color: var(--secondary) !important;
     font-weight: 600 !important;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    margin-top: 0;
 }
 
 .container-info {

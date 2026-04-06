@@ -129,12 +129,27 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/self-management/home',
+    path: '/self-management',
     title: 'Academia',
-    type: 'link',
+    type: 'sub',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
+    collapse: 'academiaSub',
+    isCollapsed: false,
+    children: [
+      {
+        path: 'home',
+        title: 'Inicio',
+        type: 'link',
+        smallTitle: 'IN',
+      },
+      {
+        path: 'withdrawals',
+        title: 'Retiros y ganancias',
+        type: 'link',
+        smallTitle: 'RT',
+      },
+    ],
   },
   {
     path: '/downloads',
@@ -244,13 +259,36 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     ]
   },
   {
-    path: '/self-management/home',
+    path: '/self-management',
     title: 'Academia',
-    type: 'link',
+    type: 'sub',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-  }, {
+    collapse: 'academiaSubAdmin',
+    isCollapsed: false,
+    children: [
+      {
+        path: 'home',
+        title: 'Inicio',
+        type: 'link',
+        smallTitle: 'IN',
+      },
+      {
+        path: 'withdrawals',
+        title: 'Retiros y ganancias',
+        type: 'link',
+        smallTitle: 'RT',
+      },
+    ],
+  },
+  {
+    path: '/referrals',
+    title: 'Back office',
+    type: 'link',
+    icontype: 'tim-icons icon-send',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
     path: '#',
     title: 'Señales en Vivo',
     type: 'sub',
@@ -308,13 +346,36 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     ]
   },
   {
-    path: '/self-management/home',
+    path: '/self-management',
     title: 'Academia',
-    type: 'link',
+    type: 'sub',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-  }, {
+    collapse: 'academiaSubTeacher',
+    isCollapsed: false,
+    children: [
+      {
+        path: 'home',
+        title: 'Inicio',
+        type: 'link',
+        smallTitle: 'IN',
+      },
+      {
+        path: 'withdrawals',
+        title: 'Retiros y ganancias',
+        type: 'link',
+        smallTitle: 'RT',
+      },
+    ],
+  },
+  {
+    path: '/referrals',
+    title: 'Back office',
+    type: 'link',
+    icontype: 'tim-icons icon-send',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
     path: '#',
     title: 'Señales en Vivo',
     type: 'sub',
@@ -350,34 +411,34 @@ export const ROUTES_USER: RouteInfo[] = [
     role: [ROLES_ENUM.ALL]
   },
   {
-    path: '/self-management/home',
-    title: 'Academia',
+    path: '/referrals',
+    title: 'Back office',
     type: 'link',
+    icontype: 'tim-icons icon-send',
+    role: [ROLES_ENUM.ALL],
+  },
+  {
+    path: '/self-management',
+    title: 'Academia',
+    type: 'sub',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-  }, {
-    path: '#',
-    title: 'Descarga la APP',
-    type: 'sub',
-    icontype: ' fa-sharp fa-solid fa-ticket',
-    role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-    isCollapsed: true,
+    collapse: 'academiaSubUser',
+    isCollapsed: false,
     children: [
       {
-        path: 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro',
-        title: 'Android',
+        path: 'home',
+        title: 'Inicio',
         type: 'link',
-        smallTitle: 'AD'
+        smallTitle: 'IN',
       },
       {
-        path: 'https://testflight.apple.com/join/6laFRCqS',
-        title: 'IOS',
+        path: 'withdrawals',
+        title: 'Retiros y ganancias',
         type: 'link',
-        smallTitle: 'IOS'
-      }
-    ]
+        smallTitle: 'RT',
+      },
+    ],
   }
   // {
   //   path: '/academy',

@@ -1,10 +1,23 @@
-<div class="content">
-  <ol class="breadcrumb bg-transparent ml-3">
-    <li class="breadcrumb-item text-primary">
-      <a routerLink="/funding-program/home"> Area trading </a>
-    </li>
-    <li class="breadcrumb-item">Nuevo Paquete</li>
-  </ol>
+<div class="content admin-area-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/home">Inicio</a>
+          </li>
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/funding-program/home">Área trading</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Nuevo paquete
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
   <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
     <div class="row">
       <div class="col-5">
@@ -40,51 +53,17 @@
               </div>
               <div class="col-12">
                 <p class="title">Elige el balance de la cuenta</p>
-                <div class="row">
-                  <div class="col-12">
-                    <input
-                      name="balance"
-                      value="fifty_thousand"
-                      type="radio"
-                      formControlName="balance"
-                      id="50k"
-                    />
-                    <label class="radio-button mr-2" for="50k">
-                      50.000 USD
-                    </label>
-                    <input
-                      name="balance"
-                      value="one_hundred_thousand"
-                      type="radio"
-                      formControlName="balance"
-                      id="100k"
-                      checked
-                    />
-                    <label class="radio-button mr-2" for="100k">
-                      100.000 USD
-                    </label>
-                  </div>
-                  <div class="col-12">
+                <div class="row" *ngIf="fundingTiers.length">
+                  <div class="col-12 col-md-6" *ngFor="let tier of fundingTiers">
                     <p>
                       <input
-                        name="balance"
-                        value="two_hundred_thousand"
                         type="radio"
                         formControlName="balance"
-                        id="200k"
+                        [value]="tier.balance"
+                        [id]="'bal-' + tier.balance"
                       />
-                      <label class="radio-button mr-2" for="200k">
-                        200.000 USD
-                      </label>
-                      <input
-                        name="balance"
-                        value="five_hundred_thousand"
-                        type="radio"
-                        formControlName="balance"
-                        id="500k"
-                      />
-                      <label class="radio-button mr-2" for="500k">
-                        500.000 USD
+                      <label class="radio-button mr-2" [attr.for]="'bal-' + tier.balance">
+                        {{ tier.label || tier.balance }} — {{ tier.amount }} {{ tier.currency }}
                       </label>
                     </p>
                   </div>
@@ -463,4 +442,6 @@
         </div>
       </div>
   </form>
+    </div>
+  </div>
 </div>

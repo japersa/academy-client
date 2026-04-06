@@ -7,9 +7,9 @@ import { UserDataService } from '../../../core/services/user-data.service';
   styleUrls: ["./footer.component.css"]
 })
 export class FooterComponent implements OnInit {
-  test: Date = new Date();
+  readonly currentYear = new Date().getFullYear();
 
   constructor(public userDataService: UserDataService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

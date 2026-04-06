@@ -144,6 +144,13 @@ const routes: Routes = [
           .then(m => m.BillingModule)
       },
       {
+        path: 'referrals',
+        loadChildren: () =>
+          import('./features/admin/pages/referrals/referrals.module').then(
+            (m) => m.ReferralsModule,
+          ),
+      },
+      {
         path: 'customer-service',
         loadChildren: () => import('./features/customer-service/customer-service.module')
           .then(m => m.CustomerServiceModule)

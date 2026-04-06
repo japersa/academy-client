@@ -1,75 +1,40 @@
-<div class="content">
-  <div class="row">
-    <div class="col-8">
-      <ol class="breadcrumb bg-transparent ml-3">
-        <li class="breadcrumb-item text-primary">
-          <a routerLink="/home"> Inicio </a>
-        </li>
-      </ol>
-    </div>
-
-    <div class="col-4  text-right p-2">
-      <div class="card  card-stats text-center referido p-2">
-        <h3 class="pb-0">Código de Referido</h3>
-        <div class="row">
-          <div class="col-8 pr-1">
-            <p class="ref">{{ referalCode }}</p>
-          </div>
-          <div class="col-4">
-            <button class="btn btn-secondary  btn-md  " [cdkCopyToClipboard]="referalCode">
-              Copiar
-            </button>
+<div class="content home-page admin-area-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <div class="d-flex flex-column gap-3 home-page__top">
+        <nav aria-label="Migas de pan" class="home-page__crumb">
+          <ol class="breadcrumb bg-transparent mb-0 px-0">
+            <li class="breadcrumb-item text-primary">
+              <a routerLink="/home"> Inicio </a>
+            </li>
+          </ol>
+        </nav>
+        <div class="referral-code-banner-wrap home-page__referido w-100 align-self-md-end">
+          <div class="card card-stats text-center referral-code-banner">
+            <p class="referral-code-banner__title">Código de referido</p>
+            <div class="row referral-code-banner__row g-1 align-items-center">
+              <div class="col-8">
+                <p class="referral-code-banner__code mb-0">{{ referalCode }}</p>
+              </div>
+              <div class="col-4 text-md-end">
+                <button type="button" class="btn btn-secondary btn-sm" [cdkCopyToClipboard]="referalCode">
+                  Copiar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row p-3 mx-3">
-    <div class="col-12 banner mx-auto">
-      <carousel [showIndicators]="true" [interval]="30000" [indicatorsByChunk]="true">
-        <slide>
-          <img
-            src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1729959162/Sin_ti%CC%81tulo_1368_x_500_px_6_hywngp.jpg"
-            alt="first slide" style="display: block; width: 100%; height: 100%;">
-       <!--   <div class=" btn-banner d-flex bg-black" style="background:black;" >
-            <div class="col-4">
-              <h3>
-                Descargala ahora
-              </h3>
-            </div>
-            <div class="col-3">
-              <button class="btn btn-banner btn-block  " (click)="openAndroid()">
-                Android
-              </button>  
-            </div>
-            <div class="col-3">
-              <button class="btn btn-banner btn-block  " (click)="openiOS()">
-                iOS
-              </button>
-            </div> 
-          </div>-->
-        </slide>
-        <!-- <slide>
-          <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476126/banner-eurostreet_cyeyxd.jpg"
-            alt="first slide" style="display: block; width: 100%; height: 100%;">
-          <div class="button-container-one col-4">
-            <button class="btn btn-banner btn-block  " (click)="openiOS()">
-              Conoce más
-            </button>
-          </div>
-        </slide> -->
-      </carousel>
+  <div class="row mt-4">
+    <div class="col-12">
+      <h2 class="mb-1 text-center">
+        ¡Contamos con usuarios en México, Colombia, Ecuador, Venezuela, Chile, España y Australia, formando una comunidad global increíblemente conectada!
+      </h2>
     </div>
   </div>
-
-  <div class="row p-3 mt-4">
-      <div class="col-11 mx-auto " style="padding:30px; border-radius:15px; background:black; ">
-        <h2 class="mb-1 text-center">¡Contamos con usuarios en México, Colombia, Ecuador, Venezuela, Chile, España y Australia, formando una comunidad global increíblemente conectada!</h2>
-         <img class="mt-4 "  src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1729958621/9_ijwpwm.jpg"
-            alt="first slide" style="display: block; width: auto; height: auto;background-size:contain !important; ">
-      </div>
-    </div>
   <!-- SELF MANAGEMENT -->
   <!-- <div>
     
@@ -87,7 +52,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-8 mt-4 mb-2 mx-auto">
-                <h3 class="card-subtitle">Icex Funding</h3>
+                <h3 class="card-subtitle">Funding</h3>
               </div>
               <div class="col-8 container-card-title mx-auto">
                 <h2 class="card-title pb-4">Challenge DEMO</h2>
@@ -190,7 +155,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-8 mt-4 mb-2 mx-auto">
-                <h3 class="card-subtitle">Icex Funding</h3>
+                <h3 class="card-subtitle">Funding</h3>
               </div>
               <div class="col-8 container-card-title mx-auto">
                 <h2 class="card-title pb-4">Challenge</h2>
@@ -289,7 +254,7 @@
                   class="btn btn-secondary btn-lg mb-3"
                   routerLink="/funding-program/create-order"
                 >
-                  Comenzar ICEX Challenge
+                  Comenzar Challenge
                 </button>
               </div>
             </div>
@@ -467,7 +432,7 @@
     </div>
   </div> -->
   <div *ngIf="userDataService?.userData$?.value?.subscription == 'none'" class="row" style="margin-top:20px;">
-    <div class="col-12 pl-5 pr-5">
+    <div class="col-12">
       <div class="card shadow-custom p-3">
         <div class="card-body">
           <div class="row mt-4">
@@ -579,30 +544,32 @@
       </div>
     </div>
   </div>
-  <div class="row mt-4 mx-4">
-    <div class="col-lg-12 col-md-12 card card-stats shadow-custom commissions">
-      <div class="row">
-        <div class="col-7">
-          <h3 class="card-subtitle text-white mt-3 mb-2">
-            <h3>Comisiona con Start Academy</h3>
-          </h3>
-          <p class="text-light">
-            Invita a tus amigos y empieza a generar ingresos extras. recibe el
-            20% del valor del paquete por el primer referido, un 20% por el
-            segundo referido y un 30% por tu tercer referido
-          </p>
-          <p class="mb-3 text-light">
-            Compártelo y empieza a comisionar con Start Academy
-          </p>
-        </div>
-        <div class="col-5 my-auto mx-auto">
-          <div class="">
-            <p class="ref text-center">{{ referalCode }}</p>
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="shadow-custom commissions">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-7 mb-4 mb-md-0">
+            <h3 class="card-subtitle mb-3 mt-0">
+              Gana con Start Academy
+            </h3>
+            <p class="text-white mb-3">
+              Invita a tus amigos y empieza a generar ingresos extra. Recibe el
+              20% del valor del paquete por el primer referido, un 20% por el
+              segundo referido y un 30% por tu tercer referido.
+            </p>
+            <p class="mb-0 text-white">
+              Compártelo y empieza a ganar con Start Academy.
+            </p>
           </div>
-          <div class="">
-            <button class="btn btn-ref btn-block" [cdkCopyToClipboard]="referalCode">
-              Copiar
-            </button>
+          <div class="col-12 col-md-5 my-auto text-center commissions__code-col">
+            <div class="mb-2">
+              <p class="ref2 text-center mb-0">{{ referalCode }}</p>
+            </div>
+            <div>
+              <button type="button" class="btn btn-ref btn-block" [cdkCopyToClipboard]="referalCode">
+                Copiar
+              </button>
+            </div>
           </div>
         </div>
       </div>

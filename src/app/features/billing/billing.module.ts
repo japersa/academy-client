@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { BillingRoutingModule } from './billing-routing.module';
 import { BillingComponent } from './billing.component';
@@ -11,6 +12,7 @@ import { BillingComponent } from './billing.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     BillingRoutingModule
   ]
 })

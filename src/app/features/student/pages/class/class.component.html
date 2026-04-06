@@ -1,18 +1,20 @@
-<div class=" content"  [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
-    <div class="row ml-3">
-        <ol class=" breadcrumb bg-transparent ml-3">
-            <li class=" breadcrumb-item text-primary">
-                <a routerLink="/home">
-                    Home
-                </a>
-            </li>
-            <li class=" breadcrumb-item text-primary">
-                <a href="javascript:void(0)" (click)="seeCourse()">
-                    Curso
-                </a>
-            </li>
-            <li class=" breadcrumb-item text-white">{{ topic?.course_name }}</li>
-        </ol>
+<div class="content admin-area-page" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
+    <div class="row admin-area-breadcrumb-row">
+        <div class="col-12">
+            <nav aria-label="Migas de pan">
+                <ol class="breadcrumb bg-transparent mb-0 px-0">
+                    <li class="breadcrumb-item text-primary">
+                        <a routerLink="/home">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item text-primary">
+                        <a href="javascript:void(0)" (click)="seeCourse()">Curso</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ topic?.course_name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12 p-0 m-0">
 
             <div class="container">

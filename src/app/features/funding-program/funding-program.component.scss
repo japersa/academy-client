@@ -36,20 +36,16 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 3px solid var(--secondary);
 }
 
-.card-title {
-    border-bottom: 2px solid #4be8e6 !important;
-}
-
 .border {
   border-bottom: 1px solid #cccccc; 
   border-radius: 5px!important; 
 }
 
- 
 .card-title {
     font-weight: 600 !important;
-    font-size: 1.4rem;
-    border-bottom: 2px solid #4be8e6;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    margin-top: 0;
 }
 
 .card-subtitle {

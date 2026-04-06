@@ -1,22 +1,21 @@
 export const environment = {
   production: false,
   environmentName: 'Development',
-  apiURL: 'https://ultra-back-98fc6bf42dce.herokuapp.com',
+  apiURL: 'https://ultra-back-dev-f00d4a68f5ce.herokuapp.com',
   rollbarConfig: {
     accessToken: '748115ffc5b04e71ba4d73da8ca51159',
     captureUncaught: true,
     captureUnhandledRejections: true,
   },
   firebaseConfig: {
-    apiKey: "AIzaSyCdXRtZsU3WOw2swFXH0nzwng_uGRa-yAo",
-    authDomain: "ultramarkets-prd.firebaseapp.com",
-    projectId: "ultramarkets-prd",
-    storageBucket: "ultramarkets-prd.appspot.com",
-    messagingSenderId: "910504303916",
-    appId: "1:910504303916:web:28db84a81b6d03ce312089",
-    measurementId: "G-V00BF9JB6X"
+    apiKey: 'AIzaSyCAzX6h9JQEXwfUAJgUPYHFNGOTE_QvXpg',
+    authDomain: 'ultramarkets-dev.firebaseapp.com',
+    projectId: 'ultramarkets-dev',
+    storageBucket: 'ultramarkets-dev.appspot.com',
+    messagingSenderId: '819614109600',
+    appId: '1:819614109600:web:d5823c273ea75dcae49ec5',
+    measurementId: 'G-HCYCE7Q5Z8',
   },
-  stripePK: 'pk_test_51Mok6LKim0A5yCrrD5U0SiKGYgFpMcVtUc1eDJUE0r7vB0VXXQ3xJGgywdhEdxHU73sIGV3Jahg2CXZkf0NzKLBw00LDYJVWv5'
+
+  stripePK: 'pk_live_51Mok6LKim0A5yCrrqPttq7ccd8x9chqLWb2Kft2CUUWSUt3CWhpAOAR6vruVw0cf2OShadhQs1AMCRplMbAyofHx00f4E36Hg0',
 };
-
-

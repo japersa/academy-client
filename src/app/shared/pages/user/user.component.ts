@@ -21,9 +21,9 @@ export class UserComponent implements OnInit, OnDestroy {
   approvedCourses = [];
 
   public rol = '';
-  public first_name = this.userDataService.userData$.value.first_name;
-  public last_name = this.userDataService.userData$.value.last_name;
-  public username = this.userDataService.userData$.value.username;
+  public first_name = '';
+  public last_name = '';
+  public username = '';
 
   showPasswordField = false;
   showButtonPassword = true;
@@ -94,15 +94,32 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   // Asignar valor al rol del usuario
-  setRol(rolLocal: string = this.userDataService.userData$.value.rol) {
-    if (rolLocal == 'student') {
+  setRol(rolLocal: string = this.userDataService.userData$.value?.rol) {
+    if (rolLocal === 'student') {
       this.rol = 'Estudiante';
-    } else if (rolLocal == 'teacher') {
+    } else if (rolLocal === 'teacher') {
       this.rol = 'Profesor';
-    } else if (rolLocal == 'admin') {
-      this.rol = 'Administrador'
-    } else { this.rol = 'None' }
+    } else if (rolLocal === 'admin') {
+      this.rol = 'Administrador';
+    } else {
+      this.rol = 'Usuario';
+    }
     return this.rol;
+  }
+
+  /** Etiqueta en español; evita mostrar "None" por titlecase sobre el valor `none`. */
+  get subscriptionLabelText(): string {
+    const s = this.userDataService?.userData$?.value?.subscription;
+    if (s === 'full') {
+      return 'Start Academy';
+    }
+    if (s === 'basic') {
+      return 'Básico';
+    }
+    if (s === 'none' || !s) {
+      return 'Sin suscripción';
+    }
+    return String(s);
   }
 
   // Actualizar info del usuario
@@ -112,10 +129,10 @@ export class UserComponent implements OnInit, OnDestroy {
 
     this.editUserService.updateUser(dataFrom).subscribe(res => {
       this.userDataService.userData$.next(res);
-      this.storageService.set('userData', res);
+      void this.storageService.set('userData', res);
 
       this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);
-      this.updateForm.reset();
+      this.patchProfileForm(res);
     },
       error => {
         this.errorMessage = error.error;
@@ -176,9 +193,43 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   getUser() {
-    this.userService.getUser().subscribe(user => {
-      this.user = user;
-    })
+    this.userService.getUser().subscribe({
+      next: (user) => {
+        this.user = user;
+        this.userDataService.userData$.next(user);
+        void this.storageService.set('userData', user);
+        this.patchProfileForm(user);
+      },
+      error: (err) => console.error(err),
+    });
+  }
+
+  /** Rellena el formulario; evita ngModel sobre userData$.value nulo o incompleto. */
+  private patchProfileForm(user: Record<string, unknown> | null | undefined): void {
+    if (!user || typeof user !== 'object') {
+      return;
+    }
+    const u = user;
+    this.updateForm.patchValue({
+      first_name: (u['first_name'] as string) ?? '',
+      last_name: (u['last_name'] as string) ?? '',
+      email: (u['username'] as string) ?? (u['email'] as string) ?? '',
+      phone_number: (u['phone_number'] as string) ?? '',
+      birth_date: this.normalizeDateInput(u['birth_date']),
+      identity_card: (u['identity_card'] as string) ?? '',
+    });
+    this.first_name = String(u['first_name'] ?? '');
+    this.last_name = String(u['last_name'] ?? '');
+    this.username = String(u['username'] ?? '');
+    this.setRol((u['rol'] as string) ?? undefined);
+  }
+
+  private normalizeDateInput(value: unknown): string {
+    if (value == null || value === '') {
+      return '';
+    }
+    const s = String(value);
+    return s.length >= 10 ? s.slice(0, 10) : s;
   }
 
   ngOnInit() {

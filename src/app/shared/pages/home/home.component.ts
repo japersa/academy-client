@@ -17,16 +17,6 @@ export class HomeComponent implements OnInit {
     private route: Router
   ) { }
 
-  openAndroid() {
-    const url = 'https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro';
-    window.open(url, '_blank');
-  }
-
-  openiOS() {
-    const url = 'https://testflight.apple.com/join/6laFRCqS';
-    window.open(url, '_blank');
-  }
-
   ngOnInit(): void {
     this.userDataService.userData$.subscribe(
       {
