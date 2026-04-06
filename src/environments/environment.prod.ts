@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   environmentName: 'Development',
-  apiURL: 'https://ultra-back-98fc6bf42dce.herokuapp.com',
+  apiURL: 'https://ultra-back-dev-f00d4a68f5ce.herokuapp.com',
   rollbarConfig: {
     accessToken: '748115ffc5b04e71ba4d73da8ca51159',
     captureUncaught: true,
