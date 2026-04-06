@@ -6,12 +6,15 @@
 }
 
 .card-title {
-    font-size: 2em !important;
+    font-size: 1.35rem !important;
+    line-height: 1.35;
     font-weight: 500 !important;
     color: var(--secondary) !important;
+    margin-top: 0;
 }
 .subtitle {
-    font-size: 1.7em !important;
+    font-size: 1.1rem !important;
+    line-height: 1.35;
     font-weight: 500 !important;
     color: var(--secondary) !important;
 }

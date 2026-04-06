@@ -212,6 +212,8 @@ $referrals-page-inset-x: map-get($spacers, 3);
 
 // Cards con texto / datos: respiro interno uniforme (evita contenido pegado a los bordes)
 $card-content-inset: map-get($spacers, 3);
+// Menos aire arriba: el título no debe “flotar” con doble padding (body + mt-2)
+$card-body-padding-top: map-get($spacers, 2);
 
 .main-panel .content .card:not(.card-plain):not(.card-chart) {
   .card-header {
@@ -222,7 +224,7 @@ $card-content-inset: map-get($spacers, 3);
   .card-body:not(.table-full-width) {
     padding-left: $card-content-inset;
     padding-right: $card-content-inset;
-    padding-top: $card-content-inset;
+    padding-top: $card-body-padding-top;
     padding-bottom: $card-content-inset;
   }
 
@@ -230,4 +232,10 @@ $card-content-inset: map-get($spacers, 3);
     padding-left: $card-content-inset;
     padding-right: $card-content-inset;
   }
+}
+
+// Títulos al inicio de la card: sin margen superior extra
+.main-panel .content .card:not(.card-plain):not(.card-chart) .card-body > .row.container-title:first-child .card-title,
+.main-panel .content .card:not(.card-plain):not(.card-chart) .card-body .container-title .card-title {
+  margin-top: 0;
 }

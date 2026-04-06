@@ -16,13 +16,15 @@ th {
 }
 
 .card-title {
-    font-size: 3em !important;
+    font-size: 1.35rem !important;
+    line-height: 1.35;
     font-weight: 600 !important;
     color: var(--secondary) !important;
+    margin-top: 0;
 }
 
 .title-lg {
-    font-size: 3em !important;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem) !important;
     font-weight: 600 !important;
     color: var(--secondary) !important;
 }

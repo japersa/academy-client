@@ -1,7 +1,8 @@
 
 .title {
     color: var(--primary) !important;
-    font-size: 2.5em !important;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem) !important;
+    line-height: 1.3;
 }
 
 
@@ -11,9 +12,11 @@
 }
 
 .card-title {
-    font-size: 2em !important;
+    font-size: 1.35rem !important;
+    line-height: 1.35;
     font-weight: 600 !important;
     color: var(--secondary) !important;
+    margin-top: 0;
 }
 
 /*

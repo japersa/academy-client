@@ -4,9 +4,11 @@
 }
 
 .title-table {
-    font-size: 2em !important;
+    font-size: clamp(1.35rem, 3vw, 2rem) !important;
+    line-height: 1.25;
     font-weight: 600 !important;
     color: var(--secondary) !important;
+    margin-top: 0;
 }
 
 .img {

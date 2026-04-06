@@ -3,9 +3,11 @@
 }
 
 .card-title {
-    font-size: 3em !important;
+    font-size: 1.35rem !important;
+    line-height: 1.35;
     font-weight: 600 !important;
     color: var(--secondary) !important;
+    margin-top: 0;
 }
 
 .mt-40 {
