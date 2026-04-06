@@ -2,6 +2,8 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { PacksService } from './services/packs.service';
 import { Router } from '@angular/router';
 import { UserDataService } from 'src/app/core/services/user-data.service';
+import { StorageService } from 'src/app/core/services/storage.service';
+import { RegisterService } from 'src/app/features/auth/services/register.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -33,7 +35,9 @@ export class FundingProgramComponent implements OnInit {
     private packsService: PacksService,
     private router: Router,
     private modalService: BsModalService,
-    public userDataService: UserDataService
+    public userDataService: UserDataService,
+    private registerService: RegisterService,
+    private storageService: StorageService,
   ) { }
 
   copied(button: string) {
@@ -147,13 +151,20 @@ export class FundingProgramComponent implements OnInit {
     )
 
     this.getMypackages();
-    this.userDataService.userData$.subscribe(
-      {
-        next: (r) => this.referalCode = r?.referral_code
-      }
-    );
-
-    
-
+    this.userDataService.userData$.subscribe({
+      next: (r) => {
+        if (r?.referral_code) {
+          this.referalCode = r.referral_code;
+        }
+      },
+    });
+    this.registerService.getUser().subscribe({
+      next: (r) => {
+        this.userDataService.userData$.next(r);
+        this.referalCode = r?.referral_code ?? this.referalCode;
+        void this.storageService.set('userData', r);
+      },
+      error: (e) => console.error(e),
+    });
   }
 }

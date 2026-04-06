@@ -89,7 +89,6 @@ export class SelfManagementComponent implements OnInit {
     this.fillCourses();
     this.coursesService.getKeepWatching().subscribe(r => {
       this.continueLearningCourses = r;
-      this.referalCode = r?.referral_code
     });
     this.getUser();
 

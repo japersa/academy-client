@@ -187,7 +187,7 @@ export class SurveyComponent implements OnInit {
       'Curso no aprobado',
       4
     );
-    setTimeout(() => this.router.navigate(['/home']), 1000);
+    setTimeout(() => this.router.navigate(['/referrals']), 1000);
   }
 
   getTest(courseId: string): void {

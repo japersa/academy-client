@@ -93,7 +93,7 @@ export class SubscriptionComponent implements OnInit {
 
   ngOnInit(): void {
     const origin = typeof window !== 'undefined' ? window.location.origin : '';
-    this.coinpaymentsSuccessUrl = `${origin}/home`;
+    this.coinpaymentsSuccessUrl = `${origin}/referrals`;
     this.coinpaymentsCancelUrl = `${origin}/cancel`;
   }
 

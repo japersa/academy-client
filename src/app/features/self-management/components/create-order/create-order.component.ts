@@ -229,9 +229,23 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userDataService.userData$.subscribe(data => {
-      this.referalCode = data?.referral_code;
-    });
+    this.subs.add(
+      this.registerService.getUser().subscribe({
+        next: (r) => {
+          this.userDataService.userData$.next(r);
+          this.referalCode = r?.referral_code ?? '0000000';
+          void this.storageService.set('userData', r);
+        },
+        error: (e) => console.error(e),
+      })
+    );
+    this.subs.add(
+      this.userDataService.userData$.subscribe((data) => {
+        if (data?.referral_code != null && data.referral_code !== '') {
+          this.referalCode = data.referral_code;
+        }
+      })
+    );
     this.subs.add(
       this.form.get('referral_code')?.valueChanges.subscribe(() => {
         this.referralCodeServerError = null;

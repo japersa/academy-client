@@ -159,13 +159,6 @@ export const ROUTES: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
   },
   {
-    path: '/home',
-    title: 'cursos',
-    type: 'link',
-    icontype: 'tim-icons icon-trophy',
-    role: [ROLES_ENUM.ALL],
-  },
-{
     path: '#',
     title: 'Señales en vivo',
     type: 'sub',
@@ -403,13 +396,6 @@ export const ROUTES_TEACHER: RouteInfo[] = [
 
 // Routes to USER
 export const ROUTES_USER: RouteInfo[] = [
-  {
-    path: '/home',
-    title: 'Inicio',
-    type: 'link',
-    icontype: 'tim-icons icon-bank',
-    role: [ROLES_ENUM.ALL]
-  },
   {
     path: '/referrals',
     title: 'Back office',

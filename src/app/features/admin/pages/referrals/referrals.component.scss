@@ -2,6 +2,12 @@
   padding-bottom: 2rem;
 }
 
+/* Migas: en admin-area el .active hereda blanco (pensado para fondo oscuro); panel claro → color tema (como .text-primary). */
+.referrals-page.admin-area-page .admin-area-breadcrumb-row .breadcrumb-item.active {
+  color: #d0ad50 !important;
+  font-weight: 600;
+}
+
 .referrals-stat-sphere__withdraw-btn {
   white-space: nowrap;
 }

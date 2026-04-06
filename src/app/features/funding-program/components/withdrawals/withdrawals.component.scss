@@ -1,0 +1,97 @@
+.withdrawals-page {
+  padding-bottom: 2rem;
+}
+
+.withdrawals-page .card-header .card-category {
+  line-height: 1.55;
+}
+
+/* Paleta Black Dashboard (#d0ad50) — coherente con el resto de la app */
+.withdrawals-page__type-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.withdrawals-page__type-tab {
+  border: 1px solid rgba(208, 173, 80, 0.35);
+  background: #fff;
+  color: #525f7f;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.withdrawals-page__type-tab:hover {
+  border-color: rgba(208, 173, 80, 0.85);
+  color: #7a6520;
+  background: rgba(208, 173, 80, 0.1);
+}
+
+.withdrawals-page__type-tab:focus-visible {
+  outline: 2px solid rgba(208, 173, 80, 0.85);
+  outline-offset: 2px;
+}
+
+.withdrawals-page__type-tab.active {
+  border-color: #9a7d1f;
+  color: #1a191f;
+  background: linear-gradient(145deg, #e5c566 0%, #d0ad50 42%, #b8943d 100%);
+  box-shadow: 0 2px 12px rgba(154, 125, 31, 0.28);
+}
+
+.withdrawals-page__type-tab.active:hover {
+  color: #141418;
+  border-color: #8a6f1a;
+  filter: brightness(1.03);
+}
+
+.withdrawals-page__request-list li:last-child {
+  border-bottom: none !important;
+}
+
+.withdrawals-page__request-item {
+  gap: 0.125rem 0;
+}
+
+.withdrawals-page__date {
+  font-size: 0.9375rem;
+}
+
+.withdrawals-page__sep {
+  color: rgba(0, 0, 0, 0.35);
+  user-select: none;
+}
+
+.withdrawals-page__amount {
+  font-variant-numeric: tabular-nums;
+}
+
+.withdrawals-page__request-item .badge-warning {
+  background-color: #ffc107;
+  color: #212529 !important;
+}
+
+.withdrawals-page__request-item .badge-success {
+  background-color: #28a745;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-danger {
+  background-color: #dc3545;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-info {
+  background-color: #17a2b8;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-secondary {
+  background-color: #6c757d;
+  color: #fff !important;
+}

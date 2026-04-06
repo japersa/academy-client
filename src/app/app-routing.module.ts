@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     // redirectTo: '/trading-area/my-packages',
-    redirectTo: '/self-management/home',
+    redirectTo: '/referrals',
     pathMatch: 'full'
   },
   {
