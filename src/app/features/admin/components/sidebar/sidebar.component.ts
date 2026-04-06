@@ -129,27 +129,18 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/self-management',
+    path: '/self-management/home',
     title: 'Academia',
-    type: 'sub',
+    type: 'link',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
-    collapse: 'academiaSub',
-    isCollapsed: false,
-    children: [
-      {
-        path: 'home',
-        title: 'Inicio',
-        type: 'link',
-        smallTitle: 'IN',
-      },
-      {
-        path: 'withdrawals',
-        title: 'Retiros y ganancias',
-        type: 'link',
-        smallTitle: 'RT',
-      },
-    ],
+  },
+  {
+    path: '/self-management/withdrawals',
+    title: 'Retiros y ganancias',
+    type: 'link',
+    icontype: 'tim-icons icon-money-coins',
+    role: [ROLES_ENUM.ALL],
   },
   {
     path: '/downloads',
@@ -252,27 +243,18 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     ]
   },
   {
-    path: '/self-management',
+    path: '/self-management/home',
     title: 'Academia',
-    type: 'sub',
+    type: 'link',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
-    collapse: 'academiaSubAdmin',
-    isCollapsed: false,
-    children: [
-      {
-        path: 'home',
-        title: 'Inicio',
-        type: 'link',
-        smallTitle: 'IN',
-      },
-      {
-        path: 'withdrawals',
-        title: 'Retiros y ganancias',
-        type: 'link',
-        smallTitle: 'RT',
-      },
-    ],
+  },
+  {
+    path: '/self-management/withdrawals',
+    title: 'Retiros y ganancias',
+    type: 'link',
+    icontype: 'tim-icons icon-money-coins',
+    role: [ROLES_ENUM.ALL],
   },
   {
     path: '/referrals',
@@ -339,27 +321,18 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     ]
   },
   {
-    path: '/self-management',
+    path: '/self-management/home',
     title: 'Academia',
-    type: 'sub',
+    type: 'link',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
-    collapse: 'academiaSubTeacher',
-    isCollapsed: false,
-    children: [
-      {
-        path: 'home',
-        title: 'Inicio',
-        type: 'link',
-        smallTitle: 'IN',
-      },
-      {
-        path: 'withdrawals',
-        title: 'Retiros y ganancias',
-        type: 'link',
-        smallTitle: 'RT',
-      },
-    ],
+  },
+  {
+    path: '/self-management/withdrawals',
+    title: 'Retiros y ganancias',
+    type: 'link',
+    icontype: 'tim-icons icon-money-coins',
+    role: [ROLES_ENUM.ALL],
   },
   {
     path: '/referrals',
@@ -404,28 +377,19 @@ export const ROUTES_USER: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
   },
   {
-    path: '/self-management',
+    path: '/self-management/home',
     title: 'Academia',
-    type: 'sub',
+    type: 'link',
     icontype: 'fa fa-graduation-cap',
     role: [ROLES_ENUM.ALL],
-    collapse: 'academiaSubUser',
-    isCollapsed: false,
-    children: [
-      {
-        path: 'home',
-        title: 'Inicio',
-        type: 'link',
-        smallTitle: 'IN',
-      },
-      {
-        path: 'withdrawals',
-        title: 'Retiros y ganancias',
-        type: 'link',
-        smallTitle: 'RT',
-      },
-    ],
-  }
+  },
+  {
+    path: '/self-management/withdrawals',
+    title: 'Retiros y ganancias',
+    type: 'link',
+    icontype: 'tim-icons icon-money-coins',
+    role: [ROLES_ENUM.ALL],
+  },
   // {
   //   path: '/academy',
   //   title: 'Academia',
