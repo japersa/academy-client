@@ -1,16 +1,24 @@
 <div
-  class="content"
+  class="content academy-page admin-area-page"
   [ngClass]="{
     'class-user': userDataService?.userData$?.value?.rol === 'user'
   }"
 >
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/home"> Inicio </a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Academia</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
   <div class="row">
-    <ol class="breadcrumb bg-transparent ml-3">
-      <li class="breadcrumb-item text-primary">
-        <a routerLink="/home"> Inicio </a>
-      </li>
-    </ol>
-    <div class="col-12 ml-3">
+    <div class="col-12">
       <h3 class="m-0 text-primary">
         Hola, {{ userDataService?.userData$?.value?.first_name | titlecase }}
       </h3>
@@ -20,29 +28,30 @@
           else elseTemplate
         "
       >
-        <p>
+        <p class="mb-0">
           Continúa aprendiendo mediante su subscripción
-          <strong>Icex AG</strong>
+          <strong>Start Academy — Academia</strong>
         </p>
       </ng-container>
       <ng-template #elseTemplate>
-        <p>
+        <p class="mb-0">
           Hemos detectado que aún no tienes una subscripción activa, te animamos
           a conseguir una
           <a routerLink="/self-management/create-order">aquí</a>.
         </p>
       </ng-template>
     </div>
+  </div>
 
     <ng-container *ngIf="continueLearningCourses.length > 0">
-      <div class="ml-3 row" style="width: 100% !important">
+      <div class="row g-3 mt-2">
         <div class="col-12">
-          <h2 class="mt-4">Continuar viendo</h2>
-          <hr style="width: 100% !important"  />
+          <h2 class="mt-2 mb-0">Continuar viendo</h2>
+          <hr class="academy-page__hr" />
         </div>
         <div
           *ngFor="let c of continueLearningCourses"
-          class="col-lg-3 col-md-3 col-sm-12 col-sm-12"
+          class="col-lg-3 col-md-6 col-sm-12"
         >
           <div class="card">
             <img
@@ -70,16 +79,16 @@
       </div>
     </ng-container>
 
-    <div class="ml-3 row" style="width: 100% !important">
+    <div class="row g-3 mt-3">
       <div class="col-12">
-        <h2 class="mt-4">Cursos</h2>
-        <hr style="width: 100% !important" />
-        <p *ngIf="courses.length < 1">Aún no tienes cursos asignados</p>
+        <h2 class="mt-2 mb-0">Cursos</h2>
+        <hr class="academy-page__hr" />
+        <p *ngIf="courses.length < 1" class="mb-0">Aún no tienes cursos asignados</p>
       </div>
 
       <div
         *ngFor="let c of courses"
-        class="col-lg-3 col-md-3 col-sm-12 col-sm-12"
+        class="col-lg-3 col-md-6 col-sm-12"
       >
         <div class="card">
           <img
@@ -105,5 +114,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>

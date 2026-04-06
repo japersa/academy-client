@@ -1,9 +1,18 @@
-.content {
-    background-image: url('https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042471/webapp/FONDO_zftidw.jpg') !important;
+.home-page .breadcrumb {
+    padding-left: 0;
 }
 
-.class-user {
-    padding: 80px 30px 30px 80px !important;
+// Migas arriba, bloque de código de referido debajo (columna)
+.home-page__top {
+    align-items: stretch;
+}
+
+.home-page__crumb {
+    flex: 0 0 auto;
+}
+
+.home-page .referral-code-banner-wrap {
+    flex: 0 0 auto;
 }
 
 .banner {
@@ -48,22 +57,6 @@
  .carousel-indicators li {
     margin-top: -50px;
 }
-.referido {
-    color: var(--primary) !important;
-    border-radius: 10px;
-}
-
-.referido h3{
-    padding: 0px !important;
-    border-bottom: 1px solid var(--primary);
-}
-
-.referido button {
-    margin-left: -30px;
-    margin-top: -4px;
-}
-
-
 .shadow-custom {
     box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
     border-radius: 10px;
@@ -143,6 +136,49 @@ h3, h2 {
 }
 
 .commissions {
+    background: linear-gradient(120deg, #1e1e26 0%, #252018 55%, #2d2820 100%) !important;
+    border-left: 4px solid #d0ad50;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 1.5rem clamp(1.1rem, 4vw, 2.25rem);
+    box-sizing: border-box;
+}
+
+.commissions .card-subtitle {
+    color: #f5f0e6 !important;
+}
+
+.commissions p.text-white {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.commissions .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.commissions .row > [class*='col-'] {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .commissions .commissions__code-col {
+        padding-left: 1.75rem;
+        border-left: 1px solid rgba(208, 173, 80, 0.25);
+    }
+}
+
+.commissions .ref2 {
+    padding: 0.65rem 1rem !important;
+    border-radius: 6px;
+    word-break: break-all;
+}
+
+.home-page .commissions .btn-ref {
+    color: var(--secondary);
+    background: black !important;
     background-color: black !important;
 }
 

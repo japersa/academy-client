@@ -1,15 +1,25 @@
-<div class="content">
-  <ol class="breadcrumb bg-transparent ml-3">
-    <li class="breadcrumb-item">Academia</li>
-    <li class="breadcrumb-item text-primary">
-      <a routerLink="self-management/home"> Inicio </a>
-    </li>
-    <li class="breadcrumb-item text-primary">
-      <a routerLink="/funding-program/create-order"> Nuevo Paquete </a>
-    </li>
-    <li class="breadcrumb-item">Pago</li>
-  </ol>
-  <div class="row mx-3">
+<div class="content admin-area-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/home">Inicio</a>
+          </li>
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/self-management/home">Academia</a>
+          </li>
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/self-management/create-order">Nuevo paquete</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Pago</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="row mx-0">
     <div class="col-lg-10 col-md-6">
       <div class="card card-stats shadow text-center">
         <div class="card-body">
@@ -165,6 +175,8 @@
         </form>
       </div>
     </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -240,7 +252,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12">
-            <h3 class="card-title">Pagar ordén 123456 ICEX AG</h3>
+            <h3 class="card-title">Pagar ordén 123456 Academia</h3>
             <div *ngIf="invalidError" style="color: red">
               {{ invalidError.message }}
             </div>

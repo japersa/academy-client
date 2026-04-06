@@ -3,34 +3,46 @@
     <div class=" container">
       <div class=" row">
         <div class=" col-md-6 ml-auto mr-auto text-center">
-          <h1 class=" title text-primary">ICEX EDUCACIÓN</h1>
+          <ng-container *ngIf="loading">
+            <p class="text-muted">Cargando…</p>
+          </ng-container>
+
+          <ng-container *ngIf="!loading && loadError">
+            <p class="text-warning">{{ loadError }}</p>
+          </ng-container>
+
+          <ng-container *ngIf="!loading && offer && !loadError">
+          <h1 class=" title text-primary">{{ offer.title }}</h1>
           <img src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1656181880/assets/paquetes_iz6glf.png"
             alt="">
           <h4 class=" description text-gray font-weight-bold mb-3">
-            Inscríbete en nuestros 3 cursos (Forex, Cryptomonedas, indices)
+            {{ offer.hero_subtitle }}
           </h4>
-          <div class="d-flex justify-content-center align-items-center mb-2">
+          <div class="d-flex justify-content-center align-items-center mb-2 flex-wrap">
             <h3 class="text-primary mr-2 mb-3">Por un Único pago de:</h3>
-            <h1 class="big text-default font-weight-bold mb-3">$293.99 usd</h1>
+            <h1 class="big text-default font-weight-bold mb-3">
+              ${{ offer.amount }} {{ offer.currency | lowercase }}
+            </h1>
           </div>
           <hr>
           <div>
-            <form action="https://www.coinpayments.net/index.php"  method="post">
+            <form [action]="coinpaymentsAction" method="post">
               <input type="hidden" name="cmd" value="_pay_simple">
               <input type="hidden" name="reset" value="1">
-              <input type="hidden" name="merchant" value="9f135a6a18337044fc156365bb6e8855">
-              <input type="hidden" name="item_name" value="Full">
-              <input type="hidden" name="item_desc" value="asd">
-              <input type="hidden" name="currency" value="USD">
-              <input type="hidden" name="amountf" value="293.99">
+              <input type="hidden" name="merchant" [value]="offer.coinpayments_merchant_id">
+              <input type="hidden" name="item_name" [value]="offer.item_name">
+              <input type="hidden" name="item_desc" [value]="offer.item_desc">
+              <input type="hidden" name="currency" [value]="offer.currency">
+              <input type="hidden" name="amountf" [value]="offer.amount">
               <input type="hidden" name="want_shipping" value="0">
-              <input type="hidden" name="success_url" value="https://app.intcapex.com/success">
-              <input type="hidden" name="cancel_url" value="https://app.intcapex.com/cancel">
-              <input type="hidden" name="ipn_url" value="https://icex-prd.herokuapp.com/full/payment/">
+              <input type="hidden" name="success_url" [value]="offer.success_url">
+              <input type="hidden" name="cancel_url" [value]="offer.cancel_url">
+              <input type="hidden" name="ipn_url" [value]="offer.ipn_url">
               <input type="image" src="https://www.coinpayments.net/images/pub/buynow-grey.png"
                 alt="Buy Now with CoinPayments.net">
             </form>
           </div>
+          </ng-container>
         </div>
       </div>
 

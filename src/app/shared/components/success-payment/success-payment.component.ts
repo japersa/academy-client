@@ -27,7 +27,7 @@ import { UserDataService } from 'src/app/core/services/user-data.service';
   Método de pago: Tarjeta de crédito  <br> <br>
   Agradecemos tu compra y esperamos que disfrutes de tu servicio. Si tienes alguna pregunta, no dudes en contactarnos. <br>
   Saludos cordiales, <br>
-  Equipo ICEX
+  Equipo Start Academy
   </p>
   </div>
   <div class="modal-footer">

@@ -1,4 +1,7 @@
-<div class="wrapper">
+<div
+  class="wrapper"
+  [class.wrapper--student]="userDataService?.userData$?.value?.rol === 'student'"
+>
   <div class="navbar-minimize-fixed d-inline">
     <button
       class="minimize-sidebar btn btn-link btn-just-icon"

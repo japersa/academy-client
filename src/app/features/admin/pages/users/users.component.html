@@ -1,20 +1,26 @@
-<div class="content">
-  <div class="row">
-    <ol class="breadcrumb bg-transparent ml-3">
-      <li class="breadcrumb-item text-primary">
-        <a routerLink="/dashboard"> Dashboard </a>
-      </li>
-      <li class="breadcrumb-item">Roles</li>
-      <ng-container *ngIf="showFormCreateUser">
-        <li class="breadcrumb-item active">Crear</li>
-      </ng-container>
-      <ng-container *ngIf="showFormEditUser">
-        <li class="breadcrumb-item active">Editar</li>
-      </ng-container>
-    </ol>
+<div class="content admin-area-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item">Roles</li>
+          <ng-container *ngIf="showFormCreateUser">
+            <li class="breadcrumb-item active" aria-current="page">Crear</li>
+          </ng-container>
+          <ng-container *ngIf="showFormEditUser">
+            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+          </ng-container>
+        </ol>
+      </nav>
+    </div>
+  </div>
 
-    <ng-container *ngIf="!showFormCreateUser && !showFormEditUser">
-      <div class="col-md-12 mx-3">
+  <ng-container *ngIf="!showFormCreateUser && !showFormEditUser">
+    <div class="row">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-header">
             <div class="tools float-right">
@@ -190,21 +196,23 @@
           </div>
         </div>
       </div>
+    </div>
     </ng-container>
-    <ng-container *ngIf="showFormCreateUser">
-      <div class="col-md-12">
-        <app-create-user
-          (showEvent)="changeStateShow($event)"
-        ></app-create-user>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="showFormEditUser">
-      <div class="col-md-12">
-        <app-edit-user
-          (showEvent)="changeStateShow($event)"
-          [user]="userEdit"
-        ></app-edit-user>
-      </div>
-    </ng-container>
-  </div>
+    <div class="row" *ngIf="showFormCreateUser || showFormEditUser">
+      <ng-container *ngIf="showFormCreateUser">
+        <div class="col-md-12">
+          <app-create-user
+            (showEvent)="changeStateShow($event)"
+          ></app-create-user>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="showFormEditUser">
+        <div class="col-md-12">
+          <app-edit-user
+            (showEvent)="changeStateShow($event)"
+            [user]="userEdit"
+          ></app-edit-user>
+        </div>
+      </ng-container>
+    </div>
 </div>

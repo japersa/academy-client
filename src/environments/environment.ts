@@ -1,7 +1,12 @@
+/**
+ * Entorno de `ng serve` / build no productivo.
+ * apiURL: backend Django local por defecto (`python manage.py runserver` → :8000).
+ * Para probar contra Heroku u otro entorno, cambia solo esta constante.
+ */
 export const environment = {
   production: false,
   environmentName: 'Development',
-  apiURL: 'https://ultra-back-98fc6bf42dce.herokuapp.com',
+  apiURL: 'http://127.0.0.1:8000',
   rollbarConfig: {
     accessToken: '748115ffc5b04e71ba4d73da8ca51159',
     captureUncaught: true,

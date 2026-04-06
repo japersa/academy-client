@@ -32,7 +32,7 @@ export class HttpErrorInterceptor {
             }
           }
           console.log(errorMessage);
-          return throwError(error);
+          return throwError(() => error);
         })
       );
   }

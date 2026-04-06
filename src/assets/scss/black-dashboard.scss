@@ -142,3 +142,7 @@
 
 // Angular Differences
 @import "black-dashboard/angular-differences/angular-differences";
+
+// Routed views: nested .content + footer alignment with sidebar
+@import "black-dashboard/custom/main-content-layout";
+@import "black-dashboard/custom/referral-code-banner";

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
-import { take } from 'rxjs/operators';
 
 const apiURL = environment.apiURL;
 
@@ -17,73 +16,29 @@ export class NotificationsService {
 
   constructor(private http: HttpClient, public toastr: ToastrService) { }
 
+  /** Un solo icono: el SVG que aporta ngx-toastr (no tim-icons en el HTML). */
   showNotification(from: string, align: string, text: string, color: number) {
+    const base = {
+      timeOut: 8000,
+      closeButton: true,
+      positionClass: 'toast-' + from + '-' + align,
+    };
 
     switch (color) {
       case 1:
-        this.toastr.info(
-          `<span class=" tim-icons icon-bell-55"></span> ${text} `,
-          "",
-          {
-            timeOut: 8000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-info alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
+        this.toastr.info(text, '', base);
         break;
       case 2:
-        this.toastr.success(
-          `<span class=" tim-icons tim-icons-color icon-bell-55"></span>  ${text}`,
-          "",
-          {
-            timeOut: 8000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-success alert-with-icon ",
-            positionClass: "toast-" + from + "-" + align,
-          }
-        );
+        this.toastr.success(text, '', base);
         break;
       case 3:
-        this.toastr.warning(
-          `<span class=" tim-icons icon-bell-55"></span> ${text} `,
-          "",
-          {
-            timeOut: 8000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-warning alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
+        this.toastr.warning(text, '', base);
         break;
       case 4:
-        this.toastr.error(
-          `<span class=" tim-icons-error tim-icons icon-bell-55"></span> ${text} `,
-          "",
-          {
-            timeOut: 8000,
-            enableHtml: true,
-            closeButton: true,
-            toastClass: "alert alert-danger alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
+        this.toastr.error(text, '', base);
         break;
       case 5:
-        this.toastr.show(
-          `<span class=" tim-icons icon-bell-55"></span> ${text} `,
-          "",
-          {
-            timeOut: 8000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-primary alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
+        this.toastr.show(text, '', base, 'toast-info');
         break;
       default:
         break;

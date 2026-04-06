@@ -1,16 +1,22 @@
 <div
-  class="content"
+  class="content admin-area-page"
   [ngClass]="{
     'class-user': userDataService?.userData$?.value?.rol === 'student'
   }"
 >
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/home">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Examen</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
   <div class="row">
-    <ol class="breadcrumb bg-transparent ml-3">
-      <li class="breadcrumb-item text-primary">
-        <a routerLink="/home"> Inicio </a>
-      </li>
-      <li class="breadcrumb-item">Examen</li>
-    </ol>
     <div class="offset-1 col-md-10">
       <h1 class="title m-0 p-0">EXAMEN</h1>
       <div class="container mt-4 mb-5">

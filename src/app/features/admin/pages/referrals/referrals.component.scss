@@ -1,4 +1,142 @@
-.card-stats .card-title {
-  font-size: 1.5rem;
+.referrals-page {
+  padding-bottom: 2rem;
 }
 
+.referrals-stat-sphere__withdraw-btn {
+  white-space: nowrap;
+}
+
+.referrals-page .stats-row .card-stats {
+  border-radius: 0.5rem;
+}
+
+.referrals-page .stats-row .card-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+// Esferas / métricas circulares (saldo + puntos)
+.referrals-stat-sphere {
+  position: relative;
+  width: min(100%, 220px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem 0.85rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(208, 173, 80, 0.38);
+  background: radial-gradient(
+      ellipse 80% 55% at 28% 22%,
+      rgba(255, 255, 255, 0.14) 0%,
+      transparent 52%
+    ),
+    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.35) 0%, transparent 55%),
+    linear-gradient(155deg, #353344 0%, #23222e 42%, #1a191f 100%);
+  box-shadow: inset 0 -6px 18px rgba(0, 0, 0, 0.35), inset 0 2px 10px rgba(255, 255, 255, 0.06),
+    0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.referrals-stat-sphere__highlight {
+  position: absolute;
+  top: 8%;
+  left: 14%;
+  width: 42%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, transparent 72%);
+  pointer-events: none;
+  filter: blur(0.5px);
+}
+
+.referrals-stat-sphere__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 11.5rem;
+}
+
+.referrals-stat-sphere__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.25;
+}
+
+.referrals-stat-sphere__value {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.referrals-stat-sphere__value.text-primary {
+  color: #d0ad50 !important;
+}
+
+// Leyenda bajo la esfera (no dentro): evita que 3 líneas rompan el círculo
+.referrals-stat-sphere__hint-below {
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  line-height: 1.25;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 14rem;
+}
+
+.referral-code-text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  font-size: 1rem;
+  word-break: break-all;
+}
+
+/* Sin plan de Academia activo: aviso de recompra (marca, sin azul tipo alert-info) */
+.rebuy-banner {
+  padding: 1.25rem 1.35rem;
+  border-radius: 10px;
+  border: 1px solid rgba(208, 173, 80, 0.45);
+  border-left-width: 4px;
+  border-left-color: #d0ad50;
+  background: linear-gradient(125deg, #1e1e26 0%, #252018 50%, #2a2620 100%);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.rebuy-banner__title {
+  margin: 0 0 0.65rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f0e6d2;
+  letter-spacing: 0.02em;
+}
+
+.rebuy-banner__text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.rebuy-banner__text strong {
+  color: #e8d5a0;
+  font-weight: 600;
+}
+
+.rebuy-banner__btn {
+  background: linear-gradient(to bottom left, #c9a227, #9a7d1f) !important;
+  border: none !important;
+  color: #1a1a1a !important;
+  font-weight: 600;
+}
+
+.rebuy-banner__btn:hover {
+  filter: brightness(1.08);
+  color: #1a1a1a !important;
+}

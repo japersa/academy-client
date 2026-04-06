@@ -1,26 +1,46 @@
+// Ajustes sobre node_modules/ngx-toastr/toastr.css (iconos SVG a la izquierda, padding y ancho 300px).
+// No quitar background-image ni el padding del paquete: si no, el diseño queda con hueco vacío.
+
 .toast-container {
-  width: 100%;
-  
-  
+  width: auto;
+  max-width: 100%;
+
+  // Sustituye el error gris del tema legacy por el rojo semántico del propio ngx-toastr
+  .ngx-toastr.toast-error {
+    background-color: #bd362f !important;
+    color: #ffffff !important;
+  }
+
+  .ngx-toastr.toast-success {
+    background-color: #51a351 !important;
+    color: #ffffff !important;
+  }
+
+  .ngx-toastr.toast-info {
+    background-color: #2f96b4 !important;
+    color: #ffffff !important;
+  }
+
+  .ngx-toastr.toast-warning {
+    background-color: #f89406 !important;
+    color: #1a1a1a !important;
+
+    .toast-title,
+    .toast-message {
+      color: #1a1a1a;
+    }
+  }
 
   .toast-close-button {
     font-weight: 300;
     text-shadow: none;
-    color: black !important;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    margin-top: -14px;
-    width: 25px;
-    height: 25px;
 
     &:focus {
       outline: none;
     }
 
     &:hover {
-      opacity: 1;
-      color: $white;
+      opacity: 0.9;
     }
 
     & > span {
@@ -28,11 +48,9 @@
     }
 
     &:before {
-      display: block;
       display: inline-block;
       font: normal normal normal 1em/1 "Nucleo";
       font-size: inherit;
-      speak: none;
       text-transform: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -42,11 +60,29 @@
     }
   }
 
+  .ngx-toastr:not(.toast-warning) .toast-close-button {
+    color: rgba(255, 255, 255, 0.92) !important;
+
+    &:hover {
+      color: #ffffff !important;
+    }
+  }
+
+  .ngx-toastr.toast-warning .toast-close-button {
+    color: rgba(0, 0, 0, 0.55) !important;
+
+    &:hover {
+      color: #000000 !important;
+    }
+  }
+
+  // Toasts legacy con .alert (p. ej. fixed-plugin)
   .alert {
     z-index: 9999;
-    width: 20%;
+    width: auto;
+    max-width: min(420px, 92vw);
     pointer-events: auto;
-    box-shadow: 0px 0px 18px 0.2px rgba(255, 254, 254, 0.15);
+    box-shadow: 0px 0px 18px 0.2px rgba(0, 0, 0, 0.12);
 
     .toast-message {
       max-width: 89%;
@@ -62,25 +98,8 @@
       }
     }
   }
-
-  .toast-error {
-    background-color: #f0f0f0;
-    color: black;
-    background-image: none;
-  }
-
-  .toast-success {
-    background-image: none;
-  }
-
-  .toast-info {
-    background-image: none;
-  }
-
-  .toast-warning {
-    background-image: none;
-  }
 }
+
 .toast-top-center,
 .toast-bottom-center {
   .alert {
@@ -88,6 +107,7 @@
     margin-right: auto;
   }
 }
+
 .toast-top-right,
 .toast-bottom-right {
   .alert {
@@ -106,6 +126,7 @@
 
 @media screen and (max-width: 767px) {
   .toast-container .alert {
-    width: 25.6666%;
+    width: auto;
+    max-width: min(92vw, 400px);
   }
 }

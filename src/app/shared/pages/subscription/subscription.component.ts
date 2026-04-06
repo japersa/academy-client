@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../../../core/services/user-data.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-subscription',
@@ -9,6 +10,14 @@ import { UserDataService } from '../../../core/services/user-data.service';
 export class SubscriptionComponent implements OnInit {
 
   role: string = null;
+
+  /** IPN hacia el backend Django (`/full/payment/`). */
+  readonly coinpaymentsIpnUrl = `${environment.apiURL.replace(/\/$/, '')}/full/payment/`;
+  coinpaymentsSuccessUrl = '';
+  coinpaymentsCancelUrl = '';
+
+  readonly logoStartAcademy =
+    'https://res.cloudinary.com/ddw7odxzr/image/upload/v1719765038/RC_11326_Logo_Final_Start_Academy_Alex_Logotipo_Negativo_ku9htb.png';
 
   featuresVIP: object[] = [
     {
@@ -83,6 +92,9 @@ export class SubscriptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    this.coinpaymentsSuccessUrl = `${origin}/home`;
+    this.coinpaymentsCancelUrl = `${origin}/cancel`;
   }
 
 }

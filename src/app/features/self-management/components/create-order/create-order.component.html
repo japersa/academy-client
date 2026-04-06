@@ -1,13 +1,23 @@
-<div class="content">
-  <ol class="breadcrumb bg-transparent ml-3">
-    <li class="breadcrumb-item text-primary">
-      <a routerLink="/self-management/home"> Academia </a>
-    </li>
-    <li class="breadcrumb-item">Nuevo Paquete</li>
-  </ol>
-  <div class="row"></div>
-  <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
-    <div class="row pl-2 pr-2">
+<div class="content admin-area-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/home">Inicio</a>
+          </li>
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/self-management/home">Academia</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Nuevo paquete</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="form" (ngSubmit)="createPack(form.value)">
+        <div class="row pl-2 pr-2">
       <div class="col-lg-5 col-md-12">
         <h3 class="title">Membresia Academia</h3>
         <div class="card shadow-custom p-3">
@@ -387,6 +397,13 @@
                   >
                     El código de referido debe ser diferente al tuyo.
                   </small>
+                  <small
+                    class="form-text text-danger d-block mt-1"
+                    *ngIf="referralCodeServerError"
+                    role="alert"
+                  >
+                    {{ referralCodeServerError }}
+                  </small>
                 </div>
               </div>
             </div>
@@ -480,6 +497,8 @@
       </div>
     </div>
   </form>
+    </div>
+  </div>
 </div>
 
 <!-- <div class="content">

@@ -1,79 +1,56 @@
-<div class="d-none d-sm-block bg-gray">
-  <footer class="footer" [ngClass]="{
-      'class-user': userDataService?.userData$?.value?.rol === 'student'
-    }">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-6">
-          <ul class="nav">
-            <li class="nav-item">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                <img class="logo"
-                  src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1719765038/RC_11326_Logo_Final_Start_Academy_Alex_Logotipo_Positivo_detuei.png"
-                  alt="" />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-6 d-flex align-items-center justify-content-end">
-          <div class="">
-            
-            <a href="https://www.instagram.com/startacademy.digital?igsh=NWt1NXJ1enFrZHZs&utm_source=qr" target="_blank">
-              <i class="fa-brands fa-instagram fa-3x align-middle"></i>
-            </a>
-          </div>
-        </div>
+<footer
+  class="app-footer"
+  [ngClass]="{ 'app-footer--student': userDataService?.userData$?.value?.rol === 'student' }"
+>
+  <div class="container-fluid app-footer__inner">
+    <div class="row align-items-center justify-content-between gy-3">
+      <div class="col-12 col-md-6 text-center text-md-start">
+        <a
+          routerLink="/home"
+          class="app-footer__brand d-inline-block"
+          title="Inicio — Start Academy"
+        >
+          <img
+            class="app-footer__logo"
+            src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1719765038/RC_11326_Logo_Final_Start_Academy_Alex_Logotipo_Positivo_detuei.png"
+            alt="Start Academy"
+            width="120"
+            height="auto"
+          />
+        </a>
       </div>
-      <div class="row">
-        <div class="col-12 d-flex align-items-center justify-content-center">
-          <div class="copyright">
-            &copy; {{ test | date : "yyyy" }} Hecho con
-            <i class="tim-icons icon-heart-2"> </i> para
-            <a href="#" target="_blank"> Start Academy </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-</div>
-
-<div class="d-block d-sm-none">
-  <footer class="footer p-3" [ngClass]="{
-      'class-user': userDataService?.userData$?.value?.rol === 'student'
-    }">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 d-flex align-items-center justify-content-center">
-          <ul class="nav">
-            <li class="nav-item">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                <img class="logo"
-                  src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1719765038/RC_11326_Logo_Final_Start_Academy_Alex_Logotipo_Positivo_detuei.png"
-                  alt="" />
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 d-flex align-items-center justify-content-center">
-          <div class="mb-2">
-            
-            <a href="https://www.instagram.com/startacademy.digital?igsh=NWt1NXJ1enFrZHZs&utm_source=qr" target="_blank">
-              <i class="fa-brands fa-instagram-square fa-3x align-middle"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 d-flex align-items-center justify-content-center">
-          <div class="copyright">
-            &copy; {{ test | date : "yyyy" }} Hecho con
-            <i class="tim-icons icon-heart-2"> </i> por
-            <a href="https://startacademy.digital/" target="_blank"> Start Academy </a>
-          </div>
-        </div>
+      <div class="col-12 col-md-6">
+        <nav class="app-footer__social" aria-label="Redes sociales">
+          <a
+            class="app-footer__social-link"
+            href="https://www.instagram.com/startacademy.digital"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Start Academy en Instagram"
+          >
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+        </nav>
       </div>
     </div>
-  </footer>
-</div>
+    <div class="row">
+      <div class="col-12">
+        <p class="app-footer__copy text-center mb-0">
+          &copy; {{ currentYear }}
+          <span class="app-footer__sep">·</span>
+          Hecho con
+          <i class="tim-icons icon-heart-2 app-footer__heart" aria-hidden="true"></i>
+          <span class="app-footer__sep">·</span>
+          <a
+            href="https://startacademy.digital/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="app-footer__site-link"
+          >
+            Start Academy
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

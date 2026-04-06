@@ -1,0 +1,233 @@
+// Tokens compartidos: mismo margen horizontal en admin, estudiante, auth y footer.
+// Angular inserta rutas anidadas en .main-panel; el tema solo estiliza .main-panel > .content.
+//
+// Login, registro y demás pantallas en AuthLayout (wrapper-full-page) no usan .main-panel ni
+// admin-area-page / migas: quedan fuera de estas reglas. Su aspecto sigue en _example-pages.scss.
+
+:root {
+  --app-gutter-x: 15px;
+}
+
+// Fondo de aplicación (todas las pantallas con .content o auth .full-page)
+$app-content-background-image: url("https://res.cloudinary.com/ddw7odxzr/image/upload/v1696042471/webapp/FONDO_zftidw.jpg");
+
+.main-panel .content,
+.wrapper-full-page .content {
+  background-image: $app-content-background-image !important;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.wrapper-full-page .full-page {
+  background-image: $app-content-background-image !important;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 576px) {
+  :root {
+    --app-gutter-x: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --app-gutter-x: 30px;
+  }
+}
+
+// Rutas públicas (login, registro, pricing, etc.)
+.wrapper.wrapper-full-page {
+  box-sizing: border-box;
+  padding-left: var(--app-gutter-x);
+  padding-right: var(--app-gutter-x);
+}
+
+// Evitar doble padding con .container de Bootstrap (el margen lo marca --app-gutter-x).
+.wrapper.wrapper-full-page .container,
+.wrapper.wrapper-full-page .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// Contenido principal con sidebar (no estudiante)
+@media (max-width: 767.98px) {
+  .wrapper:not(.wrapper--student) .main-panel .content {
+    padding-left: var(--app-gutter-x);
+    padding-right: var(--app-gutter-x);
+    padding-top: 80px;
+    box-sizing: border-box;
+  }
+
+  .wrapper:not(.wrapper--student) .main-panel > app-footer .app-footer {
+    padding-left: var(--app-gutter-x);
+    padding-right: var(--app-gutter-x);
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .wrapper:not(.wrapper--student) .main-panel .content {
+    padding: 80px var(--app-gutter-x) 30px var(--app-gutter-x) !important;
+    min-height: calc(100vh - 70px);
+    box-sizing: border-box;
+  }
+
+  .wrapper:not(.wrapper--student) .main-panel > app-footer .app-footer {
+    padding-left: var(--app-gutter-x) !important;
+    padding-right: var(--app-gutter-x);
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 992px) {
+  .wrapper:not(.wrapper--student) .main-panel .content {
+    padding: 80px 30px 30px 280px;
+    min-height: calc(100vh - 70px);
+    box-sizing: border-box;
+  }
+
+  body.sidebar-mini .wrapper:not(.wrapper--student) .main-panel .content {
+    padding-left: 130px;
+  }
+
+  .wrapper:not(.wrapper--student) .main-panel > app-footer .app-footer {
+    padding-left: 280px;
+    padding-right: 30px;
+    box-sizing: border-box;
+  }
+
+  body.sidebar-mini .wrapper:not(.wrapper--student) .main-panel > app-footer .app-footer {
+    padding-left: 130px;
+  }
+}
+
+// Estudiante: sin sidebar; mismo gutter que auth
+.wrapper.wrapper--student .main-panel .content {
+  padding: 80px var(--app-gutter-x) 2rem;
+  box-sizing: border-box;
+  min-height: calc(100vh - 70px);
+}
+
+// Inset horizontal uniforme con referrals (Bootstrap .px-3 ≈ spacer 3)
+$referrals-page-inset-x: map-get($spacers, 3);
+
+// Panel admin / autogestión / funding (no estudiante): mismo margen interno que referrals-page
+.wrapper:not(.wrapper--student) .main-panel .content > .row {
+  padding-left: $referrals-page-inset-x;
+  padding-right: $referrals-page-inset-x;
+  box-sizing: border-box;
+}
+
+// Vistas cuyo primer contenido no va en .row (p. ej. funding home: ol + h3 antes de .row)
+.wrapper:not(.wrapper--student) .main-panel .content > :not(.row) {
+  padding-left: $referrals-page-inset-x;
+  padding-right: $referrals-page-inset-x;
+  box-sizing: border-box;
+}
+
+// Estudiante: mismas márgenes horizontales en filas y bloques directos (alinea migas con el resto del panel)
+.wrapper.wrapper--student .main-panel .content > .row {
+  padding-left: $referrals-page-inset-x;
+  padding-right: $referrals-page-inset-x;
+  box-sizing: border-box;
+}
+
+.wrapper.wrapper--student .main-panel .content > :not(.row) {
+  padding-left: $referrals-page-inset-x;
+  padding-right: $referrals-page-inset-x;
+  box-sizing: border-box;
+}
+
+// Migas de pan (panel con sidebar): fila propia; no anular márgenes del .row de Bootstrap
+// (los negativos alinean columnas con el resto de filas / Home).
+.main-panel .content .admin-area-breadcrumb-row {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding-bottom: 0.75rem;
+}
+
+.main-panel .content .admin-area-breadcrumb-row > [class*="col-"] {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
+.main-panel .content .admin-area-breadcrumb-row nav {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+// Misma fila cuando está bajo .admin-area-page (selectores históricos)
+.admin-area-page > .admin-area-breadcrumb-row {
+  width: 100%;
+  max-width: 100%;
+}
+
+.admin-area-page > .admin-area-breadcrumb-row > [class*="col-"] {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
+.admin-area-page .breadcrumb {
+  padding-left: 0;
+}
+
+// Misma base que Home: sin margen inferior en el <ol>; el respiro lo da la fila (.padding-bottom)
+.main-panel .content .admin-area-breadcrumb-row .breadcrumb,
+.admin-area-page > .admin-area-breadcrumb-row .breadcrumb {
+  margin-left: 0 !important;
+  margin-right: 0;
+  margin-bottom: 0 !important;
+  width: 100%;
+  max-width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 0.25rem;
+  box-sizing: border-box;
+}
+
+// Quitar ml-3 en plantillas antiguas (funding, admin…). No aplicar en Home: allí migas y banner
+// comparten una fila flex; forzar max-width/márgenes en la miga rompe el layout.
+.main-panel .content:not(.home-page) .breadcrumb.bg-transparent {
+  margin-left: 0 !important;
+}
+
+.admin-area-page .breadcrumb-item.active {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+// El bloque siguiente respeta el flujo y no sube encima de las migas
+.main-panel .content .admin-area-breadcrumb-row + .row {
+  position: relative;
+  z-index: 1;
+}
+
+// Cards con texto / datos: respiro interno uniforme (evita contenido pegado a los bordes)
+$card-content-inset: map-get($spacers, 3);
+
+.main-panel .content .card:not(.card-plain):not(.card-chart) {
+  .card-header {
+    padding-left: $card-content-inset;
+    padding-right: $card-content-inset;
+  }
+
+  .card-body:not(.table-full-width) {
+    padding-left: $card-content-inset;
+    padding-right: $card-content-inset;
+    padding-top: $card-content-inset;
+    padding-bottom: $card-content-inset;
+  }
+
+  .card-footer {
+    padding-left: $card-content-inset;
+    padding-right: $card-content-inset;
+  }
+}

@@ -45,30 +45,6 @@
                 </li>
               </ul>
             </div>
-            <a data-toggle="collapse" (click)="childitems.isCollapsed = !childitems.isCollapsed"
-              [attr.aria-expanded]="!childitems.isCollapsed" [attr.aria-controls]="childitems.collapse"
-              *ngIf="childitems.type === 'sub'">
-              <span class="sidebar-mini-icon">{{ childitems.smallTitle }}</span>
-              <span class="sidebar-normal">{{ childitems.title }}<b class="caret"></b></span>
-            </a>
-            <!--Display the submenu items-->
-            <div id="{{ childitems.collapse }}" class="collapse" *ngIf="childitems.type === 'sub'"
-              [collapse]="childitems.isCollapsed" [isAnimated]="true">
-              <ul class="nav">
-                <li class="mb-4">
-      <a target="_blank" href="https://play.google.com/store/apps/details?id=com.sniperpro.sniperpro">
-        <i class="currency-exchange"></i>
-        <p>Android</p>
-      </a>
-    </li>
-    <li class="mb-4">
-      <a target="_blank" href="https://testflight.apple.com/join/6laFRCqS">
-        <i class="currency-exchange"></i>
-        <p>iOS</p>
-      </a>
-    </li>
-              </ul>
-            </div>
           </li>
         </ul>
       </div>

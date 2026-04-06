@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { getHttpErrorMessage } from 'src/app/core/utils/http-error-message';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { PacksService } from '../../services/packs.service';
 import { Router } from '@angular/router';
@@ -12,11 +16,14 @@ import { UserDataService } from 'src/app/core/services/user-data.service';
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.scss']
 })
-export class CreateOrderComponent implements OnInit {
+export class CreateOrderComponent implements OnInit, OnDestroy {
   price = '';
   form!: FormGroup;
-  errorMessage: string | null;
+  errorMessage: Record<string, unknown> | null = null;
+  /** Mensaje del API debajo del input de código de referido (p. ej. inválido o propio código). */
+  referralCodeServerError: string | null = null;
   referalCode = '0000000';
+  private readonly subs = new Subscription();
 
   constructor(
     // import the form builder
@@ -27,6 +34,7 @@ export class CreateOrderComponent implements OnInit {
     private registerService: RegisterService,
     public userDataService: UserDataService,
     private storageService: StorageService,
+    private toastr: ToastrService,
   ) {
     // Build the form
     this.buildForm();
@@ -149,18 +157,65 @@ export class CreateOrderComponent implements OnInit {
   }
 
   createPack(formData: any) {
-
-    this.packsService.createPack(formData).subscribe(() => {
-      this.packsService.getMyPacks().subscribe(pkg => {
-        const newPack = pkg.reduce((prev, current) => {
-          return (prev.id > current.id) ? prev : current;
+    this.errorMessage = null;
+    this.referralCodeServerError = null;
+    this.packsService.createPack(formData).subscribe({
+      next: () => {
+        this.packsService.getMyPacks().subscribe({
+          next: (pkg) => {
+            const newPack = pkg.reduce((prev: { id: number }, current: { id: number }) =>
+              prev.id > current.id ? prev : current
+            );
+            this.router.navigate([`/self-management/checkout/${newPack.id}`]);
+          },
+          error: (err: unknown) => {
+            this.handleCreateOrderApiError(err, 'Error');
+          },
         });
-        console.log(newPack);
-        this.router.navigate([`/self-management/checkout/${newPack.id}`]);
-      });
-    }
-    );
+      },
+      error: (err: unknown) => {
+        this.handleCreateOrderApiError(err, 'No se pudo crear el pedido');
+      },
+    });
+  }
 
+  /**
+   * Errores de código de referido: solo mensaje bajo el input (sin duplicar bloque general ni toast).
+   * Otros errores: bloque general + toast.
+   */
+  private handleCreateOrderApiError(err: unknown, toastTitle: string): void {
+    const msg = getHttpErrorMessage(err);
+    if (this.isReferralRelatedApiError(err, msg)) {
+      this.errorMessage = null;
+      this.referralCodeServerError = msg.trim();
+      this.referralCodeField?.markAsTouched();
+      return;
+    }
+    this.referralCodeServerError = null;
+    this.setErrorMessageFromPayload(err, msg);
+    this.toastr.error(msg, toastTitle);
+  }
+
+  private isReferralRelatedApiError(err: unknown, msg: string): boolean {
+    const lower = msg.toLowerCase();
+    if (lower.includes('referido') || lower.includes('referral')) {
+      return true;
+    }
+    if (err instanceof HttpErrorResponse && err.error && typeof err.error === 'object' && !(err.error instanceof Blob)) {
+      const keys = Object.keys(err.error as object);
+      if (keys.some((k) => k.toLowerCase().includes('referral'))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private setErrorMessageFromPayload(err: unknown, displayMsg: string): void {
+    if (err instanceof HttpErrorResponse && err.error && typeof err.error === 'object' && !(err.error instanceof Blob)) {
+      this.errorMessage = { ...(err.error as Record<string, unknown>), detail: displayMsg };
+    } else {
+      this.errorMessage = { detail: displayMsg };
+    }
   }
 
   validarReferralCode(control: FormControl): { [key: string]: boolean } | null {
@@ -177,6 +232,15 @@ export class CreateOrderComponent implements OnInit {
     this.userDataService.userData$.subscribe(data => {
       this.referalCode = data?.referral_code;
     });
+    this.subs.add(
+      this.form.get('referral_code')?.valueChanges.subscribe(() => {
+        this.referralCodeServerError = null;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
 }

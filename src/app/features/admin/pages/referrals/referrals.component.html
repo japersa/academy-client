@@ -1,80 +1,146 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Sistema de comisiones y viajes</h4>
-      </div>
-      <div class="card-body">
-        <div *ngIf="error" class="alert alert-danger">
-          {{ error }}
+<div class="content referrals-page admin-area-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/home">Inicio</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Back office</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title mb-0">Back office</h4>
+          <p class="card-category text-muted mb-0">
+            Saldo y puntos de viaje Start Academy
+          </p>
         </div>
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="numbers">
-                  <p class="card-category">Saldo de comisiones</p>
-                  <p class="card-title">${{ commissionBalance | number:'1.2-2' }}</p>
-                </div>
-              </div>
-            </div>
+        <div class="card-body">
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            {{ error }}
           </div>
 
-          <div class="col-md-4">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="numbers">
-                  <p class="card-category">Puntos de viaje</p>
-                  <p class="card-title">{{ travelPoints }} pts</p>
-                  <small>1 punto = 1 USD</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="numbers">
-                  <p class="card-category">Código de referido</p>
-                  <p class="card-title">{{ referralCode || 'No asignado' }}</p>
-                  <p class="card-category">
-                    Estado:
-                    <span [ngClass]="referralActive ? 'text-success' : 'text-danger'">
-                      {{ referralActive ? 'Activo' : 'Inactivo' }}
-                    </span>
-                  </p>
-                  <p *ngIf="referralNextRenewal" class="card-category">
-                    Próxima recompra: {{ referralNextRenewal | date }}
+          <div class="row stats-row">
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 d-flex flex-column align-items-center">
+              <div class="referrals-stat-sphere" role="group" aria-label="Saldo de ganancias">
+                <div class="referrals-stat-sphere__highlight" aria-hidden="true"></div>
+                <div class="referrals-stat-sphere__content">
+                  <p class="referrals-stat-sphere__label">Saldo de ganancias</p>
+                  <p class="referrals-stat-sphere__value text-primary">
+                    ${{ commissionBalance | number: '1.2-2' }}
                   </p>
                 </div>
               </div>
+              <a
+                routerLink="/self-management/withdrawals"
+                class="btn btn-primary btn-sm mt-3 referrals-stat-sphere__withdraw-btn"
+              >
+                Retirar
+              </a>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 d-flex flex-column align-items-center">
+              <div class="referrals-stat-sphere" role="group" aria-label="Puntos de viaje">
+                <div class="referrals-stat-sphere__highlight" aria-hidden="true"></div>
+                <div class="referrals-stat-sphere__content">
+                  <p class="referrals-stat-sphere__label">Puntos de viaje</p>
+                  <p class="referrals-stat-sphere__value">{{ travelPoints }} pts</p>
+                </div>
+              </div>
+              <p class="referrals-stat-sphere__hint-below mb-0">1 punto = 1 USD</p>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+              <div class="card card-stats h-100 shadow-sm">
+                <div class="card-body">
+                  <div class="numbers">
+                    <p class="card-category">Código de referido</p>
+                    <p class="card-title referral-code-text">{{ referralCode || 'No asignado' }}</p>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-primary mt-2"
+                      [disabled]="!referralCode"
+                      [cdkCopyToClipboard]="referralCode"
+                    >
+                      Copiar código
+                    </button>
+                    <p class="card-category mt-3 mb-0">
+                      Estado:
+                      <span [ngClass]="referralActive ? 'text-success' : 'text-warning'">
+                        {{ referralActive ? 'Activo' : 'Inactivo' }}
+                      </span>
+                    </p>
+                    <p *ngIf="!referralActive" class="small text-muted mb-0 mt-1">
+                      El servidor marcó el código como inactivo; la recompra mensual lo reactiva.
+                    </p>
+                    <p *ngIf="referralNextRenewal" class="card-category small mb-0">
+                      Próxima recompra: {{ referralNextRenewal | date: 'mediumDate' }}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <hr />
+          <hr class="mt-2" />
 
-        <div class="row">
-          <div class="col-md-12">
-            <h5>Recompra mensual</h5>
-            <p>
-              Para mantener tu código de referido activo debes realizar una recompra mensual de
-              <strong>30 USD</strong>.
-            </p>
-            <!--
-              Integrar aquí el flujo de Stripe que ya usáis para pagos de paquetes.
-              Una vez obtenido el token de Stripe, llamad a:
-              payMonthlyRebuy(stripeToken.id)
-            -->
-            <button class="btn btn-primary btn-fill" [disabled]="loading">
-              Pagar recompra (30 USD)
-            </button>
+          <div class="row" *ngIf="!hasActiveSelfManagementPlan">
+            <div class="col-lg-10 col-md-12">
+              <div class="rebuy-banner mb-0" role="status">
+                <h5 class="rebuy-banner__title">Recompra mensual</h5>
+                <p class="rebuy-banner__text mb-3">
+                  La recompra de <strong>30 USD</strong> para mantener activo tu código de referido
+                  aplica cuando ya tienes un <strong>plan de Academia activo</strong>.
+                  Sin ese plan, primero contrata en Academia.
+                </p>
+                <a routerLink="/self-management/home" class="btn btn-sm btn-fill rebuy-banner__btn">Ir a Academia</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="hasActiveSelfManagementPlan">
+            <div class="col-lg-8 col-md-12">
+              <h5 class="mb-2">Recompra mensual</h5>
+              <p class="text-muted mb-3">
+                Con tu plan de Academia activo, puedes pagar aquí los <strong>30 USD</strong> mensuales
+                para mantener tu código de referido activo. Mismo Stripe que en el resto de la app.
+              </p>
+              <div class="mb-3 container-credit-card">
+                <stripe-card
+                  #stripeCard
+                  (catch)="onStripeError($event)"
+                  [(invalid)]="invalidError"
+                  (cardMounted)="cardCaptureReady = true"
+                  (tokenChange)="setStripeToken($event)"
+                  [options]="cardOptions"
+                  class="stripe-card"
+                ></stripe-card>
+              </div>
+              <div *ngIf="invalidError?.message" class="text-danger small mb-2">
+                {{ invalidError?.message }}
+              </div>
+              <p *ngIf="!cardCaptureReady" class="small text-muted mb-2">
+                Esperando a que cargue el formulario de tarjeta…
+              </p>
+              <button
+                type="button"
+                class="btn btn-primary btn-fill"
+                [disabled]="loading || !cardCaptureReady"
+                (click)="submitRebuy($event)"
+              >
+                <span *ngIf="!loading">Pagar recompra (30 USD)</span>
+                <span *ngIf="loading">Procesando…</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

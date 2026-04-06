@@ -1,19 +1,23 @@
-<div class="content">
-  <div class="row d-flex justify-content-space-between">
-    <div class="col-8">
-      <ol class="breadcrumb bg-transparent ml-3">
-        <li class="breadcrumb-item text-primary">
-          <a routerLink="/dashboard"> Dashboard </a>
-        </li>
-        <li class="breadcrumb-item">Solicitud de paquetes</li>
-      </ol>
+<div class="content admin-area-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Solicitud de paquetes</li>
+        </ol>
+      </nav>
     </div>
-    <div class="col-3 ">
-      <label class="text-primary">
-        Estado: 
+  </div>
+  <div class="row mb-3 align-items-end justify-content-end">
+    <div class="col-md-4 col-lg-3">
+      <label class="text-primary mb-0 w-100">
+        Estado:
         <select
           name="selectionStatus"
-          class="form-control "
+          class="form-control"
           (change)="statusChange($event.target.value)"
         >
           <option selected="true" disabled="disabled">
@@ -41,7 +45,7 @@
                   </p>
                   <p>
                     <strong>Nombre del Paquete:</strong>
-                    Icex Challenge # {{i.id}}
+                    Challenge # {{i.id}}
                   </p>
                   <p>
                     <strong>Moneda:</strong>

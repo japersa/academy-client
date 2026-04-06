@@ -1,4 +1,54 @@
-.shadow {
-    box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
-    border-radius: 10px;
-} 
+.withdrawals-page {
+  padding-bottom: 2rem;
+}
+
+.withdrawals-page .card-header .card-category {
+  line-height: 1.55;
+}
+
+.withdrawals-page__request-list li:last-child {
+  border-bottom: none !important;
+}
+
+.withdrawals-page__request-item {
+  gap: 0.125rem 0;
+}
+
+.withdrawals-page__date {
+  font-size: 0.9375rem;
+}
+
+.withdrawals-page__sep {
+  color: rgba(0, 0, 0, 0.35);
+  user-select: none;
+}
+
+.withdrawals-page__amount {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Badges con contraste explícito por si el tema aplana colores */
+.withdrawals-page__request-item .badge-warning {
+  background-color: #ffc107;
+  color: #212529 !important;
+}
+
+.withdrawals-page__request-item .badge-success {
+  background-color: #28a745;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-danger {
+  background-color: #dc3545;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-info {
+  background-color: #17a2b8;
+  color: #fff !important;
+}
+
+.withdrawals-page__request-item .badge-secondary {
+  background-color: #6c757d;
+  color: #fff !important;
+}
