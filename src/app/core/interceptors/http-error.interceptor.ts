@@ -28,7 +28,7 @@ export class HttpErrorInterceptor {
               this.router.navigate(['/sign-in'])
             }
             if (error.status === 403) {
-              this.router.navigate(['/home'])
+              this.router.navigate(['/referrals'])
             }
           }
           console.log(errorMessage);
