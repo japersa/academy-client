@@ -6,6 +6,7 @@
   line-height: 1.55;
 }
 
+/* Paleta Black Dashboard (#d0ad50) — coherente con el resto de la app */
 .withdrawals-page__type-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -13,26 +14,40 @@
 }
 
 .withdrawals-page__type-tab {
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(208, 173, 80, 0.35);
   background: #fff;
-  color: #344675;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
+  color: #525f7f;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
   font-size: 0.9375rem;
   font-weight: 600;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .withdrawals-page__type-tab:hover {
-  border-color: rgba(41, 98, 255, 0.45);
-  color: #2962ff;
+  border-color: rgba(208, 173, 80, 0.85);
+  color: #7a6520;
+  background: rgba(208, 173, 80, 0.1);
+}
+
+.withdrawals-page__type-tab:focus-visible {
+  outline: 2px solid rgba(208, 173, 80, 0.85);
+  outline-offset: 2px;
 }
 
 .withdrawals-page__type-tab.active {
-  background: #2962ff;
-  border-color: #2962ff;
-  color: #fff;
+  border-color: #9a7d1f;
+  color: #1a191f;
+  background: linear-gradient(145deg, #e5c566 0%, #d0ad50 42%, #b8943d 100%);
+  box-shadow: 0 2px 12px rgba(154, 125, 31, 0.28);
+}
+
+.withdrawals-page__type-tab.active:hover {
+  color: #141418;
+  border-color: #8a6f1a;
+  filter: brightness(1.03);
 }
 
 .withdrawals-page__request-list li:last-child {
