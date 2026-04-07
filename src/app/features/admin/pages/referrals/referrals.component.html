@@ -12,10 +12,8 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-          <p class="card-category text-muted mb-0">
-            Saldo y puntos de viaje Start Academy
-          </p>
+        <div class="card-header pb-2">
+          <h4 class="card-title mb-0">Saldo y puntos de viaje Start Academy</h4>
         </div>
         <div class="card-body">
           <div *ngIf="error" class="alert alert-danger" role="alert">
@@ -110,8 +108,8 @@
 
           <div class="row" *ngIf="hasActiveSelfManagementPlan">
             <div class="col-lg-8 col-md-12">
-              <h5 class="mb-2">Recompra mensual</h5>
-              <p class="text-muted mb-3">
+              <h4 class="card-title mb-2">Recompra mensual</h4>
+              <p class="card-category text-muted mb-3">
                 Con tu plan de Academia activo, puedes pagar aquí los <strong>30 USD</strong> mensuales
                 para mantener tu código de referido activo. Mismo Stripe que en el resto de la app.
               </p>
@@ -147,31 +145,59 @@
           <hr class="mt-4" />
 
           <div class="referrals-network-section">
-            <h5 class="mb-2">Personas que has referido</h5>
-            <p class="text-muted small mb-3">
+            <h4 class="card-title mb-2">Personas que has referido</h4>
+            <p class="card-category text-muted mb-3">
               Incluye quienes contrataron Academia con tu código y quienes generaron comisiones a tu favor.
             </p>
             <div *ngIf="profileLoading" class="text-muted small">Cargando lista…</div>
-            <div *ngIf="!profileLoading && referredUsers.length === 0" class="text-muted small">
-              Aún no tienes referidos con tu código o no se ha registrado ninguna comisión por referido.
+            <div
+              *ngIf="!profileLoading && referredUsers.length === 0"
+              class="referrals-empty"
+              role="status"
+              aria-live="polite"
+            >
+              <p class="referrals-empty__title">No hay referidos para mostrar todavía.</p>
+              <p class="referrals-empty__copy text-muted small mb-0">
+                En cuanto alguien contrate Academia con tu código o se registre una comisión por referido,
+                sus datos aparecerán en la tabla de esta sección.
+              </p>
             </div>
-            <div *ngIf="!profileLoading && referredUsers.length > 0" class="table-responsive">
-              <table class="table table-hover referrals-network-table mb-0">
-                <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Registro</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let row of referredUsers">
-                    <td>{{ displayReferredName(row) }}</td>
-                    <td>{{ displayReferredEmail(row) }}</td>
-                    <td>{{ row.date_joined | date: 'mediumDate' }}</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div *ngIf="!profileLoading && referredUsers.length > 0" class="referrals-list-wrap">
+              <div class="referrals-list-panel">
+                <div class="referrals-list-panel__head">
+                  <span class="referrals-list-panel__label">Tu red</span>
+                  <span class="referrals-list-panel__count">
+                    {{ referredUsers.length }}
+                    {{ referredUsers.length === 1 ? 'referido' : 'referidos' }}
+                  </span>
+                </div>
+                <div class="table-responsive referrals-list-panel__body">
+                  <table class="table referrals-list-table mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-muted border-0">Nombre</th>
+                        <th scope="col" class="text-muted border-0">Correo</th>
+                        <th scope="col" class="referrals-list-table__col-date text-muted text-nowrap border-0">
+                          Alta
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of referredUsers" class="referrals-list-table__row">
+                        <td>
+                          <span class="referrals-list-table__name">{{ displayReferredName(row) }}</span>
+                        </td>
+                        <td>
+                          <span class="referrals-list-table__email">{{ displayReferredEmail(row) }}</span>
+                        </td>
+                        <td class="referrals-list-table__col-date text-nowrap">
+                          <time [attr.datetime]="row.date_joined">{{ row.date_joined | date : 'mediumDate' }}</time>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
