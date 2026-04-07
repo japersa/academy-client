@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { buildWhatsAppReferralShareUrl } from '../../../shared/utils/referral-share';
 import { UserDataService } from '../../../core/services/user-data.service';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../../features/auth/services/register.service';
@@ -20,6 +21,10 @@ export class HomeComponent implements OnInit {
     private registerService: RegisterService,
     private storageService: StorageService,
   ) { }
+
+  get whatsappReferralHref(): string {
+    return buildWhatsAppReferralShareUrl(this.referalCode);
+  }
 
   ngOnInit(): void {
     this.userDataService.userData$.subscribe({

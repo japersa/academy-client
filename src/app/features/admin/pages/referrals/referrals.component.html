@@ -64,14 +64,25 @@
                   <div class="numbers">
                     <p class="card-category">Código de referido</p>
                     <p class="card-title referral-code-text">{{ referralCode || 'No asignado' }}</p>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-outline-primary mt-2"
-                      [disabled]="!referralCode"
-                      [cdkCopyToClipboard]="referralCode"
-                    >
-                      Copiar código
-                    </button>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-primary"
+                        [disabled]="!referralCode"
+                        [cdkCopyToClipboard]="referralCode"
+                      >
+                        Copiar código
+                      </button>
+                      <a
+                        *ngIf="referralCode"
+                        class="btn btn-sm referrals-page__btn-wa"
+                        [href]="whatsappReferralHref"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        WhatsApp
+                      </a>
+                    </div>
                     <p class="card-category mt-3 mb-0">
                       Estado:
                       <span [ngClass]="referralActive ? 'text-success' : 'text-warning'">

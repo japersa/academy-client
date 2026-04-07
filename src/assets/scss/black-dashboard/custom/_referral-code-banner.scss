@@ -41,6 +41,33 @@
     border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
+  .referral-code-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: center;
+    margin-top: 0.45rem;
+  }
+
+  .referral-code-banner__btn-wa {
+    white-space: nowrap;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff !important;
+    background-color: #25d366 !important;
+    border: 1px solid #1ebe57 !important;
+    text-decoration: none !important;
+    border-radius: 4px;
+    line-height: 1.2;
+  }
+
+  .referral-code-banner__btn-wa:hover {
+    background-color: #20bd5a !important;
+    color: #fff !important;
+  }
+
   .btn {
     margin-left: 0;
     margin-top: 0;
@@ -60,8 +87,3 @@
   }
 }
 
-@media (max-width: 767.98px) {
-  .referral-code-banner .referral-code-banner__row .col-4 {
-    text-align: end;
-  }
-}

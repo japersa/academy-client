@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-share';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { UserDataService } from 'src/app/core/services/user-data.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
@@ -28,7 +29,12 @@ export class SelfManagementComponent implements OnInit {
 
   copied() {
     this.buttonText = 'Copiado';
-  } 
+  }
+
+  get whatsappReferralHref(): string {
+    return buildWhatsAppReferralShareUrl(this.referalCode);
+  }
+
 
   constructor(public userDataService: UserDataService,
               private coursesService: CoursesService,

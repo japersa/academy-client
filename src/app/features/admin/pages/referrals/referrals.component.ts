@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-share';
 import { ReferredUserRow, UserService } from 'src/app/shared/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -73,6 +74,10 @@ export class ReferralsComponent implements OnInit {
 
   displayReferredEmail(row: ReferredUserRow): string {
     return (row.email && row.email.trim()) || row.username || '—';
+  }
+
+  get whatsappReferralHref(): string {
+    return buildWhatsAppReferralShareUrl(this.referralCode);
   }
 
   loadUserReferralData() {

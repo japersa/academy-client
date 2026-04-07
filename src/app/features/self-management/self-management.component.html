@@ -487,15 +487,19 @@
       <div class="referral-code-banner-wrap self-management-home__referido w-100">
         <div class="card card-stats text-center referral-code-banner">
           <p class="referral-code-banner__title">Código de referido</p>
-          <div class="row referral-code-banner__row g-1 align-items-center">
-            <div class="col-8">
-              <p class="referral-code-banner__code mb-0">{{ referalCode }}</p>
-            </div>
-            <div class="col-4 text-md-end">
-              <button type="button" class="btn btn-secondary btn-sm" [cdkCopyToClipboard]="referalCode">
-                Copiar
-              </button>
-            </div>
+          <p class="referral-code-banner__code mb-0">{{ referalCode }}</p>
+          <div class="referral-code-banner__actions">
+            <button type="button" class="btn btn-secondary btn-sm" [cdkCopyToClipboard]="referalCode">
+              Copiar
+            </button>
+            <a
+              class="btn btn-sm referral-code-banner__btn-wa"
+              [href]="whatsappReferralHref"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
           </div>
         </div>
       </div>
