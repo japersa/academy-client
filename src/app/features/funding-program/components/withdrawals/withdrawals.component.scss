@@ -32,7 +32,32 @@
   background: rgba(208, 173, 80, 0.1);
 }
 
+/* Quitar anillo azul por defecto del navegador/Bootstrap al hacer clic */
+.withdrawals-page__type-tab:focus,
+.withdrawals-page__type-tab:focus:not(:focus-visible),
+.withdrawals-page__type-tab:active {
+  outline: none;
+  box-shadow: none;
+}
+
 .withdrawals-page__type-tab:focus-visible {
+  outline: 2px solid rgba(208, 173, 80, 0.85);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* Inputs y botones primary: sin halo azul del tema (border focus en inputs) */
+.withdrawals-page .form-control:focus {
+  border-color: #d0ad50;
+  box-shadow: none;
+}
+
+.withdrawals-page .btn-primary:focus,
+.withdrawals-page .btn-primary:active {
+  box-shadow: none !important;
+}
+
+.withdrawals-page .btn-primary:focus-visible {
   outline: 2px solid rgba(208, 173, 80, 0.85);
   outline-offset: 2px;
 }
@@ -40,14 +65,14 @@
 .withdrawals-page__type-tab.active {
   border-color: #9a7d1f;
   color: #1a191f;
-  background: linear-gradient(145deg, #e5c566 0%, #d0ad50 42%, #b8943d 100%);
+  background: #d0ad50;
   box-shadow: 0 2px 12px rgba(154, 125, 31, 0.28);
 }
 
 .withdrawals-page__type-tab.active:hover {
   color: #141418;
   border-color: #8a6f1a;
-  filter: brightness(1.03);
+  background: #c4a14a;
 }
 
 .withdrawals-page__request-list li:last-child {
