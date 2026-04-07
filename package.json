@@ -18,7 +18,7 @@
     "@angular/common": "17.3.12",
     "@angular/compiler": "17.3.12",
     "@angular/core": "17.3.12",
-    "@angular/fire": "^16.0.0",
+    "@angular/fire": "17.1.0",
     "@angular/forms": "17.3.12",
     "@angular/platform-browser": "17.3.12",
     "@angular/platform-browser-dynamic": "17.3.12",
@@ -36,7 +36,7 @@
     "d3-scale": "^4.0.2",
     "devextreme": "^25.2.5",
     "devextreme-angular": "^25.2.5",
-    "firebase": "^12.11.0",
+    "firebase": "^10.14.1",
     "fullcalendar": "6.1.20",
     "install": "^0.13.0",
     "jw-bootstrap-switch-ng2": "2.0.5",
@@ -59,10 +59,7 @@
   },
   "overrides": {
     "ngx-toastr": "17.0.2",
-    "zone.js": "0.14.10",
-    "@videogular/ngx-videogular": {
-      "zone.js": "0.14.10"
-    }
+    "zone.js": "0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.11",
