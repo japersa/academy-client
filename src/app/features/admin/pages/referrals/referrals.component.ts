@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-share';
 import { ReferredUserRow, UserService } from 'src/app/shared/services/user.service';
 import { HttpClient } from '@angular/common/http';
@@ -57,6 +58,7 @@ export class ReferralsComponent implements OnInit {
     private userService: UserService,
     private http: HttpClient,
     private stripeScriptTag: StripeScriptTag,
+    private toastr: ToastrService,
   ) {
     if (!this.stripeScriptTag.StripeInstance) {
       this.stripeScriptTag.setPublishableKey(environment.stripePK);
@@ -78,6 +80,14 @@ export class ReferralsComponent implements OnInit {
 
   get whatsappReferralHref(): string {
     return buildWhatsAppReferralShareUrl(this.referralCode);
+  }
+
+  onReferralCodeCopied(success: boolean): void {
+    if (success) {
+      this.toastr.success('Código copiado al portapapeles.', 'Copiado');
+    } else {
+      this.toastr.warning('No se pudo copiar. Intenta de nuevo o copia manualmente.', 'Copiar');
+    }
   }
 
   loadUserReferralData() {

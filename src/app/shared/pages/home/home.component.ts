@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { buildWhatsAppReferralShareUrl } from '../../../shared/utils/referral-share';
 import { UserDataService } from '../../../core/services/user-data.service';
 import { Router } from '@angular/router';
@@ -20,7 +21,16 @@ export class HomeComponent implements OnInit {
     private route: Router,
     private registerService: RegisterService,
     private storageService: StorageService,
+    private toastr: ToastrService,
   ) { }
+
+  onReferralCodeCopied(success: boolean): void {
+    if (success) {
+      this.toastr.success('Código copiado al portapapeles.', 'Copiado');
+    } else {
+      this.toastr.warning('No se pudo copiar. Intenta de nuevo o copia manualmente.', 'Copiar');
+    }
+  }
 
   get whatsappReferralHref(): string {
     return buildWhatsAppReferralShareUrl(this.referalCode);

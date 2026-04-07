@@ -9,17 +9,65 @@ $referrals-surface-2: rgba(255, 255, 255, 0.055);
   padding-bottom: 2rem;
 }
 
-.referrals-page__btn-wa {
-  color: #fff !important;
-  background-color: #25d366 !important;
-  border: 1px solid #1ebe57 !important;
-  text-decoration: none !important;
-  font-weight: 600;
+.referrals-page__code-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  flex-wrap: nowrap;
 }
 
-.referrals-page__btn-wa:hover {
-  background-color: #20bd5a !important;
+.referrals-page__code-row .referral-code-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  word-break: break-word;
+  line-height: 1.25;
+}
+
+.referrals-page__code-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+}
+
+// a.btn: el tema aplica gradiente en background-image; forzar verde sólido
+a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   color: #fff !important;
+  background: #25d366 !important;
+  background-image: none !important;
+  border: 1px solid #128c7e !important;
+  text-decoration: none !important;
+  font-weight: 600;
+  border-radius: 6px;
+  line-height: 1;
+  box-shadow: none !important;
+
+  &:hover,
+  &:focus,
+  &:focus-visible,
+  &:active {
+    background: #128c7e !important;
+    background-image: none !important;
+    border-color: #075e54 !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    transform: none !important;
+    outline: none !important;
+  }
+}
+
+.referrals-page__code-actions .btn-sm.referral-share-icon-btn:not(.referrals-page__btn-wa) {
+  border-radius: 6px;
+
+  &:focus,
+  &.focus,
+  &:focus-visible,
+  &:active:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 }
 
 /* Migas: en admin-area el .active hereda blanco (pensado para fondo oscuro); panel claro → color tema (como .text-primary). */

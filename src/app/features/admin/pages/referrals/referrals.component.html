@@ -63,25 +63,34 @@
                 <div class="card-body">
                   <div class="numbers">
                     <p class="card-category">Código de referido</p>
-                    <p class="card-title referral-code-text">{{ referralCode || 'No asignado' }}</p>
-                    <div class="d-flex flex-wrap gap-2 mt-2">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-primary"
-                        [disabled]="!referralCode"
-                        [cdkCopyToClipboard]="referralCode"
-                      >
-                        Copiar código
-                      </button>
-                      <a
-                        *ngIf="referralCode"
-                        class="btn btn-sm referrals-page__btn-wa"
-                        [href]="whatsappReferralHref"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        WhatsApp
-                      </a>
+                    <div class="referrals-page__code-row">
+                      <p class="card-title referral-code-text mb-0">
+                        {{ referralCode || 'No asignado' }}
+                      </p>
+                      <div class="referrals-page__code-actions">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-primary referral-share-icon-btn"
+                          [disabled]="!referralCode"
+                          [cdkCopyToClipboard]="referralCode"
+                          (cdkCopyToClipboardCopied)="onReferralCodeCopied($event)"
+                          aria-label="Copiar código"
+                          title="Copiar código"
+                        >
+                          <i class="tim-icons icon-single-copy-04" aria-hidden="true"></i>
+                        </button>
+                        <a
+                          *ngIf="referralCode"
+                          class="btn btn-sm referrals-page__btn-wa referral-share-icon-btn"
+                          [href]="whatsappReferralHref"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Compartir por WhatsApp"
+                          title="WhatsApp"
+                        >
+                          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        </a>
+                      </div>
                     </div>
                     <p class="card-category mt-3 mb-0">
                       Estado:

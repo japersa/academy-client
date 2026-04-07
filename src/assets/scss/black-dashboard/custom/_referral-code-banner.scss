@@ -27,54 +27,89 @@
     margin-right: 0;
   }
 
+  .referral-code-banner__code-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0.35rem;
+    width: 100%;
+    text-align: left;
+  }
+
   .referral-code-banner__code {
     margin: 0;
-    padding: 0.28rem 0.45rem;
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0.65rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 2.375rem;
+    box-sizing: border-box;
+    text-align: left;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
       monospace;
-    font-size: 0.8125rem;
-    line-height: 1.3;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.35;
     word-break: break-all;
     background-color: #dcdcdc !important;
     color: #1a1a1a !important;
-    border-radius: 4px;
+    border-radius: 6px;
     border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .referral-code-banner__actions {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex: 0 0 auto;
+    align-items: center;
+    align-self: center;
     gap: 0.35rem;
-    justify-content: center;
-    margin-top: 0.45rem;
+    justify-content: flex-end;
+    margin-top: 0;
   }
 
-  .referral-code-banner__btn-wa {
-    white-space: nowrap;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    font-size: 0.75rem;
-    font-weight: 600;
+  // WhatsApp: sustituir gradiente del tema (.btn usa background-image) por color sólido de marca
+  .referral-code-banner__btn-wa.referral-share-icon-btn {
     color: #fff !important;
-    background-color: #25d366 !important;
-    border: 1px solid #1ebe57 !important;
+    background: #25d366 !important;
+    background-image: none !important;
+    border: 1px solid #128c7e !important;
     text-decoration: none !important;
-    border-radius: 4px;
-    line-height: 1.2;
+    border-radius: 6px;
+    line-height: 1;
+    font-weight: 600;
+    box-shadow: none !important;
   }
 
-  .referral-code-banner__btn-wa:hover {
-    background-color: #20bd5a !important;
+  .referral-code-banner__btn-wa.referral-share-icon-btn:hover,
+  .referral-code-banner__btn-wa.referral-share-icon-btn:focus,
+  .referral-code-banner__btn-wa.referral-share-icon-btn:active {
+    background: #128c7e !important;
+    background-image: none !important;
+    border-color: #075e54 !important;
     color: #fff !important;
+    box-shadow: none !important;
+    transform: none !important;
+    outline: none !important;
   }
 
-  .btn {
+  .referral-code-banner__actions .btn.btn-sm.referral-share-icon-btn:not(.referral-code-banner__btn-wa) {
+    border-radius: 6px;
+    line-height: 1;
+  }
+
+  .btn:not(.referral-share-icon-btn) {
     margin-left: 0;
     margin-top: 0;
     white-space: nowrap;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     font-size: 0.75rem;
+  }
+
+  .referral-code-banner__actions .referral-share-icon-btn {
+    margin-left: 0;
+    margin-top: 0;
   }
 }
 
@@ -84,6 +119,64 @@
   @media (min-width: 768px) {
     // Evita que la card se estire demasiado en pantallas anchas
     max-width: min(20rem, 100%);
+  }
+}
+
+// Botones solo icono (copiar / WhatsApp) — mismo tamaño cuadrado en todos los sitios
+.referral-share-icon-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2.375rem;
+  height: 2.375rem;
+  min-width: 2.375rem;
+  min-height: 2.375rem;
+  max-height: 2.375rem;
+  padding: 0 !important;
+  flex-shrink: 0;
+  line-height: 1;
+
+  .tim-icons,
+  .fab.fa-whatsapp {
+    font-size: 1.0625rem;
+    line-height: 1;
+  }
+
+  &.btn-block {
+    width: 2.375rem;
+    max-width: 2.375rem;
+  }
+
+  // Sin anillo azul de Bootstrap / outline del navegador al enfocar
+  &:focus,
+  &.focus,
+  &:focus-visible,
+  &:active:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// Refuerzo: <a class="btn"> hereda gradiente del tema; anular siempre el enlace WA con estas clases
+a.btn.referral-code-banner__btn-wa.referral-share-icon-btn {
+  background: #25d366 !important;
+  background-image: none !important;
+  color: #fff !important;
+  border: 1px solid #128c7e !important;
+  box-shadow: none !important;
+
+  &:hover,
+  &:focus,
+  &:focus-visible,
+  &:active {
+    background: #128c7e !important;
+    background-image: none !important;
+    color: #fff !important;
+    border-color: #075e54 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    outline: none !important;
   }
 }
 

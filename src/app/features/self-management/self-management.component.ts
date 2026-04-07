@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-share';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { UserDataService } from 'src/app/core/services/user-data.service';
@@ -27,8 +28,15 @@ export class SelfManagementComponent implements OnInit {
 
   slides$ = new BehaviorSubject<any>([]);
 
-  copied() {
-    this.buttonText = 'Copiado';
+  onReferralCodeCopied(success: boolean, updateCommissionsButton = false): void {
+    if (success) {
+      this.toastr.success('Código copiado al portapapeles.', 'Copiado');
+      if (updateCommissionsButton) {
+        this.buttonText = 'Copiado';
+      }
+    } else {
+      this.toastr.warning('No se pudo copiar. Intenta de nuevo o copia manualmente.', 'Copiar');
+    }
   }
 
   get whatsappReferralHref(): string {
@@ -40,6 +48,7 @@ export class SelfManagementComponent implements OnInit {
               private coursesService: CoursesService,
               private registerService: RegisterService,
               private storageService: StorageService,
+              private toastr: ToastrService,
   ) { }
 
   agActivete() {
