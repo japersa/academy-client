@@ -12,20 +12,25 @@
         <div class="referral-code-banner-wrap home-page__referido w-100 align-self-md-end">
           <div class="card card-stats text-center referral-code-banner">
             <p class="referral-code-banner__title">Código de referido</p>
+            <p *ngIf="!referralCodeActive" class="small text-warning mb-1 text-start">
+              Código inactivo por recompra vencida. Reactívalo en <a routerLink="/referrals">Referidos</a>.
+            </p>
             <div class="referral-code-banner__code-row">
               <p class="referral-code-banner__code mb-0">{{ referalCode }}</p>
               <div class="referral-code-banner__actions">
                 <button
                   type="button"
                   class="btn btn-secondary btn-sm referral-share-icon-btn"
+                  [disabled]="!referralCodeActive"
                   [cdkCopyToClipboard]="referalCode"
                   (cdkCopyToClipboardCopied)="onReferralCodeCopied($event)"
                   aria-label="Copiar código"
-                  title="Copiar código"
+                  [title]="referralCodeActive ? 'Copiar código' : 'Código inactivo'"
                 >
                   <i class="tim-icons icon-single-copy-04" aria-hidden="true"></i>
                 </button>
                 <a
+                  *ngIf="referralCodeActive"
                   class="btn btn-sm referral-code-banner__btn-wa referral-share-icon-btn"
                   [href]="whatsappReferralHref"
                   target="_blank"
@@ -35,6 +40,15 @@
                 >
                   <i class="fab fa-whatsapp" aria-hidden="true"></i>
                 </a>
+                <span
+                  *ngIf="!referralCodeActive"
+                  class="btn btn-sm referral-share-icon-btn referral-code-banner__btn-wa--disabled"
+                  role="img"
+                  aria-label="WhatsApp no disponible: código inactivo"
+                  title="Código inactivo"
+                >
+                  <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                </span>
               </div>
             </div>
           </div>
@@ -584,10 +598,11 @@
               <button
                 type="button"
                 class="btn btn-ref referral-share-icon-btn"
+                [disabled]="!referralCodeActive"
                 [cdkCopyToClipboard]="referalCode"
                 (cdkCopyToClipboardCopied)="onReferralCodeCopied($event)"
                 aria-label="Copiar código"
-                title="Copiar código"
+                [title]="referralCodeActive ? 'Copiar código' : 'Código inactivo'"
               >
                 <i class="tim-icons icon-single-copy-04" aria-hidden="true"></i>
               </button>

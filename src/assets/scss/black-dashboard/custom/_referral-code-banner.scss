@@ -93,6 +93,17 @@
     outline: none !important;
   }
 
+  .referral-code-banner__btn-wa--disabled {
+    opacity: 0.45;
+    pointer-events: none;
+    cursor: not-allowed;
+    color: #fff !important;
+    background: #6c757d !important;
+    background-image: none !important;
+    border: none !important;
+    border-radius: 6px;
+  }
+
   .referral-code-banner__actions .btn.btn-sm.referral-share-icon-btn:not(.referral-code-banner__btn-wa) {
     border-radius: 6px;
     line-height: 1;
