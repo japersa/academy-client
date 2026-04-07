@@ -143,6 +143,37 @@
               </button>
             </div>
           </div>
+
+          <hr class="mt-4" />
+
+          <div class="referrals-network-section">
+            <h5 class="mb-2">Personas que has referido</h5>
+            <p class="text-muted small mb-3">
+              Incluye quienes contrataron Academia con tu código y quienes generaron comisiones a tu favor.
+            </p>
+            <div *ngIf="profileLoading" class="text-muted small">Cargando lista…</div>
+            <div *ngIf="!profileLoading && referredUsers.length === 0" class="text-muted small">
+              Aún no tienes referidos con tu código o no se ha registrado ninguna comisión por referido.
+            </div>
+            <div *ngIf="!profileLoading && referredUsers.length > 0" class="table-responsive">
+              <table class="table table-hover referrals-network-table mb-0">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Registro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of referredUsers">
+                    <td>{{ displayReferredName(row) }}</td>
+                    <td>{{ displayReferredEmail(row) }}</td>
+                    <td>{{ row.date_joined | date: 'mediumDate' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

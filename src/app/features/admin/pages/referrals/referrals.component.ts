@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
+import { ReferredUserRow, UserService } from 'src/app/shared/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { StripeScriptTag } from 'stripe-angular';
@@ -27,6 +27,10 @@ export class ReferralsComponent implements OnInit {
 
   loading: boolean = false;
   error: string | null = null;
+
+  referredUsers: ReferredUserRow[] = [];
+  /** true hasta que termina la primera carga de perfil (incluye lista de referidos desde el API). */
+  profileLoading = true;
 
   cardCaptureReady = false;
   invalidError: { message?: string } | null = null;
@@ -62,7 +66,17 @@ export class ReferralsComponent implements OnInit {
     this.loadUserReferralData();
   }
 
+  displayReferredName(row: ReferredUserRow): string {
+    const name = `${row.first_name || ''} ${row.last_name || ''}`.trim();
+    return name || row.email || row.username || '—';
+  }
+
+  displayReferredEmail(row: ReferredUserRow): string {
+    return (row.email && row.email.trim()) || row.username || '—';
+  }
+
   loadUserReferralData() {
+    this.profileLoading = true;
     this.userService.getUser().subscribe({
       next: (user) => {
         this.commissionBalance = user.commission_balance ?? 0;
@@ -73,10 +87,13 @@ export class ReferralsComponent implements OnInit {
         const pkgs = user.packages_self_management as SelfManagementPackage[] | undefined;
         this.hasActiveSelfManagementPlan = Array.isArray(pkgs)
           && pkgs.some((p) => (p.status || '').toLowerCase() === 'active');
+        this.referredUsers = Array.isArray(user.referred_users) ? user.referred_users : [];
+        this.profileLoading = false;
       },
       error: (err) => {
         console.error(err);
         this.error = 'No se pudo cargar la información de referidos.';
+        this.profileLoading = false;
       }
     });
   }
