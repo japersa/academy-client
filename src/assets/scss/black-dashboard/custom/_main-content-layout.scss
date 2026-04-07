@@ -190,8 +190,72 @@ $referrals-page-inset-x: map-get($spacers, 3);
   max-width: 100%;
   flex-wrap: wrap;
   align-items: center;
+  align-content: center;
   row-gap: 0.25rem;
+  column-gap: 0;
   box-sizing: border-box;
+  /* Una sola línea visual de texto entre ítems (Bootstrap mete padding en ol e ítems) */
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Cada miga: flex para alinear separador, enlace y texto activo en la misma línea base */
+.main-panel .content .admin-area-breadcrumb-row .breadcrumb-item,
+.admin-area-page > .admin-area-breadcrumb-row .breadcrumb-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  min-height: 1.375rem;
+}
+
+.main-panel .content .admin-area-breadcrumb-row .breadcrumb-item a,
+.admin-area-page > .admin-area-breadcrumb-row .breadcrumb-item a {
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.main-panel .content .admin-area-breadcrumb-row .breadcrumb-item a:hover,
+.admin-area-page > .admin-area-breadcrumb-row .breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+/* Separador ::before alineado con el texto (Bootstrap lo deja inline-block) */
+.main-panel .content .admin-area-breadcrumb-row .breadcrumb-item + .breadcrumb-item,
+.admin-area-page > .admin-area-breadcrumb-row .breadcrumb-item + .breadcrumb-item {
+  padding-left: 0;
+}
+
+.main-panel .content .admin-area-breadcrumb-row .breadcrumb-item + .breadcrumb-item::before,
+.admin-area-page > .admin-area-breadcrumb-row .breadcrumb-item + .breadcrumb-item::before {
+  float: none;
+  position: static;
+  top: auto;
+  padding-left: 0.25rem;
+  padding-right: 0.5rem;
+  line-height: 1.35;
+  transform: none;
+  align-self: center;
+}
+
+/* Truncar sin romper la alineación vertical del flex */
+.main-panel .content .admin-area-breadcrumb-row .breadcrumb-item.text-truncate,
+.admin-area-page > .admin-area-breadcrumb-row .breadcrumb-item.text-truncate {
+  min-width: 0;
+  flex-shrink: 1;
+  max-width: min(100%, 18rem);
+}
+
+.main-panel .content .admin-area-breadcrumb-row .breadcrumb-item a.text-truncate,
+.admin-area-page > .admin-area-breadcrumb-row .breadcrumb-item a.text-truncate {
+  min-width: 0;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 // Quitar ml-3 en plantillas antiguas (funding, admin…). No aplicar en Home: allí migas y banner
