@@ -448,37 +448,20 @@
   </div> -->
   <div class="row admin-area-breadcrumb-row">
     <div class="col-12">
-      <div class="d-flex flex-column gap-3 self-management-home__top">
-        <nav aria-label="Migas de pan">
-          <ol class="breadcrumb bg-transparent mb-0 px-0">
-            <li class="breadcrumb-item text-primary">
-              <a routerLink="/referrals">Back office</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">Academia</li>
-          </ol>
-        </nav>
-        <div class="referral-code-banner-wrap self-management-home__referido w-100 align-self-md-end">
-          <div class="card card-stats text-center referral-code-banner">
-            <p class="referral-code-banner__title">Código de referido</p>
-            <div class="row referral-code-banner__row g-1 align-items-center">
-              <div class="col-8">
-                <p class="referral-code-banner__code mb-0">{{ referalCode }}</p>
-              </div>
-              <div class="col-4 text-md-end">
-                <button type="button" class="btn btn-secondary btn-sm" [cdkCopyToClipboard]="referalCode">
-                  Copiar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/referrals">Back office</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Academia</li>
+        </ol>
+      </nav>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12">
-      <h3 class="m-0">
+  <div class="row align-items-start g-3 self-management-home__welcome-row">
+    <div class="col-12 col-md-7 col-lg-8 min-w-0">
+      <h3 class="m-0 self-management-home__greeting">
         Hola, {{ userDataService?.userData$?.value?.first_name | titlecase }}
       </h3>
       <ng-container
@@ -487,18 +470,35 @@
           else elseTemplate
         "
       >
-        <p class="mb-0">
-          Continúa aprendiendo mediante su subscripción
-          <strong>Start Academy</strong>
+        <p class="mb-0 mt-2 self-management-home__tagline">
+          Continúa aprendiendo mediante tu suscripción a
+          <strong>Start Academy</strong>.
         </p>
       </ng-container>
       <ng-template #elseTemplate>
-        <p class="mb-0">
-          Hemos detectado que aún no tienes una subscripción activa, te animamos a
+        <p class="mb-0 mt-2 self-management-home__tagline">
+          Hemos detectado que aún no tienes una suscripción activa; te animamos a
           conseguir una
           <a routerLink="/self-management/create-order">aquí</a>.
         </p>
       </ng-template>
+    </div>
+    <div class="col-12 col-md-5 col-lg-4 self-management-home__referral-col">
+      <div class="referral-code-banner-wrap self-management-home__referido w-100">
+        <div class="card card-stats text-center referral-code-banner">
+          <p class="referral-code-banner__title">Código de referido</p>
+          <div class="row referral-code-banner__row g-1 align-items-center">
+            <div class="col-8">
+              <p class="referral-code-banner__code mb-0">{{ referalCode }}</p>
+            </div>
+            <div class="col-4 text-md-end">
+              <button type="button" class="btn btn-secondary btn-sm" [cdkCopyToClipboard]="referalCode">
+                Copiar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

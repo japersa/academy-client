@@ -38,10 +38,6 @@ export class CoursesComponent implements OnInit {
     this.router.navigate([`/class/${topicId}`])
   }
 
-  getGeight() {
-    return `height: ${this.course.modules.length * 50}% !important`;
-  }
-
   loadCourse() {
     this.coursesService.getCourseById(this.courseId).subscribe(res => {
       Object.assign(this.course, res);

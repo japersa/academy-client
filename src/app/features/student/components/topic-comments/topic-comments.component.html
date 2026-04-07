@@ -1,81 +1,115 @@
-<div class="wrapper">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-12 border">
-
-
-                <div class="border">
-                    <form class=" form" [formGroup]="commentForm" (ngSubmit)="createComment(commentForm.value)"
-                        role="form">
-                        <div class="form-group">
-                            <label for="response"> Pregunta </label>
-
-                            <textarea class="form-control" id="response" rows="3" class="form-control" placeholder=""
-                                formControlName="body"></textarea>
-                            <ng-container *ngFor="let validation of validationMessages.comment">
-                                <small class="form-text text-danger" *ngIf=" commentForm.get('body').hasError(validation.type) &&
-                                        (commentForm.get('body').dirty ||
-                                          commentForm.get('body').touched) ">
-                                    {{validation.message}}
-                                </small>
-                            </ng-container>
-
-                            <ng-container *ngIf="errorMessage">
-                                <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{e.value}}</small>
-                                <br>
-                            </ng-container>
-
-                            <button class="btn btn-primary btn-sm mt-2"
-                                [disabled]="commentForm.invalid">Responder</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="headings d-flex justify-content-between align-items-center mb-3 mt-3">
-                    <h5>Comentarios ( {{ comments.length }} )</h5>
-                </div>
-                <ng-container *ngIf="comments.length > 0">
-                    <div class="card p-3 mb-4">
-                        <ng-container *ngFor="let c of comments">
-                            <div class="d-flex justify-content-between align-items-center mt-2 " >
-                                <div class=" d-flex flex-row align-items-start">
-                                    <img [src]="c?.author?.image_profile  !== '' ? c?.author?.image_profile : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'"
-                                        width="40" class="user-img rounded-circle mr-2">
-                                    <span class="m-0 p-0">
-                                        <small
-                                            class="font-weight-bold m-0 p-0 text-secondary">{{ (c?.author?.first_name ? c?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
-                                        <br>
-                                        <div class="d-block">
-                                            <small class="text-right"> {{ c?.created_at | date}} </small>
-                                        </div>
-                                        <small class="text-default m-0 p-o">{{ c?.body }}. </small>
-                                    </span>
-    
-                                </div>
-                            </div>
-                            <ng-container *ngIf="c.answer">
-                                <div class="d-flex justify-content-between align-items-center mt-2 response" >
-                                    <div class=" d-flex flex-row align-items-start">
-                                        <img [src]="c?.answer?.author?.image_profile  !== '' ? c?.answer?.author?.image_profile : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'"
-                                            width="40" class="user-img rounded-circle mr-2">
-                                        <span class="m-0 p-0">
-                                            <small
-                                                class="font-weight-bold m-0 p-0 text-secondary">{{ (c?.answer?.author?.first_name ? c?.answer?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
-                                            <br> 
-                                            <div class="d-block">
-                                                <small class="text-right"> {{ c?.answer?.created_at | date}} </small>
-                                            </div>
-                                            <small class="text-default m-0 p-o">{{ c?.answer?.body }}. </small>
-                                        </span>
-        
-                                    </div>
-                                </div>
-                            </ng-container>
-                            
-                        </ng-container>
-                        
-                    </div>
-                </ng-container>
-            </div>
-        </div>
+<div class="topic-comments">
+  <section class="topic-comments__ask card border-0 shadow-sm">
+    <div class="topic-comments__ask-head">
+      <h2 class="topic-comments__ask-title mb-0">Tu pregunta sobre el tema</h2>
+      <p class="topic-comments__ask-hint mb-0">
+        El equipo puede responderte aquí. Sé concreto (mín. 8 caracteres, máx. 500).
+      </p>
     </div>
+    <form
+      class="topic-comments__form"
+      [formGroup]="commentForm"
+      (ngSubmit)="createComment(commentForm.value)"
+      novalidate
+    >
+      <label class="topic-comments__label" for="topic-comment-body">Escribe tu pregunta</label>
+      <textarea
+        id="topic-comment-body"
+        class="form-control topic-comments__textarea"
+        rows="4"
+        placeholder="Ej.: ¿Podrías aclarar el minuto 5:12 sobre la gestión del riesgo?"
+        formControlName="body"
+        autocomplete="off"
+      ></textarea>
+      <ng-container *ngFor="let validation of validationMessages.comment">
+        <small
+          class="topic-comments__error"
+          *ngIf="
+            commentForm.get('body').hasError(validation.type) &&
+            (commentForm.get('body').dirty || commentForm.get('body').touched)
+          "
+        >
+          {{ validation.message }}
+        </small>
+      </ng-container>
+      <ng-container *ngIf="errorMessage">
+        <small class="topic-comments__error" *ngFor="let e of errorMessage | keyvalue">{{ e.value }}</small>
+      </ng-container>
+      <div class="topic-comments__actions">
+        <button type="submit" class="btn btn-primary btn-sm" [disabled]="commentForm.invalid">
+          Enviar pregunta
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="topic-comments__list-section">
+    <div class="topic-comments__list-head">
+      <h3 class="topic-comments__list-title mb-0">Comentarios</h3>
+      <span class="topic-comments__count">{{ comments.length }}</span>
+    </div>
+
+    <ng-container *ngIf="comments.length > 0">
+      <ul class="list-unstyled topic-comments__thread mb-0">
+        <li *ngFor="let c of comments" class="topic-comments__thread-item">
+          <article class="topic-comments__bubble">
+            <div class="topic-comments__avatar-wrap">
+              <img
+                [src]="
+                  c?.author?.image_profile
+                    ? c?.author?.image_profile
+                    : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'
+                "
+                width="40"
+                height="40"
+                class="topic-comments__avatar rounded-circle"
+                alt=""
+              />
+            </div>
+            <div class="topic-comments__body">
+              <header class="topic-comments__meta">
+                <strong class="topic-comments__author">{{
+                  (c?.author?.first_name ? c?.author?.first_name : 'Usuario ' + c.id) | titlecase
+                }}</strong>
+                <time class="topic-comments__date" [attr.datetime]="c?.created_at">{{ c?.created_at | date }}</time>
+              </header>
+              <p class="topic-comments__text mb-0">{{ c?.body }}</p>
+            </div>
+          </article>
+
+          <article class="topic-comments__bubble topic-comments__bubble--answer" *ngIf="c.answer">
+            <div class="topic-comments__avatar-wrap">
+              <img
+                [src]="
+                  c?.answer?.author?.image_profile
+                    ? c?.answer?.author?.image_profile
+                    : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'
+                "
+                width="40"
+                height="40"
+                class="topic-comments__avatar rounded-circle"
+                alt=""
+              />
+            </div>
+            <div class="topic-comments__body">
+              <header class="topic-comments__meta">
+                <span class="topic-comments__badge-reply">Respuesta</span>
+                <strong class="topic-comments__author">{{
+                  (c?.answer?.author?.first_name ? c?.answer?.author?.first_name : 'Equipo') | titlecase
+                }}</strong>
+                <time class="topic-comments__date" [attr.datetime]="c?.answer?.created_at">{{
+                  c?.answer?.created_at | date
+                }}</time>
+              </header>
+              <p class="topic-comments__text mb-0">{{ c?.answer?.body }}</p>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </ng-container>
+
+    <p class="topic-comments__empty text-muted small mb-0" *ngIf="comments.length === 0">
+      Aún no hay comentarios en este tema. Sé el primero en preguntar.
+    </p>
+  </section>
 </div>

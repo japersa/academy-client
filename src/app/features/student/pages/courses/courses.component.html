@@ -12,52 +12,62 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-12">
+        <div class="col-12">
+            <div class="headings d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <h2 class="title m-0">{{ course?.title | uppercase}}</h2>
+                <button type="button" class="btn btn-primary" [routerLink]="['/test', courseId]">
+                    Presentar exámen
+                </button>
+            </div>
 
-                <div class="headings d-flex justify-content-between align-items-center mb-3">
-                    <h2 class="title m-0">{{ course?.title | uppercase}}</h2>
-
-                    <button type="button" class="btn btn-primary" [routerLink]="['/test', courseId]">Presentar
-                        exámen</button>
-                </div>
-
-
-
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="row" *ngFor="let t of course.modules">
-                            <div class="col-12">
-                                <h3 class="text-secondary">{{t?.name | titlecase}}</h3>
-                            </div>
-                            <div class="col-12" *ngIf="t?.topics.length > 0">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <!-- Timeline -->
-                                        <ul class="timeline">
-                                            <a *ngFor="let c of t?.topics" class="nav-link " href="javascript:void(0)"
-                                                (click)="goToTopicDetail(c.id)" [class]="c.seen ?  'seen' : 'no-seen '">
-                                                <li
-                                                    class="timeline-item bg-transparent rounded ml-3 p-4 shadow nav-item">
-                                                    <h2 class="h3 text-secondary mb-0">{{c?.title | titlecase}}</h2>
-                                                </li>
-                                            </a>
-                                        </ul>
-                                        <!-- End -->
-
-                                    </div>
-
-                                </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <section class="course-module mb-4" *ngFor="let module of course.modules || []">
+                        <h3 class="course-module__title">{{ module?.name | titlecase }}</h3>
+                        <p class="text-muted small mb-0" *ngIf="!module?.topics?.length">Este módulo aún no tiene temas.</p>
+                        <div class="card course-timeline-card border-0 shadow-sm" *ngIf="module?.topics?.length > 0">
+                            <div class="card-body p-0">
+                                <ul class="course-timeline" role="list" [attr.aria-label]="'Temas del módulo ' + (module?.name || '')">
+                                    <li
+                                        *ngFor="let topic of module.topics; let idx = index"
+                                        class="course-timeline__item"
+                                        [class.course-timeline__item--seen]="topic.seen"
+                                        [class.course-timeline__item--pending]="!topic.seen"
+                                    >
+                                        <span class="course-timeline__marker" aria-hidden="true"></span>
+                                        <button
+                                            type="button"
+                                            class="course-timeline__btn"
+                                            (click)="goToTopicDetail(topic.id)"
+                                            [attr.aria-label]="(topic.seen ? 'Abrir tema visto: ' : 'Abrir tema: ') + (topic?.title || '')"
+                                        >
+                                            <span class="course-timeline__index">{{ idx + 1 }}</span>
+                                            <span class="course-timeline__body">
+                                                <span class="course-timeline__heading">{{ topic?.title | titlecase }}</span>
+                                                <span class="course-timeline__status" *ngIf="topic.seen">Completado</span>
+                                                <span class="course-timeline__status course-timeline__status--pending" *ngIf="!topic.seen">Pendiente</span>
+                                            </span>
+                                            <span class="course-timeline__chevron" aria-hidden="true"></span>
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-sm-12">
-                        <img [src]="course?.path_preview_image" class="img-fluid img-responsive" alt="Responsive image">
-                        <p class="mt-2">{{ course?.description }}</p>
-                    </div>
+                    </section>
                 </div>
 
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="course-preview sticky-lg-top" style="top: 5.5rem;">
+                        <img
+                            [src]="course?.path_preview_image"
+                            class="img-fluid rounded shadow-sm w-100 course-preview__img"
+                            [alt]="'Imagen del curso ' + (course?.title || '')"
+                            loading="lazy"
+                        />
+                        <p class="mt-3 mb-0 text-muted course-preview__desc">{{ course?.description }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>

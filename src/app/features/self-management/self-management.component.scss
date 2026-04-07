@@ -2,18 +2,31 @@
     padding-left: 0;
 }
 
-// Misma lógica que Home: migas arriba, código de referido debajo; tarjeta a la derecha desde md
-.self-management-home__top {
-    align-items: stretch;
+// Saludo + tagline a la izquierda; código de referido a la derecha (misma línea de cierre en ≥ md)
+.self-management-home__welcome-row {
+    margin-top: 0.25rem;
 }
 
-.self-management-home__top .referral-code-banner-wrap {
-    flex: 0 0 auto;
+.self-management-home__greeting {
+    line-height: 1.35;
 }
 
-// El espacio entre migas y banner lo marca gap-3; quitar mb global de la miga en esta vista
-.self-management-home__top .breadcrumb {
-    margin-bottom: 0 !important;
+.self-management-home__tagline {
+    line-height: 1.55;
+    max-width: 36rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@media (min-width: 768px) {
+    .self-management-home__referral-col {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .self-management-home__referido {
+        width: 100%;
+        max-width: min(20rem, 100%);
+    }
 }
 
 .self-management-home__hr {

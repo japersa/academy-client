@@ -1,115 +1,156 @@
-<div class="content admin-area-page" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
-    <div class="row admin-area-breadcrumb-row">
-        <div class="col-12">
-            <nav aria-label="Migas de pan">
-                <ol class="breadcrumb bg-transparent mb-0 px-0">
-                    <li class="breadcrumb-item text-primary">
-                        <a routerLink="/referrals">Back office</a>
-                    </li>
-                    <li class="breadcrumb-item text-primary">
-                        <a href="javascript:void(0)" (click)="seeCourse()">Curso</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ topic?.course_name }}</li>
-                </ol>
-            </nav>
-        </div>
+<div
+  class="content admin-area-page class-page"
+  [ngClass]="{ 'class-user': userDataService?.userData$?.value?.rol === 'student' }"
+>
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/referrals">Back office</a>
+          </li>
+          <li class="breadcrumb-item text-primary" *ngIf="topic?.course_id">
+            <a [routerLink]="['/course', topic.course_id]" class="text-truncate d-inline-block" style="max-width: 14rem">
+              {{ topic?.course_name | titlecase }}
+            </a>
+          </li>
+          <li class="breadcrumb-item text-primary" *ngIf="!topic?.course_id">
+            <span class="text-white-50">…</span>
+          </li>
+          <li class="breadcrumb-item active text-truncate" aria-current="page" style="max-width: 14rem">
+            {{ topic?.title | titlecase }}
+          </li>
+        </ol>
+      </nav>
     </div>
-    <div class="row">
-        <div class="col-12 p-0 m-0">
+  </div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <div class="card">
-                            <div class="card-title">{{ topic?.module_name | titlecase }}</div>
-                            <div class="video-player-wrapper">
-                                <vg-player>
-                                    <vg-overlay-play></vg-overlay-play>
-                                    <vg-buffering></vg-buffering>
-                                    <vg-scrub-bar>
-                                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                                    </vg-scrub-bar>
-                                    <vg-controls>
-                                        <vg-play-pause></vg-play-pause>
-                                        <vg-playback-button></vg-playback-button>
-                                        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-                                        <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
-                                        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
-                                        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-                                        <vg-mute></vg-mute>
-                                        <vg-volume></vg-volume>
-                                        <vg-fullscreen></vg-fullscreen>
-                                    </vg-controls>
-                                    <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto"
-                                        [src]="source | async" type="video/mp4" crossorigin>
-                                    </video>
-                                </vg-player>
-                            </div>
-
-                            <div class="">
-                                <button class="btn btn-primary btn-simple" [ngClass]="previus === null ? 'd-none': ''"
-                                    (click)="previusClass()">Anterior</button>
-                                <button class="btn btn-primary" [ngClass]="next === null ? 'd-none': ''"
-                                    (click)="nextClass()">Siguiente</button>
-                            </div>
-                        </div>
-                        <div>
-                            <h1 class="subtitle mb-1">{{topic?.title | titlecase}}</h1>
-                            <p>{{topic?.description | titlecase}}</p>
-                            <div class="row mt-4 ">
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 border-right">
-                                    <h4 class="text-secondary">Recursos Adicionales</h4>
-                                    <ng-container *ngFor="let f of topic.files">
-                                        <div class="card mb-3">
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <img src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1697668368/icono-5_zlcyhe.png"
-                                                        alt="">
-                                                </div>
-                                                <div class="col-9 d-flex align-items-center">
-                                                    <a [href]="f.url" target="_blank" download>
-                                                        <small class="text-default">{{ f?.name | slice:0:40 }}</small>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ng-container>
-                                    <div class="d-block">
-                                        <h4 class="text-secondary">Links de Descargas</h4>
-                                        <ng-container *ngFor="let l of topic.links">
-                                            <div class="mb-3">
-                                                <p class="h5 m-0 p-0 text-secondary">{{l.title | titlecase | slice:0:40}}:</p>
-                                                <a [href]="l.link" class="text-white" target="_blank">
-                                                    <small class="text-white">{{l.link | slice:0:40}}</small>
-                                                </a>
-                                            </div>
-                                        </ng-container>
-
-                                    </div>
-
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                    <div class="card units">
-                                        <h6>Unidades</h6>
-                                        <ng-container *ngFor="let c of allClass; index as i">
-                                            <a href="javascript:void(0)" class="mb-2" [ngClass]=" c.seen ? 'seen' : 'no-seen' " (click)="setClass(c.id)">
-                                                {{(i+1) +' '+ c.title }}
-                                            </a>
-                                        </ng-container>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <ng-container *ngIf="topic.comments">
-                            <app-topic-comments  [comments]="topic?.comments"></app-topic-comments>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-
+  <div class="row class-page__layout g-4">
+    <div class="col-12 col-lg-8 class-page__main">
+      <div class="card class-page__video-card border-0 shadow-sm">
+        <div class="class-page__video-card-head" *ngIf="topic?.module_name">
+          <span class="class-page__module-label">Módulo</span>
+          <span class="class-page__module-name">{{ topic.module_name | titlecase }}</span>
         </div>
+        <div class="class-page__video-shell">
+          <div class="video-player-wrapper class-page__player">
+            <vg-player>
+              <vg-overlay-play></vg-overlay-play>
+              <vg-buffering></vg-buffering>
+              <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+              </vg-scrub-bar>
+              <vg-controls>
+                <vg-play-pause></vg-play-pause>
+                <vg-playback-button></vg-playback-button>
+                <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                <vg-scrub-bar style="pointer-events: none"></vg-scrub-bar>
+                <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+                <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                <vg-mute></vg-mute>
+                <vg-volume></vg-volume>
+                <vg-fullscreen></vg-fullscreen>
+              </vg-controls>
+              <video
+                [vgMedia]="$any(media)"
+                #media
+                id="singleVideo"
+                preload="auto"
+                [src]="source | async"
+                type="video/mp4"
+                crossorigin
+              ></video>
+            </vg-player>
+          </div>
+        </div>
+        <div class="class-page__nav-actions">
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary class-page__nav-btn"
+            (click)="previusClass()"
+            [disabled]="previus === null || previus === ''"
+            [class.invisible]="previus === null || previus === ''"
+          >
+            ← Anterior
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary class-page__nav-btn"
+            (click)="nextClass()"
+            [disabled]="next === null || next === ''"
+            [class.invisible]="next === null || next === ''"
+          >
+            Siguiente →
+          </button>
+        </div>
+      </div>
+
+      <section class="class-page__topic-meta">
+        <h1 class="class-page__topic-title">{{ topic?.title | titlecase }}</h1>
+        <p class="class-page__topic-desc" *ngIf="topic?.description">{{ topic.description }}</p>
+      </section>
+
+      <div class="class-page__below">
+        <section class="class-page__section" *ngIf="topic?.files?.length">
+          <h2 class="class-page__section-title">Recursos adicionales</h2>
+          <ul class="list-unstyled class-page__resource-list mb-0">
+            <li *ngFor="let f of topic.files" class="class-page__resource-item">
+              <a [href]="f.url" target="_blank" rel="noopener noreferrer" class="class-page__resource-link">
+                <span class="class-page__resource-icon" aria-hidden="true"></span>
+                <span class="text-truncate d-inline-block" style="max-width: 100%">{{ f?.name }}</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section class="class-page__section" *ngIf="topic?.links?.length">
+          <h2 class="class-page__section-title">Enlaces</h2>
+          <ul class="list-unstyled mb-0">
+            <li *ngFor="let l of topic.links" class="class-page__link-item">
+              <strong class="class-page__link-label">{{ l.title | titlecase }}</strong>
+              <a [href]="l.link" target="_blank" rel="noopener noreferrer" class="class-page__link-url text-truncate d-block">
+                {{ l.link }}
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <p class="text-muted small mb-0" *ngIf="!topic?.files?.length && !topic?.links?.length && topic?.id">
+          No hay recursos ni enlaces adjuntos a este tema.
+        </p>
+      </div>
     </div>
+
+    <div class="col-12 col-lg-4 class-page__aside">
+      <div class="class-page__sidebar-sticky d-flex flex-column gap-3">
+        <div class="card class-page__units-card border-0 shadow-sm w-100" *ngIf="allClass?.length">
+          <div class="class-page__units-head">
+            <h2 class="class-page__units-title mb-0">Unidades</h2>
+            <span class="class-page__units-count">{{ allClass.length }}</span>
+          </div>
+          <ul class="list-unstyled class-page__units-list mb-0" role="list">
+            <li *ngFor="let c of allClass; index as i" role="listitem" class="class-page__units-li">
+              <button
+                type="button"
+                class="class-page__unit-btn"
+                [class.class-page__unit-btn--current]="c.id === topic?.id"
+                [class.class-page__unit-btn--seen]="c.seen"
+                (click)="setClass(c.id)"
+              >
+                <span class="class-page__unit-idx">{{ i + 1 }}</span>
+                <span class="class-page__unit-title">{{ c.title }}</span>
+                <span class="class-page__unit-badge-slot">
+                  <span class="class-page__unit-badge" *ngIf="c.seen" title="Visto">✓</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <ng-container *ngIf="topic?.comments">
+          <app-topic-comments class="class-page__comments-wrap" [comments]="topic?.comments"></app-topic-comments>
+        </ng-container>
+      </div>
+    </div>
+  </div>
 </div>
