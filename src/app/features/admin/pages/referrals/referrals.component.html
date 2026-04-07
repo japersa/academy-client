@@ -94,7 +94,14 @@
                     </div>
                     <p class="card-category mt-3 mb-0">
                       Estado:
-                      <span [ngClass]="referralActive ? 'text-success' : 'text-warning'">
+                      <span
+                        class="referrals-page__referral-status"
+                        [ngClass]="
+                          referralActive
+                            ? 'referrals-page__referral-status--active'
+                            : 'referrals-page__referral-status--inactive'
+                        "
+                      >
                         {{ referralActive ? 'Activo' : 'Inactivo' }}
                       </span>
                     </p>

@@ -73,7 +73,7 @@
     color: #fff !important;
     background: #25d366 !important;
     background-image: none !important;
-    border: 1px solid #128c7e !important;
+    border: none !important;
     text-decoration: none !important;
     border-radius: 6px;
     line-height: 1;
@@ -86,7 +86,7 @@
   .referral-code-banner__btn-wa.referral-share-icon-btn:active {
     background: #128c7e !important;
     background-image: none !important;
-    border-color: #075e54 !important;
+    border: none !important;
     color: #fff !important;
     box-shadow: none !important;
     transform: none !important;
@@ -163,7 +163,7 @@ a.btn.referral-code-banner__btn-wa.referral-share-icon-btn {
   background: #25d366 !important;
   background-image: none !important;
   color: #fff !important;
-  border: 1px solid #128c7e !important;
+  border: none !important;
   box-shadow: none !important;
 
   &:hover,
@@ -173,7 +173,7 @@ a.btn.referral-code-banner__btn-wa.referral-share-icon-btn {
     background: #128c7e !important;
     background-image: none !important;
     color: #fff !important;
-    border-color: #075e54 !important;
+    border: none !important;
     box-shadow: none !important;
     transform: none !important;
     outline: none !important;

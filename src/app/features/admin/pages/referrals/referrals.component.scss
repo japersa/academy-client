@@ -37,7 +37,7 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   color: #fff !important;
   background: #25d366 !important;
   background-image: none !important;
-  border: 1px solid #128c7e !important;
+  border: none !important;
   text-decoration: none !important;
   font-weight: 600;
   border-radius: 6px;
@@ -50,7 +50,7 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   &:active {
     background: #128c7e !important;
     background-image: none !important;
-    border-color: #075e54 !important;
+    border: none !important;
     color: #fff !important;
     box-shadow: none !important;
     transform: none !important;
@@ -87,6 +87,18 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
 .referrals-page .stats-row .card-title {
   font-size: 1.5rem;
   margin-bottom: 0.25rem;
+}
+
+.referrals-page__referral-status {
+  font-weight: 600;
+}
+
+.referrals-page__referral-status--active {
+  color: #16a34a !important;
+}
+
+.referrals-page__referral-status--inactive {
+  color: #ca8a04 !important;
 }
 
 // Esferas / métricas circulares (saldo + puntos)
