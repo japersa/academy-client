@@ -40,3 +40,134 @@
     box-shadow: 0px 0px 18px 0.2px rgba(0,0,0,0.15) !important;
     border-radius: 10px;
 }
+
+/* Modal CoinPayments (checkout cripto: autogestión, funding, recompra referidos) */
+.crypto-pay-modal {
+    .modal-header.crypto-pay-modal__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: nowrap;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding-bottom: 1rem;
+    }
+
+    .crypto-pay-modal__eyebrow {
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.5);
+        margin: 0 0 0.25rem;
+    }
+
+    .modal-body.crypto-pay-modal__body {
+        max-width: 520px;
+        margin: 0 auto;
+        padding-top: 1.25rem;
+        padding-bottom: 1.5rem;
+        max-height: min(85vh, 720px);
+        overflow-y: auto;
+    }
+
+    .crypto-pay-modal__section {
+        margin-bottom: 1.35rem;
+    }
+
+    .crypto-pay-modal__section-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 0 0 0.65rem;
+        color: rgba(0, 0, 0, 0.75);
+    }
+
+    .crypto-pay-modal__dl {
+        margin: 0;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    .crypto-pay-modal__row {
+        display: grid;
+        grid-template-columns: minmax(108px, 34%) 1fr;
+        gap: 0.35rem 0.75rem;
+        padding: 0.55rem 0.85rem;
+        align-items: start;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        dt {
+            margin: 0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: rgba(0, 0, 0, 0.5);
+            padding-top: 0.15rem;
+        }
+
+        dd {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+    }
+
+    .crypto-pay-modal__mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+            monospace;
+        font-size: 0.8rem;
+    }
+
+    .crypto-pay-modal__section--qr {
+        text-align: center;
+    }
+
+    .crypto-pay-modal__qr-wrap {
+        display: inline-block;
+        padding: 0.65rem;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+        img {
+            display: block;
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .crypto-pay-modal__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .crypto-pay-modal__disclaimer {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: rgba(0, 0, 0, 0.65);
+        padding: 0.75rem 0.9rem;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        margin: 0 0 1rem;
+    }
+
+    .crypto-pay-modal__footer {
+        text-align: center;
+        padding-top: 0.25rem;
+    }
+}

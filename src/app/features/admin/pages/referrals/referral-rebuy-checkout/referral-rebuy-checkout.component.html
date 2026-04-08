@@ -129,66 +129,70 @@
 </div>
 
 <ng-template #rebuyCryptoModalTemplate>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Coinpayments</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Cerrar" (click)="modalRef?.hide()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="row">
-      <div class="col-4">
-        <p class="title">Precio:</p>
-        <p class="title">TXN id:</p>
-        <p class="title">Bloques:</p>
-        <p class="title">Wallet:</p>
+  <div class="crypto-pay-modal">
+    <div class="modal-header crypto-pay-modal__header">
+      <div>
+        <p class="crypto-pay-modal__eyebrow">CoinPayments</p>
+        <h4 class="modal-title mb-0">Pago con criptomonedas</h4>
       </div>
-      <div class="col-7 mr-2">
-        <p>{{ coinpaymentRebuyResponse?.amount }}</p>
-        <p>{{ coinpaymentRebuyResponse?.txn_id }}</p>
-        <p>{{ coinpaymentRebuyResponse?.confirms_needed }}</p>
-        <p>{{ coinpaymentRebuyResponse?.address }}</p>
-      </div>
+      <button type="button" class="btn-close close" aria-label="Cerrar" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
     </div>
-    <div class="row">
-      <div class="col-4">
-        <p class="title">QR:</p>
-      </div>
-      <div class="col-8">
-        <img [src]="coinpaymentRebuyResponse?.qrcode_url" alt="" srcset="" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-8 mx-auto">
+    <div class="modal-body crypto-pay-modal__body">
+      <section class="crypto-pay-modal__section" aria-labelledby="rebuy-crypto-modal-detail-title">
+        <h5 id="rebuy-crypto-modal-detail-title" class="crypto-pay-modal__section-title">Detalle del pago</h5>
+        <dl class="crypto-pay-modal__dl">
+          <div class="crypto-pay-modal__row">
+            <dt>Importe</dt>
+            <dd>{{ coinpaymentRebuyResponse?.amount }}</dd>
+          </div>
+          <div class="crypto-pay-modal__row">
+            <dt>ID de transacción</dt>
+            <dd>{{ coinpaymentRebuyResponse?.txn_id }}</dd>
+          </div>
+          <div class="crypto-pay-modal__row">
+            <dt>Confirmaciones</dt>
+            <dd>{{ coinpaymentRebuyResponse?.confirms_needed }}</dd>
+          </div>
+          <div class="crypto-pay-modal__row">
+            <dt>Dirección</dt>
+            <dd class="crypto-pay-modal__mono">{{ coinpaymentRebuyResponse?.address }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="crypto-pay-modal__section crypto-pay-modal__section--qr" *ngIf="coinpaymentRebuyResponse?.qrcode_url">
+        <h5 class="crypto-pay-modal__section-title">Código QR</h5>
+        <div class="crypto-pay-modal__qr-wrap">
+          <img [src]="coinpaymentRebuyResponse?.qrcode_url" alt="Código QR para completar el pago en tu wallet" />
+        </div>
+      </section>
+
+      <div class="crypto-pay-modal__actions">
         <a
           [href]="coinpaymentRebuyResponse?.checkout_url"
-          class="btn btn-secondary btn-lg mb-3"
-          type="button"
+          class="btn btn-secondary btn-lg"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Pagar
+          Abrir checkout
         </a>
         <a
           [href]="coinpaymentRebuyResponse?.status_url"
-          class="btn btn-md btn-lg mb-3"
-          type="button"
+          class="btn btn-outline-secondary btn-lg"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Estado
+          Ver estado
         </a>
       </div>
-    </div>
-    <div class="row" *ngIf="cryptoCheckoutDisclaimer">
-      <div class="col-12">
-        <h4 class="mb-0">{{ cryptoCheckoutDisclaimer }}</h4>
+
+      <p *ngIf="cryptoCheckoutDisclaimer" class="crypto-pay-modal__disclaimer">{{ cryptoCheckoutDisclaimer }}</p>
+
+      <div class="crypto-pay-modal__footer">
+        <a routerLink="/referrals" class="btn btn-link" (click)="modalRef?.hide()">Volver a Referidos</a>
       </div>
-    </div>
-    <div class="row mx-auto">
-      <a routerLink="/referrals" class="btn btn-md btn-lg mt-3" type="button" (click)="modalRef?.hide()">
-        Volver a Referidos
-      </a>
     </div>
   </div>
 </ng-template>
