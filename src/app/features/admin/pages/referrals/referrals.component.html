@@ -139,22 +139,28 @@
 
           <hr class="mt-2" />
 
-          <div class="row" *ngIf="showGoToAcademiaBanner">
+          <div class="row" *ngIf="showAcademiaOnboardingBanner">
+            <div class="col-lg-10 col-md-12">
+              <div class="rebuy-banner rebuy-banner--onboarding mb-0" role="status">
+                <h5 class="rebuy-banner__title">Plan de Academia</h5>
+                <p class="rebuy-banner__text mb-3">
+                  Contrata un plan en <strong>Academia</strong> para poder activar tu código de referido y
+                  empezar a referir. La recompra mensual de mantenimiento aplica cuando ya tengas el plan
+                  activo.
+                </p>
+                <a routerLink="/self-management/home" class="btn btn-sm btn-fill rebuy-banner__btn">Ir a Academia</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="showAcademiaRebuySyncBanner">
             <div class="col-lg-10 col-md-12">
               <div class="rebuy-banner mb-0" role="status">
                 <h5 class="rebuy-banner__title">Recompra mensual</h5>
-                <p *ngIf="!hasActiveSelfManagementPlan" class="rebuy-banner__text mb-3">
-                  La recompra de <strong>{{ rebuyPriceLabel }}</strong> para mantener activo tu código de referido
-                  aplica cuando ya tienes un <strong>plan de Academia activo</strong>.
-                  Sin ese plan, primero contrata en Academia.
-                </p>
-                <p
-                  *ngIf="hasActiveSelfManagementPlan"
-                  class="rebuy-banner__text mb-3"
-                >
+                <p class="rebuy-banner__text mb-3">
                   Aún no consta la fecha de tu próxima <strong>recompra</strong>. Entra en
                   <strong>Academia</strong> para sincronizar o completar el pago de la
-                  <strong>recompra mensual</strong>.
+                  <strong>recompra mensual</strong> ({{ rebuyPriceLabel }}).
                 </p>
                 <a routerLink="/self-management/home" class="btn btn-sm btn-fill rebuy-banner__btn">Ir a Academia</a>
               </div>

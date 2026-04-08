@@ -65,11 +65,18 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Banner «Ir a Academia»: solo cuando aún no hay fecha de próxima recompra.
-   * Si ya hay `referral_next_renewal`, el mensaje correcto es el CTA de recompra (pago), no este banner.
+   * Usuario con plan (o equivalente) pero el backend aún no devolvió fecha de recompra: mensaje de sincronización / recompra.
+   * No usar para usuarios nuevos sin plan (ver `showAcademiaOnboardingBanner`).
    */
-  get showGoToAcademiaBanner(): boolean {
-    return !this.referralNextRenewal;
+  get showAcademiaRebuySyncBanner(): boolean {
+    return !this.referralNextRenewal && this.hasActiveSelfManagementPlan;
+  }
+
+  /**
+   * Usuario nuevo / sin plan de Academia: solo invitar a contratar el plan. Sin título ni texto de «recompra» ni importe mensual.
+   */
+  get showAcademiaOnboardingBanner(): boolean {
+    return !this.referralNextRenewal && !this.hasActiveSelfManagementPlan;
   }
 
   ngOnInit(): void {

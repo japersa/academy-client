@@ -232,7 +232,7 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   word-break: break-all;
 }
 
-/* Sin plan de Academia activo: aviso de recompra (marca, sin azul tipo alert-info) */
+/* Alta en Academia (usuarios nuevos) vs. aviso de recompra mensual (plan ya activo) */
 .rebuy-banner {
   /* Evita que el bloque se confunda visualmente con la tarjeta de código / “Próxima recompra” */
   margin-top: 0.25rem;
@@ -243,6 +243,11 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   border-left-color: #d0ad50;
   background: linear-gradient(125deg, #1e1e26 0%, #252018 50%, #2a2620 100%);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.rebuy-banner--onboarding {
+  border-color: rgba(130, 175, 215, 0.42);
+  border-left-color: rgba(140, 190, 230, 0.95);
 }
 
 .rebuy-banner__title {
