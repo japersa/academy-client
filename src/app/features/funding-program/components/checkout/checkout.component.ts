@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { SuccessPaymentComponent } from '../../../../shared/components/success-payment/success-payment.component';
+import { CatalogPricesService } from 'src/app/core/services/catalog-prices.service';
 
 interface CPResponsePayment {
   amount: string;
@@ -129,12 +130,16 @@ export class CheckoutComponent implements OnInit {
 
   criptoform!: FormGroup;
 
+  cryptoCheckoutDisclaimer = '';
+
   constructor(private stripeScriptTag: StripeScriptTag,
     private packsService: PacksService,
     public utilsService: UtilsService,
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private catalogPricesService: CatalogPricesService,
+  ) {
     if (!this.stripeScriptTag.StripeInstance) {
       this.stripeScriptTag.setPublishableKey(environment.stripePK);
     }
@@ -241,6 +246,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.catalogPricesService.getCatalog().subscribe({
+      next: (c) => {
+        this.cryptoCheckoutDisclaimer = (c.crypto_checkout_disclaimer ?? '').trim();
+      },
+      error: () => {},
+    });
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.productID = params.get('id');
       console.log(this.productID)

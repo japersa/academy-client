@@ -180,15 +180,15 @@
         </a>
       </div>
     </div>
-    <div class="row">
-      <h4>
-        El pago con crypto tarda algo de tiempo en validarce, se te notificara por correo cuando se valide.
-      </h4>
-      <div class="row mx-auto">
-        <a routerLink="/referrals" class="btn btn-md btn-lg mt-3" type="button" (click)="modalRef?.hide()">
-          Volver a Referidos
-        </a>
+    <div class="row" *ngIf="cryptoCheckoutDisclaimer">
+      <div class="col-12">
+        <h4 class="mb-0">{{ cryptoCheckoutDisclaimer }}</h4>
       </div>
+    </div>
+    <div class="row mx-auto">
+      <a routerLink="/referrals" class="btn btn-md btn-lg mt-3" type="button" (click)="modalRef?.hide()">
+        Volver a Referidos
+      </a>
     </div>
   </div>
 </ng-template>

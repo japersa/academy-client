@@ -314,19 +314,19 @@
       
       </div>
     </div>
-    <div class="row ">
-      <h4>El pago con crypto tarda algo de tiempo en validarce, 
-        se te notificara por correo cuando se valide.
-      </h4>
-      <div class="col-6 mx-auto">
-        <a
-          routerLink="/funding-program/home"
-          class="btn btn-md btn-lg mt-3"
-          type="submit"
-        >
-        Volver al Inicio
-        </a>
+    <div class="row" *ngIf="cryptoCheckoutDisclaimer">
+      <div class="col-12">
+        <h4 class="mb-0">{{ cryptoCheckoutDisclaimer }}</h4>
       </div>
+    </div>
+    <div class="col-6 mx-auto">
+      <a
+        routerLink="/funding-program/home"
+        class="btn btn-md btn-lg mt-3"
+        type="submit"
+      >
+        Volver al Inicio
+      </a>
     </div>
   </div>
 </ng-template>

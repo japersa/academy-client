@@ -234,6 +234,8 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
 
 /* Sin plan de Academia activo: aviso de recompra (marca, sin azul tipo alert-info) */
 .rebuy-banner {
+  /* Evita que el bloque se confunda visualmente con la tarjeta de código / “Próxima recompra” */
+  margin-top: 0.25rem;
   padding: 1.25rem 1.35rem;
   border-radius: 10px;
   border: 1px solid rgba(208, 173, 80, 0.45);
@@ -249,6 +251,8 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   font-weight: 600;
   color: #f0e6d2;
   letter-spacing: 0.02em;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .rebuy-banner__text {

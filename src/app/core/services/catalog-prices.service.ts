@@ -55,6 +55,8 @@ export interface CatalogPricesResponse {
   public_checkout: PublicCheckoutOfferPayload | null;
   referral_rebuy?: ReferralRebuyCatalogPayload | null;
   referral_package_sale?: ReferralPackageSaleCatalogPayload | null;
+  /** Texto opcional (backend/env). Si vacío, no se muestra en modales CoinPayments. */
+  crypto_checkout_disclaimer?: string;
 }
 
 @Injectable({ providedIn: 'root' })

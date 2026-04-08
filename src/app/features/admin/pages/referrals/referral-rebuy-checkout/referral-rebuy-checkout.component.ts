@@ -45,6 +45,9 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
 
   modalRef?: BsModalRef;
 
+  /** Viene del catálogo API (`CRYPTO_CHECKOUT_DISCLAIMER` en el servidor). */
+  cryptoCheckoutDisclaimer = '';
+
   currencies: { name: string; logo: string; symbol: string }[] = [
     { name: 'Bitcoin', logo: '', symbol: 'btc' },
     { name: 'Bitcoin Cash', logo: '', symbol: 'BCH' },
@@ -88,6 +91,7 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
         if (rr?.currency) {
           this.rebuyCurrency = rr.currency;
         }
+        this.cryptoCheckoutDisclaimer = (c.crypto_checkout_disclaimer ?? '').trim();
       },
       error: () => {},
     });

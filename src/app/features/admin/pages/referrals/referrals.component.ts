@@ -55,17 +55,21 @@ export class ReferralsComponent implements OnInit, OnDestroy {
     return `${this.rebuyAmountUsd} ${this.rebuyCurrency}`.trim();
   }
 
-  /** Renovación mensual solo tiene sentido si el backend ya asignó fecha (tras pago del plan). */
+  /**
+   * CTA «Ir a pagar» la recompra mensual: basta con que el backend tenga fecha de próxima recompra.
+   * (Si solo exigiéramos `hasActiveSelfManagementPlan`, usuarios con fecha pero paquete mal reflejado
+   * no verían el CTA y seguirían viendo el banner equivocado de «Ir a Academia».)
+   */
   get showRebuyMonthlyCta(): boolean {
-    return this.hasActiveSelfManagementPlan && !!this.referralNextRenewal;
+    return !!this.referralNextRenewal;
   }
 
   /**
-   * Banner «Ir a Academia»: sin plan de Academia, o con plan pero sin fecha de próxima recompra aún
-   * (misma idea que «aún no hay recompra» — no mostrar hueco vacío entre estadísticas y la red).
+   * Banner «Ir a Academia»: solo cuando aún no hay fecha de próxima recompra.
+   * Si ya hay `referral_next_renewal`, el mensaje correcto es el CTA de recompra (pago), no este banner.
    */
   get showGoToAcademiaBanner(): boolean {
-    return !this.hasActiveSelfManagementPlan || !this.referralNextRenewal;
+    return !this.referralNextRenewal;
   }
 
   ngOnInit(): void {
