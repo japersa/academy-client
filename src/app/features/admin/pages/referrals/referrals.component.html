@@ -114,9 +114,6 @@
                         {{ referralActive ? 'Activo' : 'Inactivo' }}
                       </span>
                     </p>
-                    <p *ngIf="!referralActive" class="small text-muted mb-0 mt-1">
-                      El servidor marcó el código como inactivo; la recompra mensual lo reactiva.
-                    </p>
                     <p *ngIf="referralNextRenewal" class="card-category small mb-0">
                       Próxima recompra: {{ referralNextRenewal | date: 'mediumDate' }}
                     </p>
