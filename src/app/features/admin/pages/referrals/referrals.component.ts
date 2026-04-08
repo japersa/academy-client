@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-share';
 import { ReferredUserRow, UserService } from 'src/app/shared/services/user.service';
 import { CatalogPricesService } from 'src/app/core/services/catalog-prices.service';
+import { isReferralRenewalDueOrOverdue } from 'src/app/shared/utils/referral-renewal-date';
 
 interface SelfManagementPackage {
   status?: string;
@@ -56,12 +57,11 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * CTA «Ir a pagar» la recompra mensual: basta con que el backend tenga fecha de próxima recompra.
-   * (Si solo exigiéramos `hasActiveSelfManagementPlan`, usuarios con fecha pero paquete mal reflejado
-   * no verían el CTA y seguirían viendo el banner equivocado de «Ir a Academia».)
+   * CTA «Ir a pagar»: solo el día de `referral_next_renewal` o si la fecha ya venció (recompra pendiente).
+   * No mientras la renovación sea futura (el usuario ve la fecha en la tarjeta de código).
    */
   get showRebuyMonthlyCta(): boolean {
-    return !!this.referralNextRenewal;
+    return isReferralRenewalDueOrOverdue(this.referralNextRenewal);
   }
 
   /**

@@ -7,6 +7,7 @@ import { CatalogPricesService } from 'src/app/core/services/catalog-prices.servi
 import { UserService } from 'src/app/shared/services/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { isReferralRenewalDueOrOverdue } from 'src/app/shared/utils/referral-renewal-date';
 
 const apiURL = environment.apiURL;
 
@@ -122,6 +123,12 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
         } else if (!this.referralNextRenewal) {
           this.toastr.info(
             'La renovación mensual solo está disponible cuando ya tienes una fecha de próxima renovación (se asigna al confirmar el pago del plan).',
+            'Renovación',
+          );
+          this.router.navigate(['/referrals']);
+        } else if (!isReferralRenewalDueOrOverdue(this.referralNextRenewal)) {
+          this.toastr.info(
+            'El pago de la recompra solo está habilitado el día de tu renovación o si ya venció. El importe es el de recompra mensual, no el del plan completo.',
             'Renovación',
           );
           this.router.navigate(['/referrals']);
