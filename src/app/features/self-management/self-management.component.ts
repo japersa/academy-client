@@ -16,7 +16,7 @@ import { BehaviorSubject } from 'rxjs';
 export class SelfManagementComponent implements OnInit {
 
   referalCode = '0000000';
-  referralCodeActive = true;
+  referralCodeActive = false;
   buttonText = 'Copiar';
 
   courses = [];
@@ -85,7 +85,7 @@ export class SelfManagementComponent implements OnInit {
             this.agActivete();
             this.userDataService.userData$.next(r);
             this.referalCode = r?.referral_code;
-            this.referralCodeActive = r?.referral_active !== false;
+            this.referralCodeActive = r?.referral_active === true;
             this.storageService.set('userData', r);
           },
           error: (e) => {

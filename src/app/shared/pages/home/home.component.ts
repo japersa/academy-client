@@ -16,8 +16,8 @@ import { StorageService } from '../../../core/services/storage.service';
 export class HomeComponent implements OnInit {
 
   referalCode = '0000000';
-  /** false solo si el backend envía referral_active === false (p. ej. recompra vencida). */
-  referralCodeActive = true;
+  /** true solo si el backend confirma referral_active (p. ej. tras pago del plan). */
+  referralCodeActive = false;
 
   constructor(public userDataService: UserDataService,
     private route: Router,
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
           this.referalCode = r.referral_code;
         }
         if (r && 'referral_active' in r) {
-          this.referralCodeActive = r.referral_active !== false;
+          this.referralCodeActive = r.referral_active === true;
         }
       },
     });
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
       next: (r) => {
         this.userDataService.userData$.next(r);
         this.referalCode = r?.referral_code ?? this.referalCode;
-        this.referralCodeActive = r?.referral_active !== false;
+        this.referralCodeActive = r?.referral_active === true;
         void this.storageService.set('userData', r);
       },
       error: (e) => console.error(e),

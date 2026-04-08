@@ -6,11 +6,13 @@ import { environment } from 'src/environments/environment';
 import { CatalogPricesService } from 'src/app/core/services/catalog-prices.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 const apiURL = environment.apiURL;
 
 interface SelfManagementPackage {
   status?: string;
+  package_type?: string;
 }
 
 @Component({
@@ -23,10 +25,11 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
   rebuyCurrency = 'USD';
 
   hasActiveSelfManagementPlan = false;
+  /** Sin fecha de renovación no aplica el flujo de recompra mensual. */
+  referralNextRenewal: string | null = null;
   planChecked = false;
 
   loading = false;
-  error: string | null = null;
 
   rebuyCryptoForm!: FormGroup;
 
@@ -59,6 +62,7 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
     private modalService: BsModalService,
     private userService: UserService,
     private router: Router,
+    private toastr: ToastrService,
   ) {
     this.rebuyCryptoForm = this.formBuilder.group({
       currency2: ['', Validators.required],
@@ -93,10 +97,29 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
         const pkgs = user.packages_self_management as SelfManagementPackage[] | undefined;
         const hasActivePkg =
           Array.isArray(pkgs) && pkgs.some((p) => (p.status || '').toLowerCase() === 'active');
+        const hasPaidOrExpiredAgPackage =
+          Array.isArray(pkgs) &&
+          pkgs.some((p) => {
+            const st = (p.status || '').toLowerCase();
+            const isAg = (p.package_type || '').toLowerCase() === 'ag';
+            return isAg && (st === 'active' || st === 'closed');
+          });
         const subscriptionFull = (user.subscription || '').toLowerCase() === 'full';
-        this.hasActiveSelfManagementPlan = hasActivePkg || subscriptionFull;
+        this.hasActiveSelfManagementPlan =
+          hasActivePkg || subscriptionFull || hasPaidOrExpiredAgPackage;
+        this.referralNextRenewal = user.referral_next_renewal ?? null;
         this.planChecked = true;
         if (!this.hasActiveSelfManagementPlan) {
+          this.toastr.warning(
+            'La recompra mensual del código de referido solo aplica si tienes un plan de Academia (autogestión) activo.',
+            'Renovación',
+          );
+          this.router.navigate(['/referrals']);
+        } else if (!this.referralNextRenewal) {
+          this.toastr.info(
+            'La renovación mensual solo está disponible cuando ya tienes una fecha de próxima renovación (se asigna al confirmar el pago del plan).',
+            'Renovación',
+          );
           this.router.navigate(['/referrals']);
         }
       },
@@ -113,7 +136,6 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.error = null;
     this.coinpaymentRebuyResponse = null;
     this.http
       .post<typeof this.coinpaymentRebuyResponse>(`${apiURL}/payment/referral-rebuy/coinpayments`, {
@@ -131,10 +153,11 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
           console.error(err);
           this.loading = false;
           const detail = err?.error?.detail;
-          this.error =
+          const msg =
             typeof detail === 'string'
               ? detail
               : 'No se pudo iniciar el pago de la recompra con CoinPayments.';
+          this.toastr.warning(msg, 'Pago');
         },
       });
   }

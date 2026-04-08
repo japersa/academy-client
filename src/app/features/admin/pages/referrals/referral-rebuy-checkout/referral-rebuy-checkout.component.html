@@ -62,8 +62,6 @@
         </div>
 
         <div class="col-lg-10 col-md-12">
-          <div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
-
           <div class="card card-stats shadow text-center crypto-checkout-card">
             <form [formGroup]="rebuyCryptoForm" (ngSubmit)="payRebuyCoinpayments(rebuyCryptoModalTemplate)">
               <div class="card-body">

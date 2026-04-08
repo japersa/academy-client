@@ -139,21 +139,28 @@
 
           <hr class="mt-2" />
 
-          <div class="row" *ngIf="!hasActiveSelfManagementPlan">
+          <div class="row" *ngIf="showGoToAcademiaBanner">
             <div class="col-lg-10 col-md-12">
               <div class="rebuy-banner mb-0" role="status">
                 <h5 class="rebuy-banner__title">Recompra mensual</h5>
-                <p class="rebuy-banner__text mb-3">
+                <p *ngIf="!hasActiveSelfManagementPlan" class="rebuy-banner__text mb-3">
                   La recompra de <strong>{{ rebuyPriceLabel }}</strong> para mantener activo tu código de referido
                   aplica cuando ya tienes un <strong>plan de Academia activo</strong>.
                   Sin ese plan, primero contrata en Academia.
+                </p>
+                <p
+                  *ngIf="hasActiveSelfManagementPlan && !referralNextRenewal"
+                  class="rebuy-banner__text mb-3"
+                >
+                  Aún no consta la fecha de tu próxima recompra. Entra en <strong>Academia</strong> para
+                  sincronizar tu cuenta o completar el pago del plan.
                 </p>
                 <a routerLink="/self-management/home" class="btn btn-sm btn-fill rebuy-banner__btn">Ir a Academia</a>
               </div>
             </div>
           </div>
 
-          <div class="row" *ngIf="hasActiveSelfManagementPlan">
+          <div class="row" *ngIf="showRebuyMonthlyCta">
             <div class="col-12">
               <div class="card shadow-custom referrals-rebuy-cta-card">
                 <div class="card-body">

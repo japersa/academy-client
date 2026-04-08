@@ -6,6 +6,7 @@ import { CatalogPricesService } from 'src/app/core/services/catalog-prices.servi
 
 interface SelfManagementPackage {
   status?: string;
+  package_type?: string;
 }
 
 @Component({
@@ -17,10 +18,13 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   commissionBalance: number = 0;
   travelPoints: number = 0;
   referralCode: string = '';
-  /** Recompra mensual solo tiene sentido con paquete de autogestión / Academia activo. */
+  /**
+   * Muestra el banner de renovación solo si ya hubo un plan Academia pagado (activo o cerrado
+   * por vencimiento) o suscripción full. Un paquete solo en `pending` no cuenta.
+   */
   hasActiveSelfManagementPlan = false;
-  /** Solo es false si el backend envía explícitamente false (el valor por defecto en servidor es activo). */
-  referralActive = true;
+  /** true solo si el backend confirma referral_active (p. ej. tras pago del plan). */
+  referralActive = false;
   referralNextRenewal?: string | null;
 
   /** Importe recompra y comisión al patrocinador (catálogo / admin). */
@@ -49,6 +53,19 @@ export class ReferralsComponent implements OnInit, OnDestroy {
 
   get rebuyPriceLabel(): string {
     return `${this.rebuyAmountUsd} ${this.rebuyCurrency}`.trim();
+  }
+
+  /** Renovación mensual solo tiene sentido si el backend ya asignó fecha (tras pago del plan). */
+  get showRebuyMonthlyCta(): boolean {
+    return this.hasActiveSelfManagementPlan && !!this.referralNextRenewal;
+  }
+
+  /**
+   * Banner «Ir a Academia»: sin plan de Academia, o con plan pero sin fecha de próxima recompra aún
+   * (misma idea que «aún no hay recompra» — no mostrar hueco vacío entre estadísticas y la red).
+   */
+  get showGoToAcademiaBanner(): boolean {
+    return !this.hasActiveSelfManagementPlan || !this.referralNextRenewal;
   }
 
   ngOnInit(): void {
@@ -118,15 +135,22 @@ export class ReferralsComponent implements OnInit, OnDestroy {
         this.commissionBalance = user.commission_balance ?? 0;
         this.travelPoints = user.travel_points ?? 0;
         this.referralCode = user.referral_code ?? '';
-        this.referralActive = user.referral_active !== false;
+        this.referralActive = user.referral_active === true;
         this.referralNextRenewal = user.referral_next_renewal ?? null;
         const pkgs = user.packages_self_management as SelfManagementPackage[] | undefined;
         const hasActivePkg =
           Array.isArray(pkgs)
           && pkgs.some((p) => (p.status || '').toLowerCase() === 'active');
+        const hasPaidOrExpiredAgPackage =
+          Array.isArray(pkgs)
+          && pkgs.some((p) => {
+            const st = (p.status || '').toLowerCase();
+            const isAg = (p.package_type || '').toLowerCase() === 'ag';
+            return isAg && (st === 'active' || st === 'closed');
+          });
         const subscriptionFull = (user.subscription || '').toLowerCase() === 'full';
-        // Mismo criterio que el backend: Academia = paquete activo o suscripción full.
-        this.hasActiveSelfManagementPlan = hasActivePkg || subscriptionFull;
+        this.hasActiveSelfManagementPlan =
+          hasActivePkg || subscriptionFull || hasPaidOrExpiredAgPackage;
         this.referredUsers = Array.isArray(user.referred_users) ? user.referred_users : [];
         this.profileLoading = false;
 
