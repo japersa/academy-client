@@ -148,7 +148,6 @@ export class ReferralsComponent implements OnInit, OnDestroy {
     if (!silent) {
       this.profileLoading = true;
     }
-    const hadRenewalBefore = !!this.referralNextRenewal;
     this.userService.getUser().subscribe({
       next: (user) => {
         this.commissionBalance = user.commission_balance ?? 0;
@@ -157,14 +156,14 @@ export class ReferralsComponent implements OnInit, OnDestroy {
         this.referralActive = user.referral_active !== false;
         this.referralNextRenewal = user.referral_next_renewal ?? null;
         const pkgs = user.packages_self_management as SelfManagementPackage[] | undefined;
-        this.hasActiveSelfManagementPlan = Array.isArray(pkgs)
+        const hasActivePkg =
+          Array.isArray(pkgs)
           && pkgs.some((p) => (p.status || '').toLowerCase() === 'active');
+        const subscriptionFull = (user.subscription || '').toLowerCase() === 'full';
+        // Mismo criterio que el backend: Academia = paquete activo o suscripción full.
+        this.hasActiveSelfManagementPlan = hasActivePkg || subscriptionFull;
         this.referredUsers = Array.isArray(user.referred_users) ? user.referred_users : [];
         this.profileLoading = false;
-
-        if (silent && !hadRenewalBefore && this.referralNextRenewal) {
-          this.toastr.info('Ya puedes ver la fecha de tu próxima recompra.', 'Perfil actualizado');
-        }
 
         this.syncReferralRenewalPollingState();
       },
@@ -179,7 +178,10 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   }
 
   private syncReferralRenewalPollingState(): void {
-    if (this.hasActiveSelfManagementPlan && !this.referralNextRenewal) {
+    const waitingForRebuyState =
+      this.hasActiveSelfManagementPlan &&
+      (!this.referralActive || !this.referralNextRenewal);
+    if (waitingForRebuyState) {
       this.startReferralRenewalPolling();
     } else {
       this.stopReferralRenewalPolling();
@@ -230,6 +232,7 @@ export class ReferralsComponent implements OnInit, OnDestroy {
           if (res && typeof res === 'object') {
             this.coinpaymentRebuyResponse = res;
           }
+          this.loadUserReferralData(true);
         },
         error: (err) => {
           console.error(err);
