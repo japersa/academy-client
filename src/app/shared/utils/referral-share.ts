@@ -12,7 +12,7 @@ export function buildWhatsAppReferralShareUrl(referralCode: string): string {
   const origin =
     typeof window !== 'undefined' && window.location?.origin
       ? window.location.origin
-      : 'https://ultramarkets-prd.web.app';
+      : 'https://app.startacademy.digital';
   const signUpUrl = `${origin}/sign-up`;
   const text =
     `¡Hola! Te invito a ${BRAND}.\n\n` +
