@@ -42,11 +42,19 @@ export interface ReferralRebuyCatalogPayload {
   referrer_commission_usd: string;
 }
 
+/** Comisión por primera venta del plan Academia con código de referido (admin). */
+export interface ReferralPackageSaleCatalogPayload {
+  /** Tasa 0–1, p. ej. "0.25" = 25 % del valor del paquete. */
+  commission_rate: string;
+  travel_points_per_sale: number;
+}
+
 export interface CatalogPricesResponse {
   funding_balances: FundingBalancePriceRow[];
   self_management_plans: SelfManagementPlanPriceRow[];
   public_checkout: PublicCheckoutOfferPayload | null;
   referral_rebuy?: ReferralRebuyCatalogPayload | null;
+  referral_package_sale?: ReferralPackageSaleCatalogPayload | null;
 }
 
 @Injectable({ providedIn: 'root' })
