@@ -1,0 +1,196 @@
+<div *ngIf="!planChecked" class="content admin-area-page p-4">
+  <p class="text-muted mb-0">Cargando…</p>
+</div>
+
+<div class="content admin-area-page referral-rebuy-checkout-page" *ngIf="planChecked && hasActiveSelfManagementPlan">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/referrals">Back office</a>
+          </li>
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/referrals">Referidos</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Recompra mensual</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="row mx-0">
+        <div class="col-lg-10 col-md-12">
+          <div class="card card-stats shadow text-center referrals-rebuy-order-card">
+            <div class="card-body">
+              <div class="row container-title">
+                <div class="col-8">
+                  <h2 class="card-title mt-2 mb-1 text-left">Recompra mensual</h2>
+                </div>
+                <div class="col-4">
+                  <img
+                    src="https://res.cloudinary.com/ddw7odxzr/image/upload/v1719765038/RC_11326_Logo_Final_Start_Academy_Alex_Logotipo_Negativo_ku9htb.png"
+                    alt=""
+                    width="150"
+                  />
+                </div>
+              </div>
+              <div class="row mt-3 mb-3 pb-3 container-info">
+                <div class="col-12 col-md-5 ml-md-auto">
+                  <div class="row bg-label mt-2 mr-2">
+                    <div class="col-2 my-auto">
+                      <img
+                        src="https://res.cloudinary.com/app-intcapex-com/image/upload/v1682476125/valor-challenge_uyqzmc.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="col-10">
+                      <div class="row">
+                        <p class="text-left mb-0"><strong>Valor recompra:</strong></p>
+                      </div>
+                      <div class="row">
+                        <span class="text-right">{{ '$' + rebuyAmountUsd + ' ' + rebuyCurrency }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-10 col-md-12">
+          <div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
+
+          <div class="card card-stats shadow text-center crypto-checkout-card">
+            <form [formGroup]="rebuyCryptoForm" (ngSubmit)="payRebuyCoinpayments(rebuyCryptoModalTemplate)">
+              <div class="card-body">
+                <div class="row container-title">
+                  <div class="col-8">
+                    <h2 class="card-title mt-2 mb-1 text-left">
+                      Pagar con <strong>Cripto</strong>
+                    </h2>
+                  </div>
+                  <div class="col-4 d-flex align-items-center justify-content-end">
+                    <div class="crypto-checkout-card__brand" aria-hidden="true">
+                      <span class="crypto-checkout-card__brand-icon">₿</span>
+                      <span class="crypto-checkout-card__brand-text">CoinPayments</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3 mb-2 pb-3 container-info crypto-checkout-card__body">
+                  <div class="col-12">
+                    <p class="text-left mb-3">
+                      Elige la criptomoneda y continúa el pago de forma segura. Procesamos el cobro a través de
+                      CoinPayments.
+                    </p>
+                    <div class="row bg-label align-items-center py-3 px-2 mx-0">
+                      <div class="col-md-2 col-3 text-center my-auto">
+                        <span class="crypto-checkout-card__icon" aria-hidden="true">₿</span>
+                      </div>
+                      <div class="col-md-10 col-9">
+                        <label class="text-left d-block mb-1 font-weight-bold" for="rebuy-checkout-currency2">
+                          Moneda
+                          <span *ngIf="currencyField?.value" class="text-muted font-weight-normal">
+                            ({{ currencyField?.value | uppercase }})
+                          </span>
+                        </label>
+                        <select
+                          formControlName="currency2"
+                          class="form-control"
+                          id="rebuy-checkout-currency2"
+                        >
+                          <option value="" selected disabled>Selecciona una moneda</option>
+                          <option *ngFor="let c of currencies" [value]="c?.symbol">
+                            {{ (c?.name | titlecase) + ' — ' + (c?.symbol | uppercase) }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer border-0 pt-0 pb-4">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  type="submit"
+                  [disabled]="loading || rebuyCryptoForm.invalid"
+                >
+                  <span *ngIf="!loading">Pagar con cripto</span>
+                  <span *ngIf="loading">Procesando…</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #rebuyCryptoModalTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Coinpayments</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Cerrar" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-4">
+        <p class="title">Precio:</p>
+        <p class="title">TXN id:</p>
+        <p class="title">Bloques:</p>
+        <p class="title">Wallet:</p>
+      </div>
+      <div class="col-7 mr-2">
+        <p>{{ coinpaymentRebuyResponse?.amount }}</p>
+        <p>{{ coinpaymentRebuyResponse?.txn_id }}</p>
+        <p>{{ coinpaymentRebuyResponse?.confirms_needed }}</p>
+        <p>{{ coinpaymentRebuyResponse?.address }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <p class="title">QR:</p>
+      </div>
+      <div class="col-8">
+        <img [src]="coinpaymentRebuyResponse?.qrcode_url" alt="" srcset="" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 mx-auto">
+        <a
+          [href]="coinpaymentRebuyResponse?.checkout_url"
+          class="btn btn-secondary btn-lg mb-3"
+          type="button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pagar
+        </a>
+        <a
+          [href]="coinpaymentRebuyResponse?.status_url"
+          class="btn btn-md btn-lg mb-3"
+          type="button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Estado
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <h4>
+        El pago con crypto tarda algo de tiempo en validarce, se te notificara por correo cuando se valide.
+      </h4>
+      <div class="row mx-auto">
+        <a routerLink="/referrals" class="btn btn-md btn-lg mt-3" type="button" (click)="modalRef?.hide()">
+          Volver a Referidos
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-template>

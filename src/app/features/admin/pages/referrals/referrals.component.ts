@@ -1,13 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-share';
 import { ReferredUserRow, UserService } from 'src/app/shared/services/user.service';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { CatalogPricesService } from 'src/app/core/services/catalog-prices.service';
-
-const apiURL = environment.apiURL;
 
 interface SelfManagementPackage {
   status?: string;
@@ -33,7 +28,6 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   rebuyCurrency = 'USD';
   referrerRebuyCommissionUsd = '10';
 
-  loading: boolean = false;
   error: string | null = null;
 
   referredUsers: ReferredUserRow[] = [];
@@ -47,40 +41,11 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   private readonly referralRenewalPollMax = 50;
   private visibilityListener?: () => void;
 
-  rebuyCryptoForm!: FormGroup;
-
-  coinpaymentRebuyResponse: {
-    amount?: string;
-    txn_id?: string;
-    address?: string;
-    confirms_needed?: string;
-    checkout_url?: string;
-    status_url?: string;
-    qrcode_url?: string;
-  } | null = null;
-
-  /** Mismas opciones que el checkout de Academia (`checkout.component.ts`). */
-  currencies: { name: string; logo: string; symbol: string }[] = [
-    { name: 'Bitcoin', logo: '', symbol: 'btc' },
-    { name: 'Bitcoin Cash', logo: '', symbol: 'BCH' },
-    { name: 'Ripple', logo: '', symbol: 'xrp' },
-    { name: 'Tether USD (Omni Layer)', logo: '', symbol: 'USDT' },
-    { name: 'Tether USD (ERC20)', logo: '', symbol: 'USDT.ERC20' },
-    { name: 'Tether USD (TRON/TRC20)', logo: '', symbol: 'USDT.TRC20' },
-    { name: 'Litecoin', logo: '', symbol: 'LTC' },
-  ];
-
   constructor(
     private userService: UserService,
-    private http: HttpClient,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder,
     private catalogPricesService: CatalogPricesService,
-  ) {
-    this.rebuyCryptoForm = this.formBuilder.group({
-      currency2: ['', Validators.required],
-    });
-  }
+  ) {}
 
   get rebuyPriceLabel(): string {
     return `${this.rebuyAmountUsd} ${this.rebuyCurrency}`.trim();
@@ -208,41 +173,5 @@ export class ReferralsComponent implements OnInit, OnDestroy {
       clearInterval(this.referralRenewalPollId);
       this.referralRenewalPollId = null;
     }
-  }
-
-  /**
-   * Misma API que el curso Academia: `payment/referral-rebuy/coinpayments`
-   * (paralelo a `payment/package-self-management/coinpayments`).
-   */
-  payRebuyCoinpayments(): void {
-    if (this.rebuyCryptoForm.invalid) {
-      this.rebuyCryptoForm.markAllAsTouched();
-      return;
-    }
-    this.loading = true;
-    this.error = null;
-    this.coinpaymentRebuyResponse = null;
-    this.http
-      .post<typeof this.coinpaymentRebuyResponse>(`${apiURL}/payment/referral-rebuy/coinpayments`, {
-        currency2: this.rebuyCryptoForm.value.currency2,
-      })
-      .subscribe({
-        next: (res) => {
-          this.loading = false;
-          if (res && typeof res === 'object') {
-            this.coinpaymentRebuyResponse = res;
-          }
-          this.loadUserReferralData(true);
-        },
-        error: (err) => {
-          console.error(err);
-          this.loading = false;
-          const detail = err?.error?.detail;
-          this.error =
-            typeof detail === 'string'
-              ? detail
-              : 'No se pudo iniciar el pago de la recompra con CoinPayments.';
-        },
-      });
   }
 }

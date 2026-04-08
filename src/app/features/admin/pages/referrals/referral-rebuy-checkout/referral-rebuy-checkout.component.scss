@@ -1,0 +1,104 @@
+.referral-rebuy-checkout-page.admin-area-page .admin-area-breadcrumb-row .breadcrumb-item.active {
+  color: #d0ad50 !important;
+  font-weight: 600;
+}
+
+// Mismo patrón que Academia checkout (self-management/components/checkout)
+.referral-rebuy-checkout-page .shadow {
+  box-shadow: 0px 0px 18px 0.2px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 10px;
+}
+
+.referral-rebuy-checkout-page .referrals-rebuy-order-card .card-title,
+.referral-rebuy-checkout-page .crypto-checkout-card .card-title {
+  color: var(--secondary) !important;
+  font-weight: 600 !important;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  margin-top: 0;
+}
+
+.referral-rebuy-checkout-page .referrals-rebuy-order-card.card,
+.referral-rebuy-checkout-page .crypto-checkout-card.card {
+  border-bottom: 3px solid var(--secondary);
+}
+
+.referral-rebuy-checkout-page .container-info {
+  border-bottom: 1px solid #ccc;
+}
+
+.referral-rebuy-checkout-page .bg-label {
+  border-radius: 5px;
+  background-color: #cccc;
+}
+
+.referral-rebuy-checkout-page .crypto-checkout-card {
+  .container-title {
+    align-items: flex-start;
+  }
+
+  .crypto-checkout-card__body {
+    width: 100%;
+  }
+
+  .crypto-checkout-card__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 0.25rem;
+  }
+
+  .crypto-checkout-card__brand-icon {
+    font-size: 2.25rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--secondary);
+    font-weight: 600;
+  }
+
+  .crypto-checkout-card__brand-text {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(0, 0, 0, 0.55);
+    text-transform: uppercase;
+    max-width: 120px;
+  }
+
+  .crypto-checkout-card__icon {
+    font-size: 1.75rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--secondary);
+    font-weight: 600;
+  }
+
+  select.form-control {
+    border-radius: 5px;
+  }
+}
+
+.referral-rebuy-checkout-page .btn-md {
+  color: var(--secondary);
+  background: black !important;
+  background-image: black !important;
+  background-color: black !important;
+}
+
+.modal-body {
+  max-width: 600px;
+  overflow-y: auto;
+}

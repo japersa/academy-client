@@ -69,16 +69,25 @@
                       </p>
                       <div class="referrals-page__code-actions">
                         <button
+                          *ngIf="referralCode && referralActive"
                           type="button"
                           class="btn btn-sm btn-outline-primary referral-share-icon-btn"
-                          [disabled]="!referralCode || !referralActive"
                           [cdkCopyToClipboard]="referralCode"
                           (cdkCopyToClipboardCopied)="onReferralCodeCopied($event)"
                           aria-label="Copiar código"
-                          [title]="referralActive ? 'Copiar código' : 'Código inactivo'"
+                          title="Copiar código"
                         >
                           <i class="tim-icons icon-single-copy-04" aria-hidden="true"></i>
                         </button>
+                        <span
+                          *ngIf="referralCode && !referralActive"
+                          class="btn btn-sm referral-share-icon-btn referrals-page__btn-copy--disabled"
+                          role="img"
+                          aria-label="Copiar no disponible: código inactivo"
+                          title="Código inactivo"
+                        >
+                          <i class="tim-icons icon-single-copy-04" aria-hidden="true"></i>
+                        </span>
                         <a
                           *ngIf="referralCode && referralActive"
                           class="btn btn-sm referrals-page__btn-wa referral-share-icon-btn"
@@ -145,61 +154,27 @@
           </div>
 
           <div class="row" *ngIf="hasActiveSelfManagementPlan">
-            <div class="col-lg-8 col-md-12">
-              <h4 class="card-title mb-2">Recompra mensual</h4>
-              <p class="card-category text-muted mb-3">
-                Con tu plan de Academia activo, paga aquí los <strong>{{ rebuyPriceLabel }}</strong> mensuales
-                para mantener tu código de referido activo. Mismo proceso que el pago del curso:
-                <strong>CoinPayments</strong> (elige criptomoneda y completa el pago).
-              </p>
-
-              <form [formGroup]="rebuyCryptoForm" (ngSubmit)="payRebuyCoinpayments()">
-                <div class="form-group">
-                  <label class="form-control-label" for="rebuy-currency2">Moneda</label>
-                  <select
-                    formControlName="currency2"
-                    class="form-control"
-                    id="rebuy-currency2"
-                  >
-                    <option value="" disabled>Selecciona una moneda</option>
-                    <option *ngFor="let c of currencies" [value]="c.symbol">
-                      {{ (c.name | titlecase) + ' — ' + (c.symbol | uppercase) }}
-                    </option>
-                  </select>
+            <div class="col-12">
+              <div class="card shadow-custom referrals-rebuy-cta-card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-lg-8 col-md-12">
+                      <h3 class="mb-2 referrals-rebuy-cta-card__title">Recompra mensual</h3>
+                      <p class="mb-0 referrals-rebuy-cta-card__text">
+                        Mantén activo tu código de referido. Importe:
+                        <strong>{{ rebuyPriceLabel }}</strong>.
+                      </p>
+                    </div>
+                    <div class="col-lg-4 col-md-12 mt-3 mt-lg-0">
+                      <a
+                        routerLink="/referrals/rebuy-checkout"
+                        class="btn btn-secondary btn-block btn-lg referrals-rebuy-cta-card__btn"
+                      >
+                        Ir a pagar
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-fill"
-                  [disabled]="loading || rebuyCryptoForm.invalid"
-                >
-                  <span *ngIf="!loading">Pagar con cripto ({{ rebuyPriceLabel }})</span>
-                  <span *ngIf="loading">Procesando…</span>
-                </button>
-              </form>
-              <div *ngIf="coinpaymentRebuyResponse" class="mt-4 p-3 border rounded bg-light">
-                <p class="mb-1"><strong>Precio:</strong> {{ coinpaymentRebuyResponse.amount }}</p>
-                <p class="mb-1"><strong>TXN:</strong> {{ coinpaymentRebuyResponse.txn_id }}</p>
-                <p class="mb-2" *ngIf="coinpaymentRebuyResponse.checkout_url">
-                  <a
-                    [href]="coinpaymentRebuyResponse.checkout_url"
-                    class="btn btn-primary btn-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Abrir pago CoinPayments</a
-                  >
-                  <a
-                    *ngIf="coinpaymentRebuyResponse.status_url"
-                    [href]="coinpaymentRebuyResponse.status_url"
-                    class="btn btn-outline-secondary btn-sm ml-2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Estado</a
-                  >
-                </p>
-                <p class="small text-muted mb-0">
-                  El pago con cripto puede tardar en confirmarse; cuando CoinPayments lo valide, se
-                  actualizará tu fecha de próxima recompra. Puedes recargar esta página en unos minutos.
-                </p>
               </div>
             </div>
           </div>

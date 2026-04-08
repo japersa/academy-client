@@ -9,6 +9,30 @@ $referrals-surface-2: rgba(255, 255, 255, 0.055);
   padding-bottom: 2rem;
 }
 
+// Banner “Ir a pagar” (misma idea que la tarjeta Comprar del curso en Academia / self-management home)
+.referrals-page .shadow-custom {
+  box-shadow: 0px 0px 18px 0.2px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 10px;
+}
+
+.referrals-rebuy-cta-card.card {
+  border-bottom: 3px solid var(--secondary);
+}
+
+.referrals-rebuy-cta-card__title {
+  color: var(--secondary) !important;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.referrals-rebuy-cta-card__text {
+  line-height: 1.5;
+}
+
+.referrals-rebuy-cta-card__btn {
+  font-weight: 600;
+}
+
 .referrals-page__code-row {
   display: flex;
   align-items: center;
@@ -67,6 +91,19 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   background-image: none !important;
   border: none !important;
   border-radius: 6px;
+}
+
+// Copiar: mismo criterio que WhatsApp inactivo (no botón outline deshabilitado)
+.referrals-page__btn-copy--disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.85) !important;
+  background: #6c757d !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 6px;
+  line-height: 1;
 }
 
 .referrals-page__code-actions .btn-sm.referral-share-icon-btn:not(.referrals-page__btn-wa) {
