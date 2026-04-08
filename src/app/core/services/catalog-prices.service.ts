@@ -32,10 +32,21 @@ export interface PublicCheckoutOfferPayload {
   ipn_url: string;
 }
 
+export interface ReferralRebuyCatalogPayload {
+  /** Importe cobrado en la recompra mensual (solo este valor; no es el precio del curso). */
+  rebuy_amount?: string;
+  /** Mismo valor que rebuy_amount (compatibilidad). */
+  amount?: string;
+  currency: string;
+  /** Comisión USD para el patrocinador cuando un referido paga la recompra. */
+  referrer_commission_usd: string;
+}
+
 export interface CatalogPricesResponse {
   funding_balances: FundingBalancePriceRow[];
   self_management_plans: SelfManagementPlanPriceRow[];
   public_checkout: PublicCheckoutOfferPayload | null;
+  referral_rebuy?: ReferralRebuyCatalogPayload | null;
 }
 
 @Injectable({ providedIn: 'root' })

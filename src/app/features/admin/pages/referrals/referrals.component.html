@@ -126,6 +126,11 @@
             </div>
           </div>
 
+          <p class="small text-muted mb-3 mt-2">
+            Cuando un referido paga su recompra mensual, recibes
+            <strong>{{ referrerRebuyCommissionUsd }} USD</strong> de comisión en tu saldo de ganancias.
+          </p>
+
           <hr class="mt-2" />
 
           <div class="row" *ngIf="!hasActiveSelfManagementPlan">
@@ -133,7 +138,7 @@
               <div class="rebuy-banner mb-0" role="status">
                 <h5 class="rebuy-banner__title">Recompra mensual</h5>
                 <p class="rebuy-banner__text mb-3">
-                  La recompra de <strong>30 USD</strong> para mantener activo tu código de referido
+                  La recompra de <strong>{{ rebuyPriceLabel }}</strong> para mantener activo tu código de referido
                   aplica cuando ya tienes un <strong>plan de Academia activo</strong>.
                   Sin ese plan, primero contrata en Academia.
                 </p>
@@ -146,35 +151,59 @@
             <div class="col-lg-8 col-md-12">
               <h4 class="card-title mb-2">Recompra mensual</h4>
               <p class="card-category text-muted mb-3">
-                Con tu plan de Academia activo, puedes pagar aquí los <strong>30 USD</strong> mensuales
-                para mantener tu código de referido activo. Mismo Stripe que en el resto de la app.
+                Con tu plan de Academia activo, paga aquí los <strong>{{ rebuyPriceLabel }}</strong> mensuales
+                para mantener tu código de referido activo. Mismo proceso que el pago del curso:
+                <strong>CoinPayments</strong> (elige criptomoneda y completa el pago).
               </p>
-              <div class="mb-3 container-credit-card">
-                <stripe-card
-                  #stripeCard
-                  (catch)="onStripeError($event)"
-                  [(invalid)]="invalidError"
-                  (cardMounted)="cardCaptureReady = true"
-                  (tokenChange)="setStripeToken($event)"
-                  [options]="cardOptions"
-                  class="stripe-card"
-                ></stripe-card>
+
+              <form [formGroup]="rebuyCryptoForm" (ngSubmit)="payRebuyCoinpayments()">
+                <div class="form-group">
+                  <label class="form-control-label" for="rebuy-currency2">Moneda</label>
+                  <select
+                    formControlName="currency2"
+                    class="form-control"
+                    id="rebuy-currency2"
+                  >
+                    <option value="" disabled>Selecciona una moneda</option>
+                    <option *ngFor="let c of currencies" [value]="c.symbol">
+                      {{ (c.name | titlecase) + ' — ' + (c.symbol | uppercase) }}
+                    </option>
+                  </select>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-fill"
+                  [disabled]="loading || rebuyCryptoForm.invalid"
+                >
+                  <span *ngIf="!loading">Pagar con cripto ({{ rebuyPriceLabel }})</span>
+                  <span *ngIf="loading">Procesando…</span>
+                </button>
+              </form>
+              <div *ngIf="coinpaymentRebuyResponse" class="mt-4 p-3 border rounded bg-light">
+                <p class="mb-1"><strong>Precio:</strong> {{ coinpaymentRebuyResponse.amount }}</p>
+                <p class="mb-1"><strong>TXN:</strong> {{ coinpaymentRebuyResponse.txn_id }}</p>
+                <p class="mb-2" *ngIf="coinpaymentRebuyResponse.checkout_url">
+                  <a
+                    [href]="coinpaymentRebuyResponse.checkout_url"
+                    class="btn btn-primary btn-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Abrir pago CoinPayments</a
+                  >
+                  <a
+                    *ngIf="coinpaymentRebuyResponse.status_url"
+                    [href]="coinpaymentRebuyResponse.status_url"
+                    class="btn btn-outline-secondary btn-sm ml-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Estado</a
+                  >
+                </p>
+                <p class="small text-muted mb-0">
+                  El pago con cripto puede tardar en confirmarse; cuando CoinPayments lo valide, se
+                  actualizará tu fecha de próxima recompra. Puedes recargar esta página en unos minutos.
+                </p>
               </div>
-              <div *ngIf="invalidError?.message" class="text-danger small mb-2">
-                {{ invalidError?.message }}
-              </div>
-              <p *ngIf="!cardCaptureReady" class="small text-muted mb-2">
-                Esperando a que cargue el formulario de tarjeta…
-              </p>
-              <button
-                type="button"
-                class="btn btn-primary btn-fill"
-                [disabled]="loading || !cardCaptureReady"
-                (click)="submitRebuy($event)"
-              >
-                <span *ngIf="!loading">Pagar recompra (30 USD)</span>
-                <span *ngIf="loading">Procesando…</span>
-              </button>
             </div>
           </div>
 

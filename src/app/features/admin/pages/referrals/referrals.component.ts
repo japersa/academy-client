@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-share';
 import { ReferredUserRow, UserService } from 'src/app/shared/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { StripeScriptTag } from 'stripe-angular';
+import { CatalogPricesService } from 'src/app/core/services/catalog-prices.service';
 
 const apiURL = environment.apiURL;
 
@@ -17,7 +18,7 @@ interface SelfManagementPackage {
   templateUrl: './referrals.component.html',
   styleUrls: ['./referrals.component.scss']
 })
-export class ReferralsComponent implements OnInit {
+export class ReferralsComponent implements OnInit, OnDestroy {
   commissionBalance: number = 0;
   travelPoints: number = 0;
   referralCode: string = '';
@@ -27,6 +28,11 @@ export class ReferralsComponent implements OnInit {
   referralActive = true;
   referralNextRenewal?: string | null;
 
+  /** Importe recompra y comisión al patrocinador (catálogo / admin). */
+  rebuyAmountUsd = '30';
+  rebuyCurrency = 'USD';
+  referrerRebuyCommissionUsd = '10';
+
   loading: boolean = false;
   error: string | null = null;
 
@@ -34,39 +40,83 @@ export class ReferralsComponent implements OnInit {
   /** true hasta que termina la primera carga de perfil (incluye lista de referidos desde el API). */
   profileLoading = true;
 
-  cardCaptureReady = false;
-  invalidError: { message?: string } | null = null;
+  private referralRenewalPollId: ReturnType<typeof setInterval> | null = null;
+  private referralRenewalPollAttempts = 0;
+  private readonly referralRenewalPollMs = 12000;
+  /** ~10 minutos de reintentos */
+  private readonly referralRenewalPollMax = 50;
+  private visibilityListener?: () => void;
 
-  @ViewChild('stripeCard') stripeCard: { createToken: (ev: Event) => void } | null = null;
+  rebuyCryptoForm!: FormGroup;
 
-  cardOptions = {
-    iconStyle: 'solid' as const,
-    hidePostalCode: true,
-    style: {
-      base: {
-        iconColor: '#706f6f',
-        color: '#706f6f',
-        fontWeight: '100',
-        '::placeholder': {
-          color: '#706f6f'
-        }
-      }
-    }
-  };
+  coinpaymentRebuyResponse: {
+    amount?: string;
+    txn_id?: string;
+    address?: string;
+    confirms_needed?: string;
+    checkout_url?: string;
+    status_url?: string;
+    qrcode_url?: string;
+  } | null = null;
+
+  /** Mismas opciones que el checkout de Academia (`checkout.component.ts`). */
+  currencies: { name: string; logo: string; symbol: string }[] = [
+    { name: 'Bitcoin', logo: '', symbol: 'btc' },
+    { name: 'Bitcoin Cash', logo: '', symbol: 'BCH' },
+    { name: 'Ripple', logo: '', symbol: 'xrp' },
+    { name: 'Tether USD (Omni Layer)', logo: '', symbol: 'USDT' },
+    { name: 'Tether USD (ERC20)', logo: '', symbol: 'USDT.ERC20' },
+    { name: 'Tether USD (TRON/TRC20)', logo: '', symbol: 'USDT.TRC20' },
+    { name: 'Litecoin', logo: '', symbol: 'LTC' },
+  ];
 
   constructor(
     private userService: UserService,
     private http: HttpClient,
-    private stripeScriptTag: StripeScriptTag,
     private toastr: ToastrService,
+    private formBuilder: FormBuilder,
+    private catalogPricesService: CatalogPricesService,
   ) {
-    if (!this.stripeScriptTag.StripeInstance) {
-      this.stripeScriptTag.setPublishableKey(environment.stripePK);
-    }
+    this.rebuyCryptoForm = this.formBuilder.group({
+      currency2: ['', Validators.required],
+    });
+  }
+
+  get rebuyPriceLabel(): string {
+    return `${this.rebuyAmountUsd} ${this.rebuyCurrency}`.trim();
   }
 
   ngOnInit(): void {
-    this.loadUserReferralData();
+    this.loadUserReferralData(false);
+    this.visibilityListener = () => {
+      if (document.visibilityState === 'visible') {
+        this.loadUserReferralData(true);
+      }
+    };
+    document.addEventListener('visibilitychange', this.visibilityListener);
+    this.catalogPricesService.getCatalog().subscribe({
+      next: (c) => {
+        const rr = c.referral_rebuy;
+        const rebuy = rr?.rebuy_amount ?? rr?.amount;
+        if (rebuy) {
+          this.rebuyAmountUsd = rebuy;
+        }
+        if (rr?.currency) {
+          this.rebuyCurrency = rr.currency;
+        }
+        if (rr?.referrer_commission_usd) {
+          this.referrerRebuyCommissionUsd = rr.referrer_commission_usd;
+        }
+      },
+      error: () => {},
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.stopReferralRenewalPolling();
+    if (this.visibilityListener) {
+      document.removeEventListener('visibilitychange', this.visibilityListener);
+    }
   }
 
   displayReferredName(row: ReferredUserRow): string {
@@ -90,8 +140,15 @@ export class ReferralsComponent implements OnInit {
     }
   }
 
-  loadUserReferralData() {
-    this.profileLoading = true;
+  /**
+   * @param silent Si true, no muestra el spinner principal ni reinicia lista en blanco;
+   *               sirve para sondeo y al volver a la pestaña.
+   */
+  loadUserReferralData(silent: boolean) {
+    if (!silent) {
+      this.profileLoading = true;
+    }
+    const hadRenewalBefore = !!this.referralNextRenewal;
     this.userService.getUser().subscribe({
       next: (user) => {
         this.commissionBalance = user.commission_balance ?? 0;
@@ -104,61 +161,85 @@ export class ReferralsComponent implements OnInit {
           && pkgs.some((p) => (p.status || '').toLowerCase() === 'active');
         this.referredUsers = Array.isArray(user.referred_users) ? user.referred_users : [];
         this.profileLoading = false;
+
+        if (silent && !hadRenewalBefore && this.referralNextRenewal) {
+          this.toastr.info('Ya puedes ver la fecha de tu próxima recompra.', 'Perfil actualizado');
+        }
+
+        this.syncReferralRenewalPollingState();
       },
       error: (err) => {
         console.error(err);
-        this.error = 'No se pudo cargar la información de referidos.';
+        if (!silent) {
+          this.error = 'No se pudo cargar la información de referidos.';
+        }
         this.profileLoading = false;
       }
     });
   }
 
-  onStripeError(err: Error): void {
-    console.error(err);
-    this.invalidError = { message: err.message };
+  private syncReferralRenewalPollingState(): void {
+    if (this.hasActiveSelfManagementPlan && !this.referralNextRenewal) {
+      this.startReferralRenewalPolling();
+    } else {
+      this.stopReferralRenewalPolling();
+    }
   }
 
-  setStripeToken(event: stripe.Token): void {
-    this.payMonthlyRebuy(event.id);
-  }
-
-  payMonthlyRebuy(tokenId: string) {
-    if (!tokenId) {
-      this.error = 'Falta el token de pago (Stripe).';
+  private startReferralRenewalPolling(): void {
+    if (this.referralRenewalPollId !== null) {
       return;
     }
+    this.referralRenewalPollAttempts = 0;
+    this.referralRenewalPollId = setInterval(() => {
+      this.referralRenewalPollAttempts += 1;
+      if (this.referralRenewalPollAttempts > this.referralRenewalPollMax) {
+        this.stopReferralRenewalPolling();
+        return;
+      }
+      this.loadUserReferralData(true);
+    }, this.referralRenewalPollMs);
+  }
 
+  private stopReferralRenewalPolling(): void {
+    if (this.referralRenewalPollId !== null) {
+      clearInterval(this.referralRenewalPollId);
+      this.referralRenewalPollId = null;
+    }
+  }
+
+  /**
+   * Misma API que el curso Academia: `payment/referral-rebuy/coinpayments`
+   * (paralelo a `payment/package-self-management/coinpayments`).
+   */
+  payRebuyCoinpayments(): void {
+    if (this.rebuyCryptoForm.invalid) {
+      this.rebuyCryptoForm.markAllAsTouched();
+      return;
+    }
     this.loading = true;
     this.error = null;
-
-    this.http.post<{ next_renewal?: string }>(`${apiURL}/payments/payment/referral-rebuy/stripe`, {
-      token_id: tokenId
-    }).subscribe({
-      next: (res) => {
-        this.loading = false;
-        this.referralActive = true;
-        if (res.next_renewal) {
-          this.referralNextRenewal = res.next_renewal;
-        }
-        this.loadUserReferralData();
-      },
-      error: (err) => {
-        console.error(err);
-        this.loading = false;
-        const detail = err?.error?.detail;
-        this.error =
-          typeof detail === 'string'
-            ? detail
-            : 'No se pudo procesar el pago de la recompra.';
-      }
-    });
-  }
-
-  submitRebuy($event: Event): void {
-    if (!this.stripeCard?.createToken) {
-      this.error = 'Stripe no está listo. Recarga la página.';
-      return;
-    }
-    this.stripeCard.createToken($event);
+    this.coinpaymentRebuyResponse = null;
+    this.http
+      .post<typeof this.coinpaymentRebuyResponse>(`${apiURL}/payment/referral-rebuy/coinpayments`, {
+        currency2: this.rebuyCryptoForm.value.currency2,
+      })
+      .subscribe({
+        next: (res) => {
+          this.loading = false;
+          if (res && typeof res === 'object') {
+            this.coinpaymentRebuyResponse = res;
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          this.loading = false;
+          const detail = err?.error?.detail;
+          this.error =
+            typeof detail === 'string'
+              ? detail
+              : 'No se pudo iniciar el pago de la recompra con CoinPayments.';
+        },
+      });
   }
 }
