@@ -79,6 +79,17 @@ export class ReferralsComponent implements OnInit, OnDestroy {
     return !this.referralNextRenewal && !this.hasActiveSelfManagementPlan;
   }
 
+  /**
+   * Plan activo y fecha de recompra aún futura: acceso a Academia/cursos sin CTA de pago (ese va solo al vencer el plazo).
+   */
+  get showAcademiaCourseBanner(): boolean {
+    return (
+      this.hasActiveSelfManagementPlan &&
+      !!this.referralNextRenewal &&
+      !isReferralRenewalDueOrOverdue(this.referralNextRenewal)
+    );
+  }
+
   ngOnInit(): void {
     this.loadUserReferralData(false);
     this.visibilityListener = () => {

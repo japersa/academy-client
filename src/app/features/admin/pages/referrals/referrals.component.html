@@ -167,6 +167,19 @@
             </div>
           </div>
 
+          <div class="row" *ngIf="showAcademiaCourseBanner">
+            <div class="col-lg-10 col-md-12">
+              <div class="rebuy-banner rebuy-banner--academia-course mb-0" role="status">
+                <h5 class="rebuy-banner__title">Academia</h5>
+                <p class="rebuy-banner__text mb-3">
+                  Entra a tus <strong>cursos</strong> desde Academia. El pago de la recompra mensual aparecerá aquí
+                  cuando llegue la fecha indicada arriba.
+                </p>
+                <a routerLink="/academy" class="btn btn-sm btn-fill rebuy-banner__btn">Ir al curso</a>
+              </div>
+            </div>
+          </div>
+
           <div class="row" *ngIf="showRebuyMonthlyCta">
             <div class="col-12">
               <div class="card shadow-custom referrals-rebuy-cta-card">
