@@ -1,3 +1,25 @@
+/* Alineado al panel: sin offset-md-1 / col-md-8 */
+.ama-page {
+  max-width: 100%;
+}
+
+.ama-page__card {
+  width: 100%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.ama-page__inner-card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.title-table {
+  font-size: clamp(1.35rem, 3vw, 2rem) !important;
+  line-height: 1.25;
+  font-weight: 600 !important;
+  color: var(--secondary) !important;
+  margin-top: 0;
+}
+
 .shadow {
     border-radius: 10px;
 }

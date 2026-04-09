@@ -1,69 +1,72 @@
-<div class="content admin-area-page">
-    <div class="row admin-area-breadcrumb-row">
-        <div class="col-12">
-            <nav aria-label="Migas de pan">
-                <ol class="breadcrumb bg-transparent mb-0 px-0">
-                    <li class="breadcrumb-item text-primary">
-                        <a routerLink="/dashboard">Dashboard</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Dudas y consultas</li>
-                </ol>
-            </nav>
-        </div>
+<div class="content admin-area-page ama-page">
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Dudas y consultas
+          </li>
+        </ol>
+      </nav>
     </div>
-    <div class="shadow row">
-        <div class="col-md-12">
-            <div class="offset-md-1 col-md-8">
-                <div class="col-md-12">
-                    <h3 class=" card-title">PREGUNTAS</h3>
-
-                    <div class="card p-4">
-                        <div class="headings d-flex justify-content-between align-items-center mb-3">
-                            <!-- <div>
-                                <button class="btn btn-simple btn-primary mr-2">Día</button>
-                                <button class="btn btn-simple btn-primary mr-2">Semana</button>
-                                <button class="btn btn-simple btn-primary mr-2">Mes</button>
-                            </div> -->
-                            <!-- <div>
-                                <button class="btn btn btn-danger mr-2">Sin resolver</button>
-                                <button class="btn btn-simple btn-primary mr-2">Resueltas</button>
-                            </div> -->
-                        </div>
-
-                        <div class="headings d-flex justify-content-between align-items-center mb-3">
-                            <h5>Preguntas ({{unansweredQuestion.length}})</h5>
-                        </div>
-                        <ng-container *ngIf="unansweredQuestion.length > 0">
-                            <div class="card p-3">
-                                <ng-container *ngFor="let c of unansweredQuestion">
-                                    <div class=" mt-3">
-                                        <div class=" d-flex flex-row align-items-start">
-                                            <img [src]="c?.author?.image_profile  !== '' ? c?.author?.image_profile : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'"
-                                                width="40" class="user-img rounded-circle mr-2">
-                                            <span class="m-0 p-0 w">
-                                                <small
-                                                    class="font-weight-bold m-0 p-0 text-secondary">{{ (c?.author?.first_name ? c?.author?.first_name : 'User ' + c.id) | titlecase}}</small>
-                                                <br>
-                                                <div class="d-block">
-                                                    <small class="text-right">{{ c?.created_at | date}} </small>
-                                                </div>
-                                                <p class="text-default m-0 p-o"> {{ c?.body }}. </p>
-                                                <hr class="text-left">
-                                                <ng-container *ngIf="c">
-                                                    <app-reply-comment [comment]="c"
-                                                        (loadUnanswered)="getUnansweredQuestions()"></app-reply-comment>
-                                                </ng-container>
-                                            </span>
-
-                                        </div>
-                                    </div>
-                                </ng-container>
-                            </div>
-                        </ng-container>
-                    </div>
-
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card ama-page__card">
+        <div class="card-header">
+          <h4 class="card-title title-table mb-0">Preguntas</h4>
+        </div>
+        <div class="card-body">
+          <div class="headings d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Preguntas ({{ unansweredQuestion.length }})</h5>
+          </div>
+          <ng-container *ngIf="unansweredQuestion.length > 0">
+            <div class="card p-3 ama-page__inner-card">
+              <ng-container *ngFor="let c of unansweredQuestion">
+                <div class="mt-3">
+                  <div class="d-flex flex-row align-items-start">
+                    <img
+                      [src]="
+                        c?.author?.image_profile !== ''
+                          ? c?.author?.image_profile
+                          : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'
+                      "
+                      width="40"
+                      class="user-img rounded-circle mr-2"
+                      alt=""
+                    />
+                    <span class="m-0 p-0 w">
+                      <small class="font-weight-bold m-0 p-0 text-secondary">
+                        {{
+                          (c?.author?.first_name
+                            ? c?.author?.first_name
+                            : 'User ' + c.id
+                          ) | titlecase
+                        }}
+                      </small>
+                      <br />
+                      <div class="d-block">
+                        <small class="text-right">{{ c?.created_at | date }}</small>
+                      </div>
+                      <p class="text-default m-0 p-o">{{ c?.body }}.</p>
+                      <hr class="text-left" />
+                      <ng-container *ngIf="c">
+                        <app-reply-comment
+                          [comment]="c"
+                          (loadUnanswered)="getUnansweredQuestions()"
+                        ></app-reply-comment>
+                      </ng-container>
+                    </span>
+                  </div>
                 </div>
+              </ng-container>
             </div>
+          </ng-container>
         </div>
+      </div>
     </div>
+  </div>
 </div>

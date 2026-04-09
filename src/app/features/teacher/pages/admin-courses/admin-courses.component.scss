@@ -1,3 +1,16 @@
+/* Mismo ancho que el resto del panel: sin mx-5 extra */
+.admin-courses-page {
+  max-width: 100%;
+}
+
+.title-table {
+  font-size: clamp(1.35rem, 3vw, 2rem) !important;
+  line-height: 1.25;
+  font-weight: 600 !important;
+  color: var(--secondary) !important;
+  margin-top: 0;
+}
+
 .shadow {
     border-radius: 10px;
 }

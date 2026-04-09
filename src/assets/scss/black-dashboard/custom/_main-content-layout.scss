@@ -303,3 +303,64 @@ $card-body-padding-top: map-get($spacers, 2);
 .main-panel .content .card:not(.card-plain):not(.card-chart) .card-body .container-title .card-title {
   margin-top: 0;
 }
+
+// —— Tipografía unificada: cards en vistas con .admin-area-page (sidebar admin + estudiante) ——
+$app-card-title-size: clamp(1.22rem, 2.15vw, 1.62rem);
+$app-card-eyebrow-size: 0.7rem;
+
+.main-panel .content .admin-area-page,
+.wrapper.wrapper--student .main-panel .content .admin-area-page {
+  .title-table {
+    font-size: $app-card-title-size !important;
+    line-height: 1.3 !important;
+    font-weight: 600 !important;
+    color: var(--secondary) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .card .card-header {
+    .card-title,
+    h1.card-title,
+    h2.card-title,
+    h3.card-title,
+    h4.card-title,
+    h5.card-title {
+      font-size: $app-card-title-size !important;
+      line-height: 1.3 !important;
+      font-weight: 600 !important;
+      color: var(--secondary) !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .card-category {
+      font-size: $app-card-eyebrow-size !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.5) !important;
+      margin-bottom: 0.3rem !important;
+      line-height: 1.35;
+    }
+
+    .tools {
+      line-height: 1.2;
+    }
+  }
+
+  .card .card-body {
+    .headings h5,
+    .d-flex.justify-content-between.align-items-center h5 {
+      font-size: 0.95rem !important;
+      font-weight: 600 !important;
+      color: rgba(0, 0, 0, 0.68) !important;
+      line-height: 1.35;
+    }
+
+    small.text-muted,
+    .text-gray {
+      color: rgba(0, 0, 0, 0.52) !important;
+    }
+  }
+}

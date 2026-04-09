@@ -1,3 +1,10 @@
+/* Mismo ancho que el resto de admin: sin mx-4 ni col-md-10 (el panel ya aplica --app-gutter-x). */
+.create-course-by-steps-page {
+  .wizard-container {
+    max-width: 100%;
+  }
+}
+
 .shadow {
     border-radius: 10px;
 }

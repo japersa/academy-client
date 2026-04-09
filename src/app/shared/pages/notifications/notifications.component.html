@@ -1,90 +1,111 @@
-<div class="content admin-area-page" [ngClass]="{'class-user' : userDataService?.userData$?.value?.rol === 'student'}">
-    <div class="row admin-area-breadcrumb-row">
-        <div class="col-12">
-            <nav aria-label="Migas de pan">
-                <ol class="breadcrumb bg-transparent mb-0 px-0">
-                    <li class="breadcrumb-item text-primary">
-                        <a routerLink="/referrals">Back office</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Notificaciones</li>
-                </ol>
-            </nav>
-        </div>
+<div
+  class="content admin-area-page notifications-page"
+  [ngClass]="{
+    'class-user': userDataService?.userData$?.value?.rol === 'student'
+  }"
+>
+  <div class="row admin-area-breadcrumb-row">
+    <div class="col-12">
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumb bg-transparent mb-0 px-0">
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/referrals">Back office</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Notificaciones
+          </li>
+        </ol>
+      </nav>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="offset-md-1 col-md-8">
-                <div class="col-md-12">
-                    <h3 class=" card-title">NOTIFICACIONES</h3>
-
-                    <div class="card p-4">
-                        <div class="headings d-flex justify-content-between align-items-center mb-3">
-                            <!-- <div>
-                                <button class="btn btn-simple btn-primary mr-2">Día</button>
-                                <button class="btn btn-simple btn-primary mr-2">Semana</button>
-                                <button class="btn btn-simple btn-primary mr-2">Mes</button>
-                            </div> -->
-                            <!-- <div>
-                                <button class="btn btn btn-danger mr-2">Sin resolver</button>
-                                <button class="btn btn-simple btn-primary mr-2">Resueltas</button>
-                            </div> -->
-                        </div>
-
-                        <div class="headings d-flex justify-content-between align-items-center mb-3">
-                            <h5>Notificaciones ({{notificaciones.length}})</h5>
-                        </div>
-                        <ng-container *ngIf="notificaciones.length > 0">
-                            <div class="card p-3">
-
-                                <ng-container *ngFor="let c of notificaciones">
-                                    <div class=" mt-3">
-                                        <div class=" d-flex flex-row align-items-start">
-                                            <img [src]="c?.student?.image_profile  !== '' ? c?.student?.image_profile : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'"
-                                                width="40" class="user-img rounded-circle mr-2">
-                                            <span class="m-0 p-0 w">
-                                                <small
-                                                    class="font-weight-bold m-0 p-0 text-primary">{{ (c?.student?.first_name ? c?.student?.first_name : 'User ' + c.id) | titlecase}}</small>
-                                                <br>
-                                                <div class="d-block">
-                                                    <small
-                                                        class="font-weight-bold m-0 p-0 text-primary">{{ c?.type_notification +  ' ' | uppercase}}</small>
-                                                    <small class="text-gray">{{ c?.created_at | date}} </small>
-                                                </div>
-                                                <p class="text-default m-0 p-o"> {{ c?.body?.comment }}. </p>
-                                                <br>
-                                                <ng-container *ngIf="c.body.reply_comment">
-                                                    <div class=" d-flex flex-row align-items-start">
-                                                        <img [src]="c?.teacher?.image_profile  !== '' ? c?.teacher?.image_profile  : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'"
-                                                            width="40" class="user-img rounded-circle mr-2">
-                                                        <span class="m-0 p-0 w">
-                                                            <small
-                                                                class="font-weight-bold m-0 p-0 text-primary">{{ (c?.teacher?.first_name ? c?.teacher?.first_name : 'User ' + c.id) | titlecase}}</small>
-                                                            <br>
-                                                            <div class="d-block">
-                                                                <small
-                                                                    class="text-gray">{{ c?.body?.reply_comment_created_at | date}}
-                                                                </small>
-                                                            </div>
-                                                            <p class="text-default m-0 p-o"> {{ c?.body?.reply_comment }}.
-                                                            </p>
-                                                        </span>
-                                                    </div>
-                                                </ng-container>
-
-                                                <hr class="text-left">
-                                            </span>
-
-                                        </div>
-                                    </div>
-                                </ng-container>
-
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card notifications-page__card">
+        <div class="card-header">
+          <h4 class="card-title title-table mb-0">Notificaciones</h4>
+        </div>
+        <div class="card-body">
+          <div class="headings d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">
+              Notificaciones ({{ notificaciones.length }})
+            </h5>
+          </div>
+          <ng-container *ngIf="notificaciones.length > 0">
+            <div class="card p-3 notifications-page__inner-card">
+              <ng-container *ngFor="let c of notificaciones">
+                <div class="mt-3">
+                  <div class="d-flex flex-row align-items-start">
+                    <img
+                      [src]="
+                        c?.student?.image_profile !== ''
+                          ? c?.student?.image_profile
+                          : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'
+                      "
+                      width="40"
+                      class="user-img rounded-circle mr-2"
+                      alt=""
+                    />
+                    <span class="m-0 p-0 w">
+                      <small class="font-weight-bold m-0 p-0 text-primary">
+                        {{
+                          (c?.student?.first_name
+                            ? c?.student?.first_name
+                            : 'User ' + c.id
+                          ) | titlecase
+                        }}
+                      </small>
+                      <br />
+                      <div class="d-block">
+                        <small class="font-weight-bold m-0 p-0 text-primary">
+                          {{ c?.type_notification + ' ' | uppercase }}
+                        </small>
+                        <small class="text-gray">{{ c?.created_at | date }}</small>
+                      </div>
+                      <p class="text-default m-0 p-o">{{ c?.body?.comment }}.</p>
+                      <br />
+                      <ng-container *ngIf="c.body.reply_comment">
+                        <div class="d-flex flex-row align-items-start">
+                          <img
+                            [src]="
+                              c?.teacher?.image_profile !== ''
+                                ? c?.teacher?.image_profile
+                                : 'https://res.cloudinary.com/app-intcapex-com/image/upload/v1657559461/assets/icons/placeholder_m0p6jj.jpg'
+                            "
+                            width="40"
+                            class="user-img rounded-circle mr-2"
+                            alt=""
+                          />
+                          <span class="m-0 p-0 w">
+                            <small class="font-weight-bold m-0 p-0 text-primary">
+                              {{
+                                (c?.teacher?.first_name
+                                  ? c?.teacher?.first_name
+                                  : 'User ' + c.id
+                                ) | titlecase
+                              }}
+                            </small>
+                            <br />
+                            <div class="d-block">
+                              <small class="text-gray">{{
+                                c?.body?.reply_comment_created_at | date
+                              }}</small>
                             </div>
-                        </ng-container>
+                            <p class="text-default m-0 p-o">
+                              {{ c?.body?.reply_comment }}.
+                            </p>
+                          </span>
+                        </div>
+                      </ng-container>
 
-                    </div>
-
+                      <hr class="text-left" />
+                    </span>
+                  </div>
                 </div>
+              </ng-container>
             </div>
+          </ng-container>
         </div>
+      </div>
     </div>
+  </div>
 </div>
