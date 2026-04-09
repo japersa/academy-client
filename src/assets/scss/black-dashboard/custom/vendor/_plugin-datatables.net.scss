@@ -164,8 +164,12 @@ div.dataTables_scrollFoot > .dataTables_scrollFootInner > table {
   border-top: none;
 }
 @media screen and (max-width: 767px) {
-  div.dataTables_wrapper div.dataTables_length,
-  div.dataTables_wrapper div.dataTables_filter,
+  div.dataTables_wrapper div.dataTables_length {
+    text-align: left;
+  }
+  div.dataTables_wrapper div.dataTables_filter {
+    text-align: right;
+  }
   div.dataTables_wrapper div.dataTables_info,
   div.dataTables_wrapper div.dataTables_paginate {
     text-align: center;
