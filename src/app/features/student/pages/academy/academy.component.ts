@@ -57,15 +57,13 @@ export class AcademyComponent implements OnInit{
 
   fillCourses() {
     this.coursesService.getCourses().subscribe(res => {
-
-      if (this.userDataService.userData$.value.rol === 'admin') {
-        this.courses = res.all;
-      }
-      if (this.userDataService.userData$.value.rol === 'teacher') {
-        this.courses = res.my_courses_created;
-      }
-      if (this.userDataService.userData$.value.rol === 'user') {
-        this.courses = res.my_enrolled_courses;
+      const rol = this.userDataService.userData$.value?.rol;
+      if (rol === 'admin') {
+        this.courses = res.all ?? [];
+      } else if (rol === 'teacher') {
+        this.courses = res.my_courses_created ?? [];
+      } else if (rol === 'user') {
+        this.courses = res.my_enrolled_courses ?? [];
       }
     },
       error => {
@@ -82,6 +80,7 @@ export class AcademyComponent implements OnInit{
             this.agActivete();
             this.userDataService.userData$.next(r);
             this.storageService.set('userData', r);
+            this.fillCourses();
           },
           error: (e) => {
             console.log(e.error);

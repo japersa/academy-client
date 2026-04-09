@@ -91,7 +91,11 @@
 
     <div
       class="row g-3 mt-3"
-      *ngIf="(userDataService?.userData$?.value?.subscription || 'none') !== 'none'"
+      *ngIf="
+        (userDataService?.userData$?.value?.subscription || 'none') !== 'none' ||
+        userDataService?.userData$?.value?.rol === 'teacher' ||
+        userDataService?.userData$?.value?.rol === 'admin'
+      "
     >
       <div class="col-12">
         <h2 class="mt-2 mb-0">Cursos</h2>
