@@ -61,10 +61,6 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-.self-management-home__course-card .card-body {
-    border-bottom: none;
-}
-
 .self-management-home__course-img {
     object-fit: cover;
     width: 100%;
@@ -123,11 +119,6 @@ h3, h2 {
     color: var(--secondary) !important;
     padding: 5px !important;
 }
-
-.card-body {
-    border-bottom: 1px solid #cccccc;
-}
-
 
 .container-body {
     color: #cccccc !important;
