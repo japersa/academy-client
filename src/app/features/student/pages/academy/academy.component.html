@@ -65,7 +65,7 @@
               alt="Card image cap"
             />
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title text-center mb-2">
+              <h5 class="card-title text-center academy-page__course-title">
                 {{
                   (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
                     | uppercase
@@ -77,7 +77,7 @@
                 </p>
               </ng-container>
               <button
-                class="btn btn-simple btn-primary btn-block mt-auto"
+                class="btn btn-simple btn-primary btn-block mt-auto text-nowrap"
                 type="button"
                 [routerLink]="['/class', c.id]"
               >
@@ -110,7 +110,7 @@
             alt="Card image cap"
           />
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title text-center mb-2">
+            <h5 class="card-title text-center academy-page__course-title">
               {{
                 (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
                   | uppercase

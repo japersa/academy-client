@@ -556,7 +556,7 @@
                     [alt]="c?.title || 'Curso'"
                   />
                   <div class="card-body d-flex flex-column">
-                    <h5 class="card-title text-center mb-2 self-management-home__course-title">
+                    <h5 class="card-title text-center self-management-home__course-title">
                       {{
                         (c.title.length > 20 ? c.title.slice(0, 18) + '...' : c.title)
                           | uppercase
@@ -568,7 +568,7 @@
                       </p>
                     </ng-container>
                     <button
-                      class="btn btn-primary btn-block mt-auto"
+                      class="btn btn-primary btn-block mt-auto text-nowrap"
                       type="button"
                       [routerLink]="['/class', c.id]"
                     >
@@ -603,7 +603,7 @@
                   [alt]="c?.title || 'Curso'"
                 />
                 <div class="card-body d-flex flex-column">
-                  <h5 class="card-title text-center mb-2 self-management-home__course-title">
+                  <h5 class="card-title text-center self-management-home__course-title">
                     {{
                       (c.title.length > 20 ? c.title.slice(0, 18) + '...' : c.title)
                         | uppercase
