@@ -38,6 +38,10 @@
     border-top: 1px solid var(--primary);
 }
 
+.self-management-home__continue-watching-section {
+    margin-top: clamp(2rem, 5vw, 3.25rem);
+}
+
 /* Cursos / Continuar viendo: mismo patrón que dashboard (card contenedora + rejilla + cards internas) */
 .self-management-home__courses-card .card-header {
     padding-bottom: 0.5rem;
