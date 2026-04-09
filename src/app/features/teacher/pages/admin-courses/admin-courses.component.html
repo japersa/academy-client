@@ -30,7 +30,7 @@
               <ng-container
                 *ngIf="!showFormCreateCourse && !showFormEditCourse"
               >
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <div class="card shadow">
                     <div class="card-header">
                       <div class="tools float-right">
@@ -95,14 +95,14 @@
                 </div>
               </ng-container>
               <ng-container *ngIf="showFormCreateCourse">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <app-create-course
                     (showEvent)="changeStateShow($event)"
                   ></app-create-course>
                 </div>
               </ng-container>
               <ng-container *ngIf="showFormEditCourse">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <app-edit-course
                     (showEvent)="changeStateShow($event)"
                     [course]="courseEdit"
@@ -119,7 +119,7 @@
               <ng-container
                 *ngIf="!showFormCreateModule && !showFormEditModule"
               >
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <div class="card">
                     <div class="card-header">
                       <div class="tools float-right">
@@ -216,14 +216,14 @@
                 </div>
               </ng-container>
               <ng-container *ngIf="showFormCreateModule">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <app-create-module
                     (showEvent)="changeStateShow($event)"
                   ></app-create-module>
                 </div>
               </ng-container>
               <ng-container *ngIf="showFormEditModule">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <app-edit-module
                     (showEvent)="changeStateShow($event)"
                     [module]="moduleEdit"
@@ -238,7 +238,7 @@
                 <i class="tim-icons icon-paper"> </i> Temarios
               </ng-template>
               <ng-container *ngIf="!showFormCreateTopic && !showFormEditTopic">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <div class="card">
                     <div class="card-header">
                       <div class="tools float-right">
@@ -331,14 +331,14 @@
                 </div>
               </ng-container>
               <ng-container *ngIf="showFormCreateTopic">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <app-create-topics
                     (showEvent)="changeStateShow($event)"
                   ></app-create-topics>
                 </div>
               </ng-container>
               <ng-container *ngIf="showFormEditTopic">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <app-edit-topics
                     (showEvent)="changeStateShow($event)"
                     [topic]="topicEdit"
@@ -355,7 +355,7 @@
               <ng-container
                 *ngIf="!showFormCreateQuizzes && !showFormEditQuizzes"
               >
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <div class="card">
                     <div class="card-header">
                       <div class="tools float-right">
@@ -450,14 +450,14 @@
                 </div>
               </ng-container>
               <ng-container *ngIf="showFormCreateQuizzes">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <app-create-quiz
                     (showEvent)="changeStateShow($event)"
                   ></app-create-quiz>
                 </div>
               </ng-container>
               <ng-container *ngIf="showFormEditQuizzes">
-                <div class="col-md-12">
+                <div class="col-md-12 p-0">
                   <app-edit-quiz
                     (showEvent)="changeStateShow($event)"
                     [quiz]="quizEdit"
