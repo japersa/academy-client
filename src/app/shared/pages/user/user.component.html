@@ -18,17 +18,10 @@
   <div class="row">
     <div class="col-12">
       <div class="row pl-2 pr-2 align-items-lg-start">
-        <div class="col-12 mb-3">
-          <h4 class="text-secondary">{{ rol | titlecase }}</h4>
-          <h1 class="text-secondary title">
-            {{ userDataService?.userData$?.value.first_name | uppercase }}
-          </h1>
-        </div>
-
         <div class="col-lg-7 col-md-12 d-flex flex-column">
-          <div class="card shadow w-100">
-            <div class="card-header">
-              <h4 class="title">Editar perfil</h4>
+          <div class="card user-profile__edit-card border-0 shadow-sm w-100">
+            <div class="card-header user-profile__card-head pb-2">
+              <h4 class="card-title title-table mb-0">Editar perfil</h4>
             </div>
             <div class="card-body">
               <form class="form" [formGroup]="updateForm" (ngSubmit)="updateUser(updateForm.value)" role="form">
@@ -169,9 +162,9 @@
               </form>
             </div>
           </div>
-          <div class="card shadow" *ngIf="showPasswordField">
-            <div class="card-header">
-              <h4 class="title">CAMBIAR CONTRASEÑA</h4>
+          <div class="card user-profile__edit-card border-0 shadow-sm mt-3" *ngIf="showPasswordField">
+            <div class="card-header user-profile__card-head pb-2">
+              <h4 class="card-title title-table mb-0">Cambiar contraseña</h4>
             </div>
             <div class="card-body">
               <form class="form" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword(updatePasswordForm.value)"
@@ -215,23 +208,24 @@
           </div>
         </div>
 
-        <div class="col-lg-5 col-md-12 d-flex flex-column">
-          <div class="card card-user shadow w-100">
-            <div class="card-body p-0 pt-3 pb-3">
-              <p class="card-text"></p>
-              <div class="author">
-                <a href="javascript:void(0)">
+        <div class="col-lg-5 col-md-12 d-flex flex-column mt-3 mt-lg-0">
+          <div class="card user-profile__detail-card border-0 shadow-sm w-100">
+            <div class="card-header user-profile__card-head pb-2">
+              <h4 class="card-title title-table mb-0">Detalle del perfil</h4>
+            </div>
+            <div class="card-body pt-3 pb-3">
+              <div class="author text-center">
+                <a href="javascript:void(0)" class="d-inline-block">
                   <app-picture-upload></app-picture-upload>
-
-                  <h5 class="title text-secondary">
+                  <h5 class="title text-secondary mt-3 mb-2">
                     {{ first_name | titlecase }} {{ last_name | titlecase }}
                   </h5>
                 </a>
               </div>
-              <div class="card-description" style="text-align: center">
-                <p class="description text-primary">{{ rol | titlecase }}</p>
-                <p>{{ username }}</p>
-                <p class="description">
+              <div class="card-description text-center">
+                <p class="description text-primary mb-1">{{ rol | titlecase }}</p>
+                <p class="mb-1">{{ username }}</p>
+                <p class="description mb-0">
                   {{ subscriptionLabelText }}
                 </p>
               </div>
@@ -242,44 +236,49 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row user-profile__approved-courses-section">
     <div class="col-12">
-      <div class="row pl-2 pr-2">
-        <div class="col-12">
-          <h2 class="mt-4 mb-0 text-secondary">Cursos aprobados</h2>
-          <hr style="width: 100%" color="primary" />
+      <div class="card user-profile__courses-card">
+        <div class="card-header pb-2">
+          <h4 class="card-title title-table mb-0">Cursos aprobados</h4>
         </div>
+        <div class="card-body pt-3">
+          <ng-container *ngIf="approvedCourses.length < 1">
+            <p class="text-center text-muted mb-0 py-3">
+              Aún no tienes aprobado ningún curso.
+            </p>
+          </ng-container>
 
-        <ng-container *ngIf="approvedCourses.length < 1">
-          <div class="col-lg-6 col-md-12">
-            <div class="card shadow">
-              <div class="card-body">
-                <h5 class="card-title text-center">
-                  Aún no tienes aprobado ningún curso
-                </h5>
+          <div class="row user-profile__courses" *ngIf="approvedCourses.length > 0">
+            <div
+              *ngFor="let c of approvedCourses"
+              class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4"
+            >
+              <div class="card user-profile__course-card h-100">
+                <img
+                  class="card-img-top user-profile__course-img"
+                  [src]="c?.path_preview_image"
+                  [alt]="c?.title || 'Curso'"
+                />
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title text-center mb-3 user-profile__course-title">
+                    {{
+                      (c.title.length > 20 ? c.title.slice(0, 18) + '...' : c.title)
+                        | uppercase
+                    }}
+                  </h5>
+                  <button
+                    class="btn btn-secondary btn-block mt-auto user-profile__cert-btn"
+                    type="button"
+                    (click)="generateCertificate(c.id)"
+                  >
+                    Descargar certificado
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </ng-container>
-
-        <ng-container *ngFor="let c of approvedCourses">
-          <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card">
-              <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title text-center">
-                  {{
-                  (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
-                  | uppercase
-                  }}
-                </h5>
-                <button class="btn btn-simple btn-secondary btn-block" type="button" style="color:#d0ad50 !important" (click)="generateCertificate(c.id)">
-                  DESCARGAR CERTIFICADO
-                </button>
-              </div>
-            </div>
-          </div>
-        </ng-container>
+        </div>
       </div>
     </div>
   </div>

@@ -36,6 +36,45 @@
     border-top: 1px solid var(--primary);
 }
 
+/* Cursos / Continuar viendo: mismo patrón que dashboard (card contenedora + rejilla + cards internas) */
+.self-management-home__courses-card .card-header {
+    padding-bottom: 0.5rem;
+}
+
+.self-management-home__courses {
+    align-items: stretch;
+}
+
+.self-management-home__courses-card {
+    border: none !important;
+}
+
+.self-management-home__course-card {
+    border: none !important;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.self-management-home__course-card .card-body {
+    border-bottom: none;
+}
+
+.self-management-home__course-img {
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+    padding: 10px !important;
+    border-radius: 15px !important;
+}
+
+.self-management-home__course-title {
+    word-break: break-word;
+    line-height: 1.3;
+    min-height: 2.6em;
+    font-weight: 600 !important;
+    font-size: 1.35rem !important;
+}
+
 .self-management-home .breadcrumb-item.active {
     color: rgba(255, 255, 255, 0.85);
 }

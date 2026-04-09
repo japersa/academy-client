@@ -86,10 +86,14 @@
         </div>
       </div>
 
-      <section class="class-page__topic-meta">
-        <h1 class="class-page__topic-title">{{ topic?.title | titlecase }}</h1>
-        <p class="class-page__topic-desc" *ngIf="topic?.description">{{ topic.description }}</p>
-      </section>
+      <div class="card class-page__topic-card border-0 shadow-sm" *ngIf="topic">
+        <div class="card-header class-page__topic-card-head pb-2">
+          <h2 class="card-title title-table mb-0">{{ topic?.title | titlecase }}</h2>
+        </div>
+        <div class="card-body pt-3" *ngIf="topic?.description">
+          <p class="class-page__topic-desc mb-0">{{ topic.description }}</p>
+        </div>
+      </div>
 
       <div class="class-page__below">
         <section class="class-page__section" *ngIf="topic?.files?.length">

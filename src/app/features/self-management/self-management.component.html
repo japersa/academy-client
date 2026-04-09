@@ -537,31 +537,40 @@
       (userDataService?.userData$?.value?.subscription || 'none') !== 'none'
     "
   >
-    <div class="row mt-2">
+    <div class="row self-management-home__courses-section mt-2">
       <div class="col-12">
-        <h2 class="mt-2 mb-0">Continuar viendo</h2>
-        <hr class="self-management-home__hr" />
-        <div class="row g-3">
-          <div
-            *ngFor="let c of continueLearningCourses"
-            class="col-lg-3 col-md-6 col-sm-12 col-12"
-          >
-            <div class="card">
-              <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap" />
-              <div class="card-body">
-                <h5 class="card-title text-center">
-                  {{
-                    (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
-                      | uppercase
-                  }}
-                </h5>
-                <button
-                  class="btn btn-simple btn-primary btn-block"
-                  type="button"
-                  [routerLink]="['/class', c.id]"
-                >
-                  CONTINUAR VIENDO
-                </button>
+        <div class="card self-management-home__courses-card">
+          <div class="card-header pb-2">
+            <h4 class="card-title title-table mb-0">Continuar viendo</h4>
+          </div>
+          <div class="card-body pt-3">
+            <div class="row self-management-home__courses">
+              <div
+                *ngFor="let c of continueLearningCourses"
+                class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4"
+              >
+                <div class="card self-management-home__course-card h-100">
+                  <img
+                    class="card-img-top self-management-home__course-img"
+                    [src]="c?.path_preview_image"
+                    [alt]="c?.title || 'Curso'"
+                  />
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center mb-3 self-management-home__course-title">
+                      {{
+                        (c.title.length > 20 ? c.title.slice(0, 18) + '...' : c.title)
+                          | uppercase
+                      }}
+                    </h5>
+                    <button
+                      class="btn btn-primary btn-block mt-auto"
+                      type="button"
+                      [routerLink]="['/class', c.id]"
+                    >
+                      Continuar viendo
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -571,30 +580,39 @@
   </ng-container>
 
   <div
-    class="row mt-3"
+    class="row self-management-home__courses-section mt-3"
     *ngIf="(userDataService?.userData$?.value?.subscription || 'none') !== 'none'"
   >
     <div class="col-12">
-      <h2 class="mt-2 mb-0">Cursos</h2>
-      <hr class="self-management-home__hr" />
-      <div class="row g-3">
-        <div *ngFor="let c of courses" class="col-lg-3 col-md-6 col-sm-12 col-12">
-          <div class="card">
-            <img class="card-img-top" [src]="c?.path_preview_image" alt="Card image cap" />
-            <div class="card-body">
-              <h5 class="card-title text-center">
-                {{
-                  (c.title.length > 20 ? c.title.slice(0, 18) + "..." : c.title)
-                    | uppercase
-                }}
-              </h5>
-              <button
-                class="btn btn-secondary btn-block"
-                type="button"
-                [routerLink]="['/course', c.id]"
-              >
-                IR AL CURSO
-              </button>
+      <div class="card self-management-home__courses-card">
+        <div class="card-header pb-2">
+          <h4 class="card-title title-table mb-0">Cursos</h4>
+        </div>
+        <div class="card-body pt-3">
+          <div class="row self-management-home__courses">
+            <div *ngFor="let c of courses" class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+              <div class="card self-management-home__course-card h-100">
+                <img
+                  class="card-img-top self-management-home__course-img"
+                  [src]="c?.path_preview_image"
+                  [alt]="c?.title || 'Curso'"
+                />
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title text-center mb-3 self-management-home__course-title">
+                    {{
+                      (c.title.length > 20 ? c.title.slice(0, 18) + '...' : c.title)
+                        | uppercase
+                    }}
+                  </h5>
+                  <button
+                    class="btn btn-secondary btn-block mt-auto"
+                    type="button"
+                    [routerLink]="['/course', c.id]"
+                  >
+                    Ir al curso
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
