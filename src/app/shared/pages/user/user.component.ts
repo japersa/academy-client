@@ -122,6 +122,14 @@ export class UserComponent implements OnInit, OnDestroy {
     return String(s);
   }
 
+  courseCardDescription(c: { description?: string }): string | null {
+    const raw = String(c?.description ?? '').trim();
+    if (!raw || raw === 'Sin asignar') {
+      return null;
+    }
+    return raw;
+  }
+
   // Actualizar info del usuario
   updateUser(dataFrom: any) {
 

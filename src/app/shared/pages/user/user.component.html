@@ -261,12 +261,17 @@
                   [alt]="c?.title || 'Curso'"
                 />
                 <div class="card-body d-flex flex-column">
-                  <h5 class="card-title text-center mb-3 user-profile__course-title">
+                  <h5 class="card-title text-center mb-2 user-profile__course-title">
                     {{
                       (c.title.length > 20 ? c.title.slice(0, 18) + '...' : c.title)
                         | uppercase
                     }}
                   </h5>
+                  <ng-container *ngIf="courseCardDescription(c) as desc">
+                    <p class="small text-muted text-center mb-2 user-profile__course-desc">
+                      {{ desc }}
+                    </p>
+                  </ng-container>
                   <button
                     class="btn btn-secondary btn-block mt-auto user-profile__cert-btn"
                     type="button"

@@ -25,6 +25,15 @@ export class AcademyComponent implements OnInit{
 
   slides$ = new BehaviorSubject<any>([]);
 
+  /** Descripción en cards; oculta vacío y placeholder del backend. */
+  courseCardDescription(c: { course_description?: string; description?: string }): string | null {
+    const raw = String(c?.course_description ?? c?.description ?? '').trim();
+    if (!raw || raw === 'Sin asignar') {
+      return null;
+    }
+    return raw;
+  }
+
   constructor(
     private coursesService: CoursesService,
     private registerService: RegisterService,

@@ -44,6 +44,15 @@ export class SelfManagementComponent implements OnInit {
     return buildWhatsAppReferralShareUrl(this.referalCode);
   }
 
+  /** Descripción visible en cards; oculta vacío y placeholder del backend. */
+  courseCardDescription(c: { course_description?: string; description?: string }): string | null {
+    const raw = String(c?.course_description ?? c?.description ?? '').trim();
+    if (!raw || raw === 'Sin asignar') {
+      return null;
+    }
+    return raw;
+  }
+
 
   constructor(public userDataService: UserDataService,
               private coursesService: CoursesService,

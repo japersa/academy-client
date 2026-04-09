@@ -116,6 +116,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.router.navigate([`/course/${id}`])
   }
 
+  courseCardDescription(c: { description?: string }): string | null {
+    const raw = String(c?.description ?? '').trim();
+    if (!raw || raw === 'Sin asignar') {
+      return null;
+    }
+    return raw;
+  }
+
   ngOnInit() {
     this.showGeneralStatistics();
     this.getCourses();

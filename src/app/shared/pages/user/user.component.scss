@@ -121,6 +121,15 @@ hr {
     font-size: 1.35rem !important;
 }
 
+.user-profile__course-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.45;
+    font-size: 0.8125rem;
+}
+
 .user-profile__cert-btn {
     color: #d0ad50 !important;
 }
