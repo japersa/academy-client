@@ -99,6 +99,15 @@ export class ReferralRebuyCheckoutComponent implements OnInit {
 
     this.userService.getUser().subscribe({
       next: (user) => {
+        if (user.rol === 'teacher' || user.rol === 'admin') {
+          this.planChecked = true;
+          this.toastr.info(
+            'Las cuentas de profesor y administrador no requieren recompra mensual del código.',
+            'Renovación',
+          );
+          void this.router.navigate(['/referrals']);
+          return;
+        }
         const pkgs = user.packages_self_management as SelfManagementPackage[] | undefined;
         const hasActivePkg =
           Array.isArray(pkgs) && pkgs.some((p) => (p.status || '').toLowerCase() === 'active');
