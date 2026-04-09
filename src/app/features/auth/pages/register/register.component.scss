@@ -65,49 +65,6 @@
     color: #000 !important;
 }
 
-.register-side-panel {
-    min-height: 100vh;
-    align-items: stretch;
-    background: linear-gradient(155deg, #171a22 0%, #221e18 42%, #352e26 100%);
-    border-left: 1px solid rgba(208, 173, 80, 0.25);
-}
-
-.register-side-inner {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2.5rem 2rem;
-}
-
-.register-side-content {
-    max-width: 22rem;
-    text-align: center;
-}
-
-.register-side-eyebrow {
-    margin: 0 0 0.75rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(208, 173, 80, 0.85);
-}
-
-.register-side-title {
-    margin: 0 0 1rem;
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: #f5f0e6;
-    letter-spacing: 0.04em;
-}
-
-.register-side-copy {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.72);
-}
-
 @media only screen and (max-width: 600px) {
     .card-title {
         margin-top: 0.5rem !important;
