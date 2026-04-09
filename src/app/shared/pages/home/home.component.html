@@ -12,7 +12,10 @@
         <div class="referral-code-banner-wrap home-page__referido w-100 align-self-md-end">
           <div class="card card-stats text-center referral-code-banner">
             <p class="referral-code-banner__title">Código de referido</p>
-            <p *ngIf="!referralCodeActive" class="small text-warning mb-1 text-start">
+            <p
+              *ngIf="!referralCodeActive && !isTeacherOrAdmin"
+              class="small text-warning mb-1 text-start"
+            >
               Código inactivo por recompra vencida. Reactívalo en <a routerLink="/referrals">Referidos</a>.
             </p>
             <div class="referral-code-banner__code-row">

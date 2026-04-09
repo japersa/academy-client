@@ -123,8 +123,14 @@
                         {{ referralActive ? 'Activo' : 'Inactivo' }}
                       </span>
                     </p>
-                    <p *ngIf="referralNextRenewal" class="card-category small mb-0">
+                    <p
+                      *ngIf="referralNextRenewal && !isTeacherOrAdmin"
+                      class="card-category small mb-0"
+                    >
                       Próxima recompra: {{ referralNextRenewal | date: 'mediumDate' }}
+                    </p>
+                    <p *ngIf="isTeacherOrAdmin" class="card-category small text-muted mb-0">
+                      Sin recompra mensual (cuenta profesor o administrador).
                     </p>
                   </div>
                 </div>
@@ -132,12 +138,31 @@
             </div>
           </div>
 
-          <p class="small text-muted mb-3 mt-2">
+          <p *ngIf="!isTeacherOrAdmin" class="small text-muted mb-3 mt-2">
             Cuando un referido paga su recompra mensual, recibes
             <strong>{{ referrerRebuyCommissionUsd }} USD</strong> de comisión en tu saldo de ganancias.
           </p>
+          <p *ngIf="isTeacherOrAdmin" class="small text-muted mb-3 mt-2">
+            Las comisiones por referidos se acreditan en tu saldo según las reglas del programa.
+          </p>
 
           <hr class="mt-2" />
+
+          <div class="row" *ngIf="showStaffAcademiaBanner">
+            <div class="col-lg-10 col-md-12">
+              <div class="rebuy-banner rebuy-banner--academia-course mb-3" role="status">
+                <h5 class="rebuy-banner__title">Academia y referidos</h5>
+                <p class="rebuy-banner__text mb-3">
+                  Las cuentas de <strong>profesor</strong> o <strong>administrador</strong> no requieren
+                  recompra mensual: tu código permanece activo y el plan de la app no se desactiva por fecha
+                  de renovación.
+                </p>
+                <a routerLink="/self-management/home" class="btn btn-sm btn-fill rebuy-banner__btn"
+                  >Ir a Academia</a
+                >
+              </div>
+            </div>
+          </div>
 
           <div class="row" *ngIf="showAcademiaOnboardingBanner">
             <div class="col-lg-10 col-md-12">

@@ -4,6 +4,7 @@ import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-sha
 import { ReferredUserRow, UserService } from 'src/app/shared/services/user.service';
 import { CatalogPricesService } from 'src/app/core/services/catalog-prices.service';
 import { isReferralRenewalDueOrOverdue } from 'src/app/shared/utils/referral-renewal-date';
+import { isTeacherOrAdminRole } from 'src/app/shared/utils/staff-role';
 
 interface SelfManagementPackage {
   status?: string;
@@ -36,6 +37,8 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   error: string | null = null;
 
   referredUsers: ReferredUserRow[] = [];
+  /** Profesor y admin: sin recompra mensual ni bajada de plan por fecha. */
+  isTeacherOrAdmin = false;
   /** true hasta que termina la primera carga de perfil (incluye lista de referidos desde el API). */
   profileLoading = true;
 
@@ -61,6 +64,9 @@ export class ReferralsComponent implements OnInit, OnDestroy {
    * No mientras la renovación sea futura (el usuario ve la fecha en la tarjeta de código).
    */
   get showRebuyMonthlyCta(): boolean {
+    if (this.isTeacherOrAdmin) {
+      return false;
+    }
     return isReferralRenewalDueOrOverdue(this.referralNextRenewal);
   }
 
@@ -69,6 +75,9 @@ export class ReferralsComponent implements OnInit, OnDestroy {
    * No usar para usuarios nuevos sin plan (ver `showAcademiaOnboardingBanner`).
    */
   get showAcademiaRebuySyncBanner(): boolean {
+    if (this.isTeacherOrAdmin) {
+      return false;
+    }
     return !this.referralNextRenewal && this.hasActiveSelfManagementPlan;
   }
 
@@ -76,6 +85,9 @@ export class ReferralsComponent implements OnInit, OnDestroy {
    * Usuario nuevo / sin plan de Academia: solo invitar a contratar el plan. Sin título ni texto de «recompra» ni importe mensual.
    */
   get showAcademiaOnboardingBanner(): boolean {
+    if (this.isTeacherOrAdmin) {
+      return false;
+    }
     return !this.referralNextRenewal && !this.hasActiveSelfManagementPlan;
   }
 
@@ -83,11 +95,19 @@ export class ReferralsComponent implements OnInit, OnDestroy {
    * Plan activo y fecha de recompra aún futura: acceso a Academia/cursos sin CTA de pago (ese va solo al vencer el plazo).
    */
   get showAcademiaCourseBanner(): boolean {
+    if (this.isTeacherOrAdmin) {
+      return false;
+    }
     return (
       this.hasActiveSelfManagementPlan &&
       !!this.referralNextRenewal &&
       !isReferralRenewalDueOrOverdue(this.referralNextRenewal)
     );
+  }
+
+  /** Mensaje neutro para staff: Academia sin mencionar recompra. */
+  get showStaffAcademiaBanner(): boolean {
+    return this.isTeacherOrAdmin;
   }
 
   ngOnInit(): void {
@@ -154,10 +174,12 @@ export class ReferralsComponent implements OnInit, OnDestroy {
     }
     this.userService.getUser().subscribe({
       next: (user) => {
+        this.isTeacherOrAdmin = isTeacherOrAdminRole(user?.rol);
         this.commissionBalance = user.commission_balance ?? 0;
         this.travelPoints = user.travel_points ?? 0;
         this.referralCode = user.referral_code ?? '';
-        this.referralActive = user.referral_active === true;
+        this.referralActive =
+          this.isTeacherOrAdmin || user.referral_active === true;
         this.referralNextRenewal = user.referral_next_renewal ?? null;
         const pkgs = user.packages_self_management as SelfManagementPackage[] | undefined;
         const hasActivePkg =
@@ -190,6 +212,7 @@ export class ReferralsComponent implements OnInit, OnDestroy {
 
   private syncReferralRenewalPollingState(): void {
     const waitingForRebuyState =
+      !this.isTeacherOrAdmin &&
       this.hasActiveSelfManagementPlan &&
       (!this.referralActive || !this.referralNextRenewal);
     if (waitingForRebuyState) {

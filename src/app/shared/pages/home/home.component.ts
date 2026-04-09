@@ -5,6 +5,7 @@ import { UserDataService } from '../../../core/services/user-data.service';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../../features/auth/services/register.service';
 import { StorageService } from '../../../core/services/storage.service';
+import { isTeacherOrAdminRole } from '../../../shared/utils/staff-role';
 
 
 @Component({
@@ -38,6 +39,10 @@ export class HomeComponent implements OnInit {
     return buildWhatsAppReferralShareUrl(this.referalCode);
   }
 
+  get isTeacherOrAdmin(): boolean {
+    return isTeacherOrAdminRole(this.userDataService.userData$.value?.rol);
+  }
+
   ngOnInit(): void {
     this.userDataService.userData$.subscribe({
       next: (r) => {
@@ -45,7 +50,8 @@ export class HomeComponent implements OnInit {
           this.referalCode = r.referral_code;
         }
         if (r && 'referral_active' in r) {
-          this.referralCodeActive = r.referral_active === true;
+          this.referralCodeActive =
+            isTeacherOrAdminRole(r.rol) || r.referral_active === true;
         }
       },
     });
@@ -53,7 +59,8 @@ export class HomeComponent implements OnInit {
       next: (r) => {
         this.userDataService.userData$.next(r);
         this.referalCode = r?.referral_code ?? this.referalCode;
-        this.referralCodeActive = r?.referral_active === true;
+        this.referralCodeActive =
+          isTeacherOrAdminRole(r?.rol) || r?.referral_active === true;
         void this.storageService.set('userData', r);
       },
       error: (e) => console.error(e),

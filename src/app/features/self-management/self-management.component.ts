@@ -6,6 +6,7 @@ import { UserDataService } from 'src/app/core/services/user-data.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { RegisterService } from '../auth/services/register.service';
 import { BehaviorSubject } from 'rxjs';
+import { isTeacherOrAdminRole } from 'src/app/shared/utils/staff-role';
 
 
 @Component({
@@ -108,7 +109,8 @@ export class SelfManagementComponent implements OnInit {
             this.agActivete();
             this.userDataService.userData$.next(r);
             this.referalCode = r?.referral_code;
-            this.referralCodeActive = r?.referral_active === true;
+            this.referralCodeActive =
+              isTeacherOrAdminRole(r?.rol) || r?.referral_active === true;
             this.storageService.set('userData', r);
             this.fillCourses();
           },
