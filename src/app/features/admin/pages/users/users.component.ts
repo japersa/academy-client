@@ -104,6 +104,20 @@ export class UsersComponent implements OnInit {
     return Math.min(this.currentPage * this.entries, this.temp.length);
   }
 
+  /** Título de la card: español, mismo criterio que el resto de vistas admin (sin mayúsculas ni inglés). */
+  get roleTitleEs(): string {
+    switch (this.role) {
+      case ROLES_ENUM.ADMIN:
+        return 'Administradores';
+      case ROLES_ENUM.TEACHER:
+        return 'Profesores';
+      case ROLES_ENUM.USER:
+        return 'Usuarios';
+      default:
+        return 'Usuarios';
+    }
+  }
+
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
