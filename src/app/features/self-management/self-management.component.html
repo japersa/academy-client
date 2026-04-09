@@ -471,8 +471,8 @@
         "
       >
         <p class="mb-0 mt-2 self-management-home__tagline">
-          Continúa con tu plan <strong>Start Academy — Academia</strong>. La
-          <strong>recompra mensual</strong> mantiene activo tu acceso y tu código de referido.
+          Continúa con tu plan Start Academy — Academia. La recompra mensual mantiene activo tu acceso y tu
+          código de referido.
         </p>
       </ng-container>
       <ng-template #elseTemplate>
@@ -752,7 +752,7 @@
     <div class="col-12">
       <div class="shadow-custom commissions">
         <div class="row align-items-center">
-          <div class="col-12 col-md-7 mb-4 mb-md-0">
+          <div class="col-12 col-md-6 mb-4 mb-md-0">
             <h3 class="card-subtitle mb-3 mt-0">
               Gana con Start Academy
             </h3>
@@ -765,13 +765,14 @@
               Compártelo y empieza a ganar con Start Academy.
             </p>
           </div>
-          <div class="col-12 col-md-5 my-auto text-center commissions__code-col">
-            <div class="mb-2">
-              <p class="ref2 text-center mb-0">{{ referalCode }}</p>
-            </div>
+          <div class="col-12 col-md-6 my-auto text-center commissions__code-col">
             <div
-              class="commissions__share-actions d-flex flex-wrap justify-content-center align-items-center"
+              class="commissions__code-row d-flex flex-nowrap align-items-center justify-content-center"
             >
+              <p class="ref2 text-center mb-0 commissions__code-text">{{ referalCode }}</p>
+              <div
+                class="commissions__share-actions d-flex flex-nowrap justify-content-center align-items-center"
+              >
               <button
                 type="button"
                 class="btn btn-secondary btn-sm referral-share-icon-btn"

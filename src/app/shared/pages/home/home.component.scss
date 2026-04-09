@@ -177,6 +177,45 @@ h3, h2 {
     word-break: break-all;
 }
 
+.commissions__code-row.d-flex {
+    display: grid !important;
+    grid-template-columns: minmax(15rem, 1fr) auto;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.commissions .ref2.commissions__code-text {
+    width: 100%;
+    min-width: 0;
+    white-space: nowrap;
+    word-break: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 2.375rem;
+    height: 2.375rem;
+    max-height: 2.375rem;
+    padding: 0 1rem !important;
+    line-height: 1.15;
+}
+
+.commissions__share-actions {
+    flex-shrink: 0;
+    gap: 0.35rem;
+}
+
 .home-page .commissions .btn-ref {
     color: var(--secondary);
     background: black !important;
