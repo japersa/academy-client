@@ -19,8 +19,17 @@
         [collapse]="menuitem.isCollapsed" [isAnimated]="true">
         <ul class="nav">
           <li *ngFor="let childitems of menuitem.children" routerLinkActive="active">
-            <!--If is a single link-->
-            <a [routerLink]="[menuitem.path, childitems.path]" *ngIf="childitems.type === 'link'">
+            <!--If is a single link (sin ruta todavía: solo aviso)-->
+            <a
+              href="#"
+              *ngIf="childitems.type === 'link' && childitems.comingSoon"
+              (click)="onComingSoonNavClick($event)"
+              class="sidebar-nav-link--coming-soon"
+            >
+              <span class="sidebar-mini-icon">{{ childitems.smallTitle }}</span>
+              <span class="sidebar-normal">{{ childitems.title }}</span>
+            </a>
+            <a [routerLink]="[menuitem.path, childitems.path]" *ngIf="childitems.type === 'link' && !childitems.comingSoon">
               <span class="sidebar-mini-icon">{{ childitems.smallTitle }}</span>
               <span class="sidebar-normal">{{ childitems.title }}</span>
             </a>

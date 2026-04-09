@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserDataService } from '../../../../core/services/user-data.service';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import { environment } from 'src/environments/environment';
@@ -24,6 +25,8 @@ export interface ChildrenItems {
   collapse?: string;
   children?: ChildrenItems2[];
   isCollapsed?: boolean;
+  /** Sin ruta todavía: el clic muestra aviso en lugar de navegar */
+  comingSoon?: boolean;
 }
 
 export interface ChildrenItems2 {
@@ -160,10 +163,11 @@ export const ROUTES: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: '#',
+        path: '',
         title: 'Proximamente',
         type: 'link',
-        smallTitle: 'AD'
+        smallTitle: 'AD',
+        comingSoon: true,
       }
     ]
   }
@@ -274,10 +278,11 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     isCollapsed: true,
     children: [
       {
-        path: '#',
+        path: '',
         title: 'Proximamente',
         type: 'link',
-        smallTitle: 'AD'
+        smallTitle: 'AD',
+        comingSoon: true,
       },
     ]
   }
@@ -355,7 +360,8 @@ export const ROUTES_TEACHER: RouteInfo[] = [
         path: '',
         title: 'Proximamente',
         type: 'link',
-        smallTitle: 'AD'
+        smallTitle: 'AD',
+        comingSoon: true,
       },
     ]
   }
@@ -449,8 +455,21 @@ export class SidebarComponent implements OnInit {
         }, */
   ];
 
-  constructor(private router: Router,
-    private userDataService: UserDataService) { }
+  constructor(
+    private router: Router,
+    private userDataService: UserDataService,
+    private toastr: ToastrService,
+  ) { }
+
+  onComingSoonNavClick(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.toastr.info(
+      'Esta sección estará disponible pronto.',
+      'Próximamente',
+      { timeOut: 4500, closeButton: true, positionClass: 'toast-top-right' },
+    );
+  }
 
   public rol: string;
 

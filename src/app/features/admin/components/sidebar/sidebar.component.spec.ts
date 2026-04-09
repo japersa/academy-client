@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ToastrService } from "ngx-toastr";
 
 import { SidebarComponent } from "./sidebar.component";
+import { UserDataService } from "../../../../core/services/user-data.service";
+import { of } from "rxjs";
 
 describe("SidebarComponent", () => {
   let component: SidebarComponent;
@@ -8,7 +12,15 @@ describe("SidebarComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SidebarComponent]
+      imports: [RouterTestingModule],
+      declarations: [SidebarComponent],
+      providers: [
+        { provide: ToastrService, useValue: { info: (): void => undefined } },
+        {
+          provide: UserDataService,
+          useValue: { userData$: of({ rol: "user" }) },
+        },
+      ],
     }).compileComponents();
   }));
 
