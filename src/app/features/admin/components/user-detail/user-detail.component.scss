@@ -1,4 +1,4 @@
-/* Alineado con el resto de admin: títulos vía .title-table global en card-header */
+/* Detalle de usuario: sin línea bajo el encabezado de la card */
 
 .user-detail-page__card {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
@@ -6,7 +6,7 @@
   overflow: hidden;
 
   .card-header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: none !important;
   }
 }
 

@@ -1,6 +1,39 @@
 /* Mismo ancho que el resto del panel: sin mx-5 extra */
 .admin-courses-page {
   max-width: 100%;
+
+  .card-subcategories > .card-body {
+    padding: 0.65rem 0.85rem 0.9rem !important;
+  }
+
+  tabset:not(.vertical-pills) .tab-content {
+    padding: 0.35rem 0 0 !important;
+  }
+
+  tabset .nav-pills .nav-item .nav-link {
+    padding: 0.35rem 0.85rem !important;
+    min-width: 0;
+  }
+
+  tabset .nav-pills .nav-item .nav-link i.tim-icons {
+    display: block;
+    line-height: 1.2 !important;
+    font-size: 1.05rem !important;
+    margin-bottom: 0.15rem;
+  }
+
+  .tab-content .tab-pane [class*='col-'] {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .tab-content .card .card-header {
+    padding: 0.55rem 0.75rem !important;
+  }
+
+  .tab-content .card .card-body {
+    padding: 0.55rem 0.75rem !important;
+  }
 }
 
 .title-table {
