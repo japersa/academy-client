@@ -65,18 +65,22 @@ hr {
     border-radius: 10px;
 }
 
-/* Editar perfil + detalle: misma card que dashboard / Academia */
+/* Editar perfil + detalle: sin radio extra (igual que card de «Cursos aprobados») */
 .user-profile__edit-card,
 .user-profile__detail-card {
     overflow: hidden;
-    border-radius: 12px !important;
     background: #fff !important;
 }
 
+/* Sin línea bajo el título (Bootstrap .card-header trae border-bottom por defecto) */
+.user-profile__edit-card .card-header,
+.user-profile__detail-card .card-header,
+.user-profile__courses-card .card-header {
+    border-bottom: none !important;
+}
+
 .user-profile__card-head {
-    border-bottom: 1px solid rgba(208, 173, 80, 0.35);
     background: #faf9f7;
-    border-radius: 12px 12px 0 0;
 }
 
 .user-profile__detail-card .card-body {
@@ -86,10 +90,6 @@ hr {
 /* Cursos aprobados: mismo patrón que dashboard / Academia (card contenedora + rejilla) */
 .user-profile__approved-courses-section {
     margin-top: 1.5rem;
-}
-
-.user-profile__courses-card .card-header {
-    padding-bottom: 0.5rem;
 }
 
 .user-profile__courses {

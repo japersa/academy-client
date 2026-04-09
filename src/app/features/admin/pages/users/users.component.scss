@@ -10,22 +10,57 @@
     border-radius: 10px;
 }
 
-select { 
+/* Misma altura que Bootstrap sm en el resto de filtros (40px) */
+.filters select.form-control-sm {
     height: 40px;
+    box-sizing: border-box;
 }
 
-input {
+.filters input.form-control-sm:not(.search-input) {
     height: 40px;
-    width: 250px!important;
+    width: 250px !important;
+    box-sizing: border-box;
 }
 
+.users-filters__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+}
+
+.users-filters__date-label {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.5rem;
+    margin-bottom: 0;
+}
+
+/* Icono de búsqueda dentro del input (derecha), alineado al centro vertical */
+.search-label {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+.search-input {
+    width: 250px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    box-sizing: border-box;
+    padding-right: 2.35rem !important;
+}
 
 .search-icon {
     position: absolute;
-    right: 70px;
-    top: 15px;
+    right: 0.65rem;
+    top: 50%;
+    transform: translateY(-50%);
     pointer-events: none;
-    font-size: x-large;
+    font-size: 0.9375rem;
+    line-height: 1;
     color: var(--primary);
 }
  .id {

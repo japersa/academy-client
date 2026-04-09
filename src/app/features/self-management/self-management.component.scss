@@ -18,9 +18,11 @@
 }
 
 @media (min-width: 768px) {
+    /* Card pegada arriba y a la derecha (sin estirar en altura el bloque del código) */
     .self-management-home__referral-col {
         display: flex;
         justify-content: flex-end;
+        align-items: flex-start;
     }
 
     .self-management-home__referido {
@@ -163,6 +165,22 @@ h3, h2 {
     padding: 0.65rem 1rem !important;
     border-radius: 6px;
     word-break: break-all;
+}
+
+/* Copiar + WhatsApp en banner “Gana con Start Academy” (mismo criterio que código arriba) */
+.commissions__share-actions {
+    gap: 0.35rem;
+}
+
+.commissions__wa-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+    cursor: not-allowed;
+    color: #fff !important;
+    background: #6c757d !important;
+    background-image: none !important;
+    border: none !important;
+    border-radius: 6px;
 }
 
 .btn-ref {
