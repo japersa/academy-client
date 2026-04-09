@@ -1,4 +1,11 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
@@ -12,7 +19,7 @@ const ROLES = ROLES_ENUM;
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
-export class EditUserComponent {
+export class EditUserComponent implements OnChanges {
 
   roles = [
     {
@@ -22,6 +29,10 @@ export class EditUserComponent {
     {
       name: 'PROFESOR',
       role: ROLES.TEACHER
+    },
+    {
+      name: 'usuario',
+      role: ROLES.USER
     }
   ];
 
@@ -60,6 +71,22 @@ export class EditUserComponent {
 
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes['user'] || !this.user) {
+      return;
+    }
+    const u = this.user as Record<string, unknown>;
+    if (u['id'] == null) {
+      return;
+    }
+    const email = (u['username'] ?? u['email'] ?? '') as string;
+    this.createUserForm.patchValue({
+      email,
+      first_name: (u['first_name'] ?? '') as string,
+      last_name: (u['last_name'] ?? '') as string,
+      role: (u['rol'] ?? u['role'] ?? '') as string,
+    });
+  }
 
   editUser(dataFrom: any) {
 
@@ -72,7 +99,12 @@ export class EditUserComponent {
       email: dataFrom.email
     };
 
-    this.registerService.editUser(data, this.user.id).subscribe(res => {
+    const uid = (this.user as { id?: string | number })?.id;
+    if (uid == null) {
+      return;
+    }
+
+    this.registerService.editUser(data, String(uid)).subscribe(res => {
       this.showEvent.emit(false);
       this.notificationService.showNotification('bottom', 'center', 'Usuario editado correctamente', 2);
       this.createUserForm.reset();

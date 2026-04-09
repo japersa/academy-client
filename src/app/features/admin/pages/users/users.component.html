@@ -45,8 +45,8 @@
             </p>
           </div> -->
           <div class="card-body">
-            <div class="dataTables_wrapper py-4">
-              <div class="row filters mb-5 mx-2 py-2">
+            <div class="dataTables_wrapper py-2">
+              <div class="row filters mb-3 mx-2 py-1">
                 <div class="col-sm-12 col-md-4 my-auto">
                   <div class="dataTables_length" id="datatable_length">
                     <label>
@@ -57,9 +57,7 @@
                         class="form-control form-control-sm"
                         (change)="entriesChange($event)"
                       >
-                        <option value="10" [selected]="entries == 10">
-                          <p>10</p>
-                        </option>
+                        <option value="10" [selected]="entries == 10">10</option>
                         <option value="25" [selected]="entries == 25">
                           25
                         </option>
@@ -109,89 +107,106 @@
                 </div>
               </div>
 
-              <ngx-datatable
+              <div *ngIf="listError" class="alert alert-warning" role="alert">
+                {{ listError }}
+              </div>
+
+              <div *ngIf="loading" class="text-center py-4 text-muted">
+                Cargando usuarios…
+              </div>
+
+              <div
                 id="print-section"
-                class="bootstrap selection-cell"
-                [columnMode]="'force'"
-                [headerHeight]="50"
-                [footerHeight]="50"
-                [rowHeight]="'auto'"
-                [limit]="entries != -1 ? entries : undefined"
-                [rows]="temp"
-                [selected]="selected"
-                (activate)="onActivate($event)"
-                (select)="onSelect($event)"
+                class="table-responsive users-table-wrap"
+                *ngIf="!loading"
               >
-                <!-- <ngx-datatable-column name="#" prop="idx">
-                </ngx-datatable-column> -->
-                <ngx-datatable-column
-                  name="ID"
-                  prop="id"
-                  class="id"
-                  width="50"
-                ></ngx-datatable-column>
-                <ngx-datatable-column name="Nombre" prop="first_name">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.first_name | titlecase }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Apellido" prop="last_name">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.last_name | titlecase }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Email" prop="username">
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Cedula" prop="identity_card">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.identity_card | titlecase }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column
-                  name="Fecha de registro"
-                  prop="date_joined"
-                >
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.date_joined | date }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column
-                  name="C.C Referido"
-                  prop="deferred_document_number"
-                >
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row?.deferred_document_number | titlecase }}
-                  </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Actions">
-                  <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a
-                      class="btn btn-primary btn-link btn-sm btn-icon"
-                      [routerLink]="['./details/', row?.id]"
-                      tooltip="Detalles"
-                      type="button"
-                    >
-                      <i class="tim-icons icon-zoom-split"> </i>
-                    </a>
-                    <button
-                      class="btn btn-green btn-link btn-sm btn-icon"
-                      (click)="editUser(row)"
-                      tooltip="Editar"
-                      type="button"
-                    >
-                      <i class="tim-icons icon-pencil"> </i>
-                    </button>
-                    <button
-                      class="btn btn-danger btn-link btn-sm"
-                      (click)="deleteUser(row?.id)"
-                      tooltip="Eliminar"
-                      type="button"
-                    >
-                      <i class="tim-icons icon-simple-remove"> </i>
-                    </button>
-                  </ng-template>
-                </ngx-datatable-column>
-              </ngx-datatable>
+                <table class="table table-hover table-sm users-table mb-0">
+                  <thead>
+                    <tr>
+                      <th class="users-table__col-id">ID</th>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Email</th>
+                      <th>Cédula</th>
+                      <th>Fecha de registro</th>
+                      <th>C.C Referido</th>
+                      <th class="text-right">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let row of pagedRows">
+                      <td class="users-table__col-id">{{ row?.id }}</td>
+                      <td>{{ row?.first_name | titlecase }}</td>
+                      <td>{{ row?.last_name | titlecase }}</td>
+                      <td>{{ row?.username }}</td>
+                      <td>{{ row?.identity_card | titlecase }}</td>
+                      <td>{{ row?.date_joined | date }}</td>
+                      <td>{{ row?.deferred_document_number | titlecase }}</td>
+                      <td class="text-right text-nowrap">
+                        <a
+                          class="btn btn-primary btn-link btn-sm btn-icon"
+                          [routerLink]="['./details/', row?.id]"
+                          tooltip="Detalles"
+                          type="button"
+                        >
+                          <i class="tim-icons icon-zoom-split"></i>
+                        </a>
+                        <button
+                          class="btn btn-green btn-link btn-sm btn-icon"
+                          (click)="editUser(row)"
+                          tooltip="Editar"
+                          type="button"
+                        >
+                          <i class="tim-icons icon-pencil"></i>
+                        </button>
+                        <button
+                          class="btn btn-danger btn-link btn-sm"
+                          (click)="deleteUser(row?.id)"
+                          tooltip="Eliminar"
+                          type="button"
+                        >
+                          <i class="tim-icons icon-simple-remove"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr *ngIf="!loading && temp.length === 0">
+                      <td colspan="8" class="text-center text-muted py-4">
+                        No hay usuarios para mostrar.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div
+                *ngIf="!loading && entries !== -1 && temp.length > entries"
+                class="d-flex flex-wrap justify-content-between align-items-center mt-3 px-2"
+              >
+                <span class="text-muted small mb-2 mb-md-0">
+                  {{ rangeStart }}–{{ rangeEnd }} de {{ temp.length }}
+                </span>
+                <div>
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-secondary"
+                    [disabled]="currentPage <= 1"
+                    (click)="prevPage()"
+                  >
+                    Anterior
+                  </button>
+                  <span class="mx-2 small text-muted">
+                    Página {{ currentPage }} / {{ totalPages }}
+                  </span>
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-secondary"
+                    [disabled]="currentPage >= totalPages"
+                    (click)="nextPage()"
+                  >
+                    Siguiente
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

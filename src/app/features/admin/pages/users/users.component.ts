@@ -1,9 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import swal from 'sweetalert2';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { EMPTY, merge } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admins',
@@ -19,7 +27,7 @@ export class UsersComponent implements OnInit {
     dateInputFormat: 'YYYY-MM-DD',
     useUtc: true,
     showClearButton: true
-  }
+  };
 
   @ViewChild('search') input!: ElementRef;
 
@@ -28,17 +36,114 @@ export class UsersComponent implements OnInit {
   showFormEditUser = false;
   role: ROLES_ENUM = undefined;
 
-  rows: any = [];
-  activeRow: any;
-  entries: number = 10;
-  selected: any[] = [];
-  temp = [];
+  rows: any[] = [];
+  /** Filas mostradas (tras búsqueda); la paginación opera sobre esto. */
+  temp: any[] = [];
+  entries = 10;
+  /** Página actual (1-based) cuando entries !== -1 */
+  currentPage = 1;
 
-  options = {};
+  listError: string | null = null;
+  loading = false;
 
-  constructor(private dashboardService: DashboardService,
-    private route: ActivatedRoute
+  options: Record<string, string> = {};
+
+  constructor(
+    private dashboardService: DashboardService,
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
   ) { }
+
+  private roleFromRouteTree(): string | null {
+    let r: ActivatedRoute | null = this.route;
+    while (r) {
+      const role = r.snapshot.paramMap.get('role');
+      if (role) {
+        return role;
+      }
+      r = r.parent;
+    }
+    return null;
+  }
+
+  /** Filas de la página actual (tabla HTML; sin ngx-datatable). */
+  get pagedRows(): any[] {
+    if (this.entries === -1) {
+      return this.temp;
+    }
+    const ps = this.entries;
+    const start = (this.currentPage - 1) * ps;
+    return this.temp.slice(start, start + ps);
+  }
+
+  get totalPages(): number {
+    if (this.entries === -1 || this.temp.length === 0) {
+      return 1;
+    }
+    return Math.max(1, Math.ceil(this.temp.length / this.entries));
+  }
+
+  /** Inicio inclusivo en UI (1-based índice humano del primer registro) */
+  get rangeStart(): number {
+    if (this.temp.length === 0) {
+      return 0;
+    }
+    if (this.entries === -1) {
+      return 1;
+    }
+    return (this.currentPage - 1) * this.entries + 1;
+  }
+
+  get rangeEnd(): number {
+    if (this.temp.length === 0) {
+      return 0;
+    }
+    if (this.entries === -1) {
+      return this.temp.length;
+    }
+    return Math.min(this.currentPage * this.entries, this.temp.length);
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  private normalizeUserListResponse(body: unknown): any[] {
+    if (Array.isArray(body)) {
+      return body;
+    }
+    if (body && typeof body === 'object') {
+      const o = body as { results?: unknown; data?: unknown };
+      if (Array.isArray(o.results)) {
+        return o.results;
+      }
+      if (Array.isArray(o.data)) {
+        return o.data;
+      }
+    }
+    return [];
+  }
+
+  private applyRowsToTemp(): void {
+    this.temp = this.rows.map((prop: any, key: number) => ({
+      ...prop,
+      idx: key,
+    }));
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+    }
+    if (this.currentPage < 1) {
+      this.currentPage = 1;
+    }
+  }
 
   createUser() {
     this.showFormCreateUser = !this.showFormCreateUser;
@@ -46,7 +151,8 @@ export class UsersComponent implements OnInit {
 
   editUser(user: object) {
     this.userEdit = user;
-    this.showFormEditUser = !this.showFormCreateUser;
+    this.showFormCreateUser = false;
+    this.showFormEditUser = true;
   }
 
   changeStateShow(value: boolean) {
@@ -55,58 +161,84 @@ export class UsersComponent implements OnInit {
   }
 
   filterTable($event: any) {
-    let val = $event.target.value;
-    this.temp = this.rows.filter(function (d: any) {
-      for (var key in d) {
-        if (d[key].toString().toLowerCase().indexOf(val) !== -1) {
+    const val = ($event.target.value || '').toString().toLowerCase().trim();
+    if (!val) {
+      this.applyRowsToTemp();
+      this.currentPage = 1;
+      return;
+    }
+    const filtered = this.rows.filter((d: any) => {
+      for (const key in d) {
+        if (!Object.prototype.hasOwnProperty.call(d, key)) {
+          continue;
+        }
+        const cell = d[key] != null ? String(d[key]) : '';
+        if (cell.toLowerCase().indexOf(val) !== -1) {
           return true;
         }
       }
       return false;
     });
+    this.temp = filtered.map((prop: any, key: number) => ({
+      ...prop,
+      idx: key,
+    }));
+    this.currentPage = 1;
   }
 
   getUsers() {
-
-    this.dashboardService.getUsersByRole(this.options).subscribe(
-      {
-        next: r => {
-          this.rows = r;
-          console.log(r);
-          console.log(this.rows);
-          this.rows.forEach((e: any) => (e['demo_package'] = 'null'));
-          this.temp = r;
-
-          this.temp = this.rows.map((prop: any, key: any) => {
-            return {
-              ...prop,
-              idx: key,
-            };
-          });
-
-        },
-        error: e => console.log('error ' + e.error)
-      }
-    );
+    this.loading = true;
+    this.listError = null;
+    this.dashboardService.getUsersByRole(this.options).subscribe({
+      next: r => {
+        this.rows = this.normalizeUserListResponse(r);
+        this.rows.forEach((e: any) => (e['demo_package'] = 'null'));
+        this.currentPage = 1;
+        this.applyRowsToTemp();
+        this.loading = false;
+        this.cdr.markForCheck();
+      },
+      error: err => {
+        this.loading = false;
+        this.rows = [];
+        this.temp = [];
+        const msg =
+          err?.error?.detail ||
+          err?.error?.message ||
+          (typeof err?.error === 'string' ? err.error : null);
+        this.listError =
+          msg || `No se pudo cargar usuarios (${err?.status ?? '?'})`;
+        this.cdr.markForCheck();
+      },
+    });
   }
 
-  entriesChange($event) {
-    this.entries = $event.target.value;
+  entriesChange($event: Event) {
+    const raw = ($event.target as HTMLSelectElement).value;
+    const n = parseInt(raw, 10);
+    this.entries = Number.isNaN(n) ? 10 : n;
+    this.currentPage = 1;
   }
 
   resetFilters() {
     this.entries = 10;
-    this.options['rol'] = this.role;
+    if (this.role != null) {
+      this.options['rol'] = String(this.role);
+    } else {
+      delete this.options['rol'];
+    }
     this.bsRangeValue = null;
-
     delete this.options['since'];
     delete this.options['until'];
-
+    this.currentPage = 1;
     this.getUsers();
   }
 
-  deleteUser(userId: string) {
-
+  deleteUser(userId: string | number | undefined) {
+    if (userId === undefined || userId === null) {
+      return;
+    }
+    const id = String(userId);
     swal
       .fire({
         title: 'Estas seguro?',
@@ -122,24 +254,24 @@ export class UsersComponent implements OnInit {
         buttonsStyling: false
       })
       .then(result => {
-        if (result.value) {
-
-          this.dashboardService.deleteUser(userId).subscribe(res => {
-            this.getUsers();
-            swal.fire({
-              title: 'Eliminado!',
-              text: 'La orden ha sido ejecutada',
-              icon: 'success',
-              customClass: {
-                confirmButton: 'btn btn-success',
-              },
-              buttonsStyling: false
-            })
-          },
-            error => {
+        if (result.isConfirmed) {
+          this.dashboardService.deleteUser(id).subscribe({
+            next: () => {
+              this.getUsers();
+              swal.fire({
+                title: 'Eliminado!',
+                text: 'La orden ha sido ejecutada',
+                icon: 'success',
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                },
+                buttonsStyling: false
+              });
+            },
+            error: error => {
               console.log('error ' + error.error);
-            });
-
+            }
+          });
         } else {
           swal.fire({
             title: 'Cancelado',
@@ -150,11 +282,8 @@ export class UsersComponent implements OnInit {
             },
             buttonsStyling: false
           });
-          return false
         }
       });
-
-
   }
 
   onValueChange(value: Date[]): void {
@@ -164,16 +293,31 @@ export class UsersComponent implements OnInit {
       this.options['until'] = date[1];
       this.getUsers();
     }
-  };
-
-
-
-  ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.role = params.get('role') as ROLES_ENUM;
-      this.options['rol'] = params.get('role');
-      this.getUsers();
-    });
   }
 
+  ngOnInit(): void {
+    const paramMaps$ = merge(
+      this.route.paramMap,
+      this.route.parent ? this.route.parent.paramMap : EMPTY,
+    );
+
+    paramMaps$
+      .pipe(
+        map(() => this.roleFromRouteTree()),
+        distinctUntilChanged(),
+      )
+      .subscribe(role => {
+        if (role) {
+          this.role = role as ROLES_ENUM;
+          this.options['rol'] = role;
+        } else {
+          this.role = undefined;
+          delete this.options['rol'];
+        }
+        this.showFormCreateUser = false;
+        this.showFormEditUser = false;
+        this.userEdit = {};
+        this.getUsers();
+      });
+  }
 }

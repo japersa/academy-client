@@ -6,7 +6,6 @@ import { QuicklinkModule } from 'ngx-quicklink';
 import { AdminsRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -30,7 +29,6 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     AdminsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxDatatableModule,
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),

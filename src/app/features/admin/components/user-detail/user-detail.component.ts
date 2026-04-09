@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DashboardService } from '../../services/dashboard.service';
-import { PackagesService } from '../../services/packages.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -13,22 +12,23 @@ export class UserDetailComponent implements OnInit {
 
   buttonText = 'Copiar';
 
-  userId: string = null;
-  user = null;
-  packages: any [] = null;
-  packagesActive: any [] = null;
-  packAgActived: any [] = null;
+  userId: string | null = null;
+  user: any = null;
+  packages: any[] = [];
+  packagesActive: any[] = [];
+  packAgActived: any[] = [];
   packAgActive: string = 'Inactivo';
+  loadError: string | null = null;
 
   agActivete() {
-    if(this.packAgActived.length > 0){
+    if (this.packAgActived.length > 0) {
       this.packAgActive = 'Activo';
     }
   }
 
-  constructor(private dashboardService: DashboardService,
-              private route: ActivatedRoute,
-              private packsServices: PackagesService
+  constructor(
+    private dashboardService: DashboardService,
+    private route: ActivatedRoute,
   ) { }
 
   copied() {
@@ -52,8 +52,15 @@ export class UserDetailComponent implements OnInit {
   }
 
   convertBalancesToNumbers(): void {
+    if (!this.packages?.length) {
+      return;
+    }
     for (const order of this.packages) {
-      order.balance = this.convertBalanceToNumber(order.balance);
+      try {
+        order.balance = this.convertBalanceToNumber(order.balance);
+      } catch {
+        /* balance opcional / otro formato */
+      }
     }
   }
 
@@ -69,34 +76,33 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.packsServices.getPackagesById('4').subscribe(
-      {
-        next: pack => {
-          console.log(pack);
-          
-      },
-        error: e => console.log(e)
-      }
-    );
- 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userId = params.get('id');
-      this.dashboardService.getUsersById(this.userId).subscribe(
-        {
-          next: r => { 
-            this.user = r;
-            this.packagesActive = this.user.packages.filter(pkg => pkg.status === 'active');
-            this.packAgActived = this.user.packages_self_management.filter(pkg => pkg.status === 'active');
-            this.packages =  this.user.packages;
-            this.convertBalancesToNumbers(); 
-            console.log(this.packages); 
-            console.log(this.packAgActived); 
-            this.agActivete();
-            
-          },
-          error: e => console.log('error ' + e.error)
-        }
-      );
+      if (!this.userId) {
+        return;
+      }
+      this.loadError = null;
+      this.dashboardService.getUsersById(this.userId).subscribe({
+        next: r => {
+          this.user = r;
+          const pkgs = Array.isArray(this.user.packages) ? this.user.packages : [];
+          const selfMgmt = Array.isArray(this.user.packages_self_management)
+            ? this.user.packages_self_management
+            : [];
+          this.packagesActive = pkgs.filter((pkg: any) => pkg.status === 'active');
+          this.packAgActived = selfMgmt.filter((pkg: any) => pkg.status === 'active');
+          this.packages = pkgs;
+          this.convertBalancesToNumbers();
+          this.agActivete();
+        },
+        error: err => {
+          this.user = null;
+          this.loadError =
+            err?.error?.detail ||
+            err?.error?.message ||
+            'No se pudo cargar el usuario.';
+        },
+      });
     });
 
 

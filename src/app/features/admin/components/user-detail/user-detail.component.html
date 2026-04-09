@@ -1,4 +1,4 @@
-<div class="content admin-area-page">
+<div class="content admin-area-page user-detail-page">
   <div class="row admin-area-breadcrumb-row">
     <div class="col-12">
       <nav aria-label="Migas de pan">
@@ -7,97 +7,122 @@
             <a routerLink="/dashboard">Dashboard</a>
           </li>
           <li class="breadcrumb-item text-primary">
-            <a routerLink="/users/user">Roles</a>
+            <a [routerLink]="['../']">Roles</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Detalle</li>
         </ol>
       </nav>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-10 col-md-12">
-      <div class="card shadow">
+
+  <div class="row" *ngIf="user as u">
+    <div class="col-12">
+      <div class="card user-detail-page__card">
+        <div class="card-header">
+          <h4 class="card-title title-table mb-0">Datos del cliente</h4>
+        </div>
         <div class="card-body">
-          <h3> Datos Del Cliente </h3>
           <div class="row">
-            <div class="col-lg-5 col-md-12"> 
-              <p>Nombre: <span>{{user.first_name + ' ' + user.last_name }} </span> </p>
-              <p>ID Usuario: <span> {{user.id }} </span>  </p>
-              <p>Télefono: <span>{{user.phone_number }}</span> </p>
-              <p>País: <span> {{user.country }} </span> </p>
-              <p>Dirección: <span> {{user.address }} </span> </p>
-              <p>C.C: <span> {{user.identity_card }} </span> </p>
+            <div class="col-md-6 user-detail-page__col">
+              <dl class="user-detail-page__dl">
+                <dt>Nombre</dt>
+                <dd>{{ u.first_name }} {{ u.last_name }}</dd>
+                <dt>ID usuario</dt>
+                <dd>{{ u.id }}</dd>
+                <dt>Teléfono</dt>
+                <dd>{{ u.phone_number || '—' }}</dd>
+                <dt>País</dt>
+                <dd>{{ u.country || '—' }}</dd>
+                <dt>Dirección</dt>
+                <dd>{{ u.address || '—' }}</dd>
+                <dt>Cédula</dt>
+                <dd>{{ u.identity_card || '—' }}</dd>
+              </dl>
             </div>
-            <div class="col-lg-5 col-md-12">
-             <!--  <p>C.C Refrido: <span> {{user.deferred_document_number }} </span> </p> -->
-              <p>Correo: <span> {{user.username }} </span> </p>
-              <p>Fecha de ceración de cuenta: <span> {{user.date_joined | date: 'dd/MM/yyyy' }} </span> </p>
-              <!--<p>Paquetes Activos: <span> {{packagesActive.length }} </span> </p>
-              <p>Paquetes Adquiridos: <span> {{user.packages.length }} </span> </p>
-              <!-- <p>Paquete Academia: 
-                <span 
-                  [ngClass]="{
-                    'text-success': packAgActive === 'Activo', 
-                    'text-danger': packAgActive === 'Inactivo',
-                  }"  
-                > {{ packAgActive }} </span>   
-              </p> -->
-            </div> 
+            <div class="col-md-6 user-detail-page__col">
+              <dl class="user-detail-page__dl">
+                <dt>Correo</dt>
+                <dd>{{ u.username || '—' }}</dd>
+                <dt>Fecha de creación de cuenta</dt>
+                <dd>{{ u.date_joined | date: 'dd/MM/yyyy' }}</dd>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <ng-container *ngIf="packAgActived.length > 0 ; else elseTemplate2" >
+  <div class="row" *ngIf="loadError">
+    <div class="col-12">
+      <div class="alert alert-warning" role="alert">{{ loadError }}</div>
+    </div>
+  </div>
 
-    <div class="row ml-3">
-      <div *ngFor="let i of packAgActived "  class="col-10">
-        <div class="card shadow">
-          <div class="card-body">
-            <h3> Academia </h3>
-            <div class="row">
-              <div class="col-lg-10 col-md-12">
-                <p>Referido por: <span>{{ i?.referral_code_owner_name }} </span> </p>
-                <p>Codigo de Referido: <span>{{ i?.referral_code }} </span> </p>
-                <p>Cedula de Referido: <span> {{ i?.referral_code_owner_identity_card }} </span> </p>
-                <p>Academia: 
-                  <span 
-                    [ngClass]="{
-                      'text-success': packAgActive === 'Activo', 
-                      'text-danger': packAgActive === 'Inactivo',
-                    }"  
-                  > {{ packAgActive }} </span>   
-                </p>
-              </div>
-            </div> 
-          </div>    
-        </div>     
+  <div class="row" *ngIf="!user && userId && !loadError">
+    <div class="col-12">
+      <div class="card user-detail-page__card">
+        <div class="card-body text-center text-muted py-5">Cargando datos…</div>
       </div>
     </div>
-     
-  </ng-container>
+  </div>
 
-  <ng-template #elseTemplate2 >
-    <div class="row ml-3">
-      <div class="col-10">
-        <div class="card shadow">
-          
+  <!-- Academia -->
+  <div class="row user-detail-page__section" *ngIf="user">
+    <ng-container *ngIf="packAgActived?.length > 0; else academiaEmpty">
+      <div
+        class="col-12 mb-3"
+        *ngFor="let pack of packAgActived"
+      >
+        <div class="card user-detail-page__card">
+          <div class="card-header">
+            <h4 class="card-title title-table mb-0">Academia</h4>
+          </div>
           <div class="card-body">
-            <h3> Academia</h3>
-            <p>Paquete Academia: 
-              <span 
+            <dl class="user-detail-page__dl mb-0">
+              <dt>Referido por</dt>
+              <dd>{{ pack?.referral_code_owner_name || '—' }}</dd>
+              <dt>Código de referido</dt>
+              <dd>{{ pack?.referral_code || '—' }}</dd>
+              <dt>Cédula de referido</dt>
+              <dd>{{ pack?.referral_code_owner_identity_card || '—' }}</dd>
+              <dt>Estado Academia</dt>
+              <dd>
+                <span
+                  [ngClass]="{
+                    'text-success': packAgActive === 'Activo',
+                    'text-danger': packAgActive === 'Inactivo'
+                  }"
+                >
+                  {{ packAgActive }}
+                </span>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #academiaEmpty>
+      <div class="col-12">
+        <div class="card user-detail-page__card">
+          <div class="card-header">
+            <h4 class="card-title title-table mb-0">Academia</h4>
+          </div>
+          <div class="card-body">
+            <p class="mb-0">
+              Paquete Academia:
+              <span
                 [ngClass]="{
-                  'text-success': packAgActive === 'Activo', 
-                  'text-danger': packAgActive === 'Inactivo',
-                }"  
-              > {{ packAgActive }} </span>   
+                  'text-success': packAgActive === 'Activo',
+                  'text-danger': packAgActive === 'Inactivo'
+                }"
+              >
+                {{ packAgActive }}
+              </span>
             </p>
           </div>
         </div>
       </div>
-    </div>
-  </ng-template>
-  
-
+    </ng-template>
+  </div>
 </div>

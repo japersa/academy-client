@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserDataService } from '../../../../core/services/user-data.service';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
+import { environment } from 'src/environments/environment';
 
 export interface RouteInfo {
   path: string;
@@ -420,6 +421,8 @@ export const ROUTES_USER: RouteInfo[] = [
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+
+  readonly publicWebsiteUrl = environment.publicWebsiteUrl;
 
   packs: any = [
     {

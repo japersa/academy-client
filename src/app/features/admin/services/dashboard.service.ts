@@ -2,6 +2,20 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+function toHttpParams(obj: Record<string, unknown> | undefined): HttpParams {
+  let params = new HttpParams();
+  if (!obj) {
+    return params;
+  }
+  for (const key of Object.keys(obj)) {
+    const v = obj[key];
+    if (v !== undefined && v !== null && v !== '') {
+      params = params.set(key, String(v));
+    }
+  }
+  return params;
+}
 import { ROLES_ENUM } from '../../../shared/enum/roles.enum';
 
 const apiURL = environment.apiURL;
@@ -32,7 +46,9 @@ export class DashboardService {
 
   getUsersByRole(options?: Partial<IUsersParams>): Observable<any> {
     const route = `/list/users/`;
-    return this.http.get<any>(`${apiURL}${route}`, { params: options });
+    return this.http.get<any>(`${apiURL}${route}`, {
+      params: toHttpParams(options as Record<string, unknown>),
+    });
   }
 
   getUsersById(id: string): Observable<any> {

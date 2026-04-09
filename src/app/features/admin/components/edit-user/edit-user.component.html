@@ -16,17 +16,15 @@
             formControlName="email"
             placeholder="Email"
             type="email"
-            [(ngModel)]="user.username"
-            required
           />
         </div>
         <ng-container *ngFor="let validation of validationMessages.email">
           <small
             class="text-danger d-block"
             *ngIf="
-              createUserForm.get('email').hasError(validation.type) &&
-              (createUserForm.get('email').dirty ||
-                createUserForm.get('email').touched)
+              createUserForm.get('email')?.hasError(validation.type) &&
+              (createUserForm.get('email')?.dirty ||
+                createUserForm.get('email')?.touched)
             "
           >
             {{ validation.message }}
@@ -39,17 +37,15 @@
             formControlName="first_name"
             placeholder="Nombres"
             type="text"
-            [(ngModel)]="user.first_name"
-            required
           />
         </div>
         <ng-container *ngFor="let validation of validationMessages.first_name">
           <small
             class="text-danger d-block"
             *ngIf="
-              createUserForm.get('first_name').hasError(validation.type) &&
-              (createUserForm.get('first_name').dirty ||
-                createUserForm.get('first_name').touched)
+              createUserForm.get('first_name')?.hasError(validation.type) &&
+              (createUserForm.get('first_name')?.dirty ||
+                createUserForm.get('first_name')?.touched)
             "
           >
             {{ validation.message }}
@@ -62,17 +58,15 @@
             formControlName="last_name"
             placeholder="Apellidos"
             type="text"
-            [(ngModel)]="user.last_name"
-            required
           />
         </div>
         <ng-container *ngFor="let validation of validationMessages.last_name">
           <small
             class="text-danger d-block"
             *ngIf="
-              createUserForm.get('last_name').hasError(validation.type) &&
-              (createUserForm.get('last_name').dirty ||
-                createUserForm.get('last_name').touched)
+              createUserForm.get('last_name')?.hasError(validation.type) &&
+              (createUserForm.get('last_name')?.dirty ||
+                createUserForm.get('last_name')?.touched)
             "
           >
             {{ validation.message }}

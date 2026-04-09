@@ -7,7 +7,6 @@
 }
 
 .filters {
-    border: 1px solid black;
     border-radius: 10px;
 }
 
@@ -36,5 +35,37 @@ input {
 .btn-green {
     color: green;
 }
-  
+
+.users-table-wrap {
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* El tema global (.table thead th) usa texto blanco; en card claro no se ve. */
+.users-table {
+  min-width: 720px;
+  margin-bottom: 0;
+
+  thead th {
+    border-top: none;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--secondary, #344675) !important;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  }
+
+  tbody td {
+    vertical-align: middle;
+    color: rgba(33, 37, 41, 0.92);
+  }
+}
+
+.users-table__col-id {
+  width: 3.5rem;
+  max-width: 4rem;
+}
+
   
