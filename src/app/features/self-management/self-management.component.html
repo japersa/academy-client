@@ -464,23 +464,25 @@
       <h3 class="m-0 self-management-home__greeting">
         Hola, {{ userDataService?.userData$?.value?.first_name | titlecase }}
       </h3>
-      <ng-container
-        *ngIf="
-          (userDataService?.userData$?.value?.subscription || 'none') !== 'none';
-          else elseTemplate
-        "
-      >
+      <ng-container *ngIf="isTeacherOrAdmin; else studentWelcomeSm">
         <p class="mb-0 mt-2 self-management-home__tagline">
-          Continúa con tu plan Start Academy — Academia. La recompra mensual mantiene activo tu acceso y tu
-          código de referido.
+          Aquí ves y administras los cursos que impartes; no necesitas un plan de alumno.
         </p>
       </ng-container>
-      <ng-template #elseTemplate>
-        <p class="mb-0 mt-2 self-management-home__tagline">
-          Aún no tienes el plan de Academia activo; contrátalo
-          <a routerLink="/self-management/create-order">aquí</a>. Después podrás gestionar la
-          <strong>recompra mensual</strong> desde Referidos.
-        </p>
+      <ng-template #studentWelcomeSm>
+        <ng-container *ngIf="hasStudentAcademySubscription; else elseTemplateSm">
+          <p class="mb-0 mt-2 self-management-home__tagline">
+            Continúa con tu plan Start Academy — Academia. La recompra mensual mantiene activo tu acceso y tu
+            código de referido.
+          </p>
+        </ng-container>
+        <ng-template #elseTemplateSm>
+          <p class="mb-0 mt-2 self-management-home__tagline">
+            Aún no tienes el plan de Academia activo; contrátalo
+            <a routerLink="/self-management/create-order">aquí</a>. Después podrás gestionar la
+            <strong>recompra mensual</strong> desde Referidos.
+          </p>
+        </ng-template>
       </ng-template>
     </div>
     <div class="col-12 col-md-5 col-lg-4 self-management-home__referral-col">
@@ -534,7 +536,7 @@
   <ng-container
     *ngIf="
       continueLearningCourses.length > 0 &&
-      (userDataService?.userData$?.value?.subscription || 'none') !== 'none'
+      (hasStudentAcademySubscription || isTeacherOrAdmin)
     "
   >
     <div class="row self-management-home__courses-section self-management-home__continue-watching-section">
@@ -586,7 +588,7 @@
 
   <div
     class="row self-management-home__courses-section mt-3"
-    *ngIf="(userDataService?.userData$?.value?.subscription || 'none') !== 'none'"
+    *ngIf="hasStudentAcademySubscription || isTeacherOrAdmin"
   >
     <div class="col-12">
       <div class="card self-management-home__courses-card">
@@ -631,7 +633,10 @@
   </div>
 
   <ng-container
-    *ngIf="(userDataService?.userData$?.value?.subscription || 'none') === 'none'"
+    *ngIf="
+      (userDataService?.userData$?.value?.subscription || 'none') === 'none' &&
+      userDataService?.userData$?.value?.rol === 'user'
+    "
   >
     <div class="row mt-3">
       <div class="col-12">

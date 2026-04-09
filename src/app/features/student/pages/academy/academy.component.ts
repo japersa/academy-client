@@ -48,6 +48,15 @@ export class AcademyComponent implements OnInit{
     private notificationsService: NotificationsService
   ) { }
 
+  /** Alumnos con plan de academia activo (no aplica a profesores ni admins). */
+  get hasStudentAcademySubscription(): boolean {
+    return (this.userDataService.userData$.value?.subscription || 'none') !== 'none';
+  }
+
+  get isTeacherOrAdmin(): boolean {
+    const r = this.userDataService.userData$.value?.rol;
+    return r === 'teacher' || r === 'admin';
+  }
 
   agActivete() {
     if(this.packAgActived.length > 0){
@@ -81,6 +90,9 @@ export class AcademyComponent implements OnInit{
             this.userDataService.userData$.next(r);
             this.storageService.set('userData', r);
             this.fillCourses();
+            if (r.rol === 'user' && r.subscription === 'none') {
+              this.notificationsService.showNotification('top', 'center', 'Aún no tienes una subscripción, puedes obtenerla rápidamente <a href="/subscription">AQUÍ</a>.</p>', 3);
+            }
           },
           error: (e) => {
             console.log(e.error);
@@ -96,9 +108,5 @@ export class AcademyComponent implements OnInit{
       this.continueLearningCourses = r;
     });
     this.getUser();
-    if (this.userDataService.userData$.value.subscription === 'none') {
-      this.notificationsService.showNotification('top', 'center', 'Aún no tienes una subscripción, puedes obtenerla rápidamente <a href="/subscription">AQUÍ</a>.</p>', 3);
-    }
-
   }
 }

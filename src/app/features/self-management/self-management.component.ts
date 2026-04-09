@@ -67,6 +67,16 @@ export class SelfManagementComponent implements OnInit {
               private toastr: ToastrService,
   ) { }
 
+  /** Alumnos con plan de academia activo (no aplica a profesores ni admins). */
+  get hasStudentAcademySubscription(): boolean {
+    return (this.userDataService.userData$.value?.subscription || 'none') !== 'none';
+  }
+
+  get isTeacherOrAdmin(): boolean {
+    const r = this.userDataService.userData$.value?.rol;
+    return r === 'teacher' || r === 'admin';
+  }
+
   agActivete() {
     if(this.packAgActived.length > 0){
       this.packAgActive = 'Acivo';
@@ -75,15 +85,13 @@ export class SelfManagementComponent implements OnInit {
 
   fillCourses() {
     this.coursesService.getCourses().subscribe(res => {
-
-      if (this.userDataService.userData$.value.rol === 'admin') {
-        this.courses = res.all;
-      }
-      if (this.userDataService.userData$.value.rol === 'teacher') {
-        this.courses = res.my_courses_created;
-      }
-      if (this.userDataService.userData$.value.rol === 'user') {
-        this.courses = res.my_enrolled_courses;
+      const rol = this.userDataService.userData$.value?.rol;
+      if (rol === 'admin') {
+        this.courses = res.all ?? [];
+      } else if (rol === 'teacher') {
+        this.courses = res.my_courses_created ?? [];
+      } else if (rol === 'user') {
+        this.courses = res.my_enrolled_courses ?? [];
       }
     },
       error => {
@@ -102,6 +110,7 @@ export class SelfManagementComponent implements OnInit {
             this.referalCode = r?.referral_code;
             this.referralCodeActive = r?.referral_active === true;
             this.storageService.set('userData', r);
+            this.fillCourses();
           },
           error: (e) => {
             console.log(e.error);
