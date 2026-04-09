@@ -24,7 +24,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <section class="course-module mb-4" *ngFor="let module of course.modules || []">
                         <h3 class="course-module__title">{{ module?.name | titlecase }}</h3>
-                        <p class="text-muted small mb-0" *ngIf="!module?.topics?.length">Este módulo aún no tiene temas.</p>
+                        <p class="course-module__empty small mb-0" *ngIf="!module?.topics?.length">Este módulo aún no tiene temas.</p>
                         <div class="card course-timeline-card border-0 shadow-sm" *ngIf="module?.topics?.length > 0">
                             <div class="card-body p-0">
                                 <ul class="course-timeline" role="list" [attr.aria-label]="'Temas del módulo ' + (module?.name || '')">
