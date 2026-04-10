@@ -104,6 +104,18 @@ export class CoursesService {
     return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
   }
 
+  /** Vídeo/archivos/enlaces con URLs firmadas; requiere sesión y acceso al curso. */
+  getTopicMedia(id: string): Observable<{
+    video_url: string | null;
+    files: { name: string; url: string }[];
+    links: { title?: string; link?: string }[];
+    /** Segundos hasta caducidad aproximada (renovar antes con otro GET). */
+    signed_urls_expires_in_seconds?: number | null;
+  }> {
+    const route = `/detail/topics/${id}/media/`;
+    return this.http.get<any>(`${apiURL}${route}`, { headers: this.headers });
+  }
+
   markTopicAsSeen(id: string) {
     const route = '/last-seen/topic/';
     return this.http.post<any>(`${apiURL}${route}`, { topic: id }, { headers: this.headers });

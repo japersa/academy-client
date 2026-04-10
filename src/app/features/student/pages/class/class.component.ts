@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, Subscription } from 'rxjs';
-import { af$ } from '../../../../shared/utils/angularfire-rxjs';
+import { Observable, of } from 'rxjs';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { UserDataService } from '../../../../core/services/user-data.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -19,10 +17,14 @@ export class ClassComponent implements OnInit, OnDestroy {
   next = '';
   previus = '';
 
-  source: Observable<string | null>;
+  source: Observable<string | null> = of(null);
+
+  /** Renueva URLs firmadas antes de que caduquen. */
+  private mediaRefreshTimer: ReturnType<typeof setInterval> | null = null;
+  private currentTopicId: string | null = null;
+  private videoErrorRetries = 0;
 
   constructor(
-    private storage: AngularFireStorage,
     private coursesService: CoursesService,
     public userDataService: UserDataService,
     private router: Router,
@@ -36,8 +38,8 @@ export class ClassComponent implements OnInit, OnDestroy {
         next: (res) => {
           console.log(res);
           
-          this.topic = res.result
-          this.getVideo(res.result.video);
+          this.topic = res.result;
+          this.loadTopicMedia(topicId);
           this.allClass = res.all;
           this.next = res.next.topicID;
           this.previus = res.previus.topicID;
@@ -52,11 +54,62 @@ export class ClassComponent implements OnInit, OnDestroy {
     )
   }
 
-  getVideo(url: string) {
-    const ref = this.storage.ref(url);
-    this.source = af$<string | null>(ref.getDownloadURL());
-    console.log(this.source);
-    
+  private clearMediaRefresh() {
+    if (this.mediaRefreshTimer != null) {
+      clearInterval(this.mediaRefreshTimer);
+      this.mediaRefreshTimer = null;
+    }
+  }
+
+  private loadTopicMedia(topicId: string) {
+    this.clearMediaRefresh();
+    this.currentTopicId = topicId;
+    this.videoErrorRetries = 0;
+
+    this.coursesService.getTopicMedia(topicId).subscribe({
+      next: (m) => {
+        this.source = of(m.video_url ?? null);
+        this.topic = {
+          ...this.topic,
+          files: m.files ?? [],
+          links: m.links ?? [],
+        };
+        const sec = m.signed_urls_expires_in_seconds;
+        if (sec != null && sec > 30) {
+          const ms = Math.max(60_000, Math.floor(sec * 0.7 * 1000));
+          this.mediaRefreshTimer = setInterval(() => {
+            this.refreshTopicMediaSilent(topicId);
+          }, ms);
+        }
+      },
+      error: (e) => {
+        console.error(e);
+        this.source = of(null);
+      },
+    });
+  }
+
+  /** Misma API; actualiza src del vídeo y enlaces de archivos sin parpadear el tema. */
+  private refreshTopicMediaSilent(topicId: string) {
+    this.coursesService.getTopicMedia(topicId).subscribe({
+      next: (m) => {
+        this.source = of(m.video_url ?? null);
+        this.topic = {
+          ...this.topic,
+          files: m.files ?? [],
+          links: m.links ?? [],
+        };
+      },
+      error: () => {},
+    });
+  }
+
+  onVideoError() {
+    if (this.videoErrorRetries >= 2 || !this.currentTopicId) {
+      return;
+    }
+    this.videoErrorRetries += 1;
+    this.refreshTopicMediaSilent(this.currentTopicId);
   }
 
   nextClass() {
@@ -76,12 +129,15 @@ export class ClassComponent implements OnInit, OnDestroy {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
-      this.getTopic(id);
+      if (id) {
+        this.getTopic(id);
+      }
     });
 
   }
 
   ngOnDestroy(): void {
+    this.clearMediaRefresh();
   }
 
 

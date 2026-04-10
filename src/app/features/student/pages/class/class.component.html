@@ -60,6 +60,7 @@
                 [src]="source | async"
                 type="video/mp4"
                 crossorigin
+                (error)="onVideoError()"
               ></video>
             </vg-player>
           </div>
