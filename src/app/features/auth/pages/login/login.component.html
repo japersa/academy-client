@@ -41,10 +41,7 @@
               </ng-container>
             </div>
 
-            <ng-container *ngIf="errorMessage">
-              <small class="text-danger" *ngFor="let e of errorMessage | keyvalue">{{ e.value }}
-              </small>
-            </ng-container>
+            <small *ngIf="errorMessage" class="text-danger d-block">{{ errorMessage }}</small>
             <div class="card-footer">
               <div class="pull-right">
                 <h6 class="mt-1">
@@ -53,9 +50,9 @@
                   </a>
                 </h6>
               </div>
-              <button class="btn btn-secondary btn-lg btn-block mb-3 rounded-pill" [disabled]="form.invalid"
+              <button class="btn btn-secondary btn-lg btn-block mb-3 rounded-pill" [disabled]="form.invalid || loginPending"
                 type="submit">
-                Iniciar sesión
+                {{ loginPending ? 'Entrando…' : 'Iniciar sesión' }}
               </button>
               <div class="pull-left">
                 <h6>

@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../../../core/services/storage.service';
 import { Router } from '@angular/router';
 import { UserDataService } from '../../../../core/services/user-data.service';
+import { finalize, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   focus1;
 
   errorMessage: string | null;
+  loginPending = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -100,27 +102,41 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loginUser(data: any) {
-
-    const CREDENTIALS = {
-      username: data.email,
-      password: data.password
+    if (this.loginPending) {
+      return;
     }
+    const username = String(data?.email ?? '').trim();
+    const password = String(data?.password ?? '');
+    const CREDENTIALS = { username, password };
 
-    this.authenticationService.doLogin(CREDENTIALS).subscribe(
-      {
-        next: (r) => {
-          this.notificationService.showNotification('top', 'right', 'Has iniciado sesión correctamente', 2);
-          this.errorMessage = '';
-          this.form.reset();
-        },
-        error: (e) => {
-          this.errorMessage = e.error;
-          this.notificationService.showNotification('top', 'right', 'Error al iniciar sesión', 4);
+    this.loginPending = true;
+    this.errorMessage = null;
+    this.authenticationService.doLogin(CREDENTIALS).pipe(
+      take(1),
+      finalize(() => { this.loginPending = false; })
+    ).subscribe({
+      next: () => {
+        this.notificationService.showNotification('top', 'right', 'Has iniciado sesión correctamente', 2);
+        this.errorMessage = null;
+        this.form.reset();
+      },
+      error: (e) => {
+        const err = e?.error;
+        if (typeof err === 'string') {
+          this.errorMessage = err;
+        } else if (Array.isArray(err)) {
+          this.errorMessage = err.join(' ');
+        } else if (err?.non_field_errors?.length) {
+          this.errorMessage = err.non_field_errors.join(' ');
+        } else if (err?.detail) {
+          this.errorMessage = String(err.detail);
+        } else {
+          this.errorMessage = 'Correo o contraseña incorrectos. Comprueba que el usuario exista en la plataforma.';
         }
+        this.notificationService.showNotification('top', 'right', 'Error al iniciar sesión', 4);
       }
-    );
-
-  };
+    });
+  }
 
   onSlideRangeChange(indexes: number[] | void): void {
     if (indexes && indexes.length > 0) {
