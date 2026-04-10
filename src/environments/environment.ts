@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   environmentName: 'Development',
-  apiURL: 'https://ultra-back-98fc6bf42dce.herokuapp.com',
+  apiURL: 'http://localhost:8000',
   /** Sitio público (marketing) */
   publicWebsiteUrl: 'https://startacademy.digital/',
   rollbarConfig: {
