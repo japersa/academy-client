@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../../../../core/services/utils.service';
 import { FirebaseStorageService } from '../../../../shared/services/firebase-storage.service';
@@ -19,7 +27,7 @@ function clean(obj) {
   templateUrl: './edit-course.component.html',
   styleUrls: ['./edit-course.component.scss']
 })
-export class EditCourseComponent implements OnInit {
+export class EditCourseComponent implements OnInit, OnChanges {
 
   @Input() course = null;
 
@@ -106,6 +114,20 @@ export class EditCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['course'] && this.course) {
+      this.courseForm.patchValue({
+        title: this.course.title ?? '',
+        description: this.course.description ?? '',
+        price:
+          this.course.price != null && this.course.price !== ''
+            ? String(this.course.price)
+            : '0',
+        path_preview_image: null,
+      });
+    }
   }
 
 }

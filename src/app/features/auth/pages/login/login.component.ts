@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   /** Paso 2: TOTP tras contraseña correcta con 2FA activo. */
   awaiting2fa = false;
   preAuthToken: string | null = null;
-  twoFactorCode = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -102,8 +101,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      rememberPassword: [false]
+      rememberPassword: [false],
+      /** Solo paso 2FA; no mezclar ngModel con formGroup (rompe en Angular 17+). */
+      otp: [''],
     });
+  }
+
+  /** Texto del OTP para validar botón / envío. */
+  private get otpTrimmed(): string {
+    return String(this.form?.get('otp')?.value ?? '').trim();
   }
 
   loginUser(data: any) {
@@ -128,7 +134,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (res?.two_factor_required && res?.pre_auth_token) {
           this.awaiting2fa = true;
           this.preAuthToken = res.pre_auth_token;
-          this.twoFactorCode = '';
+          this.form.patchValue({ otp: '' });
           this.errorMessage = null;
           return;
         }
@@ -155,13 +161,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   verify2fa() {
-    if (!this.preAuthToken || !String(this.twoFactorCode ?? '').trim()) {
+    if (!this.preAuthToken || !this.otpTrimmed) {
       this.errorMessage = 'Introduce el código de 6 dígitos de tu app de autenticación.';
       return;
     }
     this.loginPending = true;
     this.errorMessage = null;
-    this.authenticationService.completeLogin2fa(this.preAuthToken, this.twoFactorCode).pipe(
+    this.authenticationService.completeLogin2fa(this.preAuthToken, this.otpTrimmed).pipe(
       take(1),
       finalize(() => { this.loginPending = false; })
     ).subscribe({
@@ -170,7 +176,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.errorMessage = null;
         this.awaiting2fa = false;
         this.preAuthToken = null;
-        this.twoFactorCode = '';
         this.form.reset();
       },
       error: (e) => {
@@ -190,7 +195,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   cancel2fa() {
     this.awaiting2fa = false;
     this.preAuthToken = null;
-    this.twoFactorCode = '';
+    this.form.patchValue({ otp: '' });
     this.errorMessage = null;
   }
 

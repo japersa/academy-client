@@ -11,7 +11,7 @@
                 <label> Título </label>
                 <div class=" form-group">
                     <input class=" form-control" formControlName="title" placeholder="Ingresa el título" type="text"
-                        [(ngModel)]="course.title" required />
+                        required />
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.title">
                     <small class="text-danger d-block" *ngIf="courseForm.get('title').hasError(validation.type) &&
@@ -23,7 +23,7 @@
                 <div class=" form-group">
 
                     <textarea class="form-control" formControlName="description" placeholder="Descripción" rows="3"
-                        [(ngModel)]="course.description" required></textarea>
+                        required></textarea>
 
                 </div>
                 <ng-container *ngFor="let validation of validationMessages.description">
