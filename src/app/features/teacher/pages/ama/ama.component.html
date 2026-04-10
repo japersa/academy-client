@@ -51,7 +51,19 @@
                       <div class="d-block">
                         <small class="text-right">{{ c?.created_at | date }}</small>
                       </div>
-                      <p class="text-default m-0 p-o">{{ c?.body }}.</p>
+                      <p
+                        *ngIf="c?.topic"
+                        class="text-default small mb-1 mt-1 ama-page__context"
+                      >
+                        <span *ngIf="c.topic.course_title" class="font-weight-bold"
+                          >Curso: {{ c.topic.course_title | titlecase }}</span
+                        >
+                        <span *ngIf="c.topic.course_title && c.topic.title"> · </span>
+                        <span *ngIf="c.topic.title" class="font-weight-bold"
+                          >Clase: {{ c.topic.title | titlecase }}</span
+                        >
+                      </p>
+                      <p class="text-default m-0 p-o">{{ c?.body }}</p>
                       <hr class="text-left" />
                       <ng-container *ngIf="c">
                         <app-reply-comment
