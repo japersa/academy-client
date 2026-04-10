@@ -206,6 +206,107 @@
               </form>
             </div>
           </div>
+
+          <div class="card user-profile__edit-card mt-3" *ngIf="userDataService?.userData$?.value">
+            <div class="card-header user-profile__card-head pb-2">
+              <h4 class="card-title title-table mb-0">Verificación en dos pasos (2FA)</h4>
+            </div>
+            <div class="card-body">
+              <p class="text-muted small mb-3">
+                Añade una capa extra de seguridad con Google Authenticator, Authy u otra app compatible (códigos TOTP).
+              </p>
+
+              <ng-container *ngIf="twoFactorEnabled">
+                <p class="mb-2"><strong>Estado:</strong> <span class="text-success">activado</span></p>
+                <p class="small text-muted">Para desactivar, confirma tu contraseña y un código de la app.</p>
+                <div class="form-group">
+                  <label>Contraseña actual</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    [(ngModel)]="disablePassword"
+                    [ngModelOptions]="{ standalone: true }"
+                    autocomplete="current-password"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Código de la app</label>
+                  <input
+                    class="form-control"
+                    [(ngModel)]="disableOtp"
+                    [ngModelOptions]="{ standalone: true }"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    maxlength="12"
+                    placeholder="000000"
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-fill btn-danger"
+                  (click)="disableTwoFactor()"
+                  [disabled]="twoFactorBusy"
+                >
+                  {{ twoFactorBusy ? 'Procesando…' : 'Desactivar 2FA' }}
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="!twoFactorEnabled && (twoFactorSetupUri || twoFactorPending)">
+                <div *ngIf="qrCodeImgUrl" class="text-center mb-3">
+                  <img [src]="qrCodeImgUrl" alt="Código QR para 2FA" width="200" height="200" />
+                </div>
+                <p *ngIf="twoFactorManualKey" class="small mb-2">
+                  Si no puedes escanear el QR, introduce esta clave en la app:<br />
+                  <code class="user-select-all">{{ twoFactorManualKey }}</code>
+                </p>
+                <p *ngIf="twoFactorPending && !twoFactorSetupUri" class="small text-warning mb-2">
+                  Ya generaste un secreto. Introduce el código de 6 dígitos de tu app para activar el 2FA.
+                </p>
+                <div class="form-group">
+                  <label>Código de 6 dígitos</label>
+                  <input
+                    class="form-control"
+                    [(ngModel)]="confirmOtp"
+                    [ngModelOptions]="{ standalone: true }"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    maxlength="12"
+                    placeholder="000000"
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-fill btn-primary mr-2"
+                  (click)="confirmTwoFactor()"
+                  [disabled]="twoFactorBusy"
+                >
+                  {{ twoFactorBusy ? 'Confirmando…' : 'Confirmar y activar' }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-link"
+                  (click)="cancelTwoFactorWizard()"
+                  *ngIf="twoFactorSetupUri"
+                >
+                  Cancelar
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="!twoFactorEnabled && !twoFactorPending && !twoFactorSetupUri">
+                <p class="mb-2"><strong>Estado:</strong> desactivado</p>
+                <button
+                  type="button"
+                  class="btn btn-fill btn-primary"
+                  (click)="startTwoFactorSetup()"
+                  [disabled]="twoFactorBusy"
+                >
+                  {{ twoFactorBusy ? 'Preparando…' : 'Activar verificación en dos pasos' }}
+                </button>
+              </ng-container>
+
+              <small class="text-danger d-block mt-2" *ngIf="twoFactorError">{{ twoFactorError }}</small>
+            </div>
+          </div>
         </div>
 
         <div class="col-lg-5 col-md-12 d-flex flex-column mt-3 mt-lg-0">

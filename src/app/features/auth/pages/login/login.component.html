@@ -10,14 +10,18 @@
           <h1 class="card-title">Login</h1>
         </div>
         <div class="card-body">
-          <p class="card-text text-center">
+          <p class="card-text text-center" *ngIf="!awaiting2fa">
             Ingresa al dashboard y entérate de todo lo que podrías hacer.
+          </p>
+          <p class="card-text text-center" *ngIf="awaiting2fa">
+            Introduce el código de 6 dígitos de tu app de autenticación (Google Authenticator, etc.).
           </p>
           <form class="form" [formGroup]="form" (ngSubmit)="loginUser(form.value)" role="form">
             <div class="form-group">
               <label for="email">Email: {{ emailField?.value | lowercase }}
               </label>
               <input type="email" class="form-control rounded-pill shadow" formControlName="email"
+                [attr.readonly]="awaiting2fa ? true : null"
                 aria-describedby="emailHelp" placeholder="Escriba su email" id="email" />
               <ng-container *ngFor="let validation of validationMessages.email">
                 <small class="form-text text-danger" *ngIf="
@@ -30,6 +34,7 @@
             <div class="form-group">
               <label for="password">Password</label>
               <input class="form-control rounded-pill shadow" formControlName="password" placeholder="Contraseña"
+                [attr.readonly]="awaiting2fa ? true : null"
                 id="password" type="password" aria-describedby="password" />
               <ng-container *ngFor="let validation of validationMessages.password">
                 <small class="form-text text-danger" *ngIf="
@@ -41,6 +46,13 @@
               </ng-container>
             </div>
 
+            <div class="form-group" *ngIf="awaiting2fa">
+              <label for="otp">Código de verificación</label>
+              <input class="form-control rounded-pill shadow" id="otp" name="otp" type="text" inputmode="numeric"
+                autocomplete="one-time-code" maxlength="12" placeholder="000000"
+                [(ngModel)]="twoFactorCode" [ngModelOptions]="{standalone: true}" />
+            </div>
+
             <small *ngIf="errorMessage" class="text-danger d-block">{{ errorMessage }}</small>
             <div class="card-footer">
               <div class="pull-right">
@@ -50,9 +62,13 @@
                   </a>
                 </h6>
               </div>
-              <button class="btn btn-secondary btn-lg btn-block mb-3 rounded-pill" [disabled]="form.invalid || loginPending"
+              <button class="btn btn-secondary btn-lg btn-block mb-3 rounded-pill"
+                [disabled]="loginPending || (!awaiting2fa && form.invalid) || (awaiting2fa && !twoFactorCode?.trim())"
                 type="submit">
-                {{ loginPending ? 'Entrando…' : 'Iniciar sesión' }}
+                {{ loginPending ? (awaiting2fa ? 'Verificando…' : 'Entrando…') : (awaiting2fa ? 'Verificar código' : 'Iniciar sesión') }}
+              </button>
+              <button *ngIf="awaiting2fa" type="button" class="btn btn-link btn-block mb-2" (click)="cancel2fa()">
+                Volver al inicio de sesión
               </button>
               <div class="pull-left">
                 <h6>

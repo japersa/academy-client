@@ -57,6 +57,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   errorMessage: string | null;
   loginPending = false;
 
+  /** Paso 2: TOTP tras contraseña correcta con 2FA activo. */
+  awaiting2fa = false;
+  preAuthToken: string | null = null;
+  twoFactorCode = '';
+
   constructor(
     private formBuilder: FormBuilder,
     private utilsService: UtilsService,
@@ -105,6 +110,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginPending) {
       return;
     }
+    if (this.awaiting2fa) {
+      this.verify2fa();
+      return;
+    }
     const username = String(data?.email ?? '').trim();
     const password = String(data?.password ?? '');
     const CREDENTIALS = { username, password };
@@ -115,7 +124,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       take(1),
       finalize(() => { this.loginPending = false; })
     ).subscribe({
-      next: () => {
+      next: (res: any) => {
+        if (res?.two_factor_required && res?.pre_auth_token) {
+          this.awaiting2fa = true;
+          this.preAuthToken = res.pre_auth_token;
+          this.twoFactorCode = '';
+          this.errorMessage = null;
+          return;
+        }
         this.notificationService.showNotification('top', 'right', 'Has iniciado sesión correctamente', 2);
         this.errorMessage = null;
         this.form.reset();
@@ -136,6 +152,46 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.notificationService.showNotification('top', 'right', 'Error al iniciar sesión', 4);
       }
     });
+  }
+
+  verify2fa() {
+    if (!this.preAuthToken || !String(this.twoFactorCode ?? '').trim()) {
+      this.errorMessage = 'Introduce el código de 6 dígitos de tu app de autenticación.';
+      return;
+    }
+    this.loginPending = true;
+    this.errorMessage = null;
+    this.authenticationService.completeLogin2fa(this.preAuthToken, this.twoFactorCode).pipe(
+      take(1),
+      finalize(() => { this.loginPending = false; })
+    ).subscribe({
+      next: () => {
+        this.notificationService.showNotification('top', 'right', 'Has iniciado sesión correctamente', 2);
+        this.errorMessage = null;
+        this.awaiting2fa = false;
+        this.preAuthToken = null;
+        this.twoFactorCode = '';
+        this.form.reset();
+      },
+      error: (e) => {
+        const err = e?.error;
+        if (typeof err === 'string') {
+          this.errorMessage = err;
+        } else if (err?.detail) {
+          this.errorMessage = String(err.detail);
+        } else {
+          this.errorMessage = 'Código incorrecto o sesión expirada. Vuelve a iniciar sesión.';
+        }
+        this.notificationService.showNotification('top', 'right', 'Error al verificar el código', 4);
+      }
+    });
+  }
+
+  cancel2fa() {
+    this.awaiting2fa = false;
+    this.preAuthToken = null;
+    this.twoFactorCode = '';
+    this.errorMessage = null;
   }
 
   onSlideRangeChange(indexes: number[] | void): void {

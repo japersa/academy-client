@@ -9,6 +9,7 @@ import { tap } from 'rxjs/operators';
 
 const apiURL = environment.apiURL;
 const route = '/login/';
+const route2fa = '/login/2fa/';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +24,13 @@ export class AuthService {
   doLogin(credentials: any): Observable<any> {
     this.headers = this.headers.set('skip-auth', 'true');
     return this.http.post<any>(`${apiURL}${route}`, credentials, { headers: this.headers }).pipe(tap(res => {
-      // save data in local storage
+      if (res?.two_factor_required) {
+        return;
+      }
       this.storageService.set('isUserLoggedIn', true);
       this.storageService.set('accessToken', res.token);
       this.storageService.set('userData', res.user);
 
-      // load data at memory
       this.userDataService.loadStorageUserData();
       this.userDataService.isUserLoggedIn$.next(true);
 
@@ -36,6 +38,25 @@ export class AuthService {
     })
 
     )
+  }
+
+  /** Segundo paso cuando el usuario tiene 2FA activo (TOTP). */
+  completeLogin2fa(pre_auth_token: string, otp: string): Observable<any> {
+    this.headers = this.headers.set('skip-auth', 'true');
+    return this.http.post<any>(
+      `${apiURL}${route2fa}`,
+      { pre_auth_token, otp: String(otp).trim() },
+      { headers: this.headers }
+    ).pipe(tap(res => {
+      this.storageService.set('isUserLoggedIn', true);
+      this.storageService.set('accessToken', res.token);
+      this.storageService.set('userData', res.user);
+
+      this.userDataService.loadStorageUserData();
+      this.userDataService.isUserLoggedIn$.next(true);
+
+      this.router.navigate(['/referrals']);
+    }));
   }
 
   doLogout() {

@@ -8,6 +8,8 @@ import { EditUserService } from '../../services/edit-user.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { CoursesService } from '../../services/courses.service';
 import { UserService } from '../../services/user.service';
+import { TwoFactorService } from '../../services/two-factor.service';
+import { AuthService } from '../../../features/auth/services/auth.service';
 
 
 @Component({
@@ -34,6 +36,15 @@ export class UserComponent implements OnInit, OnDestroy {
   errorPassMessage: any;
   errorMessage: string | null;
 
+  /** Asistente 2FA (perfil) */
+  twoFactorSetupUri: string | null = null;
+  twoFactorManualKey: string | null = null;
+  confirmOtp = '';
+  disablePassword = '';
+  disableOtp = '';
+  twoFactorBusy = false;
+  twoFactorError: string | null = null;
+
   focus;
   focus1;
   focus2;
@@ -47,7 +58,9 @@ export class UserComponent implements OnInit, OnDestroy {
     public userDataService: UserDataService,
     public updatePasswordService: UpdatePasswordService,
     private coursesService: CoursesService,
-    private userService: UserService
+    private userService: UserService,
+    private twoFactorService: TwoFactorService,
+    private authService: AuthService,
   ) {
     this.validationMessages = utilsService.getValidationMessages();
 
@@ -108,6 +121,24 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   /** Etiqueta en español; evita mostrar "None" por titlecase sobre el valor `none`. */
+  get twoFactorEnabled(): boolean {
+    return !!this.userDataService.userData$?.value?.two_factor_enabled;
+  }
+
+  get twoFactorPending(): boolean {
+    return !!this.userDataService.userData$?.value?.two_factor_pending;
+  }
+
+  get qrCodeImgUrl(): string {
+    if (!this.twoFactorSetupUri) {
+      return '';
+    }
+    return (
+      'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' +
+      encodeURIComponent(this.twoFactorSetupUri)
+    );
+  }
+
   get subscriptionLabelText(): string {
     const s = this.userDataService?.userData$?.value?.subscription;
     if (s === 'full') {
@@ -209,6 +240,97 @@ export class UserComponent implements OnInit, OnDestroy {
         this.patchProfileForm(user);
       },
       error: (err) => console.error(err),
+    });
+  }
+
+  startTwoFactorSetup(): void {
+    this.twoFactorError = null;
+    this.twoFactorBusy = true;
+    this.twoFactorService.setup().subscribe({
+      next: (res) => {
+        this.twoFactorSetupUri = res.otpauth_uri;
+        this.twoFactorManualKey = res.manual_entry_key;
+        this.twoFactorBusy = false;
+        this.getUser();
+      },
+      error: (e) => {
+        this.twoFactorBusy = false;
+        this.twoFactorError =
+          e?.error?.detail ||
+          (typeof e?.error === 'string' ? e.error : null) ||
+          'No se pudo iniciar la configuración de 2FA.';
+      },
+    });
+  }
+
+  confirmTwoFactor(): void {
+    const code = String(this.confirmOtp ?? '').trim();
+    if (!code) {
+      this.twoFactorError = 'Introduce el código de 6 dígitos.';
+      return;
+    }
+    this.twoFactorError = null;
+    this.twoFactorBusy = true;
+    this.twoFactorService.confirm(code).subscribe({
+      next: () => {
+        this.confirmOtp = '';
+        this.twoFactorSetupUri = null;
+        this.twoFactorManualKey = null;
+        this.twoFactorBusy = false;
+        this.notificationService.showNotification(
+          'bottom',
+          'center',
+          'Verificación en dos pasos activada correctamente',
+          2
+        );
+        this.getUser();
+      },
+      error: (e) => {
+        this.twoFactorBusy = false;
+        this.twoFactorError =
+          e?.error?.detail ||
+          (typeof e?.error === 'string' ? e.error : null) ||
+          'Código incorrecto.';
+      },
+    });
+  }
+
+  cancelTwoFactorWizard(): void {
+    this.twoFactorSetupUri = null;
+    this.twoFactorManualKey = null;
+    this.confirmOtp = '';
+    this.twoFactorError = null;
+  }
+
+  disableTwoFactor(): void {
+    const pw = String(this.disablePassword ?? '');
+    const otp = String(this.disableOtp ?? '').trim();
+    if (!pw || !otp) {
+      this.twoFactorError = 'Indica contraseña y código de la app.';
+      return;
+    }
+    this.twoFactorError = null;
+    this.twoFactorBusy = true;
+    this.twoFactorService.disable(pw, otp).subscribe({
+      next: () => {
+        this.twoFactorBusy = false;
+        this.disablePassword = '';
+        this.disableOtp = '';
+        this.notificationService.showNotification(
+          'bottom',
+          'center',
+          '2FA desactivado. Debes iniciar sesión de nuevo.',
+          2
+        );
+        this.authService.doLogout();
+      },
+      error: (e) => {
+        this.twoFactorBusy = false;
+        this.twoFactorError =
+          e?.error?.detail ||
+          (typeof e?.error === 'string' ? e.error : null) ||
+          'No se pudo desactivar. Revisa contraseña y código.';
+      },
     });
   }
 
