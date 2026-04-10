@@ -87,6 +87,8 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
         const err = error?.error;
         if (typeof err === 'string') {
           this.errorMessage = err;
+        } else if (Array.isArray(err)) {
+          this.errorMessage = err.join(' ');
         } else if (err?.non_field_errors?.length) {
           this.errorMessage = err.non_field_errors.join(' ');
         } else if (err?.username?.length) {
