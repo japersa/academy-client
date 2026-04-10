@@ -217,8 +217,11 @@
               </p>
 
               <ng-container *ngIf="twoFactorEnabled">
-                <p class="mb-2"><strong>Estado:</strong> <span class="text-success">activado</span></p>
-                <p class="small text-muted">Para desactivar, confirma tu contraseña y un código de la app.</p>
+                <div class="user-profile__2fa-status-row mb-3">
+                  <span class="user-profile__2fa-status-label">Estado</span>
+                  <span class="user-profile__2fa-status-badge user-profile__2fa-status-badge--on">Activado</span>
+                </div>
+                <p class="small text-muted mb-3">Para desactivar, confirma tu contraseña y un código de la app.</p>
                 <div class="form-group">
                   <label>Contraseña actual</label>
                   <input
@@ -293,7 +296,10 @@
               </ng-container>
 
               <ng-container *ngIf="!twoFactorEnabled && !twoFactorPending && !twoFactorSetupUri">
-                <p class="mb-2"><strong>Estado:</strong> desactivado</p>
+                <div class="user-profile__2fa-status-row mb-3">
+                  <span class="user-profile__2fa-status-label">Estado</span>
+                  <span class="user-profile__2fa-status-badge user-profile__2fa-status-badge--off">Desactivado</span>
+                </div>
                 <button
                   type="button"
                   class="btn btn-fill btn-primary"

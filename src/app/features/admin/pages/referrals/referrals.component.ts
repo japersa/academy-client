@@ -152,6 +152,11 @@ export class ReferralsComponent implements OnInit, OnDestroy {
     return (row.email && row.email.trim()) || row.username || '—';
   }
 
+  /** Mismo criterio que el banner del propio usuario: staff siempre «activo» para el código. */
+  referredUserReferralCodeActive(row: ReferredUserRow): boolean {
+    return isTeacherOrAdminRole(row?.rol) || row?.referral_active === true;
+  }
+
   get whatsappReferralHref(): string {
     return buildWhatsAppReferralShareUrl(this.referralCode);
   }

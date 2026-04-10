@@ -423,6 +423,27 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   word-break: break-word;
 }
 
+.referrals-list-table__code-status {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.referrals-list-table__code-status--active {
+  background: rgba(40, 167, 69, 0.12);
+  color: #1e7e34;
+  border: 1px solid rgba(40, 167, 69, 0.35);
+}
+
+.referrals-list-table__code-status--inactive {
+  background: rgba(108, 117, 125, 0.15);
+  color: #495057;
+  border: 1px solid rgba(108, 117, 125, 0.35);
+}
+
 .referrals-list-table__col-date {
   text-align: right;
   font-size: 0.875rem;

@@ -263,6 +263,7 @@
                       <tr>
                         <th scope="col" class="text-muted border-0">Nombre</th>
                         <th scope="col" class="text-muted border-0">Correo</th>
+                        <th scope="col" class="text-muted border-0 text-nowrap">Estado código</th>
                         <th scope="col" class="referrals-list-table__col-date text-muted text-nowrap border-0">
                           Alta
                         </th>
@@ -275,6 +276,15 @@
                         </td>
                         <td>
                           <span class="referrals-list-table__email">{{ displayReferredEmail(row) }}</span>
+                        </td>
+                        <td class="text-nowrap">
+                          <span
+                            class="referrals-list-table__code-status"
+                            [class.referrals-list-table__code-status--active]="referredUserReferralCodeActive(row)"
+                            [class.referrals-list-table__code-status--inactive]="!referredUserReferralCodeActive(row)"
+                          >
+                            {{ referredUserReferralCodeActive(row) ? 'Activo' : 'Inactivo' }}
+                          </span>
                         </td>
                         <td class="referrals-list-table__col-date text-nowrap">
                           <time [attr.datetime]="row.date_joined">{{ row.date_joined | date : 'mediumDate' }}</time>

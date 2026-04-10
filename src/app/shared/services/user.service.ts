@@ -22,4 +22,8 @@ export interface ReferredUserRow {
   email: string;
   username: string;
   date_joined: string;
+  /** Rol del referido (p. ej. profe/admin sin ciclo de recompra). */
+  rol?: string;
+  /** Si su código de referido está activo (recompra al día). */
+  referral_active?: boolean;
 }
