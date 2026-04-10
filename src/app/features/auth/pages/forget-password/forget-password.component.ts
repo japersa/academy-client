@@ -70,10 +70,12 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
   }
 
   recoverUser(dataFrom: any) {
-
+    // JSON.stringify omite undefined: sin esto el POST puede ir como {} y el API devuelve 400.
+    const email = String(dataFrom?.email ?? '').trim();
     const data = {
-      username: dataFrom.email
-    }
+      username: email,
+      email: email,
+    };
 
     this.subscription$ = this.forgetPasswordService.register(data).pipe(take(1)).subscribe(res => {
       this.notificationService.showNotification('top', 'right', 'Se ha enviado la solicitud de cambio de clave correctamente', 2);
@@ -82,9 +84,19 @@ export class ForgetPasswordComponent implements OnInit, OnDestroy {
 
     },
       error => {
-        this.errorMessage = error.error;
+        const err = error?.error;
+        if (typeof err === 'string') {
+          this.errorMessage = err;
+        } else if (err?.non_field_errors?.length) {
+          this.errorMessage = err.non_field_errors.join(' ');
+        } else if (err?.username?.length) {
+          this.errorMessage = Array.isArray(err.username) ? err.username[0] : String(err.username);
+        } else if (err?.detail) {
+          this.errorMessage = String(err.detail);
+        } else {
+          this.errorMessage = 'No se pudo enviar el correo. Comprueba el email e inténtalo de nuevo.';
+        }
         this.notificationService.showNotification('top', 'right', 'Ha surgido un error', 4);
-        console.log(error.error);
       });
 
   }
