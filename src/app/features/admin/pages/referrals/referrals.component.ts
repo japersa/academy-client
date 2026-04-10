@@ -37,6 +37,9 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   error: string | null = null;
 
   referredUsers: ReferredUserRow[] = [];
+  /** Paginación solo en front (el API devuelve la lista completa). */
+  referralsPageSize = 10;
+  referralsCurrentPage = 1;
   /** Profesor y admin: sin recompra mensual ni bajada de plan por fecha. */
   isTeacherOrAdmin = false;
   /** true hasta que termina la primera carga de perfil (incluye lista de referidos desde el API). */
@@ -152,6 +155,47 @@ export class ReferralsComponent implements OnInit, OnDestroy {
     return (row.email && row.email.trim()) || row.username || '—';
   }
 
+  /** Filas de la página actual. */
+  get referredUsersPaged(): ReferredUserRow[] {
+    const start = (this.referralsCurrentPage - 1) * this.referralsPageSize;
+    return this.referredUsers.slice(start, start + this.referralsPageSize);
+  }
+
+  get referralsTotalPages(): number {
+    const n = this.referredUsers.length;
+    if (n <= 0) {
+      return 1;
+    }
+    return Math.ceil(n / this.referralsPageSize);
+  }
+
+  get referralsRangeLabel(): string {
+    const n = this.referredUsers.length;
+    if (n === 0) {
+      return '';
+    }
+    const start = (this.referralsCurrentPage - 1) * this.referralsPageSize + 1;
+    const end = Math.min(n, this.referralsCurrentPage * this.referralsPageSize);
+    return `${start}–${end} de ${n}`;
+  }
+
+  get showReferralsPagination(): boolean {
+    return this.referredUsers.length > this.referralsPageSize;
+  }
+
+  setReferralsPage(page: number): void {
+    const total = this.referralsTotalPages;
+    this.referralsCurrentPage = Math.min(Math.max(1, page), total);
+  }
+
+  prevReferralsPage(): void {
+    this.setReferralsPage(this.referralsCurrentPage - 1);
+  }
+
+  nextReferralsPage(): void {
+    this.setReferralsPage(this.referralsCurrentPage + 1);
+  }
+
   /** Mismo criterio que el banner del propio usuario: staff siempre «activo» para el código. */
   referredUserReferralCodeActive(row: ReferredUserRow): boolean {
     return isTeacherOrAdminRole(row?.rol) || row?.referral_active === true;
@@ -201,6 +245,10 @@ export class ReferralsComponent implements OnInit, OnDestroy {
         this.hasActiveSelfManagementPlan =
           hasActivePkg || subscriptionFull || hasPaidOrExpiredAgPackage;
         this.referredUsers = Array.isArray(user.referred_users) ? user.referred_users : [];
+        const tp = this.referralsTotalPages;
+        if (this.referralsCurrentPage > tp) {
+          this.referralsCurrentPage = tp;
+        }
         this.profileLoading = false;
 
         this.syncReferralRenewalPollingState();

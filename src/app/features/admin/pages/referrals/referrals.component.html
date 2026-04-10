@@ -270,7 +270,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let row of referredUsers" class="referrals-list-table__row">
+                      <tr *ngFor="let row of referredUsersPaged" class="referrals-list-table__row">
                         <td>
                           <span class="referrals-list-table__name">{{ displayReferredName(row) }}</span>
                         </td>
@@ -292,6 +292,39 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+                <div
+                  class="referrals-list-panel__footer"
+                  *ngIf="referredUsers.length > 0"
+                >
+                  <p class="referrals-pagination__range text-muted small mb-2 mb-md-0">
+                    Mostrando <strong>{{ referralsRangeLabel }}</strong>
+                  </p>
+                  <nav
+                    class="referrals-pagination"
+                    *ngIf="showReferralsPagination"
+                    aria-label="Paginación de referidos"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-secondary referrals-pagination__btn"
+                      (click)="prevReferralsPage()"
+                      [disabled]="referralsCurrentPage <= 1"
+                    >
+                      Anterior
+                    </button>
+                    <span class="referrals-pagination__status text-muted small">
+                      Página {{ referralsCurrentPage }} de {{ referralsTotalPages }}
+                    </span>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-secondary referrals-pagination__btn"
+                      (click)="nextReferralsPage()"
+                      [disabled]="referralsCurrentPage >= referralsTotalPages"
+                    >
+                      Siguiente
+                    </button>
+                  </nav>
                 </div>
               </div>
             </div>

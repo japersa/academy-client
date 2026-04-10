@@ -372,6 +372,42 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
   -webkit-overflow-scrolling: touch;
 }
 
+.referrals-list-panel__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid $referrals-line;
+  background: $referrals-surface;
+}
+
+.referrals-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.referrals-pagination__btn {
+  min-width: 5.5rem;
+}
+
+.referrals-pagination__status {
+  font-variant-numeric: tabular-nums;
+  padding: 0 0.25rem;
+}
+
+.referrals-pagination__range {
+  margin: 0;
+  strong {
+    font-weight: 600;
+    color: inherit;
+    opacity: 0.95;
+  }
+}
+
 .referrals-list-table {
   border-collapse: separate;
   border-spacing: 0;
@@ -477,6 +513,11 @@ a.btn.referrals-page__btn-wa.referral-share-icon-btn {
 
   .referrals-list-panel__head {
     border-bottom-color: rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .referrals-list-panel__footer {
+    border-top-color: rgba(0, 0, 0, 0.08);
     background: rgba(0, 0, 0, 0.03);
   }
 
