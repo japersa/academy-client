@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, DestroyRef, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, forkJoin } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { RegisterService } from '../../../auth/services/register.service';
@@ -40,6 +42,8 @@ export class AcademyComponent implements OnInit{
     return raw;
   }
 
+  private readonly destroyRef = inject(DestroyRef);
+
   constructor(
     private coursesService: CoursesService,
     private registerService: RegisterService,
@@ -64,49 +68,74 @@ export class AcademyComponent implements OnInit{
     }
   }
 
+  /** Respaldo si falla el perfil: usa `userData` ya cargado (p. ej. desde storage). */
   fillCourses() {
-    this.coursesService.getCourses().subscribe(res => {
-      const rol = this.userDataService.userData$.value?.rol;
-      if (rol === 'admin') {
-        this.courses = res.all ?? [];
-      } else if (rol === 'teacher') {
-        this.courses = res.my_courses_created ?? [];
-      } else if (rol === 'user') {
-        this.courses = res.my_enrolled_courses ?? [];
-      }
-    },
+    this.coursesService.getCourses().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
+      res => {
+        const rol = this.userDataService.userData$.value?.rol;
+        if (rol === 'admin') {
+          this.courses = res.all ?? [];
+        } else if (rol === 'teacher') {
+          this.courses = res.my_courses_created ?? [];
+        } else if (rol === 'user') {
+          this.courses = res.my_enrolled_courses ?? [];
+        }
+      },
       error => {
         console.log(error);
-      });
+      }
+    );
   }
 
-  getUser() {
-    setTimeout(() => {
-      this.registerService.getUser().subscribe(
-        {
-          next: (r) => {
-            this.packAgActived = r.packages_self_management.filter(pkg => pkg.status === 'active');
-            this.agActivete();
-            this.userDataService.userData$.next(r);
-            this.storageService.set('userData', r);
-            this.fillCourses();
-            if (r.rol === 'user' && r.subscription === 'none') {
-              this.notificationsService.showNotification('top', 'center', 'Aún no tienes una subscripción, puedes obtenerla rápidamente <a href="/subscription">AQUÍ</a>.</p>', 3);
-            }
-          },
-          error: (e) => {
-            console.log(e.error);
-            this.fillCourses();
-          }
-        }
-      )
-    }, 200);
+  private applyProfile(r: Record<string, unknown>): void {
+    const pkgs = r['packages_self_management'] as { status?: string }[] | undefined;
+    this.packAgActived = (pkgs ?? []).filter(pkg => pkg.status === 'active');
+    this.agActivete();
+    this.userDataService.userData$.next(r);
+    void this.storageService.set('userData', r);
+    if (r['rol'] === 'user' && r['subscription'] === 'none') {
+      this.notificationsService.showNotification(
+        'top',
+        'center',
+        'Aún no tienes una subscripción, puedes obtenerla rápidamente <a href="/subscription">AQUÍ</a>.</p>',
+        3
+      );
+    }
+  }
+
+  private assignCoursesFromPayload(res: Record<string, unknown>, rol: string | undefined): void {
+    if (rol === 'admin') {
+      this.courses = (res['all'] as unknown[]) ?? [];
+    } else if (rol === 'teacher') {
+      this.courses = (res['my_courses_created'] as unknown[]) ?? [];
+    } else if (rol === 'user') {
+      this.courses = (res['my_enrolled_courses'] as unknown[]) ?? [];
+    }
   }
 
   ngOnInit(): void {
-    this.coursesService.getKeepWatching().subscribe(r => {
-      this.continueLearningCourses = r;
-    });
-    this.getUser();
+    forkJoin({
+      watching: this.coursesService.getKeepWatching(),
+      profile: this.registerService.getUser(),
+    })
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(({ watching, profile }) => {
+          this.continueLearningCourses = watching;
+          this.applyProfile(profile as Record<string, unknown>);
+        }),
+        switchMap(({ profile }) => {
+          const p = profile as { rol?: string };
+          return this.coursesService.getCourses().pipe(
+            tap(res => this.assignCoursesFromPayload(res as Record<string, unknown>, p.rol))
+          );
+        })
+      )
+      .subscribe({
+        error: e => {
+          console.log(e?.error ?? e);
+          this.fillCourses();
+        },
+      });
   }
 }
