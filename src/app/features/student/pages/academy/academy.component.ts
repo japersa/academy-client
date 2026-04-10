@@ -96,6 +96,7 @@ export class AcademyComponent implements OnInit{
           },
           error: (e) => {
             console.log(e.error);
+            this.fillCourses();
           }
         }
       )
@@ -103,7 +104,6 @@ export class AcademyComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.fillCourses();
     this.coursesService.getKeepWatching().subscribe(r => {
       this.continueLearningCourses = r;
     });
