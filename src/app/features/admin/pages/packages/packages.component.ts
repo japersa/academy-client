@@ -23,6 +23,9 @@ export class PackagesComponent implements OnInit {
   validationMessages: any;
   errorMessage: string | null;
 
+  showMtPassword = false;
+  showMtPasswordInvestor = false;
+
   constructor(private modalService: BsModalService,
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
@@ -32,15 +35,15 @@ export class PackagesComponent implements OnInit {
 
 
   get loginField() {
-    return this.form?.get('login');
+    return this.form?.get('mt_login');
   }
 
   get loginFieldDirty() {
     return this.loginField?.dirty || this.loginField?.touched;
   }
 
-  get passwordField() { 
-    return this.form?.get('password');
+  get passwordField() {
+    return this.form?.get('mt_password');
   }
 
   get passwordFieldDirty() {
@@ -48,7 +51,7 @@ export class PackagesComponent implements OnInit {
   }
 
   get passwordInvestorField() {
-    return this.form?.get('password_investor');
+    return this.form?.get('mt_password_investor');
   }
 
   get passwordInvestorFieldDirty() {
@@ -137,6 +140,13 @@ export class PackagesComponent implements OnInit {
 
   loadPackInModal(idPack: number, template: TemplateRef<any>){
     this.pack = this.packages.find(pack => pack.id == idPack);
+    this.showMtPassword = false;
+    this.showMtPasswordInvestor = false;
+    this.form.patchValue({
+      mt_login: this.pack?.mt_login ?? '',
+      mt_password: this.pack?.mt_password ?? '',
+      mt_password_investor: this.pack?.mt_password_investor ?? '',
+    });
     console.log(this.pack);
     this.openModal(template);
   }

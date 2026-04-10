@@ -44,6 +44,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   validationMessages: any;
   errorMessage: string | null;
 
+  showPassword = false;
+  showConfirmPassword = false;
+
   constructor(
     private formBuilder: FormBuilder,
     public utilsService: UtilsService,
@@ -392,6 +395,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.registerService.register(dataForm).subscribe(res => {
       this.notificationService.showNotification('top', 'right', 'Te has registrado correctamente', 2);
       this.showSwal('success-message')
+      this.showPassword = false;
+      this.showConfirmPassword = false;
       this.form.reset();
       this.router.navigate(['/sign-in']);
     }, 

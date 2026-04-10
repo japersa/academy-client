@@ -29,6 +29,9 @@ export class UserComponent implements OnInit, OnDestroy {
 
   showPasswordField = false;
   showButtonPassword = true;
+  showOldPassword = false;
+  showNewPassword = false;
+  showDisablePassword = false;
 
   updateForm: UntypedFormGroup;
   updatePasswordForm: UntypedFormGroup;
@@ -99,6 +102,8 @@ export class UserComponent implements OnInit, OnDestroy {
     if (this.showPasswordField) {
       this.showPasswordField = false;
       this.showButtonPassword = true;
+      this.showOldPassword = false;
+      this.showNewPassword = false;
       this.updatePasswordForm.reset();
     } else if (this.showPasswordField == false) {
       this.showPasswordField = true;
@@ -188,6 +193,8 @@ export class UserComponent implements OnInit, OnDestroy {
     }
     this.updatePasswordService.updatePassword(data).subscribe(res => {
       this.notificationService.showNotification('bottom', 'center', 'Has actualizado los datos correctamente', 2);
+      this.showOldPassword = false;
+      this.showNewPassword = false;
       this.updatePasswordForm.reset();
       this.showUpdatePassword();
     },
@@ -314,6 +321,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.twoFactorService.disable(pw, otp).subscribe({
       next: () => {
         this.twoFactorBusy = false;
+        this.showDisablePassword = false;
         this.disablePassword = '';
         this.disableOtp = '';
         this.notificationService.showNotification(

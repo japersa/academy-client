@@ -261,8 +261,25 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="pass">Contraseña</label>
-                  <input type="password" class="form-control rounded-pill shadow" formControlName="password" id="pass"
-                    placeholder="Ingrese su contraseña" />
+                  <div class="password-input-toggle-wrap password-input-toggle-wrap--rounded">
+                    <input
+                      [type]="showPassword ? 'text' : 'password'"
+                      class="form-control rounded-pill shadow"
+                      formControlName="password"
+                      id="pass"
+                      placeholder="Ingrese su contraseña"
+                      autocomplete="new-password"
+                    />
+                    <button
+                      type="button"
+                      class="password-input-toggle-btn"
+                      (click)="showPassword = !showPassword"
+                      [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                      [attr.aria-pressed]="showPassword"
+                    >
+                      <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+                    </button>
+                  </div>
                   <ng-container *ngFor="
                       let validation of utilsService.validationMessages.password
                     ">
@@ -277,9 +294,26 @@
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <label for="pass">Confirmar contraseña</label>
-                  <input type="password" class="form-control rounded-pill shadow" formControlName="confirm_password"
-                    id="pass2" placeholder="Ingrese su contraseña" />
+                  <label for="pass2">Confirmar contraseña</label>
+                  <div class="password-input-toggle-wrap password-input-toggle-wrap--rounded">
+                    <input
+                      [type]="showConfirmPassword ? 'text' : 'password'"
+                      class="form-control rounded-pill shadow"
+                      formControlName="confirm_password"
+                      id="pass2"
+                      placeholder="Ingrese su contraseña"
+                      autocomplete="new-password"
+                    />
+                    <button
+                      type="button"
+                      class="password-input-toggle-btn"
+                      (click)="showConfirmPassword = !showConfirmPassword"
+                      [attr.aria-label]="showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                      [attr.aria-pressed]="showConfirmPassword"
+                    >
+                      <i class="fas" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+                    </button>
+                  </div>
                   <ng-container *ngFor="
                       let validation of utilsService.validationMessages
                         .confirm_password

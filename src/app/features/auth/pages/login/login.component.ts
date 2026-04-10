@@ -61,6 +61,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   awaiting2fa = false;
   preAuthToken: string | null = null;
 
+  showPassword = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private utilsService: UtilsService,
@@ -140,6 +142,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
         this.notificationService.showNotification('top', 'right', 'Has iniciado sesión correctamente', 2);
         this.errorMessage = null;
+        this.showPassword = false;
         this.form.reset();
       },
       error: (e) => {
@@ -176,6 +179,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.errorMessage = null;
         this.awaiting2fa = false;
         this.preAuthToken = null;
+        this.showPassword = false;
         this.form.reset();
       },
       error: (e) => {
@@ -195,6 +199,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   cancel2fa() {
     this.awaiting2fa = false;
     this.preAuthToken = null;
+    this.showPassword = false;
     this.form.patchValue({ otp: '' });
     this.errorMessage = null;
   }

@@ -173,15 +173,47 @@
                   <div class="col-md-6 pr-md-1">
                     <div class="form-group">
                       <label> Contraseña actual </label>
-                      <input class="form-control" type="password" placeholder="Contraseña actual"
-                        formControlName="old_password" />
+                      <div class="password-input-toggle-wrap">
+                        <input
+                          class="form-control"
+                          [type]="showOldPassword ? 'text' : 'password'"
+                          placeholder="Contraseña actual"
+                          formControlName="old_password"
+                          autocomplete="current-password"
+                        />
+                        <button
+                          type="button"
+                          class="password-input-toggle-btn"
+                          (click)="showOldPassword = !showOldPassword"
+                          [attr.aria-label]="showOldPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                          [attr.aria-pressed]="showOldPassword"
+                        >
+                          <i class="fas" [ngClass]="showOldPassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6 pl-md-1">
                     <div class="form-group">
                       <label> Nueva contraseña </label>
-                      <input class="form-control" type="password" placeholder="Nueva contraseña"
-                        formControlName="password" />
+                      <div class="password-input-toggle-wrap">
+                        <input
+                          class="form-control"
+                          [type]="showNewPassword ? 'text' : 'password'"
+                          placeholder="Nueva contraseña"
+                          formControlName="password"
+                          autocomplete="new-password"
+                        />
+                        <button
+                          type="button"
+                          class="password-input-toggle-btn"
+                          (click)="showNewPassword = !showNewPassword"
+                          [attr.aria-label]="showNewPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                          [attr.aria-pressed]="showNewPassword"
+                        >
+                          <i class="fas" [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <ng-container *ngIf="errorMessage">
@@ -224,13 +256,24 @@
                 <p class="small text-muted mb-3">Para desactivar, confirma tu contraseña y un código de la app.</p>
                 <div class="form-group">
                   <label>Contraseña actual</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    [(ngModel)]="disablePassword"
-                    [ngModelOptions]="{ standalone: true }"
-                    autocomplete="current-password"
-                  />
+                  <div class="password-input-toggle-wrap">
+                    <input
+                      [type]="showDisablePassword ? 'text' : 'password'"
+                      class="form-control"
+                      [(ngModel)]="disablePassword"
+                      [ngModelOptions]="{ standalone: true }"
+                      autocomplete="current-password"
+                    />
+                    <button
+                      type="button"
+                      class="password-input-toggle-btn"
+                      (click)="showDisablePassword = !showDisablePassword"
+                      [attr.aria-label]="showDisablePassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                      [attr.aria-pressed]="showDisablePassword"
+                    >
+                      <i class="fas" [ngClass]="showDisablePassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+                    </button>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label>Código de la app</label>

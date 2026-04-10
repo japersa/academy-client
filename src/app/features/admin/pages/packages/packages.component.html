@@ -156,13 +156,25 @@
           <div class="col-12">
             <div class="form-group">
               <label for="password">Contraseña: {{ pack.mt_password  }} </label>
-              <input
-                type="text"
-                class="form-control rounded-pill shadow"
-                formControlName="mt_password"
-                id="password"
-                placeholder="***********"
-              />
+              <div class="password-input-toggle-wrap password-input-toggle-wrap--rounded">
+                <input
+                  [type]="showMtPassword ? 'text' : 'password'"
+                  class="form-control rounded-pill shadow"
+                  formControlName="mt_password"
+                  id="password"
+                  placeholder="***********"
+                  autocomplete="new-password"
+                />
+                <button
+                  type="button"
+                  class="password-input-toggle-btn"
+                  (click)="showMtPassword = !showMtPassword"
+                  [attr.aria-label]="showMtPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                  [attr.aria-pressed]="showMtPassword"
+                >
+                  <i class="fas" [ngClass]="showMtPassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+                </button>
+              </div>
               <ng-container
                 *ngFor="
                   let validation of utilsService.validationMessages.password
@@ -183,13 +195,25 @@
           <div class="col-12">
             <div class="form-group">
               <label for="passwordInvestorField">Contraseña inversor: {{ pack.mt_password_investor  }} </label>
-              <input
-                type="text"
-                class="form-control rounded-pill shadow"
-                formControlName="mt_password_investor"
-                id="passwordInvestorField"
-                placeholder="***********"
-              />
+              <div class="password-input-toggle-wrap password-input-toggle-wrap--rounded">
+                <input
+                  [type]="showMtPasswordInvestor ? 'text' : 'password'"
+                  class="form-control rounded-pill shadow"
+                  formControlName="mt_password_investor"
+                  id="passwordInvestorField"
+                  placeholder="***********"
+                  autocomplete="new-password"
+                />
+                <button
+                  type="button"
+                  class="password-input-toggle-btn"
+                  (click)="showMtPasswordInvestor = !showMtPasswordInvestor"
+                  [attr.aria-label]="showMtPasswordInvestor ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                  [attr.aria-pressed]="showMtPasswordInvestor"
+                >
+                  <i class="fas" [ngClass]="showMtPasswordInvestor ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+                </button>
+              </div>
               <ng-container
                 *ngFor="
                   let validation of utilsService.validationMessages.password

@@ -33,9 +33,31 @@
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input class="form-control rounded-pill shadow" formControlName="password" placeholder="Contraseña"
-                [attr.readonly]="awaiting2fa ? true : null"
-                id="password" type="password" aria-describedby="password" />
+              <div class="password-input-toggle-wrap password-input-toggle-wrap--rounded">
+                <input
+                  class="form-control rounded-pill shadow"
+                  formControlName="password"
+                  placeholder="Contraseña"
+                  [attr.readonly]="awaiting2fa ? true : null"
+                  id="password"
+                  [type]="showPassword ? 'text' : 'password'"
+                  aria-describedby="password"
+                  autocomplete="current-password"
+                />
+                <button
+                  type="button"
+                  class="password-input-toggle-btn"
+                  (click)="showPassword = !showPassword"
+                  [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+                  [attr.aria-pressed]="showPassword"
+                >
+                  <i
+                    class="fas"
+                    [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </div>
               <ng-container *ngFor="let validation of validationMessages.password">
                 <small class="form-text text-danger" *ngIf="
                     passwordField?.hasError(validation.type) &&
