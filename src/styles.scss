@@ -57,16 +57,23 @@
     width: 100%;
 }
 
-/* Contenedor flex: el input puede ser más estrecho que su min-intrínseco en iOS */
+/*
+ * Contenedor: block evita rarezas de flex en Chrome con un solo hijo;
+ * min-width: 0 sigue ayudando en iOS dentro del grid.
+ */
 .app-date-field-wrap {
-    display: flex;
+    display: block;
     width: 100%;
     max-width: 100%;
     min-width: 0;
 }
 
+/*
+ * Chrome/Safari resetean type=date (font, padding, altura). Forzar alineación con .form-control del tema
+ * (Black Dashboard usa font-size ~0.875rem en _forms.scss).
+ */
 input[type="date"].form-control.app-date-field {
-    flex: 1 1 auto;
+    display: block;
     width: 100%;
     min-width: 0;
     max-width: 100%;
@@ -74,32 +81,42 @@ input[type="date"].form-control.app-date-field {
     color-scheme: light;
     background-color: #fff;
     border-radius: 10px !important;
-    box-shadow: 0px 0px 18px 0.2px rgba(0, 0, 0, 0.15) !important;
-    /* iOS: menos padding lateral evita que fecha + icono desborden el viewport */
-    padding-left: 0.65rem;
-    padding-right: 0.35rem;
+    /* Misma sombra que .shadow (sin !important: respeta :focus del tema) */
+    box-shadow: 0px 0px 18px 0.2px rgba(0, 0, 0, 0.15);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #000 !important;
+    padding: 0.375rem 0.75rem;
+    min-height: calc(1.5em + 0.75rem + 2px);
 }
 
 input[type="date"].form-control.app-date-field::-webkit-datetime-edit {
     min-width: 0;
-    flex: 1 1 auto;
 }
 
 input[type="date"].form-control.app-date-field::-webkit-datetime-edit-fields-wrapper {
     padding: 0;
     min-width: 0;
-    flex: 1 1 auto;
-}
-
-input[type="date"].form-control.app-date-field::-webkit-datetime-edit-text {
-    padding: 0 0.1rem;
 }
 
 input[type="date"].form-control.app-date-field::-webkit-calendar-picker-indicator {
     cursor: pointer;
     opacity: 0.65;
-    flex-shrink: 0;
-    margin-left: 0;
+}
+
+/* Misma lógica que .form-control:focus del tema (nuestra regla base es más específica y dejaba la sombra fija) */
+input[type="date"].form-control.app-date-field:focus {
+    box-shadow: none;
+    border-color: var(--primary, #d0ad50);
+    outline: 0;
+}
+
+/* Pantallas estrechas: un poco menos de padding derecho (fecha + icono) sin romper Chrome en escritorio */
+@media (max-width: 576px) {
+    input[type="date"].form-control.app-date-field {
+        padding-left: 0.5rem;
+        padding-right: 0.35rem;
+    }
 }
 
 /* Modal CoinPayments (checkout cripto: autogestión, funding, recompra referidos) */
