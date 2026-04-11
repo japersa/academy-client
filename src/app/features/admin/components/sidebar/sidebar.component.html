@@ -4,7 +4,14 @@
       <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
         <i class="{{ menuitem.icontype }}"></i>
-        <p>{{ menuitem.title }}</p>
+        <p>
+          <span
+            class="sidebar-live-pulse"
+            *ngIf="menuitem.livePulse && (liveSignalService.livePulseActive$ | async)"
+            aria-hidden="true"
+          ></span>
+          {{ menuitem.title }}
+        </p>
       </a>
       <!--If it have a submenu-->
       <a data-toggle="collapse" routerLinkActive="active" *ngIf="menuitem.type === 'sub'"

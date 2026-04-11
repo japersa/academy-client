@@ -1,0 +1,58 @@
+<div class="content admin-area-page">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title mb-0">Admin — Señales en vivo</h4>
+          <p class="card-category mb-0">
+            Activa la sesión cuando el stream en YouTube (no listado o público) esté listo.
+            La URL del vídeo solo la reciben usuarios autorizados por la app.
+          </p>
+        </div>
+        <div class="card-body" *ngIf="!loading">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group">
+              <label class="d-flex align-items-center">
+                <input type="checkbox" formControlName="is_live" class="mr-2" />
+                Emisión activa (mostrar en menú y página de señal)
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Título</label>
+              <input type="text" class="form-control" formControlName="title" />
+            </div>
+            <div class="form-group">
+              <label>URL del stream (YouTube)</label>
+              <input
+                type="url"
+                class="form-control"
+                formControlName="stream_url"
+                placeholder="https://www.youtube.com/watch?v=..."
+              />
+              <small class="form-text text-muted">
+                Puede ser enlace de visionado o de embed. En YouTube usa “No listado” para
+                que no aparezca en búsquedas; el control de quién ve la señal lo marca esta app.
+              </small>
+            </div>
+            <div class="form-group">
+              <label>Quién puede ver la señal</label>
+              <select class="form-control" formControlName="min_subscription">
+                <option *ngFor="let o of minOptions" [value]="o.value">{{ o.label }}</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-round"
+              [disabled]="saving || form.invalid"
+            >
+              {{ saving ? 'Guardando…' : 'Guardar' }}
+            </button>
+          </form>
+        </div>
+        <div class="card-body" *ngIf="loading">
+          <p class="text-muted mb-0">Cargando…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import PerfectScrollbar from "perfect-scrollbar";
 import { ToastrService } from "ngx-toastr";
 import { UserDataService } from '../../../../core/services/user-data.service';
+import { LiveSignalService } from 'src/app/shared/services/live-signal.service';
 
 var misc: any = {
   sidebar_mini_active: true
@@ -16,7 +17,9 @@ var misc: any = {
 export class AdminLayoutComponent implements OnInit {
   constructor(public router: Router,
     public userDataService: UserDataService,
-    public toastr: ToastrService) { }
+    public toastr: ToastrService,
+    private liveSignalService: LiveSignalService,
+  ) { }
   @HostListener("window:scroll", ["$event"])
   showNavbarButton = () => {
     var mainPanel: any = document.getElementsByClassName("main-panel")[0];
@@ -54,6 +57,7 @@ export class AdminLayoutComponent implements OnInit {
       }
     }
     this.showNavbarButton();
+    this.liveSignalService.startPolling();
   }
   minimizeSidebar() {
     const body = document.getElementsByTagName("body")[0];

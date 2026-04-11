@@ -151,6 +151,20 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'live-signals',
+        loadChildren: () =>
+          import('./features/live-signals/live-signals.module').then(
+            (m) => m.LiveSignalsModule,
+          ),
+      },
+      {
+        path: 'live-signal-admin',
+        loadChildren: () =>
+          import('./features/admin/pages/live-signal-admin/live-signal-admin.module').then(
+            (m) => m.LiveSignalAdminModule,
+          ),
+      },
+      {
         path: 'customer-service',
         loadChildren: () => import('./features/customer-service/customer-service.module')
           .then(m => m.CustomerServiceModule)

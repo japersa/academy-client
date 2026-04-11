@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserDataService } from '../../../../core/services/user-data.service';
+import { LiveSignalService } from 'src/app/shared/services/live-signal.service';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +16,8 @@ export interface RouteInfo {
   isCollapsed?: boolean;
   isCollapsing?: any;
   children?: ChildrenItems[];
+  /** Punto animado cuando hay sesión en vivo (API). */
+  livePulse?: boolean;
 }
 
 export interface ChildrenItems {
@@ -154,23 +157,13 @@ export const ROUTES: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
   },
   {
-    path: '#',
+    path: '/live-signals',
     title: 'Señales en vivo',
-    type: 'sub',
+    type: 'link',
     icontype: 'tim-icons currency-exchange',
     role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: '',
-        title: 'Proximamente',
-        type: 'link',
-        smallTitle: 'AD',
-        comingSoon: true,
-      }
-    ]
-  }
+    livePulse: true,
+  },
 ];
 
 // Routes to ADMIN
@@ -269,23 +262,20 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
   },
   {
-    path: '#',
+    path: '/live-signals',
     title: 'Señales en Vivo',
-    type: 'sub',
+    type: 'link',
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: '',
-        title: 'Proximamente',
-        type: 'link',
-        smallTitle: 'AD',
-        comingSoon: true,
-      },
-    ]
-  }
+    livePulse: true,
+  },
+  {
+    path: '/live-signal-admin',
+    title: 'Admin señales en vivo',
+    type: 'link',
+    icontype: 'tim-icons icon-settings-gear-63',
+    role: [ROLES_ENUM.ADMIN],
+  },
   // {
   //   path: '/academy',
   //   title: 'Academia',
@@ -348,23 +338,13 @@ export const ROUTES_TEACHER: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
   },
   {
-    path: '#',
+    path: '/live-signals',
     title: 'Señales en Vivo',
-    type: 'sub',
+    type: 'link',
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: '',
-        title: 'Proximamente',
-        type: 'link',
-        smallTitle: 'AD',
-        comingSoon: true,
-      },
-    ]
-  }
+    livePulse: true,
+  },
   // {
   //   path: '/academy',
   //   title: 'Academia',
@@ -398,22 +378,12 @@ export const ROUTES_USER: RouteInfo[] = [
     role: [ROLES_ENUM.ALL],
   },
   {
-    path: '#',
+    path: '/live-signals',
     title: 'Señales en Vivo',
-    type: 'sub',
+    type: 'link',
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
-    collapse: 'pages',
-    isCollapsed: true,
-    children: [
-      {
-        path: '',
-        title: 'Proximamente',
-        type: 'link',
-        smallTitle: 'AD',
-        comingSoon: true,
-      },
-    ]
+    livePulse: true,
   },
   // {
   //   path: '/academy',
@@ -477,6 +447,7 @@ export class SidebarComponent implements OnInit {
     private router: Router,
     private userDataService: UserDataService,
     private toastr: ToastrService,
+    public liveSignalService: LiveSignalService,
   ) { }
 
   onComingSoonNavClick(event: Event): void {
