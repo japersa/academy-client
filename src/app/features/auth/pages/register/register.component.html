@@ -122,13 +122,17 @@
               </div> -->
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-12 col-md-4">
                 <div class="form-group">
-                  <label for="birth_date">Indicativo: {{ countryCodeField?.value }}
-                  </label>
-                  <select class="form-control rounded-pill shadow" formControlName="country_code">
+                  <label id="label-country-code" for="country_code_select">Indicativo</label>
+                  <select
+                    id="country_code_select"
+                    class="form-control rounded-pill shadow"
+                    formControlName="country_code"
+                    aria-labelledby="label-country-code"
+                  >
                     <option *ngFor="let c of utilsService.countries" [value]="c.dial_code">
-                      {{ c.dial_code + " " + c.flag }}
+                      {{ c.dial_code }} {{ c.name }}
                     </option>
                   </select>
                   <ng-container *ngFor="
@@ -144,7 +148,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-8">
+              <div class="col-12 col-md-8">
                 <div class="form-group">
                   <label for="phone_number">Télefono: {{ phoneField?.value }}</label>
                   <input type="tel" class="form-control rounded-pill shadow" formControlName="phone_number"
@@ -183,8 +187,15 @@
               <div class="col-12">
                 <div class="form-group">
                   <label for="city">Ciudad: {{ cityField?.value | titlecase }}</label>
-                  <input type="tel" class="form-control rounded-pill shadow" formControlName="city" id="city"
-                    placeholder="Buenos Aires" />
+                  <input
+                    type="text"
+                    inputmode="text"
+                    autocomplete="address-level2"
+                    class="form-control rounded-pill shadow"
+                    formControlName="city"
+                    id="city"
+                    placeholder="Buenos Aires"
+                  />
                   <ng-container *ngFor="
                       let validation of utilsService.validationMessages.city
                     ">
@@ -217,10 +228,15 @@
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <label for="countryField">País: {{ countryField?.value | uppercase }}</label>
-                  <select class="form-control rounded-pill shadow" formControlName="country">
+                  <label id="label-country-iso" for="countryField">País</label>
+                  <select
+                    id="countryField"
+                    class="form-control rounded-pill shadow"
+                    formControlName="country"
+                    aria-labelledby="label-country-iso"
+                  >
                     <option *ngFor="let c of utilsService.countries" [value]="c.code">
-                      {{ c.name + " " + c.flag }}
+                      {{ c.name }} ({{ c.code }})
                     </option>
                   </select>
                   <ng-container *ngFor="

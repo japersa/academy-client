@@ -5,7 +5,7 @@ import { StorageService } from 'src/app/core/services/storage.service';
 import { UserDataService } from 'src/app/core/services/user-data.service';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { RegisterService } from '../auth/services/register.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 import { isTeacherOrAdminRole } from 'src/app/shared/utils/staff-role';
 
 
@@ -84,6 +84,7 @@ export class SelfManagementComponent implements OnInit {
     }
   }
 
+  /** Respaldo si falla la carga agrupada; usa rol ya en `userData$`. */
   fillCourses() {
     this.coursesService.getCourses().subscribe(res => {
       const rol = this.userDataService.userData$.value?.rol;
@@ -100,41 +101,66 @@ export class SelfManagementComponent implements OnInit {
       });
   }
 
-  getUser() {
-    setTimeout(() => {
-      this.registerService.getUser().subscribe(
-        {
-          next: (r) => {
-            this.packAgActived = r.packages_self_management.filter(pkg => pkg.status === 'active');
-            this.agActivete();
-            this.userDataService.userData$.next(r);
-            this.referalCode = r?.referral_code;
-            this.referralCodeActive =
-              isTeacherOrAdminRole(r?.rol) || r?.referral_active === true;
-            this.storageService.set('userData', r);
-            this.fillCourses();
-          },
-          error: (e) => {
-            console.log(e.error);
-          }
-        }
-      )
-    }, 200);
+  private applyUserProfile(r: Record<string, unknown>): void {
+    const pkgs = r['packages_self_management'] as { status?: string }[] | undefined;
+    this.packAgActived = (pkgs ?? []).filter(pkg => pkg.status === 'active');
+    this.agActivete();
+    this.userDataService.userData$.next(r);
+    this.referalCode = (r['referral_code'] as string) ?? this.referalCode;
+    this.referralCodeActive =
+      isTeacherOrAdminRole(r['rol'] as string | undefined) || r['referral_active'] === true;
+    void this.storageService.set('userData', r);
+  }
+
+  private assignCoursesFromPayload(res: Record<string, unknown>, rol: string | undefined): void {
+    if (rol === 'admin') {
+      this.courses = (res['all'] as unknown[]) ?? [];
+    } else if (rol === 'teacher') {
+      this.courses = (res['my_courses_created'] as unknown[]) ?? [];
+    } else if (rol === 'user') {
+      this.courses = (res['my_enrolled_courses'] as unknown[]) ?? [];
+    }
   }
 
   ngOnInit(): void {
-    /* this.userDataService.userData$.subscribe(
-     {
-      next: (r) => this.referalCode = r?.referral_code
-     } 
-    ); */
-
-    this.fillCourses();
-    this.coursesService.getKeepWatching().subscribe(r => {
-      this.continueLearningCourses = r;
+    forkJoin({
+      profile: this.registerService.getUser(),
+      courses: this.coursesService.getCourses(),
+      watching: this.coursesService.getKeepWatching(),
+    }).subscribe({
+      next: ({ profile, courses, watching }) => {
+        const p = profile as Record<string, unknown>;
+        this.applyUserProfile(p);
+        this.continueLearningCourses = watching;
+        this.assignCoursesFromPayload(courses as Record<string, unknown>, p['rol'] as string | undefined);
+      },
+      error: (e) => {
+        console.log(e);
+        this.registerService.getUser().subscribe({
+          next: (r) => {
+            this.applyUserProfile(r as Record<string, unknown>);
+            forkJoin({
+              courses: this.coursesService.getCourses(),
+              watching: this.coursesService.getKeepWatching(),
+            }).subscribe({
+              next: ({ courses, watching }) => {
+                this.continueLearningCourses = watching;
+                this.assignCoursesFromPayload(courses as Record<string, unknown>, r.rol);
+              },
+              error: err => {
+                console.log(err);
+                this.fillCourses();
+                this.coursesService.getKeepWatching().subscribe(
+                  w => { this.continueLearningCourses = w; },
+                  err2 => console.log(err2),
+                );
+              },
+            });
+          },
+          error: err => console.log(err.error),
+        });
+      },
     });
-    this.getUser();
-
   }
 
 }
