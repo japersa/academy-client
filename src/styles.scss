@@ -54,49 +54,56 @@
     min-width: 0;
     max-width: 100%;
     width: 100%;
-}
-
-.app-date-field-wrap {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
+    overflow-x: clip;
 }
 
 /*
- * Misma altura que .form-control textual: $input-height ≈ 1.5em + 0.75rem + 2px (Bootstrap 4).
- * type=date suele verse más alto por el layout interno WebKit.
+ * type=date: el UA suele imponer min-width y altura distinta al .form-control textual.
+ * Forzar misma tipografía que custom/_forms.scss (font-size-sm) y altura Bootstrap con rem fijos.
  */
 input[type="date"].form-control.app-date-field {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
     box-sizing: border-box;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     color-scheme: light;
-    height: calc(1.5em + 0.75rem + 2px);
-    min-height: unset;
-    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem !important;
     line-height: 1.5;
+    /* $input-height con font 0.875rem: 1.5×0.875rem + 2×0.375rem + 2px borde */
+    height: calc(2.0625rem + 2px);
+    min-height: unset;
+    padding: 0.375rem 0.5rem 0.375rem 0.75rem;
+    overflow: hidden;
+    field-sizing: fixed;
 }
 
 input[type="date"].form-control.app-date-field::-webkit-datetime-edit {
     min-width: 0;
     padding: 0;
-    line-height: inherit;
+    line-height: 1.5;
 }
 
 input[type="date"].form-control.app-date-field::-webkit-datetime-edit-fields-wrapper {
     min-width: 0;
     padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 input[type="date"].form-control.app-date-field::-webkit-calendar-picker-indicator {
     cursor: pointer;
+    width: 1.125rem;
+    height: 1.125rem;
+    padding: 0;
+    margin: 0 0 0 0.15rem;
+    flex-shrink: 0;
+    opacity: 0.75;
 }
 
 @media (max-width: 576px) {
     input[type="date"].form-control.app-date-field {
-        padding-inline-end: 0.35rem;
+        padding-right: 0.35rem;
     }
 }
 

@@ -81,16 +81,14 @@
                   <div class="col-md-6 pl-md-1 app-date-field-col">
                     <div class="form-group app-date-field-group">
                       <label> Fecha de nacimiento </label>
-                      <div class="app-date-field-wrap">
-                        <input
-                          type="date"
-                          class="form-control app-date-field"
-                          formControlName="birth_date"
-                          id="birth_date"
-                          (blur)="focus = false"
-                          (focus)="focus = true"
-                        />
-                      </div>
+                      <input
+                        type="date"
+                        class="form-control app-date-field"
+                        formControlName="birth_date"
+                        id="birth_date"
+                        (blur)="focus = false"
+                        (focus)="focus = true"
+                      />
                     </div>
                     <ng-container *ngFor="let validation of validationMessages.birth_date">
                       <small class="form-text text-danger" *ngIf="
