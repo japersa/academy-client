@@ -397,6 +397,24 @@ export const ROUTES_USER: RouteInfo[] = [
     icontype: 'tim-icons icon-money-coins',
     role: [ROLES_ENUM.ALL],
   },
+  {
+    path: '#',
+    title: 'Señales en Vivo',
+    type: 'sub',
+    icontype: 'fa-sharp fa-solid fa-ticket',
+    role: [ROLES_ENUM.ALL],
+    collapse: 'pages',
+    isCollapsed: true,
+    children: [
+      {
+        path: '',
+        title: 'Proximamente',
+        type: 'link',
+        smallTitle: 'AD',
+        comingSoon: true,
+      },
+    ]
+  },
   // {
   //   path: '/academy',
   //   title: 'Academia',
