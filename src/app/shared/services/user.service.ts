@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser() {
-    return this.http.get<any>(`${apiURL}/profile/me`);
+    return this.http.get<any>(`${apiURL}/profile/me/`);
   }
 }
 
