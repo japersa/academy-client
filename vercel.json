@@ -4,8 +4,8 @@
   "outputDirectory": "dist/browser",
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://ultra-back-98fc6bf42dce.herokuapp.com/:path*"
+      "source": "/api/(.*)",
+      "destination": "https://ultra-back-98fc6bf42dce.herokuapp.com/$1"
     },
     {
       "source": "/(.*)",
