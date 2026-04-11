@@ -158,7 +158,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/live-signals',
-    title: 'Señales en vivo',
+    title: 'Señal en vivo',
     type: 'link',
     icontype: 'tim-icons currency-exchange',
     role: [ROLES_ENUM.ALL],
@@ -263,7 +263,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
   },
   {
     path: '/live-signals',
-    title: 'Señales en Vivo',
+    title: 'Señal en vivo',
     type: 'link',
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
@@ -271,7 +271,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
   },
   {
     path: '/live-signal-admin',
-    title: 'Admin señales en vivo',
+    title: 'Admin señal en vivo',
     type: 'link',
     icontype: 'tim-icons icon-settings-gear-63',
     role: [ROLES_ENUM.ADMIN],
@@ -339,7 +339,7 @@ export const ROUTES_TEACHER: RouteInfo[] = [
   },
   {
     path: '/live-signals',
-    title: 'Señales en Vivo',
+    title: 'Señal en vivo',
     type: 'link',
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
@@ -379,7 +379,7 @@ export const ROUTES_USER: RouteInfo[] = [
   },
   {
     path: '/live-signals',
-    title: 'Señales en Vivo',
+    title: 'Señal en vivo',
     type: 'link',
     icontype: 'fa-sharp fa-solid fa-ticket',
     role: [ROLES_ENUM.ALL],
