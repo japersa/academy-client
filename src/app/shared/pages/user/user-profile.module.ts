@@ -8,6 +8,7 @@ import { QuicklinkModule} from 'ngx-quicklink';
 import { UserComponent } from './user.component';
 import { UserRoutes } from './user-profile.routing';
 import { ComponentsModule } from '../../components/components.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ComponentsModule } from '../../components/components.module';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
     QuicklinkModule
   ],
   declarations: [UserComponent],

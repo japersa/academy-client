@@ -78,14 +78,18 @@
                       </small>
                     </ng-container>
                   </div>
-                  <div class="col-md-6 pl-md-1 app-date-field-col">
-                    <div class="form-group app-date-field-group">
+                  <div class="col-md-6 pl-md-1">
+                    <div class="form-group">
                       <label> Fecha de nacimiento </label>
                       <input
-                        type="date"
-                        class="form-control app-date-field"
+                        type="text"
+                        class="form-control"
                         formControlName="birth_date"
                         id="birth_date"
+                        bsDatepicker
+                        [bsConfig]="birthDateBsConfig"
+                        placeholder="AAAA-MM-DD"
+                        autocomplete="bday"
                         (blur)="focus = false"
                         (focus)="focus = true"
                       />

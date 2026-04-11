@@ -7,6 +7,7 @@ import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     FormsModule,
     ReactiveFormsModule,
     CarouselModule,
+    BsDatepickerModule.forRoot(),
     QuicklinkModule
   ]
 })

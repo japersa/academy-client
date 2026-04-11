@@ -10,6 +10,7 @@ import { CoursesService } from '../../services/courses.service';
 import { UserService } from '../../services/user.service';
 import { TwoFactorService } from '../../services/two-factor.service';
 import { AuthService } from '../../../features/auth/services/auth.service';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 
 @Component({
@@ -52,6 +53,14 @@ export class UserComponent implements OnInit, OnDestroy {
   focus1;
   focus2;
   focus4;
+
+  birthDateBsConfig: Partial<BsDatepickerConfig> = {
+    dateInputFormat: 'YYYY-MM-DD',
+    containerClass: 'theme-default',
+    adaptivePosition: true,
+    showWeekNumbers: false,
+    isAnimated: true,
+  };
 
   constructor(private formBuilder: UntypedFormBuilder,
     private utilsService: UtilsService,
@@ -169,7 +178,8 @@ export class UserComponent implements OnInit, OnDestroy {
   // Actualizar info del usuario
   updateUser(dataFrom: any) {
 
-    dataFrom.username = dataFrom.email
+    dataFrom.username = dataFrom.email;
+    dataFrom.birth_date = this.formatBirthDateForApi(dataFrom.birth_date);
 
     this.editUserService.updateUser(dataFrom).subscribe(res => {
       this.userDataService.userData$.next(res);
@@ -353,7 +363,7 @@ export class UserComponent implements OnInit, OnDestroy {
       last_name: (u['last_name'] as string) ?? '',
       email: (u['username'] as string) ?? (u['email'] as string) ?? '',
       phone_number: (u['phone_number'] as string) ?? '',
-      birth_date: this.normalizeDateInput(u['birth_date']),
+      birth_date: this.parseBirthDateForPicker(u['birth_date']),
       identity_card: (u['identity_card'] as string) ?? '',
     });
     this.first_name = String(u['first_name'] ?? '');
@@ -365,6 +375,40 @@ export class UserComponent implements OnInit, OnDestroy {
   private normalizeDateInput(value: unknown): string {
     if (value == null || value === '') {
       return '';
+    }
+    const s = String(value);
+    return s.length >= 10 ? s.slice(0, 10) : s;
+  }
+
+  /** Valor para bsDatepicker (Date local, sin desfase UTC). */
+  private parseBirthDateForPicker(value: unknown): Date | null {
+    const s = this.normalizeDateInput(value);
+    if (!s || s.length < 10) {
+      return null;
+    }
+    const parts = s.split('-');
+    if (parts.length !== 3) {
+      return null;
+    }
+    const y = Number(parts[0]);
+    const m = Number(parts[1]);
+    const d = Number(parts[2]);
+    if (!y || !m || !d) {
+      return null;
+    }
+    return new Date(y, m - 1, d);
+  }
+
+  private formatBirthDateForApi(value: unknown): string {
+    if (value == null || value === '') {
+      return '';
+    }
+    if (value instanceof Date) {
+      const d = value;
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
     }
     const s = String(value);
     return s.length >= 10 ? s.slice(0, 10) : s;

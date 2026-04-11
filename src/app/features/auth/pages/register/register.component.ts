@@ -8,6 +8,7 @@ import { MyValidators } from '../../../../core/utils/validators';
 
 import swal from "sweetalert2";
 import { AlertsService } from '../../../../core/services/alerts.service';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 
 @Component({
@@ -46,6 +47,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   showPassword = false;
   showConfirmPassword = false;
+
+  /** Mismo control visual que text/email: input text + calendario (evita type=date nativo en iOS/Chrome). */
+  birthDateBsConfig: Partial<BsDatepickerConfig> = {
+    dateInputFormat: 'YYYY-MM-DD',
+    containerClass: 'theme-default',
+    adaptivePosition: true,
+    showWeekNumbers: false,
+    isAnimated: true,
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -360,6 +370,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
     return this.datapoliticsField?.dirty || this.datapoliticsField?.touched;
   }
 
+  /** ISO YYYY-MM-DD para el API (Date de ngx-bootstrap o string). */
+  private formatBirthDateForApi(value: unknown): string {
+    if (value == null || value === '') {
+      return '';
+    }
+    if (value instanceof Date) {
+      const d = value;
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+    const s = String(value);
+    return s.length >= 10 ? s.slice(0, 10) : s;
+  }
+
   private buildForm() {
     this.form = this.formBuilder.group({
       first_name: ['', [Validators.required, Validators.minLength(3)]],
@@ -389,6 +415,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   registerUser(dataForm: any) {
 
     dataForm.username = dataForm.email;
+    dataForm.birth_date = this.formatBirthDateForApi(dataForm.birth_date);
 
     this.showSwal('wait');
   

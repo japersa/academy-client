@@ -253,11 +253,19 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12 app-date-field-col">
-                <div class="form-group app-date-field-group">
+              <div class="col-12">
+                <div class="form-group">
                   <label for="birth_date">Fecha de nacimiento</label>
-                  <input type="date" class="form-control rounded-pill shadow app-date-field" formControlName="birth_date"
-                    id="birth_date" />
+                  <input
+                    type="text"
+                    class="form-control rounded-pill shadow"
+                    formControlName="birth_date"
+                    id="birth_date"
+                    bsDatepicker
+                    [bsConfig]="birthDateBsConfig"
+                    placeholder="AAAA-MM-DD"
+                    autocomplete="bday"
+                  />
                   <ng-container *ngFor="
                       let validation of utilsService.validationMessages
                         .birth_date
