@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './features/admin/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './features/auth/layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { AdminGuard } from './core/guards/admin.guard';
 import { QuicklinkStrategy } from 'ngx-quicklink';
 
 const routes: Routes = [
@@ -159,6 +160,7 @@ const routes: Routes = [
       },
       {
         path: 'live-signal-admin',
+        canActivate: [AdminGuard],
         loadChildren: () =>
           import('./features/admin/pages/live-signal-admin/live-signal-admin.module').then(
             (m) => m.LiveSignalAdminModule,

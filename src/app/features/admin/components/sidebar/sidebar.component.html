@@ -1,6 +1,7 @@
 <div class="sidebar-wrapper">
   <ul class="nav pb-5">
-    <li *ngFor="let menuitem of menuItems" routerLinkActive="active" class="mb-4">
+    <ng-container *ngFor="let menuitem of menuItems">
+    <li *ngIf="showMenuItem(menuitem)" routerLinkActive="active" class="mb-4">
       <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
         <i class="{{ menuitem.icontype }}"></i>
@@ -65,7 +66,7 @@
         </ul>
       </div>
     </li>
-    
+    </ng-container>
 
     <li class="separator"></li>
 

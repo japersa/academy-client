@@ -18,6 +18,8 @@ export interface RouteInfo {
   children?: ChildrenItems[];
   /** Punto animado cuando hay sesión en vivo (API). */
   livePulse?: boolean;
+  /** Solo mostrar en el menú si el usuario es admin (p. ej. enlaces de configuración). */
+  adminOnly?: boolean;
 }
 
 export interface ChildrenItems {
@@ -275,6 +277,7 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     type: 'link',
     icontype: 'tim-icons icon-settings-gear-63',
     role: [ROLES_ENUM.ADMIN],
+    adminOnly: true,
   },
   // {
   //   path: '/academy',
@@ -463,17 +466,25 @@ export class SidebarComponent implements OnInit {
   public rol: string;
 
   ngOnInit() {
-    this.userDataService.userData$.subscribe(userData => {
-      this.rol = userData.rol;
+    this.userDataService.userData$.subscribe((userData) => {
+      this.rol = userData?.rol;
+      if (this.rol === 'admin') {
+        this.menuItems = ROUTES_ADMIN;
+      } else if (this.rol === 'teacher') {
+        this.menuItems = ROUTES_TEACHER;
+      } else if (this.rol === 'user') {
+        this.menuItems = ROUTES_USER;
+      } else {
+        this.menuItems = [];
+      }
     });
+  }
 
-    if (this.rol === 'admin') {
-      this.menuItems = ROUTES_ADMIN;
-    } else if (this.rol === 'teacher') {
-      this.menuItems = ROUTES_TEACHER;
-    } else if (this.rol === 'user') {
-      this.menuItems = ROUTES_USER;
+  /** Oculta ítems marcados como solo admin (defensa en profundidad). */
+  showMenuItem(item: RouteInfo): boolean {
+    if (item.adminOnly && this.rol !== 'admin') {
+      return false;
     }
-
+    return true;
   }
 }
