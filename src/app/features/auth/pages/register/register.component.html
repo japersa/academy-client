@@ -253,11 +253,13 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12">
+              <div class="col-12 app-date-field-col">
                 <div class="form-group app-date-field-group">
                   <label for="birth_date">Fecha de nacimiento</label>
-                  <input type="date" class="form-control app-date-field" formControlName="birth_date"
-                    id="birth_date" />
+                  <div class="app-date-field-wrap">
+                    <input type="date" class="form-control app-date-field" formControlName="birth_date"
+                      id="birth_date" />
+                  </div>
                   <ng-container *ngFor="
                       let validation of utilsService.validationMessages
                         .birth_date
