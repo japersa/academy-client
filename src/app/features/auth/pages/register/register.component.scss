@@ -65,27 +65,6 @@
     color: #000 !important;
 }
 
-/*
- * <select>: la flecha nativa suele ir mal con rounded-pill + .shadow (WebKit/Firefox).
- * Flecha única alineada al centro vertical.
- */
-select.form-control.rounded-pill.shadow {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    padding-right: 2.5rem;
-    line-height: 1.5;
-    background-color: #fff;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236c757d' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 1rem 1rem;
-
-    &::-ms-expand {
-        display: none;
-    }
-}
-
 @media only screen and (max-width: 600px) {
     .card-title {
         margin-top: 0.5rem !important;
