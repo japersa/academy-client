@@ -107,6 +107,8 @@ export class CoursesService {
   /** Vídeo/archivos/enlaces con URLs firmadas; requiere sesión y acceso al curso. */
   getTopicMedia(id: string): Observable<{
     video_url: string | null;
+    /** Si viene, el vídeo se reproduce vía proxy del API (?t=token), no URL de GCS. */
+    video_stream_token: string | null;
     files: { name: string; url: string }[];
     links: { title?: string; link?: string }[];
     /** Segundos hasta caducidad aproximada (renovar antes con otro GET). */

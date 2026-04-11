@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { CoursesService } from '../../../../shared/services/courses.service';
 import { UserDataService } from '../../../../core/services/user-data.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -61,6 +62,18 @@ export class ClassComponent implements OnInit, OnDestroy {
     }
   }
 
+  /** Proxy en el API con token de corta vida; si no, URL directa (legacy). */
+  private videoSrcFromMedia(m: {
+    video_stream_token?: string | null;
+    video_url?: string | null;
+  }, topicId: string): string | null {
+    if (m.video_stream_token) {
+      const base = environment.apiURL.replace(/\/$/, '');
+      return `${base}/detail/topics/${topicId}/stream/?t=${encodeURIComponent(m.video_stream_token)}`;
+    }
+    return m.video_url ?? null;
+  }
+
   private loadTopicMedia(topicId: string) {
     this.clearMediaRefresh();
     this.currentTopicId = topicId;
@@ -68,7 +81,7 @@ export class ClassComponent implements OnInit, OnDestroy {
 
     this.coursesService.getTopicMedia(topicId).subscribe({
       next: (m) => {
-        this.source = of(m.video_url ?? null);
+        this.source = of(this.videoSrcFromMedia(m, topicId));
         this.topic = {
           ...this.topic,
           files: m.files ?? [],
@@ -93,7 +106,7 @@ export class ClassComponent implements OnInit, OnDestroy {
   private refreshTopicMediaSilent(topicId: string) {
     this.coursesService.getTopicMedia(topicId).subscribe({
       next: (m) => {
-        this.source = of(m.video_url ?? null);
+        this.source = of(this.videoSrcFromMedia(m, topicId));
         this.topic = {
           ...this.topic,
           files: m.files ?? [],
