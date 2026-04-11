@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../../../core/services/user-data.service';
-import { environment } from 'src/environments/environment';
+import { resolveApiPublicBase } from 'src/environments/api-base';
 
 @Component({
   selector: 'app-subscription',
@@ -11,8 +11,8 @@ export class SubscriptionComponent implements OnInit {
 
   role: string = null;
 
-  /** IPN hacia el backend Django (`/full/payment/`). */
-  readonly coinpaymentsIpnUrl = `${environment.apiURL.replace(/\/$/, '')}/full/payment/`;
+  /** IPN hacia el backend Django (`/full/payment/`), URL absoluta vía proxy `/api`. */
+  readonly coinpaymentsIpnUrl = `${resolveApiPublicBase()}/full/payment/`;
   coinpaymentsSuccessUrl = '';
   coinpaymentsCancelUrl = '';
 

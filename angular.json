@@ -103,7 +103,8 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "black-dashboard-pro-angular:build:production"
+              "buildTarget": "black-dashboard-pro-angular:build:production",
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },
