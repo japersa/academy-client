@@ -36,16 +36,20 @@
           class="class-page__video-shell"
           (contextmenu)="onVideoChromeGuard($event)"
         >
-          <div class="video-player-wrapper class-page__player class-page__player--protected">
+          <div
+            class="video-player-wrapper class-page__player class-page__player--protected"
+            (dragstart)="onVideoChromeGuard($event)"
+          >
             <vg-player>
-              <vg-overlay-play></vg-overlay-play>
+              <!-- vg-overlay-play z-index 200 < vídeo nativo encima: sin pointer-events en el video el clic llega al overlay -->
+              <vg-overlay-play [vgFor]="'singleVideo'"></vg-overlay-play>
               <vg-buffering></vg-buffering>
               <vg-scrub-bar>
                 <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
                 <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
               </vg-scrub-bar>
               <vg-controls>
-                <vg-play-pause></vg-play-pause>
+                <vg-play-pause [vgFor]="'singleVideo'"></vg-play-pause>
                 <vg-playback-button></vg-playback-button>
                 <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
                 <vg-scrub-bar style="pointer-events: none"></vg-scrub-bar>
@@ -68,8 +72,6 @@
                 disablePictureInPicture
                 [attr.controlsList]="'nodownload noplaybackrate noremoteplayback'"
                 (error)="onVideoError()"
-                (contextmenu)="onVideoChromeGuard($event)"
-                (dragstart)="onVideoChromeGuard($event)"
               ></video>
             </vg-player>
           </div>

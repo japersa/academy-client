@@ -59,4 +59,17 @@ export class AuthNavbarComponent implements OnInit {
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
   }
+
+  /** Sin [collapse] de ngx-bootstrap: evita aria-hidden con hijo enfocado (Chrome WAI-ARIA). */
+  onToggleNavbar() {
+    const menu = document.getElementById('authNavbarMenu');
+    const hadFocusInside =
+      typeof document !== 'undefined' &&
+      document.activeElement instanceof HTMLElement &&
+      menu?.contains(document.activeElement);
+    this.isCollapsed = !this.isCollapsed;
+    if (this.isCollapsed && hadFocusInside) {
+      document.getElementById('authNavbarMenuToggle')?.focus();
+    }
+  }
 }

@@ -71,6 +71,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authService.doLogout();
   }
 
+  /** Sin [collapse] de ngx-bootstrap: evita aria-hidden con hijo enfocado (Chrome WAI-ARIA). */
+  onToggleNavbar() {
+    const hadFocusInside =
+      typeof document !== 'undefined' &&
+      document.activeElement instanceof HTMLElement &&
+      document.getElementById('navbarMenu')?.contains(document.activeElement);
+    this.isCollapsed = !this.isCollapsed;
+    if (this.isCollapsed && hadFocusInside) {
+      document.getElementById('navbarMenuToggle')?.focus();
+    }
+  }
+
   ngOnInit() {
     window.addEventListener('resize', this.updateColor);
     const navbar: HTMLElement = this.element.nativeElement;
