@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { UserDataService } from 'src/app/core/services/user-data.service';
 import { LiveSignalService, LiveSignalStatus } from 'src/app/shared/services/live-signal.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class LiveSignalsComponent implements OnInit, OnDestroy {
   private sub = new Subscription();
 
   constructor(
+    public userDataService: UserDataService,
     private liveSignalService: LiveSignalService,
     private sanitizer: DomSanitizer,
   ) {}
