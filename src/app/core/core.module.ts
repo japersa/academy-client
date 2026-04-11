@@ -14,7 +14,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
   declarations: [],
   imports: [
     CommonModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-newton-cradle.css' }),
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple.css' }),
   ],
   providers: [
     StorageService,
