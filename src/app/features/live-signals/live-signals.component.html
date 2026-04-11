@@ -1,10 +1,18 @@
-<div class="content admin-area-page live-signals-page">
+<div
+  class="content academy-page admin-area-page live-signals-page"
+  [ngClass]="{
+    'class-user': userDataService?.userData$?.value?.rol === 'user'
+  }"
+>
   <div class="row admin-area-breadcrumb-row">
     <div class="col-12">
       <nav aria-label="Migas de pan">
         <ol class="breadcrumb bg-transparent mb-0 px-0">
           <li class="breadcrumb-item text-primary">
-            <a routerLink="/self-management/home">Academia</a>
+            <a routerLink="/referrals">Back office</a>
+          </li>
+          <li class="breadcrumb-item text-primary">
+            <a routerLink="/academy">Academia</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Señales en vivo</li>
         </ol>
@@ -13,22 +21,37 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
-      <div *ngIf="loading" class="card">
+    <div class="col-12">
+      <h3 class="m-0 text-primary">Señales en vivo</h3>
+      <p class="mb-0">
+        Sigue la transmisión en directo cuando el equipo active la sesión.
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-3 live-signals-page__block">
+    <div class="col-12">
+      <h2 class="mt-0 mb-0">Transmisión</h2>
+      <hr class="academy-page__hr" />
+    </div>
+
+    <div class="col-12">
+      <div *ngIf="loading" class="card live-signals-page__video-card border-0 shadow-sm">
         <div class="card-body py-5 text-center">
           <p class="text-muted mb-0">Cargando…</p>
         </div>
       </div>
 
       <ng-container *ngIf="!loading && status?.active && safeEmbedUrl">
-        <div class="card mb-4">
-          <div class="card-header pb-2">
-            <h4 class="card-title title-table mb-0">
+        <div class="card live-signals-page__video-card border-0 shadow-sm">
+          <div class="live-signals-page__video-card-head">
+            <span class="live-signals-page__label">En directo</span>
+            <span class="live-signals-page__title-row">
               <span class="live-signals__dot" aria-hidden="true"></span>
               {{ status?.title || 'Señal en vivo' }}
-            </h4>
+            </span>
           </div>
-          <div class="card-body p-0">
+          <div class="live-signals-page__video-shell">
             <div class="live-signals__embed">
               <iframe
                 [src]="safeEmbedUrl"
@@ -41,14 +64,15 @@
         </div>
       </ng-container>
 
-      <div *ngIf="!loading && !status?.active" class="card">
-        <div class="card-header pb-2">
-          <h4 class="card-title title-table mb-0">Señales en vivo</h4>
+      <div *ngIf="!loading && !status?.active" class="card live-signals-page__video-card border-0 shadow-sm">
+        <div class="live-signals-page__video-card-head">
+          <span class="live-signals-page__label">Estado</span>
+          <span class="live-signals-page__title-row">Sin transmisión activa</span>
         </div>
-        <div class="card-body text-center py-5">
+        <div class="card-body">
           <p class="text-muted mb-0">
-            No hay una señal en vivo activa o no tienes permiso para verla.
-            Cuando el equipo active la sesión, podrás seguirla desde aquí.
+            No hay una señal en vivo en este momento o no tienes permiso para verla.
+            Cuando el equipo active la sesión, podrás seguirla aquí.
           </p>
         </div>
       </div>
