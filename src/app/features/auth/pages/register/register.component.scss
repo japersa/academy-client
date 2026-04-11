@@ -65,6 +65,39 @@
     color: #000 !important;
 }
 
+/* Fecha de nacimiento: evita desbordes en móvil (etiqueta larga + input nativo) */
+.birth-date-group {
+    min-width: 0;
+}
+
+.birth-date-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.birth-date-label__title {
+    font-weight: inherit;
+}
+
+.birth-date-label__value {
+    font-weight: 400;
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.birth-date-input {
+    border-radius: 10px !important;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
 @media only screen and (max-width: 600px) {
     .card-title {
         margin-top: 0.5rem !important;
@@ -75,5 +108,10 @@
     }
     .logo {
         padding-left: 30px !important;
+    }
+
+    /* Evita zoom automático en iOS al enfocar el date picker */
+    .birth-date-input {
+        font-size: 16px;
     }
 }

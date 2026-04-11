@@ -172,3 +172,21 @@ hr {
     color: #495057;
     border: 1px solid rgba(108, 117, 125, 0.28);
 }
+
+/* type="date": sin text-uppercase (rompe controles nativos) + ancho seguro en móvil */
+.user-profile__birth-date-group {
+    min-width: 0;
+}
+
+.user-profile__birth-date-input {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 767.98px) {
+    .user-profile__birth-date-input {
+        font-size: 16px;
+    }
+}

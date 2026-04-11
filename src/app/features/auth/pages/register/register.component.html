@@ -254,10 +254,14 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <div class="form-group">
-                  <label for="birth_date">Fecha de nacimiento:
-                    {{ birthDateField?.value | date }}</label>
-                  <input type="date" class="form-control rounded-pill shadow" formControlName="birth_date"
+                <div class="form-group birth-date-group">
+                  <label for="birth_date" class="birth-date-label">
+                    <span class="birth-date-label__title">Fecha de nacimiento</span>
+                    <span *ngIf="birthDateField?.value" class="birth-date-label__value">{{
+                      birthDateField?.value | date
+                    }}</span>
+                  </label>
+                  <input type="date" class="form-control birth-date-input shadow" formControlName="birth_date"
                     id="birth_date" />
                   <ng-container *ngFor="
                       let validation of utilsService.validationMessages
