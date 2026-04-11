@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, fromEvent, merge, Observable, timer } from 'rxjs';
-import { distinctUntilChanged, filter, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, merge, Observable, of, timer } from 'rxjs';
+import {
+  catchError,
+  distinctUntilChanged,
+  filter,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 /** Cada cuánto se pregunta al API si hay señal en vivo (menú + pulso). */
@@ -27,16 +34,33 @@ export class LiveSignalService {
 
   private readonly pulse$ = new BehaviorSubject<boolean>(false);
 
+  /** Último estado del API (menú, pulso y pantalla /live-signals). */
+  private readonly statusSubject = new BehaviorSubject<LiveSignalStatus | null>(null);
+
   private pollStarted = false;
 
   /** True si la API indica sesión activa y el usuario puede ver el embed. */
   readonly livePulseActive$ = this.pulse$.pipe(distinctUntilChanged(), shareReplay(1));
 
+  /**
+   * Emite en cada poll (y tras guardar en admin). `null` = aún no hubo primera respuesta.
+   * La pantalla de señal en vivo se suscribe aquí para quitar el iframe al desactivar.
+   */
+  readonly liveSignalStatus$ = this.statusSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getStatus(): Observable<LiveSignalStatus> {
     return this.http.get<LiveSignalStatus>(`${this.api}/status/`).pipe(
-      tap((s) => this.pulse$.next(!!s.active)),
+      tap((s) => {
+        this.pulse$.next(!!s.active);
+        this.statusSubject.next(s);
+      }),
+      catchError(() => {
+        this.pulse$.next(false);
+        this.statusSubject.next({ active: false });
+        return of({ active: false });
+      }),
     );
   }
 
@@ -57,9 +81,7 @@ export class LiveSignalService {
 
     merge(onInterval$, onTabVisible$)
       .pipe(switchMap(() => this.getStatus()))
-      .subscribe({
-        error: () => this.pulse$.next(false),
-      });
+      .subscribe();
   }
 
   getAdmin(): Observable<LiveSignalAdminPayload> {

@@ -23,19 +23,19 @@ export class LiveSignalsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub.add(
-      this.liveSignalService.getStatus().subscribe({
-        next: (s) => {
-          this.status = s;
-          this.safeEmbedUrl =
-            s.active && s.embed_url
-              ? this.sanitizer.bypassSecurityTrustResourceUrl(s.embed_url)
-              : null;
-          this.loading = false;
-        },
-        error: () => {
-          this.status = { active: false };
-          this.loading = false;
-        },
+      this.liveSignalService.liveSignalStatus$.subscribe((s) => {
+        if (s === null) {
+          this.loading = true;
+          this.status = null;
+          this.safeEmbedUrl = null;
+          return;
+        }
+        this.loading = false;
+        this.status = s;
+        this.safeEmbedUrl =
+          s.active && s.embed_url
+            ? this.sanitizer.bypassSecurityTrustResourceUrl(s.embed_url)
+            : null;
       }),
     );
   }
