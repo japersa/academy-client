@@ -41,6 +41,35 @@
     border-radius: 10px;
 }
 
+/*
+ * Campo nativo type="date": mismo aspecto que form-control + rounded-pill + .shadow
+ * (registro, perfil, etc.). Mayor especificidad que .form-control suelto en páginas con otro radio.
+ */
+.app-date-field-group {
+    min-width: 0;
+}
+
+input[type="date"].form-control.app-date-field {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    color-scheme: light;
+    background-color: #fff;
+    border-radius: 10px !important;
+    box-shadow: 0px 0px 18px 0.2px rgba(0, 0, 0, 0.15) !important;
+}
+
+input[type="date"].form-control.app-date-field::-webkit-datetime-edit,
+input[type="date"].form-control.app-date-field::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+}
+
+input[type="date"].form-control.app-date-field::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.65;
+}
+
 /* Modal CoinPayments (checkout cripto: autogestión, funding, recompra referidos) */
 .crypto-pay-modal {
     .modal-header.crypto-pay-modal__header {
