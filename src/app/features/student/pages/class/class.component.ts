@@ -125,6 +125,12 @@ export class ClassComponent implements OnInit, OnDestroy {
     this.refreshTopicMediaSilent(this.currentTopicId);
   }
 
+  /** Limitar menú contextual / arrastre del vídeo (estilo apps tipo redes sociales). No es DRM. */
+  onVideoChromeGuard(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   nextClass() {
     this.router.navigate(['/class/', this.next]);
   }

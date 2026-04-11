@@ -32,8 +32,11 @@
           <span class="class-page__module-label">Módulo</span>
           <span class="class-page__module-name">{{ topic.module_name | titlecase }}</span>
         </div>
-        <div class="class-page__video-shell">
-          <div class="video-player-wrapper class-page__player">
+        <div
+          class="class-page__video-shell"
+          (contextmenu)="onVideoChromeGuard($event)"
+        >
+          <div class="video-player-wrapper class-page__player class-page__player--protected">
             <vg-player>
               <vg-overlay-play></vg-overlay-play>
               <vg-buffering></vg-buffering>
@@ -56,11 +59,17 @@
                 [vgMedia]="$any(media)"
                 #media
                 id="singleVideo"
+                class="class-page__native-video"
                 preload="auto"
                 [src]="source | async"
                 type="video/mp4"
                 crossorigin
+                playsinline
+                disablePictureInPicture
+                [attr.controlsList]="'nodownload noplaybackrate noremoteplayback'"
                 (error)="onVideoError()"
+                (contextmenu)="onVideoChromeGuard($event)"
+                (dragstart)="onVideoChromeGuard($event)"
               ></video>
             </vg-player>
           </div>
