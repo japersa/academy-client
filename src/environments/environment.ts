@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   environmentName: 'Development',
-  apiURL: 'http://localhost:8000/api',
+  apiURL: 'http://localhost:8000',
   /** Sitio público (marketing) */
   publicWebsiteUrl: 'https://startacademy.digital/',
   rollbarConfig: {

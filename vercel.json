@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://ultra-back-98fc6bf42dce.herokuapp.com/api/$1"
+      "destination": "https://ultra-back-98fc6bf42dce.herokuapp.com/$1"
     },
     {
       "source": "/(.*)",
