@@ -41,6 +41,33 @@
     border-radius: 10px;
 }
 
+/*
+ * <select class="form-control">: mismo aspecto que inputs + evitar texto cortado.
+ * - height fija de Bootstrap recorta el glifo en algunos navegadores.
+ * - la flecha nativa necesita padding derecho extra.
+ */
+select.form-control {
+    background-color: #fff !important;
+    color: #000 !important;
+    height: auto !important;
+    min-height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 2.75rem 0.375rem 0.75rem;
+    line-height: 1.5;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+select.form-control:focus,
+select.form-control:active {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+select.form-control option {
+    background-color: #fff;
+    color: #000;
+}
+
 /* Modal CoinPayments (checkout cripto: autogestión, funding, recompra referidos) */
 .crypto-pay-modal {
     .modal-header.crypto-pay-modal__header {
