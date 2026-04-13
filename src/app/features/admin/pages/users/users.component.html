@@ -129,7 +129,9 @@
                       <th>Email</th>
                       <th>Cédula</th>
                       <th>Fecha de registro</th>
-                      <th>C.C Referido</th>
+                      <th>Cód. referido</th>
+                      <th>Estado</th>
+                      <th>C.C referido</th>
                       <th class="text-right">Acciones</th>
                     </tr>
                   </thead>
@@ -141,6 +143,19 @@
                       <td>{{ row?.username }}</td>
                       <td>{{ row?.identity_card | titlecase }}</td>
                       <td>{{ row?.date_joined | date }}</td>
+                      <td class="text-monospace small">{{ row?.referral_code || '—' }}</td>
+                      <td>
+                        <span
+                          class="user-profile__2fa-status-badge"
+                          [ngClass]="{
+                            'user-profile__2fa-status-badge--on': referralPillKind(row) === 'on',
+                            'user-profile__2fa-status-badge--off': referralPillKind(row) === 'off',
+                            'user-profile__2fa-status-badge--empty': referralPillKind(row) === 'empty'
+                          }"
+                        >
+                          {{ referralPillLabel(row) }}
+                        </span>
+                      </td>
                       <td>{{ row?.deferred_document_number | titlecase }}</td>
                       <td class="text-right text-nowrap">
                         <a
@@ -170,7 +185,7 @@
                       </td>
                     </tr>
                     <tr *ngIf="!loading && temp.length === 0">
-                      <td colspan="8" class="text-center text-muted py-4">
+                      <td colspan="10" class="text-center text-muted py-4">
                         No hay usuarios para mostrar.
                       </td>
                     </tr>

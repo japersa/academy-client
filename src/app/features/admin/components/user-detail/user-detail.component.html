@@ -37,6 +37,29 @@
                 <dd>{{ u.address || '—' }}</dd>
                 <dt>Cédula</dt>
                 <dd>{{ u.identity_card || '—' }}</dd>
+                <dt>Código de referido</dt>
+                <dd class="user-select-all">{{ u.referral_code || '—' }}</dd>
+                <dt>Estado del código</dt>
+                <dd>
+                  <div class="user-profile__2fa-status-row">
+                    <span class="user-profile__2fa-status-label">Estado</span>
+                    <span
+                      class="user-profile__2fa-status-badge"
+                      [ngClass]="{
+                        'user-profile__2fa-status-badge--on': referralPillKind(u) === 'on',
+                        'user-profile__2fa-status-badge--off': referralPillKind(u) === 'off',
+                        'user-profile__2fa-status-badge--empty': referralPillKind(u) === 'empty'
+                      }"
+                    >
+                      {{ referralPillLabel(u) }}
+                    </span>
+                  </div>
+                  <ng-container *ngIf="u.referral_next_renewal">
+                    <span class="text-muted small d-block mt-2">
+                      Próx. renovación: {{ u.referral_next_renewal | date: 'dd/MM/yyyy' }}
+                    </span>
+                  </ng-container>
+                </dd>
               </dl>
             </div>
             <div class="col-md-6 user-detail-page__col">

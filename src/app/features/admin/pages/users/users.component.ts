@@ -7,6 +7,10 @@ import {
 } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { ROLES_ENUM } from 'src/app/shared/enum/roles.enum';
+import {
+  referralCodePillKind,
+  referralCodePillLabel,
+} from 'src/app/shared/utils/referral-code-status';
 import swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -128,6 +132,22 @@ export class UsersComponent implements OnInit {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
     }
+  }
+
+  referralPillKind(row: {
+    referral_code?: string;
+    rol?: string;
+    referral_active?: boolean;
+  }): ReturnType<typeof referralCodePillKind> {
+    return referralCodePillKind(row);
+  }
+
+  referralPillLabel(row: {
+    referral_code?: string;
+    rol?: string;
+    referral_active?: boolean;
+  }): string {
+    return referralCodePillLabel(referralCodePillKind(row));
   }
 
   private normalizeUserListResponse(body: unknown): any[] {

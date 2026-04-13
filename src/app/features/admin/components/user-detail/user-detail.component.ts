@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DashboardService } from '../../services/dashboard.service';
+import {
+  referralCodePillKind,
+  referralCodePillLabel,
+} from 'src/app/shared/utils/referral-code-status';
 
 @Component({
   selector: 'app-user-detail',
@@ -19,6 +23,22 @@ export class UserDetailComponent implements OnInit {
   packAgActived: any[] = [];
   packAgActive: string = 'Inactivo';
   loadError: string | null = null;
+
+  referralPillKind(user: {
+    referral_code?: string;
+    rol?: string;
+    referral_active?: boolean;
+  } | null): ReturnType<typeof referralCodePillKind> {
+    return referralCodePillKind(user);
+  }
+
+  referralPillLabel(user: {
+    referral_code?: string;
+    rol?: string;
+    referral_active?: boolean;
+  } | null): string {
+    return referralCodePillLabel(referralCodePillKind(user));
+  }
 
   agActivete() {
     if (this.packAgActived.length > 0) {
