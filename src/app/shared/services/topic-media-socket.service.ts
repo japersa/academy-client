@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserDataService } from 'src/app/core/services/user-data.service';
-import { buildWebSocketBaseUrl } from 'src/app/shared/utils/ws-base-url';
+import { buildWebSocketUrl } from 'src/app/shared/utils/ws-base-url';
 
 /** Ticks del servidor para renovar URLs firmadas del tema (sustituye setInterval en el cliente). */
 @Injectable({ providedIn: 'root' })
@@ -18,7 +18,7 @@ export class TopicMediaSocketService {
     if (!token) {
       return;
     }
-    const url = `${buildWebSocketBaseUrl()}/ws/topic-media/?token=${encodeURIComponent(
+    const url = `${buildWebSocketUrl('/ws/topic-media/')}?token=${encodeURIComponent(
       token,
     )}&topic_id=${encodeURIComponent(topicId)}`;
     let socket: WebSocket;

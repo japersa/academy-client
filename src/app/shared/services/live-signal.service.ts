@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, merge, Observable, of, Subscription, timer } from 'rxjs';
 import {
   catchError,
   distinctUntilChanged,
   filter,
   shareReplay,
+  switchMap,
   tap,
 } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserDataService } from 'src/app/core/services/user-data.service';
-import { buildWebSocketBaseUrl } from 'src/app/shared/utils/ws-base-url';
+import { buildWebSocketUrl } from 'src/app/shared/utils/ws-base-url';
+
+/** Fallback si el proxy no soporta WebSockets: GET periódico (mismo ritmo que antes). */
+const LIVE_SIGNAL_HTTP_POLL_MS = 5_000;
 
 export interface LiveSignalStatus {
   active: boolean;
@@ -42,6 +46,9 @@ export class LiveSignalService {
   private reconnectAttempt = 0;
   private tokenSub: Subscription | null = null;
   private visibilitySub: Subscription | null = null;
+  /** Si el WS nunca conecta (p. ej. proxy sin Upgrade), sondea por HTTP. */
+  private httpPollSub: Subscription | null = null;
+  private wsEverOpened = false;
 
   /** True si la API indica sesión activa y el usuario puede ver el embed. */
   readonly livePulseActive$ = this.pulse$.pipe(distinctUntilChanged(), shareReplay(1));
@@ -83,6 +90,8 @@ export class LiveSignalService {
     this.tokenSub = this.userDataService.accessToken$
       .pipe(distinctUntilChanged())
       .subscribe(() => {
+        this.wsEverOpened = false;
+        this.stopHttpPoll();
         this.reconnectWebSocket();
       });
 
@@ -106,6 +115,9 @@ export class LiveSignalService {
       this.statusSubject.next({ active: false });
       return;
     }
+    if (this.httpPollSub) {
+      return;
+    }
     this.openWebSocket(token);
   }
 
@@ -122,6 +134,8 @@ export class LiveSignalService {
 
     socket.onopen = () => {
       this.reconnectAttempt = 0;
+      this.wsEverOpened = true;
+      this.stopHttpPoll();
     };
 
     socket.onmessage = (ev: MessageEvent) => {
@@ -142,12 +156,37 @@ export class LiveSignalService {
       if (this.ws === socket) {
         this.ws = null;
       }
+      if (!this.wsEverOpened && this.reconnectAttempt >= 2) {
+        this.startHttpPollFallback();
+        return;
+      }
       this.scheduleReconnect();
     };
   }
 
+  private startHttpPollFallback(): void {
+    if (this.httpPollSub || !this.streamStarted) {
+      return;
+    }
+    this.reconnectAttempt = 0;
+    const onInterval$ = timer(0, LIVE_SIGNAL_HTTP_POLL_MS);
+    const onTabVisible$ = fromEvent(document, 'visibilitychange').pipe(
+      filter(() => document.visibilityState === 'visible'),
+    );
+    this.httpPollSub = merge(onInterval$, onTabVisible$)
+      .pipe(switchMap(() => this.getStatus()))
+      .subscribe();
+  }
+
+  private stopHttpPoll(): void {
+    if (this.httpPollSub) {
+      this.httpPollSub.unsubscribe();
+      this.httpPollSub = null;
+    }
+  }
+
   private scheduleReconnect(): void {
-    if (!this.streamStarted) {
+    if (!this.streamStarted || this.httpPollSub) {
       return;
     }
     const token = this.normalizeToken(this.userDataService.getAccessToken());
@@ -184,7 +223,7 @@ export class LiveSignalService {
 
   private buildWsUrl(token: string): string {
     const q = encodeURIComponent(token);
-    return `${buildWebSocketBaseUrl()}/ws/live-signal/?token=${q}`;
+    return `${buildWebSocketUrl('/ws/live-signal/')}?token=${q}`;
   }
 
   private normalizeToken(raw: unknown): string | null {

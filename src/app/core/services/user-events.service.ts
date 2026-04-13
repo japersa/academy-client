@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { UserDataService } from './user-data.service';
-import { buildWebSocketBaseUrl } from 'src/app/shared/utils/ws-base-url';
+import { buildWebSocketUrl } from 'src/app/shared/utils/ws-base-url';
 
 /** Eventos del servidor para el usuario (referidos, notificaciones). */
 @Injectable({ providedIn: 'root' })
@@ -37,7 +37,7 @@ export class UserEventsService {
       this.reconnectAttempt = 0;
       return;
     }
-    const url = `${buildWebSocketBaseUrl()}/ws/user-events/?token=${encodeURIComponent(token)}`;
+    const url = `${buildWebSocketUrl('/ws/user-events/')}?token=${encodeURIComponent(token)}`;
     let socket: WebSocket;
     try {
       socket = new WebSocket(url);
