@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { buildWhatsAppReferralShareUrl } from 'src/app/shared/utils/referral-share';
 import { ReferredUserRow, UserService } from 'src/app/shared/services/user.service';
 import { CatalogPricesService } from 'src/app/core/services/catalog-prices.service';
 import { isReferralRenewalDueOrOverdue } from 'src/app/shared/utils/referral-renewal-date';
 import { isTeacherOrAdminRole } from 'src/app/shared/utils/staff-role';
+import { UserEventsService } from 'src/app/core/services/user-events.service';
 
 interface SelfManagementPackage {
   status?: string;
@@ -45,17 +47,14 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   /** true hasta que termina la primera carga de perfil (incluye lista de referidos desde el API). */
   profileLoading = true;
 
-  private referralRenewalPollId: ReturnType<typeof setInterval> | null = null;
-  private referralRenewalPollAttempts = 0;
-  private readonly referralRenewalPollMs = 12000;
-  /** ~10 minutos de reintentos */
-  private readonly referralRenewalPollMax = 50;
   private visibilityListener?: () => void;
+  private referralEventsSub?: Subscription;
 
   constructor(
     private userService: UserService,
     private toastr: ToastrService,
     private catalogPricesService: CatalogPricesService,
+    private userEventsService: UserEventsService,
   ) {}
 
   get rebuyPriceLabel(): string {
@@ -115,6 +114,9 @@ export class ReferralsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadUserReferralData(false);
+    this.referralEventsSub = this.userEventsService.referralUpdated$.subscribe(() => {
+      this.loadUserReferralData(true);
+    });
     this.visibilityListener = () => {
       if (document.visibilityState === 'visible') {
         this.loadUserReferralData(true);
@@ -140,7 +142,7 @@ export class ReferralsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.stopReferralRenewalPolling();
+    this.referralEventsSub?.unsubscribe();
     if (this.visibilityListener) {
       document.removeEventListener('visibilitychange', this.visibilityListener);
     }
@@ -250,8 +252,6 @@ export class ReferralsComponent implements OnInit, OnDestroy {
           this.referralsCurrentPage = tp;
         }
         this.profileLoading = false;
-
-        this.syncReferralRenewalPollingState();
       },
       error: (err) => {
         console.error(err);
@@ -263,37 +263,4 @@ export class ReferralsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private syncReferralRenewalPollingState(): void {
-    const waitingForRebuyState =
-      !this.isTeacherOrAdmin &&
-      this.hasActiveSelfManagementPlan &&
-      (!this.referralActive || !this.referralNextRenewal);
-    if (waitingForRebuyState) {
-      this.startReferralRenewalPolling();
-    } else {
-      this.stopReferralRenewalPolling();
-    }
-  }
-
-  private startReferralRenewalPolling(): void {
-    if (this.referralRenewalPollId !== null) {
-      return;
-    }
-    this.referralRenewalPollAttempts = 0;
-    this.referralRenewalPollId = setInterval(() => {
-      this.referralRenewalPollAttempts += 1;
-      if (this.referralRenewalPollAttempts > this.referralRenewalPollMax) {
-        this.stopReferralRenewalPolling();
-        return;
-      }
-      this.loadUserReferralData(true);
-    }, this.referralRenewalPollMs);
-  }
-
-  private stopReferralRenewalPolling(): void {
-    if (this.referralRenewalPollId !== null) {
-      clearInterval(this.referralRenewalPollId);
-      this.referralRenewalPollId = null;
-    }
-  }
 }

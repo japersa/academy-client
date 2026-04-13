@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NotificationsService } from '../../../core/services/notifications.service';
 import { UserDataService } from '../../../core/services/user-data.service';
 
@@ -7,9 +8,10 @@ import { UserDataService } from '../../../core/services/user-data.service';
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss']
 })
-export class NotificationsComponent implements OnInit {
+export class NotificationsComponent implements OnInit, OnDestroy {
 
   notificaciones = [];
+  private incomingSub?: Subscription;
 
   constructor(
     private notificationsService: NotificationsService,
@@ -30,6 +32,13 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNotifications();
+    this.incomingSub = this.notificationsService.notificationIncoming$.subscribe(() => {
+      this.getNotifications();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.incomingSub?.unsubscribe();
   }
 
 }

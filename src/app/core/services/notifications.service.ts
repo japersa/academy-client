@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
+import { UserEventsService } from './user-events.service';
 
 const apiURL = environment.apiURL;
 
@@ -11,10 +12,21 @@ const apiURL = environment.apiURL;
 })
 export class NotificationsService {
 
+  /** Emite cuando llega una notificación nueva por WebSocket (refrescar lista / badge). */
+  readonly notificationIncoming$ = new Subject<void>();
 
   headers = new HttpHeaders();
 
-  constructor(private http: HttpClient, public toastr: ToastrService) { }
+  constructor(
+    private http: HttpClient,
+    public toastr: ToastrService,
+    userEventsService: UserEventsService,
+  ) {
+    userEventsService.notificationNew$.subscribe(() => {
+      this.notificationIncoming$.next();
+      this.showNotification('top', 'right', 'Tienes una nueva notificación', 2);
+    });
+  }
 
   /** Un solo icono: el SVG que aporta ngx-toastr (no tim-icons en el HTML). */
   showNotification(from: string, align: string, text: string, color: number) {

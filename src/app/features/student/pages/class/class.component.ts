@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CoursesService } from '../../../../shared/services/courses.service';
+import { TopicMediaSocketService } from '../../../../shared/services/topic-media-socket.service';
 import { UserDataService } from '../../../../core/services/user-data.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -20,8 +21,7 @@ export class ClassComponent implements OnInit, OnDestroy {
 
   source: Observable<string | null> = of(null);
 
-  /** Renueva URLs firmadas antes de que caduquen. */
-  private mediaRefreshTimer: ReturnType<typeof setInterval> | null = null;
+  private mediaTickSub: Subscription | null = null;
   private currentTopicId: string | null = null;
   private videoErrorRetries = 0;
 
@@ -30,6 +30,7 @@ export class ClassComponent implements OnInit, OnDestroy {
     public userDataService: UserDataService,
     private router: Router,
     private route: ActivatedRoute,
+    private topicMediaSocket: TopicMediaSocketService,
   ) {
   }
 
@@ -56,10 +57,9 @@ export class ClassComponent implements OnInit, OnDestroy {
   }
 
   private clearMediaRefresh() {
-    if (this.mediaRefreshTimer != null) {
-      clearInterval(this.mediaRefreshTimer);
-      this.mediaRefreshTimer = null;
-    }
+    this.mediaTickSub?.unsubscribe();
+    this.mediaTickSub = null;
+    this.topicMediaSocket.disconnect();
   }
 
   /** Proxy en el API con token de corta vida; si no, URL directa (legacy). */
@@ -89,10 +89,12 @@ export class ClassComponent implements OnInit, OnDestroy {
         };
         const sec = m.signed_urls_expires_in_seconds;
         if (sec != null && sec > 30) {
-          const ms = Math.max(60_000, Math.floor(sec * 0.7 * 1000));
-          this.mediaRefreshTimer = setInterval(() => {
-            this.refreshTopicMediaSilent(topicId);
-          }, ms);
+          this.topicMediaSocket.connect(topicId);
+          this.mediaTickSub = this.topicMediaSocket.tick$.subscribe(() => {
+            if (this.currentTopicId === topicId) {
+              this.refreshTopicMediaSilent(topicId);
+            }
+          });
         }
       },
       error: (e) => {
