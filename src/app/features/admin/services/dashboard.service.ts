@@ -52,7 +52,7 @@ export class DashboardService {
   }
 
   getUsersById(id: string): Observable<any> {
-    const route = `/retrieve/user/${id}`;
+    const route = `/retrieve/user/${id}/`;
     return this.http.get<any>(`${apiURL}${route}`);
   };
 

@@ -1,7 +1,6 @@
 export const environment = {
   production: true,
   environmentName: 'Production',
-  /** Mismo origen que el SPA; Vercel reescribe `/api/*` al backend (ver `vercel.json`). */
   apiURL: '/api',
   /** Sitio público (marketing) */
   publicWebsiteUrl: 'https://startacademy.digital/',
