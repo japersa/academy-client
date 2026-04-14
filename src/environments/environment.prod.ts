@@ -2,6 +2,13 @@ export const environment = {
   production: true,
   environmentName: 'Production',
   apiURL: '/api',
+  /**
+   * URL base del backend (https://…, sin /api al final) para WebSockets.
+   * Déjalo vacío solo si tu proxy (Nginx/Cloudflare) hace Upgrade WebSocket en /api/ws/.
+   * Si los WS fallan desde app.startacademy.digital, pon aquí el host real del API, p. ej.:
+   * 'https://TU-APP.herokuapp.com' o 'https://api.startacademy.digital'
+   */
+  websocketPublicOrigin: '' as string,
   /** Sitio público (marketing) */
   publicWebsiteUrl: 'https://startacademy.digital/',
   rollbarConfig: {

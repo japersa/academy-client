@@ -1,7 +1,23 @@
 import { environment } from 'src/environments/environment';
 
+function originToWsOrigin(httpsOrigin: string): string {
+  const raw = httpsOrigin.trim();
+  if (!raw) {
+    return '';
+  }
+  const withScheme = raw.startsWith('http://') || raw.startsWith('https://') ? raw : `https://${raw}`;
+  const parsed = new URL(withScheme);
+  const wsProto = parsed.protocol === 'https:' ? 'wss:' : 'ws:';
+  return `${wsProto}//${parsed.host}`;
+}
+
 /** Origen `ws:` / `wss:` para el API (absoluto o mismo host que el SPA con `/api`). */
 export function buildWebSocketBaseUrl(): string {
+  const wsOverride = originToWsOrigin(environment.websocketPublicOrigin ?? '');
+  if (wsOverride) {
+    return wsOverride;
+  }
+
   const u = environment.apiURL.replace(/\/$/, '');
   if (u.startsWith('http://') || u.startsWith('https://')) {
     const parsed = new URL(u);

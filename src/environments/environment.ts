@@ -2,6 +2,12 @@ export const environment = {
   production: false,
   environmentName: 'Development',
   apiURL: 'http://localhost:8000',
+  /**
+   * Origen público HTTPS del API solo para WebSockets (sin path). Vacío = mismo criterio que apiURL.
+   * En prod con hosting estático (p. ej. Firebase) suele hacer falta apuntar al backend (Heroku) porque
+   * `wss://mismo-host/api/ws/...` no siempre proxifica el Upgrade.
+   */
+  websocketPublicOrigin: '' as string,
   /** Sitio público (marketing) */
   publicWebsiteUrl: 'https://startacademy.digital/',
   rollbarConfig: {
