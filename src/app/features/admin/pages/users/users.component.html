@@ -156,7 +156,7 @@
                           {{ referralPillLabel(row) }}
                         </span>
                       </td>
-                      <td>{{ row?.deferred_document_number | titlecase }}</td>
+                      <td>{{ referralSponsorIdentityCard(row) || '—' }}</td>
                       <td class="text-right text-nowrap">
                         <a
                           class="btn btn-primary btn-link btn-sm btn-icon"

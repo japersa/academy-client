@@ -150,6 +150,26 @@ export class UsersComponent implements OnInit {
     return referralCodePillLabel(referralCodePillKind(row));
   }
 
+  /**
+   * Cédula del patrocinador (dueño del código en autogestión), no el documento diferido del usuario.
+   * Coincide con `referral_code_owner_identity_card` del detalle de paquete.
+   */
+  referralSponsorIdentityCard(row: {
+    packages_self_management?: Array<{ referral_code_owner_identity_card?: string | null }>;
+  }): string {
+    const packs = row?.packages_self_management;
+    if (!Array.isArray(packs)) {
+      return '';
+    }
+    for (const p of packs) {
+      const v = p?.referral_code_owner_identity_card;
+      if (v != null && String(v).trim() !== '') {
+        return String(v).trim();
+      }
+    }
+    return '';
+  }
+
   private normalizeUserListResponse(body: unknown): any[] {
     if (Array.isArray(body)) {
       return body;
@@ -202,6 +222,9 @@ export class UsersComponent implements OnInit {
       return;
     }
     const filtered = this.rows.filter((d: any) => {
+      if (this.referralSponsorIdentityCard(d).toLowerCase().indexOf(val) !== -1) {
+        return true;
+      }
       for (const key in d) {
         if (!Object.prototype.hasOwnProperty.call(d, key)) {
           continue;
