@@ -3,12 +3,11 @@ export const environment = {
   environmentName: 'Production',
   apiURL: '/api',
   /**
-   * URL base del backend (https://…, sin /api al final) para WebSockets.
-   * Déjalo vacío solo si tu proxy (Nginx/Cloudflare) hace Upgrade WebSocket en /api/ws/.
-   * Si los WS fallan desde app.startacademy.digital, pon aquí el host real del API, p. ej.:
-   * 'https://TU-APP.herokuapp.com' o 'https://api.startacademy.digital'
+   * Vercel (`vercel.json`) reescribe `/api/*` → Heroku para HTTP, pero el edge **no proxifica
+   * bien WebSocket** hacia el destino externo. Los WS deben ir directos al backend.
+   * Misma base que en `vercel.json` → `destination` (sin path, solo origen https).
    */
-  websocketPublicOrigin: '' as string,
+  websocketPublicOrigin: 'https://ultra-back-98fc6bf42dce.herokuapp.com' as string,
   /** Sitio público (marketing) */
   publicWebsiteUrl: 'https://startacademy.digital/',
   rollbarConfig: {
