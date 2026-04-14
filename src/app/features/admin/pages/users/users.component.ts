@@ -137,7 +137,7 @@ export class UsersComponent implements OnInit {
   referralPillKind(row: {
     referral_code?: string;
     rol?: string;
-    referral_active?: boolean;
+    subscription?: string | null;
   }): ReturnType<typeof referralCodePillKind> {
     return referralCodePillKind(row);
   }
@@ -145,7 +145,7 @@ export class UsersComponent implements OnInit {
   referralPillLabel(row: {
     referral_code?: string;
     rol?: string;
-    referral_active?: boolean;
+    subscription?: string | null;
   }): string {
     return referralCodePillLabel(referralCodePillKind(row));
   }
