@@ -51,23 +51,7 @@
   }
 }
 
-/* Mismo patrón visual que 2FA (perfil usuario): Estado + pastilla Activado / Desactivado */
-.user-profile__2fa-status-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.65rem 1rem;
-}
-
-.user-profile__2fa-status-label {
-  font-weight: 600;
-  font-size: 0.8125rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--secondary, #6c757d);
-  margin: 0;
-}
-
+/* Pastilla Activado / Desactivado / Sin código (el <dt> ya titula «Estado del código») */
 .user-profile__2fa-status-badge {
   display: inline-block;
   padding: 0.4rem 1rem;
