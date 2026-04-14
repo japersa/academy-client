@@ -3,12 +3,10 @@ export const environment = {
   environmentName: 'Production',
   apiURL: '/api',
   /**
-   * Vacío = WebSockets al mismo host que el SPA (`wss://app…/api/ws/...`).
-   * Vercel solo reescribe HTTP; para WS mismo dominio hace falta un proxy con Upgrade
-   * (Nginx/Caddy/Cloudflare Worker) delante: ver `infra/nginx-api-with-websockets.example.conf`.
-   * Solo si no puedes proxificar WS, pon aquí el https:// del backend (Heroku).
+   * Solo Vercel + Heroku: el rewrite de `vercel.json` sirve el REST a Heroku, pero el edge
+   * no proxifica WebSocket. Los WS van directos al mismo backend (debe coincidir con vercel.json).
    */
-  websocketPublicOrigin: '' as string,
+  websocketPublicOrigin: 'https://ultra-back-98fc6bf42dce.herokuapp.com' as string,
   /** Sitio público (marketing) */
   publicWebsiteUrl: 'https://startacademy.digital/',
   rollbarConfig: {
