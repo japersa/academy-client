@@ -34,10 +34,10 @@ export function referralCodePillKind(
   return hasSubscriptionForReferralState(row) ? 'on' : 'off';
 }
 
-/** Textos alineados con 2FA (Activado / Desactivado). */
+/** Etiquetas para el código de referidos (no confundir con 2FA: Activado/Desactivado). */
 export function referralCodePillLabel(kind: ReferralCodePillKind): string {
   if (kind === 'empty') {
     return 'Sin código';
   }
-  return kind === 'on' ? 'Activado' : 'Desactivado';
+  return kind === 'on' ? 'Activo' : 'Inactivo';
 }
