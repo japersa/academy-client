@@ -130,7 +130,12 @@
                       <th>Cédula</th>
                       <th>Fecha de registro</th>
                       <th>Cód. referido</th>
-                      <th>Estado</th>
+                      <th
+                        class="users-table__th-ref-status"
+                        title="Si el código de referidos puede usarse (plan activo o staff)."
+                      >
+                        Estado del código
+                      </th>
                       <th>C.C referido</th>
                       <th class="text-right">Acciones</th>
                     </tr>
@@ -144,13 +149,13 @@
                       <td>{{ row?.identity_card | titlecase }}</td>
                       <td>{{ row?.date_joined | date }}</td>
                       <td class="text-monospace small">{{ row?.referral_code || '—' }}</td>
-                      <td>
+                      <td class="users-table__cell-ref-status">
                         <span
-                          class="user-profile__2fa-status-badge"
+                          class="users-table__ref-status"
                           [ngClass]="{
-                            'user-profile__2fa-status-badge--on': referralPillKind(row) === 'on',
-                            'user-profile__2fa-status-badge--off': referralPillKind(row) === 'off',
-                            'user-profile__2fa-status-badge--empty': referralPillKind(row) === 'empty'
+                            'users-table__ref-status--on': referralPillKind(row) === 'on',
+                            'users-table__ref-status--off': referralPillKind(row) === 'off',
+                            'users-table__ref-status--empty': referralPillKind(row) === 'empty'
                           }"
                         >
                           {{ referralPillLabel(row) }}

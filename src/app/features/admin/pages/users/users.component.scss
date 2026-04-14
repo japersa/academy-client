@@ -104,33 +104,41 @@
   max-width: 4rem;
 }
 
-/* Mismo patrón visual que 2FA (perfil usuario): Estado + pastilla */
-.user-profile__2fa-status-badge {
-  display: inline-block;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.25;
+/* Estado del código de referidos: compacto para tabla (no pastilla tipo 2FA) */
+.users-table__th-ref-status {
+  max-width: 9rem;
+}
+
+.users-table__cell-ref-status {
   white-space: nowrap;
 }
 
-.user-profile__2fa-status-badge--on {
-  background: rgba(40, 167, 69, 0.14);
-  color: #1b5e20;
-  border: 1px solid rgba(40, 167, 69, 0.35);
+.users-table__ref-status {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
 }
 
-.user-profile__2fa-status-badge--off {
-  background: rgba(108, 117, 125, 0.12);
+.users-table__ref-status--on {
+  background: rgba(25, 135, 84, 0.1);
+  color: #146c43;
+  border: 1px solid rgba(25, 135, 84, 0.22);
+}
+
+.users-table__ref-status--off {
+  background: rgba(73, 80, 87, 0.06);
   color: #495057;
-  border: 1px solid rgba(108, 117, 125, 0.28);
+  border: 1px solid rgba(73, 80, 87, 0.15);
 }
 
-.user-profile__2fa-status-badge--empty {
-  background: rgba(108, 117, 125, 0.08);
+.users-table__ref-status--empty {
+  background: transparent;
   color: #868e96;
-  border: 1px solid rgba(108, 117, 125, 0.2);
+  border: 1px dashed rgba(73, 80, 87, 0.22);
 }
 
   
