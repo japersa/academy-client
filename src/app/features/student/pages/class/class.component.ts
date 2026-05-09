@@ -104,16 +104,36 @@ export class ClassComponent implements OnInit, OnDestroy {
     });
   }
 
-  /** Misma API; actualiza src del vídeo y enlaces de archivos sin parpadear el tema. */
-  private refreshTopicMediaSilent(topicId: string) {
+  /**
+   * Refresca metadatos del tema sin reiniciar el vídeo.
+   * - swapVideoSrc=false (default): solo actualiza files/links (firmas de descarga). El <video> sigue intacto.
+   * - swapVideoSrc=true: cambia el src (token nuevo) preservando currentTime y estado paused.
+   */
+  private refreshTopicMediaSilent(topicId: string, swapVideoSrc: boolean = false) {
+    const videoEl = document.getElementById('singleVideo') as HTMLVideoElement | null;
+    const prevTime = videoEl?.currentTime ?? 0;
+    const wasPaused = videoEl?.paused ?? true;
+
     this.coursesService.getTopicMedia(topicId).subscribe({
       next: (m) => {
-        this.source = of(this.videoSrcFromMedia(m, topicId));
         this.topic = {
           ...this.topic,
           files: m.files ?? [],
           links: m.links ?? [],
         };
+        if (swapVideoSrc) {
+          this.source = of(this.videoSrcFromMedia(m, topicId));
+          setTimeout(() => {
+            const v = document.getElementById('singleVideo') as HTMLVideoElement | null;
+            if (!v) { return; }
+            const restore = () => {
+              try { v.currentTime = prevTime; } catch {}
+              if (!wasPaused) { v.play().catch(() => {}); }
+              v.removeEventListener('loadedmetadata', restore);
+            };
+            v.addEventListener('loadedmetadata', restore);
+          }, 0);
+        }
       },
       error: () => {},
     });
@@ -124,7 +144,7 @@ export class ClassComponent implements OnInit, OnDestroy {
       return;
     }
     this.videoErrorRetries += 1;
-    this.refreshTopicMediaSilent(this.currentTopicId);
+    this.refreshTopicMediaSilent(this.currentTopicId, true);
   }
 
   /** Limitar menú contextual / arrastre del vídeo (estilo apps tipo redes sociales). No es DRM. */
@@ -142,7 +162,7 @@ export class ClassComponent implements OnInit, OnDestroy {
   seeCourse() {
     this.router.navigate(['/course/', this.topic.course_id]);
   }
-  setClass(id) {
+  setClass(id: any) {
     this.router.navigate(['/class/', id]);
   }
 
